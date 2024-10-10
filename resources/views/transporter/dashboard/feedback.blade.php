@@ -10,13 +10,14 @@
             align-items: flex-start;
             margin: 12px 0;
         }
+
         .wd-transport-rght ul li:last-child {
             margin-bottom: 0;
         }
 
         /* .wd-transport-area {
-                align-items: self-start;
-            } */
+                    align-items: self-start;
+                } */
 
         ul.wd-star-lst {
             margin-bottom: 0;
@@ -96,12 +97,16 @@
                 display: none;
             }
 
-
+            @media (max-width: 575px) {
+                .adjust-space-in-mobile {
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            }
 
         }
     </style>
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/css/globle.css')}}" />
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/globle.css') }}" />
 @endsection
 
 
@@ -118,7 +123,7 @@
                         <div class="wd-feedback-box border-0 rounded-0 p-0">
                             <div class="row wd-pb pb-5 mx-0">
                                 <div class="col-lg-12">
-                                    <div class="wd-transport-dtls">
+                                    <div class="wd-transport-dtls adjust-space-in-mobile">
                                         <div class="row mx-0 align-items-center user-feedback-header-wrap mb-3">
                                             <div class="w-auto wd-transport-img pt-0">
                                                 <img src="{{ $user->profile_image }}" width="58" height="58"
@@ -172,15 +177,14 @@
                                                         </svg>
                                                     </li>
                                                     <li class="user-feedback-rating-count"><span>(12)</span></li>
-                                                    {{-- <li>({{ number_format($overall_percentage, 0) }}%)</li> --}}
-                                                    <!-- <li>({{ 100 }}%)</li> -->
+
                                                 </ul>
                                                 <div>Member since: <span
                                                         class="font-weight-light user-feedback-member-from">12/08/2024</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="wd-transport-area">
+                                        <div class="wd-transport-area pb-0">
 
                                             <div class="wd-transport-rght">
                                                 <ul>
@@ -189,12 +193,11 @@
                                                         <span class="wd-black">{{ number_format($positive_feedback_percentage, 0) }}%</span>
                                                     </li> --}}
                                                     <!-- <li>
-                                                                <p>Completed jobs:</p>
-                                                                <span>{{ $completed_job }}</span>
-                                                            </li> -->
+                                                                    <p>Completed jobs:</p>
+                                                                    <span>{{ $completed_job }}</span>
+                                                                </li> -->
                                                     <li>
                                                         <p>Insurance:</p>
-
                                                         <span>
                                                             @if ($user->insurance_cover)
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="13"
@@ -210,8 +213,11 @@
                                                         <p>Photo ID:</p>
                                                         <span>
                                                             @if ($user->profile_image)
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
-                                                                    <path d="M4.41537 11.1567L0.190373 6.93169C-0.0634575 6.67786 -0.0634575 6.2663 0.190373 6.01245L1.10959 5.0932C1.36342 4.83935 1.775 4.83935 2.02883 5.0932L4.87499 7.93934L10.9712 1.8432C11.225 1.58937 11.6366 1.58937 11.8904 1.8432L12.8096 2.76245C13.0634 3.01628 13.0634 3.42783 12.8096 3.68169L5.33462 11.1567C5.08076 11.4105 4.6692 11.4105 4.41537 11.1567Z" fill="#52D017"/>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="13"
+                                                                    height="13" viewBox="0 0 13 13" fill="none">
+                                                                    <path
+                                                                        d="M4.41537 11.1567L0.190373 6.93169C-0.0634575 6.67786 -0.0634575 6.2663 0.190373 6.01245L1.10959 5.0932C1.36342 4.83935 1.775 4.83935 2.02883 5.0932L4.87499 7.93934L10.9712 1.8432C11.225 1.58937 11.6366 1.58937 11.8904 1.8432L12.8096 2.76245C13.0634 3.01628 13.0634 3.42783 12.8096 3.68169L5.33462 11.1567C5.08076 11.4105 4.6692 11.4105 4.41537 11.1567Z"
+                                                                        fill="#52D017" />
                                                                 </svg>
                                                             @endif
                                                     </li>

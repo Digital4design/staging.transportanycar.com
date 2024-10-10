@@ -238,6 +238,9 @@
     top: 10px;
     right: -20px;
     padding: 3px 24px;
+    width: 80px;
+    text-align: center;
+    text-transform: capitalize;
 }
 .actionDiv .rotated-banner.green {
     background-color: #52D017;
@@ -954,7 +957,7 @@ body.modal-open {
 }
 @media (max-width:575px) {
     .list_of_items,
-    #search-results {margin-left: -16px; margin-right: -16px;}
+    #search-results {margin-left: -15px; margin-right: -15px;}
 }
 @media (max-width:400px) {
     .boxContentList .contentBlockBtn .btnCol a {

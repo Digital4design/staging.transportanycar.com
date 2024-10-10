@@ -8,6 +8,7 @@
             padding: 0px 20px 0;
             box-shadow: 0px 0px 4px 0px #00000040;
             margin: 0px 0px 20px 0px;
+            /* margin: 0px -15px 20px -15px; */
             border-radius: 10px;
         }
 
@@ -213,6 +214,9 @@
         }
 
 
+        /* @media(max-width: 767px) {
+            .deshbord-job-listing {border-radius: 0!important; margin-bottom: 10px!important;}
+        } */
         @media(max-width: 580px) {
             .new_job_list_mobile {
                 width: 100%;
@@ -238,12 +242,13 @@
             }
 
             .job_list_desh_mobile .list_img {
-                /* width: 36%;
-                        order: 1; */
-                width: 92px;
+                width: 36%;
+                order: 1;
+                /* width: 92px;
                 max-width: 92px;
                 min-height: 57px;
-                max-height: 57px;
+                max-height: 57px; */
+                /* margin: auto; */
             }
 
             .job_list_desh_mobile .list_detail {
@@ -252,12 +257,12 @@
             }
 
             .new_job_list_mobile .deshbord-job-listing.job_list_desh_mobile li .list_img img {
-                /* width: 100%;
-                    height: auto; */
-                width: 92px;
+                width: 100%;
+                height: auto;
+                /* width: 92px;
                 max-width: 92px;
                 min-height: 57px;
-                max-height: 57px;
+                max-height: 57px; */
             }
 
             .new_job_list_mobile .deshbord-job-listing.job_list_desh_mobile li .list_img p {

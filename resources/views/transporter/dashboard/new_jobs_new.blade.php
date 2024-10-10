@@ -2167,7 +2167,7 @@
     </div>
 
     {{-- d4dDeveloper-r  start --}}
-    @include('transporter.Modal.saveSearch');
+    @include('transporter.Modal.saveSearch')
     {{-- End --}}
 
 @endsection
@@ -2998,7 +2998,7 @@
                 success: function(response) {
                     if (response.success) {
                         // Show a success message or update the UI accordingly
-                        toastr.success('Quote successfully remove to watchlist!');
+                        toastr.success('Quote successfully removed from your watchlist!');
                         setTimeout(function() {
                             location.reload(); // Reload the page
                         }, 2000);

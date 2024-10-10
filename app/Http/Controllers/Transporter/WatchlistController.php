@@ -41,6 +41,7 @@ class WatchlistController extends Controller
             'lowest_bid' => QuoteByTransporter::selectRaw('MIN(CAST(transporter_payment AS UNSIGNED))')
                 ->whereColumn('user_quote_id', 'user_quotes.id') // Match user_quote_id to the Quote model's ID
         ])
+        ->whereDate('created_at', '>=', now()->subDays(10))
         ->latest()
         ->paginate(50);
         // return $watchlist;
