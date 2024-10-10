@@ -12,7 +12,7 @@
         font-size: 15px;
         font-weight: 400;
         color: #909090;
-        margin: 12px 0 28px;
+        margin: 12px 0 12px;
     }
 
     .save-search-email {
@@ -93,6 +93,7 @@
         border: 1px solid #52D017;
         border-radius: 3px;
         margin-right: 5px;
+        margin-top: -4px;
         vertical-align: middle;
         transition: background-color 0.3s ease;
     }

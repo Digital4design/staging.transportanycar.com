@@ -2416,7 +2416,6 @@
                 });
             }
         });
-
         function share_give_quote(id) {
             $('#quote_id').val(id);
             var quotes = @json($quotes);

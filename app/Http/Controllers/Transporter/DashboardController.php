@@ -763,7 +763,7 @@ class DashboardController extends WebController
             $dropoff = $request->input('search_drop_off_area') ?? 'Anywhere';
             $html = view('transporter.dashboard.partial.search_job_result', compact('quotes', 'pickup', 'dropoff'))->render();;
 
-            return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $html]);
+            return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $html, 'quotes' => $quotes]);
         }
     }
     //end d4d developer - k
@@ -1047,5 +1047,10 @@ class DashboardController extends WebController
         $data = SaveSearch::find($request->id);
         $data->delete();
         return redirect()->back()->with('saveSearchSuccess', 'Item deleted successfully');
+    }
+    public function savesearchredirect(Request $request)
+    {
+        return view('transporter.savedSearch.result', ["pick_area" => $request->pick_area, "drop_area" => $request->drop_area]);
+        return $request->all();
     }
 }

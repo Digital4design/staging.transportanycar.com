@@ -1704,7 +1704,7 @@
                 </div>
                 <div class="job_container">
                     <div class="admin_job_bx find_trans_newjob" id="style-1">
-                        <div class="admin_job_top">
+                        <div class="admin_job_top" style="margin-bottom: 20px;">
                             <h3>Saved searches</h3>
                         </div>
                         <div class="container">
@@ -1749,6 +1749,8 @@
                                             </button>
                                         </form>
                                         <form action="">
+                                            <input type="hidden" value="{{ $savedSearch->pick_area }}" name="pick_area">
+                                            <input type="hidden" value="{{ $savedSearch->drop_area}}" name="drop_area">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
                                                     <span class="font-weight-bold">Name of search:</span>
