@@ -244,6 +244,11 @@
             .job_list_desh_mobile .list_img {
                 width: 36%;
                 order: 1;
+                height: 140px;
+                overflow: hidden;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
                 /* width: 92px;
                 max-width: 92px;
                 min-height: 57px;

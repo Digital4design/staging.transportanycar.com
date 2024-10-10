@@ -4812,6 +4812,7 @@ div#spam-banner button.btn {
 
 @media (max-width: 767px)
 {
+  .side_dropdown .card-body::before {left:20px;}
   /*Dropdown*/  
   .menu_leftbar .logo img {max-width: 190px;width: 100%;height:35px; object-fit: contain;}
   .admin-header .navbar .brand img{width: 180px; height: 35px;object-fit: contain;}
@@ -5053,8 +5054,8 @@ div#spam-banner button.btn {
   .send-msg svg {  margin-left: 5px;}
   .rating-star li:last-child{margin-left: 7.02px;}
   .wd-deposit-area tbody tr td, .wd-deposit-area tfoot tr td{padding: 9px 18px;font-size: 13px;}
-  .side_dropdown .card-body::before{display: none;}
-  .side_dropdown .card-body{padding: 0 0 0 20px;}
+  /* .side_dropdown .card-body::before{display: none;} */
+  /* .side_dropdown .card-body{padding: 0 0 0 20px;} */
   .dropdown-menu {    
     position: fixed;
     top: 0;

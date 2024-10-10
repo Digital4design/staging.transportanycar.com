@@ -10,7 +10,7 @@
                 position: absolute;
                 right: 16px;
                 top: 16px;
-                z-index: 9;
+                z-index: 2;
             }
 
         .jobserch_mob form button {
@@ -1326,7 +1326,7 @@
                 width: calc(100% + 60px);
                 margin-left: -30px;
             }
-
+.card{border-width: 0!important;}
             .jobserch_mob .jobsrch_box {
                 padding: 20px;
                 margin-bottom: 7px;
@@ -1659,7 +1659,6 @@
         .card {
             border: 1px solid #ddd;
             border-radius: 10px;
-            border-radius: 10px;
             background: #FFF;
             box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
             /* width: 420px; */
@@ -1781,7 +1780,7 @@
                                                 Jobs available: <a href="#"
                                                     class="font-weight-bold text-primary ml-1">{{ $savedSearch->quote_count }}</a>
                                             </div>
-                                            <button type="submit" class="position-absolute w-100 h-100 border-0 bg-transparent rounded-md" style="left:0; top:0; z-index:8;"></button>
+                                            <button type="submit" class="position-absolute w-100 h-100 border-0 bg-transparent rounded-md" style="left:0; top:0; z-index:1;"></button>
                                         </form>
                                     </div>
                                 @endforeach

@@ -106,12 +106,17 @@
 
     /* Add checkmark */
     .custom-checkbox input[type="checkbox"]:checked+label::after {
-        content: "\2713";
+        content: " ";
         color: #ffffff;
         font-size: 12px;
         position: absolute;
-        left: 3px;
-        top: 2px;
+        left: 2px;
+        top: 5px;
+        background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMjUuMDAwMDAwcHQiIGhlaWdodD0iMjI1LjAwMDAwMHB0IiB2aWV3Qm94PSIwIDAgMjI1LjAwMDAwMCAyMjUuMDAwMDAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij4KPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMDAwMDAsMjI1LjAwMDAwMCkgc2NhbGUoMC4xMDAwMDAsLTAuMTAwMDAwKSIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSJub25lIj4KPHBhdGggZD0iTTE1MTQgMTY2MyBjLTIxNCAtMjE5IC00NTIgLTQ2MyAtNTMwIC01NDIgbC0xNDIgLTE0NSAtMTk5IDE5MWMtMTA5IDEwNCAtMjIwIDIwOSAtMjQ2IDIzMyBsLTQ4IDQ0IC0xNzAgLTE3MCBjLTkzIC05MyAtMTY5IC0xNzIgLTE2OSAtMTc2IDAgLTExIDgyMSAtODAzIDgzMyAtODAzIDcgMCAyNjEgMjU0IDU2NiA1NjUgMzA1IDMxMSA2MTkgNjMwIDY5OCA3MTAgbDE0MyAxNDUgLTE3MyAxNzMgLTE3NCAxNzMgLTM4OS0zOTh6Ii8+CjwvZz4KPC9zdmc+Cg==');
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 10px;
+        height: 10px;
     }
 
     .custom-checkbox label {

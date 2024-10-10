@@ -53,6 +53,13 @@
         @endif
     </div>
     @foreach ($quotes as $quote)
+    @php
+    $transporterQuotesCount = 0;
+@endphp
+@php
+    $lowestBid = $quote->lowest_bid ?? 0;
+    $transporterQuotesCount = $quote->quotes_count ?? 0;
+@endphp
         <div class="deshbord-job-listing job_list_desh_mobile" id="edit_bid_{{ $quote->id }}">
             @if ($type != 'cancel')
                 <div class="bidding_new_design_date job_new_grid_date">
@@ -73,9 +80,11 @@
                 {{-- <div class="bidding-pic-wrap"> --}}
                     <div class="list_img">
                         <img src="{{ $quote->image }}">
-                        @if (new_roundBasedOnDecimal($quote->transporter_payment) !== "N/A")
-                            <p>{{ new_roundBasedOnDecimal("£ " . $quote->transporter_payment) }}</p>
+
+                        @if ($transporterQuotesCount > 0)
+                        <p>£ {{ (roundBasedOnDecimal($lowestBid)) }}</p>
                         @endif
+
                         <span>Posted {{ getTimeAgo($quote->created_at->toDateTimeString()) }}</span>
                     </div>
                 {{-- </div> --}}
@@ -113,13 +122,7 @@
                         @endif
                     </p>
                 </div>
-                @php
-                    $transporterQuotesCount = 0;
-                @endphp
-                @php
-                    $lowestBid = $quote->lowest_bid ?? 0;
-                    $transporterQuotesCount = $quote->quotes_count ?? 0;
-                @endphp
+               
                 @if ($type == 'all')
                     @if ($quote->status == 'completed' && $quote->qbt_status != 'pending')
                         <div class="won_details">
