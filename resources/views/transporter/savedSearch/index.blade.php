@@ -375,7 +375,7 @@
             padding-bottom: 20px;
         }
 
-
+        .adjust-space-in-mobile {margin-bottom: 48px;}
         @media (min-width: 579px) {
 
             .jobserch_mob .jobsrch_box {
@@ -1243,6 +1243,7 @@
 
 
         @media(max-width: 767px) {
+            .adjust-space-in-mobile {margin-bottom: 56px;}
             .jobserch_mob li p {
                 display: none !important;
             }
@@ -1703,7 +1704,7 @@
                 </div>
                 <div class="job_container">
                     <div class="admin_job_bx find_trans_newjob" id="style-1">
-                        <div class="admin_job_top" style="margin-bottom: 20px;">
+                        <div class="admin_job_top" style="margin-bottom: 20px!important;">
                             <h3>Saved searches</h3>
                         </div>
                         <div class="container">
@@ -1711,7 +1712,7 @@
                                 <p>Searching for transport jobs that match your criteria...</p>
                                 <img src="/uploads/loading-popup.gif" alt="Loading">
                             </div>
-                            <p class="pera_srch">Here are your current saved searches. </p>
+                            <p class="pera_srch adjust-space-in-mobile">Here are your current saved searches. </p>
                             <div class="job-data">
                                 @if ($savedSearches->total() == 0)
                                     <span>Results: 0</span>

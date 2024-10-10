@@ -263,7 +263,8 @@
 
             .new_job_list_mobile .deshbord-job-listing.job_list_desh_mobile li .list_img img {
                 width: 100%;
-                height: auto;
+                height: 120px;
+                /* height: auto; */
                 /* width: 92px;
                 max-width: 92px;
                 min-height: 57px;
