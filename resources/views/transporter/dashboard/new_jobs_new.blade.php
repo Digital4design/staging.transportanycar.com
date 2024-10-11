@@ -2518,7 +2518,7 @@
                 success: function(response) {
                     if (response.success) {
                         // Show a success message or update the UI accordingly
-                        toastr.success('Quote successfully added to watchlist!');
+                        toastr.success('Job added to watchlist!');
                         setTimeout(function() {
                             location.reload(); // Reload the page
                         }, 2000);
@@ -3004,7 +3004,7 @@
                 success: function(response) {
                     if (response.success) {
                         // Show a success message or update the UI accordingly
-                        toastr.success('Quote successfully removed from your watchlist!');
+                        toastr.success('Job removed from watchlist!');
                         setTimeout(function() {
                             location.reload(); // Reload the page
                         }, 2000);

@@ -2828,7 +2828,7 @@
                 success: function(response) {
                     if (response.success) {
                         // Show a success message or update the UI accordingly
-                        toastr.success('Quote successfully remove to watchlist!');
+                        toastr.success('Job removed from watchlist!');
                         setTimeout(function() {
                             location.reload(); // Reload the page
                         }, 2000);
