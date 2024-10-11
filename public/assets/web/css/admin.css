@@ -1508,7 +1508,7 @@ span.select2.select2-container.select2-container--default{max-width: 152px;width
   color: #000;
   line-height: normal;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 .wd-cstm-check .form-group span{
     margin: 0;
@@ -1527,6 +1527,7 @@ span.select2.select2-container.select2-container--default{max-width: 152px;width
   background-color: transparent;
   border: 1px solid #424242;
   box-shadow: none;
+  min-width: 15px;
   width: 15px;
   height: 15px;
   border-radius: 2px;

@@ -65,42 +65,43 @@
 
     .leave_inner .form-group textarea::-webkit-input-placeholder {
         /* Chrome/Opera/Safari */
-         color: #C3C3C3;
+        color: #C3C3C3;
     }
 
     .leave_inner .form-group textarea::-moz-placeholder {
         /* Firefox 19+ */
-         color: #C3C3C3;
+        color: #C3C3C3;
     }
 
     .leave_inner .form-group textarea:-ms-input-placeholder {
         /* IE 10+ */
-         color: #C3C3C3;
+        color: #C3C3C3;
     }
 
     .leave_inner .form-group textarea:-moz-placeholder {
         /* Firefox 18- */
-         color: #C3C3C3;
+        color: #C3C3C3;
     }
+
     /*******************************/
     .leave_inner .form-group textarea:focus::-webkit-input-placeholder {
         /* Chrome/Opera/Safari */
-         color: #000000;
+        color: #000000;
     }
 
     .leave_inner .form-group textarea:focus::-moz-placeholder {
         /* Firefox 19+ */
-         color: #000000;
+        color: #000000;
     }
 
     .leave_inner .form-group textarea:focus:-ms-input-placeholder {
         /* IE 10+ */
-         color: #000000;
+        color: #000000;
     }
 
     .leave_inner .form-group textarea:focus:-moz-placeholder {
         /* Firefox 18- */
-         color: #000000;
+        color: #000000;
     }
 
     button.lve_feed_btn {
@@ -358,7 +359,7 @@
                                         <li>
                                             <h5>Click to rate:</h5>
                                             <div class="starrating">
-                                                <input type="radio" id="star5_comm_pos" name="rating_comm_positive"
+                                                <input type="radio" id="star5_comm_pos" name="rating"
                                                     value="5" /><label for="star5_comm_pos" title="5 star">
                                                     <svg width="36" height="33" viewBox="0 0 36 33" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -368,7 +369,7 @@
                                                     </svg>
 
                                                 </label>
-                                                <input type="radio" id="star4_comm_pos" name="rating_comm_positive"
+                                                <input type="radio" id="star4_comm_pos" name="rating"
                                                     value="4" /><label for="star4_comm_pos" title="4 star">
                                                     <svg width="36" height="33" viewBox="0 0 36 33"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -377,7 +378,7 @@
                                                             fill="#D9D9D9" />
                                                     </svg>
                                                 </label>
-                                                <input type="radio" id="star3_comm_pos" name="rating_comm_positive"
+                                                <input type="radio" id="star3_comm_pos" name="rating"
                                                     value="3" /><label for="star3_comm_pos" title="3 star">
                                                     <svg width="36" height="33" viewBox="0 0 36 33"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -386,7 +387,7 @@
                                                             fill="#D9D9D9" />
                                                     </svg>
                                                 </label>
-                                                <input type="radio" id="star2_comm_pos" name="rating_comm_positive"
+                                                <input type="radio" id="star2_comm_pos" name="rating"
                                                     value="2" /><label for="star2_comm_pos" title="2 star">
                                                     <svg width="36" height="33" viewBox="0 0 36 33"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -395,7 +396,7 @@
                                                             fill="#D9D9D9" />
                                                     </svg>
                                                 </label>
-                                                <input type="radio" id="star1_comm_pos" name="rating_comm_positive"
+                                                <input type="radio" id="star1_comm_pos" name="rating"
                                                     value="1" /><label for="star1_comm_pos" title="1 star">
                                                     <svg width="36" height="33" viewBox="0 0 36 33"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -437,105 +438,43 @@
                 var rating = $(this).val();
                 $(this).closest('.starrating').find('.rating-display').text(`(${rating}/5)`);
             });
+
             $('#ratingForm').submit(function(e) {
                 e.preventDefault();
 
-                var positiveRatings = [];
-                var negativeRatings = [];
-                var neutralRatings = [];
+                // Get feedback comments
+                var feedback = $('#pos_comment').val();
 
-                function extractActiveTabRatings() {
-                    var activeTabId = $('.nav-link.active').attr('href');
-                    var activeTab = $(activeTabId);
-                    positiveRatings = [];
-                    negativeRatings = [];
-                    neutralRatings = [];
-                    activeTab.find('input[type=radio]:checked').each(function() {
-                        var category = $(this).attr('name');
-                        var value = $(this).val();
-                        if (activeTabId === '#positive') {
-                            positiveRatings.push({
-                                category: category,
-                                value: value
-                            });
-                        } else if (activeTabId === '#negative') {
-                            negativeRatings.push({
-                                category: category,
-                                value: value
-                            });
-                        } else if (activeTabId === '#neutral') {
-                            neutralRatings.push({
-                                category: category,
-                                value: value
-                            });
-                        }
-                    });
+                // Validate form inputs
+                if (!$('input[name="rating"]:checked').val()) {
+                    $('.feedback-error').removeClass('d-none').text(
+                        'Please provide a rating before submitting.');
+                    return;
                 }
 
-                function getFeedbackComments() {
-                    var activeTabId = $('.nav-link.active').attr('href');
-                    var comments = '';
-                    if (activeTabId === '#positive') {
-                        comments = $('#pos_comment').val().trim();
-                    } else if (activeTabId === '#negative') {
-                        comments = $('#neg_comment').val().trim();
-                    } else if (activeTabId === '#neutral') {
-                        comments = $('#neu_comment').val().trim();
-                    }
-                    return comments;
+                if (feedback.trim() === '') {
+                    $('.feedback-error').removeClass('d-none').text(
+                        'Please provide feedback comments before submitting.');
+                    return;
                 }
 
-                function validateForm() {
-                    var ratingsProvided = positiveRatings.length > 0 || negativeRatings.length > 0 ||
-                        neutralRatings.length > 0;
-                    var feedbackComments = getFeedbackComments();
-                    if (!ratingsProvided) {
-                        $('.feedback-error').removeClass('d-none');
-                        $('.feedback-error').text('Please provide ratings before submitting.');
-                        return false;
-                    }
-                    if (feedbackComments === '') {
-                        $('.feedback-error').removeClass('d-none');
-                        $('.feedback-error').text('Please provide feedback comments before submitting.');
-                        return false;
-                    }
-                    return true;
-                }
-
-                // Clear any previous error messages
-                $('.feedback-error').addClass('d-none').text('');
-
-                extractActiveTabRatings();
-                var feedback = getFeedbackComments();
-
-                if (!validateForm()) {
-                    return; // Exit submission process
-                }
-                // Example: AJAX submission
+                // Submit form via AJAX
                 $.ajax({
                     url: "{{ route('front.save_feedback_quote') }}",
                     method: 'POST',
                     data: {
-                        positiveRatings: positiveRatings,
-                        negativeRatings: negativeRatings,
-                        neutralRatings: neutralRatings,
-                        feedback: feedback,
                         _token: "{{ csrf_token() }}",
+                        rating: $('input[name="rating"]:checked').val(),
+                        feedback: feedback,
                         quote_by_transporter_id: $('#quote_by_transporter_id').val()
                     },
                     success: function(response) {
                         if (response.status) {
                             Swal.fire({
-                                title: '<span class="help-title">Thank You.</span>',
-                                html: '<span class="help-text">Your feedback has been submitted.</span>',
+                                title: 'Thank You',
+                                html: 'Your feedback has been submitted.',
                                 confirmButtonColor: '#52D017',
-                                confirmButtonText: 'OK',
-                                customClass: {
-                                    title: 'swal-title',
-                                    htmlContainer: 'swal-text-container',
-                                    popup: 'swal-popup'
-                                },
-                                showCloseButton: true,
+                                confirmButtonText: 'OK'
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     history.back();
@@ -543,37 +482,24 @@
                             });
                         } else {
                             Swal.fire({
-                                title: '<span class="help-title">Error</span>',
-                                html: '<span class="help-text">Invalid feedback data!.. Please try again</span>',
+                                title: 'Error',
+                                html: 'Invalid feedback data! Please try again.',
                                 confirmButtonColor: '#d33',
-                                confirmButtonText: 'OK',
-                                customClass: {
-                                    title: 'swal-title',
-                                    htmlContainer: 'swal-text-container',
-                                    popup: 'swal-popup'
-                                },
-                                showCloseButton: true,
-                                allowOutsideClick: false
+                                confirmButtonText: 'OK'
                             });
                         }
                     },
                     error: function(xhr, status, error) {
                         Swal.fire({
-                            title: '<span class="help-title">Error</span>',
-                            html: '<span class="help-text">Something went wrong!.. Please try again</span>',
+                            title: 'Error',
+                            html: 'Something went wrong! Please try again.',
                             confirmButtonColor: '#d33',
-                            confirmButtonText: 'OK',
-                            customClass: {
-                                title: 'swal-title',
-                                htmlContainer: 'swal-text-container',
-                                popup: 'swal-popup'
-                            },
-                            showCloseButton: true,
-                            allowOutsideClick: false
+                            confirmButtonText: 'OK'
                         });
                     }
                 });
             });
+
             // Clear error message on change
             $('#positive, #negative, #neutral').on('change', 'input[type=radio], textarea', function() {
                 $('.feedback-error').addClass('d-none').text(''); // Remove error message on change

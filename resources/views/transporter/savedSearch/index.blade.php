@@ -1735,10 +1735,9 @@
                             <div class="jobsrch_blogs jobserch_mob">
                                 @foreach ($savedSearches as $savedSearch)
                                     <div class="card p-3 mb-2">
-                                        <form action="{{ route('transporter.delete.save.search') }}" method="POST" class="close-btn">
-                                            @csrf
-                                            <button type="submit" class="close text-danger "
-                                                value="{{ $savedSearch->id }}" name="id" aria-label="Close">
+                                       
+                                                <a href="javascript:;" data-toggle="modal" data-target="#delete_quote_{{ $savedSearch->id }}"
+                                                    class="d-lg-block delete_btn_mobile">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                     viewBox="0 0 14 14" fill="none">
                                                     <path
@@ -1746,8 +1745,8 @@
                                                         fill="#ED1C24" />
                                                 </svg>
                                                 {{-- <span aria-hidden="true">&times;</span> --}}
-                                            </button>
-                                        </form>
+                                            </a>
+                                        
                                         <form action="">
                                             <input type="hidden" value="{{ $savedSearch->pick_area }}" name="pick_area">
                                             <input type="hidden" value="{{ $savedSearch->drop_area}}" name="drop_area">
@@ -1784,6 +1783,37 @@
                                             <button type="submit" class="position-absolute w-100 h-100 border-0 bg-transparent rounded-md" style="left:0; top:0; z-index:1;"></button>
                                         </form>
                                     </div>
+                                    <div class="modal fade mark_bx" id="delete_quote_{{ $savedSearch->id }}" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">
+                                                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M0.93934 15.9393C0.353553 16.5251 0.353553 17.4749 0.93934 18.0607C1.52513 18.6464 2.47487 18.6464 3.06066 18.0607L0.93934 15.9393ZM10.5607 10.5607C11.1464 9.97487 11.1464 9.02513 10.5607 8.43934C9.97487 7.85355 9.02513 7.85355 8.43934 8.43934L10.5607 10.5607ZM8.43934 8.43934C7.85355 9.02513 7.85355 9.97487 8.43934 10.5607C9.02513 11.1464 9.97487 11.1464 10.5607 10.5607L8.43934 8.43934ZM18.0607 3.06066C18.6464 2.47487 18.6464 1.52513 18.0607 0.93934C17.4749 0.353553 16.5251 0.353553 15.9393 0.93934L18.0607 3.06066ZM10.5607 8.43934C9.97487 7.85355 9.02513 7.85355 8.43934 8.43934C7.85355 9.02513 7.85355 9.97487 8.43934 10.5607L10.5607 8.43934ZM15.9393 18.0607C16.5251 18.6464 17.4749 18.6464 18.0607 18.0607C18.6464 17.4749 18.6464 16.5251 18.0607 15.9393L15.9393 18.0607ZM8.43934 10.5607C9.02513 11.1464 9.97487 11.1464 10.5607 10.5607C11.1464 9.97487 11.1464 9.02513 10.5607 8.43934L8.43934 10.5607ZM3.06066 0.93934C2.47487 0.353553 1.52513 0.353553 0.93934 0.93934C0.353553 1.52513 0.353553 2.47487 0.93934 3.06066L3.06066 0.93934ZM3.06066 18.0607L10.5607 10.5607L8.43934 8.43934L0.93934 15.9393L3.06066 18.0607ZM10.5607 10.5607L18.0607 3.06066L15.9393 0.93934L8.43934 8.43934L10.5607 10.5607ZM8.43934 10.5607L15.9393 18.0607L18.0607 15.9393L10.5607 8.43934L8.43934 10.5607ZM10.5607 8.43934L3.06066 0.93934L0.93934 3.06066L8.43934 10.5607L10.5607 8.43934Z"
+                                                                    fill="#CFCFCF" />
+                                                            </svg>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3 class="d-block text-center">Are you sure you want to <br /> cancel your bid ?</h3>
+                                                </div>
+                                                <div class="modal-footer p-0">
+                                                    <a href="javascript:;" class="no_btn" data-dismiss="modal">No</a>
+                                                    <form action="{{ route('transporter.delete.save.search') }}" method="POST" class="close-btn">
+                                                        @csrf
+                                                        <button type="submit" class="close text-danger "
+                                                            value="{{ $savedSearch->id }}" name="id" aria-label="Close">
+                                                    {{-- <a href="javascript:void(0)" onclick="quoteChangeStatus({{ $quote->id }}, 'rejected');"
+                                                        class="yes_btn">Yes</a> --}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
@@ -1795,6 +1825,7 @@
     <div class="pagination before_search">
         {{ $savedSearches->links() }}
     </div>
+    
 
 @endsection
 
