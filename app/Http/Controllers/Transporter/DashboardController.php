@@ -965,7 +965,7 @@ class DashboardController extends WebController
                 ],
                 $data // The data to be updated or inserted
             );
-            return response(["success" => true, "message" => "Search save successfully!", "data" => []]);
+            return response(["success" => true, "message" => "Search saved successfully!", "data" => []]);
         } catch (\Exception $ex) {
             return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
         }
