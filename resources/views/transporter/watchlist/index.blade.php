@@ -1649,7 +1649,7 @@
                 <div class="job_container job_container_watchList">
                     <div class="admin_job_bx find_trans_newjob list_of_items" id="style-1">
                         <div class="admin_job_top flex-column header-banner">
-                            <h3 style="margin-bottom:20px!important;">Watchlist</h3>
+                            <h3 class="mb-md-3">Watchlist</h3>
                             <p class="pera_srch">Here are the jobs you are currently watching.</p>
                         </div>
 

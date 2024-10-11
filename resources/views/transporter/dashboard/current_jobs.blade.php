@@ -328,7 +328,7 @@
                 font-weight: 300;
                 color: #000000ba;
                 margin-bottom: 0;
-                top: 29px;
+                /* top: 29px; */
             }
 
         }

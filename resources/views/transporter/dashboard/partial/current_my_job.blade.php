@@ -53,7 +53,7 @@
                         <img src="{{ $quote->image }}">
 
                         @if ($transporterQuotesCount > 0)
-                        <p>£ {{ (roundBasedOnDecimal($lowestBid)) }}</p>
+                        <p>£{{(roundBasedOnDecimal($lowestBid)) }}</p>
                         @endif
 
                         <span>Posted {{ getTimeAgo($quote->created_at->toDateTimeString()) }}</span>

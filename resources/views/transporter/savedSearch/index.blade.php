@@ -1243,7 +1243,7 @@
 
 
         @media(max-width: 767px) {
-            .adjust-space-in-mobile {margin-bottom: 56px;}
+            .adjust-space-in-mobile {margin-bottom: 36px;}
             .jobserch_mob li p {
                 display: none !important;
             }
@@ -1704,7 +1704,7 @@
                 </div>
                 <div class="job_container">
                     <div class="admin_job_bx find_trans_newjob" id="style-1">
-                        <div class="admin_job_top" style="margin-bottom: 20px!important;">
+                        <div class="admin_job_top mb-0 mb-md-3">
                             <h3>Saved searches</h3>
                         </div>
                         <div class="container">

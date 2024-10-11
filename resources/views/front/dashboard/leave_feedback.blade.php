@@ -4,11 +4,12 @@
 @endsection
 <style>
     .wd_leave_bx {
-        padding:0!important;
-        box-shadow: none!important;
-        background: transparent!important;
-        border: none!important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        border: none !important;
     }
+
     .leave_inner h2 {
         font-size: 16px !important;
     }
@@ -59,7 +60,47 @@
         padding: 5px 10px !important;
         font-size: 14px;
         font-weight: 300;
-        color: #C3C3C3;
+        color: #000000;
+    }
+
+    .leave_inner .form-group textarea::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+         color: #C3C3C3;
+    }
+
+    .leave_inner .form-group textarea::-moz-placeholder {
+        /* Firefox 19+ */
+         color: #C3C3C3;
+    }
+
+    .leave_inner .form-group textarea:-ms-input-placeholder {
+        /* IE 10+ */
+         color: #C3C3C3;
+    }
+
+    .leave_inner .form-group textarea:-moz-placeholder {
+        /* Firefox 18- */
+         color: #C3C3C3;
+    }
+    /*******************************/
+    .leave_inner .form-group textarea:focus::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+         color: #000000;
+    }
+
+    .leave_inner .form-group textarea:focus::-moz-placeholder {
+        /* Firefox 19+ */
+         color: #000000;
+    }
+
+    .leave_inner .form-group textarea:focus:-ms-input-placeholder {
+        /* IE 10+ */
+         color: #000000;
+    }
+
+    .leave_inner .form-group textarea:focus:-moz-placeholder {
+        /* Firefox 18- */
+         color: #000000;
     }
 
     button.lve_feed_btn {
@@ -235,15 +276,16 @@
                             </div>
                             <div class="leave_rgt">
                                 <div class="leave_inner_img">
-                                    @if ( $transporter_detail->profile_image)
-                                    <img src="{{ $transporter_detail->profile_image }}">
+                                    @if ($transporter_detail->profile_image)
+                                        <img src="{{ $transporter_detail->profile_image }}">
                                     @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="#5B5B5B" class="size-6" width="43" height="43">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                    </svg>
-                                   @endif 
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="#5B5B5B" class="size-6" width="43"
+                                            height="43">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                        </svg>
+                                    @endif
                                 </div>
                                 <div class="leave_txt">
                                     <h4>{{ $transporter_detail->username }} <img
@@ -372,8 +414,8 @@
                                     </div>
                                     <!-- <button class="lve_feed_btn">Leave feedback</button> -->
                                 </div>
-                                
-                              
+
+
                                 <span class="feedback-error d-none"></span>
                                 <button class="lve_feed_btn">Leave feedback</button>
                             </div>

@@ -4881,7 +4881,7 @@ div#spam-banner button.btn {
   .wd-quote-area .row {width: 100%;margin: 0 auto;}
   .chat_list_body ul{height: auto;}
   .jobsrch_form_blog {
-        margin: 56px 0 20px;
+        margin: 36px 0 20px;
         flex-flow: column;
         border-radius: 0;
         border: none;
@@ -4968,7 +4968,8 @@ div#spam-banner button.btn {
         font-size: 20px;
         margin-bottom: 5px;
     }
-    .find_trans_newjob .admin_job_top h3, .find_trans_newjob .admin_job_top {margin-bottom: 50px !important;}
+    /* .find_trans_newjob .admin_job_top, */
+    .find_trans_newjob .admin_job_top h3  {margin-bottom: 30px !important;}
     .jobsrch_info_list h6{margin-right: 10px;}
     .get_quote .modal-footer p{font-size: 12px;}
 }
