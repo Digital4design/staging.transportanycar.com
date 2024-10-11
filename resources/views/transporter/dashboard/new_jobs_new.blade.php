@@ -2,6 +2,9 @@
 
 @section('head_css')
     <style>
+        .adjust-space-without-btn {
+            margin-bottom: 40px!important;
+        }
         .jobsrch_info_list h6 {
             width: 10% !important;
         }
@@ -2315,12 +2318,16 @@
                         $('#emailNtf').prop('checked', false);
                         $("#saveSrchModal").modal('hide');
                         toastr.success(response.message);
+                        $(".search_resu_sec").addClass('adjust-space-without-btn');
+                        $(".search_resu_sec").siblings('.savebtnS').addClass('d-none');
                     } else {
                         $("#srchName").val('');
                         $('#emailNtf').prop('checked', false);
                         $("#saveSrchModal").modal('hide');
                         toastr.error(response.message);
                     }
+
+
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log('Error:', jqXHR.responseText || errorThrown);
