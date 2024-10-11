@@ -768,121 +768,62 @@ class DashboardController extends WebController
     }
     //end d4d developer - k
 
-    // public function my_job(Request $request)
-    // {
-    //     $is_dashboard = $request->is_dashboard ?? 0;
-    //     $search = $request->search ?? null;
-    //     $type = $request->type;
-    //     $user_data = Auth::guard('transporter')->user();
-    //     $my_quotes = QuoteByTransporter::query();
-    //     $my_quotes = $my_quotes->where('user_id', $user_data->id);
-    //     if ($type == 'won') {
-    //         $my_quotes = $my_quotes->where('status', 'accept');
-    //     } elseif ($type == 'bidding') {
-    //         $my_quotes = $my_quotes->where('status', 'pending')->whereDate('created_at', '>=', now()->subDays(10));
-
-    //     } elseif ($type == 'cancel') {
-    //         $my_quotes = $my_quotes->where('status', 'rejected');
-    //     }
-    //     $my_quotes = $my_quotes->get();
-    //     $subQuery = \DB::table('quote_by_transpoters')
-    //         ->select('user_quote_id', \DB::raw('COUNT(*) as quotes_count'), \DB::raw('MIN(transporter_payment) as lowest_bid'))
-    //         ->groupBy('user_quote_id');
-    //     $quotes = UserQuote::query();
-    //     $quotes = UserQuote::query()
-    //         ->join('quote_by_transpoters', 'user_quotes.id', '=', 'quote_by_transpoters.user_quote_id')
-    //         ->joinSub($subQuery, 'sub', function ($join) {
-    //             $join->on('user_quotes.id', '=', 'sub.user_quote_id');
-    //         })
-    //         ->join('threads', function ($join) use ($user_data) {
-    //             $join->on('user_quotes.id', '=', 'threads.user_quote_id')
-    //                 ->where('threads.friend_id', '=', $user_data->id);
-    //         })
-    //         ->whereIn('user_quotes.id', $my_quotes->pluck('user_quote_id'))
-    //         ->where('quote_by_transpoters.user_id', $user_data->id)
-    //         ->groupBy('user_quotes.id') // Use groupBy to avoid duplicates
-    //         ->select('user_quotes.*', 'quote_by_transpoters.id as quote_by_transporter_id', 'quote_by_transpoters.transporter_payment as transporter_payment', 'sub.quotes_count', 'sub.lowest_bid', 'threads.id as thread_id', 'quote_by_transpoters.updated_at as qbt_updated_at', 'quote_by_transpoters.status as qbt_status');
-
-    //     // Order by created_at descending for bidding to show newest first
-    //     if ($type == 'bidding' || $type == 'all') {
-    //         $quotes = $quotes->where('user_quotes.status', '!=', 'cancelled')
-    //             ->orderBy('quote_by_transpoters.created_at', 'desc');
-    //     }
-    //     if ($search) {
-    //         $quotes = $quotes->where(function ($query) use ($search) {
-    //             $query->where('pickup_postcode', 'like', '%' . $search . '%')->orWhere('drop_postcode', 'like', '%' . $search . '%');
-    //         });
-    //     }
-    //     $quotes = $quotes->paginate(50);
-    //     //dd($quotes);
-    //     $params['html'] = view('transporter.dashboard.partial.current_my_job', compact('quotes', 'type', 'is_dashboard'))->render();
-    //     $params['type'] = $type;
-    //     if ($request->ajax()) {
-    //         return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $params]);
-    //     }
-    // }
-    // d4d developer - k
     public function my_job(Request $request)
     {
         $is_dashboard = $request->is_dashboard ?? 0;
         $search = $request->search ?? null;
         $type = $request->type;
         $user_data = Auth::guard('transporter')->user();
-
-        // Initialize the query for quotes
-        $my_quotes = QuoteByTransporter::query()
-            ->where('user_id', $user_data->id);
-
-        // Filter based on type
+        $my_quotes = QuoteByTransporter::query();
+        $my_quotes = $my_quotes->where('user_id', $user_data->id);
         if ($type == 'won') {
             $my_quotes = $my_quotes->where('status', 'accept');
         } elseif ($type == 'bidding') {
-            $my_quotes = $my_quotes->where('status', 'pending'); // Do not apply date filter here
+            $my_quotes = $my_quotes->where('status', 'pending')->whereDate('created_at', '>=', now()->subDays(10));
+
         } elseif ($type == 'cancel') {
             $my_quotes = $my_quotes->where('status', 'rejected');
         }
-
-        // Get my quotes
         $my_quotes = $my_quotes->get();
-
-        // Subquery to count quotes and find the lowest bid for each user_quote
         $subQuery = \DB::table('quote_by_transpoters')
             ->select('user_quote_id', \DB::raw('COUNT(*) as quotes_count'), \DB::raw('MIN(transporter_payment) as lowest_bid'))
             ->groupBy('user_quote_id');
-
-        // Main query to get UserQuote records
+        $quotes = UserQuote::query();
         $quotes = UserQuote::query()
+            ->join('quote_by_transpoters', 'user_quotes.id', '=', 'quote_by_transpoters.user_quote_id')
             ->joinSub($subQuery, 'sub', function ($join) {
                 $join->on('user_quotes.id', '=', 'sub.user_quote_id');
             })
-            ->whereIn('user_quotes.id', $my_quotes->pluck('user_quote_id')) // Only include my quotes
-            ->where('user_quotes.status', '!=', 'cancelled'); // Exclude cancelled quotes
+            ->join('threads', function ($join) use ($user_data) {
+                $join->on('user_quotes.id', '=', 'threads.user_quote_id')
+                    ->where('threads.friend_id', '=', $user_data->id);
+            })
+            ->whereIn('user_quotes.id', $my_quotes->pluck('user_quote_id'))
+            ->where('quote_by_transpoters.user_id', $user_data->id)
+            ->groupBy('user_quotes.id') // Use groupBy to avoid duplicates
+            ->select('user_quotes.*', 'quote_by_transpoters.id as quote_by_transporter_id', 'quote_by_transpoters.transporter_payment as transporter_payment', 'sub.quotes_count', 'sub.lowest_bid', 'threads.id as thread_id', 'quote_by_transpoters.updated_at as qbt_updated_at', 'quote_by_transpoters.status as qbt_status');
 
-        // Apply the 10-day filter only when the type is 'bidding'
-        if ($type == 'bidding') {
-            $quotes = $quotes->whereDate('user_quotes.created_at', '>=', now()->subDays(10));
+        // Order by created_at descending for bidding to show newest first
+        if ($type == 'bidding' || $type == 'all') {
+            $quotes = $quotes->where('user_quotes.status', '!=', 'cancelled')
+                ->orderBy('quote_by_transpoters.created_at', 'desc');
         }
-
-        // Include any search functionality
         if ($search) {
             $quotes = $quotes->where(function ($query) use ($search) {
-                $query->where('pickup_postcode', 'like', '%' . $search . '%')
-                    ->orWhere('drop_postcode', 'like', '%' . $search . '%');
+                $query->where('pickup_postcode', 'like', '%' . $search . '%')->orWhere('drop_postcode', 'like', '%' . $search . '%');
             });
         }
-
-        // Order and paginate results
-        $quotes = $quotes->latest()->paginate(50);
-
-        // Prepare response
+        $quotes = $quotes->paginate(50);
+        // return  $quotes;
+        //dd($quotes);
         $params['html'] = view('transporter.dashboard.partial.current_my_job', compact('quotes', 'type', 'is_dashboard'))->render();
         $params['type'] = $type;
-
         if ($request->ajax()) {
-            return response()->json(['success' => true, 'message' => 'Job found successfully', 'data' => $params]);
+            return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $params]);
         }
     }
-    //end d4d developer - k
+    
+   
 
     public function editQuoteAmount(Request $request)
     {

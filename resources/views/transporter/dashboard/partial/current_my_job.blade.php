@@ -1,33 +1,4 @@
-{{-- <style>
-    .posted-on {
-        font-size: 12px;
-        display: block;
-        color: #9C9C9C;
-    }
-    .bidding-pic-wrap {width:7.8%;}
-    .job_list_desh_mobile .list_img {width: 100%;}
-    @media (max-width: 1400px) {
-        .bidding-pic-wrap {
-        width: 12.5%;
-    }
-}
-    @media (max-width: 1280px) {
-        .bidding-pic-wrap {
-        width: 15%;
-    }
-}
-    @media (max-width: 580px) {
 
-        .bidding-pic-wrap {
-            min-height: 100px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            flex-direction: column;
-            width: 40%;
-        }
-    }
-</style> --}}
 @if (count($quotes) == 0)
     <div class="col-12 biddata">
         <div class="card nodata-card border-0 rounded-3 bg-white h-100 overflow-hidden">
