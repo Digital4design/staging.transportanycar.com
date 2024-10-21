@@ -1016,6 +1016,7 @@ class DashboardController extends WebController
             $search->quote_count = $quote->count();
             return $search;
         });
+        // return $data;
         return view('transporter.savedSearch.index', ['savedSearches' => $data]);
     }
     public function saveSearchDlt(Request $request)

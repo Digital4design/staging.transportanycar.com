@@ -718,7 +718,7 @@
 
 
 
-                                        @if ($user->is_status == 'pending')
+                                        @if ($user->is_status == '' || $user->is_status == 'pending')
 
                                             @if (
                                                 $user->is_status == 'pending' &&
