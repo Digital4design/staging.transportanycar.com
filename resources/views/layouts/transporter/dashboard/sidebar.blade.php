@@ -396,7 +396,7 @@ $currentRoute = request()->route()->getName();
                   html: `
                       <div style="text-align: center;">
                           <h2>Upload Documents.</h2>
-                          <p>You must upload a valid drivers license and insurance within your profile before you are able to bid for jobs.</p>
+                          <p>You must upload a valid driving license, goods in transist insurance within your profile before you are able to bids for jobs.</p>
                           <button id="verifyActionBtn" style="background-color: #52D017; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
                               Verify
                           </button>

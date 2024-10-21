@@ -769,6 +769,7 @@
                                                                 </div>
                                                             </div>
                                                         </h2>
+                                                        
                                                         <p class="subtitle">You must upload your documents before you can
                                                             start
                                                             bidding.</p>
@@ -1124,7 +1125,7 @@
                                                     <div class="input-group">
                                                         <input type="tel" id="phone" class="form-control"
                                                             placeholder="Mobile Phone" name="mobile"
-                                                            value=" {{ old('mobile', $user->mobile ?? '') }}" />
+                                                            value="{{ old('mobile', $user->mobile ?? '') }}" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -1263,7 +1264,7 @@
                 </div>
                 <div class="modal-body">
                     <iframe id="pdfIframe" style="width: 100%; height: 500px; border: none;"></iframe>
-                    <img class="pdf_image" style="disply:none;">
+                    <img class="pdf_image" style="max-width:100%;">
                 </div>
             </div>
         </div>
@@ -1330,7 +1331,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify({
                     email: email,
-                    subject: 'Verify Email',
+                    subject: 'Verify Your Email and Activate Your TransportAnyCar.com Account.',
                     user: user
                 }),
                 headers: {

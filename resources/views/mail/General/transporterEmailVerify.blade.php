@@ -65,7 +65,7 @@
 
 <body>
     <div class="contain">
-        <h1>Verify Your Email and Activate Your TransportAnyCar.com Account.</h1>
+        {{-- <h1>Verify Your Email and Activate Your TransportAnyCar.com Account.</h1> --}}
         <img class="adjust-space" src="{{asset('/assets/images/transport-logo.jpg')}}" alt="Transport Logo" style="max-width:90px"; />
         <h2>Hi {{$name}},</h2>
         <p class="adjust-space">Please verify your email address to activate your account.</p>

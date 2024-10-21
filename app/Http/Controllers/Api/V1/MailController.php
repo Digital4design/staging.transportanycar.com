@@ -43,6 +43,7 @@ class MailController extends ResponseController
 
     public function transporterEmailVerify(Request $request)
     {
+        
         $emailService = app(EmailService::class);
         // Validate the incoming request data
         $request->validate([
