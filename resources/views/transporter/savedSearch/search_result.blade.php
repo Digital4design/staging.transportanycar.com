@@ -2580,11 +2580,11 @@
         function myFunction(x) {
             if (x.matches) { // If media query matches
                 $(document).ready(function() {
-                    $('.where_custom').click(function() {
-                        $('.where_box').slideToggle("slow");
-                        $('#pickupLabel').hide();
-                        $('#search_pick_up_area').attr('placeholder', 'Where from ?');
-                    });
+                    // $('.where_custom').click(function() {
+                    //     $('.where_box').slideToggle("slow");
+                    //     $('#pickupLabel').hide();
+                    //     $('#search_pick_up_area').attr('placeholder', 'Where from ?');
+                    // });
                     $('.drop_off_box').click(function() {
                         $('.to_box').slideToggle("slow");
                         $('#dropoffLabel').hide();
@@ -2593,9 +2593,9 @@
                 });
             } else {
                 $(document).ready(function() {
-                    $('.where_custom').click(function() {
-                        $('.where_box').hide();
-                    });
+                    // $('.where_custom').click(function() {
+                    //     $('.where_box').hide();
+                    // });
                 });
 
                 $(document).ready(function() {
