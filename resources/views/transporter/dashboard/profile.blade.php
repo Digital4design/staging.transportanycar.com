@@ -51,8 +51,9 @@
             color: #777;
             margin-bottom: 15px;
         }
+
         .subtitle.message {
-            font-size: 12px!important;
+            font-size: 12px !important;
         }
 
         .upload-section {
@@ -76,26 +77,26 @@
         }
 
         /* .document span {
-                                font-size: 14px;
-                                margin-bottom: 10px;
-                            } */
+                                        font-size: 14px;
+                                        margin-bottom: 10px;
+                                    } */
 
         /* .upload-btn {
-                                background-color: #f0f0f0;
-                                border: 1px solid #ddd;
-                                border-radius: 5px;
-                                padding: 5px 10px;
-                                font-size: 14px;
-                                cursor: pointer;
-                                display: flex;
-                                align-items: center;
-                            }
+                                        background-color: #f0f0f0;
+                                        border: 1px solid #ddd;
+                                        border-radius: 5px;
+                                        padding: 5px 10px;
+                                        font-size: 14px;
+                                        cursor: pointer;
+                                        display: flex;
+                                        align-items: center;
+                                    }
 
-                            .upload-btn img {
-                                margin-left: 5px;
-                                width: 16px;
-                                height: 16px;
-                            } */
+                                    .upload-btn img {
+                                        margin-left: 5px;
+                                        width: 16px;
+                                        height: 16px;
+                                    } */
 
         .form-group {
             position: relative;
@@ -143,14 +144,14 @@
         }
 
         /* .requied_sec_row .document {
-                                display: flex;
-                                flex-direction: row;
-                                align-items: center;
-                                border: 1px solid #CFCFCF;
-                                border-radius: 8px;
-                                padding: 12px;
-                                justify-content: space-around;
-                            } */
+                                        display: flex;
+                                        flex-direction: row;
+                                        align-items: center;
+                                        border: 1px solid #CFCFCF;
+                                        border-radius: 8px;
+                                        padding: 12px;
+                                        justify-content: space-around;
+                                    } */
         .requied_sec_row .document a,
         .requied_sec_row .document span {
             color: #717171;
@@ -167,7 +168,7 @@
             background-color: #FDFFFA;
             border-radius: 5px;
         }
-        
+
         .requied_sec_row .document a:hover,
         .requied_sec_row .document span:hover {
             background-color: #52D017;
@@ -183,11 +184,11 @@
         }
 
         /* .requied_sec_row .upload-btn {
-                                box-shadow: 0px 0px 13px 5px #cfcfcf9c;
-                                font-size: 15px;
-                                background: #fff;
-                                padding: 6px 17px;
-                            } */
+                                        box-shadow: 0px 0px 13px 5px #cfcfcf9c;
+                                        font-size: 15px;
+                                        background: #fff;
+                                        padding: 6px 17px;
+                                    } */
         .info_sec {
             margin-left: 10px;
             position: relative;
@@ -371,34 +372,34 @@
         @media screen and (min-width: 768px) and (max-width: 1100px) {
 
             /* .upload_docs .upload-section .requied_sec_row {
-                        width:49%;
-                    } */
+                                width:49%;
+                            } */
             .admin-profile-box .col-lg-8 {
                 flex: auto;
                 max-width: 100%;
             }
 
             /* .wd-profile-form form#form_account {
-                        padding-left: 33.33%;
-                    } */
+                                padding-left: 33.33%;
+                            } */
 
             /* .wd-admin-profile {
-                        max-width: 33.333333%;
-                        position: absolute;
-                        left: 0;
-                        bottom: 0;
-                        margin-left: 15px;
-                    } */
+                                max-width: 33.333333%;
+                                position: absolute;
+                                left: 0;
+                                bottom: 0;
+                                margin-left: 15px;
+                            } */
 
 
         }
 
         /* end 16-09-2024 */
         /* @media(max-width: 1600px) {
-                    .requied_sec_row {
-                        width: 100%;
-                    }
-                } */
+                            .requied_sec_row {
+                                width: 100%;
+                            }
+                        } */
 
         @media(max-width: 1199px) {
             .admin-profile-box a.logout_txt.mob_view {
@@ -432,12 +433,12 @@
             }
 
             /* .wd-profile-form .form-group span {
-                                    font-size: 14px;
-                                    width: 68%;
-                                } */
+                                            font-size: 14px;
+                                            width: 68%;
+                                        } */
             /* .requied_sec_row .document {
-                                    padding: 10px 8px;
-                                } */
+                                            padding: 10px 8px;
+                                        } */
             .requied_sec_row .document label.addmore_btn {
                 flex-wrap: wrap;
                 font-size: 14px;
@@ -488,8 +489,8 @@
 
             /* start 16-09-2024 */
             /* .wd-profile-form .form-group span {
-                                    width: 100%;
-                                    } */
+                                            width: 100%;
+                                            } */
             /* end 16-09-2024 */
             .wd-profile-form .form-group label.addmore_btn span {
                 width: auto;
@@ -521,9 +522,9 @@
             }
 
             /* .requied_sec {
-                        margin-right: -15px;
-                        margin-left: -15px;
-                    } */
+                                margin-right: -15px;
+                                margin-left: -15px;
+                            } */
 
             .requied_sec_row .document {
                 justify-content: space-between;
@@ -712,14 +713,21 @@
                                         <input type="hidden" name="country_code" id="country_code"
                                             value="{{ empty($user->country_code) ? '+44' : $user->country_code }}">
 
-                                        @if ($user->is_status == 'pending' && ($user->driver_license != null && $user->goods_in_transit_insurance != null && $user->email_verify_status == '0'))
+                                        @if (
+                                            $user->is_status == 'pending' &&
+                                                ($user->driver_license != null &&
+                                                    $user->goods_in_transit_insurance != null &&
+                                                    $user->email_verify_status == '0'))
                                             <div class="requied_sec px-md-3 mx-xl-4" style="color:red">
                                                 <h2>Account approval pending</h2>
                                             </div>
                                         @endif
                                         <div class="row mx-0 mx-xl-4">
-                                            @if (($user->is_status != 'approved' && $user->is_status != 'pending') || ($user->driver_license == null || $user->goods_in_transit_insurance == null))
-                                                <div class="col-md-6 col-xl-6 requied_sec mb-0 upload_docs px-0 px-md-3 pl-lg-0 px-xl-3" style="{{ $user->is_status == 'approved' ? 'display:block' : '' }}">
+                                            @if (
+                                                ($user->is_status != 'approved' && $user->is_status != 'pending') ||
+                                                    ($user->driver_license == null || $user->goods_in_transit_insurance == null))
+                                                <div class="col-md-6 col-xl-6 requied_sec mb-0 upload_docs px-0 px-md-3 pl-lg-0 px-xl-3"
+                                                    style="{{ $user->is_status == 'approved' ? 'display:block' : '' }}">
                                                     <h2 class="upload-heading">Upload Documents:
                                                         <div class="info_sec">
                                                             <span class="info-popup">
@@ -734,12 +742,16 @@
                                                             </span>
                                                             <div class="info_sec_details">
                                                                 <div class="info_sec_details_contant">
-                                                                    <p>In order to be one of our transport providers you need
-                                                                        the following documents. This is to protect not only you
-                                                                        but the customer from damage or loss. If you’re unable
+                                                                    <p>In order to be one of our transport providers you
+                                                                        need
+                                                                        the following documents. This is to protect not only
+                                                                        you
+                                                                        but the customer from damage or loss. If you’re
+                                                                        unable
                                                                         to provide these documents unfortunately your
                                                                         application will not be considered. If you have any
-                                                                        questions about the required documents please email us
+                                                                        questions about the required documents please email
+                                                                        us
                                                                         <a href="mailto:info@transportanycar.com"
                                                                             style="color:#007bff !important">info@transportanycar.com</a>
                                                                     </p>
@@ -747,7 +759,8 @@
                                                             </div>
                                                         </div>
                                                     </h2>
-                                                    <p class="subtitle">You must upload your documents before you can start bidding.</p>
+                                                    <p class="subtitle">You must upload your documents before you can start
+                                                        bidding.</p>
                                                     <p class="subtitle text-danger message">Upload your documents</p>
                                                     <div class="upload-section">
                                                         <div class="requied_sec_row">
@@ -767,12 +780,14 @@
                                                                                     fill="#52D017" />
                                                                             </svg>
                                                                         </span>
-                                                                        <input type="file" accept=".pdf, .png, .jpg, .jpeg"
+                                                                        <input type="file"
+                                                                            accept=".pdf, .png, .jpg, .jpeg"
                                                                             name="driver_license" id="driver_license"
                                                                             style="display: none;">
                                                                     </label>
                                                                 </div>
-                                                                <span id="driver_license_success" class="d-none success_msg"
+                                                                <span id="driver_license_success"
+                                                                    class="d-none success_msg"
                                                                     style="color: #52D017;">Uploaded Successfully</span>
                                                             </div>
                                                         </div>
@@ -780,7 +795,8 @@
                                                             <div class="form-group">
                                                                 <div class="document border-danger">
                                                                     <label for="goods_in_transit_insurance"
-                                                                        class="addmore_btn font-weight-light" id="add"
+                                                                        class="addmore_btn font-weight-light"
+                                                                        id="add"
                                                                         title="Click to upload the document">
                                                                         Goods in transit insurance
                                                                         <!-- <span>Goods in transit insurance</span> -->
@@ -793,7 +809,8 @@
                                                                                     fill="#52D017" />
                                                                             </svg>
                                                                         </span>
-                                                                        <input type="file" accept=".pdf, .png, .jpg, .jpeg"
+                                                                        <input type="file"
+                                                                            accept=".pdf, .png, .jpg, .jpeg"
                                                                             name="goods_in_transit_insurance"
                                                                             id="goods_in_transit_insurance"
                                                                             style="display: none;">
@@ -811,20 +828,21 @@
                                                 <div class="col-md-6 col-xl-6 mb-0 px-0 px-md-3 mt-3 pt-2">
                                                     <h2 class="uploaded-documents p-0 m-0">Uploaded documents</h2>
                                                     <p class="subtitle text-success message">Documents uploaded</p>
-                                                    
+
                                                     <div class="row flex-column mx-0">
                                                         @if ($user->driver_license != null)
                                                             <div class="col-xl-12  my-0 upload_docs px-0">
                                                                 <div class="requied_sec_row">
                                                                     <div class="form-group">
                                                                         <div class="document">
-                                                                            <label for="" class="font-weight-light">
+                                                                            <label for=""
+                                                                                class="font-weight-light">
                                                                                 Valid driving license
                                                                                 <a class="view-pdf"
-                                                                                href="{{ url($user->driver_license) }}"
-                                                                                data-toggle="modal" data-target="#pdfModal"
-                                                                                data-url="{{ url($user->driver_license) }}"
-                                                                                >View</a>
+                                                                                    href="{{ url($user->driver_license) }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#pdfModal"
+                                                                                    data-url="{{ url($user->driver_license) }}">View</a>
                                                                             </label>
                                                                         </div>
                                                                     </div>
@@ -836,12 +854,13 @@
                                                                 <div class="requied_sec_row">
                                                                     <div class="form-group">
                                                                         <div class="document">
-                                                                            <label for="" class="font-weight-light">
+                                                                            <label for=""
+                                                                                class="font-weight-light">
                                                                                 Goods in transit insurance
-                                                                                <a 
-                                                                                    class="view-pdf"
-                                                                                    href="{{ url($user->goods_in_transit_insurance) }}" 
-                                                                                    data-toggle="modal" data-target="#pdfModal"
+                                                                                <a class="view-pdf"
+                                                                                    href="{{ url($user->goods_in_transit_insurance) }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#pdfModal"
                                                                                     data-url="{{ url($user->goods_in_transit_insurance) }}"
                                                                                     style="float:right">View</a>
                                                                             </label>
@@ -856,17 +875,19 @@
                                             <div class="col-md-6 col-xl-6 requied_sec verify_email_sec px-0 px-md-3"
                                                 style="{{ $user->is_status == 'approved' ? 'display:block' : '' }}">
                                                 <h2 class="upload-heading">Verify Email:</h2>
-                                                <p class="subtitle">You must verify your email address before you can start bidding.</p>
+                                                <p class="subtitle">You must verify your email address before you can start
+                                                    bidding.</p>
                                                 @if ($user->email_verify_status == 0)
-                                                <p class="subtitle text-danger message">Please verify your email</p>
+                                                    <p class="subtitle text-danger message">Please verify your email</p>
                                                 @else
-                                                <p class="subtitle text-success message">Email verified</p>
+                                                    <p class="subtitle text-success message">Email verified</p>
                                                 @endif
                                                 <div class="upload-section">
                                                     <div class="requied_sec_row w-100">
                                                         <div class="form-group">
                                                             <div class="document flex-row border-danger">
-                                                                <label for="email_verify" class="w-auto font-weight-light">
+                                                                <label for="email_verify"
+                                                                    class="w-auto font-weight-light">
                                                                     Verify your email address
                                                                     {{-- <input type="email" name="email" id="email_verify"
                                                                         placeholder="Verify your email address"
@@ -965,7 +986,7 @@
                                         </div>
                                         {{-- @endif --}}
 
-                                        
+
                                         <h3 class="adjust-space-mobile-padding">Account details</h3>
                                         <div class="row align-items-end mx-4">
                                             <div class="col-lg-6 pr-lg-3">
@@ -1123,11 +1144,7 @@
         </div>
     </div>
     </div>
-    {{-- <style>
-        img.pdf_image {
-            width: 100%;
-        }
-    </style> --}}
+
     <div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -1154,17 +1171,6 @@
     <script src="{{ asset('assets/web/js/admin.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/intlTelInput-jquery.min.js"></script>
-    <script>
-        // inputel
-        // $('#phone').intlTelInput({
-        //     nationalMode: false,
-        //     separateDialCode: true,
-        //     formatOnDisplay: false,
-        //     preferredCountries: ['GB'],
-        // }).on("countrychange", function() {
-        //     $('#country_code').val('+' + $(this).intlTelInput("getSelectedCountryData").dialCode);
-        // });
-    </script>
     <script>
         $('.view-pdf').on('click', function(e) {
             e.preventDefault();
