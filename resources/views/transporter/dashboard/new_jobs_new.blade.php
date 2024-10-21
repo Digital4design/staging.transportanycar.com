@@ -2888,16 +2888,14 @@
             $.ajax({
                 url: globalSiteUrl + "/transporter/find_job?page=" + page,
                 data: {
-                    // pick_up_latitude: pick_up_latitude,
-                    // pick_up_longitude: pick_up_longitude,
-                    // drop_off_latitude: drop_off_latitude,
-                    // drop_off_longitude: drop_off_longitude,
+                    
                     search_pick_up_area: search_pick_up_area,
                     search_drop_off_area: search_drop_off_area,
                 },
                 type: "GET",
                 success: function(res) {
-                    console.log(res);
+                    // console.log(res);
+                    // return;
                     if (res.success == true) {
                         $('#popup').removeClass('show');
                         $('.jobsrch_blogs, .mainContentDiv').addClass('d-none');

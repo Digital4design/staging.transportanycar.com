@@ -1794,16 +1794,16 @@
 
                                                 </ul>
                                                 <ul class="col-6 px-0">
-                                                    @php
+                                                    {{-- @php
                                                         $lowestBid = $quote->lowest_bid ?? 0;
                                                         $transporterQuotesCount = $quote->transporter_quotes_count ?? 0;
-                                                    @endphp
+                                                    @endphp --}}
                                                    
-                                                    @if ($transporterQuotesCount > 0)
+                                                    @if ($quote->quotes_count > 0)
                                                         <li class="colorDivgreen car-row"
                                                             data-car-id="{{ $quote->id }}">
                                                             <span><b>Current lowest bid:</b></span>
-                                                            <span class="sub_color">£{{ $lowestBid }}</span>
+                                                            <span class="sub_color">£{{ $quote->lowest_bid }}</span>
                                                         </li>
                                                     @else
                                                         <li class="colorDivgreen car-row"
@@ -1815,8 +1815,8 @@
                                                     <li class="colorDivBlue  mb-2 car-row"
                                                         data-car-id="{{ $quote->id }}">
                                                         <b>Transporters bidding: </b>
-                                                        @if ($transporterQuotesCount > 0)
-                                                            <span class="sub_color">{{ $transporterQuotesCount }}</span>
+                                                        @if ($quote->quotes_count > 0)
+                                                            <span class="sub_color">{{ $quote->quotes_count }}</span>
                                                         @else
                                                             <span class="sub_color">0</span>
                                                         @endif

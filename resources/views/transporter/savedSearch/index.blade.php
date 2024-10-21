@@ -1717,16 +1717,12 @@
                                                     d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303299 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08075 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM9.247 8.253C9.31261 8.31807 9.36469 8.39549 9.40023 8.48079C9.43576 8.5661 9.45406 8.65759 9.45406 8.75C9.45406 8.84241 9.43576 8.9339 9.40023 9.0192C9.36469 9.1045 9.31261 9.18192 9.247 9.247C9.18193 9.31261 9.10451 9.36468 9.01921 9.40022C8.9339 9.43576 8.84241 9.45406 8.75 9.45406C8.65759 9.45406 8.5661 9.43576 8.4808 9.40022C8.3955 9.36468 8.31808 9.31261 8.253 9.247L7 7.987L5.747 9.247C5.68193 9.31261 5.60451 9.36468 5.51921 9.40022C5.4339 9.43576 5.34241 9.45406 5.25 9.45406C5.15759 9.45406 5.0661 9.43576 4.9808 9.40022C4.8955 9.36468 4.81808 9.31261 4.753 9.247C4.68739 9.18192 4.63532 9.1045 4.59978 9.0192C4.56424 8.9339 4.54594 8.84241 4.54594 8.75C4.54594 8.65759 4.56424 8.5661 4.59978 8.48079C4.63532 8.39549 4.68739 8.31807 4.753 8.253L6.013 7L4.753 5.747C4.62119 5.61519 4.54714 5.43641 4.54714 5.25C4.54714 5.06359 4.62119 4.88481 4.753 4.753C4.88481 4.62119 5.06359 4.54713 5.25 4.54713C5.43641 4.54713 5.61519 4.62119 5.747 4.753L7 6.013L8.253 4.753C8.38481 4.62119 8.56359 4.54713 8.75 4.54713C8.93641 4.54713 9.11519 4.62119 9.247 4.753C9.37881 4.88481 9.45287 5.06359 9.45287 5.25C9.45287 5.43641 9.37881 5.61519 9.247 5.747L7.987 7L9.247 8.253Z"
                                                     fill="#ED1C24" />
                                             </svg>
-                                            {{-- <span aria-hidden="true">&times;</span> --}}
+                                           
                                         </a>
 
-                                        <a href="#" id="saved_find_job" class="p-3"
-                                            data-id="{{ $savedSearch->id }}">
+                                       
+                                            <a href="#" id="saved_find_job" class="p-3 saved_find_job" data-value="{{ $savedSearch->id }}">
 
-                                            <input type="hidden" id="search_pick_up_area"
-                                                value="{{ $savedSearch->pick_area }}" name="pick_area">
-                                            <input type="hidden" id ="search_drop_off_area"
-                                                value="{{ $savedSearch->drop_area }}" name="drop_area">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
                                                     <span class="text-label font-weight-500">Name of search:</span>
@@ -1824,21 +1820,23 @@
         $(document).ready(function() {
             var globalSiteUrl = '<?php echo $path = url('/'); ?>';
 
-            $('#saved_find_job').on('click', function(event) {
+            $('.saved_find_job').on('click', function(event) {
 
                 event.preventDefault(); // Prevent default anchor click behavior
-                var search_pick_up_area = $('#search_pick_up_area').val();
-                var search_drop_off_area = $('#search_drop_off_area').val();
+                var id= $(this).data('value'); 
+                // console.log(id);
+                // var search_pick_up_area = $('#search_pick_up_area').val();
+                // var search_drop_off_area = $('#search_drop_off_area').val();
                 $.ajax({
                      url: "{{ route('transporter.saved_Find_job') }}",
                     data: {
-                        search_pick_up_area: search_pick_up_area,
-                        search_drop_off_area: search_drop_off_area,
+                        id: id,
+                        // search_drop_off_area: search_drop_off_area,
                          _token: "{{ csrf_token() }}"
                     },
                     type: "post",
                     success: function(res) {
-                        console.log('yesssssssssss');
+                        console.log(res.saveSearch);
                         if (res.success == true) {
                             window.location.href = res.redirect_url;  
                         } else {

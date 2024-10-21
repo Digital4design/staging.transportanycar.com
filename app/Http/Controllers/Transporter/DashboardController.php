@@ -711,11 +711,6 @@ class DashboardController extends WebController
         // Get IDs of user quotes that have been quoted by the transporter
         $my_quote_ids = $my_quotes->pluck('user_quote_id');
 
-        // $subQuery = UserQuote::query()
-        //     ->join('users', 'users.id', '=', 'user_quotes.user_id')
-        //     ->leftJoin('quote_by_transpoters', 'quote_by_transpoters.user_quote_id', '=', 'user_quotes.id')->get();
-        // return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $subQuery]);
-
         $subQuery = UserQuote::query()
             ->join('users', 'users.id', '=', 'user_quotes.user_id')
             ->leftJoin('quote_by_transpoters', function ($join) {
@@ -766,7 +761,14 @@ class DashboardController extends WebController
         }
 
         // Group by user_quote_id to get the count and minimum bid for each
-        $subQuery->groupBy('user_quotes.id')
+        $subQuery
+        // ->addSelect([
+        //     'transporter_quotes_count' => QuoteByTransporter::selectRaw('COUNT(*)')
+        //         ->whereColumn('user_quote_id', 'user_quotes.id'),
+        //     'lowest_bid' => QuoteByTransporter::selectRaw('MIN(CAST(transporter_payment AS UNSIGNED))')
+        //         ->whereColumn('user_quote_id', 'user_quotes.id')
+        // ])
+        ->groupBy('user_quotes.id')
             ->latest();
 
         // Wrap the subquery with the main query for pagination
@@ -784,7 +786,6 @@ class DashboardController extends WebController
 
             $pickup = $request->input('search_pick_up_area');
             $dropoff = $request->input('search_drop_off_area') ?? 'Anywhere';
-            
             // return $quotes;
             $html = view('transporter.dashboard.partial.search_job_result', compact('quotes', 'pickup', 'dropoff'))->render();;
 
@@ -992,12 +993,12 @@ class DashboardController extends WebController
                     'user_id' => $data['user_id'],
                     'pick_area' => $data['pick_area'],
                     'drop_area' => $data['drop_area'],
-                    'email_notification'=>'1'
+                    'email_notification' => '1'
                 ],
                 $data // The data to be updated or inserted
             );
 
-           
+
 
             return response(["success" => true, "message" => "Search saved successfully!", "data" => []]);
         } catch (\Exception $ex) {
@@ -1031,8 +1032,9 @@ class DashboardController extends WebController
 
     public function savedFindJob(Request $request)
     {
-        $pickup = $request->input('search_pick_up_area');
-        $dropoff = $request->input('search_drop_off_area') ?? 'Anywhere';
+        $saveSearch = SaveSearch::find($request->id);
+        $pickup =  $saveSearch->pick_area;
+        $dropoff =  $saveSearch->drop_area;
         return response()->json([
             'success' => true,
             'redirect_url' => route('transporter.savedFindJobResults', [
@@ -1136,11 +1138,8 @@ class DashboardController extends WebController
             ->mergeBindings($subQuery->getQuery())
             ->paginate(20);
 
-            $pickup = $request->pickup;
-            $dropoff = $request->dropoff;
-
-
-            
+        $pickup = $request->pickup;
+        $dropoff = $request->dropoff;
         return view('transporter.savedSearch.search_result', [
             'quotes' => $quotes,
             'pickup' => $pickup,

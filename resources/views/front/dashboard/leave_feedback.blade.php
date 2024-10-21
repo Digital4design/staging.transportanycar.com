@@ -347,7 +347,7 @@
                         </div>
                         <div class="leave_tabs">
                             <!-- <span>Accepted:  08/01/2024 19:20</span> -->
-                            <p class="quote-accepted">Quote accepted: 08/01/2024 19:20</p>
+                            <p class="quote-accepted">Quote accepted: {{ \Carbon\Carbon::parse($quote_info->accepted_at)->format('d/m/Y H:i') }}</p>
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="positive" role="tabpanel"
                                     aria-labelledby="positive-tab">
