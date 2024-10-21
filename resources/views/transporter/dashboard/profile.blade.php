@@ -713,11 +713,7 @@
                                         <input type="hidden" name="country_code" id="country_code"
                                             value="{{ empty($user->country_code) ? '+44' : $user->country_code }}">
 
-                                        @if (
-                                            $user->is_status == 'pending' &&
-                                                ($user->driver_license != null &&
-                                                    $user->goods_in_transit_insurance != null &&
-                                                    $user->email_verify_status == '0'))
+                                        @if ($user->is_status == 'pending' && ($user->driver_license != null && $user->goods_in_transit_insurance != null && $user->email_verify_status == '1'))
                                             <div class="requied_sec px-md-3 mx-xl-4" style="color:red">
                                                 <h2>Account approval pending</h2>
                                             </div>
@@ -872,16 +868,13 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                            <div class="col-md-6 col-xl-6 requied_sec verify_email_sec px-0 px-md-3"
+                                            <div class="col-md-6 col-xl-6 requied_sec verify_email_sec px-0 px-md-3  mt-3 pt-2"
                                                 style="{{ $user->is_status == 'approved' ? 'display:block' : '' }}">
-                                                <h2 class="upload-heading">Verify Email:</h2>
-                                                <p class="subtitle">You must verify your email address before you can start
-                                                    bidding.</p>
+                                                <h2 class="upload-heading mb-0">Verify Email:</h2>
+                                               
                                                 @if ($user->email_verify_status == 0)
-                                                    <p class="subtitle text-danger message">Please verify your email</p>
-                                                @else
-                                                    <p class="subtitle text-success message">Email verified</p>
-                                                @endif
+                                                <p class="subtitle">You must verify your email address before you can start bidding.</p>
+                                                <p class="subtitle text-danger message">Please verify your email</p>
                                                 <div class="upload-section">
                                                     <div class="requied_sec_row w-100">
                                                         <div class="form-group">
@@ -889,10 +882,7 @@
                                                                 <label for="email_verify"
                                                                     class="w-auto font-weight-light">
                                                                     Verify your email address
-                                                                    {{-- <input type="email" name="email" id="email_verify"
-                                                                        placeholder="Verify your email address"
-                                                                        class="border-0 font-weight-light"
-                                                                        title="Click to upload the document" /> --}}
+                                                                   
                                                                 </label>
 
                                                                 <span class="send-link" id="sendLinkBtn"
@@ -904,6 +894,27 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @else
+                                                <p class="subtitle text-success message">Email verified</p>
+                                                <div class="upload-section ">
+                                                    <div class="requied_sec_row w-100">
+                                                        <div class="form-group">
+                                                            <div class="document flex-row">
+                                                                <label for="email_verify" class="w-auto font-weight-light">
+                                                                    Verify your email address
+                                                                   
+                                                                </label>
+
+                                                                <span id=""
+                                                                    style="cursor: pointer;">Verified</span>
+
+                                                                <div id="message" style="display: none;"></div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
 
