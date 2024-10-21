@@ -755,8 +755,7 @@
                                                             </div>
                                                         </div>
                                                     </h2>
-                                                    <p class="subtitle">You must upload your documents before you can start
-                                                        bidding.</p>
+                                                    <p class="subtitle">You must upload your documents before you can start bidding.</p>
                                                     <p class="subtitle text-danger message">Upload your documents</p>
                                                     <div class="upload-section">
                                                         <div class="requied_sec_row">
@@ -820,6 +819,8 @@
                                                     </div>
                                                 </div>
                                             @endif
+
+                                            {{-- Uploaded Documents --}}
                                             @if ($user->driver_license != null || $user->goods_in_transit_insurance != null || $user->motor_trade_insurance != null)
                                                 <div class="col-md-6 col-xl-6 mb-0 px-0 px-md-3 mt-3 pt-2">
                                                     <h2 class="uploaded-documents p-0 m-0">Uploaded documents</h2>
@@ -868,6 +869,8 @@
                                                     </div>
                                                 </div>
                                             @endif
+
+                                            {{-- Email Verify --}}
                                             <div class="col-md-6 col-xl-6 requied_sec verify_email_sec px-0 px-md-3  mt-3 pt-2"
                                                 style="{{ $user->is_status == 'approved' ? 'display:block' : '' }}">
                                                 <h2 class="upload-heading mb-0">Verify Email:</h2>
@@ -996,6 +999,160 @@
                                             </a>
                                         </div>
                                         {{-- @endif --}}
+
+
+                                        <div class="row mx-0 mx-xl-4">
+                                            @if (
+                                                ($user->is_status != 'approved' && $user->is_status != 'pending') ||
+                                                    ($user->driver_license == null || $user->goods_in_transit_insurance == null))
+                                                <div class="col-md-6 col-xl-6 requied_sec mb-0 upload_docs px-0 px-md-3 pl-lg-0 px-xl-3"
+                                                    style="{{ $user->is_status == 'approved' ? 'display:block' : '' }}">
+                                                    <h2 class="upload-heading">Upload Documents:
+                                                        <div class="info_sec">
+                                                            <span class="info-popup">
+                                                                <svg width="23" height="23" viewBox="0 0 23 23"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <circle cx="11.5" cy="11.5" r="11.5"
+                                                                        fill="#D9D9D9" />
+                                                                    <path
+                                                                        d="M9.89286 18V9.26786H13.0179V18H9.89286ZM11.4464 8.25C10.9821 8.25 10.5952 8.09524 10.2857 7.78571C9.97619 7.46428 9.82143 7.06548 9.82143 6.58928C9.82143 6.125 9.97619 5.73214 10.2857 5.41071C10.5952 5.08928 10.9821 4.92857 11.4464 4.92857C11.9345 4.92857 12.3274 5.08928 12.625 5.41071C12.9345 5.73214 13.0893 6.125 13.0893 6.58928C13.0893 7.06548 12.9345 7.46428 12.625 7.78571C12.3274 8.09524 11.9345 8.25 11.4464 8.25Z"
+                                                                        fill="#FDFFFA" />
+                                                                </svg>
+                                                            </span>
+                                                            <div class="info_sec_details">
+                                                                <div class="info_sec_details_contant">
+                                                                    <p>In order to be one of our transport providers you
+                                                                        need
+                                                                        the following documents. This is to protect not only
+                                                                        you
+                                                                        but the customer from damage or loss. If you’re
+                                                                        unable
+                                                                        to provide these documents unfortunately your
+                                                                        application will not be considered. If you have any
+                                                                        questions about the required documents please email
+                                                                        us
+                                                                        <a href="mailto:info@transportanycar.com"
+                                                                            style="color:#007bff !important">info@transportanycar.com</a>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </h2>
+                                                    <p class="subtitle">You must upload your documents before you can start bidding.</p>
+                                                    <p class="subtitle text-danger message">Upload your documents</p>
+                                                    <div class="upload-section">
+                                                        <div class="requied_sec_row">
+                                                            <div class="form-group">
+                                                                <div class="document border-danger">
+                                                                    <!-- <span>Valid driving license</span> -->
+                                                                    <label for="driver_license"
+                                                                        class="addmore_btn font-weight-light" id="add"
+                                                                        title="Click to upload the document">
+                                                                        Valid driving license
+                                                                        <span class="upload-btn">Upload
+                                                                            <svg width="15" height="15"
+                                                                                viewBox="0 0 15 15" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path
+                                                                                    d="M3.875 9.375C3.875 8.96079 3.53921 8.625 3.125 8.625C2.71079 8.625 2.375 8.96079 2.375 9.375H3.875ZM3.125 10H2.375H3.125ZM12.625 9.375C12.625 8.96079 12.2892 8.625 11.875 8.625C11.4608 8.625 11.125 8.96079 11.125 9.375H12.625ZM8.08565 3.59352C8.34441 3.27007 8.29197 2.79811 7.96852 2.53935C7.64507 2.28059 7.17311 2.33303 6.91435 2.65648L8.08565 3.59352ZM4.41435 5.78148C4.15559 6.10493 4.20803 6.57689 4.53148 6.83565C4.85493 7.09441 5.32689 7.04197 5.58565 6.71852L4.41435 5.78148ZM8.08565 2.65648C7.82689 2.33303 7.35493 2.28059 7.03148 2.53935C6.70803 2.79811 6.65559 3.27007 6.91435 3.59352L8.08565 2.65648ZM9.41435 6.71852C9.67311 7.04197 10.1451 7.09441 10.4685 6.83565C10.792 6.57689 10.8444 6.10493 10.5857 5.78148L9.41435 6.71852ZM8.25 3.125C8.25 2.71079 7.91421 2.375 7.5 2.375C7.08579 2.375 6.75 2.71079 6.75 3.125H8.25ZM6.75 10C6.75 10.4142 7.08579 10.75 7.5 10.75C7.91421 10.75 8.25 10.4142 8.25 10H6.75ZM2.375 9.375V10H3.875V9.375H2.375ZM2.375 10C2.375 11.4497 3.55025 12.625 5 12.625V11.125C4.37868 11.125 3.875 10.6213 3.875 10H2.375ZM5 12.625H10V11.125H5V12.625ZM10 12.625C11.4497 12.625 12.625 11.4497 12.625 10H11.125C11.125 10.6213 10.6213 11.125 10 11.125V12.625ZM12.625 10V9.375H11.125V10H12.625ZM6.91435 2.65648L4.41435 5.78148L5.58565 6.71852L8.08565 3.59352L6.91435 2.65648ZM6.91435 3.59352L9.41435 6.71852L10.5857 5.78148L8.08565 2.65648L6.91435 3.59352ZM6.75 3.125V10H8.25V3.125H6.75Z"
+                                                                                    fill="#52D017" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <input type="file"
+                                                                            accept=".pdf, .png, .jpg, .jpeg"
+                                                                            name="driver_license" id="driver_license"
+                                                                            style="display: none;">
+                                                                    </label>
+                                                                </div>
+                                                                <span id="driver_license_success"
+                                                                    class="d-none success_msg"
+                                                                    style="color: #52D017;">Uploaded Successfully</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="requied_sec_row">
+                                                            <div class="form-group">
+                                                                <div class="document border-danger">
+                                                                    <label for="goods_in_transit_insurance"
+                                                                        class="addmore_btn font-weight-light"
+                                                                        id="add"
+                                                                        title="Click to upload the document">
+                                                                        Goods in transit insurance
+                                                                        <!-- <span>Goods in transit insurance</span> -->
+                                                                        <span class="upload-btn">Upload
+                                                                            <svg width="15" height="15"
+                                                                                viewBox="0 0 15 15" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path
+                                                                                    d="M3.875 9.375C3.875 8.96079 3.53921 8.625 3.125 8.625C2.71079 8.625 2.375 8.96079 2.375 9.375H3.875ZM3.125 10H2.375H3.125ZM12.625 9.375C12.625 8.96079 12.2892 8.625 11.875 8.625C11.4608 8.625 11.125 8.96079 11.125 9.375H12.625ZM8.08565 3.59352C8.34441 3.27007 8.29197 2.79811 7.96852 2.53935C7.64507 2.28059 7.17311 2.33303 6.91435 2.65648L8.08565 3.59352ZM4.41435 5.78148C4.15559 6.10493 4.20803 6.57689 4.53148 6.83565C4.85493 7.09441 5.32689 7.04197 5.58565 6.71852L4.41435 5.78148ZM8.08565 2.65648C7.82689 2.33303 7.35493 2.28059 7.03148 2.53935C6.70803 2.79811 6.65559 3.27007 6.91435 3.59352L8.08565 2.65648ZM9.41435 6.71852C9.67311 7.04197 10.1451 7.09441 10.4685 6.83565C10.792 6.57689 10.8444 6.10493 10.5857 5.78148L9.41435 6.71852ZM8.25 3.125C8.25 2.71079 7.91421 2.375 7.5 2.375C7.08579 2.375 6.75 2.71079 6.75 3.125H8.25ZM6.75 10C6.75 10.4142 7.08579 10.75 7.5 10.75C7.91421 10.75 8.25 10.4142 8.25 10H6.75ZM2.375 9.375V10H3.875V9.375H2.375ZM2.375 10C2.375 11.4497 3.55025 12.625 5 12.625V11.125C4.37868 11.125 3.875 10.6213 3.875 10H2.375ZM5 12.625H10V11.125H5V12.625ZM10 12.625C11.4497 12.625 12.625 11.4497 12.625 10H11.125C11.125 10.6213 10.6213 11.125 10 11.125V12.625ZM12.625 10V9.375H11.125V10H12.625ZM6.91435 2.65648L4.41435 5.78148L5.58565 6.71852L8.08565 3.59352L6.91435 2.65648ZM6.91435 3.59352L9.41435 6.71852L10.5857 5.78148L8.08565 2.65648L6.91435 3.59352ZM6.75 3.125V10H8.25V3.125H6.75Z"
+                                                                                    fill="#52D017" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <input type="file"
+                                                                            accept=".pdf, .png, .jpg, .jpeg"
+                                                                            name="goods_in_transit_insurance"
+                                                                            id="goods_in_transit_insurance"
+                                                                            style="display: none;">
+                                                                    </label>
+                                                                </div>
+                                                                <span id="goods_in_transit_insurance_success"
+                                                                    class=" success_msg d-none"
+                                                                    style="color: #52D017;">Uploaded Successfully</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+
+                                            {{-- Uploaded Documents --}}
+                                            @if ($user->driver_license != null || $user->goods_in_transit_insurance != null || $user->motor_trade_insurance != null)
+                                                <div class="col-md-6 col-xl-6 mb-0 px-0 px-md-3 mt-3 pt-2">
+                                                    <h2 class="uploaded-documents p-0 m-0">Uploaded documents</h2>
+                                                    <p class="subtitle text-success message">Documents uploaded</p>
+
+                                                    <div class="row flex-column mx-0">
+                                                        @if ($user->driver_license != null)
+                                                            <div class="col-xl-12  my-0 upload_docs px-0">
+                                                                <div class="requied_sec_row">
+                                                                    <div class="form-group">
+                                                                        <div class="document">
+                                                                            <label for=""
+                                                                                class="font-weight-light">
+                                                                                Valid driving license
+                                                                                <a class="view-pdf"
+                                                                                    href="{{ url($user->driver_license) }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#pdfModal"
+                                                                                    data-url="{{ url($user->driver_license) }}">View</a>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                        @if ($user->goods_in_transit_insurance != null)
+                                                            <div class="col-xl-12  my-0 upload_docs px-0">
+                                                                <div class="requied_sec_row">
+                                                                    <div class="form-group">
+                                                                        <div class="document">
+                                                                            <label for=""
+                                                                                class="font-weight-light">
+                                                                                Goods in transit insurance
+                                                                                <a class="view-pdf"
+                                                                                    href="{{ url($user->goods_in_transit_insurance) }}"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#pdfModal"
+                                                                                    data-url="{{ url($user->goods_in_transit_insurance) }}"
+                                                                                    style="float:right">View</a>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
 
 
                                         <h3 class="adjust-space-mobile-padding">Account details</h3>
