@@ -2,6 +2,9 @@
 
 @section('head_css')
     <style>
+        .jobsrch_blogs {
+            padding-top: 10px;
+        }
         .delete_btn_mobile {
             cursor: pointer;
         }
@@ -555,7 +558,7 @@
                 width: 100%;
             }
 
-
+           
         }
 
         @media (min-width: 768px) {
@@ -1258,6 +1261,9 @@
 
 
         @media(max-width: 580px) {
+            .job_container .job-data.job-data-mobile {
+                margin-left: -30px!important;
+            }
             .jobsrch_info_list li small {
                 font-size: 14px;
                 margin-left: 7px;
@@ -1331,6 +1337,9 @@
             .jobserch_mob {
                 width: calc(100% + 60px);
                 margin-left: -30px;
+                margin-right: -30px;
+                /* width: 100%; */
+                padding-top: 10px;
             }
 
             .jobserch_mob .jobsrch_box {
@@ -1686,7 +1695,7 @@
                             <p class="pera_srch adjust-space-in-mobile">Here are your current saved searches. </p>
 
                             
-                            <div class="job-data">
+                            <div class="job-data job-data-mobile">
                                 @if ($savedSearches->total() == 0)
                                     <span>Results: 0</span>
                                 @else
@@ -1707,7 +1716,7 @@
                             </div>
                             @foreach ($savedSearches as $savedSearch)
                                 <div class="jobsrch_blogs jobserch_mob">
-                                    <div class="card mb-2">
+                                    <div class="card">
 
                                         <a data-toggle="modal" data-target="#delete_quote_{{ $savedSearch->id }}"
                                             class="d-lg-block delete_btn_mobile align-self-end position-absolute" style="right: 15px; top: 15px; line-height: 10px;">
