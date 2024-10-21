@@ -181,7 +181,9 @@
     width: 170px;
     max-width: 70%;
 }
-
+.srch-data .srch-data-filter ~ a {
+    font-weight: 400;
+}
 /* .boxContentList .contentBlockBtn .btnCol {
     width: 18%;
     display: flex;
@@ -261,6 +263,7 @@
 .wishList-bidInfo .bidTnfo p {
     margin: 0;
     font-weight: 300;
+    line-height: 18px;
 }
 
 .wishList-bidInfo .bidTnfo p .green {
