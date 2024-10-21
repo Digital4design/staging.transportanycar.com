@@ -60,8 +60,8 @@
 
 
         /* .jobsrch_form_blog .form-control {
-                                        color: #000000;
-                                    } */
+                                            color: #000000;
+                                        } */
         .jobsrch_form_blog .error-message {
             position: absolute;
             bottom: -34px;
@@ -136,9 +136,9 @@
         }
 
         /* .get_quote .modal-header .close {
-                                position: absolute;
-                                right: 15px;
-                            } */
+                                    position: absolute;
+                                    right: 15px;
+                                } */
 
         /* Add your CSS styling here */
         #popup {
@@ -233,10 +233,10 @@
         }
 
         /* #carDetailsModal .modal-header button.btn-close {
-                                position: absolute;
-                                top: 11px;
-                                right: 15px;
-                            } */
+                                    position: absolute;
+                                    top: 11px;
+                                    right: 15px;
+                                } */
 
         #carDetailsModal .modal-header span {
             display: flex;
@@ -1402,10 +1402,10 @@
             }
 
             /* .modal-header button.btn-close {
-                                    position: absolute;
-                                    top: 11px;
-                                    right: 15px;
-                                } */
+                                        position: absolute;
+                                        top: 11px;
+                                        right: 15px;
+                                    } */
 
             .jobserch_mob .jobsrch_box {
                 padding: 20px 20px 10px;
@@ -1631,7 +1631,222 @@
                 right: 5%;
             }
         }
+
+        @media (max-width: 580px) {
+
+            .search_resu_sec .form-group.where_custom {
+                padding: 10px 30px;
+            }
+
+            .srch-data {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+
+            .srch-data span {
+                color: #9C9C9C;
+                font-size: 15px;
+            }
+
+            .srch-data a {
+                font-size: 15px;
+                color: #80b6f7;
+                text-decoration: underline;
+                font-weight: 700;
+            }
+
+            .jobserch_mob .jobsrch_box {
+                margin-bottom: 7px;
+                box-shadow: 0px 0px 4px 0px rgb(0 0 0 / 15%);
+            }
+
+            .jobserch_mob ul.jobsrch_info_list {
+                width: 90%;
+            }
+
+            .search_sec_footer span {
+                font-size: 17px;
+                text-align: center;
+                display: block;
+                color: #616161;
+                line-height: normal;
+            }
+
+            .search_sec_footer span a {
+                color: #80b6f7 !important;
+                text-decoration: underline !important;
+                font-size: 17px;
+                text-underline-offset: 5px;
+                font-weight: 400;
+            }
+
+            .search_sec_footer .srch-data {
+                justify-content: center;
+            }
+
+            .content_container {
+                padding-bottom: 0;
+            }
+
+            .new_job_design ul.jobsrch_info_list {
+                margin: 0;
+            }
+
+            .new_job_design ul.jobsrch_info_list {
+                margin: 0;
+                display: block;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_img {
+                width: 28%;
+                float: left;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_post_code {
+                width: 30%;
+                float: left;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_vehi_modal {
+                width: 41%;
+                float: left;
+                margin-bottom: 20px;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_drop_code {
+                width: 30%;
+                float: left;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_time_from {
+                width: 40%;
+                margin-bottom: 20px;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_miles {
+                width: 59%;
+                float: left;
+                display: block;
+                clear: both;
+                padding-right: 10px;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_type {
+                width: 59%;
+                float: left;
+                display: block;
+                clear: both;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_img span {
+                font-size: 10px;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_date {
+                display: block;
+                width: 59%;
+                float: left;
+                clear: both;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_lowest {
+                width: 41%;
+                display: block;
+                float: left;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_bidding {
+                width: 41%;
+                display: block;
+                float: left;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li span {
+                font-size: 15px;
+                font-weight: 400;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li {
+                margin-bottom: 6px;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_bid_btn {
+                display: block;
+                width: 41%;
+                float: left;
+                margin: 0;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_bid_btn .jobsrch_right_box {
+                margin: 0;
+                display: flex;
+                align-items: center;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_bid_btn .jobsrch_right_box a.make_offer_btn {
+                margin-top: 0;
+                font-size: 15px;
+                width: max-content;
+                padding: 7px 33px 10px;
+                border-radius: 7px;
+                text-transform: none;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li span.sub_color {
+                color: #0356D6 !important;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_lowest span.sub_color {
+                color: #52D017 !important;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li span.sub_color span {
+                color: #9C9C9C;
+            }
+
+            small.new_tag {
+                position: absolute;
+                background: #52d017;
+                color: #fff;
+                right: -48px;
+                padding: 3px 32px;
+                font-size: 13px;
+                transform: rotate(50deg);
+                top: -11px;
+            }
+
+            small.expring_tag {
+                position: absolute;
+                background: #ED1C24;
+                color: #fff;
+                right: -56px;
+                padding: 3px 32px;
+                font-size: 12px;
+                transform: rotate(50deg);
+                top: -11px;
+            }
+
+            .jobsrch_box {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_type span,
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_lowest span,
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_bidding span,
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_date span,
+            .jobserch_mob ul.jobsrch_info_list li.job_new_grid_miles span {
+                color: #000000ba;
+                font-size: 12px;
+                font-weight: 300;
+            }
+
+
+        }
     </style>
+
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/globle.css') }}" />
 @endsection
 
@@ -1679,9 +1894,9 @@
                                 </div>
                             </div>
 
-                            <div class="savebtnS">
+                            {{-- <div class="savebtnS">
                                 <a href="#" id="saveSrch" class="make_offer_btn checkStatus">Save search</a>
-                            </div>
+                            </div> --}}
 
                             <div class="srch-data">
                                 <div class="srch-data-filter">
@@ -1798,7 +2013,7 @@
                                                         $lowestBid = $quote->lowest_bid ?? 0;
                                                         $transporterQuotesCount = $quote->transporter_quotes_count ?? 0;
                                                     @endphp --}}
-                                                   
+
                                                     @if ($quote->quotes_count > 0)
                                                         <li class="colorDivgreen car-row"
                                                             data-car-id="{{ $quote->id }}">
@@ -1908,9 +2123,9 @@
                                     </span>
                                 </div>
                             </div>
-                       </section>
+                        </section>
                     </div>
-                 </div>
+                </div>
             </div>
         </div>
     </div>
@@ -2519,15 +2734,15 @@
                             <div class="col-lg-6">
                                 <div class="jobsrch_top_box position-relative">
                                     ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
-                                                            <div>
-                                                                <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
-                                                            </div>
-                                                            ` : `
-                                                            <div class="job_se_sec slider">
                                                                 <div>
                                                                     <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
                                                                 </div>
-                                                                ${carData.image_1 ? `
+                                                                ` : `
+                                                                <div class="job_se_sec slider">
+                                                                    <div>
+                                                                        <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+                                                                    </div>
+                                                                    ${carData.image_1 ? `
                                                 <div>
                                                     <img src="/${carData.image_1}" class="vehicle_image" alt="Vehicle Image" />
                                                 </div>
@@ -2536,11 +2751,11 @@
                                                     <img src="/uploads/no_car_image.png" class="vehicle_image" alt="No Image Available" />
                                                 </div>
                                             `}
-                                                            </div>
-                                                            <div class="custom-navigation">
-                                                                <span class="current-slide">1</span> of <span class="total-slides">2</span>
-                                                            </div>
-                                                        `}                                   
+                                                                </div>
+                                                                <div class="custom-navigation">
+                                                                    <span class="current-slide">1</span> of <span class="total-slides">2</span>
+                                                                </div>
+                                                            `}                                   
                                 </div>
                                 
                                 <div class="btnCustom">${switch_custom}</div>
