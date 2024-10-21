@@ -889,7 +889,7 @@
                                                                    
                                                                 </label>
 
-                                                                <span id="sendLinkBtn"
+                                                                <span id=""
                                                                     style="cursor: pointer;">Verified</span>
 
                                                                 <div id="message" style="display: none;"></div>
