@@ -853,26 +853,20 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                            <div class="col-md-6 col-xl-6 requied_sec verify_email_sec px-0 px-md-3"
+                                            <div class="col-md-6 col-xl-6 requied_sec verify_email_sec px-0 px-md-3  mt-3 pt-2"
                                                 style="{{ $user->is_status == 'approved' ? 'display:block' : '' }}">
-                                                <h2 class="upload-heading">Verify Email:</h2>
+                                                <h2 class="upload-heading mb-0">Verify Email:</h2>
                                                
                                                 @if ($user->email_verify_status == 0)
                                                 <p class="subtitle">You must verify your email address before you can start bidding.</p>
                                                 <p class="subtitle text-danger message">Please verify your email</p>
-                                                @else
-                                                <p class="subtitle text-success message">Email verified</p>
-                                                @endif
                                                 <div class="upload-section">
                                                     <div class="requied_sec_row w-100">
                                                         <div class="form-group">
                                                             <div class="document flex-row border-danger">
                                                                 <label for="email_verify" class="w-auto font-weight-light">
                                                                     Verify your email address
-                                                                    {{-- <input type="email" name="email" id="email_verify"
-                                                                        placeholder="Verify your email address"
-                                                                        class="border-0 font-weight-light"
-                                                                        title="Click to upload the document" /> --}}
+                                                                   
                                                                 </label>
 
                                                                 <span class="send-link" id="sendLinkBtn"
@@ -884,6 +878,27 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @else
+                                                <p class="subtitle text-success message">Email verified</p>
+                                                <div class="upload-section ">
+                                                    <div class="requied_sec_row w-100">
+                                                        <div class="form-group">
+                                                            <div class="document flex-row">
+                                                                <label for="email_verify" class="w-auto font-weight-light">
+                                                                    Verify your email address
+                                                                   
+                                                                </label>
+
+                                                                <span id="sendLinkBtn"
+                                                                    style="cursor: pointer;">Verified</span>
+
+                                                                <div id="message" style="display: none;"></div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
 

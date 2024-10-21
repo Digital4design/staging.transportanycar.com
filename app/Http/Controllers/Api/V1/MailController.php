@@ -96,7 +96,7 @@ class MailController extends ResponseController
         }
 
         // Mark the email as verified
-        $user->email_verify_status = 1;
+        $user->email_verify_status = '1';
         $user->email_verification_token = null;
         $user->save();
 
