@@ -74,7 +74,7 @@ class MailController extends ResponseController
                 'name'=> $user->name,
             ])->render();
           
-            $emailService->sendEmail($request->email, $htmlContent, $request->subject);
+            $emailService->sendEmail('kartik.d4d@gmail.com', $htmlContent, $request->subject);
 
             return response()->json(['message' => 'Verification email sent successfully.']);
 
@@ -92,7 +92,7 @@ class MailController extends ResponseController
         $user = User::where('email_verification_token', $token)->first();
 
         if (!$user) {
-            return redirect('/')->with('error', 'Invalid verification link.');
+            return redirect('/transporter/profile')->with('error', 'Invalid verification link.');
         }
 
         // Mark the email as verified
@@ -100,6 +100,7 @@ class MailController extends ResponseController
         $user->email_verification_token = null;
         $user->save();
 
-        return redirect('/')->with('success', 'Your email has been verified.');
+        // return redirect('url("/transporter')->with('success', 'Your email has been verified.');
+        return redirect('/transporter/profile')->with('success', 'Your email has been verified.');
     }
 }
