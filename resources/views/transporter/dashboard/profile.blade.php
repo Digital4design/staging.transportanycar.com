@@ -1001,7 +1001,7 @@
                                         {{-- @endif --}}
 
 
-                                        <div class="row mx-0 mx-xl-4">
+                                        <div class="row mx-4 mx-md-2">
                                             @if (
                                                 ($user->is_status != 'approved' && $user->is_status != 'pending') ||
                                                     ($user->driver_license == null || $user->goods_in_transit_insurance == null))
@@ -1132,8 +1132,8 @@
                                                         @if ($user->goods_in_transit_insurance != null)
                                                             <div class="col-xl-12  my-0 upload_docs px-0">
                                                                 <div class="requied_sec_row">
-                                                                    <div class="form-group">
-                                                                        <div class="document">
+                                                                    <div class="form-group mb-0">
+                                                                        <div class="document mb-0">
                                                                             <label for=""
                                                                                 class="font-weight-light">
                                                                                 Goods in transit insurance
