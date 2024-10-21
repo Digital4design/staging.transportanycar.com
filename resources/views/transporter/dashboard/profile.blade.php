@@ -712,7 +712,7 @@
                                         <input type="hidden" name="country_code" id="country_code"
                                             value="{{ empty($user->country_code) ? '+44' : $user->country_code }}">
 
-                                        @if ($user->is_status == 'pending' && ($user->driver_license != null && $user->goods_in_transit_insurance != null && $user->email_verify_status == '0'))
+                                        @if ($user->is_status == 'pending' && ($user->driver_license != null && $user->goods_in_transit_insurance != null && $user->email_verify_status == '1'))
                                             <div class="requied_sec px-md-3 mx-xl-4" style="color:red">
                                                 <h2>Account approval pending</h2>
                                             </div>
