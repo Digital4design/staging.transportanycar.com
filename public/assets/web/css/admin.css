@@ -296,14 +296,16 @@ input[type=number]::-webkit-inner-spin-button {
   color: #fff !important;
 }
 
-.list-group-item.active svg path,
+.list-group-item:not(.works-btn).active svg path,
 .list-group-item:not(.works-btn):hover svg path {
   fill: #fff;
 }
 /* .list-group-item.active svg path, */
+.list-group-item.works-btn.active svg path:first-child,
 .list-group-item.works-btn:hover svg path:first-child {
   stroke: #fff;
 }
+.list-group-item.works-btn.active svg path:last-child,
 .list-group-item.works-btn:hover svg path:last-child {
   stroke: #fff;
   fill:#ffffff;
