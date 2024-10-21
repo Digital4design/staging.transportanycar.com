@@ -1898,7 +1898,7 @@
                                 <a href="#" id="saveSrch" class="make_offer_btn checkStatus">Save search</a>
                             </div> --}}
 
-                            <div class="srch-data">
+                            <div class="srch-data mt-5">
                                 <div class="srch-data-filter">
                                     @if ($quotes->total() == 0)
                                         <span>Results: 0</span>

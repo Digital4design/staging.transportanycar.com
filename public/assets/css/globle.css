@@ -700,7 +700,7 @@ body.modal-open {
 
 @media (max-width:991px) {
     #page-content-wrapper .navbar {
-        box-shadow: none;
+        /* box-shadow: none; */
         background-color: #ffffff;
         /* background: linear-gradient(180deg, rgba(0, 141, 212, 0.31) 0%, rgba(245, 251, 254, 0) 100%); */
     }   
