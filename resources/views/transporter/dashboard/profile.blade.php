@@ -1195,7 +1195,7 @@
                                                         </div>
                                                     </li>
 
-                                                    <li>
+                                                    {{-- <li>
                                                         <div class="form-group">
                                                             <input type="checkbox" id="payment5"
                                                                 name="payment_methods[]" value="Cheque"
@@ -1203,19 +1203,11 @@
                                                             <label for="payment5"></label>
                                                             <span>Cheque</span>
                                                         </div>
-                                                    </li>
+                                                    </li> --}}
 
-                                                    <li>
-                                                        <div class="form-group">
-                                                            <input type="checkbox" id="payment3"
-                                                                name="payment_methods[]" value="Visa Card"
-                                                                {{ in_array('Visa Card', $payment_methods) ? 'checked' : '' }}>
-                                                            <label for="payment3"></label>
-                                                            <span>Visa Card</span>
-                                                        </div>
-                                                    </li>
+                                                   
 
-                                                    <li>
+                                                    {{-- <li>
                                                         <div class="form-group">
                                                             <input type="checkbox" id="payment4"
                                                                 name="payment_methods[]" value="Paypal"
@@ -1223,7 +1215,7 @@
                                                             <label for="payment4"></label>
                                                             <span>Paypal</span>
                                                         </div>
-                                                    </li>
+                                                    </li> --}}
 
                                                     <li>
                                                         <div class="form-group">
@@ -1232,6 +1224,15 @@
                                                                 {{ in_array('Bank Transfer', $payment_methods) ? 'checked' : '' }}>
                                                             <label for="payment2"></label>
                                                             <span>Bank Transfer</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <input type="checkbox" id="payment3"
+                                                                name="payment_methods[]" value="Visa Card"
+                                                                {{ in_array('Visa Card', $payment_methods) ? 'checked' : '' }}>
+                                                            <label for="payment3"></label>
+                                                            <span> Card Payment</span>
                                                         </div>
                                                     </li>
                                                 </ul>
