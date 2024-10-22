@@ -89,11 +89,9 @@ class PaymentController extends WebController
             //Optionally send email (uncomment and adjust as necessary)
 
 
-$user=User::find($quote->user_id);
-// return $user->email;
+            $user=User::find($quote->user_id);
             $email_to = $user->email;;
-            $subject = "confirm booking";
-            //$email_to = 'info@transportanycar.com';
+            $subject = "Confirmed, Your Bid for Ford Fiesta Delivery Has Been Accepted.";
             $maildata['quotation'] = $quote;
             $maildata['transporter_name'] =$data['transporter_name'];
             $maildata['booking_ref'] = isset($transaction->delivery_reference_id) ? $transaction->delivery_reference_id : '';
