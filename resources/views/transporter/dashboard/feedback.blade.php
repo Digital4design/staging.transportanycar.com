@@ -15,16 +15,20 @@
             padding: 8px 50px;
             display: inline-block;
         }
+
         .banner.new_member {
             background: #52D017;
         }
+
         .banner.pro_member {
             background: #000000;
         }
+
         .banner.vip_member {
             background: #fff000;
-            color:#000000;
+            color: #000000;
         }
+
         .wd-transport-dtls h1 {
             text-transform: capitalize;
         }
@@ -39,8 +43,8 @@
         }
 
         /* .wd-transport-area {
-                    align-items: self-start;
-                } */
+                        align-items: self-start;
+                    } */
 
         ul.wd-star-lst {
             margin-bottom: 0;
@@ -67,12 +71,14 @@
             font-weight: 500;
             margin-left: 10px;
         }
+
         @media(min-width: 992px) {
-            .set_banner_position > .wd-white-box {
+            .set_banner_position>.wd-white-box {
                 position: relative;
                 overflow: hidden;
             }
         }
+
         @media(max-width: 1199px) {
             .wd-transport-area {
                 flex-wrap: wrap;
@@ -100,12 +106,25 @@
             .adjust_spacing {
                 padding-top: 70px;
             }
+
             .set_banner_position {
                 position: relative;
-                overflow: hidden;
+                padding-top: 15px;
+                /* overflow: hidden; */
+            }
+
+            .banner {
+                right: -45px;
+                top: 25px;
             }
         }
+
         @media(max-width: 767px) {
+            .banner {
+                right: -50px;
+                top: 18px;
+            }
+
             .wd-transport-img {
                 padding-top: 5px;
                 padding-bottom: 5px;
@@ -157,12 +176,12 @@
             <div class="content_container adjust_spacing">
                 <div class="inner_content set_banner_position">
                     <div class="wd-white-box">
-                        @if($completed_job >= 0 && $completed_job <= 10)
+                        @if ($completed_job >= 0 && $completed_job <= 10)
                             <div class="banner new_member">New Member</div>
                         @elseif($completed_job >= 11 && $completed_job <= 50)
-                        <div class="banner pro_member">Pro Member</div>
+                            <div class="banner pro_member">Pro Member</div>
                         @elseif($completed_job >= 51)
-                        <div class="banner vip_member">ViP Member</div>
+                            <div class="banner vip_member">ViP Member</div>
                         @endif
                         <div class="wd-feedback-box border-0 rounded-0 p-0">
                             <div class="row wd-pb pb-5 mx-0">
@@ -220,11 +239,12 @@
                                                                 fill="#FFA800" />
                                                         </svg>
                                                     </li>
-                                                    <li class="user-feedback-rating-count"><span>({{ count($feedback)}})</span></li>
+                                                    <li class="user-feedback-rating-count">
+                                                        <span>({{ count($feedback) }})</span></li>
 
                                                 </ul>
                                                 <div>Member since: <span
-                                                        class="font-weight-light user-feedback-member-from">{{$user->created_at->format('m/d/Y')}}</span>
+                                                        class="font-weight-light user-feedback-member-from">{{ $user->created_at->format('m/d/Y') }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -276,7 +296,7 @@
                                                     <li>
                                                         <p>Payment method:</p>
                                                         <span>
-                                                        {{ str_replace(',', ', ', $user->payment_methods ) }}</span>
+                                                            {{ str_replace(',', ', ', $user->payment_methods) }}</span>
                                                     </li>
                                                 </ul>
                                             </div>

@@ -1636,6 +1636,7 @@
 
             .search_resu_sec .form-group.where_custom {
                 padding: 10px 30px;
+                border: 1px solid #CFCFCF;
             }
 
             .srch-data {
@@ -1918,7 +1919,15 @@
                                 </div>
                                 <a href="{{ route('transporter.new_jobs_new') }}">Reset Search</a>
                             </div>
-
+                            @if (count($quotes) == 0)
+                                <div class="col-12">
+                                    <div class="card nodata-card border-0 rounded-3 bg-white h-100 overflow-hidden">
+                                        <div class="card-body text-center p-3 py-5">
+                                            -Currently no jobs to show-
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                             @foreach ($quotes as $quote)
                                 <div class="boxContent">
                                     <div class="boxContentList" id="search-results">
