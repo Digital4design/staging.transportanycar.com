@@ -75,7 +75,7 @@ class MailController extends ResponseController
                 'name'=> $user->name,
             ])->render();
           
-            $emailService->sendEmail('kartik.d4d@gmail.com', $htmlContent, $request->subject);
+            $emailService->sendEmail($request->email, $htmlContent, $request->subject);
 
             return response()->json(['message' => 'Verification email sent successfully.']);
 
