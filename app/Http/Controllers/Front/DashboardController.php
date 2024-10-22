@@ -423,14 +423,17 @@ class DashboardController extends WebController
         }
     }
 
-    public function leaveFeedback($id=305)
+    public function leaveFeedback($id)
     {
+        $user_data = Auth::guard('web')->user();
         if($id != null){
             $quote = $id ? QuoteByTransporter::with(['getTransporters', 'quote'])->where(['id' => $id])->first() : null;
             $user_info = null;
+            // dd($quote);
             if ($quote) {
                 $transporter_detail = $quote->getTransporters;
                 $transporter_feedback = $this->get_transporter_feedback($transporter_detail->id);
+                $feedback_count= Feedback::where('transporter_id',$user_data->id)->count();
                 $quote_info = $quote->quote;
             } else {
                 return redirect()->back();
@@ -440,7 +443,8 @@ class DashboardController extends WebController
                 'data' => $quote,
                 'transporter_detail' => $transporter_detail,
                 'quote_info' => $quote_info,
-                'transporter_feedback' => $transporter_feedback
+                'transporter_feedback' => $transporter_feedback,
+                'feedback_count'=>$feedback_count
             ]);
         }
         else {
@@ -451,29 +455,11 @@ class DashboardController extends WebController
     public function saveFeedbackQuote(Request $request)
     {
         $user_data = Auth::guard('web')->user();
-        // Determine the type of feedback and get the ratings array
-        // $feedbackType = null;
-        // $ratings = null;
-// return $request->all();
+       
         $feedbackComment = $request->input('feedback');
             $quoteByTransporterId = $request->input('quote_by_transporter_id');
             $rating=$request->input('rating');
-        // if ($request->has('positiveRatings')) {
-        //     $feedbackType = 'positive';
-        //     $ratings = $request->input('positiveRatings');
-        // } elseif ($request->has('neutralRatings')) {
-        //     $feedbackType = 'neutral';
-        //     $ratings = $request->input('neutralRatings');
-        // } elseif ($request->has('negativeRatings')) {
-        //     $feedbackType = 'negative';
-        //     $ratings = $request->input('negativeRatings');
-        // }
-
-        // if ($feedbackType && $ratings) {
-        //     $feedbackComment = $request->input('feedback');
-        //     $quoteByTransporterId = $request->input('quote_by_transporter_id');
-        //     $mappedRatings = $this->mapRatings($ratings, $feedbackType);
-             // Update or create feedback entry based on quote_by_transporter_id
+        // 
             Feedback::updateOrCreate(
                 ['quote_by_transporter_id' => $quoteByTransporterId],
                 [
@@ -482,6 +468,7 @@ class DashboardController extends WebController
                     // 'punctuality' => $mappedRatings['punctuality'],
                     // 'care_of_good' => $mappedRatings['care_of_good'],
                     // 'professionalism' => $mappedRatings['professionalism'],
+                    'transporter_id'=>$user_data->id,
                     'rating'=>$rating,
                     'comment' => $feedbackComment
                 ]

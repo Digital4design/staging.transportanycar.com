@@ -18,4 +18,8 @@ class QuoteByTransporter extends Model
     {
         return $this->hasOne(UserQuote::class,'id','user_quote_id');
     }
+    public function feedback()
+    {
+        return $this->hasOne(Feedback::class,'id','quote_by_transporter_id');
+    }
 }
