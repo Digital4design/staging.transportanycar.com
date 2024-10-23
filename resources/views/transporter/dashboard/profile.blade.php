@@ -1099,7 +1099,7 @@
                                             <div class="col-lg-6 pr-lg-3">
                                                 <div class="form-group">
                                                     <select class="form-control sticky-data" name="git_insurance_cover" id="git_insurance_cover">
-                                                        <option value="" disabled>Select GIT Insurance cover</option>
+                                                        <option value="" disabled {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '' ? 'selected' : '' }}>Select GIT Insurance cover</option>
                                                         @foreach ([10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000, 1000000] as $amount)
                                                             <option value="{{ $amount }}" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == (string)$amount ? 'selected' : '' }}>
                                                                 £{{ number_format($amount) }}
