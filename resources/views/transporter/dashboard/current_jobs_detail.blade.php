@@ -315,7 +315,8 @@
                     </div>
                     <div class="collection_list">
                         <span>Mobile number:</span>
-                        <b>{{ optional($quotation_detail)->collection_mobile_number ?? 'Waiting for details' }}</b>
+                        <b>{{ optional($quotation_detail)->delivery_mobile_number ? '0' . $quotation_detail->delivery_mobile_number : 'Waiting for details' }}</b>
+
                     </div>
                     <div class="collection_list">
                         <span>Email address:</span>
@@ -345,7 +346,8 @@
                     </div>
                     <div class="collection_list">
                         <span>Mobile number:</span>
-                        <b>{{ optional($quotation_detail)->delivery_mobile_number ?? 'Waiting for details' }}</b>
+                        <b>{{ optional($quotation_detail)->delivery_mobile_number ? '0' . $quotation_detail->delivery_mobile_number : 'Waiting for details' }}</b>
+
                     </div>
                     <div class="collection_list">
                         <span>Email address:</span>

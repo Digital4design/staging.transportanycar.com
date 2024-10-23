@@ -180,6 +180,8 @@ ul.suggestions-list li {
                                     <input id="contact_number" name ="contact_number" type="tel" placeholder="Mobile number" class="form-control" />
                                 </div>
                             </div>
+
+                            
                             <div class="col-lg-6">
                                 <div class="form_group_sec">
                                     <input type="email" id="delivery_email" name="delivery_email" placeholder="Email address" class="form-control"  value="{{ $user_email }}"/>
@@ -375,18 +377,18 @@ ul.suggestions-list li {
                 }
             });
 
-            const input = document.querySelector("#phone");
-            window.intlTelInput(input, {
-                initialCountry: 'gb',
-                utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
-                separateDialCode: true
-            });
+            // const input = document.querySelector("#phone");
+            // window.intlTelInput(input, {
+            //     initialCountry: 'gb',
+            //     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+            //     separateDialCode: true
+            // });
             const contact_number = document.querySelector("#contact_number");
-            window.intlTelInput(contact_number, {
-                initialCountry: 'gb',
-                utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
-                separateDialCode: true
-            });
+            // window.intlTelInput(contact_number, {
+            //     initialCountry: 'gb',
+            //     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+            //     separateDialCode: true
+            // });
             // Toggle and validate manual address for collection
             $("#pay_address").click(function() {
                 clearStartPoint();
