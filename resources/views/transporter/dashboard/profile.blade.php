@@ -1093,7 +1093,7 @@
                                             </div>
                                         @endif
 
-                                        <h3 class="adjust-space-mobile-padding"><p>{{$user->companyDetail->years_established}}</p>
+                                        <h3 class="adjust-space-mobile-padding"><p>Company details</p>
                                         </h3>
                                         <div class="row align-items-end mx-4">
                                             <div class="col-lg-6 pr-lg-3">
