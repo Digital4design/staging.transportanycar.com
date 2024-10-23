@@ -70,10 +70,11 @@
             <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg" style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;" alt="transport notifiaction" title="transport notifiaction"></a>
 
         {{-- <h2>Hi {{ $name }},</h2> --}}
-        <p class="adjust-space">Your £250 bid for Ford Fiesta delivery has been accepted by user101.</p>
+        <p class="adjust-space">Your £{{ $data['price'] }} bid for {{$data['model']}} delivery has been accepted by {{$data['name']}}.</p>
         <p>We will send you another email shortly once they have provided their full contact information and full
             delivery details.</p>
-        <p class="adjust-space">Go to booking.</p>
+        {{-- <p class="adjust-space">Go to booking.</p> --}}
+        <a class="verify-btn" href="{{ $data['url'] }}" style="color:#ffffff;">Go to booking.</a>
         <p>Best Regards,</p>
         <p class="adjust-half-space">Transport Any Car Team</p>
         <p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>

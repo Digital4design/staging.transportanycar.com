@@ -1125,7 +1125,7 @@
                                                     <div class="input-group">
                                                         <input type="tel" id="phone" class="form-control"
                                                             placeholder="Mobile Phone" name="mobile"
-                                                            value="{{ old('mobile', $user->mobile ?? '') }}" />
+                                                            value="{{ old('mobile', '0' . ($user->mobile ?? '')) }}" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
