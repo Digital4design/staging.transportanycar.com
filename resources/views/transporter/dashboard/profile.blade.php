@@ -1099,17 +1099,18 @@
                                             <div class="col-lg-6 pr-lg-3">
                                                 <div class="form-group">
                                                     <select class="form-control sticky-data" name="git_insurance_cover" id="git_insurance_cover">
-                                                        <option value="" disabled {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '' ? 'selected' : '' }}>Select GIT Insurance cover</option>
-                                                        @foreach ([10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000, 1000000] as $amount)
+                                                        <option value="" disabled {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '' ? 'selected' : '' }}>Select git  insurance cover</option>
+                                                        @foreach ([10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000] as $amount)
                                                             <option value="{{ $amount }}" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == (string)$amount ? 'selected' : '' }}>
                                                                 £{{ number_format($amount) }}
                                                             </option>
                                                         @endforeach
+                                                        <option value="1000000+" {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '10+' ? 'selected' : '' }}>1000000+</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <select class="form-control" name="years_established" id="years_established">
-                                                        <option value="" disabled {{ old('years_established', optional($companyDetail)->years_established) == '' ? 'selected' : '' }}>Years Established</option>
+                                                        <option value="" disabled {{ old('years_established', optional($companyDetail)->years_established) == '' ? 'selected' : '' }}>Years established</option>
                                                         @foreach (range(1, 9) as $year)
                                                             <option value="{{ $year }}" {{ old('years_established', optional($companyDetail)->years_established) == (string)$year ? 'selected' : '' }}>{{ $year }}</option>
                                                         @endforeach
@@ -1121,7 +1122,7 @@
                                             <div class="col-lg-6 pl-lg-3">
                                                 <div class="form-group">
                                                     <select class="form-control sticky-data" name="no_of_tow_trucks" id="no_of_tow_trucks">
-                                                        <option value="" disabled {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == '' ? 'selected' : '' }}>Number of Tow Trucks</option>
+                                                        <option value="" disabled {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == '' ? 'selected' : '' }}>Number of tow trucks</option>
                                                         @foreach (range(1, 9) as $number)
                                                             <option value="{{ $number }}" {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == (string)$number ? 'selected' : '' }}>{{ $number }}</option>
                                                         @endforeach
@@ -1131,7 +1132,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <select class="form-control" name="no_of_drivers" id="no_of_drivers">
-                                                        <option value="" disabled {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == '' ? 'selected' : '' }}>Number of Drivers</option>
+                                                        <option value="" disabled {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == '' ? 'selected' : '' }}>Number of drivers</option>
                                                         @foreach (range(1, 9) as $number)
                                                             <option value="{{ $number }}" {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == (string)$number ? 'selected' : '' }}>{{ $number }}</option>
                                                         @endforeach
