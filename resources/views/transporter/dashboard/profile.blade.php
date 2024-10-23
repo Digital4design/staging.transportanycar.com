@@ -1100,76 +1100,43 @@
                                                 <div class="form-group">
                                                     <select class="form-control sticky-data" name="git_insurance_cover" id="git_insurance_cover">
                                                         <option value="" disabled>Select GIT Insurance cover</option>
-                                                        <option value="10000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '10000' ? 'selected' : '' }}>£10,000</option>
-                                                        <option value="20000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '20000' ? 'selected' : '' }}>£20,000</option>
-                                                        <option value="30000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '30000' ? 'selected' : '' }}>£30,000</option>
-                                                        <option value="40000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '40000' ? 'selected' : '' }}>£40,000</option>
-                                                        <option value="50000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '50000' ? 'selected' : '' }}>£50,000</option>
-                                                        <option value="60000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '60000' ? 'selected' : '' }}>£60,000</option>
-                                                        <option value="70000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '70000' ? 'selected' : '' }}>£70,000</option>
-                                                        <option value="80000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '80000' ? 'selected' : '' }}>£80,000</option>
-                                                        <option value="90000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '90000' ? 'selected' : '' }}>£90,000</option>
-                                                        <option value="100000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '100000' ? 'selected' : '' }}>£100,000</option>
-                                                        <option value="200000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '200000' ? 'selected' : '' }}>£200,000</option>
-                                                        <option value="300000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '300000' ? 'selected' : '' }}>£300,000</option>
-                                                        <option value="400000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '400000' ? 'selected' : '' }}>£400,000</option>
-                                                        <option value="500000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '500000' ? 'selected' : '' }}>£500,000</option>
-                                                        <option value="600000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '600000' ? 'selected' : '' }}>£600,000</option>
-                                                        <option value="700000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '700000' ? 'selected' : '' }}>£700,000</option>
-                                                        <option value="800000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '800000' ? 'selected' : '' }}>£800,000</option>
-                                                        <option value="900000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '900000' ? 'selected' : '' }}>£900,000</option>
-                                                        <option value="1000000" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == '1000000' ? 'selected' : '' }}>£1,000,000+</option>
+                                                        @foreach ([10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000, 1000000] as $amount)
+                                                            <option value="{{ $amount }}" {{ old('git_insurance_cover', $companyDetail->git_insurance_cover ?? '') == (string)$amount ? 'selected' : '' }}>
+                                                                £{{ number_format($amount) }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <select class="form-control" name="years_established" id="years_established">
-                                                        <option value="" disabled {{ old('years_established', optional($companyDetail)->years_established ?? '') == '' ? 'selected' : '' }}>Years Established</option>
-                                                        <option value="1" {{ old('years_established', optional($companyDetail)->years_established ?? '') == '1' ? 'selected' : '' }}>1</option>
-                                                        <option value="2" {{ old('years_established', optional($companyDetail)->years_established ?? '') == '2' ? 'selected' : '' }}>2</option>
-                                                        <option value="3" {{ old('years_established', optional($companyDetail)->years_established ?? '') == '3' ? 'selected' : '' }}>3</option>
-                                                        <option value="4" {{ old('years_established', optional($companyDetail)->years_established ?? '') == '4' ? 'selected' : '' }}>4</option>
-                                                        <option value="5" {{ old('years_established', optional($companyDetail)->years_established ?? '') == '5' ? 'selected' : '' }}>5</option>
-                                                        <option value="6" {{ old('years_established', optional($companyDetail)->years_established ?? '') == '6' ? 'selected' : '' }}>6</option>
-                                                        <option value="7" {{ old('years_established', optional($companyDetail)->years_established ?? '') == '7' ? 'selected' : '' }}>7</option>
-                                                        <option value="8" {{ old('years_established', optional($companyDetail)->years_established ?? '') == '8' ? 'selected' : '' }}>8</option>
-                                                        <option value="9" {{ old('years_established', optional($companyDetail)->years_established ?? '') == '9' ? 'selected' : '' }}>9</option>
-                                                        <option value="10+" {{ old('years_established', optional($companyDetail)->years_established ?? '') == '10+' ? 'selected' : '' }}>10+</option>
+                                                        <option value="" disabled {{ old('years_established', optional($companyDetail)->years_established) == '' ? 'selected' : '' }}>Years Established</option>
+                                                        @foreach (range(1, 9) as $year)
+                                                            <option value="{{ $year }}" {{ old('years_established', optional($companyDetail)->years_established) == (string)$year ? 'selected' : '' }}>{{ $year }}</option>
+                                                        @endforeach
+                                                        <option value="10+" {{ old('years_established', optional($companyDetail)->years_established) == '10+' ? 'selected' : '' }}>10+</option>
                                                     </select>
-                                                    
                                                 </div>
                                             </div>
                                         
                                             <div class="col-lg-6 pl-lg-3">
                                                 <div class="form-group">
                                                     <select class="form-control sticky-data" name="no_of_tow_trucks" id="no_of_tow_trucks">
-                                                        <option value="" disabled {{ old('no_of_tow_trucks', $companyDetail->no_of_tow_trucks ?? '') == '' ? 'selected' : '' }}>Number of Tow Trucks</option>
-                                                        <option value="1" {{ old('no_of_tow_trucks', $companyDetail->no_of_tow_trucks ?? '') == '1' ? 'selected' : '' }}>1</option>
-                                                        <option value="2" {{ old('no_of_tow_trucks', $companyDetail->no_of_tow_trucks ?? '') == '2' ? 'selected' : '' }}>2</option>
-                                                        <option value="3" {{ old('no_of_tow_trucks', $companyDetail->no_of_tow_trucks ?? '') == '3' ? 'selected' : '' }}>3</option>
-                                                        <option value="4" {{ old('no_of_tow_trucks', $companyDetail->no_of_tow_trucks ?? '') == '4' ? 'selected' : '' }}>4</option>
-                                                        <option value="5" {{ old('no_of_tow_trucks', $companyDetail->no_of_tow_trucks ?? '') == '5' ? 'selected' : '' }}>5</option>
-                                                        <option value="6" {{ old('no_of_tow_trucks', $companyDetail->no_of_tow_trucks ?? '') == '6' ? 'selected' : '' }}>6</option>
-                                                        <option value="7" {{ old('no_of_tow_trucks', $companyDetail->no_of_tow_trucks ?? '') == '7' ? 'selected' : '' }}>7</option>
-                                                        <option value="8" {{ old('no_of_tow_trucks', $companyDetail->no_of_tow_trucks ?? '') == '8' ? 'selected' : '' }}>8</option>
-                                                        <option value="9" {{ old('no_of_tow_trucks', $companyDetail->no_of_tow_trucks ?? '') == '9' ? 'selected' : '' }}>9</option>
-                                                        <option value="10+" {{ old('no_of_tow_trucks', $companyDetail->no_of_tow_trucks ?? '') == '10+' ? 'selected' : '' }}>10+</option>
+                                                        <option value="" disabled {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == '' ? 'selected' : '' }}>Number of Tow Trucks</option>
+                                                        @foreach (range(1, 9) as $number)
+                                                            <option value="{{ $number }}" {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == (string)$number ? 'selected' : '' }}>{{ $number }}</option>
+                                                        @endforeach
+                                                        <option value="10+" {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == '10+' ? 'selected' : '' }}>10+</option>
                                                     </select>
+                                                    
                                                 </div>
                                                 <div class="form-group">
                                                     <select class="form-control" name="no_of_drivers" id="no_of_drivers">
-                                                        <option value="" disabled {{ old('no_of_drivers', $companyDetail->no_of_drivers ?? '') == '' ? 'selected' : '' }}>Number of Drivers</option>
-                                                        <option value="1" {{ old('no_of_drivers', $companyDetail->no_of_drivers ?? '') == '1' ? 'selected' : '' }}>1</option>
-                                                        <option value="2" {{ old('no_of_drivers', $companyDetail->no_of_drivers ?? '') == '2' ? 'selected' : '' }}>2</option>
-                                                        <option value="3" {{ old('no_of_drivers', $companyDetail->no_of_drivers ?? '') == '3' ? 'selected' : '' }}>3</option>
-                                                        <option value="4" {{ old('no_of_drivers', $companyDetail->no_of_drivers ?? '') == '4' ? 'selected' : '' }}>4</option>
-                                                        <option value="5" {{ old('no_of_drivers', $companyDetail->no_of_drivers ?? '') == '5' ? 'selected' : '' }}>5</option>
-                                                        <option value="6" {{ old('no_of_drivers', $companyDetail->no_of_drivers ?? '') == '6' ? 'selected' : '' }}>6</option>
-                                                        <option value="7" {{ old('no_of_drivers', $companyDetail->no_of_drivers ?? '') == '7' ? 'selected' : '' }}>7</option>
-                                                        <option value="8" {{ old('no_of_drivers', $companyDetail->no_of_drivers ?? '') == '8' ? 'selected' : '' }}>8</option>
-                                                        <option value="9" {{ old('no_of_drivers', $companyDetail->no_of_drivers ?? '') == '9' ? 'selected' : '' }}>9</option>
-                                                        <option value="10+" {{ old('no_of_drivers', $companyDetail->no_of_drivers ?? '') == '10+' ? 'selected' : '' }}>10+</option>
+                                                        <option value="" disabled {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == '' ? 'selected' : '' }}>Number of Drivers</option>
+                                                        @foreach (range(1, 9) as $number)
+                                                            <option value="{{ $number }}" {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == (string)$number ? 'selected' : '' }}>{{ $number }}</option>
+                                                        @endforeach
+                                                        <option value="10+" {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == '10+' ? 'selected' : '' }}>10+</option>
                                                     </select>
-                                                    
                                                 </div>
                                             </div>
                                         </div>
