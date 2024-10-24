@@ -301,9 +301,12 @@ input[type=number]::-webkit-inner-spin-button {
   fill: #fff;
 }
 /* .list-group-item.active svg path, */
+.list-group-item.manage_notification.active svg path,
+.list-group-item.manage_notification:hover svg path,
 .list-group-item.works-btn.active svg path:first-child,
 .list-group-item.works-btn:hover svg path:first-child {
   stroke: #fff;
+  fill: none;
 }
 .list-group-item.works-btn.active svg path:last-child,
 .list-group-item.works-btn:hover svg path:last-child {

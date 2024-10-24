@@ -104,16 +104,19 @@ $currentRoute = request()->route()->getName();
                     Feedback
                 </span>
             </a>
-            <a class="list-group-item logout_btn @if ($currentRoute == 'transporter.manage_notification') active @endif"
+            <a class="list-group-item manage_notification @if ($currentRoute == 'transporter.manage_notification') active @endif"
                 href="{{ route('transporter.manage_notification') }}">
                 <span>
                     <div class="noti_info_icon">
-                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M8 20H17C17.83 20 18.54 19.5 18.84 18.78L21.86 11.73C21.95 11.5 22 11.26 22 11V9C22 7.9 21.1 7 20 7H13.69L14.64 2.43L14.67 2.11C14.67 1.7 14.5 1.32 14.23 1.05L13.17 0L6.58 6.59C6.22 6.95 6 7.45 6 8V18C6 19.1 6.9 20 8 20ZM8 8L12.34 3.66L11 9H20V11L17 18H8V8ZM0 8H4V20H0V8Z"
-                                fill="black" />
-                        </svg>
+                              d="M10.5 21C11.9487 21 13.1238 19.8249 13.1238 18.375H7.87626C7.87626 19.8249 9.05136 21 10.5 21ZM19.3344 14.8596C18.542 14.0081 17.0592 12.7271 17.0592 8.53125C17.0592 5.34434 14.8247 2.79316 11.8117 2.16727V1.3125C11.8117 0.587754 11.2244 0 10.5 0C9.77569 0 9.18835 0.587754 9.18835 1.3125V2.16727C6.17534 2.79316 3.94081 5.34434 3.94081 8.53125C3.94081 12.7271 2.45809 14.0081 1.66567 14.8596C1.41958 15.1241 1.31048 15.4403 1.31253 15.75C1.31704 16.4227 1.84491 17.0625 2.62913 17.0625H18.3709C19.1551 17.0625 19.6834 16.4227 19.6875 15.75C19.6896 15.4403 19.5805 15.1237 19.3344 14.8596Z"
+                              fill="none"
+                              stroke="black"
+                              stroke-width="2"
+                            />
+                          </svg>
+                          
                     </div>
                     Manage Notificaton
                 </span>
