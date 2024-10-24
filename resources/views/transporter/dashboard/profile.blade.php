@@ -1151,7 +1151,48 @@
                                             </div>
                                         </div>
                                         
+                                        <div class="row mx-4 d-lg-none">
+                                            <div class="col-lg-6">
+                                                <h5>Payment methods:</h5>
+                                                @php
+                                                    $payment_methods = $user->payment_methods
+                                                        ? explode(',', $user->payment_methods)
+                                                        : [];
+                                                @endphp
+                                                
+                                                <ul class="wd-cstm-check mb-0">
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <input type="checkbox" id="payment1"
+                                                                name="payment_methods[]" value="Cash"
+                                                                {{ empty($payment_methods) || in_array('Cash', $payment_methods) ? 'checked' : '' }}>
+                                                            <label for="payment1"></label>
+                                                            <span>Cash</span>
+                                                        </div>
+                                                        
+                                                    </li>
 
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <input type="checkbox" id="payment2"
+                                                                name="payment_methods[]" value="Bank Transfer"
+                                                                {{ empty($payment_methods) || in_array('Bank Transfer', $payment_methods) ? 'checked' : '' }}>
+                                                            <label for="payment2"></label>
+                                                            <span>Bank Transfer</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <input type="checkbox" id="payment3"
+                                                                name="payment_methods[]" value="Visa Card"
+                                                                {{ in_array('Visa Card', $payment_methods) ? 'checked' : '' }}>
+                                                            <label for="payment3"></label>
+                                                            <span> Card Payment</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                         <h3 class="adjust-space-mobile-padding">Account details</h3>
                                         <div class="row align-items-end mx-4">
                                             <div class="col-lg-6 pr-lg-3">
@@ -1197,7 +1238,7 @@
                                         </div>
 
                                         <div class="row mx-4">
-                                            <div class="col-lg-6 pr-lg-3 order-lg-1 order-2">
+                                            <div class="col-lg-6 pr-lg-3 order-lg-1 order-2 mt-3 mt-lg-0">
                                                 <h5>Email notifications preferences:</h5>
                                                 <ul class="wd-cstm-check">
                                                     <li style="display:none">
@@ -1235,7 +1276,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="col-lg-6 pl-lg-3 order-lg-2 order-1">
+                                            <div class="col-lg-6 pl-lg-3 order-lg-2 order-1 d-none d-lg-block">
                                                 <h5>Payment methods:</h5>
                                                 @php
                                                     $payment_methods = $user->payment_methods
