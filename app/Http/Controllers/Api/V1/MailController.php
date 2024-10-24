@@ -72,7 +72,7 @@ class MailController extends ResponseController
             $verificationLink = url("/transporter/verify-email/{$verificationToken}");
             $htmlContent = view('mail.General.transporterEmailVerify', [
                 'verificationLink' => $verificationLink,
-                'name' => $user->name,
+                'name' => $user->first_name,
             ])->render();
 
             $emailService->sendEmail($request->email, $htmlContent, $request->subject);

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Verify Your Email</title>
+    <title>Confirmed, Your Bid for Ford Fiesta Delivery Has Been Accepted.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -65,18 +65,23 @@
 
 <body>
     <div class="contain">
-        <img class="adjust-space" src="{{asset('/assets/images/transport-logo.jpg')}}" alt="Transport Logo" style="max-width:90px"; />
-        <h2>Hi {{$name}},</h2>
-        <p class="adjust-space">Please verify your email address to activate your account.</p>
-        <a class="verify-btn" href="{{ $verificationLink }}" style="color:#ffffff;">Verify Email</a>
-        <p class="adjust-space">Your link is active for 24 hours. After that you will need to resend the verification email.</p>
-        <p>
-            Best Regards,
-        </p>
+        {{-- <img class="adjust-space" src="{{ asset('/assets/images/transport-logo.jpg') }}" alt="Transport Logo"
+            style="max-width:90px"; /> --}}
+            <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg" style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;" alt="transport notifiaction" title="transport notifiaction"></a>
+
+        {{-- <h2>Hi {{ $name }},</h2> --}}
+        <p class="adjust-space">Your £{{ $data['price'] }} bid for {{$data['model']}} delivery has been accepted by {{$data['name']}}.</p>
+        <p>We will send you another email shortly once they have provided their full contact information and full
+            delivery details.</p>
+        {{-- <p class="adjust-space">Go to booking.</p> --}}
+        <a class="verify-btn" href="{{ $data['url'] }}" style="color:#ffffff;">Go to booking.</a>
+        <p>Best Regards,</p>
         <p class="adjust-half-space">Transport Any Car Team</p>
-        <p class="adjust-half-space">Manage notification <a href="#" style="color:#0356D6; text-decoration: none;">preferences.</span></a>
         <p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     </div>
+    </div>
+    {{-- <a href="{{ $verificationLink }}">Verify Email</a> --}}
+    {{-- <p>If you did not create an account, please ignore this email.</p> --}}
 </body>
 
 </html>

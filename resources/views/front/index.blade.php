@@ -441,6 +441,7 @@
 
             autocomplete.addListener('place_changed', function() {
                 var place = autocomplete.getPlace();
+                console.log(place);
 
                 if (!place.geometry) {
                     return;

@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\App;
 use App\SaveSearch;
+use App\CompanyDetail;
 
 class DashboardController extends WebController
 {
@@ -211,7 +212,7 @@ class DashboardController extends WebController
 
     public function profile()
     {
-        $user = \Auth::guard('transporter')->user();
+        $user = \Auth::guard('transporter','')->user();
         // save last visit time of transporter
         $user->last_visited_at = now();
         $user->save();
@@ -221,7 +222,9 @@ class DashboardController extends WebController
         $total_earning_count = $my_quotes->where('status', 'accept')->whereIn('user_quote_id', $quotes->where('status', 'completed')->pluck('id')->toArray())->sum('transporter_payment');
         // dd($user);
         // die;
-        return view('transporter.dashboard.profile', ['user' => $user, 'jobs_completed_count' => $jobs_completed_count, 'total_earning_count' => $total_earning_count]);
+        $companyDetail = $user->companyDetail; // Access the related company details
+
+        return view('transporter.dashboard.profile', ['user' => $user, 'jobs_completed_count' => $jobs_completed_count, 'total_earning_count' => $total_earning_count,'companyDetail'=>$companyDetail]);
     }
 
     public function messages()
@@ -649,6 +652,24 @@ class DashboardController extends WebController
             $user_data->password = $request->npassword;
         }
         $user_data->save();
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'git_insurance_cover' => 'required|string',
+            'years_established' => 'required|integer',
+            'no_of_tow_trucks' => 'required|integer',
+            'no_of_drivers' => 'required|integer',
+        ]);
+
+        // Use updateOrCreate to create a new record or update an existing one
+        CompanyDetail::updateOrCreate(
+            ['user_id' => auth()->id()], // The condition to find an existing record
+            [
+                'git_insurance_cover' => $validatedData['git_insurance_cover'],
+                'years_established' => $validatedData['years_established'],
+                'no_of_tow_trucks' => $validatedData['no_of_tow_trucks'],
+                'no_of_drivers' => $validatedData['no_of_drivers'],
+            ]
+        );
 
         success_session('Profile updated successfully');
         return redirect()->back();
