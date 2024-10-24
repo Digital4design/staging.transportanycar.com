@@ -75,10 +75,10 @@
             Best Regards,
         </p>
         <p class="adjust-half-space">Transport Any Car Team</p>
-        <p class="adjust-half-space">Manage notification <a href="#" style="color:#0356D6; text-decoration: none;">preferences.</span></a>
+        <p class="adjust-half-space">Manage notification <a href="{{ url('update-manage-notification') }}" style="color:#0356D6; text-decoration: none;">preferences.</span></a>
         <p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     </div>
-    {{-- <a href="{{ $verificationLink }}">Verify Email</a> --}}
+    <a href="{{ $verificationLink }}">Verify Email</a>
     {{-- <p>If you did not create an account, please ignore this email.</p> --}}
 </body>
 
