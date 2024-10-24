@@ -30,7 +30,7 @@
             width: 60px;
             height: 30px;
             border-radius: 20px;
-            background: #0356D6;
+            background: #c3c3c3;
             transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
             vertical-align: middle;
             cursor: pointer;
@@ -54,7 +54,7 @@
         }
 
         input:checked+.switch {
-            background: #72da67;
+            background: #0356D6;
         }
 
         input:checked+.switch::before {
