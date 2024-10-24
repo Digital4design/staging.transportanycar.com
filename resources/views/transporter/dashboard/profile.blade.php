@@ -718,7 +718,7 @@
 
 
 
-                                        @if ($user->is_status == 'pending')
+                                        @if ($user->is_status == '' || $user->is_status == 'pending')
 
                                             @if (
                                                 $user->is_status == 'pending' &&
@@ -769,6 +769,7 @@
                                                                 </div>
                                                             </div>
                                                         </h2>
+                                                        
                                                         <p class="subtitle">You must upload your documents before you can
                                                             start
                                                             bidding.</p>
@@ -1124,7 +1125,7 @@
                                                     <div class="input-group">
                                                         <input type="tel" id="phone" class="form-control"
                                                             placeholder="Mobile Phone" name="mobile"
-                                                            value=" {{ old('mobile', $user->mobile ?? '') }}" />
+                                                            value="{{ old('mobile', $user->mobile ?? '') }}" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -1194,7 +1195,7 @@
                                                         </div>
                                                     </li>
 
-                                                    <li>
+                                                    {{-- <li>
                                                         <div class="form-group">
                                                             <input type="checkbox" id="payment5"
                                                                 name="payment_methods[]" value="Cheque"
@@ -1202,19 +1203,11 @@
                                                             <label for="payment5"></label>
                                                             <span>Cheque</span>
                                                         </div>
-                                                    </li>
+                                                    </li> --}}
 
-                                                    <li>
-                                                        <div class="form-group">
-                                                            <input type="checkbox" id="payment3"
-                                                                name="payment_methods[]" value="Visa Card"
-                                                                {{ in_array('Visa Card', $payment_methods) ? 'checked' : '' }}>
-                                                            <label for="payment3"></label>
-                                                            <span>Visa Card</span>
-                                                        </div>
-                                                    </li>
+                                                   
 
-                                                    <li>
+                                                    {{-- <li>
                                                         <div class="form-group">
                                                             <input type="checkbox" id="payment4"
                                                                 name="payment_methods[]" value="Paypal"
@@ -1222,7 +1215,7 @@
                                                             <label for="payment4"></label>
                                                             <span>Paypal</span>
                                                         </div>
-                                                    </li>
+                                                    </li> --}}
 
                                                     <li>
                                                         <div class="form-group">
@@ -1231,6 +1224,15 @@
                                                                 {{ in_array('Bank Transfer', $payment_methods) ? 'checked' : '' }}>
                                                             <label for="payment2"></label>
                                                             <span>Bank Transfer</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <input type="checkbox" id="payment3"
+                                                                name="payment_methods[]" value="Visa Card"
+                                                                {{ in_array('Visa Card', $payment_methods) ? 'checked' : '' }}>
+                                                            <label for="payment3"></label>
+                                                            <span> Card Payment</span>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -1263,7 +1265,7 @@
                 </div>
                 <div class="modal-body">
                     <iframe id="pdfIframe" style="width: 100%; height: 500px; border: none;"></iframe>
-                    <img class="pdf_image" style="disply:none;">
+                    <img class="pdf_image" style="max-width:100%;">
                 </div>
             </div>
         </div>
@@ -1330,7 +1332,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify({
                     email: email,
-                    subject: 'Verify Email',
+                    subject: 'Verify Your Email and Activate Your TransportAnyCar.com Account.',
                     user: user
                 }),
                 headers: {

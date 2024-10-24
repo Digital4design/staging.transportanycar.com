@@ -65,7 +65,6 @@
 
 <body>
     <div class="contain">
-        {{-- <h1>Verify Your Email and Activate Your TransportAnyCar.com Account.</h1> --}}
         <img class="adjust-space" src="{{asset('/assets/images/transport-logo.jpg')}}" alt="Transport Logo" style="max-width:90px"; />
         <h2>Hi {{$name}},</h2>
         <p class="adjust-space">Please verify your email address to activate your account.</p>
@@ -78,8 +77,6 @@
         <p class="adjust-half-space">Manage notification <a href="#" style="color:#0356D6; text-decoration: none;">preferences.</span></a>
         <p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     </div>
-    {{-- <a href="{{ $verificationLink }}">Verify Email</a> --}}
-    {{-- <p>If you did not create an account, please ignore this email.</p> --}}
 </body>
 
 </html>

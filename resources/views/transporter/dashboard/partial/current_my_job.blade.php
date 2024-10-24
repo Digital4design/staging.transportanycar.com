@@ -128,7 +128,7 @@
                         </a>
                     @endif
                 @elseif($type == 'won')
-                    @if ($quote->status == 'completed')
+                    @if ($quote->status == 'ongoing' ||$quote->status == 'completed')
                         <div class="won_details">
                             <a href="{{ route('transporter.current_jobs', ['id' => $quote->quote_by_transporter_id]) }}"
                                 class="view_btn"> View details </a>

@@ -329,7 +329,7 @@
                                                     fill="#FFA800" />
                                             </svg>
                                         </span>
-                                        (12)
+                                      ({{$feedback_count}})
                                         <!-- ({{ $transporter_feedback['overall_percentage'] }}%) -->
                                         {{-- ({{ 100 }}%) --}}
                                     </div>
