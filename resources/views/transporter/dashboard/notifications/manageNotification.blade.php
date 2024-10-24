@@ -9,12 +9,14 @@
             max-width: 550px;
             margin: auto;
         }
+
         .notification-settings ul {
             display: flex;
             flex-wrap: wrap;
             flex-direction: column;
             gap: 15px;
         }
+
         .notification-settings ul li {
             display: flex;
             flex-wrap: wrap;
@@ -56,7 +58,7 @@
         }
 
         input:checked+.switch::before {
-            left: 27px;
+            left: 33px;
             background: #fff;
         }
 
@@ -83,23 +85,29 @@
                             <p class="pera_srch">Manage your notification preferences</p>
                         </div>
                         <div class="notification-settings">
+
                             <ul>
                                 <li>
                                     <span>Summary of leads</span>
-                                    <input type="checkbox" hidden="hidden" id="username">
-                                    <label class="switch" for="username"></label>
+                                    <input type="checkbox" id="summary_of_leads" name="summary_of_leads" value="1"
+                                        {{ $data->summary_of_leads == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
+                                    <label class="switch" for="summary_of_leads"></label>
                                 </li>
                                 <li>
                                     <span>Outbid alerts</span>
-                                    <input type="checkbox" hidden="hidden" id="username">
-                                    <label class="switch" for="username"></label>
+                                    <input type="checkbox" id="outbid_email_unsubscribe" name="outbid_email_unsubscribe"
+                                        value="1" {{ $data->outbid_email_unsubscribe == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
+                                    <label class="switch" for="outbid_email_unsubscribe"></label>
                                 </li>
                                 <li>
                                     <span>Saved search alerts</span>
-                                    <input type="checkbox" hidden="hidden" id="username">
-                                    <label class="switch" for="username"></label>
+                                    <input type="checkbox" id="saved_search_alerts" name="saved_search_alerts"
+                                        value="1" {{ $data->saved_search_alerts == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
+                                    <label class="switch" for="saved_search_alerts"></label>
                                 </li>
                             </ul>
+
+
                         </div>
                     </div>
                 </div>
@@ -111,50 +119,33 @@
 @section('script')
     <script src="{{ asset('assets/web/js/admin.js') }}"></script>
     <script>
-        var globalSiteUrl = '<?php echo $path = url('/'); ?>'
+        $(document).ready(function() {
+            // Attach change event to checkboxes
+            $('input[type="checkbox"]').change(function() {
+                // Gather the checkbox values
+                var summaryOfLeads = $('#summary_of_leads').is(':checked') ? 1 : 0;
+                var outbidEmailUnsubscribe = $('#outbid_email_unsubscribe').is(':checked') ? 1 : 0;
+                var savedSearchAlerts = $('#saved_search_alerts').is(':checked') ? 1 : 0;
 
-        function fetch_data(page) {
-            $.ajax({
-                url: globalSiteUrl + "/transporter/feedback_listing?page=" + page + '&' + params(),
-                success: function(res) {
-                    let result = res.data;
-                    if (result) {
-                        $('#feedback_listing').html(result.html);
+                // Send the AJAX request
+                $.ajax({
+                    url: "{{ route('transporter.updateManageNotification') }}",
+                    method: "POST",
+                    data: {
+                        summary_of_leads: summaryOfLeads,
+                        outbid_email_unsubscribe: outbidEmailUnsubscribe,
+                        saved_search_alerts: savedSearchAlerts,
+                        _token: '{{ csrf_token() }}' // Include CSRF token
+                    },
+                    success: function(response) {
+                        toastr.success(response.message); // Optional: Notify the user of success
+                    },
+                    error: function(xhr) {
+                        var errorMessage = xhr.responseJSON.message ||
+                            'An error occurred while saving preferences.';
+                            toastr.error(response.message);
                     }
-                }
-            });
-        }
-
-        function params() {
-            var search = $('#search').val();
-            return "search=" + search;
-        }
-
-        $(document).ready(function() {
-            fetch_data(1);
-        });
-
-        $(document).on('click', '.pagination a', function(event) {
-            event.preventDefault();
-            var page = $(this).attr('href').split('page=')[1];
-            $('#page').val(page);
-            fetch_data(page);
-        });
-
-        $(document).ready(function() {
-            $(document).on('click', '.read_more_show', function() {
-                var parentTr = $(this).closest('tr');
-                var readMoreContent = parentTr.find('.read_more_content');
-                $(this).addClass('d-none');
-                readMoreContent.removeClass('d-none');
-                parentTr.find('.read_more_less').removeClass('d-none');
-            });
-            $(document).on('click', '.read_more_less', function() {
-                var parentTr = $(this).closest('tr');
-                var readMoreContent = parentTr.find('.read_more_content');
-                parentTr.find('.read_more_show').removeClass('d-none');
-                readMoreContent.addClass('d-none');
-                $(this).addClass('d-none');
+                });
             });
         });
     </script>

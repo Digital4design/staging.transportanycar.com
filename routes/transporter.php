@@ -74,7 +74,7 @@ Route::group(['as' => 'transporter.'], function () {
         Route::get('/saved-find-job-results', 'DashboardController@savedFindJobResults')->name('savedFindJobResults');
         Route::post('save/search/delete', 'DashboardController@savesearchdlt')->name('delete.save.search');
         // end
-
+        Route::post('update-manage-notification', 'DashboardController@updateManageNotification')->name('updateManageNotification');
         Route::get('howItWorks', 'DashboardController@howItWorks')->name('howItWork');
     });
 
