@@ -1169,4 +1169,8 @@ class DashboardController extends WebController
             'dropoff' => $dropoff
         ]);
     }
+    public function manageNotification(Request $request)
+    {
+        return view('transporter.dashboard.manageNotification');
+    }
 }

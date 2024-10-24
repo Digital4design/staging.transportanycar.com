@@ -35,6 +35,7 @@ Route::group(['as' => 'transporter.'], function () {
         Route::get('profile', 'DashboardController@profile')->name('profile');
         Route::post('profile-post', 'DashboardController@profilePost')->name('profile_post');
         Route::get('messages', 'DashboardController@messages')->name('messages');
+        Route::get('manage_notification', 'DashboardController@manageNotification')->name('manage_notification');
         Route::get('feedback', 'DashboardController@feedback')->name('feedback');
         // Route::get('current-jobs', 'DashboardController@currentJobs')->name('current_jobs');
         Route::get('current-jobs/{id?}', 'DashboardController@currentJobs')->name('current_jobs');
