@@ -1248,10 +1248,11 @@
                                                         <div class="form-group">
                                                             <input type="checkbox" id="payment1"
                                                                 name="payment_methods[]" value="Cash"
-                                                                {{ in_array('Cash', $payment_methods) ? 'checked' : '' }}>
+                                                                {{ empty($payment_methods) || in_array('Cash', $payment_methods) ? 'checked' : '' }}>
                                                             <label for="payment1"></label>
                                                             <span>Cash</span>
                                                         </div>
+                                                        
                                                     </li>
 
                                                     {{-- <li>
@@ -1280,7 +1281,7 @@
                                                         <div class="form-group">
                                                             <input type="checkbox" id="payment2"
                                                                 name="payment_methods[]" value="Bank Transfer"
-                                                                {{ in_array('Bank Transfer', $payment_methods) ? 'checked' : '' }}>
+                                                                {{ empty($payment_methods) || in_array('Bank Transfer', $payment_methods) ? 'checked' : '' }}>
                                                             <label for="payment2"></label>
                                                             <span>Bank Transfer</span>
                                                         </div>

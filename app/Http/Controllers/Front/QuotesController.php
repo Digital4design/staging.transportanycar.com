@@ -66,6 +66,7 @@ class QuotesController extends WebController
         //$location = Cache::get('location_'.$user_data->id);
     }
     public function quoteSave(Request $request) {
+        // return "yesss";
         // Check if a user is authenticated with the 'web' guard
         $user_info = Auth::guard('web')->check();
         $current_user_data = $user_info ? Auth::guard('web')->user() : null;
@@ -95,6 +96,7 @@ class QuotesController extends WebController
         ])->first();
         if ($user_info && $current_user_data->email !== $request->email) {
             // If the email exists in the database, log out current user
+           
             Auth::guard('web')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
