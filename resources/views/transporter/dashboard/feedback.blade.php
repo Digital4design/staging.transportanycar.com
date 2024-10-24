@@ -304,6 +304,39 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row wd-pb py-5 mx-0" style="border-top: 1px solid #D9D9D9;">
+                                <div class="col-lg-12">
+                                    <div class="wd-transport-dtls adjust-space-in-mobile">
+                                        <div class="wd-transport-area pb-0">
+
+                                            <div class="wd-transport-rght">
+                                                <ul>
+                                                    <li class="mt-0">
+                                                        <p>Insurance cover:</p>
+                                                        <span>
+                                                            £1,000,000+
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <p>Years established:</p>
+                                                        <span>
+                                                            10+
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <p>Recovery trucks:</p>
+                                                        <span>2</span>
+                                                    </li>
+                                                    <li>
+                                                        <p>Drivers:</p>
+                                                        <span>2</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row mx-0">
                                 <div class="col-lg-12">
                                     <div class="feedback-tbl border-none bg-white border-0 rounded-0" id="feedback_listing">
