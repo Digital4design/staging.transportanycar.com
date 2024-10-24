@@ -459,10 +459,15 @@
         }
 
         @media(max-width: 991px) {
-            .wd-cstm-check li {
-                max-width: 33.333%;
-                flex: 0 0 33.333%;
+            .wd-cstm-check {
+                justify-content: space-between;
             }
+            .wd-cstm-check li {
+                flex: 0 0 33.333%;
+                /* max-width: 33.333%;
+                flex: 0 0 33.333%; */
+            }
+            
 
             .admin-profile-box .requied_sec {
                 padding: 0;
@@ -505,6 +510,10 @@
         }
 
         @media(max-width: 767px) {
+            .wd-cstm-check .form-group label {max-width: 100px;}
+            .wd-cstm-check li {
+                flex: 0 0 auto;
+            }
             .upload-section .requied_sec_row:first-child .form-group {
                 margin-bottom: 0;
             }
@@ -1233,6 +1242,7 @@
                                                         ? explode(',', $user->payment_methods)
                                                         : [];
                                                 @endphp
+                                                
                                                 <ul class="wd-cstm-check">
                                                     <li>
                                                         <div class="form-group">
