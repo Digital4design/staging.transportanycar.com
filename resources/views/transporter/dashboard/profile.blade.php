@@ -1107,6 +1107,7 @@
                                         <div class="row align-items-end mx-4">
                                             <div class="col-lg-6 pr-lg-3">
                                                 <div class="form-group">
+                                                    <label for="" class="mb-1">GIT insuarace cover</label>
                                                     <select class="form-control sticky-data" name="git_insurance_cover" id="git_insurance_cover">
                                                         <option value="" disabled {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '' ? 'selected' : '' }}>Select git  insurance cover</option>
                                                         @foreach ([10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000] as $amount)
@@ -1118,6 +1119,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="" class="mb-1">Years established</label>
                                                     <select class="form-control" name="years_established" id="years_established">
                                                         <option value="" disabled {{ old('years_established', optional($companyDetail)->years_established) == '' ? 'selected' : '' }}>Years established</option>
                                                         @foreach (range(1, 9) as $year)
@@ -1130,6 +1132,7 @@
                                         
                                             <div class="col-lg-6 pl-lg-3">
                                                 <div class="form-group">
+                                                    <label for="" class="mb-1">No of tow trucks</label>
                                                     <select class="form-control sticky-data" name="no_of_tow_trucks" id="no_of_tow_trucks">
                                                         <option value="" disabled {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == '' ? 'selected' : '' }}>Number of tow trucks</option>
                                                         @foreach (range(1, 9) as $number)
@@ -1140,6 +1143,7 @@
                                                     
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="" class="mb-1">No of drivers</label>
                                                     <select class="form-control" name="no_of_drivers" id="no_of_drivers">
                                                         <option value="" disabled {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == '' ? 'selected' : '' }}>Number of drivers</option>
                                                         @foreach (range(1, 9) as $number)
@@ -1197,17 +1201,20 @@
                                         <div class="row align-items-end mx-4">
                                             <div class="col-lg-6 pr-lg-3">
                                                 <div class="form-group">
+                                                    <label for="" class="mb-1">Name</label>
                                                     <input type="text" class="form-control sticky-data"
                                                         placeholder="Full name" name="name"
                                                         value="{{ $user->first_name }}" readonly>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="" class="mb-1">Company name</label>
                                                     <input type="text" class="form-control" placeholder="Company name"
                                                         name="company_name" id="company_name"
                                                         value="{{ $user->name }}">
                                                 </div>
 
                                                 <div class="form-group">
+                                                    <label for="" class="mb-1">Email address</label>
                                                     <input type="text" class="form-control"
                                                         placeholder="Email address" name="email" id="email_verify"
                                                         value="{{ $user->email }}">
@@ -1216,18 +1223,21 @@
 
                                             <div class="col-lg-6 pl-lg-3">
                                                 <div class="form-group">
+                                                    <label for="" class="mb-1">Username</label>
                                                     <input type="text" class="form-control sticky-data"
                                                         placeholder="Username" name="username"
                                                         value="{{ $user->username }}" readonly>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="input-group">
+                                                   
+                                                        <label for="" class="mb-1">Mobile Phone</label>
                                                         <input type="tel" id="phone" class="form-control"
                                                             placeholder="Mobile Phone" name="mobile"
                                                             value="{{ old('mobile', '0' . ($user->mobile ?? '')) }}" />
-                                                    </div>
+                                                  
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="" class="mb-1">New password</label>
                                                     <input type="password" class="form-control"
                                                         placeholder="New password" name="npassword" id="npassword">
                                                     <i class="fas fa-eye" id="passwordIcon"></i>
