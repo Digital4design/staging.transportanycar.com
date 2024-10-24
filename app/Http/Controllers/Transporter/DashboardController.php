@@ -1171,6 +1171,9 @@ class DashboardController extends WebController
     }
     public function manageNotification(Request $request)
     {
-        return view('transporter.dashboard.notifications.manageNotification');
+        $user = Auth::guard('transporter')->user();
+        return view('transporter.dashboard.notifications.manageNotification' ,[
+            'data' => $user,
+        ]);
     }
 }
