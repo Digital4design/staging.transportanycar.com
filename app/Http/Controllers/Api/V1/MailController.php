@@ -43,7 +43,7 @@ class MailController extends ResponseController
 
     public function transporterEmailVerify(Request $request)
     {
-        
+
         $emailService = app(EmailService::class);
         // Validate the incoming request data
         $request->validate([
@@ -60,35 +60,33 @@ class MailController extends ResponseController
         if (!$user) {
             return response()->json(['error' => 'User not found.'], 404);
         }
-    
+
         try {
-          
+
             $verificationToken = Str::random(60);
-            
+
             // Store the verification token in the database
             $user->email_verification_token = $verificationToken;
             $user->save();
- 
+
             $verificationLink = url("/transporter/verify-email/{$verificationToken}");
             $htmlContent = view('mail.General.transporterEmailVerify', [
                 'verificationLink' => $verificationLink,
-                'name'=> $user->first_name,
+                'name' => $user->first_name,
             ])->render();
-          
+
             $emailService->sendEmail($request->email, $htmlContent, $request->subject);
 
             return response()->json(['message' => 'Verification email sent successfully.']);
-
         } catch (\Exception $ex) {
             Log::error('Error sending email: ' . $ex->getMessage());
         }
-       
     }
 
     public function verifyEmail($token)
     {
 
-       
+
         // Find the user by the verification token
         $user = User::where('email_verification_token', $token)->first();
 
