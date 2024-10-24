@@ -1105,7 +1105,7 @@
                                                                 £{{ number_format($amount) }}
                                                             </option>
                                                         @endforeach
-                                                        <option value="1000000+" {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '10+' ? 'selected' : '' }}>£1000000+</option>
+                                                        <option value="1000000+" {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '1,000,000+' ? 'selected' : '' }}>£1,000,000+</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
