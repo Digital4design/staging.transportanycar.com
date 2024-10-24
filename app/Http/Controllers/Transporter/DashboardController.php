@@ -1171,6 +1171,6 @@ class DashboardController extends WebController
     }
     public function manageNotification(Request $request)
     {
-        return view('transporter.dashboard.manageNotification');
+        return view('transporter.dashboard.notifications.manageNotification');
     }
 }
