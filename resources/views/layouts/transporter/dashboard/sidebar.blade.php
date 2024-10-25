@@ -104,7 +104,7 @@ $currentRoute = request()->route()->getName();
                     Feedback
                 </span>
             </a>
-            <a class="list-group-item manage_notification @if ($currentRoute == 'transporter.manage_notification') active @endif"
+            {{-- <a class="list-group-item manage_notification @if ($currentRoute == 'transporter.manage_notification') active @endif"
                 href="{{ route('transporter.manage_notification') }}">
                 <span>
                     <div class="noti_info_icon">
@@ -120,7 +120,7 @@ $currentRoute = request()->route()->getName();
                     </div>
                     Manage Notificaton
                 </span>
-            </a>
+            </a> --}}
             <a class="list-group-item works-btn @if ($currentRoute == 'transporter.howItWork') active @endif"
                 href="{{ route('transporter.howItWork') }}">
                 <span>

@@ -1176,4 +1176,28 @@ class DashboardController extends WebController
             'data' => $user,
         ]);
     }
+    public function updateManageNotification(Request $request)
+    {
+        
+        $request->validate([
+            'summary_of_leads' => 'nullable|boolean',
+            'outbid_email_unsubscribe' => 'nullable|boolean',
+            'saved_search_alerts' => 'nullable|boolean',
+        ]);
+    
+        // Update user preferences
+        try {
+            $user = Auth::user();
+            $user->summary_of_leads = $request->input('summary_of_leads', 0);
+            $user->outbid_email_unsubscribe = $request->input('outbid_email_unsubscribe', 0);
+            $user->saved_search_alerts = $request->input('saved_search_alerts', 0);
+            $user->save();
+    
+            return response()->json(['success' => true, 'message' => 'Preferences updated successfully.']);
+        } catch (\Exception $e) {
+            // Log the error for debugging
+            Log::error('Error updating preferences: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Could not update preferences.'], 500);
+        }
+    }
 }

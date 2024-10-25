@@ -70,6 +70,7 @@ class MailController extends ResponseController
             $user->save();
 
             $verificationLink = url("/transporter/verify-email/{$verificationToken}");
+            
             $htmlContent = view('mail.General.transporterEmailVerify', [
                 'verificationLink' => $verificationLink,
                 'name' => $user->first_name,

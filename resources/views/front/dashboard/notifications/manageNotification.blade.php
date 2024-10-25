@@ -85,7 +85,6 @@
                             <p class="pera_srch">Manage your notification preferences</p>
                         </div>
                         <div class="notification-settings">
-
                             <ul>
                                 <li>
                                     <span>Summary of leads</span>
@@ -99,15 +98,7 @@
                                         value="1" {{ $data->outbid_email_unsubscribe == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
                                     <label class="switch" for="outbid_email_unsubscribe"></label>
                                 </li>
-                                <li>
-                                    <span>Saved search alerts</span>
-                                    <input type="checkbox" id="saved_search_alerts" name="saved_search_alerts"
-                                        value="1" {{ $data->saved_search_alerts == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
-                                    <label class="switch" for="saved_search_alerts"></label>
-                                </li>
                             </ul>
-
-
                         </div>
                     </div>
                 </div>
