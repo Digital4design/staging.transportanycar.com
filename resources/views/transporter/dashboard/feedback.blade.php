@@ -184,7 +184,7 @@
                             <div class="banner vip_member">ViP Member</div>
                         @endif
                         <div class="wd-feedback-box border-0 rounded-0 p-0">
-                            <div class="row wd-pb pb-5 mx-0">
+                            <div class="row wd-pb pb-3 pb-md-5 mx-0">
                                 <div class="col-lg-12">
                                     <div class="wd-transport-dtls adjust-space-in-mobile">
                                         <div class="row mx-0 align-items-center user-feedback-header-wrap mb-3">
@@ -304,7 +304,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row wd-pb py-5 mx-0" style="border-top: 1px solid #D9D9D9;">
+                            <div class="row wd-pb py-3 py-md-5 mx-0" style="border-top: 1px solid #D9D9D9;">
                                 <div class="col-lg-12">
                                     <div class="wd-transport-dtls adjust-space-in-mobile">
                                         <div class="wd-transport-area pb-0">

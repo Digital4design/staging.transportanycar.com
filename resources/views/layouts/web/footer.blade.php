@@ -67,7 +67,7 @@
                     </li>
                 </ul>
             </div> -->
-            <div class="col-12 btm_footer text-center mt-3">
+            <div class="col-12 btm_footer text-center text-md-left mt-3">
                 <p class="mb-0">Transport Any Car. <span>© All rights reserved. {{date('Y')}}</span></p>
                 <div class="foot_img">
                     <img src="{{asset('assets/web/images/footer_logo.png')}}" alt="brand_logo" class="footer_logo" />

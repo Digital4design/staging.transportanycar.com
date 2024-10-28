@@ -212,7 +212,7 @@ class DashboardController extends WebController
 
     public function profile()
     {
-        $user = \Auth::guard('transporter','')->user();
+        $user = \Auth::guard('transporter', '')->user();
         // save last visit time of transporter
         $user->last_visited_at = now();
         $user->save();
@@ -224,7 +224,7 @@ class DashboardController extends WebController
         // die;
         $companyDetail = $user->companyDetail; // Access the related company details
 
-        return view('transporter.dashboard.profile', ['user' => $user, 'jobs_completed_count' => $jobs_completed_count, 'total_earning_count' => $total_earning_count,'companyDetail'=>$companyDetail]);
+        return view('transporter.dashboard.profile', ['user' => $user, 'jobs_completed_count' => $jobs_completed_count, 'total_earning_count' => $total_earning_count, 'companyDetail' => $companyDetail]);
     }
 
     public function messages()
@@ -783,13 +783,13 @@ class DashboardController extends WebController
 
         // Group by user_quote_id to get the count and minimum bid for each
         $subQuery
-        // ->addSelect([
-        //     'transporter_quotes_count' => QuoteByTransporter::selectRaw('COUNT(*)')
-        //         ->whereColumn('user_quote_id', 'user_quotes.id'),
-        //     'lowest_bid' => QuoteByTransporter::selectRaw('MIN(CAST(transporter_payment AS UNSIGNED))')
-        //         ->whereColumn('user_quote_id', 'user_quotes.id')
-        // ])
-        ->groupBy('user_quotes.id')
+            // ->addSelect([
+            //     'transporter_quotes_count' => QuoteByTransporter::selectRaw('COUNT(*)')
+            //         ->whereColumn('user_quote_id', 'user_quotes.id'),
+            //     'lowest_bid' => QuoteByTransporter::selectRaw('MIN(CAST(transporter_payment AS UNSIGNED))')
+            //         ->whereColumn('user_quote_id', 'user_quotes.id')
+            // ])
+            ->groupBy('user_quotes.id')
             ->latest();
 
         // Wrap the subquery with the main query for pagination
@@ -1172,19 +1172,19 @@ class DashboardController extends WebController
     public function manageNotification(Request $request)
     {
         $user = Auth::guard('transporter')->user();
-        return view('transporter.dashboard.notifications.manageNotification' ,[
+        return view('transporter.dashboard.notifications.manageNotification', [
             'data' => $user,
         ]);
     }
     public function updateManageNotification(Request $request)
     {
-        
+
         $request->validate([
             'summary_of_leads' => 'nullable|boolean',
             'outbid_email_unsubscribe' => 'nullable|boolean',
             'saved_search_alerts' => 'nullable|boolean',
         ]);
-    
+
         // Update user preferences
         try {
             $user = Auth::user();
@@ -1192,7 +1192,7 @@ class DashboardController extends WebController
             $user->outbid_email_unsubscribe = $request->input('outbid_email_unsubscribe', 0);
             $user->saved_search_alerts = $request->input('saved_search_alerts', 0);
             $user->save();
-    
+
             return response()->json(['success' => true, 'message' => 'Preferences updated successfully.']);
         } catch (\Exception $e) {
             // Log the error for debugging

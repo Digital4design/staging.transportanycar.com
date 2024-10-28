@@ -126,6 +126,9 @@
         position: relative;
         cursor: pointer;
     }
+    @media screen and (max-width: 580px) {
+        .get_quote .modal-footer p {font-size: 12px!important;}
+    }
 </style>
 <div class="modal get_quote fade" id="saveSrchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">

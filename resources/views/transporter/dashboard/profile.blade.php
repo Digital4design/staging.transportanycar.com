@@ -104,7 +104,7 @@
 
         #passwordIcon {
             position: absolute;
-            top: 13px;
+            bottom: 13px;
             right: 15px;
             /* transform: translateY(-50%); */
             cursor: default;
@@ -1107,7 +1107,7 @@
                                         <div class="row align-items-end mx-4">
                                             <div class="col-lg-6 pr-lg-3">
                                                 <div class="form-group">
-                                                    <label for="" class="mb-1">GIT insuarace cover</label>
+                                                    <label for="" class="mb-1">GIT insurance cover</label>
                                                     <select class="form-control sticky-data" name="git_insurance_cover" id="git_insurance_cover">
                                                         <option value="" disabled {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '' ? 'selected' : '' }}>Select git  insurance cover</option>
                                                         @foreach ([10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000] as $amount)

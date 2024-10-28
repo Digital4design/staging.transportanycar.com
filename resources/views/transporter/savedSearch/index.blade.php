@@ -1805,7 +1805,7 @@
                                                 <form action="{{ route('transporter.delete.save.search') }}"
                                                     method="POST" class="close-btn">
                                                     @csrf
-                                                    <button type="submit" class="no_btn yes-btn"
+                                                    <button type="submit" class="yes_btn"
                                                         value="{{ $savedSearch->id }}" name="id"
                                                         aria-label="Close">Yes</button>
                                                 </form>

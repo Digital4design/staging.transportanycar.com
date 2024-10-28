@@ -2567,6 +2567,7 @@
             $('#quote_edit_id').val(id);
             var quotes = @json($quotes);
             var selectedQuote = quotes.data.find(quote => quote.id == id);
+            console.log(selectedQuote);
             if (selectedQuote) {
                 var lowestBid = selectedQuote.lowest_bid ? selectedQuote.lowest_bid : 0;
                 var bidCount = selectedQuote.transporter_quotes_count ? selectedQuote.transporter_quotes_count : 0;
