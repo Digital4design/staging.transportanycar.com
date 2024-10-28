@@ -175,7 +175,7 @@
 </head>
 
 <body style="margin: 0; background-color: #ffffff; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-{{-- <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
+<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
     <tbody>
     <tr>
         <td>
@@ -280,23 +280,23 @@
         </td>
     </tr>
     </tbody>
-</table> --}}
+</table>
 <!-- End -->
-<div class="contain">
+{{-- <div class="contain">
     <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
         style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
         alt="transport notifiaction" title="transport notifiaction"></a>
-    <h2>Hi,</h2>
-    <p class="adjust-space">You have been outbid for the Renault Capture delivery, reduce your bid now for a better chance of winning.</p>
-    <a href="#"class="verify-btn" style="border-radius: 50px; margin-bottom: 25px;">
+    <h2>Hi,{{$transportername}}</h2>
+    <p class="adjust-space">You have been outbid for the {{$quote->vehicle_make}} {{$quote->vehicle_model}} delivery, reduce your bid now for a better chance of winning.</p>
+    <a href="{{route('transporter.current_jobs', ['source' => 'email','quote-id' => $quote->id])}}"class="verify-btn" style="border-radius: 50px; margin-bottom: 25px;">
         Place bid
     </a>
     <p>Best Regards,</p>
     <p class="adjust-half-space">Transport Any Car Team</p>
-    <p class="adjust-half-space">Manage notification <a href="#"
+    <p class="adjust-half-space">Manage notification <a href="{{ url('transporter/manage_notification') }}"
             style="color:#0356D6; text-decoration: none;">preferences.</span></a>
     <p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
 </div>
-</body>
+</body> --}}
 
 </html>
