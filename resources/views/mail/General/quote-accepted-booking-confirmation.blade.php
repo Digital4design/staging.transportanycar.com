@@ -152,7 +152,7 @@
 </head>
 
 <body style="margin: 0; background-color: #ffffff; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-{{-- <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
+<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
     <tbody>
     <tr>
         <td>
@@ -317,59 +317,37 @@
         </td>
     </tr>
     </tbody>
-</table> --}}
+</table>
 <!-- End -->
-{{-- Template Number 7 --}}
-{{-- <div class="contain">
-    <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
-        style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
-        alt="transport notifiaction" title="transport notifiaction"></a>
-    <h2>Hi,</h2>
-    <p class="adjust-space">Your transport request is now live on Transport Any Car.</p>
-    <p>Account Details:</p>
-    <p>Email: user101@gmail.com</p>
-    <p>Pass: h7bdjx</p>
-    <p class="adjust-space">What Happens Next:</p>
-    <p class="adjust-space">Your delivery request has been sent to our network of transport providers and you will start receiving quotes via email once they start to place their bids.</p>
-    <p class="adjust-space">You can compare your quotes and ask questions via message before accepting to make sure you choose the right one for you, check out <a href="" style="color:#008DD4;">your quotes here</a>.</p>
-    <p class="adjust-space">The prices you will receive are very low due our network of transport providers already travelling similar routes so they can conveniently carry out your delivery efficiently.</p>
-    <p class="adjust-space">Rest assured, the price you see is the total amount you pay, there are no additional costs.</p>
-    <p class="adjust-space">We look forward to providing you with the lowest quotes possible and hope you enjoy using the site.
-    </p>
-    <p>If you need any help or have any questions please contact our team at <a href="" style="color:#008DD4;">support@transportanycar.com</a>.</p>
-    <p class="adjust-half-space">Best Regards,</p>
-    <p class="adjust-half-space">Transport Any Car Team</p>
-    <p class="adjust-half-space" style="text-align: center;">Manage notification <a href="#"
-            style="color:#0356D6; text-decoration: none;">preferences.</span></a>
-    <p style="text-align: center;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
-</div> --}}
+
 
 {{-- Template Number 10 --}}
-<div class="contain" style="text-align: center;">
+{{-- <div class="contain" style="text-align: center;">
     <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
         style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
         alt="transport notifiaction" title="transport notifiaction"></a>
     <h2>Hi,</h2>
-    <p class="adjust-space">You have accepted Transport101s quote of £250 to delivery your Ford Fiesta.</p>
+    <p class="adjust-space">You have accepted {{ $data['transporter_info']->username }} quote of £{{ $data['quotation']->price }}</strong> to deliver your {{ $data['quotation']->quote->vehicle_make}} {{$data['quotation']->quote->vehicle_model}} @if (!empty($data['quotation']->quote->vehicle_make_1) && !empty($data['quotation']->quote->vehicle_model_1))
+        / {{$data['quotation']->quote->vehicle_make_1}} {{$data['quotation']->vehicle_model_1}}</p>
     <div class="message-wrap" style="text-align: center;">
-        <p class="message">Payment ref: ******************</p>
-        <p class="message">Booking ref: TAC85057</p>
-        <p class="message">Deposit paid: £50</p>
-        <p class="message">Remaining balance: £200</p>
-        <p class="message">Total: £250</p>
-        <p class="message">Pay the remaining amount of £200 directly to Transport101.</p>
+        <p class="message">Payment ref:{{ $data['transaction_id'] }}</p>
+        <p class="message">Booking ref: {{ $data['booking_ref'] }}</p>
+        <p class="message">Deposit paid: {{ $data['quotation']->deposit }}</p>
+        <p class="message">Remaining balance:£{{$data['quotation']->transporter_payment}}</p>
+        <p class="message">Total: £{{ $data['quotation']->price }}</p>
+        <p class="message">Pay the remaining amount of £{{ $data['quotation']->transporter_payment }} directly to {{ $data['transporter_name'] }}.</p>
     </div>
     <p class="adjust-space">What Happens Next:</p>
     <p>The transport provider will contact you to arrange the delivery of you vehicle.</p>
     <p class="adjust-space">Transporter Contact Details:</p>
-    <p>Phone number: 07837836633</p>
-    <p>Email: transport101@gmail.com</p>
+    <p>Phone number: {{$data['transporter_info']->mobile}}</p>
+    <p>Email: {{$data['transporter_info']->email}}</p>
     <p class="adjust-half-space">Best Regards,</p>
     <p class="adjust-half-space">Transport Any Car Team</p>
     <p class="adjust-half-space">Manage notification <a href="#"
             style="color:#0356D6; text-decoration: none;">preferences.</span></a>
     <p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
-</div>
+</div> --}}
 
 </body>
 
