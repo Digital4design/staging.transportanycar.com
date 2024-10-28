@@ -8,7 +8,7 @@
     {{-- <link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet" type="text/css"><!--<![endif]--> --}}
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
     <style>
-        * {
+        /* * {
             box-sizing: border-box;
         }
 
@@ -70,7 +70,7 @@
                 display: table !important;
                 max-height: none !important;
             }
-        }
+        } */
         h1,
         h2,
         p {
@@ -319,7 +319,8 @@
     </tbody>
 </table> --}}
 <!-- End -->
-<div class="contain">
+{{-- Template Number 7 --}}
+{{-- <div class="contain">
     <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
         style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
         alt="transport notifiaction" title="transport notifiaction"></a>
@@ -341,7 +342,35 @@
     <p class="adjust-half-space" style="text-align: center;">Manage notification <a href="#"
             style="color:#0356D6; text-decoration: none;">preferences.</span></a>
     <p style="text-align: center;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+</div> --}}
+
+{{-- Template Number 10 --}}
+<div class="contain" style="text-align: center;">
+    <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
+        style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
+        alt="transport notifiaction" title="transport notifiaction"></a>
+    <h2>Hi,</h2>
+    <p class="adjust-space">You have accepted Transport101s quote of £250 to delivery your Ford Fiesta.</p>
+    <div class="message-wrap" style="text-align: center;">
+        <p class="message">Payment ref: ******************</p>
+        <p class="message">Booking ref: TAC85057</p>
+        <p class="message">Deposit paid: £50</p>
+        <p class="message">Remaining balance: £200</p>
+        <p class="message">Total: £250</p>
+        <p class="message">Pay the remaining amount of £200 directly to Transport101.</p>
+    </div>
+    <p class="adjust-space">What Happens Next:</p>
+    <p>The transport provider will contact you to arrange the delivery of you vehicle.</p>
+    <p class="adjust-space">Transporter Contact Details:</p>
+    <p>Phone number: 07837836633</p>
+    <p>Email: transport101@gmail.com</p>
+    <p class="adjust-half-space">Best Regards,</p>
+    <p class="adjust-half-space">Transport Any Car Team</p>
+    <p class="adjust-half-space">Manage notification <a href="#"
+            style="color:#0356D6; text-decoration: none;">preferences.</span></a>
+    <p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
 </div>
+
 </body>
 
 </html>
