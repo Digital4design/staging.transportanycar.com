@@ -5,9 +5,10 @@
 	<title></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]--><!--[if !mso]><!-->
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet" type="text/css"><!--<![endif]-->
+	{{-- <link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet" type="text/css"><!--<![endif]--> --}}
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
 	<style>
-		* {
+		/* * {
 			box-sizing: border-box;
 		}
 
@@ -69,12 +70,89 @@
 				display: table !important;
 				max-height: none !important;
 			}
-		}
+		} */
+		h1,
+        h2,
+        p {
+            margin: 0;
+        }
+        h2,
+        p,
+        body {
+            margin: 0;
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            font-size: 10px;
+            line-height: 13px;
+        }
+
+        .contain {
+            max-width: 300px;
+            width: 100%;
+            margin: auto;
+            /* text-align: center; */
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 400;
+        }
+
+        a.verify-btn {
+            background: #52D017;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;
+            border: none;
+            display: inline-block;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-left: 20px;
+            padding-right: 20px;
+            cursor: pointer;
+        }
+
+        .adjust-space {
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .adjust-half-space {
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
+        .message-wrap {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .message-wrap .message-title {
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .message-wrap .message {
+            font-size: 10px;
+            line-height: 13px;
+            font-weight: 300;
+            color: #000000;
+            margin-bottom: 15px;
+        }
 	</style>
 </head>
 
 <body style="margin: 0; background-color: #ffffff; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-	<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
+	{{-- <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
 		<tbody>
 			<tr>
 				<td>
@@ -107,12 +185,7 @@
 													<table class="button_block block-3" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad">
-																<div class="alignment" align="center"><!--[if mso]>
-<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://transportanycar.com/" style="height:42px;width:239px;v-text-anchor:middle;" arcsize="72%" stroke="false" fillcolor="#52d017">
-<w:anchorlock/>
-<v:textbox inset="0px,0px,0px,0px">
-<center style="color:#ffffff; font-family:sans-serif; font-size:16px">
-<![endif]-->													@if($data['page_type'] == 'admin')
+																<div class="alignment" align="center">@if($data['page_type'] == 'admin')
 																<a href="{{route('front.forgot_password_view', $data['reset_token'])}}" target="_blank" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#52d017;border-radius:30px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:5px;padding-bottom:5px;font-family:'Montserrat', sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:50px;padding-right:50px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;"><strong>Reset password &gt;</strong></span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
 																@elseif($data['page_type'] == 'user')
 																<a href="{{route('front.web_password_upadte', $data['reset_token'])}}" target="_blank" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#52d017;border-radius:30px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:5px;padding-bottom:5px;font-family:'Montserrat', sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:50px;padding-right:50px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;"><strong>Reset password &gt;</strong></span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
@@ -188,7 +261,25 @@
 				</td>
 			</tr>
 		</tbody>
-	</table><!-- End -->
+	</table><!-- End --> --}}
+	<div class="contain" style="text-align: center;">
+		<img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
+			style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
+			alt="transport notifiaction" title="transport notifiaction"></a>
+		<h2>Hi,</h2>
+		<p class="adjust-space">
+			Set up a new password.
+		</p>
+		<p class="adjust-space">
+			Reset your password to your TransportAnyCar.com account <a href="#" style="color:#008DD4;">here</a>.
+		</p>
+		<p class="adjust-space">
+			The link will expire in 24 hours. If it expires you must generate a new email and link here.
+		</p>
+		<p class="adjust-half-space">Best Regards,</p>
+		<p class="adjust-half-space">Transport Any Car Team</p>
+		<p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+	</div>
 </body>
 
 </html>
