@@ -5,9 +5,10 @@
 	<title></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]--><!--[if !mso]><!-->
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet" type="text/css"><!--<![endif]-->
+	{{-- <link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet" type="text/css"><!--<![endif]--> --}}
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
 	<style>
-		* {
+		/* * {
 			box-sizing: border-box;
 		}
 
@@ -69,12 +70,122 @@
 				display: table !important;
 				max-height: none !important;
 			}
+		} */
+		h1,
+        h2,
+        p {
+            margin: 0;
+        }
+		h2,
+        p,
+        body {
+            margin: 0;
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            font-size: 10px;
+            line-height: 13px;
+        }
+
+        .contain {
+            max-width: 300px;
+            width: 100%;
+            margin: auto;
+            text-align: center;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 400;
+        }
+
+        a.verify-btn {
+            background: #52D017;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;
+            border: none;
+            display: inline-block;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-left: 20px;
+            padding-right: 20px;
+            cursor: pointer;
+        }
+
+        .adjust-space {
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .adjust-half-space {
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
+        .message-wrap {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .message-wrap .message-title {
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .message-wrap .message {
+            font-size: 10px;
+            line-height: 13px;
+            font-weight: 300;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+		.details {
+			margin-bottom: 25px;
+			border-bottom: 1px solid #ddd5d5;
+			padding-bottom: 25px;
 		}
+		.details h2 {
+			font-size: 14px;
+			text-align: left;
+			margin-bottom: 10px;
+			font-weight: 500;
+		}
+		.details > div {
+			font-weight: 500;
+		}
+		.job-info > div,
+		.details > div {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+			text-align: left;
+		}
+		.details > div > div {
+			width: 50%;
+		}
+		.job-info  {
+			padding: 10px 20px 20px;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+			margin-bottom: 50px;
+		}
+		.job-info > div > div {width: 50%; box-sizing: border-box}
 	</style>
 </head>
 
 <body style="margin: 0; background-color: #ffffff; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-	<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
+	{{-- <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
 		<tbody>
 			<tr>
 				<td>
@@ -121,12 +232,7 @@
 													<table class="button_block block-4" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad">
-																<div class="alignment" align="center"><!--[if mso]>
-<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://transportanycar.com/" style="height:42px;width:211px;v-text-anchor:middle;" arcsize="72%" stroke="false" fillcolor="#52d017">
-<w:anchorlock/>
-<v:textbox inset="0px,0px,0px,0px">
-<center style="color:#ffffff; font-family:sans-serif; font-size:16px">
-<![endif]--><a href="{{ route('front.booking_confirm_page', $data['user_quotes']->id) }}" target="_blank" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#52d017;border-radius:30px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:5px;padding-bottom:5px;font-family:'Montserrat', sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:50px;padding-right:50px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;"><strong>Send details &gt;</strong></span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
+																<div class="alignment" align="center"><a href="{{ route('front.booking_confirm_page', $data['user_quotes']->id) }}" target="_blank" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#52d017;border-radius:30px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:5px;padding-bottom:5px;font-family:'Montserrat', sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:50px;padding-right:50px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;"><strong>Send details &gt;</strong></span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
 															</td>
 														</tr>
 													</table>
@@ -187,7 +293,79 @@
 				</td>
 			</tr>
 		</tbody>
-	</table><!-- End -->
+	</table> --}}
+	<!-- End -->
+	<div class="contain">
+		<img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
+			style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
+			alt="transport notifiaction" title="transport notifiaction"></a>
+		<h2>Hi,</h2>
+		<p class="adjust-space">Your £250 bid for Ford Fiesta delivery has been accepted by user101.</p>
+		<p class="adjust-space">Contact the customer as soon as possible to make arrangements and finalise the delivery.</p>
+		<div class="details">
+			<h2>Collection details</h2>
+			<div>
+				<div>Contact name:</div>
+				<div>Shubham</div>
+			</div>
+			<div>
+				<div>Mobile number:</div>
+				<div>7986680522</div>
+			</div>
+			<div>
+				<div>Email address:</div>
+				<div>test@gmail.com</div>
+			</div>
+			<div>
+				<div>Pickup address:</div>
+				<div>sgd sfdsf sf</div>
+			</div>
+		</div>
+		<div class="details">
+			<h2>Delivery details</h2>
+			<div>
+				<div>Contact name:</div>
+				<div>Shubham</div>
+			</div>
+			<div>
+				<div>Mobile number:</div>
+				<div>7986680522</div>
+			</div>
+			<div>
+				<div>Email address:</div>
+				<div>test@gmail.com</div>
+			</div>
+			<div>
+				<div>Delivery address:</div>
+				<div>sgd sfdsf sf</div>
+			</div>
+		</div>
+		<div class="job-info">
+			<div>
+				<div>Make & model:</div>
+				<div>Mercedes-Benz</div>
+			</div>
+			<div>
+				<div>Pick-up area:</div>
+				<div>UK</div>
+			</div>
+			<div>
+				<div>Drop-off area:</div>
+				<div>France</div>
+			</div>
+			<div>
+				<div>Starts & drives:</div>
+				<div>Yes</div>
+			</div>
+			<div>
+				<div>Delivery preference:</div>
+				<div>Transported</div>
+			</div>
+		</div>
+		<p>Best Regards,</p>
+		<p class="adjust-half-space">Transport Any Car Team</p>
+		<p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+	</div>
 </body>
 
 </html>
