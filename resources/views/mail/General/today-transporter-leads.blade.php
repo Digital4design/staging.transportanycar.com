@@ -66,9 +66,9 @@
 <body>
     <div class="contain">
         <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg" style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;" alt="transport notifiaction" title="transport notifiaction"></a>
-        {{-- <h2>Hi {{$name}},</h2> --}}
-        <p class="adjust-space">We’ve posted {{$quote->last24HoursCount}} transport leads today. We understand it can be hard to keep up with them all so heres a reminder to check them out. Remember customers prefer quick responses so its worth reviewing your leads at least once a day.</p>
-        <a class="verify-btn"  style="color:#ffffff;">View leads</a>
+        <h2>Hi {{$quote['name']}},</h2>
+        <p class="adjust-space">We’ve posted {{$quote['last24HoursCount']}} transport leads today. We understand it can be hard to keep up with them all so heres a reminder to check them out. Remember customers prefer quick responses so its worth reviewing your leads at least once a day.</p>
+        <a class="verify-btn"  href="{{ url('transporter/new-jobs-new') }}"  style="color:#ffffff;">View leads</a>
         <p class="adjust-space">You can view and place bids on your transport leads in <a href="{{ url('transporter/new-jobs-new') }}" style="color:#0356D6; text-decoration: none;">your dashboard here</a>.</p>
         <p>
             Best Regards,

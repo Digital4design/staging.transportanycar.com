@@ -514,11 +514,10 @@ class QuotesController extends WebController
             foreach($transporter as $transport)
             {
             $mailData = [
-                'id' => $quote['quotation_id'],
                 'last24HoursCount' =>$last24HoursCount,
-               'name'=>$transport->name,
+               'name'=>$transport->first_name,
             ]; 
-       
+         
             $htmlContent = view('mail.General.today-transporter-leads', ['quote' => $mailData])->render();
             $subject='You have received a transport notification';
 

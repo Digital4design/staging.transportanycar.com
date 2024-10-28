@@ -225,20 +225,27 @@ class MessageController extends WebController
             'message' => $request->message ?? null,
             'type' => "message",
         ]);
+        
+     
         if ($message) {
             try {
+                $quotes = UserQuote::where('id', $request->user_quote_id)->first();
+                $my_quote = QuoteByTransporter::where('user_quote_id', $request->user_quote_id)->first();
+
+                $subject= 'You Have a Message from ' . ($user->username ?? 'User') . ' Regarding ' . ($quotes->vehicle_make ?? '') . ' ' . ($quotes->vehicle_model ?? '') . ' Delivery.';
                 $transporter = User::where('id', $request->transporter_id)->first();
                 $email_to = $transporter->email;
                 $maildata['user'] = $user;
                 $maildata['thread'] = $thread;
                 $maildata['message'] = $request->message;
                 $maildata['from_page'] = $request->form_page;
-                $my_quote = QuoteByTransporter::where('user_quote_id', $request->user_quote_id)->first();
-                $quotes = UserQuote::where('id', $request->user_quote_id)->first();
                 $maildata['quotes'] = $quotes;
                 $maildata['quote_by_transporter_id'] = $my_quote->id;
                 $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
-                $this->emailService->sendEmail($email_to, $htmlContent, 'You have a new message');
+                $this->emailService->sendEmail(
+                    $email_to,
+                    $htmlContent,$subject
+                );
             } 
             catch (\Exception $ex) {
                     Log::error('Error sending email: ' . $ex->getMessage());

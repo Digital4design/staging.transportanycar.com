@@ -94,6 +94,8 @@ class MessageController extends WebController
         }
         if ($message) {
             try {
+                $subject= 'You Have a Message from ' . ($auth_user->username ?? 'User') . ' Regarding ' . ($userQuote->vehicle_make ?? '') . ' ' . ($userQuote->vehicle_model ?? '') . ' Delivery.';
+
                 if($customer_user->job_email_preference) {
                     $email_to = $customer_user->email;
                     $maildata['user'] = $auth_user;
@@ -110,7 +112,7 @@ class MessageController extends WebController
                     $maildata['quote_id'] = $from_quote_id;
                     $maildata['type'] = 'user';
                     $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
-                    $this->emailService->sendEmail($email_to, $htmlContent, 'You have a new message');
+                    $this->emailService->sendEmail($email_to, $htmlContent,  $subject);
 
                     // Call create_notification to notify the user
                     create_notification(
