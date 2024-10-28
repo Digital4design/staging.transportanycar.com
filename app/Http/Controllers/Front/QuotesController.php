@@ -510,18 +510,20 @@ class QuotesController extends WebController
             ->groupBy('users.id')
             ->get();
             $last24HoursCount = UserQuote::where('created_at', '>=', Carbon::now()->subDay())->count();
+             
+            foreach($transporter as $transport)
+            {
             $mailData = [
                 'id' => $quote['quotation_id'],
                 'last24HoursCount' =>$last24HoursCount,
-               
+               'name'=>$transport->name,
             ]; 
-        
+       
             $htmlContent = view('mail.General.today-transporter-leads', ['quote' => $mailData])->render();
             $subject='You have received a transport notification';
 
 
-           foreach($transporter as $transport)
-           {
+          
               $this->emailService->sendEmail($transport->email, $htmlContent, $subject);
            }
 
