@@ -5,7 +5,7 @@
         word-wrap: break-word !important;
     }
 </style>
-<div class="overall-review py-5">
+<div class="overall-review py-3 py-md-5">
     <h2 class="total-review">Reviews (<?php echo count($feedbacks); ?>)</h2>
     <span class="total-rating my-2 d-block">5/5</span>
     <ul class="wd-star-lst user-feedback-stars">

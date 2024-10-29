@@ -217,7 +217,7 @@
 <div class="jobsrch_form_blog search_resu_sec mb-0" style="display:block !important">
     <div class="form-group where_custom">
         <label id="pickupLabel">Your job search</label>
-        <input type="text" class="form-control" name="search_pick_up_area" id="search_pick_up_area"
+        <input style="text-transform:capitalize;" type="text" class="form-control" name="search_pick_up_area" id="search_pick_up_area"
             placeholder="{{ $pickup }} - {{ $dropoff }}" disabled />
         <input type="hidden" name="pick_up_latitude" id="pick_up_latitude">
         <input type="hidden" name="pick_up_longitude" id="pick_up_longitude">

@@ -185,7 +185,7 @@
 </head>
 
 <body style="margin: 0; background-color: #ffffff; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-	{{-- <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
+	<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
 		<tbody>
 			<tr>
 				<td>
@@ -293,79 +293,9 @@
 				</td>
 			</tr>
 		</tbody>
-	</table> --}}
+	</table>
 	<!-- End -->
-	<div class="contain">
-		<img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
-			style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
-			alt="transport notifiaction" title="transport notifiaction"></a>
-		<h2>Hi,</h2>
-		<p class="adjust-space">Your £250 bid for Ford Fiesta delivery has been accepted by user101.</p>
-		<p class="adjust-space">Contact the customer as soon as possible to make arrangements and finalise the delivery.</p>
-		<div class="details">
-			<h2>Collection details</h2>
-			<div>
-				<div>Contact name:</div>
-				<div>Shubham</div>
-			</div>
-			<div>
-				<div>Mobile number:</div>
-				<div>7986680522</div>
-			</div>
-			<div>
-				<div>Email address:</div>
-				<div>test@gmail.com</div>
-			</div>
-			<div>
-				<div>Pickup address:</div>
-				<div>sgd sfdsf sf</div>
-			</div>
-		</div>
-		<div class="details">
-			<h2>Delivery details</h2>
-			<div>
-				<div>Contact name:</div>
-				<div>Shubham</div>
-			</div>
-			<div>
-				<div>Mobile number:</div>
-				<div>7986680522</div>
-			</div>
-			<div>
-				<div>Email address:</div>
-				<div>test@gmail.com</div>
-			</div>
-			<div>
-				<div>Delivery address:</div>
-				<div>sgd sfdsf sf</div>
-			</div>
-		</div>
-		<div class="job-info">
-			<div>
-				<div>Make & model:</div>
-				<div>Mercedes-Benz</div>
-			</div>
-			<div>
-				<div>Pick-up area:</div>
-				<div>UK</div>
-			</div>
-			<div>
-				<div>Drop-off area:</div>
-				<div>France</div>
-			</div>
-			<div>
-				<div>Starts & drives:</div>
-				<div>Yes</div>
-			</div>
-			<div>
-				<div>Delivery preference:</div>
-				<div>Transported</div>
-			</div>
-		</div>
-		<p>Best Regards,</p>
-		<p class="adjust-half-space">Transport Any Car Team</p>
-		<p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
-	</div>
+	
 </body>
 
 </html>

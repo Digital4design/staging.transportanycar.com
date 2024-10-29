@@ -8,6 +8,23 @@
     .wd-active-job .container-job {
     padding-right: 25px !important;
 }
+#passwordIcon {
+    position: absolute;
+    bottom: 20px;
+    right: 15px;
+    /* transform: translateY(-50%); */
+    cursor: default;
+    color: #ccc;
+}
+#togglePassword {
+    position: absolute;
+    top: 0;
+    bottom: 7px;
+    right: 15px;
+    z-index: 1;
+    cursor: pointer;
+    width: 45px;
+}
 </style>
     @include('layouts.web.dashboard.header')
     <section class="wd-active-job admin_account">
@@ -114,10 +131,16 @@
 
                                         <div class="form-group">
                                             <input type="password" class="form-control" placeholder="New password" name="npassword" id="npassword" value="" autocomplete="on">
+                                            <i class="fas fa-eye" id="passwordIcon"></i>
+                                            <a href="#" id="togglePassword"
+                                                style="bottom:0px;right:0px;"></a>
                                         </div>
 
                                         <div class="form-group">
                                             <input type="password" class="form-control" placeholder="Confirm new password" name="cpassword" id="cpassword" value="" autocomplete="on">
+                                            <i class="fas fa-eye" id="passwordIcon"></i>
+                                            <a href="#" id="togglePassword"
+                                                style="bottom:0px;right:0px;"></a>
                                         </div>
 
                                         <div class="wd-cstm-check">

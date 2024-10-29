@@ -35,7 +35,7 @@ Route::group(['as' => 'transporter.'], function () {
         Route::get('profile', 'DashboardController@profile')->name('profile');
         Route::post('profile-post', 'DashboardController@profilePost')->name('profile_post');
         Route::get('messages', 'DashboardController@messages')->name('messages');
-       
+
         Route::get('feedback', 'DashboardController@feedback')->name('feedback');
         // Route::get('current-jobs', 'DashboardController@currentJobs')->name('current_jobs');
         Route::get('current-jobs/{id?}', 'DashboardController@currentJobs')->name('current_jobs');
@@ -87,8 +87,6 @@ Route::group(['as' => 'transporter.'], function () {
         Route::get('/notifications', 'NotificationController@index')->name('notifications.index');
         Route::get('/notifications/{notification}', 'NotificationController@show')->name('notifications.show');
     });
-
-    
 });
 Route::group(['namespace' => 'Api\V1'], function () {
     Route::post('verify-email', 'MailController@transporterEmailVerify')->name('sendVerifyEmail');

@@ -266,15 +266,21 @@
 		<img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
 			style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
 			alt="transport notifiaction" title="transport notifiaction"></a>
-		<h2>Hi,</h2>
+		
 		<p class="adjust-space">
 			Set up a new password.
 		</p>
 		<p class="adjust-space">
-			Reset your password to your TransportAnyCar.com account <a href="#" style="color:#008DD4;">here</a>.
+			Reset your password to your TransportAnyCar.com account @if($data['page_type'] == 'admin')
+			<a href="{{route('front.forgot_password_view', $data['reset_token'])}}" target="_blank" >here</a>
+			@elseif($data['page_type'] == 'user')
+			<a href="{{route('front.web_password_upadte', $data['reset_token'])}}" target="_blank" >here</a>
+			@elseif($data['page_type'] == 'transporter')
+			<a href="{{route('transporter.trans_password_upadte', $data['reset_token'])}}" target="_blank" >here</a>
+			@endif
 		</p>
 		<p class="adjust-space">
-			The link will expire in 24 hours. If it expires you must generate a new email and link here.
+			The link will expire in 24 hours. If it expires you must generate a new email and link  <a href="{{route('transporter.forgot_password')}}">here.</a>
 		</p>
 		<p class="adjust-half-space">Best Regards,</p>
 		<p class="adjust-half-space">Transport Any Car Team</p>
