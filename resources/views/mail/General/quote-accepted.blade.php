@@ -5,9 +5,11 @@
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]--><!--[if !mso]><!-->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet" type="text/css"><!--<![endif]-->
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet" type="text/css"><!--<![endif]--> --}}
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+
     <style>
-        * {
+        /* * {
             box-sizing: border-box;
         }
 
@@ -129,12 +131,132 @@
             .collection_list span {
                     width: 44%;
                 }
+        } */
+    	h1,
+        h2,
+        p {
+            margin: 0;
         }
-    </style>
+		h2,
+        p,
+        body {
+            margin: 0;
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            font-size: 10px;
+            line-height: 13px;
+        }
+
+        .contain {
+            max-width: 300px;
+            width: 100%;
+            margin: auto;
+            text-align: center;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 400;
+        }
+
+        a.verify-btn {
+            background: #52D017;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;
+            border: none;
+            display: inline-block;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-left: 20px;
+            padding-right: 20px;
+            cursor: pointer;
+        }
+
+        .adjust-space {
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .adjust-half-space {
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
+        .message-wrap {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .message-wrap .message-title {
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .message-wrap .message {
+            font-size: 10px;
+            line-height: 13px;
+            font-weight: 300;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+		.details {
+			margin-bottom: 25px;
+			border-bottom: 1px solid #ddd5d5;
+			padding-bottom: 25px;
+		}
+		.details h2 {
+			font-size: 14px;
+			text-align: left;
+			margin-bottom: 10px;
+			font-weight: 500;
+		}
+		.details .list {
+			font-weight: 500;
+		}
+	
+		.details .list {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+			text-align: left;
+		}
+		.job-info  .list  {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+			text-align: left;
+		}
+		.details .list div {
+			width: 50%;
+		}
+		.job-info {
+			padding-top: 10px;
+			padding-left: 20px;
+			padding-right: 20px;
+			padding-bottom: 20px;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+			margin-bottom: 50px;
+		}
+		.job-info .list div {width: 50%; box-sizing: border-box}
+	</style>
 </head>
 
 <body style="margin: 0; background-color: #ffffff; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
+{{-- <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
     <tbody>
     <tr>
         <td>
@@ -425,32 +547,124 @@
         </td>
     </tr>
     </tbody>
-</table><!-- End -->
-</body>
+</table><!-- End --> --}}
 
-</html>
 
-{{-- Template Number 7 --}}
-{{-- <div class="contain">
+
+
+<div class="contain">
     <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
         style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
         alt="transport notifiaction" title="transport notifiaction"></a>
     <h2>Hi,</h2>
-    <p class="adjust-space">Your transport request is now live on Transport Any Car.</p>
-    <p>Account Details:</p>
-    <p>Email: user101@gmail.com</p>
-    <p>Pass: h7bdjx</p>
-    <p class="adjust-space">What Happens Next:</p>
-    <p class="adjust-space">Your delivery request has been sent to our network of transport providers and you will start receiving quotes via email once they start to place their bids.</p>
-    <p class="adjust-space">You can compare your quotes and ask questions via message before accepting to make sure you choose the right one for you, check out <a href="" style="color:#008DD4;">your quotes here</a>.</p>
-    <p class="adjust-space">The prices you will receive are very low due our network of transport providers already travelling similar routes so they can conveniently carry out your delivery efficiently.</p>
-    <p class="adjust-space">Rest assured, the price you see is the total amount you pay, there are no additional costs.</p>
-    <p class="adjust-space">We look forward to providing you with the lowest quotes possible and hope you enjoy using the site.
-    </p>
-    <p>If you need any help or have any questions please contact our team at <a href="" style="color:#008DD4;">support@transportanycar.com</a>.</p>
-    <p class="adjust-half-space">Best Regards,</p>
+    <p class="adjust-space">Your £{{ number_format($quote['transporter_payment'], 0) }} bid  for  {{$quote['vehicle_make']}} {{$quote['vehicle_model']}} 
+        @if(!is_null($quote['vehicle_make_1']) && !is_null($quote['vehicle_model_1']))
+        / {{$quote['vehicle_make_1']}} {{$quote['vehicle_model_1']}}
+        @endif delivery has been accepted by {{ $quote['username'] }}.</p>
+    <p class="adjust-space">Contact the customer as soon as possible to make arrangements and finalise the delivery.</p>
+    <div class="details">
+        <h2>Collection details</h2>
+        <div  class="list">
+            <div>Contact name:</div>
+            <div>{{ $quote['quotation_detail']['collection_contact_name'] }}</div>
+        </div>
+        <div class="list">
+            <div>Mobile number:</div>
+            <div>{{ $quote['quotation_detail']['collection_mobile_number'] }}</div>
+        </div>
+        <div class="list">
+            <div>Email address:</div>
+            <div>{{ $quote['quotation_detail']['collection_email'] }}</div>
+        </div>
+        <div class="list">
+            <div>Pickup address:</div>
+            <div> @if($quote['quotation_detail']['collection_address'])
+                {{ $quote['quotation_detail']['collection_address'] }}
+                @else
+                
+                        {{ $quote['quotation_detail']['collection_address_1'] }}<br>
+                        {{ $quote['quotation_detail']['collection_address_2'] }}<br>
+                        {{ $quote['quotation_detail']['collection_town'] }}<br>
+                        {{ $quote['quotation_detail']['collection_country'] }}
+                
+                @endif
+            </div>
+        </div>
+    </div>
+    <div class="details">
+        <h2>Delivery details</h2>
+        <div class="list">
+            <div>Contact name:</div>
+            <div>{{ $quote['quotation_detail']['delivery_contact_name'] }}</div>
+        </div>
+        <div class="list">
+            <div>Mobile number:</div>
+            <div>{{ $quote['quotation_detail']['delivery_mobile_number'] }}</div>
+        </div>
+        <div class="list">
+            <div>Email address:</div>
+            <div>{{ $quote['quotation_detail']['delivery_email'] }}</div>
+        </div>
+        <div class="list">
+            <div>Delivery address:</div>
+            <div> @if($quote['quotation_detail']['delivery_address'])
+               {{ $quote['quotation_detail']['delivery_address'] }}
+                @else
+                
+                        {{ $quote['quotation_detail']['delivery_address_1'] }}<br>
+                        {{ $quote['quotation_detail']['delivery_address_2'] }}<br>
+                        {{ $quote['quotation_detail']['delivery_town'] }}<br>
+                        {{ $quote['quotation_detail']['delivery_country'] }}
+                
+                @endif
+            </div>
+        </div>
+    </div>
+    <div class="job-info">
+        <div class="list">
+            <div>Make & model:</div>
+            <div>
+                 {{$quote['vehicle_make']}} {{$quote['vehicle_model']}} 
+                @if(!is_null($quote['vehicle_make_1']) && !is_null($quote['vehicle_model_1']))
+                / {{$quote['vehicle_make_1']}} {{$quote['vehicle_model_1']}}
+                @endif
+            </div>
+        </div>
+        <div  class="list">
+            <div>Pick-up area:</div>
+            <div>{{ $quote['pickup_postcode'] ?? '-' }}</div>
+        </div>
+        <div class="list">
+            <div>Drop-off area:</div>
+            <div>{{ $quote['drop_postcode'] ?? '-' }}</div>
+        </div>
+        <div  class="list">
+            <div> Delivery date:</div>
+            <div>  @if($quote['delivery_timeframe_from'])
+               {{ formatCustomDate($quote['delivery_timeframe_from']) }}
+                @else
+                {{$quote['delivery_timeframe']}}
+                @endif
+            </div>
+        </div>
+        <div  class="list">
+            <div>Starts & drives:</div>
+            <div> {{$quote['starts_drives'] == 0 ? 'No' : 'Yes'}}
+                @if(!is_null($quote['starts_drives_1']))
+                / {{$quote['starts_drives_1'] == 0 ? 'No' : 'Yes'}}
+                @endif
+            </div>
+        </div>
+        <div  class="list">
+            <div>Delivery preference:</div>
+            <div>{{ $quote['how_moved'] }}</div>
+        </div>
+    </div>
+    <p>Best Regards,</p>
     <p class="adjust-half-space">Transport Any Car Team</p>
-    <p class="adjust-half-space" style="text-align: center;">Manage notification <a href="#"
-            style="color:#0356D6; text-decoration: none;">preferences.</span></a>
-    <p style="text-align: center;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
-</div> --}}
+    <p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+</div>
+</body>
+
+</html>
+

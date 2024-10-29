@@ -1155,7 +1155,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="row mx-4 d-lg-none">
+                                        {{-- <div class="row mx-4 d-lg-none">
                                             <div class="col-lg-6">
                                                 <h5>Payment methods:</h5>
                                                 @php
@@ -1196,7 +1196,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <h3 class="adjust-space-mobile-padding">Account details</h3>
                                         <div class="row align-items-end mx-4">
                                             <div class="col-lg-6 pr-lg-3">

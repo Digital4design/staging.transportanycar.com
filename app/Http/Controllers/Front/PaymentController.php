@@ -88,8 +88,7 @@ class PaymentController extends WebController
             $data['quoteId'] = $quoteId;
             $data['quote_by_transporter_id'] = $quote->id;
             //Optionally send email (uncomment and adjust as necessary)
-        //   dd(  $data['transporter_info']->username);
-        //   return ;
+          
             $user=User::find($quote->user_id);
             $email_to = $user->email;;
             $subject = "Confirmed, Your Bid for Ford Fiesta Delivery Has Been Accepted.";
@@ -97,11 +96,11 @@ class PaymentController extends WebController
             $maildata['model'] = $user_quote->vehicle_make . ' ' . $user_quote->vehicle_model;
             $maildata['price'] =isset($transaction->amount) ? $transaction->amount : '';
             $maildata['url'] = route('transporter.current_jobs', ['id' => $quote_by_transporter_id]);
-            // dd($maildata);
-            // return ;
+          
             $htmlContent = view('mail.General.quote-accepted-booking-mailtransporter', ['data' => $maildata])->render();
             $this->emailService->sendEmail($email_to, $htmlContent, $subject);
-
+            dd(  $data['transporter_info']->username);
+          return ;
 
             try {
                 if($quote->quote->user->job_email_preference) {
