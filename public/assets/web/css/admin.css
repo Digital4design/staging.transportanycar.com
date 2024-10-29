@@ -6000,10 +6000,11 @@ div#spam-banner button.btn {
 
   /* Transporter feedback  */
   .wd-white-box {
-    padding: 0;
+    padding: 15px;
     border: 0;
     box-shadow: none;
     overflow: hidden;
+    position: relative;
   }
 
   .wd-feedback-box {

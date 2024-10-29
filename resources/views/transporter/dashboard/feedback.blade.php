@@ -109,7 +109,8 @@
 
             .set_banner_position {
                 position: relative;
-                padding-top: 15px;
+                padding:0;
+                /* padding-top: 15px; */
                 /* overflow: hidden; */
             }
 
