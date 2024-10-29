@@ -80,14 +80,16 @@ class PaymentController extends WebController
             $user_quote = UserQuote::where('id', $quoteId)->first();
             $user_quote->update(['status' => 'ongoing']);
             $data['deposit'] = isset($transaction->amount) ? $transaction->amount : '';
-            $data['transporter_name'] = User::where('id', $quote->user_id)->pluck('username')->first() ?? '-';
+            $data['transporter_info'] = User::where('id', $quote->user_id)->first() ?? '-';
+            $data['transporter_name']= $data['transporter_info']->username;
             $data['transaction_id'] = isset($transaction->transaction_id) ? $transaction->transaction_id : '';
             $data['delivery_reference_id'] = isset($transaction->delivery_reference_id) ? $transaction->delivery_reference_id : '';
             $data['user_email'] = isset(Auth::user()->email) ? Auth::user()->email : '';
             $data['quoteId'] = $quoteId;
             $data['quote_by_transporter_id'] = $quote->id;
             //Optionally send email (uncomment and adjust as necessary)
-          
+        //   dd(  $data['transporter_info']->username);
+        //   return ;
             $user=User::find($quote->user_id);
             $email_to = $user->email;;
             $subject = "Confirmed, Your Bid for Ford Fiesta Delivery Has Been Accepted.";
@@ -107,7 +109,7 @@ class PaymentController extends WebController
                     $subject = 'Booking confirmation for delivery of your '.$quote->quote->vehicle_make.' '.$quote->quote->vehicle_model;
                     //$email_to = 'info@transportanycar.com';
                     $maildata['quotation'] = $quote;
-                    $maildata['transporter_name'] =$data['transporter_name'];
+                    $maildata['transporter_info'] =$data['transporter_info'];
                     $maildata['booking_ref'] = isset($transaction->delivery_reference_id) ? $transaction->delivery_reference_id : '';
                     $htmlContent = view('mail.General.quote-accepted-booking-confirmation', ['data' => $maildata])->render();
                     $this->emailService->sendEmail($email_to, $htmlContent, $subject);
@@ -130,7 +132,7 @@ class PaymentController extends WebController
             );
             
             \Log::info('Payment confirmation successful', ['payment_intent' => $paymentIntentId]);
-    
+    // 
             return view('front.payment_confirm',$data);
         } catch (\Exception $e) {
             \Log::error('Error in payment confirmation', ['error' => $e->getMessage(), 'payment_intent' => $paymentIntentId]);
