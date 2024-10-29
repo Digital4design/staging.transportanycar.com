@@ -2,45 +2,95 @@
 $user = $thread->user_qot->user ? $thread->user_qot->user : null;
 $auth_user = Auth::user();
 ?>
-@if(isset($user) && !empty($user))
+<style>
+.transportor-chat-header {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 300;
+    color:#000000;
+    gap: 10px;
+}
+.chat-note {
+    font-size: 10px;
+    line-height: 13px;
+    font-weight: 500;
+    color:#444444;
+    margin: 15px;
+    display: none;
+}
+@media screen and (max-width: 575px) {
+        #messages .navbar {
+            box-shadow: none;
+        }
+        .chat-note {display: block}
+    }
+</style>
+@if (isset($user) && !empty($user))
     <div class="chat_conversation_header">
         <a href="javascript:;" class="chat_back_arrow">
             <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6.03125 8.53906C6.03125 8.92448 5.97135 9.11719 5.85156 9.11719C5.78906 9.11719 5.70052 9.06771 5.58594 8.96875L0.695312 5.17969C0.570312 5.08594 0.507812 4.96615 0.507812 4.82031C0.507812 4.6901 0.570312 4.57031 0.695312 4.46094L5.58594 0.671875C5.70052 0.572917 5.78906 0.523438 5.85156 0.523438C5.97135 0.523438 6.03125 0.716146 6.03125 1.10156C6.02604 1.19531 5.97135 1.28125 5.86719 1.35938L1.46875 4.82031L5.86719 8.28125C5.96094 8.35938 6.01562 8.44531 6.03125 8.53906Z" fill="black"/>
+                <path
+                    d="M6.03125 8.53906C6.03125 8.92448 5.97135 9.11719 5.85156 9.11719C5.78906 9.11719 5.70052 9.06771 5.58594 8.96875L0.695312 5.17969C0.570312 5.08594 0.507812 4.96615 0.507812 4.82031C0.507812 4.6901 0.570312 4.57031 0.695312 4.46094L5.58594 0.671875C5.70052 0.572917 5.78906 0.523438 5.85156 0.523438C5.97135 0.523438 6.03125 0.716146 6.03125 1.10156C6.02604 1.19531 5.97135 1.28125 5.86719 1.35938L1.46875 4.82031L5.86719 8.28125C5.96094 8.35938 6.01562 8.44531 6.03125 8.53906Z"
+                    fill="black" />
             </svg>
         </a>
-        <div class="conversation_user">
-            <h3>
-                @if($user->name)
-                    {{Str::limit($user->name, 10)}}
-                @else
-                    {{Str::limit($user->username, 10)}}
-                @endif
-            </h3>
-            <p>
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="5" cy="5" r="5" fill="#52D017"/>
-                </svg>
-                Online
-            </p>
+        <div class="conversation_user transportor-chat-header d-flex flex-wrap align-items-center text-left">
+            <div style="border-radius:5px; overflow: hidden; flex: 1 0 0;">
+                <img src="{{ asset('uploads/no_car_image.png') }}" alt="" width="80" height="50" style="max-width: 100%;" />
+            </div>
+            <div>
+                <h3>
+                    @if ($user->name)
+                        {{ Str::limit($user->name, 10) }}
+                    @else
+                        {{ Str::limit($user->username, 10) }}
+                    @endif
+                </h3>
+                <ul>
+                    <li>
+                        <svg width="10" height="16" viewBox="0 0 16 22" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.00002 0.16C7.5361 0.15999 7.16001 0.536063 7.16 0.999982C7.15999 1.4639 7.53606 1.83999 7.99998 1.84L8.00002 0.16ZM10.6782 1.5264L10.9964 0.748992L10.9961 0.748881L10.6782 1.5264ZM13.8198 4.08L13.1238 4.5503L13.1243 4.55106L13.8198 4.08ZM15 7.916H15.84L15.84 7.91465L15 7.916ZM12.949 12.8062L12.271 12.3103C12.2608 12.3243 12.251 12.3386 12.2417 12.3531L12.949 12.8062ZM10.9162 15.98L10.2088 15.5269L10.2059 15.5316L10.9162 15.98ZM8 20.6L7.2901 21.049C7.44414 21.2926 7.71225 21.4401 8.0004 21.44C8.28855 21.4399 8.55652 21.292 8.71033 21.0484L8 20.6ZM5.0838 15.9898L5.79371 15.5407L5.79151 15.5373L5.0838 15.9898ZM3.051 12.8104L3.75871 12.3579C3.74942 12.3434 3.73969 12.3291 3.72952 12.3152L3.051 12.8104ZM1 7.9202L0.16 7.91937V7.9202H1ZM2.1802 4.08L2.87569 4.55106L2.87573 4.551L2.1802 4.08ZM5.3218 1.5306L5.63951 2.3082L5.64092 2.30762L5.3218 1.5306ZM8.00124 1.84C8.46516 1.83932 8.84068 1.46268 8.84 0.998763C8.83932 0.534845 8.46268 0.159318 7.99876 0.160001L8.00124 1.84ZM8 9.38182C7.53608 9.38182 7.16 9.7579 7.16 10.2218C7.16 10.6857 7.53608 11.0618 8 11.0618V9.38182ZM8 4.77022C7.53608 4.77022 7.16 5.1463 7.16 5.61022C7.16 6.07414 7.53608 6.45022 8 6.45022V4.77022ZM8.02068 11.07C8.48445 11.0585 8.85116 10.6733 8.83973 10.2095C8.82829 9.74574 8.44306 9.37903 7.97928 9.39046L8.02068 11.07ZM5.95582 9.09437L6.67981 8.66841L5.95582 9.09437ZM5.95582 6.75585L5.23184 6.32989L5.95582 6.75585ZM7.97928 6.45975C8.44306 6.47119 8.82829 6.10449 8.83973 5.64071C8.85116 5.17693 8.48446 4.7917 8.02068 4.78026L7.97928 6.45975ZM7.99998 1.84C8.8094 1.84002 9.61108 1.99759 10.3603 2.30392L10.9961 0.748881C10.0451 0.360035 9.02746 0.160022 8.00002 0.16L7.99998 1.84ZM10.36 2.30381C11.4829 2.76336 12.4445 3.54504 13.1238 4.5503L14.5158 3.6097C13.6508 2.32959 12.4262 1.3342 10.9964 0.748992L10.36 2.30381ZM13.1243 4.55106C13.7974 5.54482 14.1581 6.7171 14.16 7.91735L15.84 7.91465C15.8375 6.37945 15.3762 4.88002 14.5153 3.60894L13.1243 4.55106ZM14.16 7.916C14.16 8.72866 14.0336 9.33192 13.7568 9.95594C13.4676 10.608 13.0038 11.3082 12.271 12.3103L13.627 13.3021C14.3614 12.298 14.9231 11.4701 15.2926 10.6371C15.6745 9.77608 15.84 8.93734 15.84 7.916H14.16ZM12.2417 12.3531L10.2089 15.5269L11.6235 16.4331L13.6563 13.2593L12.2417 12.3531ZM10.2059 15.5316L7.28967 20.1516L8.71033 21.0484L11.6265 16.4284L10.2059 15.5316ZM8.7099 20.151L5.7937 15.5408L4.3739 16.4388L7.2901 21.049L8.7099 20.151ZM5.79151 15.5373L3.75871 12.3579L2.34329 13.2629L4.37609 16.4423L5.79151 15.5373ZM3.72952 12.3152C2.99627 11.3105 2.5324 10.6102 2.24307 9.95836C1.96633 9.33489 1.84 8.73275 1.84 7.9202H0.16C0.16 8.94165 0.325572 9.7794 0.707534 10.6399C1.0769 11.4721 1.63853 12.2999 2.37248 13.3056L3.72952 12.3152ZM1.84 7.92103C1.84119 6.71953 2.20189 5.54586 2.87569 4.55106L1.48471 3.60894C0.622887 4.88135 0.161527 6.38255 0.16 7.91937L1.84 7.92103ZM2.87573 4.551C3.55555 3.54711 4.51715 2.76676 5.63951 2.3082L5.00409 0.752999C3.57488 1.33694 2.35036 2.33063 1.48467 3.609L2.87573 4.551ZM5.64092 2.30762C6.38988 2.00002 7.19157 1.84119 8.00124 1.84L7.99876 0.160001C6.97101 0.161514 5.95338 0.363125 5.00268 0.75358L5.64092 2.30762ZM8 11.0618C9.12389 11.0618 10.1624 10.4622 10.7243 9.48892L9.26942 8.64892C9.00758 9.10244 8.52368 9.38182 8 9.38182V11.0618ZM10.7243 9.48892C11.2863 8.5156 11.2863 7.31643 10.7243 6.34312L9.26942 7.18312C9.53126 7.63664 9.53126 8.1954 9.26942 8.64892L10.7243 9.48892ZM10.7243 6.34312C10.1624 5.3698 9.12389 4.77022 8 4.77022V6.45022C8.52368 6.45022 9.00758 6.7296 9.26942 7.18312L10.7243 6.34312ZM7.97928 9.39046C7.44715 9.40358 6.94973 9.12719 6.67981 8.66841L5.23184 9.52033C5.81113 10.5049 6.87865 11.0981 8.02068 11.07L7.97928 9.39046ZM6.67981 8.66841C6.40989 8.20964 6.40989 7.64058 6.67981 7.18181L5.23184 6.32989C4.65254 7.31448 4.65254 8.53574 5.23184 9.52033L6.67981 8.66841ZM6.67981 7.18181C6.94973 6.72303 7.44715 6.44664 7.97928 6.45975L8.02068 4.78026C6.87865 4.75212 5.81113 5.34529 5.23184 6.32989L6.67981 7.18181Z"
+                                fill="#52D017"></path>
+                        </svg>
+                        <span class="ml-1">Brentwood, Essex, CM13</span>
+                    </li>
+                    <li>
+                        <svg width="10" height="16" viewBox="0 0 16 22" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.00002 0.16C7.5361 0.15999 7.16001 0.536063 7.16 0.999982C7.15999 1.4639 7.53606 1.83999 7.99998 1.84L8.00002 0.16ZM10.6782 1.5264L10.9964 0.748992L10.9961 0.748881L10.6782 1.5264ZM13.8198 4.08L13.1238 4.5503L13.1243 4.55106L13.8198 4.08ZM15 7.916H15.84L15.84 7.91465L15 7.916ZM12.949 12.8062L12.271 12.3103C12.2608 12.3243 12.251 12.3386 12.2417 12.3531L12.949 12.8062ZM10.9162 15.98L10.2088 15.5269L10.2059 15.5316L10.9162 15.98ZM8 20.6L7.2901 21.049C7.44414 21.2926 7.71225 21.4401 8.0004 21.44C8.28855 21.4399 8.55652 21.292 8.71033 21.0484L8 20.6ZM5.0838 15.9898L5.79371 15.5407L5.79151 15.5373L5.0838 15.9898ZM3.051 12.8104L3.75871 12.3579C3.74942 12.3434 3.73969 12.3291 3.72952 12.3152L3.051 12.8104ZM1 7.9202L0.16 7.91937V7.9202H1ZM2.1802 4.08L2.87569 4.55106L2.87573 4.551L2.1802 4.08ZM5.3218 1.5306L5.63951 2.3082L5.64092 2.30762L5.3218 1.5306ZM8.00124 1.84C8.46516 1.83932 8.84068 1.46268 8.84 0.998763C8.83932 0.534845 8.46268 0.159318 7.99876 0.160001L8.00124 1.84ZM8 9.38182C7.53608 9.38182 7.16 9.7579 7.16 10.2218C7.16 10.6857 7.53608 11.0618 8 11.0618V9.38182ZM8 4.77022C7.53608 4.77022 7.16 5.1463 7.16 5.61022C7.16 6.07414 7.53608 6.45022 8 6.45022V4.77022ZM8.02068 11.07C8.48445 11.0585 8.85116 10.6733 8.83973 10.2095C8.82829 9.74574 8.44306 9.37903 7.97928 9.39046L8.02068 11.07ZM5.95582 9.09437L6.67981 8.66841L5.95582 9.09437ZM5.95582 6.75585L5.23184 6.32989L5.95582 6.75585ZM7.97928 6.45975C8.44306 6.47119 8.82829 6.10449 8.83973 5.64071C8.85116 5.17693 8.48446 4.7917 8.02068 4.78026L7.97928 6.45975ZM7.99998 1.84C8.8094 1.84002 9.61108 1.99759 10.3603 2.30392L10.9961 0.748881C10.0451 0.360035 9.02746 0.160022 8.00002 0.16L7.99998 1.84ZM10.36 2.30381C11.4829 2.76336 12.4445 3.54504 13.1238 4.5503L14.5158 3.6097C13.6508 2.32959 12.4262 1.3342 10.9964 0.748992L10.36 2.30381ZM13.1243 4.55106C13.7974 5.54482 14.1581 6.7171 14.16 7.91735L15.84 7.91465C15.8375 6.37945 15.3762 4.88002 14.5153 3.60894L13.1243 4.55106ZM14.16 7.916C14.16 8.72866 14.0336 9.33192 13.7568 9.95594C13.4676 10.608 13.0038 11.3082 12.271 12.3103L13.627 13.3021C14.3614 12.298 14.9231 11.4701 15.2926 10.6371C15.6745 9.77608 15.84 8.93734 15.84 7.916H14.16ZM12.2417 12.3531L10.2089 15.5269L11.6235 16.4331L13.6563 13.2593L12.2417 12.3531ZM10.2059 15.5316L7.28967 20.1516L8.71033 21.0484L11.6265 16.4284L10.2059 15.5316ZM8.7099 20.151L5.7937 15.5408L4.3739 16.4388L7.2901 21.049L8.7099 20.151ZM5.79151 15.5373L3.75871 12.3579L2.34329 13.2629L4.37609 16.4423L5.79151 15.5373ZM3.72952 12.3152C2.99627 11.3105 2.5324 10.6102 2.24307 9.95836C1.96633 9.33489 1.84 8.73275 1.84 7.9202H0.16C0.16 8.94165 0.325572 9.7794 0.707534 10.6399C1.0769 11.4721 1.63853 12.2999 2.37248 13.3056L3.72952 12.3152ZM1.84 7.92103C1.84119 6.71953 2.20189 5.54586 2.87569 4.55106L1.48471 3.60894C0.622887 4.88135 0.161527 6.38255 0.16 7.91937L1.84 7.92103ZM2.87573 4.551C3.55555 3.54711 4.51715 2.76676 5.63951 2.3082L5.00409 0.752999C3.57488 1.33694 2.35036 2.33063 1.48467 3.609L2.87573 4.551ZM5.64092 2.30762C6.38988 2.00002 7.19157 1.84119 8.00124 1.84L7.99876 0.160001C6.97101 0.161514 5.95338 0.363125 5.00268 0.75358L5.64092 2.30762ZM8 11.0618C9.12389 11.0618 10.1624 10.4622 10.7243 9.48892L9.26942 8.64892C9.00758 9.10244 8.52368 9.38182 8 9.38182V11.0618ZM10.7243 9.48892C11.2863 8.5156 11.2863 7.31643 10.7243 6.34312L9.26942 7.18312C9.53126 7.63664 9.53126 8.1954 9.26942 8.64892L10.7243 9.48892ZM10.7243 6.34312C10.1624 5.3698 9.12389 4.77022 8 4.77022V6.45022C8.52368 6.45022 9.00758 6.7296 9.26942 7.18312L10.7243 6.34312ZM7.97928 9.39046C7.44715 9.40358 6.94973 9.12719 6.67981 8.66841L5.23184 9.52033C5.81113 10.5049 6.87865 11.0981 8.02068 11.07L7.97928 9.39046ZM6.67981 8.66841C6.40989 8.20964 6.40989 7.64058 6.67981 7.18181L5.23184 6.32989C4.65254 7.31448 4.65254 8.53574 5.23184 9.52033L6.67981 8.66841ZM6.67981 7.18181C6.94973 6.72303 7.44715 6.44664 7.97928 6.45975L8.02068 4.78026C6.87865 4.75212 5.81113 5.34529 5.23184 6.32989L6.67981 7.18181Z"
+                                fill="#ed1c24"></path>
+                        </svg>
+                        <span class="ml-1">London, Greater London, NW1 </span>
+                    </li>
+                </ul>
+                {{-- <p>
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="5" cy="5" r="5" fill="#52D017"/>
+                    </svg>
+                    Online
+                </p> --}}
+            </div>
         </div>
     </div>
     <div class="chat_conversation_body scrollbar chat_div" id="style-1">
-    @if(isset($messages) && $messages->count() > 0)
-        @foreach ($messages as $date=>$message_date)
-            @foreach ($message_date as $message)
-                <?php
-                $sender_user = $message->sender;
-                ?>
-                @if($thread->friend_id != $message->sender_id)
-                    <!-- incoming -->
+        @if (isset($messages) && $messages->count() > 0)
+            @foreach ($messages as $date => $message_date)
+                @foreach ($message_date as $message)
+                    <?php
+                    $sender_user = $message->sender;
+                    ?>
+                    @if ($thread->friend_id != $message->sender_id)
+                        <!-- incoming -->
                         <div class="chat_messages_incoming">
                             <div class="chat_conversation_bx">
                                 <div class="chat_txt_bx">
-                                    <h4>{{$user->username}}</h4>
+                                    <h4>{{ $user->username }}</h4>
                                     <div class="chat_incoming_txt">
-                                        <p>{{$message->message}}</p>
-                                        <!-- <span class="chat_time">{{carbon\carbon::parse($message->created_at)->diffForHumans()}}</span> -->
+                                        <p>{{ $message->message }}</p>
+                                        <!-- <span class="chat_time">{{ carbon\carbon::parse($message->created_at)->diffForHumans() }}</span> -->
                                         <span class="chat_time">
                                             @if (carbon\carbon::parse($message->created_at)->diffInHours() < 24)
                                                 {{ carbon\carbon::parse($message->created_at)->format('h:i A') }}
@@ -52,16 +102,16 @@ $auth_user = Auth::user();
                                 </div>
                             </div>
                         </div>
-                @else
-                    <!-- outgoing -->
+                    @else
+                        <!-- outgoing -->
                         <div class="chat_messages_outgoing">
                             <div class="chat_conversation_bx">
                                 <div class="chat_out_txt_bx">
                                     <h4>You</h4>
                                     <div class="chat_outgoing_txt">
-                                        <!-- <p>{{$message->message}}</p> -->
+                                        <!-- <p>{{ $message->message }}</p> -->
                                         <p>{!! nl2br(e($message->message)) !!}</p>
-                                        <!-- <span class="chat_time">{{carbon\carbon::parse($message->created_at)->diffForHumans()}}</span> -->
+                                        <!-- <span class="chat_time">{{ carbon\carbon::parse($message->created_at)->diffForHumans() }}</span> -->
                                         <span class="chat_time">
                                             @if (carbon\carbon::parse($message->created_at)->diffInHours() < 24)
                                                 {{ carbon\carbon::parse($message->created_at)->format('h:i A') }}
@@ -75,12 +125,12 @@ $auth_user = Auth::user();
                         </div>
                     @endif
                 @endforeach
-
             @endforeach
         @endif
     </div>
     <div class="chat_conversation_footer">
-        <form id="chat__form" action="{{route('transporter.message.store',$thread->user_quote_id)}}" method="post" enctype='multipart/form-data'>
+        <form id="chat__form" action="{{ route('transporter.message.store', $thread->user_quote_id) }}" method="post"
+            enctype='multipart/form-data'>
             @csrf
             <div class="form-group">
                 <div class="msg-send_flex">
@@ -93,16 +143,22 @@ $auth_user = Auth::user();
                     </a> -->
                     <textarea type="text" class="form-control textarea" id="message" placeholder="Write your message..."></textarea>
                     <a href="javascript:;" class="wd-send-btn" onclick="sendMessage();" id="send_message">
-                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.8821 24.3168H12.8128C12.4662 24.2822 12.189 24.0742 12.085 23.7624L9.48604 15.9307L1.27317 13.3317C0.961288 13.2277 0.718714 12.9505 0.68406 12.604C0.649407 12.2574 0.822674 11.9455 1.13456 11.8069L23.1049 0.821773C23.4167 0.648506 23.7979 0.717814 24.0751 0.960388C24.3177 1.20296 24.387 1.58415 24.2484 1.93068L13.6098 23.8317C13.4712 24.1436 13.194 24.3168 12.8821 24.3168ZM3.73357 12.3267L10.387 14.4406C10.6296 14.5099 10.8375 14.7178 10.9068 14.9604L13.0207 21.2673L21.6841 3.35148L3.73357 12.3267Z" fill="#52D017"/>
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12.8821 24.3168H12.8128C12.4662 24.2822 12.189 24.0742 12.085 23.7624L9.48604 15.9307L1.27317 13.3317C0.961288 13.2277 0.718714 12.9505 0.68406 12.604C0.649407 12.2574 0.822674 11.9455 1.13456 11.8069L23.1049 0.821773C23.4167 0.648506 23.7979 0.717814 24.0751 0.960388C24.3177 1.20296 24.387 1.58415 24.2484 1.93068L13.6098 23.8317C13.4712 24.1436 13.194 24.3168 12.8821 24.3168ZM3.73357 12.3267L10.387 14.4406C10.6296 14.5099 10.8375 14.7178 10.9068 14.9604L13.0207 21.2673L21.6841 3.35148L3.73357 12.3267Z"
+                                fill="#52D017" />
                         </svg>
                     </a>
                 </div>
             </div>
         </form>
+        <p class="chat-note">
+            Note: Users are required to accept your quote online via this platform and then we will exchange your contact details so that you can finalise the delivery.
+        </p>
     </div>
 @endif
-<div class="chat_messages_outgoing d-none" id="send_message_main" >
+<div class="chat_messages_outgoing d-none" id="send_message_main">
     <div class="chat_conversation_bx message-data">
         <div class="chat_out_txt_bx">
             <h4>You</h4>
@@ -117,51 +173,65 @@ $auth_user = Auth::user();
 
 <script>
     var send_message = false;
-    function uploadImageA(thisobj){
+
+    function uploadImageA(thisobj) {
         send_message = true;
         $("#file_type").val("image");
-        $("#image-upload1").prop("accept","image/*");
+        $("#image-upload1").prop("accept", "image/*");
         $("#image-upload1").click();
     }
-    function uploadVideo(thisobj){
+
+    function uploadVideo(thisobj) {
         send_message = true;
         $("#file_type").val("video");
-        $("#image-upload1").prop("accept","video/mp4,video/x-m4v,video/*");
+        $("#image-upload1").prop("accept", "video/mp4,video/x-m4v,video/*");
         $("#image-upload1").click();
     }
-    function uploadAudio(thisobj){
+
+    function uploadAudio(thisobj) {
         send_message = true;
         $("#file_type").val("audio");
-        $("#image-upload1").prop("accept","audio/mp3");
+        $("#image-upload1").prop("accept", "audio/mp3");
         $("#image-upload1").click();
     }
-    function sendMessage(){
+
+    function sendMessage() {
         $('#chat__form').submit();
     }
-    function isEmptyOrSpaces(str){
+
+    function isEmptyOrSpaces(str) {
         return str === null || str.match(/^ *$/) !== null;
     }
-    $(function () {
-        $('#image-upload1').change(function(){
+    $(function() {
+        $('#image-upload1').change(function() {
             //if(videoPreview == true){
             const file = this.files[0];
-            if (file){
+            if (file) {
                 let reader = new FileReader();
-                reader.onload = function(event){
+                reader.onload = function(event) {
                     $("#image_previe_main").addClass("d-none");
                     $("#audio_preview").addClass("d-none");
                     $("#video_preview").addClass("d-none");
-                    if($("#file_type").val() == "image"){
+                    if ($("#file_type").val() == "image") {
                         $("#image_previe_main").removeClass("d-none");
-                        $("#image_previe_main").html('<div><img id="imgPreview" src="'+event.target.result+'" width="100" height="100"></img></div><div><a onclick="removeImageFile(this);" href="javascript:;">remove</a></div>');
+                        $("#image_previe_main").html('<div><img id="imgPreview" src="' + event
+                            .target.result +
+                            '" width="100" height="100"></img></div><div><a onclick="removeImageFile(this);" href="javascript:;">remove</a></div>'
+                            );
                     }
-                    if($("#file_type").val() == "audio"){
+                    if ($("#file_type").val() == "audio") {
                         $("#audio_preview").removeClass("d-none");
-                        $("#audio_preview").html('<audio controls><source src="'+event.target.result+'" type="audio/mpeg"></audio><div><a onclick="removeAudioFile(this);" href="javascript:;">remove</a></div></div>');
+                        $("#audio_preview").html('<audio controls><source src="' + event.target
+                            .result +
+                            '" type="audio/mpeg"></audio><div><a onclick="removeAudioFile(this);" href="javascript:;">remove</a></div></div>'
+                            );
                     }
-                    if($("#file_type").val() == "video"){
+                    if ($("#file_type").val() == "video") {
                         $("#video_preview").removeClass("d-none");
-                        $("#video_preview").html('<video width="250" controls><source src="'+event.target.result+'" type="video/mp4"></video><div><a onclick="removeFile(this);" href="javascript:;">remove</a></div></div>');
+                        $("#video_preview").html('<video width="250" controls><source src="' + event
+                            .target.result +
+                            '" type="video/mp4"></video><div><a onclick="removeFile(this);" href="javascript:;">remove</a></div></div>'
+                            );
                     }
 
 
@@ -186,14 +256,14 @@ $auth_user = Auth::user();
                 return;
             }
             var send_message = false;
-            if(file_name != ""){
+            if (file_name != "") {
                 send_message = true;
             }
-            if(!isEmptyOrSpaces(message)){
+            if (!isEmptyOrSpaces(message)) {
                 send_message = true;
             }
-            if(send_message == true){
-                $("#send_message").prop("disabled","true");
+            if (send_message == true) {
+                $("#send_message").prop("disabled", "true");
                 //$("#send_message").text("Please Wait...");
 
                 var file_type = $('#file_type').val();
@@ -208,48 +278,54 @@ $auth_user = Auth::user();
                 var data = new FormData(this);
                 data.append('message', message);
                 data.append('file_type', file_type);
-                data.append('current_chat_id',chat_id)
+                data.append('current_chat_id', chat_id)
                 data.append('timezone', timezone);
 
                 $.ajax({
                     url: $(this).attr('action'),
-                    method:"POST",
+                    method: "POST",
                     data: data,
                     //data:{message_text:message},
                     dataType: 'json',
                     contentType: false,
                     cache: false,
-                    processData:false,
+                    processData: false,
                 }).done(function(response) {
                     $("#image-upload1").val("");
                     $("#image_previe_main").addClass("d-none");
                     $("#audio_preview").addClass("d-none");
                     $("#video_preview").addClass("d-none");
 
-                    $("#send_message").prop("disabled",false);
-                   // $("#send_message").text("Send");
-                    if(response.status == "success"){
+                    $("#send_message").prop("disabled", false);
+                    // $("#send_message").text("Send");
+                    if (response.status == "success") {
                         var data = response.data;
                         var message_clone = $("#send_message_main").clone();
                         message_clone.removeClass("d-none");
                         message_clone.find(".message-data-time").html(data.create_message);
-                        if(data.type == "file"){
-                            if(data.file_type == "audio"){
-                                message_clone.find('.message').html('<div><audio controls><source src="'+data.file+'" type="audio/mpeg"></audio></div></div>')
+                        if (data.type == "file") {
+                            if (data.file_type == "audio") {
+                                message_clone.find('.message').html(
+                                    '<div><audio controls><source src="' + data.file +
+                                    '" type="audio/mpeg"></audio></div></div>')
+                            } else if (data.file_type == "video") {
+                                message_clone.find('.message').html(
+                                    '<div><video width="250" controls><source src="' + data
+                                    .file + '" type="video/mp4"></video></div></div>')
+                            } else {
+                                message_clone.find('.message').html(
+                                    '<div><img width="200px;" src="' + data.file +
+                                    '" alt="avatar"><div></div></div>')
                             }
-                            else if(data.file_type == "video"){
-                                message_clone.find('.message').html('<div><video width="250" controls><source src="'+data.file+'" type="video/mp4"></video></div></div>')
-                            }else{
-                                message_clone.find('.message').html('<div><img width="200px;" src="'+data.file+'" alt="avatar"><div></div></div>')
-                            }
-                        }
-                        else{
+                        } else {
                             var createdAt = data.created_at;
                             var parsedCreatedAt = new Date(createdAt);
                             var formattedCreatedAt = moment(parsedCreatedAt).fromNow();
                             // Convert newline characters to <br> tags for the message
                             var formattedMessage = data.message.replace(/\r\n|\n/g, '<br>');
-                            message_clone.find('.message').html('<p>'+formattedMessage+'</p><span class="chat_time">'+formattedCreatedAt+'</span>')
+                            message_clone.find('.message').html('<p>' + formattedMessage +
+                                '</p><span class="chat_time">' + formattedCreatedAt +
+                                '</span>')
                         }
                         $('.chat_div').append(message_clone);
                     }
@@ -259,26 +335,31 @@ $auth_user = Auth::user();
                     if (xhr.status === 422) {
                         var errors = xhr.responseJSON.errors;
                         if (errors.message) {
-                            toastr.error("Do not share contact information or you will be banned.");
+                            toastr.error(
+                                "Do not share contact information or you will be banned.");
                         }
                     }
-                    $("#send_message").prop("disabled", false); // Re-enable the button in case of error
+                    $("#send_message").prop("disabled",
+                    false); // Re-enable the button in case of error
                 });
             }
 
         });
     });
-    function removeFile(){
+
+    function removeFile() {
         send_message = false;
         $("#image-upload1").val("");
         $("#video_preview").addClass("d-none");
     }
-    function removeAudioFile(){
+
+    function removeAudioFile() {
         send_message = false;
         $("#image-upload1").val("");
         $("#audio_preview").addClass("d-none");
     }
-    function removeImageFile(){
+
+    function removeImageFile() {
         send_message = false;
         $("#image-upload1").val("");
         $("#image_previe_main").addClass("d-none");

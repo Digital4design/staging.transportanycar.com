@@ -104,7 +104,7 @@
 
         @media(max-width: 991px) {
             .adjust_spacing {
-                padding-top: 70px;
+                padding-top: 65px;
             }
 
             .set_banner_position {

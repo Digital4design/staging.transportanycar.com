@@ -563,9 +563,9 @@
                 width: 100%;
             }
 
-            #passwordIcon {
+           /* #passwordIcon {
                 top: 16px;
-            }
+            }*/
 
 
 
@@ -1197,8 +1197,8 @@
                                                 </ul>
                                             </div>
                                         </div> --}}
-                                        <h3 class="adjust-space-mobile-padding">Account details</h3>
-                                        <div class="row align-items-end mx-4">
+                                        <h3 class="adjust-space-mobile-padding d-none d-lg-block">Account details</h3>
+                                        {{-- <div class="row align-items-end mx-4">
                                             <div class="col-lg-6 pr-lg-3">
                                                 <div class="form-group">
                                                     <label for="" class="mb-1">Name</label>
@@ -1245,10 +1245,57 @@
                                                         style="bottom:0px;right:0px;"></a>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="row mx-4">
-                                            <div class="col-lg-6 pr-lg-3 order-lg-1 order-2 mt-3 mt-lg-0">
+                                            <div class="col-lg-6 pr-lg-3 order-2 order-lg-1">
+                                                <h3 class="adjust-space-mobile-padding d-lg-none px-3 mt-4">Account details</h3>
+                                                <div class="form-group">
+                                                    <label for="" class="mb-1">Name</label>
+                                                    <input type="text" class="form-control sticky-data"
+                                                        placeholder="Full name" name="name"
+                                                        value="{{ $user->first_name }}" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="" class="mb-1">Company name</label>
+                                                    <input type="text" class="form-control" placeholder="Company name"
+                                                        name="company_name" id="company_name"
+                                                        value="{{ $user->name }}">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="" class="mb-1">Email address</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Email address" name="email" id="email_verify"
+                                                        value="{{ $user->email }}">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6 pl-lg-3 order-3 order-lg-2">
+                                                <div class="form-group">
+                                                    <label for="" class="mb-1">Username</label>
+                                                    <input type="text" class="form-control sticky-data"
+                                                        placeholder="Username" name="username"
+                                                        value="{{ $user->username }}" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                   
+                                                        <label for="" class="mb-1">Mobile Phone</label>
+                                                        <input type="tel" id="phone" class="form-control"
+                                                            placeholder="Mobile Phone" name="mobile"
+                                                            value="{{ old('mobile', '0' . ($user->mobile ?? '')) }}" />
+                                                  
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="" class="mb-1">New password</label>
+                                                    <input type="password" class="form-control"
+                                                        placeholder="New password" name="npassword" id="npassword">
+                                                    <i class="fas fa-eye" id="passwordIcon"></i>
+                                                    <a href="#" id="togglePassword"
+                                                        style="bottom:0px;right:0px;"></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 pr-lg-3 order-4 order-lg-3 mt-3 mt-lg-0">
                                                 <h5>Email notifications preferences:</h5>
                                                 <ul class="wd-cstm-check">
                                                     <li style="display:none">
@@ -1286,7 +1333,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="col-lg-6 pl-lg-3 order-lg-2 order-1 d-none d-lg-block">
+                                            <div class="col-lg-6 pl-lg-3 order-1 order-lg-4">
                                                 <h5>Payment methods:</h5>
                                                 @php
                                                     $payment_methods = $user->payment_methods

@@ -2,6 +2,35 @@
 $user = isset($thread->user) ? $thread->user : null;
 $auth_user = Auth::user();
 ?>
+<style>
+    .user-chat-header-pic {
+        width: 33px;
+        height: 33px;
+    }
+    .conversation_user p.verified {
+        font-size: 12px;
+        line-height:16px;
+        color:#52D017;
+        font-weight: 500;
+    }
+    .conversation_user ul li {
+        line-height: 16px;
+    }
+    .chat-note {
+        font-size: 10px;
+        line-height: 13px;
+        font-weight: 500;
+        color:#444444;
+        margin: 15px;
+        display: none;
+    }
+    @media screen and (max-width: 575px) {
+        #messages .admin-header {
+            box-shadow: none;
+        }
+        .chat-note {display: block}
+    }
+</style>
 @if(isset($user) && !empty($user))
     <div class="chat_conversation_header user_header">
         <div class="chat_head_lft">
@@ -10,16 +39,55 @@ $auth_user = Auth::user();
                     <path d="M6.03125 8.53906C6.03125 8.92448 5.97135 9.11719 5.85156 9.11719C5.78906 9.11719 5.70052 9.06771 5.58594 8.96875L0.695312 5.17969C0.570312 5.08594 0.507812 4.96615 0.507812 4.82031C0.507812 4.6901 0.570312 4.57031 0.695312 4.46094L5.58594 0.671875C5.70052 0.572917 5.78906 0.523438 5.85156 0.523438C5.97135 0.523438 6.03125 0.716146 6.03125 1.10156C6.02604 1.19531 5.97135 1.28125 5.86719 1.35938L1.46875 4.82031L5.86719 8.28125C5.96094 8.35938 6.01562 8.44531 6.03125 8.53906Z" fill="black"></path>
                 </svg>
             </a>
-            <div class="conversation_user">
-                <h3>
-                {{$transporter_username}}
-                </h3>
-                <p>
+            <div class="conversation_user d-flex flex-wrap align-items-center">
+                <div class="wd-transport-img pt-0 user-chat-header-pic mr-2">
+                    <img src="https://www.scrapcar.co/wp-content/uploads/2024/08/user.png" width="58" height="58" alt="trasporter feedback" class="img-fluid">
+                </div>
+                <div>
+
+                    <h3 class="mb-1">{{$transporter_username}} <img src="{{asset('assets/images/user-verified.png')}}" alt="" width="20" height="20" class="ml-1" /></h3>
+                    <ul class="wd-star-lst user-feedback-stars mb-1">
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#D9D9D9"></path>
+                            </svg>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#D9D9D9"></path>
+                            </svg>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#D9D9D9"></path>
+                        </svg>
+                    </li>
+                    <li>
+                        <svg width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#D9D9D9"></path>
+                        </svg>
+                    </li>
+                    <li>
+                        <svg width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#D9D9D9"></path>
+                        </svg>
+                    </li>
+                    <li class="user-feedback-rating-count">
+                        <span>(0)</span></li>
+                </ul>
+                <p class="verified">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
+                        <path d="M4.41537 11.1567L0.190373 6.93169C-0.0634575 6.67786 -0.0634575 6.2663 0.190373 6.01245L1.10959 5.0932C1.36342 4.83935 1.775 4.83935 2.02883 5.0932L4.87499 7.93934L10.9712 1.8432C11.225 1.58937 11.6366 1.58937 11.8904 1.8432L12.8096 2.76245C13.0634 3.01628 13.0634 3.42783 12.8096 3.68169L5.33462 11.1567C5.08076 11.4105 4.6692 11.4105 4.41537 11.1567Z" fill="#52D017"></path>
+                    </svg>
+                    Verified
+                </p>
+                {{-- <p>
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="5" cy="5" r="5" fill="#52D017"></circle>
                     </svg>
                     Online
-                </p>
+                </p> --}}
+            </div>
             </div>
         </div>
         @if($thread->user_qot->status == 'pending' || $thread->user_qot->status == 'approved')
@@ -111,6 +179,9 @@ $auth_user = Auth::user();
                 </div>
             </div>
         </form>
+        <p class="chat-note">
+            Note: For your safety, please do not share any contact information, details are exchanged after you have accepted the quote and paid the deposit online.
+        </p>
     </div>
 @endif
 <div class="chat_messages_outgoing d-none" id="send_message_main" >

@@ -52,6 +52,7 @@ $quoteFound = false;
 <script src="{{asset('assets/web/js/admin.js')}}"></script>
 <script>
     $('.trans_current_chat').on('click', function (){
+        $('body').attr('id', 'messages');
         $('#trans_current_chat_id').val($(this).data('id'));
     });
 </script>

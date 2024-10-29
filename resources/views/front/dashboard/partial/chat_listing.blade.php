@@ -53,6 +53,7 @@ $quoteFound = false;
 <script src="{{asset('assets/web/js/admin.js')}}"></script>
 <script>
     $('.user_current_chat').on('click', function () {
+        $('body').attr('id','messages');
         $('#user_current_chat_id').val($(this).data('id'));
     });
 </script>

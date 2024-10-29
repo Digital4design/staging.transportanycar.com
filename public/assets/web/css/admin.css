@@ -2123,18 +2123,20 @@ span.chat_count {
   color: #000;
 }
 
-.chat_conversation_header img {
+/* .chat_conversation_header img {
   width: 40px;
   height: 40px;
   object-fit: contain;
   border-radius: 50%;
-}
+} */
 
 .conversation_user h3 {
-  font-weight: 500;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
   color: #282828;
   margin-bottom: 5px;
+  text-transform: capitalize;
 }
 
 .conversation_user p {
@@ -2384,7 +2386,7 @@ a.wd-send-btn {
 
 /*scrollbar*/
 .chat_box .scrollbar {
-  height: calc(100% - 77px);
+  height: calc(100% - 93px);
   /* height: 832px; */
   overflow-x: hidden;
 }
@@ -3161,7 +3163,8 @@ a.chat_cross {
   border: 1px solid #B9B9B9;
   border-radius: 5px;
   background: #fff;
-  height: calc(100vh - 172px);
+  /* height: calc(100vh - 172px); */
+  height: calc(100vh - 80px);
 }
 
 .wd-deliver-lft {
@@ -6000,6 +6003,7 @@ div#spam-banner button.btn {
     padding: 0;
     border: 0;
     box-shadow: none;
+    overflow: hidden;
   }
 
   .wd-feedback-box {
@@ -6466,7 +6470,8 @@ div#spam-banner button.btn {
   .chat_conversation_header,
   .chat_header {
     border-radius: 10px 10px 0 0;
-    background: #f3f3f3;
+    /* background: #f3f3f3; */
+    background: #ffffff;
     border: 0;
   }
 
@@ -6498,10 +6503,10 @@ div#spam-banner button.btn {
     border-radius: 0;
   }
 
-  .conversation_user p {
+  /* .conversation_user p {
     flex-direction: row-reverse;
     justify-content: flex-end;
-  }
+  } */
 
   .option_btn::before {
     display: none;
@@ -6525,7 +6530,8 @@ div#spam-banner button.btn {
 
   .chat_head_lft {
     display: flex;
-    align-items: flex-start;
+    /* align-items: flex-start; */
+    align-items: center;
   }
 
   .dp_title {
