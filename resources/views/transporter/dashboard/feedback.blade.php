@@ -242,6 +242,8 @@
                                                     </li>
                                                     <li class="user-feedback-rating-count">
                                                         <span>({{ count($feedback) }})</span></li>
+                                                         {{-- <li>({{ number_format($overall_percentage, 0) }}%)</li> --}}
+
 
                                                 </ul>
                                                 <div>Member since: <span
