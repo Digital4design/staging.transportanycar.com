@@ -104,7 +104,7 @@
 
         #passwordIcon {
             position: absolute;
-            bottom: 13px;
+            top: 8px;
             right: 15px;
             /* transform: translateY(-50%); */
             cursor: default;
@@ -1197,14 +1197,16 @@
                                                  
                                                   
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="" class="mb-1">New password</label>
-                                                    <input type="password" class="form-control"
-                                                        placeholder="New password" name="npassword" id="npassword">
-                                                    <i class="fas fa-eye" id="passwordIcon"></i>
-                                                    <a href="#" id="togglePassword"
-                                                        style="bottom:0px;right:0px;"></a>
+                                                <div class="form-group" style="position: relative;">
+                                                    <label for="npassword" class="mb-1">New password</label>
+                                                    <input type="password" class="form-control" placeholder="New password" name="npassword" id="npassword">
+                                                    
+                                                    <!-- Toggle Password Icon -->
+                                                    <span id="togglePassword" style="position: absolute; right: 10px; top: 35px; cursor: pointer;">
+                                                        <i class="fas fa-eye" id="passwordIcon"></i>
+                                                    </span>
                                                 </div>
+                                                
                                             </div>
                                             <div class="col-lg-6 pr-lg-3 order-4 order-lg-3 mt-3 mt-lg-0">
                                                 <h5>Email notifications preferences:</h5>
@@ -1781,5 +1783,19 @@
                 }
             });
         });
+        document.getElementById("togglePassword").addEventListener("click", function() {
+    const passwordInput = document.getElementById("npassword");
+    const passwordIcon = document.getElementById("passwordIcon");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        passwordIcon.classList.remove("fa-eye");
+        passwordIcon.classList.add("fa-eye-slash");
+    } else {
+        passwordInput.type = "password";
+        passwordIcon.classList.remove("fa-eye-slash");
+        passwordIcon.classList.add("fa-eye");
+    }
+});
     </script
 @endsection
