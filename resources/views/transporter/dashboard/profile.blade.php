@@ -1155,98 +1155,8 @@
                                             </div>
                                         </div>
                                         
-                                        {{-- <div class="row mx-4 d-lg-none">
-                                            <div class="col-lg-6">
-                                                <h5>Payment methods:</h5>
-                                                @php
-                                                    $payment_methods = $user->payment_methods
-                                                        ? explode(',', $user->payment_methods)
-                                                        : [];
-                                                @endphp
-                                                
-                                                <ul class="wd-cstm-check mb-0">
-                                                    <li>
-                                                        <div class="form-group">
-                                                            <input type="checkbox" id="payment1"
-                                                                name="payment_methods[]" value="Cash"
-                                                                {{ empty($payment_methods) || in_array('Cash', $payment_methods) ? 'checked' : '' }}>
-                                                            <label for="payment1"></label>
-                                                            <span>Cash</span>
-                                                        </div>
-                                                        
-                                                    </li>
-
-                                                    <li>
-                                                        <div class="form-group">
-                                                            <input type="checkbox" id="payment2"
-                                                                name="payment_methods[]" value="Bank Transfer"
-                                                                {{ empty($payment_methods) || in_array('Bank Transfer', $payment_methods) ? 'checked' : '' }}>
-                                                            <label for="payment2"></label>
-                                                            <span>Bank Transfer</span>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="form-group">
-                                                            <input type="checkbox" id="payment3"
-                                                                name="payment_methods[]" value="Visa Card"
-                                                                {{ in_array('Visa Card', $payment_methods) ? 'checked' : '' }}>
-                                                            <label for="payment3"></label>
-                                                            <span> Card Payment</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div> --}}
+                                       
                                         <h3 class="adjust-space-mobile-padding d-none d-lg-block">Account details</h3>
-                                        {{-- <div class="row align-items-end mx-4">
-                                            <div class="col-lg-6 pr-lg-3">
-                                                <div class="form-group">
-                                                    <label for="" class="mb-1">Name</label>
-                                                    <input type="text" class="form-control sticky-data"
-                                                        placeholder="Full name" name="name"
-                                                        value="{{ $user->first_name }}" readonly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="" class="mb-1">Company name</label>
-                                                    <input type="text" class="form-control" placeholder="Company name"
-                                                        name="company_name" id="company_name"
-                                                        value="{{ $user->name }}">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="" class="mb-1">Email address</label>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Email address" name="email" id="email_verify"
-                                                        value="{{ $user->email }}">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-6 pl-lg-3">
-                                                <div class="form-group">
-                                                    <label for="" class="mb-1">Username</label>
-                                                    <input type="text" class="form-control sticky-data"
-                                                        placeholder="Username" name="username"
-                                                        value="{{ $user->username }}" readonly>
-                                                </div>
-                                                <div class="form-group">
-                                                   
-                                                        <label for="" class="mb-1">Mobile Phone</label>
-                                                        <input type="tel" id="phone" class="form-control"
-                                                            placeholder="Mobile Phone" name="mobile"
-                                                            value="{{ old('mobile', '0' . ($user->mobile ?? '')) }}" />
-                                                  
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="" class="mb-1">New password</label>
-                                                    <input type="password" class="form-control"
-                                                        placeholder="New password" name="npassword" id="npassword">
-                                                    <i class="fas fa-eye" id="passwordIcon"></i>
-                                                    <a href="#" id="togglePassword"
-                                                        style="bottom:0px;right:0px;"></a>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-
                                         <div class="row mx-4">
                                             <div class="col-lg-6 pr-lg-3 order-2 order-lg-1">
                                                 <h3 class="adjust-space-mobile-padding d-lg-none px-3 mt-4">Account details</h3>
@@ -1281,9 +1191,10 @@
                                                 <div class="form-group">
                                                    
                                                         <label for="" class="mb-1">Mobile Phone</label>
-                                                        <input type="tel" id="phone" class="form-control"
-                                                            placeholder="Mobile Phone" name="mobile"
-                                                            value="{{ old('mobile', '0' . ($user->mobile ?? '')) }}" />
+                                                        <input type="tel" id="mobile" class="form-control"
+                                                        placeholder="Mobile Phone" name="mobile"
+                                                        value="{{ old('mobile', ($user->mobile ?? '')) ? '0' . ltrim(old('mobile', $user->mobile), '0') : '' }}" />
+                                                 
                                                   
                                                 </div>
                                                 <div class="form-group">
@@ -1298,19 +1209,10 @@
                                             <div class="col-lg-6 pr-lg-3 order-4 order-lg-3 mt-3 mt-lg-0">
                                                 <h5>Email notifications preferences:</h5>
                                                 <ul class="wd-cstm-check">
-                                                    <li style="display:none">
-                                                        <div class="form-group">
-                                                            <input type="checkbox" id="check2"
-                                                                data-email-type="job_alert"
-                                                                {{ $user->job_email_preference == 1 ? 'checked' : '' }}>
-                                                            <label for="check2"><span>Email Job Alerts</span></label>
-                                                        </div>
-                                                    </li>
-
                                                     <li>
                                                         <div class="form-group">
                                                             <input type="checkbox" id="check3"
-                                                                data-email-type="outbid_alert"
+                                                                data-email-type="outbid_email_unsubscribe"
                                                                 {{ $user->outbid_email_unsubscribe == 1 ? 'checked' : '' }}>
                                                             <label for="check3"><span>Outbid Alerts</span></label>
                                                         </div>
@@ -1353,27 +1255,6 @@
                                                         
                                                     </li>
 
-                                                    {{-- <li>
-                                                        <div class="form-group">
-                                                            <input type="checkbox" id="payment5"
-                                                                name="payment_methods[]" value="Cheque"
-                                                                {{ in_array('Cheque', $payment_methods) ? 'checked' : '' }}>
-                                                            <label for="payment5"></label>
-                                                            <span>Cheque</span>
-                                                        </div>
-                                                    </li> --}}
-
-                                                   
-
-                                                    {{-- <li>
-                                                        <div class="form-group">
-                                                            <input type="checkbox" id="payment4"
-                                                                name="payment_methods[]" value="Paypal"
-                                                                {{ in_array('Paypal', $payment_methods) ? 'checked' : '' }}>
-                                                            <label for="payment4"></label>
-                                                            <span>Paypal</span>
-                                                        </div>
-                                                    </li> --}}
 
                                                     <li>
                                                         <div class="form-group">
@@ -1401,7 +1282,7 @@
                                             <button type="submit" class="wd-save-btn">Save Changes</button>
                                         </div>
                                     </div>
-                                </form>
+                                </forphonem>
                             </div>
                         </div>
                     </div>
@@ -1749,6 +1630,7 @@
         });
 
         function updateEmailPrefrence() {
+        // alert('yeeeeeeeeeeeeeee');
             var isChecked = $(this).is(':checked');
             var emailType = $(this).data('email-type');
             var value = isChecked ? 1 : 0; // Set value based on the checkbox state

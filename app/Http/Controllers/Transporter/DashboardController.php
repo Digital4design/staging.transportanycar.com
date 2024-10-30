@@ -586,6 +586,9 @@ class DashboardController extends WebController
 
     public function updateEmailPreference(Request $request)
     {
+
+        // dd($request->all());
+        // return;
         $user = Auth::guard('transporter')->user();
         if ($user) {
             if ($request->email_type == 'job_alert') {
@@ -598,6 +601,13 @@ class DashboardController extends WebController
                 }
             } elseif ($request->email_type == 'summary_of_leads') {
                 $status = $user->update(['summary_of_leads' => $request->value]);
+                if ($status) {
+                    return response()->json(['status' => true,  'message' => 'Preference updated successfully.']);
+                } else {
+                    return response()->json(['status' => false, 'message' => 'Failed to update preference.']);
+                }
+            }elseif ($request->email_type == 'outbid_email_unsubscribe') {
+                $status = $user->update(['outbid_email_unsubscribe' => $request->value]);
                 if ($status) {
                     return response()->json(['status' => true,  'message' => 'Preference updated successfully.']);
                 } else {

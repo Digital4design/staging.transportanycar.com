@@ -774,7 +774,7 @@
                 success: function(response) {
                     console.log(response.message);
                     if (response.success) {
-                        toastr.success("OTP sended successfully");
+                        // toastr.success("OTP sended successfully");
                         //alert('OTP sended to successfully');
                         $("#mobile-number").html(phoneNumber);
                         $("#otp1,#otp2,#otp3,#otp4").val('');

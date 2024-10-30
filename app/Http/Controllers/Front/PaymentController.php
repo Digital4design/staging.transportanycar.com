@@ -99,17 +99,18 @@ class PaymentController extends WebController
           
             $htmlContent = view('mail.General.quote-accepted-booking-mailtransporter', ['data' => $maildata])->render();
             $this->emailService->sendEmail($email_to, $htmlContent, $subject);
-            dd(  $data['transporter_info']->username);
-          return ;
+        
 
             try {
                 if($quote->quote->user->job_email_preference) {
                     $email_to = $quote->quote->user->email;
                     $subject = 'Booking confirmation for delivery of your '.$quote->quote->vehicle_make.' '.$quote->quote->vehicle_model;
-                    //$email_to = 'info@transportanycar.com';
                     $maildata['quotation'] = $quote;
+                    $maildata['transaction_id'] = isset($transaction->transaction_id) ? $transaction->transaction_id : '';
                     $maildata['transporter_info'] =$data['transporter_info'];
                     $maildata['booking_ref'] = isset($transaction->delivery_reference_id) ? $transaction->delivery_reference_id : '';
+                    // dd(  $maildata['transporter_info']->username);
+                    //  return ;
                     $htmlContent = view('mail.General.quote-accepted-booking-confirmation', ['data' => $maildata])->render();
                     $this->emailService->sendEmail($email_to, $htmlContent, $subject);
                 } else {

@@ -576,7 +576,7 @@ class QuotesController extends WebController
         }
         return response()->json([
             'success' => true,
-            'message' => 'OTP sent successfully.',
+            // 'message' => 'OTP sent successfully.',
         ]);
     }
 

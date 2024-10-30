@@ -7,6 +7,8 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\General\NotificationController;
 use Illuminate\Support\Facades\Mail;
 use App\Services\EmailService;
+use App\User;
+use App\QuoteByTransporter;
 
 
 /*
@@ -108,3 +110,17 @@ Route::middleware('auth:admin')->group(function () {
 Route::get('/send-email', [EmailController::class, 'sendTestEmail']);
 Route::post('/send-otp',[App\Http\Controllers\Front\QuotesController::class,'sendOtp'])->name('sendOtp');
 Route::post('/verify-otp',[App\Http\Controllers\front\QuotesController::class,'verifyOtp'])->name('verifyOtp');
+
+
+Route::get("/new/template/check",function(){
+           $maildata['transporter_name'] = "Ravi";
+           $maildata['transaction_id'] = "23";
+           $maildata['name'] = "kartik";
+            $maildata['model'] = "BMW";
+            $maildata['price'] ="200";
+            $maildata['url'] = "https://localhost";
+          $maildata['quotation'] = QuoteByTransporter::where('id',"1805")->first();
+        $maildata['transporter_info'] = User::where('id',"1104")->first();
+        $maildata['booking_ref'] = "null";
+    return view('mail.General.quote-accepted-booking-confirmation', ['data' => $maildata]);
+});
