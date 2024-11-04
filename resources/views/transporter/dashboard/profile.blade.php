@@ -1695,6 +1695,9 @@
                                 number: function() {
                                     return $('#phone').val();
                                 }
+                            },
+                             complete: function(response) {
+                              console.log("Remote validation response:", response.responseText); // Logs the server response
                             }
                         },
                     },

@@ -7,7 +7,7 @@
 </style>
 <div class="overall-review py-3 py-md-5">
     <h2 class="total-review">Reviews (<?php echo count($feedbacks); ?>)</h2>
-    <span class="total-rating my-2 d-block">5/5</span>
+    <span class="total-rating my-2 d-block">{{$average_rating}}/5</span>
     <ul class="wd-star-lst user-feedback-stars">
         <li>
             <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +57,7 @@
 
                 </div> 
             </div> 
-            <span class="review-percentage">{{$ratings['star_5']}}%</span>
+            <span class="review-percentage">{{$ratings['star_5']}}</span>
         </li>
         <li>
             <span class="review-steps">4</span>
