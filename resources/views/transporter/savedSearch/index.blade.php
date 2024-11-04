@@ -1719,7 +1719,7 @@
                                     <div class="card">
 
                                         <a data-toggle="modal" data-target="#delete_quote_{{ $savedSearch->id }}"
-                                            class="d-lg-block delete_btn_mobile align-self-end position-absolute" style="right: 15px; top: 15px; line-height: 10px;">
+                                            class="d-flex delete_btn_mobile align-self-end position-absolute justify-content-end flex-wrap" style="right: 15px; top: 15px; line-height: 10px; width: 25px; height: 25px;">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                                 viewBox="0 0 14 14" fill="none">
                                                 <path
