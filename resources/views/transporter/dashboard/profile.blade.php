@@ -12,6 +12,9 @@
             position: relative;
             display: inline-block;
         }
+        select.form-control {
+            padding: 9px 20px!important;
+        }
 
         .wd-cstm-check .form-group span {
             line-height: 13px;

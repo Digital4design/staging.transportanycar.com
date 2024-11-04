@@ -160,7 +160,7 @@
             padding: 10px 0px 0 !important;
         }
 
-        .admin_job_bx .tab-content ul .deshbord-job-listing.job_list_desh_mobile li p {font-weight: 300;}
+        /* .admin_job_bx .tab-content ul .deshbord-job-listing.job_list_desh_mobile li p {font-weight: 300;} */
 
 
 
@@ -330,7 +330,7 @@
             /* 17-08-2024 */
 
             .admin_job_bx .tab-content ul .deshbord-job-listing.job_list_desh_mobile li p {
-                font-weight: 300;
+                /* font-weight: 300; */
                 color: #000000ba;
                 margin-bottom: 0;
                 /* top: 29px; */
