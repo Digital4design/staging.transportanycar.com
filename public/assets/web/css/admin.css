@@ -389,6 +389,7 @@ input[type=number]::-webkit-inner-spin-button {
   padding: 0 0 0 40px;
   min-height: unset;
   position: relative;
+  overflow:hidden;
 }
 
 .side_dropdown .card-body::before {
@@ -1189,7 +1190,8 @@ text.highcharts-credits {
   text-align: center;
   margin: 0 auto;
   font-size: 15px;
-  font-weight: 700;
+  /* font-weight: 700; */
+  font-weight: 500;
   line-height: 19px;
   letter-spacing: 0em;
   position: absolute;
@@ -5666,7 +5668,7 @@ div#spam-banner button.btn {
 }
 
 @media (max-width: 991px) {
-
+  #page-content-wrapper {position: relative; overflow: hidden;}
   .dropdown-toggle svg,
   .admin-menu svg {
     width: 25px;
@@ -6237,6 +6239,11 @@ div#spam-banner button.btn {
   }
 }
 
+@media (min-width:768px) {
+  .chat_list {
+      display: flex!important;
+  }
+}
 @media (max-width: 767px) {
   .side_dropdown .card-body::before {
     left: 20px;

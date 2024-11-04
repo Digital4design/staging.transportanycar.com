@@ -54,7 +54,7 @@
 
                         @if ($transporterQuotesCount > 0)
                         {{-- <p class="font-weight-light">£{{(roundBasedOnDecimal($lowestBid)) }}</p> --}}
-                        <p class="font-weight-light">£{{ new_roundBasedOnDecimal($quote->transporter_payment) ?? 'N/A' }}</p>
+                        <p class="">£{{ new_roundBasedOnDecimal($quote->transporter_payment) ?? 'N/A' }}</p>
                         @endif
 
                         <span>Posted {{ getTimeAgo($quote->created_at->toDateTimeString()) }}</span>

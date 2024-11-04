@@ -15,7 +15,7 @@
             padding: 8px 50px;
             display: inline-block;
         }
-
+       
         .banner.new_member {
             background: #52D017;
         }
@@ -115,15 +115,18 @@
             }
 
             .banner {
-                right: -45px;
-                top: 25px;
+                right: -50px;
+                top: 90px;
+                z-index: 4;
+                position: fixed;
             }
         }
 
         @media(max-width: 767px) {
             .banner {
                 right: -50px;
-                top: 18px;
+                top: 85px;
+                z-index: 4;
             }
 
             .wd-transport-img {
@@ -174,15 +177,22 @@
         <div id="page-content-wrapper">
             @include('layouts.transporter.dashboard.top_head')
             <!-- content part -->
+            @if ($completed_job >= 0 && $completed_job <= 10)
+                        <div class="banner new_member d-lg-none">New Member</div>
+                        @elseif($completed_job >= 11 && $completed_job <= 50)
+                            <div class="banner pro_member d-lg-none">Pro Member</div>
+                        @elseif($completed_job >= 51)
+                            <div class="banner vip_member d-lg-none">ViP Member</div>
+                        @endif
             <div class="content_container adjust_spacing">
                 <div class="inner_content set_banner_position">
                     <div class="wd-white-box">
                         @if ($completed_job >= 0 && $completed_job <= 10)
-                            <div class="banner new_member">New Member</div>
+                            <div class="banner new_member d-none d-lg-inline-block">New Member</div>
                         @elseif($completed_job >= 11 && $completed_job <= 50)
-                            <div class="banner pro_member">Pro Member</div>
+                            <div class="banner pro_member d-none d-lg-inline-block">Pro Member</div>
                         @elseif($completed_job >= 51)
-                            <div class="banner vip_member">ViP Member</div>
+                            <div class="banner vip_member d-none d-lg-inline-block">ViP Member</div>
                         @endif
                         <div class="wd-feedback-box border-0 rounded-0 p-0">
                             <div class="row wd-pb pb-3 pb-md-5 mx-0">
