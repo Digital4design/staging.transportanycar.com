@@ -109,7 +109,7 @@ Route::middleware('auth:admin')->group(function () {
 
 Route::get('/send-email', [EmailController::class, 'sendTestEmail']);
 Route::post('/send-otp',[App\Http\Controllers\Front\QuotesController::class,'sendOtp'])->name('sendOtp');
-Route::post('/verify-otp',[App\Http\Controllers\front\QuotesController::class,'verifyOtp'])->name('verifyOtp');
+Route::post('/verify-otp',[App\Http\Controllers\Front\QuotesController::class,'verifyOtp'])->name('verifyOtp');
 
 
 Route::get("/new/template/check",function(){
