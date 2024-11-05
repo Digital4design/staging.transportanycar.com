@@ -14,6 +14,7 @@
         }
         select.form-control {
             padding: 9px 20px!important;
+            height:44px!important;
         }
 
         .wd-cstm-check .form-group span {
