@@ -75,7 +75,7 @@ $auth_user = Auth::user();
             </div>
         </div>
     </div>
-    <div class="chat_conversation_body scrollbar chat_div" id="style-1">
+    {{-- <div class="chat_conversation_body scrollbar chat_div" id="style-1">
         @if (isset($messages) && $messages->count() > 0)
             @foreach ($messages as $date => $message_date)
                 @foreach ($message_date as $message)
@@ -127,7 +127,62 @@ $auth_user = Auth::user();
                 @endforeach
             @endforeach
         @endif
+    </div> --}}
+    <div class="chat_conversation_body scrollbar chat_div" id="style-1">
+        @if (isset($messages) && $messages->count() > 0)
+            <?php $previousSenderId = null; ?>
+            @foreach ($messages as $date => $message_date)
+                @foreach ($message_date as $message)
+                    <?php $sender_user = $message->sender; ?>
+                    @if ($previousSenderId !== $message->sender_id)
+                        @if ($previousSenderId !== null)
+                            </div>
+                            </div> 
+                            </div> 
+                        @endif
+                        @if ($thread->friend_id != $message->sender_id)
+                           
+                            <div class="chat_messages_incoming">
+                                <div class="chat_conversation_bx">
+                                    <div class="chat_txt_bx">
+                                        <h4>{{ $user->username }}</h4>
+                        @else
+                           
+                            <div class="chat_messages_outgoing">
+                                <div class="chat_conversation_bx">
+                                    <div class="chat_out_txt_bx">
+                                        <h4>You</h4>
+                        @endif
+    
+                        <?php $previousSenderId = $message->sender_id; ?>
+                    @endif
+    
+                    
+                    <div class="{{ $thread->friend_id != $message->sender_id ? 'chat_incoming_txt' : 'chat_outgoing_txt' }}">
+                        <p>{!! nl2br(e($message->message)) !!}</p>
+                        <span class="chat_time">
+                            @if (carbon\carbon::parse($message->created_at)->diffInHours() < 24)
+                                {{ carbon\carbon::parse($message->created_at)->format('h:i A') }}
+                            @else
+                                {{ carbon\carbon::parse($message->created_at)->diffForHumans() }}
+                            @endif
+                        </span>
+                    </div>
+    
+                   
+                    @if ($loop->last)
+                        </div> 
+                        </div> 
+                        </div> 
+                    @endif
+                @endforeach
+            @endforeach
+        @endif
     </div>
+    
+    
+    
+    
     <div class="chat_conversation_footer">
         <form id="chat__form" action="{{ route('transporter.message.store', $thread->user_quote_id) }}" method="post"
             enctype='multipart/form-data'>
