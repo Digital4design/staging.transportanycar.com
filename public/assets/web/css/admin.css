@@ -7266,6 +7266,13 @@ button.swal2-confirm.swal2-styled:focus {
   overflow: initial;
 }
 
+.top_menu .list-group,
+.top_menu {
+  height: 85%;
+}
+.top_menu .list-group {
+  overflow: auto;
+}
 
 
 
