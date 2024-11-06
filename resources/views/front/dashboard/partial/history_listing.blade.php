@@ -202,7 +202,7 @@ $auth_user = Auth::user();
                     @if ($thread->friend_id != $message->sender_id)
                         <!-- Outgoing message -->
                         @if ($previousSender !== $message->sender_id)
-                            <div class="chat_messages_outgoing">
+                            <div class="chat_messages_outgoing mb-0">
                                 <div class="chat_conversation_bx">
                                     <div class="chat_out_txt_bx">
                                         <h4>You</h4> <!-- Sender name only displayed once -->
@@ -277,7 +277,7 @@ $auth_user = Auth::user();
         </p>
     </div>
 @endif
-<div class="chat_messages_outgoing d-none" id="send_message_main">
+<div class="chat_messages_outgoing d-none mb-0" id="send_message_main">
     <div class="chat_conversation_bx message-data">
         <div class="chat_out_txt_bx">
             <h4>You</h4>
@@ -532,9 +532,9 @@ $auth_user = Auth::user();
                         // Check if the sender is the same as the last message sender
                         if (lastMessageSender == data.sender_id) {
                             message_clone.find("h4").remove(); // Remove the sender's name if the sender is the same
-                            alert("hello");
+                            // alert("hello");
                         } else {
-                            alert("out");
+                            // alert("out");
                             message_clone.find("h4").text('You'); // Add sender name if it's a different sender
                             lastMessageSender = data.sender_id; // Update the last sender
                             $("#last_message_sender").val(data.sender_id);

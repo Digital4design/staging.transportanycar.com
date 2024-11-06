@@ -8,7 +8,7 @@
     <section class="wd-active-job new_message_section">
         <div class="container-job">
             <div class="active-job-box">
-                <div class="chat_title_bx new_message_title">
+                <div class="chat_title_bx">
                     <h5>{{$title}}</h5>
                     <form method="get" id="search_form" action="">
                         @csrf
