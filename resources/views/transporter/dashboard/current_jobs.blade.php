@@ -126,7 +126,10 @@
         }
 
         .admin_job_bx .tab-content .deshbord-job-listing .list_img img {
-            width: 100%;
+            width: 100px;
+            height: 67px;
+            object-fit: cover;
+            object-position: center;
         }
 
         .my_job_pagination .pagination a.page-link {

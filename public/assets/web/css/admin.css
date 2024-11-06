@@ -1893,17 +1893,20 @@ text.highcharts-credits {
   background: #FFFFFF;
   box-shadow: 0px 13px 35px rgba(0, 0, 0, 0.11);
   display: flex;
+  flex-wrap:wrap;
   height: 100%;
   border-radius: 9px;
   border: 1px solid #DBDBDB;
 }
 
 .chat_list {
-  max-width: 381px;
-  width: 100%;
+  /* max-width: 381px;
+  width: 100%; */
   height: 100%;
-
+  width: 381px !important;
+  max-width: 100%;
 }
+.chat_box .chat_list .chat_list_body {width: 100%;}
 
 .chat_header {
   width: 100%;
@@ -2103,6 +2106,7 @@ span.chat_count {
   display: block;
   margin: 0 auto;
   text-align: center;
+  max-width: calc(100% - 381px);
 }
 
 .chat_conversation_header {
@@ -6244,9 +6248,15 @@ div#spam-banner button.btn {
 @media (min-width:768px) {
   .chat_list {
       display: flex!important;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      /* width: 381px !important;
+      max-width: 100%; */
   }
 }
 @media (max-width: 767px) {
+ 
   .side_dropdown .list-group-item[aria-expanded="true"] ~ div:before {
     left: 20px;
   }
@@ -7784,6 +7794,12 @@ g.highcharts-input-group {
 
 
 @media(max-width: 1199px) {
+  .chat_list {
+    width: 281px!important;
+  }
+  .chat_conversation {
+    max-width: calc(100% - 281px);
+  }
   .active_job_mobile .job-listing .bidding_new_design .bidding_new_design_grid {
     padding-right: 15px;
   }
@@ -7820,6 +7836,14 @@ g.highcharts-input-group {
 
 }
 
+@media(max-width: 767px) {
+  .chat_conversation {
+    max-width: 100%;
+  }
+  .chat_list {
+    width: 100% !important;
+  }
+}
 @media(max-width: 580px) {
   .notifaction_sec .dropdown-menu {
     max-width: 100%;
