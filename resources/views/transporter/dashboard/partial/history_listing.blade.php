@@ -75,6 +75,7 @@ $auth_user = Auth::user();
             </div>
         </div>
     </div>
+    {{-- old code --}}
     {{-- <div class="chat_conversation_body scrollbar chat_div" id="style-1">
         @if (isset($messages) && $messages->count() > 0)
             @foreach ($messages as $date => $message_date)
@@ -107,7 +108,7 @@ $auth_user = Auth::user();
                         <div class="chat_messages_outgoing">
                             <div class="chat_conversation_bx">
                                 <div class="chat_out_txt_bx">
-                                    <h4>You</h4>
+                                    <h4>You Hello</h4>
                                     <div class="chat_outgoing_txt">
                                         <!-- <p>{{ $message->message }}</p> -->
                                         <p>{!! nl2br(e($message->message)) !!}</p>
@@ -128,61 +129,75 @@ $auth_user = Auth::user();
             @endforeach
         @endif
     </div> --}}
+    {{--new code working fine --}}
     <div class="chat_conversation_body scrollbar chat_div" id="style-1">
         @if (isset($messages) && $messages->count() > 0)
-            <?php $previousSenderId = null; ?>
+            @php
+                $previousSender = null; // Variable to keep track of the last message sender
+            @endphp
             @foreach ($messages as $date => $message_date)
                 @foreach ($message_date as $message)
-                    <?php $sender_user = $message->sender; ?>
-                    @if ($previousSenderId !== $message->sender_id)
-                        @if ($previousSenderId !== null)
-                            </div>
-                            </div> 
-                            </div> 
-                        @endif
-                        @if ($thread->friend_id != $message->sender_id)
-                           
+                    @php
+                        $sender_user = $message->sender;
+                    @endphp
+                    
+                    @if ($thread->friend_id != $message->sender_id)
+                        <!-- incoming messages -->
+                        @if ($previousSender !== $message->sender_id)
                             <div class="chat_messages_incoming">
                                 <div class="chat_conversation_bx">
                                     <div class="chat_txt_bx">
-                                        <h4>{{ $user->username }}</h4>
-                        @else
-                           
+                                        <h4>{{ $user->username }}</h4> <!-- Display only once for consecutive messages -->
+                        @endif
+                                        <div class="chat_incoming_txt">
+                                            <p>{{ $message->message }}</p>
+                                            <span class="chat_time">
+                                                @if (carbon\carbon::parse($message->created_at)->diffInHours() < 24)
+                                                    {{ carbon\carbon::parse($message->created_at)->format('h:i A') }}
+                                                @else
+                                                    {{ carbon\carbon::parse($message->created_at)->diffForHumans() }}
+                                                @endif
+                                            </span>
+                                        </div>
+                        @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id)
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @else
+                        <!-- outgoing messages -->
+                        @if ($previousSender !== $message->sender_id)
                             <div class="chat_messages_outgoing">
                                 <div class="chat_conversation_bx">
                                     <div class="chat_out_txt_bx">
-                                        <h4>You</h4>
+                                        <h4>You</h4> <!-- Display only once for consecutive messages -->
                         @endif
-    
-                        <?php $previousSenderId = $message->sender_id; ?>
+                                        <div class="chat_outgoing_txt">
+                                            <p>{!! nl2br(e($message->message)) !!}</p>
+                                            <span class="chat_time">
+                                                @if (carbon\carbon::parse($message->created_at)->diffInHours() < 24)
+                                                    {{ carbon\carbon::parse($message->created_at)->format('h:i A') }}
+                                                @else
+                                                    {{ carbon\carbon::parse($message->created_at)->diffForHumans() }}
+                                                @endif
+                                            </span>
+                                        </div>
+                        @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id)
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     @endif
-    
-                    
-                    <div class="{{ $thread->friend_id != $message->sender_id ? 'chat_incoming_txt' : 'chat_outgoing_txt' }}">
-                        <p>{!! nl2br(e($message->message)) !!}</p>
-                        <span class="chat_time">
-                            @if (carbon\carbon::parse($message->created_at)->diffInHours() < 24)
-                                {{ carbon\carbon::parse($message->created_at)->format('h:i A') }}
-                            @else
-                                {{ carbon\carbon::parse($message->created_at)->diffForHumans() }}
-                            @endif
-                        </span>
-                    </div>
-    
-                   
-                    @if ($loop->last)
-                        </div> 
-                        </div> 
-                        </div> 
-                    @endif
+                    @php
+                        $previousSender = $message->sender_id; // Update the previous sender tracker
+                    @endphp
                 @endforeach
             @endforeach
+            <input type="hidden" id="last_message_sender" value="{{ $previousSender }}">
         @endif
     </div>
     
-    
-    
-    
+
     <div class="chat_conversation_footer">
         <form id="chat__form" action="{{ route('transporter.message.store', $thread->user_quote_id) }}" method="post"
             enctype='multipart/form-data'>
@@ -295,111 +310,235 @@ $auth_user = Auth::user();
             }
             //}
         });
+        // old code
+        // $('#chat__form').on('submit', function(e) {
+        //     e.preventDefault();
+        //     var chat_id = $('#trans_current_chat_id').val();
+        //     var file_name = $("#image-upload1").val();
+        //     var message = $('.textarea').val();
+        //     var contains_email = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i.test(message);
+        //     var contains_digit = /\d/.test(message);
+        //     if (!message.trim()) {
+        //         toastr.error("Message cannot be empty.");
+        //         return;
+        //     }
+        //     if (contains_email || contains_digit) {
+        //         toastr.error("Do not share contact information or you will be banned.")
+        //         return;
+        //     }
+        //     var send_message = false;
+        //     if (file_name != "") {
+        //         send_message = true;
+        //     }
+        //     if (!isEmptyOrSpaces(message)) {
+        //         send_message = true;
+        //     }
+        //     if (send_message == true) {
+        //         $("#send_message").prop("disabled", "true");
+        //         //$("#send_message").text("Please Wait...");
+
+        //         var file_type = $('#file_type').val();
+        //         $('.textarea').val('');
+
+        //         $.ajaxSetup({
+        //             headers: {
+        //                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        //             }
+        //         });
+        //         var timezone = moment.tz.guess();
+        //         var data = new FormData(this);
+        //         data.append('message', message);
+        //         data.append('file_type', file_type);
+        //         data.append('current_chat_id', chat_id)
+        //         data.append('timezone', timezone);
+
+        //         $.ajax({
+        //             url: $(this).attr('action'),
+        //             method: "POST",
+        //             data: data,
+        //             //data:{message_text:message},
+        //             dataType: 'json',
+        //             contentType: false,
+        //             cache: false,
+        //             processData: false,
+        //         }).done(function(response) {
+        //             $("#image-upload1").val("");
+        //             $("#image_previe_main").addClass("d-none");
+        //             $("#audio_preview").addClass("d-none");
+        //             $("#video_preview").addClass("d-none");
+
+        //             $("#send_message").prop("disabled", false);
+        //             // $("#send_message").text("Send");
+        //             if (response.status == "success") {
+        //                 var data = response.data;
+        //                 var message_clone = $("#send_message_main").clone();
+        //                 message_clone.removeClass("d-none");
+        //                 message_clone.find(".message-data-time").html(data.create_message);
+        //                 if (data.type == "file") {
+        //                     if (data.file_type == "audio") {
+        //                         message_clone.find('.message').html(
+        //                             '<div><audio controls><source src="' + data.file +
+        //                             '" type="audio/mpeg"></audio></div></div>')
+        //                     } else if (data.file_type == "video") {
+        //                         message_clone.find('.message').html(
+        //                             '<div><video width="250" controls><source src="' + data
+        //                             .file + '" type="video/mp4"></video></div></div>')
+        //                     } else {
+        //                         message_clone.find('.message').html(
+        //                             '<div><img width="200px;" src="' + data.file +
+        //                             '" alt="avatar"><div></div></div>')
+        //                     }
+        //                 } else {
+        //                     var createdAt = data.created_at;
+        //                     var parsedCreatedAt = new Date(createdAt);
+        //                     var formattedCreatedAt = moment(parsedCreatedAt).fromNow();
+        //                     // Convert newline characters to <br> tags for the message
+        //                     var formattedMessage = data.message.replace(/\r\n|\n/g, '<br>');
+        //                     message_clone.find('.message').html('<p>' + formattedMessage +
+        //                         '</p><span class="chat_time">' + formattedCreatedAt +
+        //                         '</span>')
+        //                 }
+        //                 $('.chat_div').append(message_clone);
+        //             }
+        //             scrollToBottom();
+        //             $(".kt-avatar__cancel").click();
+        //         }).fail(function(xhr) {
+        //             if (xhr.status === 422) {
+        //                 var errors = xhr.responseJSON.errors;
+        //                 if (errors.message) {
+        //                     toastr.error(
+        //                         "Do not share contact information or you will be banned.");
+        //                 }
+        //             }
+        //             $("#send_message").prop("disabled",
+        //             false); // Re-enable the button in case of error
+        //         });
+        //     }
+
+        // });
+
+        //new code
+        console.log("///", $('#last_message_sender').val());
         $('#chat__form').on('submit', function(e) {
             e.preventDefault();
+                
             var chat_id = $('#trans_current_chat_id').val();
             var file_name = $("#image-upload1").val();
             var message = $('.textarea').val();
             var contains_email = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i.test(message);
             var contains_digit = /\d/.test(message);
+                
+            // Validation checks
             if (!message.trim()) {
                 toastr.error("Message cannot be empty.");
                 return;
             }
             if (contains_email || contains_digit) {
-                toastr.error("Do not share contact information or you will be banned.")
+                toastr.error("Do not share contact information or you will be banned.");
                 return;
             }
+        
             var send_message = false;
-            if (file_name != "") {
+            if (file_name !== "") {
                 send_message = true;
             }
-            if (!isEmptyOrSpaces(message)) {
+            if (message.trim() !== "") {
                 send_message = true;
             }
-            if (send_message == true) {
-                $("#send_message").prop("disabled", "true");
-                //$("#send_message").text("Please Wait...");
-
+        
+            // Proceed only if message or file is set to send
+            if (send_message) {
+                $("#send_message").prop("disabled", true);
+            
                 var file_type = $('#file_type').val();
-                $('.textarea').val('');
-
+                var lastMessageSender = $('#last_message_sender').val(); // Store the last sender
+                console.log("///",$('.chat_conversation_body .chat_messages_outgoing').last().data('sender-id'));
+                $('.textarea').val(''); // Clear the textarea after fetching message
+            
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('input[name="_token"]').val()
                     }
                 });
+            
                 var timezone = moment.tz.guess();
                 var data = new FormData(this);
                 data.append('message', message);
                 data.append('file_type', file_type);
-                data.append('current_chat_id', chat_id)
+                data.append('current_chat_id', chat_id);
                 data.append('timezone', timezone);
-
+            
                 $.ajax({
                     url: $(this).attr('action'),
                     method: "POST",
                     data: data,
-                    //data:{message_text:message},
                     dataType: 'json',
                     contentType: false,
                     cache: false,
                     processData: false,
                 }).done(function(response) {
                     $("#image-upload1").val("");
-                    $("#image_previe_main").addClass("d-none");
-                    $("#audio_preview").addClass("d-none");
-                    $("#video_preview").addClass("d-none");
-
+                    $("#image_previe_main, #audio_preview, #video_preview").addClass("d-none");
                     $("#send_message").prop("disabled", false);
-                    // $("#send_message").text("Send");
-                    if (response.status == "success") {
+                
+                    if (response.status === "success") {
                         var data = response.data;
                         var message_clone = $("#send_message_main").clone();
                         message_clone.removeClass("d-none");
-                        message_clone.find(".message-data-time").html(data.create_message);
-                        if (data.type == "file") {
-                            if (data.file_type == "audio") {
+                    
+                        console.log(response.data.sender_id);
+                    
+                        // Check if the sender is the same as the last message sender
+                        if (lastMessageSender == data.sender_id) {
+                            message_clone.find("h4").remove(); // Remove the sender's name if the sender is the same
+                            alert("hello");
+                        } else {
+                            alert("out");
+                            message_clone.find("h4").text('You'); // Add sender name if it's a different sender
+                            lastMessageSender = data.sender_id; // Update the last sender
+                            $("#last_message_sender").val(data.sender_id);
+                        }
+                    
+                        message_clone.find(".message-data-time").text(data.create_message);
+                    
+                        if (data.type === "file") {
+                            if (data.file_type === "audio") {
                                 message_clone.find('.message').html(
-                                    '<div><audio controls><source src="' + data.file +
-                                    '" type="audio/mpeg"></audio></div></div>')
-                            } else if (data.file_type == "video") {
+                                    '<div><audio controls><source src="' + data.file + '" type="audio/mpeg"></audio></div>'
+                                );
+                            } else if (data.file_type === "video") {
                                 message_clone.find('.message').html(
-                                    '<div><video width="250" controls><source src="' + data
-                                    .file + '" type="video/mp4"></video></div></div>')
+                                    '<div><video width="250" controls><source src="' + data.file + '" type="video/mp4"></video></div>'
+                                );
                             } else {
                                 message_clone.find('.message').html(
-                                    '<div><img width="200px;" src="' + data.file +
-                                    '" alt="avatar"><div></div></div>')
+                                    '<div><img width="200px;" src="' + data.file + '" alt="avatar"></div>'
+                                );
                             }
                         } else {
                             var createdAt = data.created_at;
                             var parsedCreatedAt = new Date(createdAt);
                             var formattedCreatedAt = moment(parsedCreatedAt).fromNow();
-                            // Convert newline characters to <br> tags for the message
                             var formattedMessage = data.message.replace(/\r\n|\n/g, '<br>');
-                            message_clone.find('.message').html('<p>' + formattedMessage +
-                                '</p><span class="chat_time">' + formattedCreatedAt +
-                                '</span>')
+                            message_clone.find('.message').html('<p>' + formattedMessage + '</p><span class="chat_time">' + formattedCreatedAt + '</span>');
                         }
+                    
                         $('.chat_div').append(message_clone);
+                        scrollToBottom();
+                        $(".kt-avatar__cancel").click();
                     }
-                    scrollToBottom();
-                    $(".kt-avatar__cancel").click();
                 }).fail(function(xhr) {
                     if (xhr.status === 422) {
                         var errors = xhr.responseJSON.errors;
                         if (errors.message) {
-                            toastr.error(
-                                "Do not share contact information or you will be banned.");
+                            toastr.error("Do not share contact information or you will be banned.");
                         }
                     }
-                    $("#send_message").prop("disabled",
-                    false); // Re-enable the button in case of error
+                    $("#send_message").prop("disabled", false); // Re-enable the button in case of error
                 });
             }
-
         });
+
     });
 
     function removeFile() {
