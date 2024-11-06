@@ -7,7 +7,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\General\NotificationController;
 use Illuminate\Support\Facades\Mail;
 use App\Services\EmailService;
-use App\User;
+use App\ {User,Thread,UserQuote};
 use App\QuoteByTransporter;
 
 
@@ -113,14 +113,12 @@ Route::post('/verify-otp',[App\Http\Controllers\Front\QuotesController::class,'v
 
 
 Route::get("/new/template/check",function(){
-           $maildata['transporter_name'] = "Ravi";
-           $maildata['transaction_id'] = "23";
-           $maildata['name'] = "kartik";
-            $maildata['model'] = "BMW";
-            $maildata['price'] ="200";
-            $maildata['url'] = "https://localhost";
-          $maildata['quotation'] = QuoteByTransporter::where('id',"1805")->first();
-        $maildata['transporter_info'] = User::where('id',"1104")->first();
-        $maildata['booking_ref'] = "null";
-    return view('mail.General.quote-accepted-booking-confirmation', ['data' => $maildata]);
+    $maildata['user'] = User::where('id',"1104")->first();
+    $maildata['thread'] = Thread::where('id', '1707')->first();
+    $maildata['message'] = "hello how are you ahfkadfkj sdfhsdfhsod shsi gsf gsiof iosf g";
+    $maildata['from_page'] = 'quotes_admin';
+    $maildata['quotes'] =  UserQuote::where('id', 717)->first();
+    $maildata['quote_id'] = 21;
+    $maildata['type'] = 'user';
+    return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' =>1707]);
 });

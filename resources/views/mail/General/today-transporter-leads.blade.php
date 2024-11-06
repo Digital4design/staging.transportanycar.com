@@ -40,8 +40,8 @@
             background: #52D017;
             color:#ffffff;
             text-decoration: none;
-            font-size: 12px;
-            line-height:16px;
+            font-size: 16px;
+            line-height: 20px;
             font-weight: 400;
             border: none;
             display: inline-block;

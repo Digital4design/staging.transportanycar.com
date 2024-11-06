@@ -79,15 +79,15 @@
             margin: 0;
             font-weight: 300;
             font-family: "Outfit", sans-serif;
-            font-size: 10px;
-            line-height: 13px;
+            font-size: 16px;
+            line-height: 18px;
         }
 
         p {
             font-weight: 300;
             font-family: "Outfit", sans-serif;
-            font-size: 10px;
-            line-height: 13px;
+            font-size: 16px;
+            line-height: 18px;
         }
 
         h1,
@@ -115,8 +115,8 @@
             background: #52D017;
             color: #ffffff;
             text-decoration: none;
-            font-size: 12px;
-            line-height: 16px;
+            font-size: 16px;
+            line-height: 20px;
             font-weight: 400;
             border: none;
             display: inline-block;
@@ -144,16 +144,16 @@
         }
 
         .message-wrap .message-title {
-            font-size: 12px;
-            line-height: 16px;
+            font-size: 20px;
+            line-height: 24px;
             font-weight: 500;
             margin-bottom: 10px;
             text-align: left;
         }
 
         .message-wrap .message {
-            font-size: 10px;
-            line-height: 13px;
+            font-size: 16px;
+            line-height: 20px;
             font-weight: 300;
             color: #000000;
             margin-bottom: 15px;
