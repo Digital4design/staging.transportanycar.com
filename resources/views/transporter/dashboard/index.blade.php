@@ -156,7 +156,10 @@
             width: 100px;
         }
         .tabs_bx .tab-content ul .deshbord-job-listing li .list_img img{
-            width: 100%;
+            width: 100px;
+            height: 67px;
+            object-fit: cover;
+            object-position: center;
         }
         .tabs_bx .tab-content ul .deshbord-job-listing li .list_img span {
             display: block;
