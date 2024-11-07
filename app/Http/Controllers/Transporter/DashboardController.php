@@ -285,8 +285,6 @@ class DashboardController extends WebController
         if ($rating_average !== null) {
             $percentage = ($rating_average / 5) * 100;
             // echo "Average rating percentage: $percentage%";
-        } else {
-            echo "No valid ratings found.";
         }
         // return $percentage;
 

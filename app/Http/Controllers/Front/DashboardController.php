@@ -268,8 +268,6 @@ class DashboardController extends WebController
         if ($rating_average !== null) {
             $percentage = ($rating_average / 5) * 100;
           
-        } else {
-            echo "No valid ratings found.";
         }
        
         $company_details = CompanyDetail::where('user_id', $transporter_id)->first();
