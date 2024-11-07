@@ -83,11 +83,11 @@
             font-weight: 300;
             font-family: "Outfit", sans-serif;
             font-size: 16px;
-            line-height: 18px;
+            line-height: 22px;
         }
 
         .contain {
-            max-width: 300px;
+            max-width: 600px;
             width: 100%;
             margin: auto;
             /* text-align: center; */

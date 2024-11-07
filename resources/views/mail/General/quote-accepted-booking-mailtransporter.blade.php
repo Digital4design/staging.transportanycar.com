@@ -27,7 +27,7 @@
             width: 100%;
             margin: auto;
             text-align: center;
-            padding: 35px;
+            /* padding: 35px; */
             box-sizing: border-box;
         }
 

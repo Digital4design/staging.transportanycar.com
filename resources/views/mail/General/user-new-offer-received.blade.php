@@ -78,14 +78,14 @@
             font-weight: 300;
             font-family: "Outfit", sans-serif;
             font-size: 16px;
-            line-height: 18px;
+            line-height: 22px;
         }
 
         p {
             font-weight: 300;
             font-family: "Outfit", sans-serif;
             font-size: 16px;
-            line-height: 18px;
+            line-height: 22px;
         }
 
         h1,
@@ -95,7 +95,7 @@
         }
 
         .contain {
-            max-width: 300px;
+            max-width: 600px;
             width: 100%;
             margin: auto;
             text-align: center;
@@ -329,7 +329,7 @@
     <p class="adjust-space">Note: The quote shown is the total amount.  If you are happy with the quote then simply accept and secure your booking.</p>
     <p class="adjust-space">You may receive more quote from our network of transporters so keep on eye out and you can accept your preferred quote at any time.</p>
     <p>Best Regards,</p>
-    <p class="adjust-half-space">Transport Any Car Team</p>
+    <p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>
     <p class="adjust-half-space">Manage notification <a href="{{ url('transporter/manage_notification') }}"
             style="color:#0356D6; text-decoration: none;">preferences.</span></a>
     <p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>

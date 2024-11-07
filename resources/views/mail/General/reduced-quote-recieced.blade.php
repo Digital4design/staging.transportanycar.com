@@ -275,7 +275,7 @@
             width: 100%;
             margin: auto;
             text-align: center;
-            padding: 35px;
+            /* padding: 35px; */
             box-sizing: border-box;
         }
 
@@ -332,7 +332,7 @@
         <p>
             Best Regards,
         </p>
-        <p class="adjust-half-space">Transport Any Car Team</p>
+        <p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>
         <p class="adjust-half-space">Manage notification <a href="{{ url('front/manage_notification') }}" style="color:#0356D6; text-decoration: none;">preferences.</span></a>
         <p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     </div>
