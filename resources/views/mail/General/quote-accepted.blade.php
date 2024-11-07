@@ -662,7 +662,7 @@
     </div>
     <p>Best Regards,</p>
     <p class="adjust-half-space">Transport Any Car Team</p>
-    <p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+    <p style=" font-size: 12px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
 </div>
 </body>
 

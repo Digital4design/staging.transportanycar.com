@@ -332,7 +332,7 @@
     <p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>
     <p class="adjust-half-space">Manage notification <a href="{{ url('transporter/manage_notification') }}"
             style="color:#0356D6; text-decoration: none;">preferences.</span></a>
-    <p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+    <p style=" font-size: 12px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
 </div>
 
 

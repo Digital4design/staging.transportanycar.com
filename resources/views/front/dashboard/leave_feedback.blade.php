@@ -330,7 +330,7 @@
                                             </svg>
                                         </span>
                                       ({{$feedback_count}})
-                                        <!-- ({{ $transporter_feedback['overall_percentage'] }}%) -->
+                                        {{-- <!-- ({{ $transporter_feedback['overall_percentage'] }}%) --> --}}
                                         {{-- ({{ 100 }}%) --}}
                                     </div>
                                     <a href="javascript:;" class="verified_btns">

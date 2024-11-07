@@ -10,6 +10,7 @@ use App\QuotationDetail;
 use App\Thread;
 use App\User;
 use App\UserQuote;
+use App\CompanyDetail;
 use App\Notification;
 use App\TransactionHistory;
 use Carbon\Carbon;
@@ -239,53 +240,55 @@ class DashboardController extends WebController
     }
 
     private function get_transporter_feedback ($transporter_id) {
+        $user_data = user::find($transporter_id);
+        // dd($user_data);
         $my_quotes = QuoteByTransporter::where('user_id', $transporter_id)->pluck('id');
-        $user_data = User::where('id',$transporter_id)->first();
-        $month = Carbon::now()->month;
-        $six_month_start = Carbon::now()->subMonths(6)->startOfMonth();
-        $six_month_end = Carbon::now()->endOfMonth();
-        $currentYear = Carbon::now()->year;
-        $params = [
-            'user' => $user_data,
-            'feedback' => [],
-        ];
+        $quotes = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)->get();
+
+        $totalDistance = $quotes->sum(function ($transaction) {
+            if ($transaction->quote) {
+                $distanceString = $transaction->quote->distance;
+                $cleanedDistance = str_replace(['mi', ',', ' '], '', $distanceString);
+                return is_numeric($cleanedDistance) ? (float)$cleanedDistance : 0;
+            }
+            return 0;
+        });
+
+        $totalDistanceFormatted = number_format($totalDistance);
+        $completedCount = $quotes->filter(function ($transaction) {
+            return $transaction->quote && $transaction->quote->status == 'completed';
+        })->count();
+
+        $total_earning = $quotes->sum('amount');
+       
         $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
-            ->selectRaw('(AVG(communication) + AVG(punctuality) + AVG(care_of_good) + AVG(professionalism)) / 4 as overall_avg')
-            ->first();
-        $overall_percentage = 100;
-        $overall_percentage += ($rating_average->overall_avg / 5) * 100;
-
-        $positive_feedback_count = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->where('type', 'positive')->count();
-        $total_feedback_count = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->count();
-        $positive_feedback_percentage = ($total_feedback_count > 0) ? ($positive_feedback_count / $total_feedback_count) * 100 : 100;
-
-        $feedbackTypes = ['positive', 'neutral', 'negative'];
-        foreach ($feedbackTypes as $type) {
-            // Monthly count
-            $params["monthly_{$type}_feedback"] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
-                ->where('type', $type)
-                ->whereYear('created_at', $currentYear)
-                ->whereMonth('created_at', $month)
-                ->count();
-
-            // Six-monthly count
-            $params["six_monthly_{$type}_feedback"] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
-                ->where('type', $type)
-                ->whereBetween('created_at', [$six_month_start, $six_month_end])
-                ->count();
-
-            // Yearly count
-            $params["yearly_{$type}_feedback"] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
-                ->where('type', $type)
-                ->whereYear('created_at', $currentYear)
-                ->count();
+        ->whereNotNull('rating')
+        ->avg('rating');
+           
+        if ($rating_average !== null) {
+            $percentage = ($rating_average / 5) * 100;
+          
+        } else {
+            echo "No valid ratings found.";
         }
+       
+        $company_details = CompanyDetail::where('user_id', $transporter_id)->first();
 
         $params['user'] = $user_data;
         $params['feedback'] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->with('quote_by_transporter.quote')->get();
-        $params['completed_job'] = UserQuote::whereIn('id', $my_quotes)->where('status', 'completed')->count();
-        $params['overall_percentage'] = $overall_percentage;
-        $params['positive_feedback_percentage'] = $positive_feedback_percentage;
+        $params['completed_job'] =  $completedCount;
+        $params['distance'] = $totalDistanceFormatted;
+        $params['total_earning'] = $total_earning;
+        $params['company_details'] = $company_details;
+        $params['rating_percentage'] = $percentage;
+
+
+        $customRequest = new Request([
+            'type' => 'feedback'
+        ]);
+
+        // Call notificationStatus with the custom request
+        $this->notificationStatus($customRequest);
         return $params;
     }
 

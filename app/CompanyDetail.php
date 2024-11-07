@@ -20,7 +20,7 @@ class CompanyDetail extends Model
         'no_of_tow_trucks',
         'no_of_drivers',
     ];
-
+    
     // Optional: Define the relationship to the User model
     public function user()
     {

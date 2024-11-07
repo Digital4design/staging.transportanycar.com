@@ -35,7 +35,7 @@
 
 <!-- Bootstrap JS & Jquery -->
 <script src="{{asset('assets/web/vendors/jquery/jquery.min.js')}}"></script>
-<script src="{{asset('assets/web/vendors/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/web/vendors/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('assets/admin/vendors/general/toastr/build/toastr.min.js')}}"></script>
 <script src="{{asset('/assets/admin/vendors/general/validate/jquery.validate.min.js')}}"></script>
 <script>

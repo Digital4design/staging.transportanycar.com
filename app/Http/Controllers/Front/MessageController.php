@@ -117,7 +117,7 @@ class MessageController extends WebController
             }
             $maildata['quotes'] = $userQuote;
             $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
-            $this->emailService->sendEmail($email_to, $htmlContent, 'You have a new message');
+            $this->emailService->sendEmail($email_to, $htmlContent, 'You Have a Message from '.$auth_user->username.' Regarding '.$userQuote->vehicle_make.' '.$userQuote->vehicle_model.'Delivery.');
 
             // Call create_notification to notify the user
             create_notification(

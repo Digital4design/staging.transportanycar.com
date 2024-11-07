@@ -7281,9 +7281,11 @@ button.swal2-confirm.swal2-styled:focus {
   overflow: initial;
 }
 
-.top_menu .list-group,
+.top_menu .list-group {
+  height: 100%;
+}
 .top_menu {
-  height: 85%;
+  height: calc(100% - 55px);
 }
 .top_menu .list-group {
   overflow: auto;
@@ -7923,7 +7925,7 @@ g.highcharts-input-group {
   .new_message_section .chat_box .scrollbar,
   .msg_active_container .chat_box .scrollbar {
     height: auto;
-    max-height: calc(100vh - 250px);
+    max-height: calc(100vh - 280px);
   }
 
   .chat_head_lft {

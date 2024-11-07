@@ -29,7 +29,7 @@
 <!-- Bootstrap JS & Jquery -->
 <script src="{{asset('assets/web/vendors/jquery/jquery.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.js"></script>
-<script src="{{asset('assets/web/vendors/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/web/vendors/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('assets/admin/vendors/general/toastr/build/toastr.min.js')}}"></script>
 <!-- <script src="{{asset('assets/web/js/admin.js')}}"></script> -->
 <script>

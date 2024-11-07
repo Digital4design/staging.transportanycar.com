@@ -257,7 +257,7 @@ class DashboardController extends WebController
     }
 
     public function feedback()
-    {
+    { 
         $user_data = Auth::guard('transporter')->user();
         $my_quotes = QuoteByTransporter::where('user_id', $user_data->id)->pluck('id');
         $quotes = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)->get();
@@ -270,31 +270,35 @@ class DashboardController extends WebController
             }
             return 0;
         });
-
-
         $totalDistanceFormatted = number_format($totalDistance);
-        // return $totalDistanceFormatted;
         $completedCount = $quotes->filter(function ($transaction) {
             return $transaction->quote && $transaction->quote->status == 'completed';
+
         })->count();
 
-        //     $totalAmount = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)
-        // ->sum('amount');
         $total_earning = $quotes->sum('amount');
-        // return$quotes;
-        $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
-            ->selectRaw('(AVG(communication) + AVG(punctuality) + AVG(care_of_good) + AVG(professionalism)) / 4 as overall_avg')
-            ->first();
-        $quote_ids = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
-            ->with('quote_by_transporter.quote')
-            ->get()
-            ->pluck('quote_by_transporter.quote.id');
+            $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+            ->whereNotNull('rating')
+            ->avg('rating');
+            // return $rating_average;
+        
+        if ($rating_average !== null) {
+            $percentage = ($rating_average / 5) * 100;
+            // echo "Average rating percentage: $percentage%";
+        } else {
+            echo "No valid ratings found.";
+        }
+        // return $percentage;
+
+        $company_details = CompanyDetail::where('user_id', $user_data->id)->first();
 
         $params['user'] = $user_data;
         $params['feedback'] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->with('quote_by_transporter.quote')->get();
         $params['completed_job'] =  $completedCount;
         $params['distance'] = $totalDistanceFormatted;
         $params['total_earning'] = $total_earning;
+        $params['company_details'] = $company_details;
+        $params['rating_percentage'] = $percentage;
 
         $customRequest = new Request([
             'type' => 'feedback'
