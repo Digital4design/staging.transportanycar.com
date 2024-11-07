@@ -264,7 +264,7 @@ class DashboardController extends WebController
         $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
         ->whereNotNull('rating')
         ->avg('rating');
-           
+        $percentage = 0;
         if ($rating_average !== null) {
             $percentage = ($rating_average / 5) * 100;
           
