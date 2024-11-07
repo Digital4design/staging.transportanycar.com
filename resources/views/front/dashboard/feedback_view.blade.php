@@ -210,7 +210,7 @@ ul.pagination {
         }
     }
 </style>
-
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/globle.css') }}" />
 @section('content')
 {{-- <div id="page-content-wrapper"> --}}
 @include('layouts.web.dashboard.header')

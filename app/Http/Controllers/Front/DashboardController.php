@@ -232,10 +232,21 @@ class DashboardController extends WebController
     public function feedback_listing($transporter_id)
     {
         $my_quotes = QuoteByTransporter::where('user_id', $transporter_id)->pluck('id');
-        $feedbacks = Feedback::query();
-        $feedbacks = $feedbacks->whereIn('quote_by_transporter_id', $my_quotes);
-        $feedbacks = $feedbacks->paginate(6);
-        $params['html'] = view('front.dashboard.partial.feedback_listing', compact('feedbacks'))->render();
+        $all_feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->get();
+        $feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->paginate(10);
+        $total_feedbacks = $all_feedbacks->count();
+
+        $total_feedbacks = $feedbacks->count();
+
+
+        $ratings = collect([5, 4, 3, 2, 1])->mapWithKeys(function ($rating) use ($all_feedbacks, $total_feedbacks) {
+            $count = $all_feedbacks->where('rating', $rating)->count();
+            $percentage = $total_feedbacks > 0 ? ($count / $total_feedbacks) * 100 : 0;
+            return ['star_' . $rating  =>  $percentage];
+        });
+
+        $average_rating = $total_feedbacks > 0 ? round($all_feedbacks->avg('rating'), 1) : 0;
+        $params['html'] = view('front.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings','average_rating'))->render();
         return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $params]);
     }
 
