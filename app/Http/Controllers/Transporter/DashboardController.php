@@ -281,7 +281,7 @@ class DashboardController extends WebController
             ->whereNotNull('rating')
             ->avg('rating');
             // return $rating_average;
-        
+            $percentage = 0;
         if ($rating_average !== null) {
             $percentage = ($rating_average / 5) * 100;
             // echo "Average rating percentage: $percentage%";
