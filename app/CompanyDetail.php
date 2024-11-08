@@ -26,4 +26,9 @@ class CompanyDetail extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getGitInsuranceCoverFormattedAttribute()
+{
+    return '£' . number_format($this->git_insurance_cover);
+}
 }

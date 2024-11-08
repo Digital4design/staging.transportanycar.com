@@ -1113,15 +1113,13 @@
                                                 <div class="form-group">
                                                     <label for="" class="mb-1">GIT insurance cover</label>
                                                     <select class="form-control sticky-data" name="git_insurance_cover" id="git_insurance_cover">
-                                                        <option value="" disabled {{ old('git_insurance_cover', (string)optional($companyDetail)->git_insurance_cover) === '' ? 'selected' : '' }}>Select git insurance cover</option>
-                                                    
+                                                        <option value="" disabled {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '' ? 'selected' : '' }}>Select git insurance cover</option>
                                                         @foreach ([10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000] as $amount)
-                                                            <option value="{{ $amount }}" {{ old('git_insurance_cover', (string)optional($companyDetail)->git_insurance_cover) === (string)$amount ? 'selected' : '' }}>
+                                                            <option value="{{ number_format($amount) }}" {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == number_format($amount) ? 'selected' : '' }}>
                                                                 £{{ number_format($amount) }}
                                                             </option>
                                                         @endforeach
-                                                    
-                                                        <option value="1000000+" {{ old('git_insurance_cover', (string)optional($companyDetail)->git_insurance_cover) === '1000000+' ? 'selected' : '' }}>£1,000,000+</option>
+                                                        <option value="1,000,000+" {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '1,000,000+' ? 'selected' : '' }}>£1,000,000+</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">

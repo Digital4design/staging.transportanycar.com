@@ -1097,11 +1097,11 @@ class DashboardController extends WebController
     
             // Build the query to count quotes based on multiple criteria
             $quoteQuery = UserQuote::query()
-                ->join('users', 'users.id', '=', 'user_quotes.user_id')
-                ->leftJoin('quote_by_transpoters', function ($join) {
-                    $join->on('quote_by_transpoters.user_quote_id', '=', 'user_quotes.id')
-                        ->where('quote_by_transpoters.user_id', auth()->id());
-                })
+                // ->join('users', 'users.id', '=', 'user_quotes.user_id')
+                // ->leftJoin('quote_by_transpoters', function ($join) {
+                //     $join->on('quote_by_transpoters.user_quote_id', '=', 'user_quotes.id')
+                //         ->where('quote_by_transpoters.user_id', auth()->id());
+                // })
                 // ->whereNotIn('user_quotes.id', $my_quote_ids)
                 ->where(function ($query) {
                     $query->where('user_quotes.status', 'pending')
@@ -1130,12 +1130,7 @@ class DashboardController extends WebController
             return $search;
         });
         return view('transporter.savedSearch.index', ['savedSearches' => $data]);
-        // Return data as JSON with the correct counts for each search
-        // return response()->json([
-        //     'success' => true,
-        //     'message' => 'Data retrieved successfully',
-        //     'data' => $data,
-        // ]);
+      
     }
     
 
