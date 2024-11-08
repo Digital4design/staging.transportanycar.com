@@ -386,7 +386,7 @@ ul.pagination {
                                                         <li class="mt-0">
                                                             <p>Insurance cover:</p>
                                                             <span>
-                                                               {{$company_details->git_insurance_cover ?? ""}}
+                                                                £{{$company_details->git_insurance_cover ?? ""}}
                                                             </span>
                                                         </li>
                                                         <li>
