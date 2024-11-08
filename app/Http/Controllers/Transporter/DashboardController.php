@@ -1179,7 +1179,7 @@ class DashboardController extends WebController
         }
         $drop_off_latitude = null;
         $drop_off_longitude = null;
-        if ($request->search_drop_off_area && $request->search_drop_off_area != 'Anywhere') {
+        if ($request->dropoff && $request->dropoff != 'Anywhere') {
             $dropOffResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
                 'address' => $request->dropoff,
                 'key' => config('constants.google_map_key'),
