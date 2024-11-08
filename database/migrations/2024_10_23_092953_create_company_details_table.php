@@ -17,9 +17,9 @@ class CreateCompanyDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id'); // Assuming you want to link this to a user
             $table->string('git_insurance_cover')->nullable();
-            $table->integer('years_established')->nullable();
-            $table->integer('no_of_tow_trucks')->nullable();
-            $table->integer('no_of_drivers')->nullable();
+            $table->string('years_established')->nullable();
+            $table->string('no_of_tow_trucks')->nullable();
+            $table->string('no_of_drivers')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
