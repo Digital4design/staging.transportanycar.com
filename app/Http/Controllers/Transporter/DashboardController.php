@@ -1040,20 +1040,106 @@ class DashboardController extends WebController
             return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
         }
     }
-    public function saveSearchView()
+    // public function saveSearchView()
+    // {
+    //     $data = SaveSearch::where('user_id', auth()->user()->id)->paginate(50);
+    //     $data->getCollection()->transform(function ($search) {
+    //         $quote = UserQuote::where('pickup_postcode', "Like", "%" . $search->pick_area . "%");
+    //         if ($search->drop_area != "Anywhere" && $search->drop_area != null) {
+    //             $quote->where('drop_postcode', "like", "%" . $search->drop_area . "%");
+    //         }
+    //         $search->quote_count = $quote->count();
+    //         return $search;
+    //     });
+    //     // return $data;
+    //     return view('transporter.savedSearch.index', ['savedSearches' => $data]);
+    // }
+
+    public function saveSearchView(Request $request)
     {
+        // Retrieve paginated saved search data
         $data = SaveSearch::where('user_id', auth()->user()->id)->paginate(50);
+    
+        // Transform each search item to include a correct quote count
         $data->getCollection()->transform(function ($search) {
-            $quote = UserQuote::where('pickup_postcode', "Like", "%" . $search->pick_area . "%");
-            if ($search->drop_area != "Anywhere" && $search->drop_area != null) {
-                $quote->where('drop_postcode', "like", "%" . $search->drop_area . "%");
+            // Define coordinates and distance range
+            $maxDistance = config('constants.max_range_km');
+            $user_data = Auth::guard('transporter')->user();
+            $my_quote_ids = QuoteByTransporter::where('user_id', $user_data->id)->pluck('user_quote_id');
+    
+            // Fetch pickup coordinates
+            $pickUpResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+                'address' => $search->pick_area,
+                'key' => config('constants.google_map_key'),
+            ]);
+            $pickUpData = $pickUpResponse->json();
+            if ($pickUpData['status'] !== 'OK') {
+                $search->quote_count = 0; // Return zero if coordinates not found
+                return $search;
             }
-            $search->quote_count = $quote->count();
+            $pick_up_latitude = $pickUpData['results'][0]['geometry']['location']['lat'];
+            $pick_up_longitude = $pickUpData['results'][0]['geometry']['location']['lng'];
+    
+            // Fetch drop-off coordinates if specified
+            $drop_off_latitude = null;
+            $drop_off_longitude = null;
+            if (!empty($search->drop_area) && $search->drop_area !== 'Anywhere') {
+                $dropOffResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+                    'address' => $search->drop_area,
+                    'key' => config('constants.google_map_key'),
+                ]);
+                $dropOffData = $dropOffResponse->json();
+                if ($dropOffData['status'] === 'OK') {
+                    $drop_off_latitude = $dropOffData['results'][0]['geometry']['location']['lat'];
+                    $drop_off_longitude = $dropOffData['results'][0]['geometry']['location']['lng'];
+                }
+            }
+    
+            // Build the query to count quotes based on multiple criteria
+            $quoteQuery = UserQuote::query()
+                ->join('users', 'users.id', '=', 'user_quotes.user_id')
+                ->leftJoin('quote_by_transpoters', function ($join) {
+                    $join->on('quote_by_transpoters.user_quote_id', '=', 'user_quotes.id')
+                        ->where('quote_by_transpoters.user_id', auth()->id());
+                })
+                // ->whereNotIn('user_quotes.id', $my_quote_ids)
+                ->where(function ($query) {
+                    $query->where('user_quotes.status', 'pending')
+                        ->orWhere('user_quotes.status', 'approved');
+                })
+                ->whereDate('user_quotes.created_at', '>=', now()->subDays(10));
+    
+            // Apply distance calculations
+            if ($drop_off_latitude) {
+                $quoteQuery->select(
+                    \DB::raw("(6371 * acos(cos(radians($pick_up_latitude)) * cos(radians(pickup_lat)) * cos(radians(pickup_lng) - radians($pick_up_longitude)) + sin(radians($pick_up_latitude)) * sin(radians(pickup_lat)))) AS distance_pickup"),
+                    \DB::raw("(6371 * acos(cos(radians($drop_off_latitude)) * cos(radians(drop_lat)) * cos(radians(drop_lng) - radians($drop_off_longitude)) + sin(radians($drop_off_latitude)) * sin(radians(drop_lat)))) AS distance_drop_off")
+                )
+                ->having('distance_pickup', '<=', $maxDistance)
+                ->having('distance_drop_off', '<=', $maxDistance);
+            } else {
+                $quoteQuery->select(
+                    \DB::raw("(6371 * acos(cos(radians($pick_up_latitude)) * cos(radians(pickup_lat)) * cos(radians(pickup_lng) - radians($pick_up_longitude)) + sin(radians($pick_up_latitude)) * sin(radians(pickup_lat)))) AS distance_pickup")
+                )
+                ->having('distance_pickup', '<=', $maxDistance);
+            }
+    
+            // Calculate and set the count for this search
+            $search->quote_count = $quoteQuery->count();
+    
             return $search;
         });
-        // return $data;
         return view('transporter.savedSearch.index', ['savedSearches' => $data]);
+        // Return data as JSON with the correct counts for each search
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'Data retrieved successfully',
+        //     'data' => $data,
+        // ]);
     }
+    
+
+
     public function saveSearchDlt(Request $request)
     {
         $data = SaveSearch::find($request->id);
