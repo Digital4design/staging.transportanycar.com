@@ -668,9 +668,9 @@ class DashboardController extends WebController
         // Validate the incoming request data
         $validatedData = $request->validate([
             'git_insurance_cover' => 'required|string',
-            'years_established' => 'required|integer',
-            'no_of_tow_trucks' => 'required|integer',
-            'no_of_drivers' => 'required|integer',
+            'years_established' => 'required|string',
+            'no_of_tow_trucks' => 'required|string',
+            'no_of_drivers' => 'required|string',
         ]);
 
         // Use updateOrCreate to create a new record or update an existing one
