@@ -120,8 +120,8 @@
             display: inline-block;
             padding-top: 6px;
             padding-bottom: 6px;
-            padding-left: 20px;
-            padding-right: 20px;
+            padding-left: 30px;
+            padding-right: 30px;
             cursor: pointer;
         }
 
@@ -315,7 +315,7 @@
         style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
         alt="transport notifiaction" title="transport notifiaction"></a>
     <h2>Hi,</h2>
-    <p class="adjust-space">You have received a quore for <span style="display: block; font-size: 12px; line-height: 16px; font-weight: 500; color:#222222; margin-top: 20px;">£{{$data->price}}</span></p>
+    <p class="adjust-space">You have received a quore for <span style="display: block; font-size: 22px; line-height: 28px; font-weight: 500; color:#222222; margin-top: 20px;">£{{$data->price}}</span></p>
     <p class="adjust-space"> from {{$data->getTransporters->username}} to deliver your {{$data->quote->vehicle_make}} {{$data->quote->vehicle_model}}</p>
     <a href="{{route('front.quotes', $data->quote->id)}}"class="verify-btn" style="border-radius: 50px;">
         View quote
