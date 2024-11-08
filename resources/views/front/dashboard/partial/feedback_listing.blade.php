@@ -164,11 +164,11 @@
     @foreach ($feedbacks as $feedback)
     <div class="review-wrap">
         <div class="feedback-user-name">
-            @if ($feedback->quote_by_transporter->quote->user)
-            @if ($feedback->quote_by_transporter->quote->user->name)
-                {{$feedback->quote_by_transporter->quote->user->name}}
+            @if ($feedback->quote_by_transporter->quote->user ?? "")
+            @if ($feedback->quote_by_transporter->quote->user->name ?? "")
+                {{$feedback->quote_by_transporter->quote->user->name ?? ""}}
             @else
-                {{$feedback->quote_by_transporter->quote->user->username}}
+                {{$feedback->quote_by_transporter->quote->user->username ?? ""}}
             @endif
         @else
             -
