@@ -249,7 +249,7 @@ ul.pagination {
                                                         alt="trasporter feedback" class="img-fluid">
                                                 </div>
                                                 <div class="">
-                                                    <h1 class="user-feedback-name mb-0">{{ $user->name ?? '-' }} <img
+                                                    <h1 class="user-feedback-name mb-0">{{ $user->name ?? '' }} <img
                                                             src="{{ asset('/assets/images/user-verified.png') }}" alt=""
                                                             width="20" height="20" class="ml-1" />
                                                         <!-- <span>({{ count($feedback) }})</span> -->

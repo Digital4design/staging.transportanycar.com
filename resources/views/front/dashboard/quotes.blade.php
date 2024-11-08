@@ -173,7 +173,7 @@
                     <div class="card-header @if($key == 0) active @endif" id="heading{{$key}}">
                         <div class="card_lft">
                             <a href="{{ route('front.feedback_view', $quote->id)}}">
-                                <h4>{{$quote->getTransporters->username}}</h4>
+                                <h4>{{$quote->getTransporters->username ??""}}</h4>
                             </a>
                             <ul class="rating-star">
                                 <li>
