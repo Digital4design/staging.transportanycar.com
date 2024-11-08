@@ -2572,7 +2572,7 @@
                 var lowestBid = selectedQuote.lowest_bid ? selectedQuote.lowest_bid : 0;
                 var bidCount = selectedQuote.transporter_quotes_count ? selectedQuote.transporter_quotes_count : 0;
                 // $('#editamount').val(selectedQuote.quote_by_transporter.price);
-                $('#editmessage').val(selectedQuote.quote_by_transporter.message);
+                // $('#editmessage').val(selectedQuote.quote_by_transporter.message);
                 $('.lowAmount').text('£' + lowestBid);
                 $('.bidCount').text(bidCount);
                 // Prevent closing quote modal when clicking outside
@@ -2743,30 +2743,31 @@
                     <div class="jobsrch_box">
                         <div class="row">                           
                             <div class="col-lg-6">
-                                <div class="jobsrch_top_box position-relative">
+                                 <div class="jobsrch_top_box position-relative">
                                     ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
-                                                                <div>
-                                                                    <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
-                                                                </div>
-                                                                ` : `
-                                                                <div class="job_se_sec slider">
-                                                                    <div>
-                                                                        <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
-                                                                    </div>
-                                                                    ${carData.image_1 ? `
+                                                        <div>
+                                                            <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+                                                        </div>
+                                                        ` : `
+                                                        <div class="job_se_sec slider">
+                                                            <div>
+                                                                <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+                                                            </div>
+                                                            ${carData.image_1 ? `
                                                 <div>
                                                     <img src="/${carData.image_1}" class="vehicle_image" alt="Vehicle Image" />
                                                 </div>
-                                            ` : `
+                                            ` : 
+                                            `
                                                 <div>
                                                     <img src="/uploads/no_car_image.png" class="vehicle_image" alt="No Image Available" />
                                                 </div>
                                             `}
-                                                                </div>
-                                                                <div class="custom-navigation">
-                                                                    <span class="current-slide">1</span> of <span class="total-slides">2</span>
-                                                                </div>
-                                                            `}                                   
+                                                        </div>
+                                                        <div class="custom-navigation">
+                                                            <span class="current-slide">1</span> of <span class="total-slides">2</span>
+                                                        </div>
+                                                    `}                                   
                                 </div>
                                 
                                 <div class="btnCustom">${switch_custom}</div>
@@ -2780,7 +2781,7 @@
                                     </div>
                                     <div class="bidTnfo">
                                         <p class="info">Current lowest bid: <span class="green">£${carData.lowest_bid  ?? 0}</span></p>
-                                        <p class="info">Transporters bidding: <span class="blue">${carData.transporter_quotes_count}</span></p>
+                                        <p class="info">Transporters bidding: <span class="blue">${carData.quotes_count}</span></p>
                                     </div>
                                 </div>
                            

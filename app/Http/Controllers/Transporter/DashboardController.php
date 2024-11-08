@@ -1257,6 +1257,7 @@ class DashboardController extends WebController
 
         $pickup = $request->pickup;
         $dropoff = $request->dropoff;
+        // return $quotes;
         return view('transporter.savedSearch.search_result', [
             'quotes' => $quotes,
             'pickup' => $pickup,

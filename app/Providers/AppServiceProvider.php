@@ -47,11 +47,11 @@ class AppServiceProvider extends ServiceProvider
                     $totalQuotes=0;
                     $user_quote = QuoteByTransporter::where('user_id', $user->id)->pluck('user_quote_id');
                     $totalQuotes = UserQuote::with('user')
-                    ->whereNotIn('id', $user_quote)
+                    // ->whereNotIn('id', $user_quote)
                     ->where(function($query) {
                         $query->where('status', 'pending')
                               ->orWhere('status', 'approved');
-                    })
+                    })->whereDate('user_quotes.created_at', '>=', now()->subDays(10))
                     ->count();
 
                     //unseen job count
