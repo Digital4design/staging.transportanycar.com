@@ -278,6 +278,9 @@ class MessageController extends WebController
                 return $query->created_at->format('d-m-Y');
             });
 
+            $quote_id=QuoteByTransporter::where('user_id',$thread->friend_id)->where('user_quote_id',$thread->user_qot->id)->first();
+
+
             // Fetch total message count for all threads of the logged-in user
             $threads = Thread::where(['user_id' => $user->id, 'user_quote_id' => $thread->user_qot->id])->get();
             if ($threads->isNotEmpty()) {
@@ -290,10 +293,10 @@ class MessageController extends WebController
             $messageCounts = collect();
         }
         if($request->from_page == 'delivery') {
-            $view = view('front.dashboard.partial.delivery_chat_history', compact('messages', 'thread', 'user'))->render();
+            $view = view('front.dashboard.partial.delivery_chat_history', compact('messages', 'thread', 'user','quote_id'))->render();
         } 
         else {
-            $view = view('front.dashboard.partial.quote_history_listing', compact('messages', 'thread', 'user'))->render();
+            $view = view('front.dashboard.partial.quote_history_listing', compact('messages', 'thread', 'user','quote_id'))->render();
         }
         return response()->json([
             'html' => $view,

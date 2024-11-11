@@ -362,22 +362,22 @@
                                                     <li class="mt-0">
                                                         <p>Insurance cover:</p>
                                                         <span>
-                                                            £{{$company_details->git_insurance_cover}}
+                                                            £{{$company_detail->git_insurance_cover ?? ''}}
                                                         </span>
                                                     </li>
                                                     <li>
                                                         <p>Years established:</p>
                                                         <span>
-                                                            {{$company_details->years_established}}
+                                                            {{$company_detail->years_established ?? ''}}
                                                         </span>
                                                     </li>
                                                     <li>
                                                         <p>Recovery trucks:</p>
-                                                        <span> {{$company_details->no_of_tow_trucks}}</span>
+                                                        <span> {{$company_detail->no_of_tow_trucks ?? ''}}</span>
                                                     </li>
                                                     <li>
                                                         <p>Drivers:</p>
-                                                        <span>{{$company_details->no_of_drivers}}</span>
+                                                        <span>{{$company_detail->no_of_drivers ?? ''}}</span>
                                                     </li>
                                                 </ul>
                                             </div>

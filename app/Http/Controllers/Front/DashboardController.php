@@ -447,6 +447,7 @@ class DashboardController extends WebController
                 $transporter_feedback = $this->get_transporter_feedback($transporter_detail->id);
                 $feedback_count= Feedback::where('transporter_id',$user_data->id)->count();
                 $quote_info = $quote->quote;
+
             } else {
                 return redirect()->back();
             }

@@ -675,7 +675,7 @@
                 vehicle_make_1: {required: "Please enter vehicle make."},
                 vehicle_model_1: {required: "Please enter vehicle model."},
                 email: {required: "Please enter email."},
-                phone : {required: "Please enter phone number."},
+                phone : {required: "Enter a valid mobile number."},
                 delivery_timeframe_date: { deliveryDateRequired: "Please enter a delivery date." }
                 //starts_drives_1: {required: "Please select starts drives."},
             },

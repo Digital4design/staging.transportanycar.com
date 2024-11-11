@@ -295,7 +295,7 @@ class DashboardController extends WebController
         $params['completed_job'] =  $completedCount;
         $params['distance'] = $totalDistanceFormatted;
         $params['total_earning'] = $total_earning;
-        $params['company_details'] = $company_details;
+        $params['company_detail'] = $company_details;
         $params['rating_percentage'] = $percentage;
 
         $customRequest = new Request([
@@ -839,7 +839,7 @@ class DashboardController extends WebController
         if ($type == 'won') {
             $my_quotes = $my_quotes->where('status', 'accept');
         } elseif ($type == 'bidding') {
-            $my_quotes = $my_quotes->where('status', 'pending')->whereDate('created_at', '>=', now()->subDays(10));
+            $my_quotes = $my_quotes->where('status', 'pending');
         } elseif ($type == 'cancel') {
             $my_quotes = $my_quotes->where('status', 'rejected');
         }
@@ -859,6 +859,7 @@ class DashboardController extends WebController
             })
             ->whereIn('user_quotes.id', $my_quotes->pluck('user_quote_id'))
             ->where('quote_by_transpoters.user_id', $user_data->id)
+            ->whereDate('user_quotes.created_at', '>=', now()->subDays(10))
             ->groupBy('user_quotes.id') // Use groupBy to avoid duplicates
             ->select('user_quotes.*', 'quote_by_transpoters.id as quote_by_transporter_id', 'quote_by_transpoters.transporter_payment as transporter_payment', 'sub.quotes_count', 'sub.lowest_bid', 'threads.id as thread_id', 'quote_by_transpoters.updated_at as qbt_updated_at', 'quote_by_transpoters.status as qbt_status');
 

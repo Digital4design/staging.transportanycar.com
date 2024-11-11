@@ -1684,6 +1684,7 @@
 
                             <!-- for mobile view -->
                             <div class="mainContentDiv">
+                                @if($quotes->total() > 1)
                                 <div id="watchlisting">
                                     @foreach ($quotes as $quote)
                                         <div class="boxContent">
@@ -1863,6 +1864,11 @@
                                         </div>
                                     @endforeach
                                 </div>
+                                @else
+                                <div class="text-center">  
+                                    <p>Currently none to show</p>
+                        </div>
+                                @endif
                             </div>
 
                             <div id="idLoadData">
