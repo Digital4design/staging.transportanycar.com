@@ -760,6 +760,19 @@
             $(this).prev('input').focus();
         }
     });
+
+    $('.otp-input input').on('paste', function(e) {
+        e.preventDefault();
+        const pasteData = e.originalEvent.clipboardData.getData('text').slice(0, 4); // Only take first 4 characters
+    
+        $('.otp-input input').each(function(index) {
+            $(this).val(pasteData[index] || '');  // Set each input value to the respective character
+        });
+    
+        // Focus on the last filled input
+        $('.otp-input input').eq(pasteData.length - 1).focus();
+    });
+
     function sendOTP()
     {
         var phoneNumber = $('input[name="phone"]').val();
