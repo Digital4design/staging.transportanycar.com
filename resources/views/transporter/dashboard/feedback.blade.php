@@ -362,7 +362,7 @@
                                                     <li class="mt-0">
                                                         <p>Insurance cover:</p>
                                                         <span>
-                                                            @if($company_detail->git_insurance_cover)
+                                                            @if($company_detail->git_insurance_cover !== null)
                                                             £{{$company_detail->git_insurance_cover ?? ''}}
                                                             @endif
                                                         </span>
