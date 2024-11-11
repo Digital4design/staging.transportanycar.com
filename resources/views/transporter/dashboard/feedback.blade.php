@@ -364,9 +364,8 @@
                                                         <span>
                                                             @if(!empty($company_detail) && $company_detail->git_insurance_cover !== null)
     £{{ $company_detail->git_insurance_cover }}
-@else
-    <span>No insurance cover specified</span>
 @endif
+   
 
                                                         </span>
                                                     </li>
