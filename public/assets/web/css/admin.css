@@ -6726,6 +6726,31 @@ div#spam-banner button.btn {
   .get_quote .modal-footer p {
     font-size: 12px;
   }
+  .chat_conversation {height: 100%;}
+  .chat_conversation_footer {
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 10px;
+    background: #f3f3f3;
+    border: none;
+    width: 100%;
+    left: 0;
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .chat_box .scrollbar {
+    /* height: auto; */
+    height:calc(100vh - 177px);
+  }
+
+  .chat_conversation_footer #chat__form {
+    border-radius: 10px;
+    margin: 0 15px;
+    border: 1px solid #bababa;
+    padding: 5px 12px;
+    background: #fff;
+  }
 }
 
 @media (max-width: 575px) {
@@ -6930,31 +6955,6 @@ div#spam-banner button.btn {
 
   .admin_account .container-job {
     padding: 40px 25px;
-  }
-
-  .chat_box .scrollbar {
-    height: auto;
-  }
-
-  .chat_conversation_footer {
-    position: fixed;
-    bottom: 0;
-    padding-bottom: 10px;
-    background: #f3f3f3;
-    border: none;
-    width: 100%;
-    left: 0;
-    margin: 0;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-
-  .chat_conversation_footer #chat__form {
-    border-radius: 10px;
-    margin: 0 15px;
-    border: 1px solid #bababa;
-    padding: 5px 12px;
-    background: #fff;
   }
 
   .photo-preview p {
@@ -7850,6 +7850,11 @@ g.highcharts-input-group {
   .chat_list {
     width: 100% !important;
   }
+  .chat_box {
+    border: 0;
+    height: 100vh;
+    background: #f3f3f3;
+}
 }
 @media(max-width: 580px) {
   .notifaction_sec .dropdown-menu {
@@ -8040,11 +8045,6 @@ g.highcharts-input-group {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
-
-
-
-
-
 }
 
 @media (max-width: 400px) {
@@ -8054,7 +8054,7 @@ g.highcharts-input-group {
 
 }
 
-@media(min-width: 1300px) {
+@media(min-width: 768px) {
   .container-job .chat_box,
   .message_container .chat_box {
     height: calc(100vh - 263px);

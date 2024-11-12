@@ -383,7 +383,12 @@
         #page-content-wrapper {
             padding-bottom: 20px;
         }
-
+        .delete_btn_mobile {
+            right: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+        }
 
         @media (min-width: 579px) {
 
@@ -557,8 +562,6 @@
             .jobserch_mob .job_new_grid_vehi_modal span {
                 width: 100%;
             }
-
-           
         }
 
         @media (min-width: 768px) {
@@ -730,15 +733,7 @@
             .jobserch_mob li p {
                 display: none !important;
             }
-
-
-
-
-
         }
-
-
-
 
         @media screen and (min-width: 1000px) and (max-width: 1199px) {
 
@@ -912,7 +907,6 @@
 
         }
 
-
         @media(min-width: 1366px) {
             .jobserch_mob .jobsrch_box {
                 border-radius: 10px;
@@ -1083,7 +1077,6 @@
 
         }
 
-
         @media(min-width: 1600px) {
             .jobserch_mob .jobsrch_box {
                 border-radius: 10px;
@@ -1250,7 +1243,6 @@
 
         }
 
-
         @media(max-width: 767px) {
             .jobserch_mob li p {
                 display: none !important;
@@ -1258,8 +1250,6 @@
         }
 
         /* end 16-09-2024 */
-
-
         @media(max-width: 580px) {
             .job_container .job-data.job-data-mobile {
                 margin-left: -30px!important;
@@ -1719,7 +1709,7 @@
                                     <div class="card">
 
                                         <a data-toggle="modal" data-target="#delete_quote_{{ $savedSearch->id }}"
-                                            class="d-flex delete_btn_mobile align-self-end position-absolute justify-content-end flex-wrap" style="right: 10px; top: 10px;">
+                                            class="d-flex delete_btn_mobile align-items-center position-absolute justify-content-center flex-wrap">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                 viewBox="0 0 14 14" fill="none">
                                                 <path
