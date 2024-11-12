@@ -2,6 +2,10 @@
 
 @section('head_css')
     <style>
+        #transporter-feedback .navbar {
+            position: relative!important;
+        }
+        #transporter-feedback .content_container {padding-top: 0;}
         .banner {
             font-size: 16px;
             line-height: 20px;
@@ -457,6 +461,7 @@
         });
 
         $(document).ready(function() {
+            $('body').attr('id','transporter-feedback');
             $(document).on('click', '.read_more_show', function() {
                 var parentTr = $(this).closest('tr');
                 var readMoreContent = parentTr.find('.read_more_content');

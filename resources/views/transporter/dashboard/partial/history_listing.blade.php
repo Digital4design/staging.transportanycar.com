@@ -144,12 +144,13 @@ $auth_user = Auth::user();
                     
                     @if ($thread->friend_id != $message->sender_id)
                         <!-- incoming messages -->
-                        @if ($previousSender !== $message->sender_id)
-                            <div class="chat_messages_incoming">
+                        
+                            <div class="chat_messages_incoming mb-0">
                                 <div class="chat_conversation_bx">
                                     <div class="chat_txt_bx">
-                                        <h4>{{ $user->username }}</h4> <!-- Display only once for consecutive messages -->
-                        @endif
+                                        @if ($previousSender !== $message->sender_id)
+                                            <h4>{{ $user->username }}</h4> <!-- Display only once for consecutive messages -->
+                                        @endif
                                         <div class="chat_incoming_txt">
                                             <p>{{ $message->message }}</p>
                                             <span class="chat_time">
@@ -160,20 +161,21 @@ $auth_user = Auth::user();
                                                 @endif
                                             </span>
                                         </div>
-                        @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id)
+                            {{-- @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id) --}}
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        {{-- @endif --}}
                     @else
                         <!-- outgoing messages -->
-                        @if ($previousSender !== $message->sender_id)
+                       
                             <div class="chat_messages_outgoing mb-0">
                                 <div class="chat_conversation_bx">
                                     <div class="chat_out_txt_bx">
-                                        <h4>You</h4> <!-- Display only once for consecutive messages -->
-                        @endif
-                                        <div class="chat_outgoing_txt chat_out_txt_bx">
+                                        @if ($previousSender !== $message->sender_id)
+                                            <h4>You</h4> <!-- Display only once for consecutive messages -->
+                                        @endif
+                                        <div class="chat_outgoing_txt">
                                             <p>{!! nl2br(e($message->message)) !!}</p>
                                             <span class="chat_time">
                                                 @if (carbon\carbon::parse($message->created_at)->diffInHours() < 24)
@@ -183,11 +185,11 @@ $auth_user = Auth::user();
                                                 @endif
                                             </span>
                                         </div>
-                        @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id)
+                                      {{-- @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id) --}}
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        {{-- @endif --}}
                     @endif
                     @php
                         $previousSender = $message->sender_id; // Update the previous sender tracker

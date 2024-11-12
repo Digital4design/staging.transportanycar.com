@@ -515,8 +515,8 @@
                             </div>
                         </fieldset>
                         <fieldset class="wizard-fieldset wizard_laststep">
-                            <h5>Enter your email address to start receiving quotes within minutes.</h5>
-                            <p class="mb-3 d-block">Quotes are provided to you directly from our network of car transport companies, they are able to offer you the most competitive prices due to backloads and return jobs.</p>
+                            <h5>Enter your details below to start receiving your quotes in minutes.</h5>
+                            <p class="mb-3 d-block">Quotes are provided to you by our network of reputable car transporters.</p>
                             @if(Auth::guard('web')->user() && Auth::guard('web')->user()->type == 'user')
                                 @php
                                     $user = Auth::guard('web')->user();
