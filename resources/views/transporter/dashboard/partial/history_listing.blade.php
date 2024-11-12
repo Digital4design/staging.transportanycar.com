@@ -172,7 +172,7 @@ $auth_user = Auth::user();
                                     <div class="chat_out_txt_bx">
                                         <h4>You</h4> <!-- Display only once for consecutive messages -->
                         @endif
-                                        <div class="chat_outgoing_txt">
+                                        <div class="chat_outgoing_txt chat_out_txt_bx">
                                             <p>{!! nl2br(e($message->message)) !!}</p>
                                             <span class="chat_time">
                                                 @if (carbon\carbon::parse($message->created_at)->diffInHours() < 24)

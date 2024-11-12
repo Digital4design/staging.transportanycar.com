@@ -110,7 +110,7 @@
                                 <i class="fas fa-eye password-toggle"></i>
                             </div>
                             <div class="col-lg-12 eyeicon">
-                                <input type="password" class="form-control password" placeholder="confirm password" name="cnf_password" id="cnf_password" />
+                                <input type="password" class="form-control password" placeholder="Confirm password" name="cnf_password" id="cnf_password" />
                                <i class="fas fa-eye password-toggle"></i>
                             </div>
                             <div class="col-lg-12 response_api" style="display: none;">
