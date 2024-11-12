@@ -562,7 +562,7 @@ class QuotesController extends WebController
                 'otp_expires_at' => now()->addMinutes(15), // Set OTP expiry
             ]
         );
-        $result = $service->sendSms("+44".$request->phoneNumber,"Transport Any Car: $otp is your verification code. It expires in 15 minutes. Don’t share this with anyone.");
+        $result = $service->sendSms($request->phoneNumber,"Transport Any Car: $otp is your verification code. It expires in 15 minutes. Don’t share this with anyone.");
         if (isset($result['sid'])) {
             return response()->json([
                 'success' => true,
