@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\App;
 use App\SaveSearch;
 use App\CompanyDetail;
+use App\Services\SmsService;
 
 class DashboardController extends WebController
 {
@@ -30,12 +31,14 @@ class DashboardController extends WebController
     public $user_obj;
     public $thread_obj;
     protected $emailService;
+    public $sendSMS;
     public function __construct(EmailService $emailService)
     {
         $this->thread_obj = new Thread();
         $this->chat_obj = new Message();
         $this->user_obj = new User();
         $this->emailService = $emailService;
+        $this->sendSMS = new SmsService;
     }
 
     public function dashboard(Request $request)
@@ -531,6 +534,11 @@ class DashboardController extends WebController
             } else {
                 Log::info('User with email ' . $quote->quote->user->email . ' has opted out of receiving emails. Quotation email not sent.');
             }
+            if($quote->quote->user->mobile)
+                {
+                    $smS = "Transport Any Car: New quote for £" . $quoteDetails['customer_quote'] . " to deliver your " . $quote->quote->vehicle_make . " " . $quote->quote->vehicle_model . ". " . request()->getSchemeAndHttpHost() . "/quotes/" . $quote->quote->id . " " . request()->getSchemeAndHttpHost() . "/account";
+                    $this->sendSMS->sendSms($quote->quote->user->mobile,$smS);
+                }
         } catch (\Exception $ex) {
             Log::error('Error sending email: ' . $ex->getMessage());
         }
@@ -893,6 +901,7 @@ class DashboardController extends WebController
         }
         $user_data = Auth::guard('transporter')->user();
         $quote = UserQuote::find($request->quote_id);
+        $customer_user = $quote->user;
         if ($quote) {
             $quoteDetails = calculateCustomerQuote((float) $offer);
             $quoteByTransporter = QuoteByTransporter::firstOrNew(['user_quote_id' => $quote->id, 'user_id' => $user_data->id]);
@@ -934,6 +943,11 @@ class DashboardController extends WebController
                     );
                 } else {
                     Log::info('User with email ' . $quote->user->email . ' has opted out of receiving emails. Edit quotation email not sent.');
+                }
+                if($customer_user->mobile && ($quoteDetails['customer_quote'] < $oldPrice))
+                {
+                $smS = "Transport Any Car:  Quote reduced from £$oldPrice to £".$quoteDetails['customer_quote']." to deliver your $quote->vehicle_make $quote->vehicle_model. ".request()->getSchemeAndHttpHost()."/quotes/$quote->id  "." ".request()->getSchemeAndHttpHost()."/account";
+                $this->sendSMS->sendSms($customer_user->mobile,$smS);
                 }
             } catch (\Exception $ex) {
                 Log::error('Error sending email: ' . $ex->getMessage());
