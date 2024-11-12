@@ -31,7 +31,7 @@
                     </p>
 
                     <!-- Confirm Button -->
-                    <button type="submit" id="confirmOtp" class="btn btn-success btn-block mt-4">Confirm</button>
+                    <button type="submit" id="confirmOtp" class="btn mt-4">Confirm</button>
                 </form>
             </div>
         </div>

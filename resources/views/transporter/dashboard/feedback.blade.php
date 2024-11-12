@@ -138,7 +138,7 @@
                 right: -50px;
                 top: 90px;
                 z-index: 4;
-                position: fixed;
+                /* position: fixed; */
             }
         }
 
