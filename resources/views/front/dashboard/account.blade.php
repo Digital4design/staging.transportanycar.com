@@ -129,18 +129,18 @@
                                             <input type="hidden" class="form-control" placeholder="Current password" name="opassword" id="opassword" value="{{Auth::guard('web')->user()->getAuthPassword()}}" autocomplete="on">
                                         </div>
 
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="New password" name="npassword" id="npassword" value="" autocomplete="on">
-                                            <i class="fas fa-eye" id="passwordIcon"></i>
-                                            <a href="#" id="togglePassword"
-                                                style="bottom:0px;right:0px;"></a>
+                                        <div class="form-group" style="position: relative;">
+                                            <input type="password" class="form-control" placeholder="New password" name="npassword" id="npassword" autocomplete="on" style="padding-right: 30px;">
+                                            <span id="togglePassword1" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                                <i class="fas fa-eye" id="passwordIcon1"></i>
+                                            </span>
                                         </div>
-
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="Confirm new password" name="cpassword" id="cpassword" value="" autocomplete="on">
-                                            <i class="fas fa-eye" id="passwordIcon"></i>
-                                            <a href="#" id="togglePassword"
-                                                style="bottom:0px;right:0px;"></a>
+                                        
+                                        <div class="form-group" style="position: relative;">
+                                            <input type="password" class="form-control" placeholder="Confirm new password" name="cpassword" id="cpassword" autocomplete="on" style="padding-right: 30px;">
+                                            <span id="togglePassword2" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                                <i class="fas fa-eye" id="passwordIcon2"></i>
+                                            </span>
                                         </div>
 
                                         <div class="wd-cstm-check">
@@ -168,6 +168,34 @@
     <script src="{{asset('/assets/admin/vendors/general/validate/jquery.validate.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+document.getElementById("togglePassword1").addEventListener("click", function () {
+    const passwordField = document.getElementById("npassword");
+    const icon = document.getElementById("passwordIcon1");
+
+    // Toggle the password visibility
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+        passwordField.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+});
+
+document.getElementById("togglePassword2").addEventListener("click", function () {
+    const passwordField = document.getElementById("cpassword");
+    const icon = document.getElementById("passwordIcon2");
+
+    // Toggle the password visibility
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+        passwordField.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+});
+
         function uploadImage(image)
         {
             var formData = new FormData();
