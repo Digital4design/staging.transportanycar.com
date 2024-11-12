@@ -8,12 +8,13 @@
     .wd-active-job .container-job {
     padding-right: 25px !important;
 }
-#passwordIcon {
+#passwordIcon1,
+#passwordIcon2 {
     position: absolute;
-    bottom: 20px;
+    top: 20px;
     right: 15px;
     /* transform: translateY(-50%); */
-    cursor: default;
+    cursor: pointer;
     color: #ccc;
 }
 #togglePassword {
@@ -131,14 +132,14 @@
 
                                         <div class="form-group" style="position: relative;">
                                             <input type="password" class="form-control" placeholder="New password" name="npassword" id="npassword" autocomplete="on" style="padding-right: 30px;">
-                                            <span id="togglePassword1" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                            <span id="togglePassword1">
                                                 <i class="fas fa-eye" id="passwordIcon1"></i>
                                             </span>
                                         </div>
                                         
                                         <div class="form-group" style="position: relative;">
                                             <input type="password" class="form-control" placeholder="Confirm new password" name="cpassword" id="cpassword" autocomplete="on" style="padding-right: 30px;">
-                                            <span id="togglePassword2" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                            <span id="togglePassword2">
                                                 <i class="fas fa-eye" id="passwordIcon2"></i>
                                             </span>
                                         </div>
