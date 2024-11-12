@@ -18,6 +18,7 @@ $auth_user = Auth::user();
     margin: 15px;
     display: none;
 }
+.chat_outgoing_txt.chat_out_txt_bx {margin-bottom: 5px;}
 @media screen and (max-width: 575px) {
         #messages .navbar {
             box-shadow: none;
