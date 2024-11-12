@@ -16,12 +16,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use App\Services\SmsService;
 
 class MessageController extends WebController
 {
     public $chat_obj;
     public $user_obj;
     public $thread_obj;
+    public $sendSMS;
 
     public function __construct(EmailService $emailService)
     {
@@ -29,6 +31,7 @@ class MessageController extends WebController
         $this->chat_obj = new Message();
         $this->user_obj = new User();
         $this->emailService = $emailService;
+        $this->sendSMS = new SmsService;
     }
 
     public function getChatHistory(Request $request, $id)
@@ -126,6 +129,11 @@ class MessageController extends WebController
                     );
                 } else {
                     Log::info('User with email ' . $customer_user->email . ' has opted out of receiving emails. Message email not sent.');
+                }
+                if($customer_user->mobile)
+                {
+                    $smS = "Transport Any Car: New message from $auth_user->username to deliver your $userQuote->vehicle_make $userQuote->vehicle_model. ".request()->getSchemeAndHttpHost()."/messages"." ".request()->getSchemeAndHttpHost()."/account";
+                    $this->sendSMS->sendSms($customer_user->mobile,$smS);
                 }
             } 
             catch (\Exception $ex) {
