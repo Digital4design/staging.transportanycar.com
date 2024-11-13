@@ -153,8 +153,8 @@ class DashboardController extends WebController
         $request->validate([
             'email' => ['required', 'email', Rule::unique('users')->ignore($user_data->id)->whereNull('deleted_at')],
             'opassword' => ['required'],
-            'npassword' => ['required'],
-            'cpassword' => ['required', 'same:npassword'],
+            // 'npassword' => ['required'],
+            'cpassword' => [ 'same:npassword'],
         ], [
             'opassword.exists' => __('admin.change_password_not_match'),
             'cpassword.same' => __('admin.change_password_not_same'),
