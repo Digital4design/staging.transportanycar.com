@@ -6273,7 +6273,7 @@ div#spam-banner button.btn {
 }
 @media (max-width: 767px) {
   .message-color .message_container {
-    height: 100vh;
+    height: 100svh;
   }
   .chat_title_bx.active_chat_title {
     display: none;
@@ -7874,14 +7874,14 @@ g.highcharts-input-group {
     /* height: calc(100vh - 66px); */
     /* height: 100%; */
     background: #f3f3f3;
-}
-.message-color .active-job-box {height: calc(100vh - 105px)}
-.message-color:not(#messages) .container-job .chat_box, .message-color:not(#messages) .message_container .chat_box {
-  height: calc(100% - 166px);
-}
-#messages .active-job-box {
-  height: calc(100vh - 116px)
-}
+  }
+  .message-color .active-job-box {height: calc(100svh - 105px)}
+  .message-color:not(#messages) .container-job .chat_box, .message-color:not(#messages) .message_container .chat_box {
+    height: calc(100% - 166px);
+  }
+  #messages .active-job-box {
+    height: calc(100svh - 116px)
+  }
 }
 @media(max-width: 580px) {
   .notifaction_sec .dropdown-menu {
@@ -7973,7 +7973,7 @@ g.highcharts-input-group {
   }
 
   #messages .active-job-box {
-    height: calc(100vh - 65px);
+    height: calc(100svh - 65px);
     padding-bottom: 0;
   }
 
