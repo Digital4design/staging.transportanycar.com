@@ -704,7 +704,7 @@
                     noPhoneOrEmail: true
                 },
                 email: {required: true},
-                phone: {required: true . maxlength: 11},
+                phone: {required: true},
                 //starts_drives: {required: true},
                 vehicle_make_1: {required: true},
                 vehicle_model_1: {required: true},
@@ -728,9 +728,7 @@
                 vehicle_make_1: {required: "Please enter vehicle make."},
                 vehicle_model_1: {required: "Please enter vehicle model."},
                 email: {required: "Please enter email."},
-                phone : {required: "Enter a valid mobile number.",
-                maxlength: "Phone number cannot be more than 11 digits",
-                },
+                phone : {required: "Enter a valid mobile number."},
                 delivery_timeframe_date: { deliveryDateRequired: "Please enter a delivery date." }
                 //starts_drives_1: {required: "Please select starts drives."},
             },
