@@ -161,7 +161,7 @@ class MessageController extends WebController
         $user_id = $user->id;
         $front_user=array();
         $my_quotes = QuoteByTransporter::where('user_id', $user_id)->get();
-        $quotes = UserQuote::whereIn('id', $my_quotes->pluck('user_quote_id'))->get();
+        $quotes = UserQuote::whereIn('id', $my_quotes->pluck('user_quote_id'))->where('created_at', '>=', Carbon::now()->subDays(10))->get();
         foreach ($quotes as $quote) {
             // $existingThread = Thread::where('friend_id', $quote->user_id)
             //     ->where('user_id', $user_id)

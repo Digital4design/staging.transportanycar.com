@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
                     //->where('seen', 1)
                     ->where('type', '!=', 'feedback')
                     ->orderBy('created_at', 'desc');
-                    $notifications = $query->get();
+                    $notifications = $query->whereDate('created_at', '>=', now()->subDays(10))->get();
                     $notificationCount = $notifications->where('seen', 1)->count();
                     $totalQuotes=0;
                     $user_quote = QuoteByTransporter::where('user_id', $user->id)->pluck('user_quote_id');
@@ -51,7 +51,8 @@ class AppServiceProvider extends ServiceProvider
                     ->where(function($query) {
                         $query->where('status', 'pending')
                               ->orWhere('status', 'approved');
-                    })->whereDate('created_at', '>=', now()->subDays(10))
+                    })
+                    ->whereDate('created_at', '>=', now()->subDays(10))
                     ->count();
 
                     //unseen job count
@@ -64,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
                         'user_id' => $user->id,
                         'seen' => 1,
                         'type' => 'message'
-                    ])->count();   
+                    ])->whereDate('created_at', '>=', now()->subDays(10))->count();   
                     
                     $unseenFeedback = Notification::where([
                         'user_id' => $user->id,
@@ -90,7 +91,7 @@ class AppServiceProvider extends ServiceProvider
                         'user_id' => $user->id,
                         'seen' => 1,
                         'type' => 'message'
-                    ])->count(); 
+                    ])->whereDate('created_at', '>=', now()->subDays(10))->count(); 
                     
                     $quoteIds = UserQuote::where('user_id', $user->id)
                     ->whereIn('status', ['pending', 'approved'])
