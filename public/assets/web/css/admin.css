@@ -2110,7 +2110,8 @@ span.chat_count {
   margin: 0 auto;
   text-align: center;
   max-width: calc(100% - 381px);
-  height: calc(100vh - 263px);
+  height: 100%;
+  /* height: calc(100vh - 263px); */
 }
 
 .chat_conversation_header {
@@ -2165,9 +2166,11 @@ span.chat_count {
 }
 
 .chat_conversation_body {
-  padding: 20px 20px 80px 20px;
+  /* padding: 20px 20px 80px 20px; */
+  padding: 20px;
   background: #F3F3F3;
   border: 1px solid #DADADA;
+  border-bottom: none;
 }
 
 .chat_conversation .time {
@@ -2321,7 +2324,7 @@ span.chat_count {
   background: #fff;
   border-radius: 0px 0 10px 0;
   padding: 10px 20px;
-  position: absolute;
+  position: sticky;
   bottom: 0;
   left: 0;
   right: 0;
@@ -2398,9 +2401,10 @@ a.wd-send-btn {
 
 /*scrollbar*/
 .chat_box .scrollbar {
-  height: calc(100% - 93px);
-  /* height: 832px; */
+  /* max-height: calc(100% - 174px); */
+  height: calc(100% - 174px);
   overflow-x: hidden;
+  /* min-height: calc(100% - 174px); */
 }
 
 #style-1::-webkit-scrollbar-track {
@@ -2954,6 +2958,10 @@ a.chat_cross {
   background: #fff;
   padding: 50px 57px;
   border-radius: 5px;
+}
+.message-color .message_container {height: calc(100vh - 50px);}
+.message-color .active-job-box {
+  height:calc(100vh - 172px);
 }
 
 .wd-active-job {
@@ -5542,6 +5550,10 @@ div#spam-banner button.btn {
     border-radius: 10px;
     height: auto;
   }
+  .message-color:not(#messages) .container-job .chat_box, .message-color:not(#messages) .message_container .chat_box {
+    height: calc(100% - 166px);
+    overflow: hidden;
+  }
 
   /********************sanjay 26-09-2024*********************/
   .jobsrch_blogs ul li span {
@@ -6074,6 +6086,10 @@ div#spam-banner button.btn {
     border: none;
     padding: 0 0 40px;
   }
+  .message-color .active-job-box {
+    height: calc(100vh - 116px);
+    padding-bottom: 0;
+  }
 
   .wd-notify {
     display: block;
@@ -6256,6 +6272,9 @@ div#spam-banner button.btn {
   }
 }
 @media (max-width: 767px) {
+  .message-color .message_container {
+    height: 100vh;
+  }
   .chat_title_bx.active_chat_title {
     display: none;
   }
@@ -6726,20 +6745,20 @@ div#spam-banner button.btn {
   }
   .chat_conversation {height: 100%;}
   .chat_conversation_footer {
-    position: fixed;
+    /* position: fixed;
     bottom: 0;
-    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    left: 0; */
+    padding: 0;
     background: #f3f3f3;
     border: none;
     width: 100%;
-    left: 0;
     margin: 0;
-    padding-left: 5px;
-    padding-right: 5px;
   }
   .chat_box .scrollbar {
     /* height: auto; */
-    height:calc(100vh - 165px);
+    height:calc(100% - 164px);
   }
 
   .chat_conversation_footer #chat__form {
@@ -7292,6 +7311,9 @@ button.swal2-confirm.swal2-styled:focus {
 
 
 @media(max-width: 580px) {
+  .chat_accept_btn {padding: 7px 10px;}
+  .chat_box,
+  .chat_conversation_header, .chat_header {border-radius: 0;}
   .great_job_sec p.subheader {
     font-size: 15px;
   }
@@ -7385,10 +7407,6 @@ button.swal2-confirm.swal2-styled:focus {
   .new_message_section .active-job-box {
     margin: 0;
   }
-
-
-
-
 }
 
 @media(max-width: 400px) {
@@ -7853,8 +7871,16 @@ g.highcharts-input-group {
   }
   .chat_box {
     border: 0;
-    height: calc(100vh - 66px);
+    /* height: calc(100vh - 66px); */
+    /* height: 100%; */
     background: #f3f3f3;
+}
+.message-color .active-job-box {height: calc(100vh - 105px)}
+.message-color:not(#messages) .container-job .chat_box, .message-color:not(#messages) .message_container .chat_box {
+  height: calc(100% - 166px);
+}
+#messages .active-job-box {
+  height: calc(100vh - 116px)
 }
 }
 @media(max-width: 580px) {
@@ -7932,9 +7958,9 @@ g.highcharts-input-group {
   .msg_active_container .chat_box .scrollbar {
     /* height: auto;
     max-height: calc(100vh - 280px); */
-    height: calc(100% - 213px);
-    max-height: calc(100% - 213px);
-    padding-bottom: 0;
+    height: calc(100% - 185px);
+    /* max-height: calc(100% - 213px);
+    padding-bottom: 0; */
   }
 
   .chat_head_lft {
@@ -7946,10 +7972,15 @@ g.highcharts-input-group {
     transition: none !important;
   }
 
-  section.wd-active-job.new_message_section {
+  #messages .active-job-box {
+    height: calc(100vh - 65px);
+    padding-bottom: 0;
+  }
+
+  /* section.wd-active-job.new_message_section {
     height: calc(100vh - 140px);
     overflow: auto;
-  }
+  } */
 
   ul.menu .noti_info_icon {
     margin-right: 0;
@@ -8058,14 +8089,14 @@ g.highcharts-input-group {
 
 }
 
-@media(min-width: 768px) {
+@media(min-width: 1200px) {
   .container-job .chat_box,
   .message_container .chat_box {
-    height: calc(100vh - 263px);
+    height:calc(100% - 85px);
     overflow: hidden;
   }
-  .wd-active-job.new_message_section .chat_box {
-    height: calc(100vh - 363px);
-  }
-  .wd-active-job.new_message_section .chat_box .chat_conversation {height:calc(100vh - 363px);}
+  /* .wd-active-job.new_message_section .chat_box {
+    height: calc(100% - 85px);
+  } */
+  .wd-active-job.new_message_section .chat_box .chat_conversation {height:100%;}
 }
