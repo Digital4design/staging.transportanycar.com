@@ -82,8 +82,8 @@ class AppServiceProvider extends ServiceProvider
                 } else {
                     // Get notifications and count in one go
                     $query = Notification::where(['user_id' => $user->id])
-                    ->where('created_at', '>=', Carbon::now()->subDays(10))
-                        ->orderBy('created_at', 'desc');
+                    ->whereDate('created_at', '>=', now()->subDays(10))
+                    ->orderBy('created_at', 'desc');
                     $notifications = $query->get();
                     $notificationCount = $notifications->where('seen', 1)->count();
 
@@ -106,6 +106,7 @@ class AppServiceProvider extends ServiceProvider
 
                     $quotationCounts = QuoteByTransporter::whereIn('user_quote_id', $filteredQuoteIds)
                     ->where('status', 'pending')
+                    ->whereDate('created_at', '>=', now()->subDays(10))
                     ->count();
 
                     $view->with('notifications', $notifications)
