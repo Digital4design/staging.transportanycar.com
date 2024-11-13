@@ -51,7 +51,7 @@ class AppServiceProvider extends ServiceProvider
                     ->where(function($query) {
                         $query->where('status', 'pending')
                               ->orWhere('status', 'approved');
-                    })->whereDate('user_quotes.created_at', '>=', now()->subDays(10))
+                    })->whereDate('created_at', '>=', now()->subDays(10))
                     ->count();
 
                     //unseen job count
