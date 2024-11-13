@@ -101,6 +101,7 @@ class AppServiceProvider extends ServiceProvider
                     ->whereIn('user_quote_id', $quoteIds)
                     ->where('seen', 1)
                     ->where('type','quote')
+                    ->whereDate('created_at', '>=', now()->subDays(10))
                     ->distinct()
                     ->pluck('user_quote_id');
 
