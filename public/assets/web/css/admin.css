@@ -2959,6 +2959,7 @@ a.chat_cross {
   padding: 50px 57px;
   border-radius: 5px;
 }
+.message-color .message_container {height: calc(100vh - 50px);}
 .message-color .active-job-box {
   height:calc(100vh - 172px);
 }
@@ -6271,6 +6272,9 @@ div#spam-banner button.btn {
   }
 }
 @media (max-width: 767px) {
+  .message-color .message_container {
+    height: 100vh;
+  }
   .chat_title_bx.active_chat_title {
     display: none;
   }
