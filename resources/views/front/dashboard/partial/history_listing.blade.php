@@ -201,38 +201,38 @@ $auth_user = Auth::user();
     
                     @if ($thread->friend_id != $message->sender_id)
                         <!-- Outgoing message -->
-                        @if ($previousSender !== $message->sender_id)
-                            <div class="chat_messages_outgoing mb-0">
-                                <div class="chat_conversation_bx">
-                                    <div class="chat_out_txt_bx">
-                                        <h4>You</h4> <!-- Sender name only displayed once -->
-                        @endif
+                        <div class="chat_messages_outgoing mb-0">
+                            <div class="chat_conversation_bx">
+                                <div class="chat_out_txt_bx">
+                                        @if ($previousSender !== $message->sender_id)
+                                            <h4>You</h4> <!-- Sender name only displayed once -->
+                                        @endif
                                         <div class="chat_outgoing_txt">
                                             <p>{!! nl2br(e($message->message)) !!}</p>
                                             <span class="chat_time">{{ $formattedTime }}</span>
                                         </div>
-                        @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id)
+                                        {{-- @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id) --}}
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        {{-- @endif --}}
                     @else
                         <!-- Incoming message -->
-                        @if ($previousSender !== $message->sender_id)
-                            <div class="chat_messages_incoming">
-                                <div class="chat_conversation_bx">
-                                    <div class="chat_txt_bx">
+                        <div class="chat_messages_incoming mb-0">
+                            <div class="chat_conversation_bx">
+                                <div class="chat_txt_bx">
+                                    @if ($previousSender !== $message->sender_id)
                                         <h4>{{ $transporter_username }}</h4> <!-- Sender name only displayed once -->
-                        @endif
-                                        <div class="chat_incoming_txt">
-                                            <p>{!! nl2br(e($message->message)) !!}</p>
-                                            <span class="chat_time">{{ $formattedTime }}</span>
-                                        </div>
-                        @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id)
+                                    @endif
+                                    <div class="chat_incoming_txt">
+                                        <p>{!! nl2br(e($message->message)) !!}</p>
+                                        <span class="chat_time">{{ $formattedTime }}</span>
                                     </div>
+                                    {{-- @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id) --}}
                                 </div>
                             </div>
-                        @endif
+                        </div>
+                        {{-- @endif --}}
                     @endif
                     @php
                         $previousSender = $message->sender_id; // Update last sender tracker
