@@ -1,4 +1,6 @@
-@extends('layouts.web.app')
+{{-- @extends('layouts.web.app') --}}
+@extends('layouts.web.dashboard.app')
+
 
 @section('head_css')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
@@ -75,7 +77,9 @@ ul.suggestions-list li {
 </style>
 
 @section('content')
-    @include('layouts.web.head-web-menu-without-mobile')
+    {{-- @include('layouts.web.head-web-menu-without-mobile') --}}
+    @include('layouts.web.dashboard.header')
+
     <main>
         <section class="join_network_main payment_confirm_main">
             <div class="container">
