@@ -1688,7 +1688,7 @@
 
                             <!-- for mobile view -->
                             <div class="mainContentDiv">
-                                @if ($quotes->total() > 1)
+                                @if ($quotes)
                                     <div id="watchlisting">
                                         @foreach ($quotes as $quote)
                                             <div class="boxContent">
