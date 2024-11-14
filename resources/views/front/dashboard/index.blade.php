@@ -20,9 +20,9 @@
 }
 .job-list-img .job-list-img-sec {
     background: #e8f0fb;
-    height: 114px;
+    height: 92px;
     border-radius: 6px;
-    min-width: 162px;
+    width: 132px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,78 +53,80 @@
 }
 @media(max-width: 580px){
     .active-job-box.active_job_mobile {
-    margin: 0;
-}
-.wd-active-job  .active_job_mobile .job-listing {
-    border-radius: 10px;
-    padding: 5px 20px 10px;
-}
-.active_job_mobile .input-preview {
-    width: 132px;
-    height: 92px;
-}
-.active-job-box.active_job_mobile ul {
-    display: flex;
-    overflow: hidden;
-    clear: both;
-    justify-content: unset;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-.active-job-box.active_job_mobile ul li {
-    height: auto;
-    display: block; width: 46%;
-}
-.active-job-box.active_job_mobile ul li.view-quote a {
-    width: 100%;
-}
-.active-job-box.active_job_mobile ul li.job-img {
-    order: 1;
-}
-.active-job-box.active_job_mobile ul  li.view-quote {
-    order: 2;
-    display: flex;
-    margin-top: 13px;
-}
-.active-job-box.active_job_mobile ul li.job-access {
-    order: 3;
-    position: absolute;
-    right: 8px;
-    top: 85px;
-}
-.active-job-box.active_job_mobile ul li.job-access a.wd-blue {
-    display: block;
-    margin-bottom: 3px;
-}
-.active-job-box.active_job_mobile ul  li.list_detail {
-    order: 4;
-}
-.active-job-box.active_job_mobile ul li.list_detail {
-    order: 5;
-}
-.active_job_mobile  .job-access::before{
-    display: none;
-}
-.bidding_new_design_date.job_new_grid_date {
-    padding-left: 0 !important;
-}
-.active-job-box.active_job_mobile ul li.job-access {
-    top: 110px;
-}
-.bidding_new_design {
-    padding: 0 0px 5px !important;
-}
-.active-job-box.active_job_mobile ul li.job-access.completed_jobs{
-    top: 100px;
-}
-.active_job_mobile .quote_grp_btns {
-    padding: 15px 0 15px;
-}
-.job-list-img .job-list-img-sec img {
-    object-fit: cover;
-}
-
-
+        margin: 0;
+    }
+    .wd-active-job  .active_job_mobile .job-listing {
+        border-radius: 10px;
+        padding: 10px 20px 20px;
+    }
+    .active_job_mobile .input-preview {
+        width: 132px;
+        height: 92px;
+    }
+    .active-job-box.active_job_mobile ul {
+        display: flex;
+        overflow: hidden;
+        clear: both;
+        justify-content: unset;
+        flex-wrap: wrap;
+        gap: 20px;
+        row-gap: 30px;
+    }
+    .active-job-box.active_job_mobile ul li {
+        height: auto;
+        display: block; width: 46%;
+    }
+    .active-job-box.active_job_mobile ul li.view-quote a {
+        width: 100%;
+    }
+    .active-job-box.active_job_mobile ul li.job-img {
+        order: 1;
+    }
+    .active-job-box.active_job_mobile ul li.view-quote {
+        order: 2;
+        display: flex;
+        margin-top: 13px;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .active-job-box.active_job_mobile ul li.job-access {
+        order: 3;
+        position: absolute;
+        right: 8px;
+        top: 85px;
+        display: none;
+    }
+    .active-job-box.active_job_mobile ul li.job-access a.wd-blue {
+        display: block;
+        margin-bottom: 3px;
+    }
+    .active-job-box.active_job_mobile ul  li.list_detail {
+        order: 4;
+    }
+    .active-job-box.active_job_mobile ul li.list_detail {
+        order: 5;
+    }
+    .active_job_mobile  .job-access::before{
+        display: none;
+    }
+    .bidding_new_design_date.job_new_grid_date {
+        padding-left: 0 !important;
+    }
+    .active-job-box.active_job_mobile ul li.job-access {
+        top: 110px;
+    }
+    .bidding_new_design {
+        padding: 0 0px 5px !important;
+    }
+    .active-job-box.active_job_mobile ul li.job-access.completed_jobs{
+        top: 100px;
+    }
+    .active_job_mobile .quote_grp_btns {
+        padding: 15px 0 15px;
+    }
+    .job-list-img .job-list-img-sec img {
+        object-fit: cover;
+    }
 }
 
 </style>
@@ -382,6 +384,15 @@
                                 Contact transporter
                             </a>
                             @endif
+                            <a href="{{route('front.leave_feedback', ['id' => $item->quoteByTransporter->id ?? null]) }}" class="wd-blue d-sm-none">Leave feedback</a>
+                            <!-- <a href="javascript:;" class="wd-orange">View VAT receipt </a> -->
+                            <div class="d-sm-none">
+                                @if($item->is_mark_as_complete == 'no')
+                                <a href="javascript:;" class="wd-red" onclick="markComplete('{{$item->id}}')">Mark complete</a>
+                                @else
+                                <a href="javascript:;" class="wd-red">Complete</a>
+                                @endif
+                            </div>
                         </li>
                         <li class="job-access completed_jobs">
                             <a href="{{route('front.leave_feedback', ['id' => $item->quoteByTransporter->id ?? null]) }}" class="wd-blue">Leave feedback</a>

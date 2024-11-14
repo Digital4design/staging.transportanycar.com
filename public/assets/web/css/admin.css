@@ -3225,8 +3225,10 @@ a.chat_cross {
   font-size: 20px;
   font-weight: 400;
   border-bottom: 1px solid #FFFFFF33;
-  padding: 0 0 15px;
-  margin: 0 0 12px;
+  /* padding: 0 0 15px;
+  margin: 0 0 12px; */
+  padding: 0 0 30px;
+  margin: 0 0 30px;
   color: #fff;
 }
 
@@ -6096,9 +6098,9 @@ div#spam-banner button.btn {
   }
 
   /* admin past deliveries  */
-  .wd-profl-delivr ul {
+  /* .wd-profl-delivr ul {
     margin: 40px 0 0;
-  }
+  } */
 
   .wd-deliver-lft {
     padding: 29px 24px;
@@ -6877,9 +6879,9 @@ div#spam-banner button.btn {
     margin-bottom: 0;
   }
 
-  .admin_del .wd-deliver-box .col-lg-8 {
+  /* .admin_del .wd-deliver-box .col-lg-8 {
     padding-right: 0;
-  }
+  } */
 
   .wd-quote-area {
     margin: 0;
@@ -7901,9 +7903,9 @@ g.highcharts-input-group {
     width: 25px;
   }
 
-  .admin_del .wd-deliver-box .new_dev_delivery .col-lg-8 {
+  /* .admin_del .wd-deliver-box .new_dev_delivery .col-lg-8 {
     padding-right: 15px !important;
-  }
+  } */
 
   .new_dev_delivery .wd-quote-box {
     padding: 30px 20px;
@@ -7925,7 +7927,7 @@ g.highcharts-input-group {
     row-gap: 0;
     justify-content: space-between;
     padding: 0 10px 5px;
-    margin-top: 30px;
+    margin-top: 15px;
   }
 
   .bidding_new_design_grid {
@@ -8062,14 +8064,14 @@ g.highcharts-input-group {
 
 
   .admin_del .wd-deliver-box .new_dev_delivery .col-lg-8.accepted_quotes_row {
-    padding-right: 0 !important;
+    /* padding-right: 0 !important; */
     margin: 0 !important;
-    padding-left: 20px !important;
+    /* padding-left: 20px !important; */
   }
 
-  .admin_del .wd-deliver-box .new_dev_delivery .col-lg-8.accepted_quotes_row .new_sec_delivr {
+  /* .admin_del .wd-deliver-box .new_dev_delivery .col-lg-8.accepted_quotes_row .new_sec_delivr {
     margin-right: -4px !important;
-  }
+  } */
 
   .new_dev_delivery .accepted_quotes_row .wd-quote-box {
     width: 95%;
@@ -8077,8 +8079,9 @@ g.highcharts-input-group {
 
   .new_dev_delivery .accepted_quotes_row .wd-quote-box.accepted_quotes_new {
     width: 100%;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    margin-bottom: 50px;
+    /* border-top-right-radius: 0;
+    border-bottom-right-radius: 0; */
   }
 }
 
