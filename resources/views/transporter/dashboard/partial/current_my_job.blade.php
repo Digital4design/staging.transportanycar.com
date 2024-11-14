@@ -163,7 +163,11 @@
                         </a>
                     @endif
                 @elseif($type == 'cancel')
-                    <a href="{{ route('transporter.current_jobs', ['id' => $quote->quote_by_transporter_id]) }}" class="view_btn cancel_btn_mobile"> View details </a>
+                <a href="javascript:;" id="edit_quote_{{ $quote->id }}"
+                    onclick="edit_quote_amount(this, '{{ $quote->id }}');"
+                    data-amount="{{ roundBasedOnDecimal($quote->transporter_payment) }}"
+                    data-lowbid="{{ $lowestBid }}" data-bidcount="{{ $transporterQuotesCount }}"
+                    class="view_btn edit_quote_btn won_details">Edit bid</a>
                 @endif
             </li>
             <div class="bidding_new_design">
