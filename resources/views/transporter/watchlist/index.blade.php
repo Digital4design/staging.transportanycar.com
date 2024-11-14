@@ -1689,7 +1689,7 @@
                             <!-- for mobile view -->
                             <div class="mainContentDiv">
 
-                                @if ($quotes > 0)
+                                @if ($quotes[0] > '')
                                     <div id="watchlisting">
                                         @foreach ($quotes as $quote)
                                             <div class="boxContent">
