@@ -1084,7 +1084,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-xl-6 requied_sec verify_email_sec mb-0 pl-md-3  mt-3 pt-2">
-                                                    <h2 class="uploaded-documents p-0 m-0">Email Verify:</h2>
+                                                    <h2 class="uploaded-documents p-0 m-0">Verify email:</h2>
                                                     <p class="subtitle text-success message">Email verified</p>
                                                     <div class="upload-section ">
                                                         <div class="requied_sec_row w-100">
