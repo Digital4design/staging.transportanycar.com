@@ -2,10 +2,8 @@
 
 @section('head_css')
     <style>
-        #transporter-feedback .navbar {
-            position: relative!important;
-        }
-        #transporter-feedback .content_container {padding-top: 0;}
+      
+        
         .banner {
             font-size: 16px;
             line-height: 20px;
@@ -144,13 +142,17 @@
                 z-index: 4;
                 /* position: fixed; */
             }
+            #transporter-feedback .navbar {
+                position: relative!important;
+            }
+            #transporter-feedback .content_container {padding-top: 0;}
         }
 
         @media(max-width: 767px) {
             .banner {
                 right: -50px;
                 top: 85px;
-                z-index: 4;
+                z-index: 2;
             }
 
             .wd-transport-img {

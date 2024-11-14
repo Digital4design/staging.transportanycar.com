@@ -1,11 +1,15 @@
-{{-- @extends('layouts.web.app') --}}
-@extends('layouts.web.dashboard.app')
+@extends('layouts.web.app')
+{{-- @extends('layouts.web.dashboard.app') --}}
 
 
 @section('head_css')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
 @endsection
 <style>
+    main,
+    .admin-header {
+        padding:0!important;
+    }
 .error{
   font-size: 14px;
   color: red;
