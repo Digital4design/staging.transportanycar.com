@@ -1688,7 +1688,8 @@
 
                             <!-- for mobile view -->
                             <div class="mainContentDiv">
-                                @if ($quotes)
+                                
+                                @if ($quotes >= 0)
                                     <div id="watchlisting">
                                         @foreach ($quotes as $quote)
                                             <div class="boxContent">
