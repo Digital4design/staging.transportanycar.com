@@ -218,9 +218,19 @@
                             </b>
                         </p>
                     </li>
-                    <li class="view-quote">
+                    {{-- <li class="view-quote">
                         <a href="{{route('front.quotes', $item->id)}}">View quotes</a>
-                    </li>
+                    </li> --}}
+                    <li class="view-quote">
+                    @if($item->status == 'pending')
+                    <a href="{{route('front.quotes', $item->id)}}">View quotes</a>
+                    @elseif($item->quoteByTransporter->status == 'accept') 
+                        {{-- @if($job_status != 'completed') --}}
+                            <a href="{{ route('front.booking_confirm_page', $item->id) }}"class="wd-accepted-btn">Go to booking</a>
+                      {{-- @endif --}}
+                    @endif
+                </li>
+
                     <li class="job-access">
                         <a href="javascript:;" class="wd-delete" data-toggle="modal" data-target="#delete_quote_{{$item->id}}">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

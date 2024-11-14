@@ -173,7 +173,6 @@ document.getElementById("togglePassword1").addEventListener("click", function ()
     const passwordField = document.getElementById("npassword");
     const icon = document.getElementById("passwordIcon1");
 
-    // Toggle the password visibility
     if (passwordField.type === "password") {
         passwordField.type = "text";
         icon.classList.replace("fa-eye", "fa-eye-slash");
@@ -183,11 +182,11 @@ document.getElementById("togglePassword1").addEventListener("click", function ()
     }
 });
 
+// Toggle password visibility for confirm password
 document.getElementById("togglePassword2").addEventListener("click", function () {
     const passwordField = document.getElementById("cpassword");
     const icon = document.getElementById("passwordIcon2");
 
-    // Toggle the password visibility
     if (passwordField.type === "password") {
         passwordField.type = "text";
         icon.classList.replace("fa-eye", "fa-eye-slash");
@@ -196,6 +195,7 @@ document.getElementById("togglePassword2").addEventListener("click", function ()
         icon.classList.replace("fa-eye-slash", "fa-eye");
     }
 });
+
 
         function uploadImage(image)
         {
@@ -299,15 +299,15 @@ document.getElementById("togglePassword2").addEventListener("click", function ()
             $(document).on('submit', '#form_account', function () {
                 $('#form_account').validate({
                     rules: {
-                        opassword: {
-                            required: true,
-                        },
+                        // opassword: {
+                        //     required: true,
+                        // },
                         npassword: {
-                            required: true,
+                            // required: true,
                             minlength: 6,
                         },
                         cpassword: {
-                            required: true,
+                            // required: true,
                             equalTo: "#npassword",
                         },
                         email: {

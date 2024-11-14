@@ -163,7 +163,7 @@
                         </a>
                     @endif
                 @elseif($type == 'cancel')
-                    <a href="javascript:;" class="view_btn cancel_btn_mobile"> View details </a>
+                    <a href="{{ route('transporter.current_jobs', ['id' => $quote->quote_by_transporter_id]) }}" class="view_btn cancel_btn_mobile"> View details </a>
                 @endif
             </li>
             <div class="bidding_new_design">

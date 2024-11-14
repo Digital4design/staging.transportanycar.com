@@ -154,15 +154,17 @@ class GuestController extends ResponseController
                 $models = Vehicle::where('make', 'LIKE', "%{$pre_make}%")
                 ->where('model', 'LIKE', "%{$term}%")
                 ->distinct()
-                ->pluck('model')
-                ->map(function($model) {
-                    return explode(' ', $model)[0];
-                });
+                ->pluck('model');
+                // ->map(function($model) {
+                //     return explode(' ', $model)[0];
+                // });
+               
                 // Remove duplicates if needed
                 $models = $models->unique()->values();
                     $data = $models;
-                }
+                 }
         }
+        // return $data;
         if(count($data) > 0) {
             $this->sendResponse(200, __('api.succ'), $data);
         } else {
