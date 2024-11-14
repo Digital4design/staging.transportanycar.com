@@ -7,7 +7,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\General\NotificationController;
 use Illuminate\Support\Facades\Mail;
 use App\Services\EmailService;
-use App\ {User,Thread,UserQuote};
+use App\{User, Thread, UserQuote};
 use App\QuoteByTransporter;
 
 
@@ -108,17 +108,17 @@ Route::middleware('auth:admin')->group(function () {
 });
 
 Route::get('/send-email', [EmailController::class, 'sendTestEmail']);
-Route::post('/send-otp',[App\Http\Controllers\Front\QuotesController::class,'sendOtp'])->name('sendOtp');
-Route::post('/verify-otp',[App\Http\Controllers\Front\QuotesController::class,'verifyOtp'])->name('verifyOtp');
+Route::post('/send-otp', [App\Http\Controllers\Front\QuotesController::class, 'sendOtp'])->name('sendOtp');
+Route::post('/verify-otp', [App\Http\Controllers\Front\QuotesController::class, 'verifyOtp'])->name('verifyOtp');
 
 
-Route::get("/new/template/check",function(){
-    $maildata['user'] = User::where('id',"1104")->first();
+Route::get("/new/template/check", function () {
+    $maildata['user'] = User::where('id', "1104")->first();
     $maildata['thread'] = Thread::where('id', '1707')->first();
     $maildata['message'] = "hello how are you ahfkadfkj sdfhsdfhsod shsi gsf gsiof iosf g";
     $maildata['from_page'] = 'quotes_admin';
     $maildata['quotes'] =  UserQuote::where('id', 717)->first();
     $maildata['quote_id'] = 21;
     $maildata['type'] = 'user';
-    return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' =>1707]);
+    return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
 });

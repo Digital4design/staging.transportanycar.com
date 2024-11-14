@@ -353,7 +353,7 @@ fa-eye:before {
                     <div class="form-group form-check custom_check">
                         <div class="form-error">
                             <input type="checkbox" class="form-check-input" name="exampleCheck2" id="exampleCheck2" required>
-                            <label class="form-check-label" for="exampleCheck2"><span>Please tick here to confirm you’ve read and accepted our <a href="javascript:;">terms & conditions</a>.</span></label>
+                            <label class="form-check-label" for="exampleCheck2"><span>Please tick here to confirm you’ve read and accepted our <a target="_blank" href="{{route('front.term_condition')}}">terms & conditions</a>.</span></label>
                         </div>
                     </div>
                     <div class="btngroup">
