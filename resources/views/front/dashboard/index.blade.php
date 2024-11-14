@@ -228,7 +228,7 @@
                     <a href="{{route('front.quotes', $item->id)}}">View quotes</a>
                     @elseif($item->quoteByTransporter->status == 'accept') 
                         {{-- @if($job_status != 'completed') --}}
-                            <a href="{{ route('front.booking_confirm_page', $item->id) }}"class="wd-accepted-btn">Go to booking</a>
+                            <a href="{{ route('front.booking_confirm_page', $item->id) }}"class="wd-accepted-btn">Complete booking</a>
                       {{-- @endif --}}
                     @endif
                 </li>
