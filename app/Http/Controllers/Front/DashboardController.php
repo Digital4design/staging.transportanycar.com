@@ -154,18 +154,28 @@ class DashboardController extends WebController
             'email' => ['required', 'email', Rule::unique('users')->ignore($user_data->id)->whereNull('deleted_at')],
             'opassword' => ['required'],
             // 'npassword' => ['required'],
-            'cpassword' => [ 'same:npassword'],
+            // 'cpassword' => [ 'same:npassword'],
         ], [
             'opassword.exists' => __('admin.change_password_not_match'),
             'cpassword.same' => __('admin.change_password_not_same'),
         ]);
+        
         if ($request->opassword == $user_data->getAuthPassword()) {
+            if ($request->npassword == ''){
+                $is_update = $user_data->update(['email' => $request->email]);
+                if ($is_update) {
+                    success_session(__('admin.chang_profile_updated'));
+                } else {
+                    error_session(__('admin.chang_fail_to_update'));
+                }
+            }else{
             $is_update = $user_data->update(['password' => $request->npassword, 'email' => $request->email]);
             if ($is_update) {
                 success_session(__('admin.chang_profile_updated'));
             } else {
                 error_session(__('admin.chang_fail_to_update'));
             }
+        }
         } else {
             error_session(__('admin.change_password_not_match'));
         }
