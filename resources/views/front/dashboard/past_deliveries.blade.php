@@ -131,10 +131,27 @@
 
                                         <div class="list_detail">
                                             <span>
+                                                <img src="{{ asset('assets/web/images/dashboard/calender.png') }}" alt="Calendar Icon">
+                                            </span>
+                                            <p>Accepted:</p>
+                                            <p><b>{{ $item->updated_at->format('d M Y') }}</b></p>
+                                        </div>
+
+                                        <div class="list_detail">
+                                            <span>
                                                 <img src="{{ asset('assets/web/images/dashboard/map-icon.svg') }}" alt="Map Icon">
                                             </span>
                                             <p>Pick-up area:</p>
                                             <p><b>{{ $item->pickup_postcode }}</b></p>
+                                        </div>
+
+
+                                        <div class="list_detail">
+                                            <span>
+                                                <img src="{{ asset('assets/web/images/dashboard/red-map-icon.svg') }}" alt="Map Icon">
+                                            </span>
+                                            <p>Drop-off area:</p>
+                                            <p><b>{{ $item->drop_postcode }}</b></p>
                                         </div>
 
                                         <div class="list_detail">
@@ -147,25 +164,9 @@
 
                                         <div class="list_detail">
                                             <span>
-                                                <img src="{{ asset('assets/web/images/dashboard/calender.png') }}" alt="Calendar Icon">
-                                            </span>
-                                            <p>Accepted:</p>
-                                            <p><b>{{ $item->updated_at->format('d M Y') }}</b></p>
-                                        </div>
-
-                                        <div class="list_detail">
-                                            <span>
-                                                <img src="{{ asset('assets/web/images/dashboard/red-map-icon.svg') }}" alt="Map Icon">
-                                            </span>
-                                            <p>Drop-off area:</p>
-                                            <p><b>{{ $item->drop_postcode }}</b></p>
-                                        </div>
-
-                                        <div class="list_detail">
-                                            <span>
                                                 <img src="{{ asset('assets/web/images/dashboard/pound.png') }}" alt="Pound Icon">
                                             </span>
-                                            <p>Quote:</p>
+                                            <p>Quote amount:</p>
                                             <p><b>£@if($item->quoteByTransporter) {{ roundBasedOnDecimal($item->quoteByTransporter->price) }} @endif</b></p>
                                         </div>
                                     </div>

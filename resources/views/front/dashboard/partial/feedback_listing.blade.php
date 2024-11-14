@@ -108,7 +108,7 @@
 
                 </div> 
             </div> 
-            <span class="review-percentage">{{$ratings['star_5']}}</span>
+            <span class="review-percentage">{{$ratings['star_5']}}%</span>
         </li>
         <li>
             <span class="review-steps">4</span>
@@ -120,7 +120,7 @@
 
                 </div> 
             </div> 
-            <span class="review-percentage">{{$ratings['star_4']}}</span>
+            <span class="review-percentage">{{$ratings['star_4']}}%</span>
         </li>
         <li>
             <span class="review-steps">3</span>
@@ -132,7 +132,7 @@
 
                 </div> 
             </div> 
-            <span class="review-percentage">{{$ratings['star_3']}}</span>
+            <span class="review-percentage">{{$ratings['star_3']}}%</span>
         </li>
         <li>
             <span class="review-steps">2</span>
@@ -144,7 +144,7 @@
 
                 </div> 
             </div> 
-            <span class="review-percentage">{{$ratings['star_2']}}</span>
+            <span class="review-percentage">{{$ratings['star_2']}}%</span>
         </li>
         <li>
             <span class="review-steps">1</span>
@@ -156,7 +156,7 @@
 
                 </div> 
             </div> 
-            <span class="review-percentage">{{$ratings['star_1']}}</span>
+            <span class="review-percentage">{{$ratings['star_1']}}%</span>
         </li>
     </ul>
 </div>

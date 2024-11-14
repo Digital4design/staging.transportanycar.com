@@ -328,7 +328,7 @@
                                                             @endif
                                                     </li>
                                                     <li>
-                                                        <p>Postive Feedback:</p>
+                                                        <p>Postive feedback:</p>
                                                         <span>{{ $rating_percentage}}%</span>  
                                                     </li>
                                                     <li>
@@ -369,10 +369,8 @@
                                                         <p>Insurance cover:</p>
                                                         <span>
                                                             @if(!empty($company_detail) && $company_detail->git_insurance_cover !== null)
-    £{{ $company_detail->git_insurance_cover }}
-@endif
-   
-
+                                                                £{{ $company_detail->git_insurance_cover }}
+                                                            @endif
                                                         </span>
                                                     </li>
                                                     <li>
