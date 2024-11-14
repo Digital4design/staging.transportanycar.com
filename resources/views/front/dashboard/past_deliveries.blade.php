@@ -25,7 +25,7 @@
     flex-wrap: wrap;
 }
 .accepted_quotes_row .wd-quote-lft .list_detail {
-    width: 30%;
+    width: 100%;
 }
 .new_dev_delivery .accepted_quotes_row .wd-quote-box.accepted_quotes_new .wd-quote-lft {
     display: grid;

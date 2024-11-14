@@ -8,8 +8,8 @@
     color: #5F5F5F;
 }
 .wd-file-upload img.img-fluid {
-    width: 46px !important;
-    height: 46px !important;
+    width: 40px !important;
+    height: 40px !important;
     object-fit: contain !important;
     margin-bottom: 4px !important;
 }
@@ -57,11 +57,11 @@
 }
 .wd-active-job  .active_job_mobile .job-listing {
     border-radius: 10px;
-    padding: 5px 10px 10px;
+    padding: 5px 20px 10px;
 }
 .active_job_mobile .input-preview {
-    width: 100%;
-    height: 114px;
+    width: 132px;
+    height: 92px;
 }
 .active-job-box.active_job_mobile ul {
     display: flex;
@@ -232,36 +232,36 @@
                 <div class="bidding_new_design">
                     <div class="bidding_new_design_grid job_new_grid_type">
                         <span>Delivery type:</span>
-                        <span class="sub_color">
+                        <span class="sub_color " style="font-weight: 500">
                         {{ $item->how_moved }}
                         </span>
                     </div>
                     @if($transporterQuotesCount > 0)
                         <div class="bidding_new_design_grid job_new_grid_lowest">
                             <span>Current lowest bid:</span>
-                            <span class="sub_color">£{{roundBasedOnDecimal($lowestBid)}}</span>
+                            <span class="sub_color " style="font-weight: 500">£{{roundBasedOnDecimal($lowestBid)}}</span>
                         </div>
                     @else
                     <div class="bidding_new_design_grid job_new_grid_lowest">
                         <span>Current lowest bid:</span>
-                        <span class="sub_color">£0</span>
+                        <span class="sub_color  " style="font-weight: 500">£0</span>
                     </div>
                     @endif
 
                     <div class="bidding_new_design_grid job_new_grid_miles">
                         <span>Journey miles:</span>  
-                        <span class="sub_color">{{ str_replace(' mi', '', $item->distance) }} <span>({{$item->duration}})</span></span>    
+                        <span class="sub_color  " style="font-weight: 500">{{ str_replace(' mi', '', $item->distance) }} <span class=" " style="font-weight: 500">({{$item->duration}})</span></span>    
                     </div>
 
                     @if($transporterQuotesCount > 0)
                     <div class="bidding_new_design_grid job_new_grid_bidding">
                         <span>Transporters bidding:</span>
-                        <span class="sub_color">{{ $transporterQuotesCount }}</span>
+                        <span class="sub_color  " style="font-weight: 500">{{ $transporterQuotesCount }}</span>
                     </div>
                     @else
                     <div class="bidding_new_design_grid job_new_grid_bidding">
                         <span>Transporters bidding:</span>
-                        <span class="sub_color">0</span>
+                        <span class="sub_color  " style="font-weight: 500">0</span>
                     </div>
                     @endif
                 </div>
