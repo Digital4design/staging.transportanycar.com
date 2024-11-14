@@ -371,6 +371,12 @@ ul.pagination {
                                                                 {{ str_replace(',', ', ', $user->payment_methods) }}</span>
                                                         </li>
                                                     </ul>
+
+                                                    @if($quote->status != 'accept')
+                                                    <div class="accept_grp">
+                                                        <a href="javascript:;" class="wd-accept-btn"  onclick="quoteChangeStatus({{ $quote->id }})" >Accept quote</a>
+                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

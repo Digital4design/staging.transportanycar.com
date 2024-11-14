@@ -911,6 +911,7 @@ class DashboardController extends WebController
             $subjectoldPrice = number_format($oldPrice, 0, '.', ',');
             // Update the record with new quote details
             $quoteByTransporter->price = $quoteDetails['customer_quote'];
+            $quoteByTransporter->status = 'pending';
             $quoteByTransporter->deposit = $quoteDetails['deposit'];
             $quoteByTransporter->transporter_payment = $quoteDetails['transporter_payment'];
             $quoteByTransporter->outbid_notified = 0;
