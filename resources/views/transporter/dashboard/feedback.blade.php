@@ -139,7 +139,7 @@
             .banner {
                 right: -50px;
                 top: 90px;
-                z-index: 4;
+                z-index: 2;
                 /* position: fixed; */
             }
             #transporter-feedback .navbar {
@@ -328,7 +328,7 @@
                                                             @endif
                                                     </li>
                                                     <li>
-                                                        <p>Postive feedback:</p>
+                                                        <p>Positive feedback:</p>
                                                         <span>{{ $rating_percentage}}%</span>  
                                                     </li>
                                                     <li>

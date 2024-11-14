@@ -147,9 +147,17 @@ ul.pagination {
     }
     
     @media(max-width: 991px) {
-        .admin-header {
-            position: fixed!important;
+        #user-feedback header ~ section {overflow: hidden; position:relative;}
+        #user-feedback .wd-white-box {padding:0;}
+        #user-feedback .admin-header {
+            position: relative !important;
         }
+        #user-feedback .adjust_spacing {
+            padding-top: 0;
+        }
+        /* .admin-header {
+            position: fixed!important;
+        } */
         .adjust_spacing {
             padding-top: 65px;
         }
@@ -162,16 +170,16 @@ ul.pagination {
         .banner {
             right: -50px;
             top: 90px;
-            z-index: 4;
-            position: fixed;
+            z-index: 2;
+            /* position: fixed; */
         }
     }
 
     @media(max-width: 767px) {
         .banner {
             right: -50px;
-            top: 85px;
-            z-index: 4;
+            top: 20px;
+            z-index: 2;
         }
 
         .wd-transport-img {
@@ -346,7 +354,7 @@ ul.pagination {
                                                                 @endif
                                                         </li>
                                                         <li>
-                                                            <p>Postive Feedback:</p>
+                                                            <p>Positive feedback:</p>
                                                             <span>{{ $rating_percentage}}%</span>  
                                                         </li>
                                                         <li>
@@ -373,9 +381,9 @@ ul.pagination {
                                                     </ul>
 
                                                     @if($quote->status != 'accept')
-                                                    <div class="accept_grp">
-                                                        <a href="javascript:;" class="wd-accept-btn"  onclick="quoteChangeStatus({{ $quote->id }})" >Accept quote</a>
-                                                    </div>
+                                                        <div class="accept_grp">
+                                                            <a href="javascript:;" class="wd-accept-btn"  onclick="quoteChangeStatus({{ $quote->id }})" >Accept quote</a>
+                                                        </div>
                                                     @endif
                                                 </div>
                                             </div>
@@ -435,6 +443,7 @@ ul.pagination {
 @section('script')
 <script>
     $(function () {
+        $('body').attr('id','user-feedback');
             $('.photo_id_popover').popover({
             content: 'We have a copy of this transporters valid drivers license photo I.D to protect you and ensuring a safe market place for transporting your vehicle.',
               container: '.photo_id_popover',
