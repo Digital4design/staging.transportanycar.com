@@ -546,7 +546,7 @@
                                     </div>
                                 </div>
                             <div class="form-group text-left d-flex flex-wrap align-items-center" style="gap:5px;">
-                                <input type="checkbox" id="terms" style="position: absolute; left: 0; top: 3px;" />
+                                <input type="checkbox" id="terms" style="position: absolute; left: 0; top: 1px;" />
                                 <label for="terms">I accept the <a target="_blank" href="{{route('front.term_condition')}}">terms & conditions</a> and <a target="_blank" href="{{route('front.privacy_policy')}}">privacy policy</a>.</label>
                                 <p>We will only use your contact details to send you competitive quotes in relation to this transport request. You can opt out of receiving quotes at any time.</p>
                             </div>

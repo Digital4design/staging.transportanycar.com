@@ -78,6 +78,16 @@ ul.suggestions-list li {
 
 
 @media screen and (max-width: 991px) {
+    header.admin-header .admin-menu {display: none;}
+    header.admin-header .navbar .brand img {height: auto; max-width: 190px; width: 100%;}
+    header.admin-header .navbar {
+        padding: 30px 0px;
+    }
+    header.admin-header {
+        background: linear-gradient(180deg, rgba(0, 141, 212, 0.31) 0%, rgba(245, 251, 254, 0) 100%);
+        position: relative;        
+        box-shadow: none;
+    }
     .admin-header .navbar #nav:checked~.wrapper .menu {
         padding: 0;
         box-shadow: none;
