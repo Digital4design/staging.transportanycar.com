@@ -77,7 +77,31 @@ ul.suggestions-list li {
 }
 
 
-
+@media screen and (max-width: 991px) {
+    .admin-header .navbar #nav:checked~.wrapper .menu {
+        padding: 0;
+        box-shadow: none;
+    }
+    .admin-header .navbar .wrapper .menu-item {
+        padding: 0 0 15px;
+    }
+    .admin-header .navbar #nav:checked~.wrapper .menu {
+        box-shadow: none;
+    }
+    .admin-header .navbar .wrapper .menu-item a {
+        padding: 6px 23px!important;
+        font-size: 15px;
+        font-weight: 400;
+        max-width: initial;
+        border: none;
+        border-radius: 0;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .admin-header .navbar .wrapper .menu-item:nth-child(2) a {margin-top: 0;}
+}
 </style>
 
 @section('content')
