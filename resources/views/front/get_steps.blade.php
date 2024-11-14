@@ -555,7 +555,7 @@
                                         <path d="M1.4848 1.62598L8.35854 8.49971L1.4848 15.3734" stroke="white" stroke-width="2.06212" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </a>--}}
-                                <button type="submit" class="wd_nextbtn form-wizard-submit" id="SaveAccount">Get Instant Quotes <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <button type="submit" class="wd_nextbtn form-wizard-submit" id="SaveAccount">Get Quotes <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1.4848 1.62598L8.35854 8.49971L1.4848 15.3734" stroke="white" stroke-width="2.06212" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </button>

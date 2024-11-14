@@ -85,7 +85,7 @@
     .active-job-box.active_job_mobile ul li.view-quote {
         order: 2;
         display: flex;
-        margin-top: 13px;
+        margin-top: 7px;
         flex-direction: column;
         gap: 15px;
     }
@@ -94,6 +94,9 @@
         position: absolute;
         right: 8px;
         top: 85px;
+        /* display: none; */
+    }
+    .active-job-box.active_job_mobile ul li.job-access.completed_jobs {
         display: none;
     }
     .active-job-box.active_job_mobile ul li.job-access a.wd-blue {
@@ -180,7 +183,7 @@
                         <span>
                             <img src="{{asset('assets/web/images/dashboard/map-icon.svg')}}" alt="Map Icon">
                         </span>
-                        <p>Pick-up area:</p>
+                        <p>Pick-up postcode:</p>
                         <p><b>{{formatAddress($item->pickup_postcode)}}</b></p>
                     </li>
 
@@ -340,7 +343,7 @@
                             <span>
                                 <img src="{{asset('assets/web/images/dashboard/map-icon.svg')}}" alt="Map Icon">
                             </span>
-                            <p>Pick-up area:</p>
+                            <p>Pick-up postcode:</p>
                             <p><b>{{formatAddress($item->pickup_postcode)}}</b></p>
                         </li>
 
