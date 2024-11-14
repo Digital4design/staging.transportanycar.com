@@ -346,7 +346,7 @@ ul.pagination {
                                                                 @endif
                                                         </li>
                                                         <li>
-                                                            <p>Postive Feedback:</p>
+                                                            <p>Postive feedback:</p>
                                                             <span>{{ $rating_percentage}}%</span>  
                                                         </li>
                                                         <li>
