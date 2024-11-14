@@ -109,7 +109,7 @@
     padding-left: 0 !important;
 }
 .active-job-box.active_job_mobile ul li.job-access {
-    top: 125px;
+    top: 110px;
 }
 .bidding_new_design {
     padding: 0 0px 5px !important;
