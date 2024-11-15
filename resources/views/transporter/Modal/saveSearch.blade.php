@@ -27,7 +27,7 @@
     }
 
     .get_quote .modal-footer p {
-        font-size: 13px !important;
+        font-size: 14px !important;
         font-weight: 300;
         color: #000000;
         margin: 0 0 28px !important;
@@ -163,9 +163,9 @@
                         {{-- <input class="form-check-input m-0 position-absolute" id="emailNtf" name="emailNtf"  type="checkbox" value="" checked /> --}}
 
                         {{-- <input class="form-check-input m-0 position-absolute" type="checkbox" value="1" checked /> --}}
-                        <label class="form-check-label save-search-email position-relative" for="emailNtf">
+                        {{-- <label class="form-check-label save-search-email position-relative" for="emailNtf">
                             Get emails for jobs that match this search.
-                        </label>
+                        </label> --}}
                     </div>
                 </div>
                 <div class="modal-footer">
