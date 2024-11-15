@@ -528,7 +528,7 @@ class QuotesController extends WebController
             ]; 
          
             $htmlContent = view('mail.General.today-transporter-leads', ['quote' => $mailData])->render();
-            $subject='You have received a transport notification';
+            $subject='Todays Transport Leads';
 
 
           
