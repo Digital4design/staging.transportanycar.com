@@ -271,7 +271,7 @@
 			Set up a new password.
 		</p>
 		<p class="adjust-space">
-			Reset your password to your account @if($data['page_type'] == 'admin')
+			Reset your password to your TransportAnyCar.com account @if($data['page_type'] == 'admin')
 			<a href="{{route('front.forgot_password_view', $data['reset_token'])}}" target="_blank" >here</a>
 			@elseif($data['page_type'] == 'user')
 			<a href="{{route('front.web_password_upadte', $data['reset_token'])}}" target="_blank" >here</a>

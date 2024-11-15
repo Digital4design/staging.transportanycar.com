@@ -326,8 +326,8 @@
         <p class="message">{{$data->message}}</p>
         <a  href="{{route('front.messages', ['thread_id' => $thread_id])}}" class="verify-btn" style="padding-top: 6px; padding-bottom: 6px; padding-left: 30px; padding-right: 30px;">Reply</a>
     </div>
-    <p class="adjust-space">Note: The quote shown is the total amount.  If you are happy with the quote then simply accept and secure your booking.</p>
-    <p class="adjust-space">You may receive more quote from our network of transporters so keep on eye out and you can accept your preferred quote at any time.</p>
+    <p class="adjust-space">Note: The quote shown is the total amount.  If you are happy with the quote then simply accept it and secure your booking.</p>
+    <p class="adjust-space">You may receive more quotes from our network of transporters so keep an eye out and you can accept your preferred quote at any time.</p>
     <p>Best Regards,</p>
     <p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>
     <p class="adjust-half-space">Manage notification <a href="{{ url('transporter/manage_notification') }}"

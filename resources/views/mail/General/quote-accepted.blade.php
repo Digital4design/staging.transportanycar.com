@@ -132,13 +132,30 @@
                     width: 44%;
                 }
         } */
-    	h1,
-        h2,
         p {
             margin: 0;
         }
-		h2,
-        p,
+
+        h2 {
+            margin: 0;
+        }
+        h1 {
+            margin: 0;
+        }
+		h2 {
+            margin: 0;
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            font-size: 16px;
+            line-height: 22px;
+        }
+        p {
+            margin: 0;
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            font-size: 16px;
+            line-height: 22px;
+        }
         body {
             margin: 0;
             font-weight: 300;
@@ -246,12 +263,12 @@
 			padding-left: 20px;
 			padding-right: 20px;
 			padding-bottom: 20px;
-			display: flex;
+			/* display: flex;
 			flex-wrap: wrap;
-			flex-direction: column;
+			flex-direction: column; */
 			margin-bottom: 50px;
 		}
-		.job-info .list div {width: 50%; box-sizing: border-box}
+		.job-info .list div {width: 50%; box-sizing: border-box; margin-bottom: 20px;}
 	</style>
 </head>
 
@@ -555,12 +572,15 @@
 <div class="contain">
     <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
         style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
-        alt="transport notifiaction" title="transport notifiaction"></a>
+        alt="transport notifiaction" title="transport notifiaction" />
     <h2>Hi,</h2>
-    <p class="adjust-space">Your £{{ number_format($quote['transporter_payment'], 0) }} bid  for  {{$quote['vehicle_make']}} {{$quote['vehicle_model']}} 
+    <p class="adjust-space">
+        Your £{{ number_format($quote['transporter_payment'], 0) }} bid  for 
+         {{$quote['vehicle_make']}} {{$quote['vehicle_model']}} 
         @if(!is_null($quote['vehicle_make_1']) && !is_null($quote['vehicle_model_1']))
         / {{$quote['vehicle_make_1']}} {{$quote['vehicle_model_1']}}
-        @endif delivery has been accepted by {{ $quote['username'] }}.</p>
+        @endif delivery has been accepted by {{ $quote['username'] }}.
+    </p>
     <p class="adjust-space">Contact the customer as soon as possible to make arrangements and finalise the delivery.</p>
     <div class="details">
         <h2>Collection details</h2>
@@ -578,15 +598,14 @@
         </div>
         <div class="list">
             <div>Pickup address:</div>
-            <div> @if($quote['quotation_detail']['collection_address'])
+            <div> 
+                @if($quote['quotation_detail']['collection_address'])
                 {{ $quote['quotation_detail']['collection_address'] }}
                 @else
-                
-                        {{ $quote['quotation_detail']['collection_address_1'] }}<br>
-                        {{ $quote['quotation_detail']['collection_address_2'] }}<br>
-                        {{ $quote['quotation_detail']['collection_town'] }}<br>
-                        {{ $quote['quotation_detail']['collection_country'] }}
-                
+                    <p>{{ $quote['quotation_detail']['collection_address_1'] }}</p>
+                    <p>{{ $quote['quotation_detail']['collection_address_2'] }}</p>
+                    <p>{{ $quote['quotation_detail']['collection_town'] }}</p>
+                    <p>{{ $quote['quotation_detail']['collection_country'] }}</p>
                 @endif
             </div>
         </div>
@@ -607,7 +626,8 @@
         </div>
         <div class="list">
             <div>Delivery address:</div>
-            <div> @if($quote['quotation_detail']['delivery_address'])
+            <div> 
+                @if($quote['quotation_detail']['delivery_address'])
                {{ $quote['quotation_detail']['delivery_address'] }}
                 @else
                 
@@ -630,7 +650,7 @@
                 @endif
             </div>
         </div>
-        <div  class="list">
+        <div class="list">
             <div>Pick-up area:</div>
             <div>{{ $quote['pickup_postcode'] ?? '-' }}</div>
         </div>
@@ -640,22 +660,24 @@
         </div>
         <div  class="list">
             <div> Delivery date:</div>
-            <div>  @if($quote['delivery_timeframe_from'])
+            <div> 
+                 @if($quote['delivery_timeframe_from'])
                {{ formatCustomDate($quote['delivery_timeframe_from']) }}
                 @else
                 {{$quote['delivery_timeframe']}}
                 @endif
             </div>
         </div>
-        <div  class="list">
+        <div class="list">
             <div>Starts & drives:</div>
-            <div> {{$quote['starts_drives'] == 0 ? 'No' : 'Yes'}}
+            <div> 
+                {{$quote['starts_drives'] == 0 ? 'No' : 'Yes'}}
                 @if(!is_null($quote['starts_drives_1']))
                 / {{$quote['starts_drives_1'] == 0 ? 'No' : 'Yes'}}
                 @endif
             </div>
         </div>
-        <div  class="list">
+        <div class="list">
             <div>Delivery preference:</div>
             <div>{{ $quote['how_moved'] }}</div>
         </div>
