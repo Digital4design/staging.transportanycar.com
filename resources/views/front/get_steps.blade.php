@@ -2,6 +2,9 @@
 
 @section('head_css')
     <style>
+        main {
+            padding-top: 104px;
+        }
         .error {
             color: red;
         }
@@ -198,19 +201,19 @@
         margin-top: 1rem;
     }
     a.form-wizard-previous-btn.back-icon {
-    margin-top: 13px;
-    margin-bottom: -11px;
-}
+        margin-top: 13px;
+        margin-bottom: -11px;
+    }
 
-.back-icon {
-    width: 22%;
-}
+    .back-icon {
+        width: 22%;
+    }
 }
 
 @media(max-width: 400px){
-.check_group_blog .custom-checkbox {
-    margin-right: 25px;
-}
+    .check_group_blog .custom-checkbox {
+        margin-right: 25px;
+    }
 }
 /* added for modal number*/
 /* Styling for the OTP input fields */

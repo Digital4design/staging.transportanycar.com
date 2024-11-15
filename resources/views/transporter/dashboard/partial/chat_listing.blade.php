@@ -2,6 +2,11 @@
 $auth_user = Auth::user();
 $quoteFound = false;
 ?>
+<style>
+    .trans_current_chat.active {
+        background: #ffffff!important;
+    }
+</style>
 @if(isset($chats) && $chats->count() > 0)
     @foreach ($chats as $chat)
         <?php

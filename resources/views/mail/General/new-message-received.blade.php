@@ -176,7 +176,7 @@
             delivery.
         </p>
         <div class="message-wrap">
-            <p class="message-title"> {{ $data['user']->username }} sent you to message</p>
+            <p class="message-title"> {{ $data['user']->username }} sent you a message</p>
             <p class="message">{{ $data['message'] }}</p>
             {{-- <a class="verify-btn"  
 			href="{{ url('transporter/new-jobs-new') }}"  

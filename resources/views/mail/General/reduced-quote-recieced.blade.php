@@ -293,10 +293,10 @@
             font-weight: 400;
             border: none;
             display: inline-block;
-            padding-top: 6px;
-            padding-bottom: 6px;
-            padding-left: 30px;
-            padding-right: 30px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 40px;
+            padding-right: 40px;
             cursor: pointer;
         }
         .adjust-space { 

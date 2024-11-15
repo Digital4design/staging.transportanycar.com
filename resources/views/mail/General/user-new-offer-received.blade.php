@@ -118,10 +118,10 @@
             font-weight: 400;
             border: none;
             display: inline-block;
-            padding-top: 6px;
-            padding-bottom: 6px;
-            padding-left: 30px;
-            padding-right: 30px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 40px;
+            padding-right: 40px;
             cursor: pointer;
         }
 
@@ -315,16 +315,16 @@
         style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
         alt="transport notifiaction" title="transport notifiaction"></a>
     <h2>Hi,</h2>
-    <p class="adjust-space">You have received a quore for <span style="display: block; font-size: 22px; line-height: 28px; font-weight: 500; color:#222222; margin-top: 20px;">£{{$data->price}}</span></p>
+    <p class="adjust-space">You have received a quote for <span style="display: block; font-size: 24px; line-height: 30px; font-weight: 500; color:#222222; margin-top: 20px;">£{{$data->price}}</span></p>
     <p class="adjust-space"> from {{$data->getTransporters->username}} to deliver your {{$data->quote->vehicle_make}} {{$data->quote->vehicle_model}}</p>
     <a href="{{route('front.quotes', $data->quote->id)}}"class="verify-btn" style="border-radius: 50px;">
         View quote
     </a>
     <p class="adjust-space">You can message the transporter to make aranagements before accepting the quote.</p>
     <div class="message-wrap">
-        <p class="message-title">247transport sent you to message</p>
+        <p class="message-title">247transport sent you a message</p>
         <p class="message">{{$data->message}}</p>
-        <a  href="{{route('front.messages', ['thread_id' => $thread_id])}}" class="verify-btn">Reply</a>
+        <a  href="{{route('front.messages', ['thread_id' => $thread_id])}}" class="verify-btn" style="padding-top: 6px; padding-bottom: 6px; padding-left: 30px; padding-right: 30px;">Reply</a>
     </div>
     <p class="adjust-space">Note: The quote shown is the total amount.  If you are happy with the quote then simply accept and secure your booking.</p>
     <p class="adjust-space">You may receive more quote from our network of transporters so keep on eye out and you can accept your preferred quote at any time.</p>
