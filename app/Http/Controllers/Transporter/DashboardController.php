@@ -260,7 +260,7 @@ class DashboardController extends WebController
     }
 
     public function feedback()
-    { 
+    {
         $user_data = Auth::guard('transporter')->user();
         $my_quotes = QuoteByTransporter::where('user_id', $user_data->id)->pluck('id');
         $quotes = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)->get();
@@ -276,15 +276,14 @@ class DashboardController extends WebController
         $totalDistanceFormatted = number_format($totalDistance);
         $completedCount = $quotes->filter(function ($transaction) {
             return $transaction->quote && $transaction->quote->status == 'completed';
-
         })->count();
 
         $total_earning = $quotes->sum('amount');
-            $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+        $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
             ->whereNotNull('rating')
             ->avg('rating');
-            // return $rating_average;
-            $percentage = 0;
+        // return $rating_average;
+        $percentage = 0;
         if ($rating_average !== null) {
             $percentage = ($rating_average / 5) * 100;
             // echo "Average rating percentage: $percentage%";
@@ -331,7 +330,7 @@ class DashboardController extends WebController
         $average_rating = $total_feedbacks > 0 ? round($all_feedbacks->avg('rating'), 1) : 0;
 
         // return $ratings['star_5'];
-        $params['html'] = view('transporter.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings','average_rating'))->render();
+        $params['html'] = view('transporter.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings', 'average_rating'))->render();
         if ($request->ajax()) {
             return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $params]);
         }
@@ -515,7 +514,7 @@ class DashboardController extends WebController
                 $maildata['email'] = $quote->quote->user->email;
                 $thread_id = isset($thread->id) ? $thread->id : 0;
                 //$maildata['email'] = 'info@transportanycar.com';
-                $mailSubject = 'New Transport Quote for £' . $quoteDetails['customer_quote'] . ' to Deliver Your ' . $quote->quote->vehicle_make . ' ' . $quote->quote->vehicle_model;
+                $mailSubject = 'Transport Quote for £' . $quoteDetails['customer_quote'] . ' to Deliver Your ' . $quote->quote->vehicle_make . ' ' . $quote->quote->vehicle_model;
                 if (!empty($quote->quote->vehicle_make_1) && !empty($quote->quote->vehicle_model_1)) {
                     $mailSubject .= ' / ' . $quote->quote->vehicle_make_1 . ' ' . $quote->quote->vehicle_model_1;
                 }
@@ -534,11 +533,10 @@ class DashboardController extends WebController
             } else {
                 Log::info('User with email ' . $quote->quote->user->email . ' has opted out of receiving emails. Quotation email not sent.');
             }
-            if($quote->quote->user->mobile)
-                {
-                    $smS = "Transport Any Car: New quote for £" . $quoteDetails['customer_quote'] . " to deliver your " . $quote->quote->vehicle_make . " " . $quote->quote->vehicle_model . ". " . request()->getSchemeAndHttpHost() . "/quotes/" . $quote->quote->id . " " . request()->getSchemeAndHttpHost() . "/account";
-                    $this->sendSMS->sendSms($quote->quote->user->mobile,$smS);
-                }
+            if ($quote->quote->user->mobile) {
+                $smS = "Transport Any Car: New quote for £" . $quoteDetails['customer_quote'] . " to deliver your " . $quote->quote->vehicle_make . " " . $quote->quote->vehicle_model . ". " . request()->getSchemeAndHttpHost() . "/quotes/" . $quote->quote->id . " " . request()->getSchemeAndHttpHost() . "/account";
+                $this->sendSMS->sendSms($quote->quote->user->mobile, $smS);
+            }
         } catch (\Exception $ex) {
             Log::error('Error sending email: ' . $ex->getMessage());
         }
@@ -617,7 +615,7 @@ class DashboardController extends WebController
                 } else {
                     return response()->json(['status' => false, 'message' => 'Failed to update preference.']);
                 }
-            }elseif ($request->email_type == 'outbid_email_unsubscribe') {
+            } elseif ($request->email_type == 'outbid_email_unsubscribe') {
                 $status = $user->update(['outbid_email_unsubscribe' => $request->value]);
                 if ($status) {
                     return response()->json(['status' => true,  'message' => 'Preference updated successfully.']);
@@ -946,10 +944,9 @@ class DashboardController extends WebController
                 } else {
                     Log::info('User with email ' . $quote->user->email . ' has opted out of receiving emails. Edit quotation email not sent.');
                 }
-                if($customer_user->mobile && ($quoteDetails['customer_quote'] < $oldPrice))
-                {
-                $smS = "Transport Any Car:  Quote reduced from £$oldPrice to £".$quoteDetails['customer_quote']." to deliver your $quote->vehicle_make $quote->vehicle_model. ".request()->getSchemeAndHttpHost()."/quotes/$quote->id  "." ".request()->getSchemeAndHttpHost()."/account";
-                $this->sendSMS->sendSms($customer_user->mobile,$smS);
+                if ($customer_user->mobile && ($quoteDetails['customer_quote'] < $oldPrice)) {
+                    $smS = "Transport Any Car:  Quote reduced from £$oldPrice to £" . $quoteDetails['customer_quote'] . " to deliver your $quote->vehicle_make $quote->vehicle_model. " . request()->getSchemeAndHttpHost() . "/quotes/$quote->id  " . " " . request()->getSchemeAndHttpHost() . "/account";
+                    $this->sendSMS->sendSms($customer_user->mobile, $smS);
                 }
             } catch (\Exception $ex) {
                 Log::error('Error sending email: ' . $ex->getMessage());
@@ -1075,14 +1072,14 @@ class DashboardController extends WebController
     {
         // Retrieve paginated saved search data
         $data = SaveSearch::where('user_id', auth()->user()->id)->paginate(50);
-    
+
         // Transform each search item to include a correct quote count
         $data->getCollection()->transform(function ($search) {
             // Define coordinates and distance range
             $maxDistance = config('constants.max_range_km');
             $user_data = Auth::guard('transporter')->user();
             $my_quote_ids = QuoteByTransporter::where('user_id', $user_data->id)->pluck('user_quote_id');
-    
+
             // Fetch pickup coordinates
             $pickUpResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
                 'address' => $search->pick_area,
@@ -1095,7 +1092,7 @@ class DashboardController extends WebController
             }
             $pick_up_latitude = $pickUpData['results'][0]['geometry']['location']['lat'];
             $pick_up_longitude = $pickUpData['results'][0]['geometry']['location']['lng'];
-    
+
             // Fetch drop-off coordinates if specified
             $drop_off_latitude = null;
             $drop_off_longitude = null;
@@ -1110,7 +1107,7 @@ class DashboardController extends WebController
                     $drop_off_longitude = $dropOffData['results'][0]['geometry']['location']['lng'];
                 }
             }
-    
+
             // Build the query to count quotes based on multiple criteria
             $quoteQuery = UserQuote::query()
                 // ->join('users', 'users.id', '=', 'user_quotes.user_id')
@@ -1124,31 +1121,30 @@ class DashboardController extends WebController
                         ->orWhere('user_quotes.status', 'approved');
                 })
                 ->whereDate('user_quotes.created_at', '>=', now()->subDays(10));
-    
+
             // Apply distance calculations
             if ($drop_off_latitude) {
                 $quoteQuery->select(
                     \DB::raw("(6371 * acos(cos(radians($pick_up_latitude)) * cos(radians(pickup_lat)) * cos(radians(pickup_lng) - radians($pick_up_longitude)) + sin(radians($pick_up_latitude)) * sin(radians(pickup_lat)))) AS distance_pickup"),
                     \DB::raw("(6371 * acos(cos(radians($drop_off_latitude)) * cos(radians(drop_lat)) * cos(radians(drop_lng) - radians($drop_off_longitude)) + sin(radians($drop_off_latitude)) * sin(radians(drop_lat)))) AS distance_drop_off")
                 )
-                ->having('distance_pickup', '<=', $maxDistance)
-                ->having('distance_drop_off', '<=', $maxDistance);
+                    ->having('distance_pickup', '<=', $maxDistance)
+                    ->having('distance_drop_off', '<=', $maxDistance);
             } else {
                 $quoteQuery->select(
                     \DB::raw("(6371 * acos(cos(radians($pick_up_latitude)) * cos(radians(pickup_lat)) * cos(radians(pickup_lng) - radians($pick_up_longitude)) + sin(radians($pick_up_latitude)) * sin(radians(pickup_lat)))) AS distance_pickup")
                 )
-                ->having('distance_pickup', '<=', $maxDistance);
+                    ->having('distance_pickup', '<=', $maxDistance);
             }
-    
+
             // Calculate and set the count for this search
             $search->quote_count = $quoteQuery->count();
-    
+
             return $search;
         });
         return view('transporter.savedSearch.index', ['savedSearches' => $data]);
-      
     }
-    
+
 
 
     public function saveSearchDlt(Request $request)

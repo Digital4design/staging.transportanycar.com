@@ -271,7 +271,7 @@
 			Set up a new password.
 		</p>
 		<p class="adjust-space">
-			Reset your password to your TransportAnyCar.com account @if($data['page_type'] == 'admin')
+			Reset your password to your account @if($data['page_type'] == 'admin')
 			<a href="{{route('front.forgot_password_view', $data['reset_token'])}}" target="_blank" >here</a>
 			@elseif($data['page_type'] == 'user')
 			<a href="{{route('front.web_password_upadte', $data['reset_token'])}}" target="_blank" >here</a>
@@ -283,7 +283,7 @@
 			The link will expire in 24 hours. If it expires you must generate a new email and link  <a href="{{route('transporter.forgot_password')}}">here.</a>
 		</p>
 		<p class="adjust-half-space">Best Regards,</p>
-		<p class="adjust-half-space">Transport Any Car Team</p>
+		<p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>
 		<p style=" font-size: 12px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
 	</div>
 </body>
