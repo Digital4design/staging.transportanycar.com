@@ -64,7 +64,7 @@
             style="max-width:90px"; /> --}}
         <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
             style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;" alt="transport notifiaction"
-            title="transport notifiaction"></a>
+            title="transport notifiaction" />
 
         {{-- <h2>Hi {{ $name }},</h2> --}}
         <p class="adjust-space">Your £{{ $data['price'] }} bid for {{ $data['model'] }} delivery has been accepted by
