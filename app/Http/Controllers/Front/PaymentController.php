@@ -92,7 +92,7 @@ class PaymentController extends WebController
             $user = User::find($quote->user_id);
             $email_to = $user->email;;
             $subject = "Confirmed, Your Bid for ". $user_quote->vehicle_make . ' ' . $user_quote->vehicle_model ."Delivery Has Been Accepted.";
-            $maildata['name'] =  $data['transporter_info']->username;;
+            $maildata['name'] =  $data['transporter_info']->first_name .' '.$data['transporter_info']->last_name;
             $maildata['model'] = $user_quote->vehicle_make . ' ' . $user_quote->vehicle_model;
             $maildata['price'] = isset($transaction->amount) ? $transaction->amount : '';
             $maildata['url'] = route('transporter.current_jobs', ['id' => $quote_by_transporter_id]);
