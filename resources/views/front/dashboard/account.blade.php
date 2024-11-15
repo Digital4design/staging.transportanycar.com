@@ -26,6 +26,9 @@
     cursor: pointer;
     width: 45px;
 }
+.wd-deliver-box {
+    height: 100%;
+}
 </style>
     @include('layouts.web.dashboard.header')
     <section class="wd-active-job admin_account">

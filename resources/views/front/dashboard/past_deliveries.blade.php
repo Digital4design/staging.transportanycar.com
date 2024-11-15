@@ -141,7 +141,7 @@
                                             <span>
                                                 <img src="{{ asset('assets/web/images/dashboard/map-icon.svg') }}" alt="Map Icon">
                                             </span>
-                                            <p>Pick-up area:</p>
+                                            <p>Pick-up postcode:</p>
                                             <p><b>{{ $item->pickup_postcode }}</b></p>
                                         </div>
 
@@ -214,7 +214,7 @@
                                             <span>
                                                 <img src="{{asset('assets/web/images/dashboard/map-icon.svg')}}" alt="Map Icon">
                                             </span>
-                                            <p>Pick-up area:</p>
+                                            <p>Pick-up postcode:</p>
                                             <p><b>{{$item->pickup_postcode}}</b></p>
                                         </div>
                                         <div class="list_detail">
