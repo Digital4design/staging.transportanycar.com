@@ -26,7 +26,7 @@ class PaymentController extends WebController
     {
         $quote = QuoteByTransporter::find($id);
         $transporter_name = User::where('id', $quote->user_id)->pluck('username')->first() ?? '-';
-        return view('front.checkout', ['data' => $quote,'transporter_name'=>$transporter_name]);
+        return view('front.checkout', ['data' => $quote, 'transporter_name' => $transporter_name]);
     }
 
     public function processPayment(Request $request)
@@ -44,7 +44,7 @@ class PaymentController extends WebController
             'transaction_id' => $paymentIntent->id,
             'amount' => $paymentIntent->amount / 100, // Convert cents to dollars
             'status' => 'pending',
-            'payment_method'=>'card',
+            'payment_method' => 'card',
             'description' => $paymentIntent->description,
             'currency' => $paymentIntent->currency
         ]);
@@ -81,33 +81,33 @@ class PaymentController extends WebController
             $user_quote->update(['status' => 'ongoing']);
             $data['deposit'] = isset($transaction->amount) ? $transaction->amount : '';
             $data['transporter_info'] = User::where('id', $quote->user_id)->first() ?? '-';
-            $data['transporter_name']= $data['transporter_info']->username;
+            $data['transporter_name'] = $data['transporter_info']->username;
             $data['transaction_id'] = isset($transaction->transaction_id) ? $transaction->transaction_id : '';
             $data['delivery_reference_id'] = isset($transaction->delivery_reference_id) ? $transaction->delivery_reference_id : '';
             $data['user_email'] = isset(Auth::user()->email) ? Auth::user()->email : '';
             $data['quoteId'] = $quoteId;
             $data['quote_by_transporter_id'] = $quote->id;
             //Optionally send email (uncomment and adjust as necessary)
-          
-            $user=User::find($quote->user_id);
+
+            $user = User::find($quote->user_id);
             $email_to = $user->email;;
             $subject = "Confirmed, Your Bid for Ford Fiesta Delivery Has Been Accepted.";
             $maildata['name'] = Auth::user()->first_name;
             $maildata['model'] = $user_quote->vehicle_make . ' ' . $user_quote->vehicle_model;
-            $maildata['price'] =isset($transaction->amount) ? $transaction->amount : '';
+            $maildata['price'] = isset($transaction->amount) ? $transaction->amount : '';
             $maildata['url'] = route('transporter.current_jobs', ['id' => $quote_by_transporter_id]);
-          
+
             $htmlContent = view('mail.General.quote-accepted-booking-mailtransporter', ['data' => $maildata])->render();
             $this->emailService->sendEmail($email_to, $htmlContent, $subject);
-        
+
 
             try {
-                if($quote->quote->user->job_email_preference) {
+                if ($quote->quote->user->job_email_preference) {
                     $email_to = $quote->quote->user->email;
-                    $subject = 'Booking confirmation for delivery of your '.$quote->quote->vehicle_make.' '.$quote->quote->vehicle_model;
+                    $subject = 'confirmation for delivery of your ' . $quote->quote->vehicle_make . ' ' . $quote->quote->vehicle_model;
                     $maildata['quotation'] = $quote;
                     $maildata['transaction_id'] = isset($transaction->transaction_id) ? $transaction->transaction_id : '';
-                    $maildata['transporter_info'] =$data['transporter_info'];
+                    $maildata['transporter_info'] = $data['transporter_info'];
                     $maildata['booking_ref'] = isset($transaction->delivery_reference_id) ? $transaction->delivery_reference_id : '';
                     // dd(  $maildata['transporter_info']->username);
                     //  return ;
@@ -122,23 +122,22 @@ class PaymentController extends WebController
 
             // Call create_notification to notify the user
             create_notification(
-                $quote->user_id, 
+                $quote->user_id,
                 Auth::id(),
-                $quoteId,       
+                $quoteId,
                 'You’ve won a job!',
                 (isset(Auth::user()->username) ? Auth::user()->username : '') . ' has accepted your quote.',  // Message of the notification
                 'won_job',
                 $quote_by_transporter_id
             );
-            
+
             \Log::info('Payment confirmation successful', ['payment_intent' => $paymentIntentId]);
-    // 
-            return view('front.payment_confirm',$data);
+            // 
+            return view('front.payment_confirm', $data);
         } catch (\Exception $e) {
             \Log::error('Error in payment confirmation', ['error' => $e->getMessage(), 'payment_intent' => $paymentIntentId]);
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
         }
         return view('front.payment_confirm');
-
     }
 }

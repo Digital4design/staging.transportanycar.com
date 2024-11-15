@@ -103,6 +103,7 @@
             <p class="message">Remaining balance:£{{ $data['quotation']->transporter_payment }}</p>
             <p class="message">Total: £{{ $data['quotation']->price }}</p> 
             <p class="message">Pay the remaining amount of £{{ $data['quotation']->transporter_payment }} directly to {{ $data['transporter_info']->first_name }}.</p>
+        </div>
             <p class="adjust-space">What Happens Next:</p>
             <p>The transport provider will contact you to arrange the delivery of you vehicle.</p>
             <p class="adjust-space">Transporter Contact Details:</p>
@@ -110,9 +111,9 @@
             <p>Email: {{$data['transporter_info']->email}}</p>
             <p class="adjust-half-space">Best Regards,</p>
             <p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>
-            <p class="adjust-half-space">Manage notification <a href="#" style="color:#0356D6; text-decoration: none;">preferences.</span></a>
+            <p class="adjust-half-space">Manage notification <a href="#" style="color:#0356D6; text-decoration: none;">preferences.</span></a></p>
             <p style=" font-size: 12px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
-        </div>
+    </div>
 </body>
 
 </html>
