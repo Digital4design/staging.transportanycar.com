@@ -1859,7 +1859,7 @@
                                                         @else
                                                             @if ($quote->created_at->timezone('Europe/London')->diffInHours(now('Europe/London')) < 1)
                                                                 <div class="actionDiv">
-                                                                    <div class="rotated-banner">Bidding</div>
+                                                                    <div class="rotated-banner green">New</div>
                                                                     {{-- <svg width="49" height="41" viewBox="0 0 49 41"
                                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M0 0H19L49 25V41L24 20L0 0Z" fill="#52D017" />
