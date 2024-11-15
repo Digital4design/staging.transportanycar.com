@@ -236,6 +236,56 @@
                                                         width="20" height="20" class="ml-1" />
                                                     <!-- <span>({{ count($feedback) }})</span> -->
                                                 </h1>
+                                                @if($rating_percentage == 0)
+                                                <ul class="wd-star-lst user-feedback-stars">
+                                                    <li>
+                                                        <svg width="12" height="12" viewBox="0 0 12 12"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                fill="#D9D9D9" />
+                                                        </svg>
+                                                    </li>
+                                                    <li>
+                                                        <svg width="12" height="12" viewBox="0 0 12 12"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                fill="#D9D9D9" />
+                                                        </svg>
+                                                    </li>
+                                                    <li>
+                                                        <svg width="12" height="12" viewBox="0 0 12 12"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                fill="#D9D9D9" />
+                                                        </svg>
+                                                    </li>
+                                                    <li>
+                                                        <svg width="12" height="12" viewBox="0 0 12 12"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                fill="#D9D9D9" />
+                                                        </svg>
+                                                    </li>
+                                                    <li>
+                                                        <svg width="12" height="12" viewBox="0 0 12 12"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                fill="#D9D9D9" />
+                                                        </svg>
+                                                    </li>
+                                                    <li class="user-feedback-rating-count">
+                                                        <span>({{ count($feedback) }})</span><span class="ml-1">{{ $rating_percentage}}%</span></li>
+                                                       
+                                                         {{-- <li>({{ number_format($overall_percentage, 0) }}%)</li> --}}
+
+
+                                                </ul>
+                                                @else
                                                 <ul class="wd-star-lst user-feedback-stars">
                                                     <li>
                                                         <svg width="12" height="12" viewBox="0 0 12 12"
@@ -284,6 +334,7 @@
 
 
                                                 </ul>
+                                                @endif
                                                 <div>Member since: <span
                                                         class="font-weight-light user-feedback-member-from">{{ $user->created_at->format('m/d/Y') }}</span>
                                                 </div>
