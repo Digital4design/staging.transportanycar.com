@@ -125,6 +125,7 @@
         }
 
         @media(max-width: 991px) {
+            #page-content-wrapper {position: relative; overflow: hidden;}
             .adjust_spacing {
                 padding-top: 65px;
             }

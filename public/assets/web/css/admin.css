@@ -5688,7 +5688,6 @@ div#spam-banner button.btn {
 }
 
 @media (max-width: 991px) {
-  #page-content-wrapper {position: relative; overflow: hidden;}
   .dropdown-toggle svg,
   .admin-menu svg {
     width: 25px;
