@@ -286,6 +286,7 @@
         cursor: pointer;
         padding-left: 20px;
     }
+    label[for="terms"].error {color:#ff0000;}
     label[for="terms"] ~ p {
         margin-bottom: 0;
         margin-top: 10px;
@@ -298,6 +299,13 @@
     label[for="terms"] a {
         color: #008DD4;
         text-decoration: underline;
+    }
+    /*  added css for terms and condition */
+    #terms.error {
+        position: static; /* Ensure the position doesn't change */
+        margin: 0; /* Reset any margins that may have been added by the error class */
+        outline: none; /* Optional: Remove outline if the error focuses on it */
+        width: auto;
     }
     </style>
 @endsection
@@ -549,7 +557,7 @@
                                     </div>
                                 </div>
                             <div class="form-group text-left d-flex flex-wrap align-items-center" style="gap:5px;">
-                                <input type="checkbox" id="terms" style="position: absolute; left: 0; top: 1px;" />
+                                <input type="checkbox" name="terms" id="terms" style="position: absolute; left: 0; top: 1px;" />
                                 <label for="terms">I accept the <a target="_blank" href="{{route('front.term_condition')}}">terms & conditions</a> and <a target="_blank" href="{{route('front.privacy_policy')}}">privacy policy</a>.</label>
                                 <p>We will only use your contact details to send you competitive quotes in relation to this transport request. You can opt out of receiving quotes at any time.</p>
                             </div>
@@ -704,7 +712,7 @@
                     noPhoneOrEmail: true
                 },
                 email: {required: true},
-                phone: {required: true},
+                phone: {required: true,digits: true,maxlength: 11,minlength: 10},
                 //starts_drives: {required: true},
                 vehicle_make_1: {required: true},
                 vehicle_model_1: {required: true},
@@ -712,6 +720,9 @@
                     deliveryDateRequired: function() {
                         return selectedDeliveryTimeframe === 'On a Specific Date';
                     }
+                },
+                 terms: {
+                  required: true // Add validation for the checkbox
                 }
                 //starts_drives_1: {required: true},
             },
@@ -728,9 +739,20 @@
                 vehicle_make_1: {required: "Please enter vehicle make."},
                 vehicle_model_1: {required: "Please enter vehicle model."},
                 email: {required: "Please enter email."},
-                phone : {required: "Enter a valid mobile number."},
-                delivery_timeframe_date: { deliveryDateRequired: "Please enter a delivery date." }
+                phone : {required: "Enter a valid mobile number.",digits: "Please enter only digits.",maxlength: "Please enter a valid mobile number.",minlength: "Mobile number must be at least 10 digits."},
+                delivery_timeframe_date: { deliveryDateRequired: "Please enter a delivery date." },
+                terms: {
+                        required: "Please accept the terms&conditions." // Custom error message
+                }
                 //starts_drives_1: {required: "Please select starts drives."},
+            },
+           errorPlacement: function(error, element) {
+                if (element.attr("name") == "terms") {
+                    // Wrap error inside a <span> and insert after the label
+                    error.addClass('').wrap('<span></span>').parent().insertAfter(element.next("label"));
+                } else {
+                    error.insertAfter(element);
+                }
             },
             submitHandler: function (form) {
                 addOverlay();
@@ -838,7 +860,7 @@
                     _token: "{{ csrf_token() }}" // CSRF token for security
                 },
                 success: function(response) {
-                    console.log(response.message);
+                    console.log(response);
                     if (response.success) {
                         // toastr.success("OTP sended successfully");
                         //alert('OTP sended to successfully');
@@ -847,8 +869,14 @@
                         $('#otpModal').modal('show');
                         // Add logic to redirect or close modal if needed
                     } else {
+                        if(response.data.status == 400)
+                        {
+                          toastr.error('Invalid mobile number');
+                        }else
+                        {
                         toastr.error(response.message);
                         //alert('Invalid OTP. Please try again.');
+                        }
                     }
                 },
                 error: function(xhr, status, error) {
