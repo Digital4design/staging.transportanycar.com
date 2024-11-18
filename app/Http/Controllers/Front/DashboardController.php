@@ -406,6 +406,8 @@ class DashboardController extends WebController
         ->orderByRaw('CAST(price AS UNSIGNED) ASC')
         ->get();
         // return $quotes;
+        $my_quotes = QuoteByTransporter::where('user_id', $quotes[0]->user_id ?? 0)->pluck('id');
+        
         $rating_average = Feedback::whereIn('quote_by_transporter_id', $quotes->pluck('id'))
             ->selectRaw('(AVG(communication) + AVG(punctuality) + AVG(care_of_good) + AVG(professionalism)) / 4 as overall_avg')
             ->first();
@@ -423,12 +425,12 @@ class DashboardController extends WebController
         });
         // $overall_percentage = 100;
         // $overall_percentage += ($rating_average->overall_avg / 5) * 100;
-        $my_quotes = QuoteByTransporter::where('user_id', $quotes[0]->user_id)->pluck('id');
+       
         $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
         ->whereNotNull('rating')
         ->avg('rating');
         $percentage = 0;
-        if ($rating_average !== null) {
+        if ($rating_average !== null) { $my_quotes = QuoteByTransporter::where('user_id', $quotes[0]->user_id)->pluck('id');
             $percentage = ($rating_average / 5) * 100;
           
         }
