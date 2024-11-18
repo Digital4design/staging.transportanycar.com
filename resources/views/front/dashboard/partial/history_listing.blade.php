@@ -24,7 +24,7 @@ $auth_user = Auth::user();
         line-height: 13px;
         font-weight: 500;
         color: #444444;
-        margin: 15px;
+        padding: 15px;
         display: none;
     }
 

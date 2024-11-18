@@ -6609,9 +6609,9 @@ div#spam-banner button.btn {
     margin: 0 auto;
   }
 
-  .chat_list_body ul {
+  /* .chat_list_body ul {
     height: auto;
-  }
+  } */
 
   .jobsrch_form_blog {
     margin: 36px 0 20px;
@@ -7959,7 +7959,7 @@ g.highcharts-input-group {
   .msg_active_container .chat_box .scrollbar {
     /* height: auto;
     max-height: calc(100vh - 280px); */
-    height: calc(100% - 185px);
+    height: calc(100% - 200px);
     /* max-height: calc(100% - 213px);
     padding-bottom: 0; */
   }
