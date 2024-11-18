@@ -847,52 +847,68 @@
     //    // Focus on the last filled input
     //    $('.otp-input input').eq(pasteData.length - 1).focus();
     //});
+    // Split OTP input when multiple characters are pasted
+    function splitNumber(e) {
+        let data = e.originalEvent.data || e.target.value; // For Chrome compatibility with e.data
+        if (!data) return; // In case no data
+        if (data.length === 1) return; // Regular input behavior (not paste)
 
-    $('.otp-input input').on('input change', function (e) {
-        const $this = $(this);
+        popuNext(e.target, data); // Process pasted data
+    }
 
-        // If the first input is autofilled with the full OTP
-        if ($this.is('#otp1') && $this.val().length > 1) {
-            const otp = $this.val().trim(); // Get the full OTP from the first input
-            $('.otp-input input').each(function (index) {
-                $(this).val(otp[index] || ''); // Populate each input with the respective character
-            });
-            $('.otp-input input').eq(otp.length - 1).focus(); // Focus on the last filled input
-            return;
+    function popuNext(el, data) {
+        $(el).val(data[0]); // Apply first character to the input
+        data = data.substring(1); // Remove first char from string
+
+        // Process next input element if data is left
+        if ($(el).next('input').length && data.length) {
+            popuNext($(el).next('input')[0], data);
+        }
+    }
+
+    // Listen for keyup events (normal input and paste handling)
+    $('input[type="text"]').on('keyup', function(e) {
+        // Prevent certain keys that don't affect input (Shift, Tab, Control, etc.)
+        if ([16, 9, 224, 18, 17].includes(e.keyCode)) return;
+
+        // Handle Backspace or left arrow key - move focus backward
+        if ((e.keyCode === 8 || e.keyCode === 37) && $(this).prev('input').length) {
+            $(this).prev('input').focus();
+        } else if (e.keyCode !== 8 && $(this).next('input').length) {
+            // Move to the next input
+            $(this).next('input').focus();
         }
 
-        // If only one character is entered, move to the next input
-        if ($this.val().length === 1) {
-            $this.next('input').focus();
+        // If user pastes or types a multi-character OTP, split it
+        if ($(this).val().length > 1) {
+            splitNumber(e);
         }
     });
 
-    $('.otp-input input').on('keydown', function (e) {
-        const $this = $(this);
-
-        // Handle backspace: move to the previous input if the current input is empty
-        if (e.key === 'Backspace' && $this.val() === '') {
-            $this.prev('input').focus();
+    // Focus management - ensure focus on the right input
+    $('input[type="text"]').on('focus', function() {
+        // If the first input is empty, focus it.
+        if ($(this).prev('input').length && $(this).prev('input').val() === '') {
+            $(this).prev('input').focus();
         }
     });
 
-     // Detect autofill using setTimeout
-    $('.otp-input input').on('focus', function () {
-        setTimeout(() => {
-            const otp = $('.otp-input input')
-                .map(function () {
-                    return $(this).val();
-                })
-                .get()
-                .join('');
+    // Handle input events (when pasted data is inserted into the first field)
+    $('#otp1').on('input', splitNumber);
 
-            if (otp.length === 4) {
-                // Autofill detected, focus on the last input
-                $('.otp-input input').eq(3).focus();
-            }
-        }, 50);
+    // Enable the confirm button when all OTP inputs are filled
+    $('#otpForm').on('input', function() {
+        const otp = $('input[type="text"]').map(function() {
+            return $(this).val();
+        }).get().join('');
+
+        if (otp.length === $('input[type="text"]').length) {
+            $('#confirmOtp').prop('disabled', false); // Enable confirm button
+        } else {
+            $('#confirmOtp').prop('disabled', true); // Disable confirm button
+        }
     });
-    
+
     $(document).on('paste', '.otp-input input', function (e) {
     e.preventDefault();
 
