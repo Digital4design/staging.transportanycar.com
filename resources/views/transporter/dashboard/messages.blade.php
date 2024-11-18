@@ -5,9 +5,17 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 <style>
-    body.keyboard-open.message-color .message_container{
-        height: calc(100% - 300px); /* Approximate keyboard height */
+    /* body.keyboard-open.message-color .message_container{
+        height: calc(100% - 300px);
         overflow: hidden;
+    } */
+     @media screen and (max-width: 580px) {
+        html, body {
+            overflow: hidden; /* Prevent extra scrolling */
+            position: fixed;  /* Prevent body movement when the keyboard is open */
+            width: 100%;
+            height: 100%;
+        }
     }
 </style>
 <?php
@@ -79,6 +87,17 @@ $auth_user = Auth::user();
     // window.addEventListener('resize', setDynamicHeight);
     // window.addEventListener('orientationchange', setDynamicHeight);
     // document.addEventListener('DOMContentLoaded', setDynamicHeight);
+        const textarea = document.querySelector('textarea#message');
+
+        textarea.addEventListener('focus', () => {
+        // Add a class or adjust the height when focusing
+        document.body.style.height = `${window.innerHeight}px`;
+        });
+
+        textarea.addEventListener('blur', () => {
+        // Reset the height when out of focus
+        document.body.style.height = '100vh';
+        });
         function getChatHistory(url,thisobj){
             var elems = document.querySelector(".active");
             var timezone = moment.tz.guess();
@@ -120,11 +139,11 @@ $auth_user = Auth::user();
             }
         }
         $(document).ready(function () {
-            $(document).on('focus', 'input, textarea', function () {
-                $('body').addClass('keyboard-open');
-            }).on('blur', 'input, textarea', function () {
-                $('body').removeClass('keyboard-open');
-            });
+            // $(document).on('focus', 'input, textarea', function () {
+            //     $('body').addClass('keyboard-open');
+            // }).on('blur', 'input, textarea', function () {
+            //     $('body').removeClass('keyboard-open');
+            // });
             //open particular chat
             const urlParams = new URLSearchParams(window.location.search);
             const threadId = urlParams.get('thread_id');
