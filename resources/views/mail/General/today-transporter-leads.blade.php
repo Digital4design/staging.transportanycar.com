@@ -16,6 +16,21 @@
             line-height: 13px;
         }
 
+        h2 {
+            margin: 0;
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            font-size: 10px;
+            line-height: 13px;
+        }
+        p {
+            margin: 0;
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            font-size: 10px;
+            line-height: 13px;
+        }
+
         h1,
         h2,
         p {

@@ -15,7 +15,7 @@ $auth_user = Auth::user();
     line-height: 13px;
     font-weight: 500;
     color:#444444;
-    margin: 15px;
+    padding: 15px;
     display: none;
 }
 .chat_outgoing_txt.chat_out_txt_bx {margin-bottom: 5px;}

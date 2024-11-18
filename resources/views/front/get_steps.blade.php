@@ -2,9 +2,9 @@
 
 @section('head_css')
     <style>
-        main {
+        /* main {
             padding-top: 104px;
-        }
+        } */    
         .error {
             color: red;
         }
