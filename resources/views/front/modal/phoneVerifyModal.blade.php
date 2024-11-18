@@ -8,17 +8,17 @@
             </button> --}}
             
             <!-- Modal Header -->
-            <div class="modal-header border-0">
+            <div class="modal-header border-0 px-0">
                 <h4 class="modal-title w-100">Confirm your mobile number</h4>
             </div>
 
             <!-- Modal Body -->
             <div class="modal-body">
-                <p>Please enter the code we just sent to <strong id="mobile-number">07932834195</strong>.</p>
+                <p>Please enter the code we just sent to <strong id="mobile-number">07932834195</strong></p>
                 
                 <!-- OTP Input Fields -->
                 <form id="otpForm">
-                    <div class="otp-input d-flex justify-content-center">
+                    <div class="otp-input d-flex justify-content-center mt-3">
                         <input type="text" id="otp1" maxlength="1" required autocomplete="off" autofocus>
                         <input type="text" id="otp2" maxlength="1" required autocomplete="off">
                         <input type="text" id="otp3" maxlength="1" required autocomplete="off">
