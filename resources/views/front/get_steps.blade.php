@@ -848,6 +848,34 @@
         $('.otp-input input').eq(pasteData.length - 1).focus();
     });
 
+    $('.otp-input input').on('input', function() {
+        const $this = $(this);
+    
+        // If OTP is autofilled in the first input, spread it across all inputs
+        if ($this.is('#otp1') && $this.val().length > 1) {
+            const otp = $this.val(); // Get the full OTP from the first input
+            $('.otp-input input').each(function(index) {
+                $(this).val(otp[index] || ''); // Populate each input with respective character
+            });
+            $('.otp-input input').eq(otp.length - 1).focus(); // Focus the last filled input
+            return;
+        }
+    
+        // Move focus to the next input if only one character is entered
+        if ($this.val().length === 1) {
+            $this.next('input').focus();
+        }
+    });
+
+        $('.otp-input input').on('keydown', function(e) {
+            const $this = $(this);
+
+            // Handle backspace: move to the previous input if current is empty
+            if (e.key === 'Backspace' && $this.val() === '') {
+                $this.prev('input').focus();
+            }
+        });
+
     function sendOTP()
     {
         var phoneNumber = $('input[name="phone"]').val();

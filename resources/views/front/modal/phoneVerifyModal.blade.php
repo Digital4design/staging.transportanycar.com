@@ -19,7 +19,7 @@
                 <!-- OTP Input Fields -->
                 <form id="otpForm">
                     <div class="otp-input d-flex justify-content-center">
-                        <input type="text" id="otp1" maxlength="1" required autocomplete="off" autofocus>
+                        <input type="text" id="otp1" maxlength="1" required autocomplete="one-time-code" autofocus>
                         <input type="text" id="otp2" maxlength="1" required autocomplete="off">
                         <input type="text" id="otp3" maxlength="1" required autocomplete="off">
                         <input type="text" id="otp4" maxlength="1" required autocomplete="off">
