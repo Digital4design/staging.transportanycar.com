@@ -836,45 +836,58 @@
         }
     });
 
-    $('.otp-input input').on('paste', function(e) {
-        e.preventDefault();
-        const pasteData = e.originalEvent.clipboardData.getData('text').slice(0, 4); // Only take first 4 characters
-    
-        $('.otp-input input').each(function(index) {
-            $(this).val(pasteData[index] || '');  // Set each input value to the respective character
-        });
-    
-        // Focus on the last filled input
-        $('.otp-input input').eq(pasteData.length - 1).focus();
-    });
+    //$('.otp-input input').on('paste', function(e) {
+    //    e.preventDefault();
+    //    const pasteData = e.originalEvent.clipboardData.getData('text').slice(0, 4); // Only take first 4 characters
+    //
+    //    $('.otp-input input').each(function(index) {
+    //        $(this).val(pasteData[index] || '');  // Set each input value to the respective character
+    //    });
+    //
+    //    // Focus on the last filled input
+    //    $('.otp-input input').eq(pasteData.length - 1).focus();
+    //});
 
-    $('.otp-input input').on('input', function() {
+    $('.otp-input input').on('input', function (e) {
         const $this = $(this);
-    
-        // If OTP is autofilled in the first input, spread it across all inputs
+
+        // If the first input is autofilled with the full OTP
         if ($this.is('#otp1') && $this.val().length > 1) {
-            const otp = $this.val(); // Get the full OTP from the first input
-            $('.otp-input input').each(function(index) {
-                $(this).val(otp[index] || ''); // Populate each input with respective character
-            });
-            $('.otp-input input').eq(otp.length - 1).focus(); // Focus the last filled input
-            return;
+        const otp = $this.val(); // Get the full OTP from the first input
+        $('.otp-input input').each(function (index) {
+            $(this).val(otp[index] || ''); // Populate each input with the respective character
+        });
+        $('.otp-input input').eq(otp.length - 1).focus(); // Focus on the last filled input
+        return;
         }
-    
-        // Move focus to the next input if only one character is entered
-        if ($this.val().length === 1) {
+
+        // If only one character is entered, move to the next input
+         if ($this.val().length === 1) {
             $this.next('input').focus();
-        }
+         }
     });
 
-        $('.otp-input input').on('keydown', function(e) {
-            const $this = $(this);
+    $('.otp-input input').on('keydown', function (e) {
+    const $this = $(this);
 
-            // Handle backspace: move to the previous input if current is empty
-            if (e.key === 'Backspace' && $this.val() === '') {
-                $this.prev('input').focus();
-            }
-        });
+    // Handle backspace: move to the previous input if the current input is empty
+    if (e.key === 'Backspace' && $this.val() === '') {
+        $this.prev('input').focus();
+    }
+    });
+
+    $(document).on('paste', '.otp-input input', function (e) {
+    e.preventDefault();
+
+    // Get pasted OTP and split it across the inputs
+    const pasteData = e.originalEvent.clipboardData.getData('text').trim();
+    $('.otp-input input').each(function (index) {
+        $(this).val(pasteData[index] || '');
+    });
+
+    // Focus on the last filled input
+    $('.otp-input input').eq(pasteData.length - 1).focus();
+    });
 
     function sendOTP()
     {
