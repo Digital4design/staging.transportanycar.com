@@ -712,7 +712,7 @@
                     noPhoneOrEmail: true
                 },
                 email: {required: true},
-                phone: {required: true,digits: true,maxlength: 11,minlength: 10},
+                phone: {required: true,digits: true,maxlength: 11,minlength: 11},
                 //starts_drives: {required: true},
                 vehicle_make_1: {required: true},
                 vehicle_model_1: {required: true},
@@ -739,7 +739,7 @@
                 vehicle_make_1: {required: "Please enter vehicle make."},
                 vehicle_model_1: {required: "Please enter vehicle model."},
                 email: {required: "Please enter email."},
-                phone : {required: "Enter a valid mobile number.",digits: "Please enter only digits.",maxlength: "Please enter a valid mobile number.",minlength: "Mobile number must be at least 10 digits."},
+                phone : {required: "Please enter a valid mobile number.",digits: "Please enter a valid mobile number",maxlength: "Please enter a valid mobile number.",minlength: "Please enter a valid mobile number."},
                 delivery_timeframe_date: { deliveryDateRequired: "Please enter a delivery date." },
                 terms: {
                         required: "Please accept the terms & conditions." // Custom error message
