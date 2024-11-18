@@ -848,34 +848,51 @@
     //    $('.otp-input input').eq(pasteData.length - 1).focus();
     //});
 
-    $('.otp-input input').on('input', function (e) {
+    $('.otp-input input').on('input change', function (e) {
         const $this = $(this);
 
         // If the first input is autofilled with the full OTP
         if ($this.is('#otp1') && $this.val().length > 1) {
-        const otp = $this.val(); // Get the full OTP from the first input
-        $('.otp-input input').each(function (index) {
-            $(this).val(otp[index] || ''); // Populate each input with the respective character
-        });
-        $('.otp-input input').eq(otp.length - 1).focus(); // Focus on the last filled input
-        return;
+            const otp = $this.val().trim(); // Get the full OTP from the first input
+            $('.otp-input input').each(function (index) {
+                $(this).val(otp[index] || ''); // Populate each input with the respective character
+            });
+            $('.otp-input input').eq(otp.length - 1).focus(); // Focus on the last filled input
+            return;
         }
 
         // If only one character is entered, move to the next input
-         if ($this.val().length === 1) {
+        if ($this.val().length === 1) {
             $this.next('input').focus();
-         }
+        }
     });
 
     $('.otp-input input').on('keydown', function (e) {
-    const $this = $(this);
+        const $this = $(this);
 
-    // Handle backspace: move to the previous input if the current input is empty
-    if (e.key === 'Backspace' && $this.val() === '') {
-        $this.prev('input').focus();
-    }
+        // Handle backspace: move to the previous input if the current input is empty
+        if (e.key === 'Backspace' && $this.val() === '') {
+            $this.prev('input').focus();
+        }
     });
 
+     // Detect autofill using setTimeout
+    $('.otp-input input').on('focus', function () {
+        setTimeout(() => {
+            const otp = $('.otp-input input')
+                .map(function () {
+                    return $(this).val();
+                })
+                .get()
+                .join('');
+
+            if (otp.length === 4) {
+                // Autofill detected, focus on the last input
+                $('.otp-input input').eq(3).focus();
+            }
+        }, 50);
+    });
+    
     $(document).on('paste', '.otp-input input', function (e) {
     e.preventDefault();
 
