@@ -5,7 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 <style>
-    body.keyboard-open .message-color .message_container{
+    body.keyboard-open.message-color .message_container{
         height: calc(100% - 300px); /* Approximate keyboard height */
         overflow: hidden;
     }
@@ -70,15 +70,15 @@ $auth_user = Auth::user();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.6.2/tinymce.min.js"></script>
 
     <script type="text/javascript">
-    function setDynamicHeight() {
-        let height = window.innerHeight; // Visible height without hidden browser UI
-        document.documentElement.style.setProperty('--vh', `${height * 0.01}px`);
-    }
+    // function setDynamicHeight() {
+    //     let height = window.innerHeight; // Visible height without hidden browser UI
+    //     document.documentElement.style.setProperty('--vh', `${height * 0.01}px`);
+    // }
 
-    // Update on load and resize
-    window.addEventListener('resize', setDynamicHeight);
-    window.addEventListener('orientationchange', setDynamicHeight);
-    document.addEventListener('DOMContentLoaded', setDynamicHeight);
+    // // Update on load and resize
+    // window.addEventListener('resize', setDynamicHeight);
+    // window.addEventListener('orientationchange', setDynamicHeight);
+    // document.addEventListener('DOMContentLoaded', setDynamicHeight);
         function getChatHistory(url,thisobj){
             var elems = document.querySelector(".active");
             var timezone = moment.tz.guess();
