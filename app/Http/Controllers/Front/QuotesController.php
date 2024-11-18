@@ -571,7 +571,8 @@ class QuotesController extends WebController
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to send SMS'
+                'message' => 'Failed to send SMS',
+                'data' => $result
             ]);
         }
         return response()->json([

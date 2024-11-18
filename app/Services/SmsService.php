@@ -37,7 +37,6 @@ class SmsService
         if ($response->successful()) {
             return $response->json(); // Successful response
         } else {
-            // Log or throw error
             return $response->json(); // Handle errors here
         }
     }
