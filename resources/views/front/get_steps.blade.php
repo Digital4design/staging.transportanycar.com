@@ -848,48 +848,68 @@
     //    $('.otp-input input').eq(pasteData.length - 1).focus();
     //});
     // Split OTP input when multiple characters are pasted
+        // Function to split OTP input when pasted or typed
     function splitNumber(e) {
-        let data = e.originalEvent.data || e.target.value; // For Chrome compatibility with e.data
-        if (!data) return; // In case no data
-        if (data.length === 1) return; // Regular input behavior (not paste)
+        let data = e.originalEvent.data || e.target.value; // Handle Chrome's e.data issue
+        if (!data) return; // Skip if no data
+        if (data.length === 1) return; // Regular input behavior, not a paste action
 
-        popuNext(e.target, data); // Process pasted data
+        // Spread the digits across the OTP fields
+        popuNext(e.target, data); // Call the recursive function to handle pasting
     }
 
+    // Recursive function to populate each OTP input field with individual digits
     function popuNext(el, data) {
         $(el).val(data[0]); // Apply first character to the input
         data = data.substring(1); // Remove first char from string
 
-        // Process next input element if data is left
+        // If more characters are left, populate the next input
         if ($(el).next('input').length && data.length) {
-            popuNext($(el).next('input')[0], data);
+            popuNext($(el).next('input')[0], data); // Call next input element recursively
         }
     }
 
-    // Listen for keyup events (normal input and paste handling)
-    $('input[type="text"]').on('keyup', function(e) {
+    // Listen for keyup events (to handle manual input and pasted data)
+    $('#otp1, #otp2, #otp3, #otp4').on('keyup', function(e) {
         // Prevent certain keys that don't affect input (Shift, Tab, Control, etc.)
         if ([16, 9, 224, 18, 17].includes(e.keyCode)) return;
 
         // Handle Backspace or left arrow key - move focus backward
         if ((e.keyCode === 8 || e.keyCode === 37) && $(this).prev('input').length) {
-            $(this).prev('input').focus();
+            $(this).prev('input').focus(); // Move focus to the previous input
         } else if (e.keyCode !== 8 && $(this).next('input').length) {
-            // Move to the next input
+            // Move to the next input field
             $(this).next('input').focus();
         }
 
-        // If user pastes or types a multi-character OTP, split it
+        // If more than one character is entered, split the input
         if ($(this).val().length > 1) {
-            splitNumber(e);
+            splitNumber(e); // Call function to handle pasted OTP
         }
     });
 
-    // Focus management - ensure focus on the right input
-    $('input[type="text"]').on('focus', function() {
-        // If the first input is empty, focus it.
-        if ($(this).prev('input').length && $(this).prev('input').val() === '') {
-            $(this).prev('input').focus();
+    // Focus management - ensure focus on the correct input field
+    $('#otp1').on('focus', function() {
+        if ($(this).val() === '') {
+            $(this).focus(); // Focus first input if it's empty
+        }
+    });
+
+    $('#otp2').on('focus', function() {
+        if ($('#otp1').val() === '') {
+            $('#otp1').focus(); // Focus previous input if it's empty
+        }
+    });
+
+    $('#otp3').on('focus', function() {
+        if ($('#otp2').val() === '') {
+            $('#otp2').focus(); // Focus previous input if it's empty
+        }
+    });
+
+    $('#otp4').on('focus', function() {
+        if ($('#otp3').val() === '') {
+            $('#otp3').focus(); // Focus previous input if it's empty
         }
     });
 
@@ -898,14 +918,15 @@
 
     // Enable the confirm button when all OTP inputs are filled
     $('#otpForm').on('input', function() {
-        const otp = $('input[type="text"]').map(function() {
+        const otp = $('#otp1, #otp2, #otp3, #otp4').map(function() {
             return $(this).val();
-        }).get().join('');
+        }).get().join(''); // Combine all the OTP values
 
-        if (otp.length === $('input[type="text"]').length) {
+        // Enable the confirm button only when all OTP fields are filled
+        if (otp.length === $('#otp1, #otp2, #otp3, #otp4').length) {
             $('#confirmOtp').prop('disabled', false); // Enable confirm button
         } else {
-            $('#confirmOtp').prop('disabled', true); // Disable confirm button
+            $('#confirmOtp').prop('disabled', true); // Disable confirm button if incomplete
         }
     });
 
