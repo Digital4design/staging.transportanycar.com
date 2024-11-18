@@ -742,7 +742,7 @@
                 phone : {required: "Enter a valid mobile number.",digits: "Please enter only digits.",maxlength: "Please enter a valid mobile number.",minlength: "Mobile number must be at least 10 digits."},
                 delivery_timeframe_date: { deliveryDateRequired: "Please enter a delivery date." },
                 terms: {
-                        required: "Please accept the terms&conditions." // Custom error message
+                        required: "Please accept the terms & conditions." // Custom error message
                 }
                 //starts_drives_1: {required: "Please select starts drives."},
             },
