@@ -87,7 +87,7 @@ $auth_user = Auth::user();
     // window.addEventListener('resize', setDynamicHeight);
     // window.addEventListener('orientationchange', setDynamicHeight);
     // document.addEventListener('DOMContentLoaded', setDynamicHeight);
-        const textarea = document.querySelector('textarea#message');
+        const textarea = document.querySelector('textarea');
 
         textarea.addEventListener('focus', () => {
         // Add a class or adjust the height when focusing
