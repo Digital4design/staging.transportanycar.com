@@ -18,7 +18,7 @@
                 
                 <!-- OTP Input Fields -->
                 <form id="otpForm">
-                    <div class="otp-input d-flex justify-content-center">
+                    <div class="otp-input d-flex justify-content-center mt-3">
                         <input class="otpNumber" type="text" id="otp1"  pattern="[0-9]*"  value="" inputtype="numeric" required autocomplete="one-time-code" autofocus>
                         <input class="otpNumber" type="text" id="otp2" maxlength="1" pattern="[0-9]*" value="" inputtype="numeric" required autocomplete="off">
                         <input class="otpNumber" type="text" id="otp3" maxlength="1" pattern="[0-9]*" value="" inputtype="numeric" required autocomplete="off">
