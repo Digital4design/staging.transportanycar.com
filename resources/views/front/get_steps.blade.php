@@ -597,6 +597,7 @@
     <script src="{{asset('assets/web/js/wizard.js')}}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script>
+    document.addEventListener("DOMContentLoaded", function () {
     let in1 = document.getElementById('otp1'),
     ins = document.querySelectorAll('input[type="number"].otpNumber'),
 	 splitNumber = function(e) {
@@ -606,6 +607,12 @@
 		
 		popuNext(e.target, data);
 		//for (i = 0; i < data.length; i++ ) { ins[i].value = data[i]; }
+
+        // Focus on the last input
+        ins[ins.length - 1].focus();
+        if (ins.length > 0) {
+                ins[ins.length - 1].focus();
+            }
 	},
 	popuNext = function(el, data) {
 		el.value = data[0]; // Apply first item to first input
@@ -614,7 +621,11 @@
 			// Do the same with the next element and next data
 			popuNext(el.nextElementSibling, data);
 		}
+
+        
 	};
+    console.log("in1:", in1); // Should log the first input element
+    console.log("ins:", ins); // 
 
 ins.forEach(function(input) {
 	/**
@@ -668,6 +679,7 @@ ins.forEach(function(input) {
  * It catches the value pasted on the first field and spread it into the inputs.
  */
 in1.addEventListener('input', splitNumber);
+});
         const car1 = document.getElementById('file-upload');
         const previewPhoto = () => {
             const file = car1.files;
