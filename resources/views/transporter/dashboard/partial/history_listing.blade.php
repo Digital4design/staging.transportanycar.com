@@ -3,27 +3,35 @@ $user = $thread->user_qot->user ? $thread->user_qot->user : null;
 $auth_user = Auth::user();
 ?>
 <style>
-.transportor-chat-header {
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 300;
-    color:#000000;
-    gap: 10px;
-}
-.chat-note {
-    font-size: 10px;
-    line-height: 13px;
-    font-weight: 500;
-    color:#444444;
-    margin: 15px;
-    display: none;
-}
-.chat_outgoing_txt.chat_out_txt_bx {margin-bottom: 5px;}
-@media screen and (max-width: 575px) {
+    .transportor-chat-header {
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 300;
+        color: #000000;
+        gap: 10px;
+    }
+
+    .chat-note {
+        font-size: 10px;
+        line-height: 13px;
+        font-weight: 500;
+        color: #444444;
+        margin: 15px;
+        display: none;
+    }
+
+    .chat_outgoing_txt.chat_out_txt_bx {
+        margin-bottom: 5px;
+    }
+
+    @media screen and (max-width: 575px) {
         #messages .navbar {
             box-shadow: none;
         }
-        .chat-note {display: block}
+
+        .chat-note {
+            display: block
+        }
     }
 </style>
 @if (isset($user) && !empty($user))
@@ -37,7 +45,8 @@ $auth_user = Auth::user();
         </a>
         <div class="conversation_user transportor-chat-header d-flex flex-wrap align-items-center text-left">
             <div style="border-radius:5px; overflow: hidden; flex: 1 0 0;">
-                <img src="{{ asset('uploads/no_car_image.png') }}" alt="" width="80" height="50" style="max-width: 100%;" />
+                <img src="{{ asset('uploads/no_car_image.png') }}" alt="" width="80" height="50"
+                    style="max-width: 100%;" />
             </div>
             <div>
                 <h3>
@@ -130,7 +139,7 @@ $auth_user = Auth::user();
             @endforeach
         @endif
     </div> --}}
-    {{--new code working fine --}}
+    {{-- new code working fine --}}
     <div class="chat_conversation_body scrollbar chat_div" id="style-1">
         @if (isset($messages) && $messages->count() > 0)
             @php
@@ -141,54 +150,55 @@ $auth_user = Auth::user();
                     @php
                         $sender_user = $message->sender;
                     @endphp
-                    
+
                     @if ($thread->friend_id != $message->sender_id)
                         <!-- incoming messages -->
-                        
-                            <div class="chat_messages_incoming mb-0">
-                                <div class="chat_conversation_bx">
-                                    <div class="chat_txt_bx">
-                                        @if ($previousSender !== $message->sender_id)
-                                            <h4>{{ $user->username }}</h4> <!-- Display only once for consecutive messages -->
-                                        @endif
-                                        <div class="chat_incoming_txt">
-                                            <p>{{ $message->message }}</p>
-                                            <span class="chat_time">
-                                                @if (carbon\carbon::parse($message->created_at)->diffInHours() < 24)
-                                                    {{ carbon\carbon::parse($message->created_at)->format('h:i A') }}
-                                                @else
-                                                    {{ carbon\carbon::parse($message->created_at)->diffForHumans() }}
-                                                @endif
-                                            </span>
-                                        </div>
-                            {{-- @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id) --}}
+
+                        <div class="chat_messages_incoming mb-0">
+                            <div class="chat_conversation_bx">
+                                <div class="chat_txt_bx">
+                                    @if ($previousSender !== $message->sender_id)
+                                        <h4>{{ $user->username }}</h4>
+                                        <!-- Display only once for consecutive messages -->
+                                    @endif
+                                    <div class="chat_incoming_txt">
+                                        <p>{{ $message->message }}</p>
+                                        <span class="chat_time">
+                                            @if (carbon\carbon::parse($message->created_at)->diffInHours() < 24)
+                                                {{ carbon\carbon::parse($message->created_at)->format('h:i A') }}
+                                            @else
+                                                {{ carbon\carbon::parse($message->created_at)->diffForHumans() }}
+                                            @endif
+                                        </span>
                                     </div>
+                                    {{-- @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id) --}}
                                 </div>
                             </div>
+                        </div>
                         {{-- @endif --}}
                     @else
                         <!-- outgoing messages -->
-                       
-                            <div class="chat_messages_outgoing mb-0">
-                                <div class="chat_conversation_bx">
-                                    <div class="chat_out_txt_bx">
-                                        @if ($previousSender !== $message->sender_id)
-                                            <h4>You</h4> <!-- Display only once for consecutive messages -->
-                                        @endif
-                                        <div class="chat_outgoing_txt">
-                                            <p>{!! nl2br(e($message->message)) !!}</p>
-                                            <span class="chat_time">
-                                                @if (carbon\carbon::parse($message->created_at)->diffInHours() < 24)
-                                                    {{ carbon\carbon::parse($message->created_at)->format('h:i A') }}
-                                                @else
-                                                    {{ carbon\carbon::parse($message->created_at)->diffForHumans() }}
-                                                @endif
-                                            </span>
-                                        </div>
-                                      {{-- @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id) --}}
+
+                        <div class="chat_messages_outgoing mb-0">
+                            <div class="chat_conversation_bx">
+                                <div class="chat_out_txt_bx">
+                                    @if ($previousSender !== $message->sender_id)
+                                        <h4>You</h4> <!-- Display only once for consecutive messages -->
+                                    @endif
+                                    <div class="chat_outgoing_txt">
+                                        <p>{!! nl2br(e($message->message)) !!}</p>
+                                        <span class="chat_time">
+                                            @if (carbon\carbon::parse($message->created_at)->diffInHours() < 24)
+                                                {{ carbon\carbon::parse($message->created_at)->format('h:i A') }}
+                                            @else
+                                                {{ carbon\carbon::parse($message->created_at)->diffForHumans() }}
+                                            @endif
+                                        </span>
                                     </div>
+                                    {{-- @if ($loop->last || $message_date[$loop->index + 1]->sender_id !== $message->sender_id) --}}
                                 </div>
                             </div>
+                        </div>
                         {{-- @endif --}}
                     @endif
                     @php
@@ -199,7 +209,7 @@ $auth_user = Auth::user();
             <input type="hidden" id="last_message_sender" value="{{ $previousSender }}">
         @endif
     </div>
-    
+
 
     <div class="chat_conversation_footer">
         <form id="chat__form" action="{{ route('transporter.message.store', $thread->user_quote_id) }}" method="post"
@@ -225,9 +235,11 @@ $auth_user = Auth::user();
                     </a>
                 </div>
             </div>
+            <input type="hidden" value="{{ $transaction }}" id="transactionValid">
         </form>
         <p class="chat-note">
-            Note: Users are required to accept your quote online via this platform and then we will exchange your contact details so that you can finalise the delivery.
+            Note: Users are required to accept your quote online via this platform and then we will exchange your
+            contact details so that you can finalise the delivery.
         </p>
     </div>
 @endif
@@ -290,21 +302,21 @@ $auth_user = Auth::user();
                         $("#image_previe_main").html('<div><img id="imgPreview" src="' + event
                             .target.result +
                             '" width="100" height="100"></img></div><div><a onclick="removeImageFile(this);" href="javascript:;">remove</a></div>'
-                            );
+                        );
                     }
                     if ($("#file_type").val() == "audio") {
                         $("#audio_preview").removeClass("d-none");
                         $("#audio_preview").html('<audio controls><source src="' + event.target
                             .result +
                             '" type="audio/mpeg"></audio><div><a onclick="removeAudioFile(this);" href="javascript:;">remove</a></div></div>'
-                            );
+                        );
                     }
                     if ($("#file_type").val() == "video") {
                         $("#video_preview").removeClass("d-none");
                         $("#video_preview").html('<video width="250" controls><source src="' + event
                             .target.result +
                             '" type="video/mp4"></video><div><a onclick="removeFile(this);" href="javascript:;">remove</a></div></div>'
-                            );
+                        );
                     }
 
 
@@ -424,23 +436,26 @@ $auth_user = Auth::user();
         console.log("///", $('#last_message_sender').val());
         $('#chat__form').on('submit', function(e) {
             e.preventDefault();
-                
+
             var chat_id = $('#trans_current_chat_id').val();
             var file_name = $("#image-upload1").val();
             var message = $('.textarea').val();
             var contains_email = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i.test(message);
             var contains_digit = /\d/.test(message);
-                
+
             // Validation checks
             if (!message.trim()) {
                 toastr.error("Message cannot be empty.");
                 return;
             }
-            if (contains_email || contains_digit) {
-                toastr.error("Do not share contact information or you will be banned.");
-                return;
+            var check = $("#transactionValid").val();
+            if (check === "false") {
+                if (contains_email || contains_digit) {
+                    toastr.error("Do not share contact information or you will be banned.");
+                    return;
+                }
             }
-        
+
             var send_message = false;
             if (file_name !== "") {
                 send_message = true;
@@ -448,29 +463,31 @@ $auth_user = Auth::user();
             if (message.trim() !== "") {
                 send_message = true;
             }
-        
+
             // Proceed only if message or file is set to send
             if (send_message) {
                 $("#send_message").prop("disabled", true);
-            
+
                 var file_type = $('#file_type').val();
                 var lastMessageSender = $('#last_message_sender').val(); // Store the last sender
-                console.log("///",$('.chat_conversation_body .chat_messages_outgoing').last().data('sender-id'));
+                console.log("///", $('.chat_conversation_body .chat_messages_outgoing').last().data(
+                    'sender-id'));
                 $('.textarea').val(''); // Clear the textarea after fetching message
-            
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('input[name="_token"]').val()
                     }
                 });
-            
+
                 var timezone = moment.tz.guess();
                 var data = new FormData(this);
                 data.append('message', message);
                 data.append('file_type', file_type);
                 data.append('current_chat_id', chat_id);
+                data.append('check', check);
                 data.append('timezone', timezone);
-            
+
                 $.ajax({
                     url: $(this).attr('action'),
                     method: "POST",
@@ -483,39 +500,44 @@ $auth_user = Auth::user();
                     $("#image-upload1").val("");
                     $("#image_previe_main, #audio_preview, #video_preview").addClass("d-none");
                     $("#send_message").prop("disabled", false);
-                
+
                     if (response.status === "success") {
                         var data = response.data;
                         var message_clone = $("#send_message_main").clone();
                         message_clone.removeClass("d-none");
-                    
+
                         console.log(response.data.sender_id);
-                    
+
                         // Check if the sender is the same as the last message sender
                         if (lastMessageSender == data.sender_id) {
-                            message_clone.find("h4").remove(); // Remove the sender's name if the sender is the same
-                            
+                            message_clone.find("h4")
+                        .remove(); // Remove the sender's name if the sender is the same
+
                         } else {
-                           
-                            message_clone.find("h4").text('You'); // Add sender name if it's a different sender
+
+                            message_clone.find("h4").text(
+                            'You'); // Add sender name if it's a different sender
                             lastMessageSender = data.sender_id; // Update the last sender
                             $("#last_message_sender").val(data.sender_id);
                         }
-                    
+
                         message_clone.find(".message-data-time").text(data.create_message);
-                    
+
                         if (data.type === "file") {
                             if (data.file_type === "audio") {
                                 message_clone.find('.message').html(
-                                    '<div><audio controls><source src="' + data.file + '" type="audio/mpeg"></audio></div>'
+                                    '<div><audio controls><source src="' + data.file +
+                                    '" type="audio/mpeg"></audio></div>'
                                 );
                             } else if (data.file_type === "video") {
                                 message_clone.find('.message').html(
-                                    '<div><video width="250" controls><source src="' + data.file + '" type="video/mp4"></video></div>'
+                                    '<div><video width="250" controls><source src="' + data
+                                    .file + '" type="video/mp4"></video></div>'
                                 );
                             } else {
                                 message_clone.find('.message').html(
-                                    '<div><img width="200px;" src="' + data.file + '" alt="avatar"></div>'
+                                    '<div><img width="200px;" src="' + data.file +
+                                    '" alt="avatar"></div>'
                                 );
                             }
                         } else {
@@ -523,9 +545,11 @@ $auth_user = Auth::user();
                             var parsedCreatedAt = new Date(createdAt);
                             var formattedCreatedAt = moment(parsedCreatedAt).fromNow();
                             var formattedMessage = data.message.replace(/\r\n|\n/g, '<br>');
-                            message_clone.find('.message').html('<p>' + formattedMessage + '</p><span class="chat_time">' + formattedCreatedAt + '</span>');
+                            message_clone.find('.message').html('<p>' + formattedMessage +
+                                '</p><span class="chat_time">' + formattedCreatedAt +
+                                '</span>');
                         }
-                    
+
                         $('.chat_div').append(message_clone);
                         scrollToBottom();
                         $(".kt-avatar__cancel").click();
@@ -534,10 +558,12 @@ $auth_user = Auth::user();
                     if (xhr.status === 422) {
                         var errors = xhr.responseJSON.errors;
                         if (errors.message) {
-                            toastr.error("Do not share contact information or you will be banned.");
+                            toastr.error(
+                                "Do not share contact information or you will be banned.");
                         }
                     }
-                    $("#send_message").prop("disabled", false); // Re-enable the button in case of error
+                    $("#send_message").prop("disabled",
+                    false); // Re-enable the button in case of error
                 });
             }
         });
@@ -563,18 +589,21 @@ $auth_user = Auth::user();
     }
 
     $('#message').on('keydown paste input', function(event) {
-        if (event.type === 'keydown' && event.key >= '0' && event.key <= '9') {
-            event.preventDefault();
-        }
-        if (event.type === 'paste') {
-            let pastedData = event.originalEvent.clipboardData.getData('text');
-            if (/\d/.test(pastedData)) {
+        var check = $("#transactionValid").val();
+        if (check === "false") {
+            if (event.type === 'keydown' && event.key >= '0' && event.key <= '9') {
                 event.preventDefault();
             }
-        }
-        if (event.type === 'input') {
-            let newValue = $(this).val().replace(/[0-9]/g, '');
-            $(this).val(newValue);
+            if (event.type === 'paste') {
+                let pastedData = event.originalEvent.clipboardData.getData('text');
+                if (/\d/.test(pastedData)) {
+                    event.preventDefault();
+                }
+            }
+            if (event.type === 'input') {
+                let newValue = $(this).val().replace(/[0-9]/g, '');
+                $(this).val(newValue);
+            }
         }
     });
     $(document).ready(function() {

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use App\Services\SmsService;
+use App\TransactionHistory;
 
 class MessageController extends WebController
 {
@@ -37,6 +38,8 @@ class MessageController extends WebController
     public function getChatHistory(Request $request, $id)
     {
         $thread = Thread::with(['user_qot', 'messages', 'messages.sender'])->where('id', '=', $id)->first();
+        $quote_by_transporter = QuoteByTransporter::where(['user_quote_id' => $thread->user_quote_id, 'user_id'=> $thread->friend_id])->first();
+        $transaction = TransactionHistory::where('quote_by_transporter_id',$quote_by_transporter->id)->where('status','completed')->exists() ? "true":"false";
         if (!empty($thread)) {
             $firend_data = $this->user_obj->find($request->to);
             $thread->messages()->update(['status' => "read"]);
@@ -46,7 +49,7 @@ class MessageController extends WebController
         } else {
             $messages = collect();
         }
-        return view('transporter.dashboard.partial.history_listing')->with(compact('messages', 'thread'));
+        return view('transporter.dashboard.partial.history_listing')->with(compact('messages', 'thread','transaction'));
     }
 
     public function store(Request $request, $id)
@@ -54,7 +57,8 @@ class MessageController extends WebController
         $request->validate([
             'message' => [
                 'required',
-                'regex:/^[^\d]*$/', // Ensure no digits are present
+                $request->check !== "true" ? 'regex:/^[^\d]*$/' : 'nullable',
+                // 'regex:/^[^\d]*$/', // Ensure no digits are present
             ],
         ]);
         $auth_user = Auth::user();
