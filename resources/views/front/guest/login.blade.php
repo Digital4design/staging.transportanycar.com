@@ -64,6 +64,7 @@
     border: 1px solid #DADADA !important;
 }
 @media(max-width: 580px){
+    .trans-login {margin-top: 10px;}
     .signnetwork {
         max-width: 370px;
         margin: auto;
