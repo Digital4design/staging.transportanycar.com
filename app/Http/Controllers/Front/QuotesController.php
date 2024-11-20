@@ -259,8 +259,8 @@ class QuotesController extends WebController
 
         // Send mail to transporters
         //$this->sendMailToTransporters($quoteData);
-        // $command = '/usr/local/bin/php /home/pfltvaho/public_html/artisan schedule:run';
-        // exec($command, $output, $returnVar);
+        $command = '/usr/local/bin/php /home/pfltvaho/public_html/artisan schedule:run';
+        exec($command, $output, $returnVar);
     }
 
     private function saveMapImage($dis_dur) {

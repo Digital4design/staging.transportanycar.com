@@ -207,7 +207,7 @@ fa-eye:before {
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group form-error">
-                                    <input type="hidden" id="country_code" name="country_code" value="+44">
+                                    {{-- <input type="hidden" id="country_code" name="country_code" value="+44"> --}}
                                     <input id="phone" type="tel" placeholder="Phone number" name="mobile" class="form-control" />
                                 </div>
                             </div>
@@ -469,14 +469,14 @@ fa-eye:before {
             return is_picked;
         }, "Please pick proper address from place picker");
 
-        $('#phone').intlTelInput({
-            nationalMode: false,
-            separateDialCode: true,
-            formatOnDisplay: false,
-            preferredCountries: ['GB'],
-        }).on("countrychange", function () {
-            $('#country_code').val('+' + $(this).intlTelInput("getSelectedCountryData").dialCode);
-        });
+        // $('#phone').intlTelInput({
+        //     nationalMode: false,
+        //     separateDialCode: true,
+        //     formatOnDisplay: false,
+        //     preferredCountries: ['GB'],
+        // }).on("countrychange", function () {
+        //     $('#country_code').val('+' + $(this).intlTelInput("getSelectedCountryData").dialCode);
+        // });
 
         // $(document).ready(function() {
         //     $("#add_address").click(function() {
@@ -563,15 +563,15 @@ fa-eye:before {
                     mobile: {
                         required: true,
                         digits: true,
-                        minlength:4,
-                        maxlength:15,
+                        maxlength: 11,
+                        minlength: 11,
                         remote: {
                             type: 'get',
                             url: "{{route('front.user_availability_checker')}}",
                             data: {
-                                country_code: function () {
-                                    return $('#country_code').val();
-                                },
+                                // country_code: function () {
+                                //     return $('#country_code').val();
+                                // },
                                 number: function () {
                                     return $('#phone').val();
                                 }
@@ -608,7 +608,7 @@ fa-eye:before {
                     address: {required: 'Please select address'},
                     email: {required: 'Please enter email'},
                     //email: {required: 'Please enter email', remote: "This email is already taken"},
-                    mobile: {required: 'Please enter mobile', remote: "This number is already taken", maxlength: "Phone number Cannot be longer than 15 characters"},
+                    mobile: {required: 'Please enter mobile', remote: "This number is already taken", maxlength: "Phone number Cannot be longer than 11 characters"},
                     username: {required: 'Please enter username', remote: "This username is already taken"},
                     password: {required: 'Please enter password'},
                     //confirm_password: {required: 'Please enter confirm password',equalTo:'Password and confirm password is not same'},

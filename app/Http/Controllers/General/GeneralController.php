@@ -308,8 +308,8 @@ public function user_availability_checker(Request $request)
         $query = $query->where('username', $request->username);
     } elseif ($request->email) {
         $query = $query->where('email', $request->email);
-    } elseif (($request->mobile ?? $request->number) && $request->country_code) {
-        $query = $query->where(['mobile' =>$request->mobile ?? $request->number, 'country_code' => $request->country_code]);
+    } elseif (($request->mobile ?? $request->number)) {
+        $query = $query->where(['mobile' =>$request->mobile ?? $request->number]);
     } else {
         return 'false';
     }
