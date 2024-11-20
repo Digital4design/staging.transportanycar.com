@@ -12,23 +12,23 @@
             margin: 0;
             font-weight: 300;
             font-family: "Outfit", sans-serif;
-            font-size: 10px;
-            line-height: 13px;
+            font-size: 16px;
+            line-height: 22px;
         }
 
         h2 {
             margin: 0;
             font-weight: 300;
             font-family: "Outfit", sans-serif;
-            font-size: 10px;
-            line-height: 13px;
+            font-size: 16px;
+            line-height: 22px;
         }
         p {
             margin: 0;
             font-weight: 300;
             font-family: "Outfit", sans-serif;
-            font-size: 10px;
-            line-height: 13px;
+            font-size: 16px;
+            line-height: 22px;
         }
 
         h1,
@@ -80,7 +80,7 @@
 
 <body>
     <div class="contain">
-        <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg" style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;" alt="transport notifiaction" title="transport notifiaction"></a>
+        <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg" style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;" alt="transport notifiaction" title="transport notifiaction" />
         <h2>Hi {{$quote['name']}},</h2>
         <p class="adjust-space">We’ve posted {{$quote['last24HoursCount']}} transport leads today. We understand it can be hard to keep up with them all so heres a reminder to check them out. Remember customers prefer quick responses so its worth reviewing your leads at least once a day.</p>
         <a class="verify-btn"  href="{{ url('transporter/new-jobs-new') }}"  style="color:#ffffff;">View leads</a>
