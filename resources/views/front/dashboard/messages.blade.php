@@ -187,6 +187,7 @@
                 url: url,
                 data:{"timezone":timezone},
             }).done(function(response) {
+                console.log(response,"------------hello world-----------------");
                 $("#chat_history_main").html(response);
                 // $(thisobj).find(".kt-widget__item").find('.kt-widget__action').html('');
                 // KTAppChat.init();
@@ -203,6 +204,7 @@
                 url: "{{route('front.message.chat_list')}}",
                 data:{"search":data,"selected_chat_id":selected_chat_id},
             }).done(function(response) {
+                //console.log(response,"////////////");
                 $(".chat_listing_main").html(response);
                 {{--var url = "{{route('admin.chat.history',($latest_chat->id) ?? 0)}}"--}}
                 // getChatHistory(url,$(".get-chat-history")[0]);
@@ -231,6 +233,7 @@
             //open particular chat
             const urlParams = new URLSearchParams(window.location.search);
             const threadId = urlParams.get('thread_id');
+            console.log(threadId,'------------urlparams');
             if (threadId) {
                 const clickAnchorTag = () => {
                     const targetElement = document.querySelector(`li[data-id="${threadId}"] a.get-chat-history`);
