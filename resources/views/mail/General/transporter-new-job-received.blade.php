@@ -155,10 +155,10 @@
                                                                             style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
                                                                             alt="transport notifiaction"
                                                                             title="transport notifiaction"></a>
-                                                                    <h3 style="font-size: 22px;line-height: normal;">
+                                                                    {{-- <h3 style="font-size: 22px;line-height: normal;">
                                                                         Transport<br> <span
                                                                             style="color: #018dd4;">notification</span>
-                                                                    </h3>
+                                                                    </h3> --}}
 
                                                                     <!-- <div style="max-width: 600px;">
                                                         <img src="https://image.optimite.email/wp-content/uploads/2024/02/Email-2-copy.png" style="display: block; height: auto; border: 0; width: 100%;" width="600" alt="transport notifiaction" title="transport notifiaction">
