@@ -137,36 +137,36 @@
                                             <tr>
                                                 <td class="column column-1" width="100%"
                                                     style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    {{-- <table class="image_block block-1" width="100%" border="0"
+                                                    <table class="image_block block-1" width="100%" border="0"
                                                         cellpadding="0" cellspacing="0" role="presentation"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
                                                         <tr>
                                                             <td class="pad" style="width:100%;">
                                                                 <div class="alignment" align="center"
                                                                     style="line-height:10px">
-                                                                    <p style="margin: 0;font-size: 14px;"><a
+                                                                    {{-- <p style="margin: 0;font-size: 14px;"><a
                                                                             href="{{ route('transporter.profile', ['unsub' => true]) }}"
                                                                             target="_blank"
                                                                             style="text-decoration: underline;color: #5f5f5f;"
                                                                             rel="noopener">Unsubscribe from
-                                                                            notifications</a></p>
+                                                                            notifications</a></p> --}}
                                                                     <a href="https://transportanycar.com/">
                                                                         <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
                                                                             style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
                                                                             alt="transport notifiaction"
                                                                             title="transport notifiaction"></a>
-                                                                    <h3 style="font-size: 22px;line-height: normal;">
+                                                                    {{-- <h3 style="font-size: 22px;line-height: normal;">
                                                                         Transport<br> <span
                                                                             style="color: #018dd4;">notification</span>
-                                                                    </h3>
+                                                                    </h3> --}}
 
-                                                                     <div style="max-width: 600px;">
+                                                                    <!-- <div style="max-width: 600px;">
                                                         <img src="https://image.optimite.email/wp-content/uploads/2024/02/Email-2-copy.png" style="display: block; height: auto; border: 0; width: 100%;" width="600" alt="transport notifiaction" title="transport notifiaction">
-                                                    </div> 
+                                                    </div> -->
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                    </table> --}}
+                                                    </table>
                                                     <!-- <table class="paragraph_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
                                         <tr>
                                             <td class="pad" style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:30px;">
@@ -430,10 +430,10 @@
                                             <tr>
                                                 <td class="column column-1" width="100%"
                                                     style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    {{-- <table class="image_block block-1" width="100%" border="0"
+                                                    <table class="image_block block-1" width="100%" border="0"
                                                         cellpadding="0" cellspacing="0" role="presentation"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                        <tr>
+                                                        {{-- <tr>
                                                             <td class="pad"
                                                                 style="padding-bottom:15px;padding-left:10px;padding-right:10px;padding-top:30px;width:100%;">
                                                                 <div class="alignment" align="center"
@@ -446,8 +446,8 @@
                                                                                 title="transport any car"></a></div>
                                                                 </div>
                                                             </td>
-                                                        </tr>
-                                                    </table> --}}
+                                                        </tr> --}}
+                                                    </table>
                                                     <table class="paragraph_block block-2" width="100%"
                                                         border="0" cellpadding="0" cellspacing="0"
                                                         role="presentation"
