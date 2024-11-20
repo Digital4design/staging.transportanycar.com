@@ -18,7 +18,7 @@
                 
                 <!-- OTP Input Fields -->
                 <form id="otpForm">
-                    <div class="otp-input d-flex justify-content-center mt-3">
+                    <div class="otp-input d-flex justify-content-center py-4">
                         <input class="otpNumber" type="text" id="otp1"  pattern="[0-9]*"  value="" inputtype="numeric" required autocomplete="one-time-code" autofocus>
                         <input class="otpNumber" type="text" id="otp2" maxlength="1" pattern="[0-9]*" value="" inputtype="numeric" required autocomplete="off">
                         <input class="otpNumber" type="text" id="otp3" maxlength="1" pattern="[0-9]*" value="" inputtype="numeric" required autocomplete="off">
@@ -26,7 +26,7 @@
                     </div>
 
                     <!-- Resend/Change Number Links -->
-                    <p class="mt-3">
+                    <p>
                         Didn't receive a code? <a href="#" id="resendOtp">Resend</a> or <a href="#" class="" data-dismiss="modal" aria-label="Close" id="changeNumber">Change number</a>.
                     </p>
 
