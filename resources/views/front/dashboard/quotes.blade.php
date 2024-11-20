@@ -177,97 +177,6 @@
                 <div class="card">
                     <div class="card-header @if($key == 0) active @endif" id="heading{{$key}}">
                         <div class="card_lft">
-<<<<<<< HEAD
-                            <a href="{{ route('front.feedback_view', $quote->id)}}">
-                                <h4>{{$quote->getTransporters->username ??""}}</h4>
-                            </a>
-                            @if ($overall_percentage == 0)
-                            <ul class="rating-star">
-                                <li>
-                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#D9D9D9"/>
-                                    </svg>
-                                </li>
-                                <li>
-                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#D9D9D9"/>
-                                    </svg>
-                                </li>
-                                <li>
-                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#D9D9D9"/>
-                                    </svg>
-                                </li>
-                                <li>
-                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#D9D9D9"/>
-                                    </svg>
-                                </li>
-                                <li>
-                                    <!-- <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
-                                    </svg> -->
-                                    <svg width="22" height="20" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z" fill="#DCDCDE"/>
-                                        <mask id="mask0_5_1268" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="23" height="44">
-                                        <rect width="23" height="44" fill="#D9D9D9"/>
-                                        </mask>
-                                        <g mask="url(#mask0_5_1268)">
-                                        <path d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z" fill="#D9D9D9"/>
-                                        </g>
-                                    </svg>
-                                </li>
-                                 <li><span class="ml-2">({{ $overall_percentage}}%)</span></li></li> 
-                            </ul>
-                            @else
-                            <ul class="wd-star-lst user-feedback-stars">
-                                <li>
-                                    <svg width="12" height="12" viewBox="0 0 12 12"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                            fill="#FFA800" />
-                                    </svg>
-                                </li>
-                                <li>
-                                    <svg width="12" height="12" viewBox="0 0 12 12"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                            fill="#FFA800" />
-                                    </svg>
-                                </li>
-                                <li>
-                                    <svg width="12" height="12" viewBox="0 0 12 12"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                            fill="#FFA800" />
-                                    </svg>
-                                </li>
-                                <li>
-                                    <svg width="12" height="12" viewBox="0 0 12 12"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                            fill="#FFA800" />
-                                    </svg>
-                                </li>
-                                <li>
-                                    <svg width="12" height="12" viewBox="0 0 12 12"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                        fill="#FFA800" />
-                                </svg>
-                                </li>
-                                <li class="user-feedback-rating-count">
-                                    <span class="ml-2">({{ $overall_percentage}}%)</span></li>
-                                   
-                                   
-                            </ul>
-                            @endif
-=======
                             <div class="d-flex flex-wrap align-items-center" style="gap:5px;">
                                 <a href="{{ route('front.feedback_view', $quote->id)}}">
                                     <h4 style="width: 100%; line-height: 24px;">{{$quote->getTransporters->username ??""}}</h4>
@@ -350,7 +259,6 @@
                                 </ul>
                                 @endif
                             </div>
->>>>>>> d8cf239a50fd84714ce9232530c9566db20a4972
                             <img src="{{asset('assets/web/images/right-mark.png')}}" class="right_mark" alt="right mark">
                             <div class="icon_hover_sec">
                                 <div class="flex_blog "><span>Flexible</span>
