@@ -211,7 +211,7 @@
                                         </g>
                                     </svg>
                                 </li>
-                                 <li><span>({{$overall_percentage}}%)</span></li> 
+                                 <li><span class="ml-2">({{ $overall_percentage}}%)</span></li></li> 
                             </ul>
                             @else
                             <ul class="wd-star-lst user-feedback-stars">
@@ -256,7 +256,7 @@
                                 </svg>
                                 </li>
                                 <li class="user-feedback-rating-count">
-                                    <span class="ml-1">({{ $overall_percentage}}%)</span></li>
+                                    <span class="ml-2">({{ $overall_percentage}}%)</span></li>
                                    
                                    
                             </ul>
