@@ -12,8 +12,8 @@
             margin: 0;
             font-weight: 300;
             font-family: "Outfit", sans-serif;
-            font-size: 10px;
-            line-height: 13px;
+            font-size: 16px;
+            line-height: 22px;
         }
 
         h1,
