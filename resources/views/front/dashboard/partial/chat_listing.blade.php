@@ -61,4 +61,7 @@ $quoteFound = false;
         $('body').attr('id','messages');
         $('#user_current_chat_id').val($(this).data('id'));
     });
+    $('.chat_back_arrow').on('click', function () {
+        $('body').attr('id','');
+    });
 </script>

@@ -7876,9 +7876,10 @@ g.highcharts-input-group {
     /* height: 100%; */
     background: #f3f3f3;
   }
-  .message-color .active-job-box {height: calc(100svh - 105px)}
+  /* .message-color .active-job-box {height: calc(100svh - 105px)} */
+  .message-color .active-job-box {height: auto;}
   .message-color:not(#messages) .container-job .chat_box, .message-color:not(#messages) .message_container .chat_box {
-    height: calc(100% - 166px);
+    height: calc(100% - 214px);
   }
   #messages .active-job-box {
     height: calc(100svh - 116px)
