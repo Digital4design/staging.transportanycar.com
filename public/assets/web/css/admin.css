@@ -2896,7 +2896,7 @@ a.chat_cross {
   font-weight: 600;
 }
 
-.admin-header .navbar .menu-item:last-child a {
+.admin-header .navbar .menu-item:last-child:not(.active) a {
   margin-right: 0;
 }
 
