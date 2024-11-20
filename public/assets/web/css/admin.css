@@ -7167,7 +7167,7 @@ button.swal2-confirm.swal2-styled:focus {
 }
 
 .great_job_sec {
-  padding: 40px 20px;
+  padding: 40px 20px 0;
   background: #fff;
 }
 
@@ -7312,6 +7312,7 @@ button.swal2-confirm.swal2-styled:focus {
 
 
 @media(max-width: 580px) {
+  .join_network_main .trans_login_blog {padding: 0px 20px; max-width: 100%;}
   .chat_accept_btn {padding: 7px 10px;}
   .chat_box,
   .chat_conversation_header, .chat_header {border-radius: 0;}
