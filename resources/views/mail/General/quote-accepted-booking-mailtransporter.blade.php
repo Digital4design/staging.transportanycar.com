@@ -68,7 +68,7 @@
 
         {{-- <h2>Hi {{ $name }},</h2> --}}
         <p class="adjust-space">Your £{{ $data['price'] }} bid for {{ $data['model'] }} delivery has been accepted by
-            {{ $data['user']->first_name}}.</p>
+            {{ $data['user']['username']}}.</p>
         <p>We will send you another email shortly once they have provided their full contact information and full
             delivery details.</p>
         {{-- <p class="adjust-space">Go to booking.</p> --}}
