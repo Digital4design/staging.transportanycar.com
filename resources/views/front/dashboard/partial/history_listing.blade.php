@@ -642,4 +642,14 @@ $auth_user = Auth::user();
     $(document).ready(function() {
         $('body').addClass('message-color');
     })
+    
+    $(function () {
+        // Function to handle load and resize
+        function handleEvent() {
+            $('.message-color .chat_box').css('height', 'calc(100vh - 65px)');
+        }
+
+        handleEvent();
+        $(window).on('resize', handleEvent);
+    });
 </script>
