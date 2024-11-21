@@ -50,7 +50,7 @@ class DashboardController extends WebController
         ->groupBy('user_quote_id');
     
 
-        $quotes = UserQuote::where(['user_id' => $user_data->id])
+        $quotes = UserQuote::with('notification_thread')->where(['user_id' => $user_data->id])
         ->whereNotIn('status', ['completed','cancelled'])
         ->leftJoinSub($subQuery, 'sub', function($join) {
             $join->on('user_quotes.id', '=', 'sub.user_quote_id');
@@ -78,6 +78,7 @@ class DashboardController extends WebController
         })
         ->select('user_quotes.*', 'sub.quotes_count', 'sub.lowest_bid')
         ->get();
+        // return $quotes;
         return view('front.dashboard.index', [
             'title' => $title,
             'data' => $quotes,

@@ -1686,8 +1686,8 @@
                     mobile: {
                         required: true,
                         digits: true,
-                        minlength: 4,
-                        maxlength: 15,
+                        minlength: 11,
+                        maxlength: 11,
                         remote: {
                             type: 'get',
                             url: "{{ route('front.user_availability_checker') }}",
@@ -1763,7 +1763,8 @@
                     mobile: {
                         required: 'Please enter mobile',
                         remote: "This number is already taken",
-                        maxlength: "Phone number Cannot be longer than 15 characters"
+                        maxlength: "Please enter a valid mobile number",
+                        minlength:"Please enter a valid mobile number"
                     },
                     // opassword: {
                     //     required: 'Old password is required',
