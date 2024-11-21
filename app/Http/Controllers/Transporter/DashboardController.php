@@ -282,7 +282,6 @@ class DashboardController extends WebController
         $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
             ->whereNotNull('rating')
             ->avg('rating');
-        // return $rating_average;
         $percentage = 0;
         if ($rating_average !== null) {
             $percentage = ($rating_average / 5) * 100;
@@ -299,6 +298,7 @@ class DashboardController extends WebController
         $params['total_earning'] = $total_earning;
         $params['company_detail'] = $company_details;
         $params['rating_percentage'] = $percentage;
+        $params['rating_average'] = $rating_average;
 
         $customRequest = new Request([
             'type' => 'feedback'
@@ -623,7 +623,7 @@ class DashboardController extends WebController
                     return response()->json(['status' => false, 'message' => 'Failed to update preference.']);
                 }
             } elseif ($request->email_type == 'saved_search_alerts') {
-                $status = $user->update(['saved_search_alerts' => $request->value]);
+                $status = $user->update(['job_email_preference' => $request->value]);
                 if ($status) {
                     return response()->json(['status' => true,  'message' => 'Preference updated successfully.']);
                 } else {

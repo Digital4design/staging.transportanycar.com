@@ -7,8 +7,8 @@ $auth_user = Auth::user();
         .chat_title_bx,
         .chat_list {display: none!important;}
         .chat_conversation {display: block!important;}
-        .message-color .chat_box {
-            height: 100dvh;
+        .message-color .chat_conversation {
+            height: calc(100dvh + 65px);
             padding-top: 65px;
         }
         .chat-note {margin-bottom: 0;}
@@ -21,9 +21,13 @@ $auth_user = Auth::user();
             right:0;
         }
         .chat_box .scrollbar.chat_conversation_body {
-           height: 100%;
-           padding-top: 100px;
-           padding-bottom: 100px;
+           height: 100dvh;
+           padding-top: 110px;
+           padding-bottom: 110px;
+        }
+        html,body {
+            /*height: 100%;*/
+            overflow: hidden;
         }
     /* Temeporary css */
 
@@ -667,11 +671,19 @@ $auth_user = Auth::user();
             let windowHeight = $(window).innerHeight();
             
             console.log('hola dear', windowHeight);
-            $('.message-color .chat_box').css('height', `calc(${windowHeight}px - 65px)`);
+            $('html, body').css('height', `calc(${windowHeight}px - 300px)`);
         }
 
-        // handleEvent();
+        handleEvent();
         // $(window).on('resize', handleEvent);
         // $(window).on('scroll', handleEvent);
+        
+         $('textarea').on('focus', function () {
+            handleEvent();
+        });
+    
+        $('textarea').on('blur', function () {
+            handleEvent();
+        });
     });
 </script>

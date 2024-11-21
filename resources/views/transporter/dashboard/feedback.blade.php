@@ -2,8 +2,6 @@
 
 @section('head_css')
     <style>
-      
-        
         .banner {
             font-size: 16px;
             line-height: 20px;
@@ -17,7 +15,7 @@
             padding: 8px 50px;
             display: inline-block;
         }
-       
+
         .banner.new_member {
             background: #52D017;
         }
@@ -45,8 +43,8 @@
         }
 
         /* .wd-transport-area {
-                        align-items: self-start;
-                    } */
+                                        align-items: self-start;
+                                    } */
 
         ul.wd-star-lst {
             margin-bottom: 0;
@@ -73,27 +71,32 @@
             font-weight: 500;
             margin-left: 10px;
         }
+
         .popover .arrow.center {
             margin: 0 auto;
-            left:0;
-            right:0;
+            left: 0;
+            right: 0;
         }
+
         .popover {
             border: 1px solid #CFCFCF;
             border-radius: 10px;
         }
+
         .popover .popover-body {
             font-size: 12px;
             line-height: 18px;
             width: 300px;
-            color:rgba(0, 0, 0, 0.5);
+            color: rgba(0, 0, 0, 0.5);
             width: 100%;
             text-align: center;
             padding: 10px 25px;
         }
+
         .queston-mark svg:hover {
             cursor: pointer;
         }
+
         @media(min-width: 992px) {
             .set_banner_position>.wd-white-box {
                 position: relative;
@@ -125,14 +128,18 @@
         }
 
         @media(max-width: 991px) {
-            #page-content-wrapper {position: relative; overflow: hidden;}
+            #page-content-wrapper {
+                position: relative;
+                overflow: hidden;
+            }
+
             .adjust_spacing {
                 padding-top: 65px;
             }
 
             .set_banner_position {
                 position: relative;
-                padding:0;
+                padding: 0;
                 /* padding-top: 15px; */
                 /* overflow: hidden; */
             }
@@ -143,10 +150,14 @@
                 z-index: 2;
                 /* position: fixed; */
             }
+
             #transporter-feedback .navbar {
-                position: relative!important;
+                position: relative !important;
             }
-            #transporter-feedback .content_container {padding-top: 0;}
+
+            #transporter-feedback .content_container {
+                padding-top: 0;
+            }
         }
 
         @media(max-width: 767px) {
@@ -205,12 +216,12 @@
             @include('layouts.transporter.dashboard.top_head')
             <!-- content part -->
             @if ($completed_job >= 0 && $completed_job <= 10)
-                        <div class="banner new_member d-lg-none">New Member</div>
-                        @elseif($completed_job >= 11 && $completed_job <= 50)
-                            <div class="banner pro_member d-lg-none">Pro Member</div>
-                        @elseif($completed_job >= 51)
-                            <div class="banner vip_member d-lg-none">ViP Member</div>
-                        @endif
+                <div class="banner new_member d-lg-none">New Member</div>
+            @elseif($completed_job >= 11 && $completed_job <= 50)
+                <div class="banner pro_member d-lg-none">Pro Member</div>
+            @elseif($completed_job >= 51)
+                <div class="banner vip_member d-lg-none">ViP Member</div>
+            @endif
             <div class="content_container adjust_spacing">
                 <div class="inner_content set_banner_position">
                     <div class="wd-white-box">
@@ -236,104 +247,118 @@
                                                         width="20" height="20" class="ml-1" />
                                                     <!-- <span>({{ count($feedback) }})</span> -->
                                                 </h1>
-                                                @if($rating_percentage == 0)
-                                                <ul class="wd-star-lst user-feedback-stars">
-                                                    <li>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                                fill="#D9D9D9" />
-                                                        </svg>
-                                                    </li>
-                                                    <li>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                                fill="#D9D9D9" />
-                                                        </svg>
-                                                    </li>
-                                                    <li>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                                fill="#D9D9D9" />
-                                                        </svg>
-                                                    </li>
-                                                    <li>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                                fill="#D9D9D9" />
-                                                        </svg>
-                                                    </li>
-                                                    <li>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                                fill="#D9D9D9" />
-                                                        </svg>
-                                                    </li>
-                                                    <li class="user-feedback-rating-count">
-                                                        <span>({{ count($feedback) }})</span><span class="ml-1">{{ $rating_percentage}}%</span></li>
-                                                       
-                                                         {{-- <li>({{ number_format($overall_percentage, 0) }}%)</li> --}}
+                                                @if ($rating_percentage == 0)
+                                                    <ul class="wd-star-lst user-feedback-stars">
+                                                        <li>
+                                                            <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                    fill="#D9D9D9" />
+                                                            </svg>
+                                                        </li>
+                                                        <li>
+                                                            <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                    fill="#D9D9D9" />
+                                                            </svg>
+                                                        </li>
+                                                        <li>
+                                                            <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                    fill="#D9D9D9" />
+                                                            </svg>
+                                                        </li>
+                                                        <li>
+                                                            <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                    fill="#D9D9D9" />
+                                                            </svg>
+                                                        </li>
+                                                        <li>
+                                                            <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                    fill="#D9D9D9" />
+                                                            </svg>
+                                                        </li>
+                                                        <li class="user-feedback-rating-count">
+                                                            <span>({{ count($feedback) }})</span><span
+                                                                class="ml-1">{{ $rating_percentage }}%</span>
+                                                        </li>
+
+                                                        {{-- <li>({{ number_format($overall_percentage, 0) }}%)</li> --}}
 
 
-                                                </ul>
+                                                    </ul>
                                                 @else
-                                                <ul class="wd-star-lst user-feedback-stars">
-                                                    <li>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                                fill="#FFA800" />
-                                                        </svg>
-                                                    </li>
-                                                    <li>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                                fill="#FFA800" />
-                                                        </svg>
-                                                    </li>
-                                                    <li>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                                fill="#FFA800" />
-                                                        </svg>
-                                                    </li>
-                                                    <li>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                                fill="#FFA800" />
-                                                        </svg>
-                                                    </li>
-                                                    <li>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                                fill="#FFA800" />
-                                                        </svg>
-                                                    </li>
-                                                    <li class="user-feedback-rating-count">
-                                                        <span>({{ count($feedback) }})</span><span class="ml-1">{{ $rating_percentage}}%</span></li>
-                                                       
-                                                         {{-- <li>({{ number_format($overall_percentage, 0) }}%)</li> --}}
+                                                    @php
+                                                        $totalStars = 5; // Total number of stars
+                                                        $yellowStars = floor($rating_average); // Full yellow stars
+                                                        $halfStar = $rating_average - $yellowStars > 0 ? true : false; // Check for a half-star
+                                                        $greyStars = $totalStars - $yellowStars - ($halfStar ? 1 : 0); // Remaining grey stars
+                                                    @endphp
+                                                    <ul class="wd-star-lst user-feedback-stars">
+
+                                                        @for ($i = 0; $i < $yellowStars; $i++)
+                                                            <li>
+                                                                <svg width="20" height="20" viewBox="0 0 12 12"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                        fill="#FFA800" />
+                                                                </svg>
+                                                            </li>
+                                                        @endfor
+
+                                                        {{-- Half star (optional) --}}
+                                                        @if ($halfStar)
+                                                            <li>
+                                                                <svg width="20" height="20" viewBox="0 0 12 12"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <defs>
+                                                                        <linearGradient id="halfStarGradient" x1="0%"
+                                                                            y1="0%" x2="100%" y2="0%">
+                                                                            <stop offset="50%"
+                                                                                style="stop-color:#FFA800;stop-opacity:1" />
+                                                                            <stop offset="50%"
+                                                                                style="stop-color:#ccc;stop-opacity:1" />
+                                                                        </linearGradient>
+                                                                    </defs>
+                                                                    <path
+                                                                        d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                        fill="url(#halfStarGradient)" />
+                                                                </svg>
+                                                            </li>
+                                                        @endif
+
+                                                        {{-- Grey stars --}}
+                                                        @for ($i = 0; $i < $greyStars; $i++)
+                                                            <li>
+                                                                <svg width="20" height="20" viewBox="0 0 12 12"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                        fill="#ccc" />
+                                                                </svg>
+                                                            </li>
+                                                        @endfor
+                                                        <li class="user-feedback-rating-count">
+                                                            <span>({{ count($feedback) }})</span><span
+                                                                class="ml-1">{{ $rating_percentage }}%</span>
+                                                        </li>
+
+                                                        {{-- <li>({{ number_format($overall_percentage, 0) }}%)</li> --}}
 
 
-                                                </ul>
+                                                    </ul>
                                                 @endif
                                                 <div>Member since: <span
                                                         class="font-weight-light user-feedback-member-from">{{ $user->created_at->format('m/d/Y') }}</span>
@@ -354,10 +379,15 @@
                                                                         d="M4.41537 11.1567L0.190373 6.93169C-0.0634575 6.67786 -0.0634575 6.2663 0.190373 6.01245L1.10959 5.0932C1.36342 4.83935 1.775 4.83935 2.02883 5.0932L4.87499 7.93934L10.9712 1.8432C11.225 1.58937 11.6366 1.58937 11.8904 1.8432L12.8096 2.76245C13.0634 3.01628 13.0634 3.42783 12.8096 3.68169L5.33462 11.1567C5.08076 11.4105 4.6692 11.4105 4.41537 11.1567Z"
                                                                         fill="#52D017" />
                                                                 </svg>
-                                                                <div data-toggle="popover" class="queston-mark d-inline-block p-0 cursor-pointer insurance_popover ml-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#D9D9D9" width="18" height="18">
-                                                                        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" />
-                                                                    </svg>                                                                      
+                                                                <div data-toggle="popover"
+                                                                    class="queston-mark d-inline-block p-0 cursor-pointer insurance_popover ml-2">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        viewBox="0 0 24 24" fill="#D9D9D9" width="18"
+                                                                        height="18">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                                                                            clip-rule="evenodd" />
+                                                                    </svg>
                                                                 </div>
                                                             @endif
                                                         </span>
@@ -372,16 +402,21 @@
                                                                         d="M4.41537 11.1567L0.190373 6.93169C-0.0634575 6.67786 -0.0634575 6.2663 0.190373 6.01245L1.10959 5.0932C1.36342 4.83935 1.775 4.83935 2.02883 5.0932L4.87499 7.93934L10.9712 1.8432C11.225 1.58937 11.6366 1.58937 11.8904 1.8432L12.8096 2.76245C13.0634 3.01628 13.0634 3.42783 12.8096 3.68169L5.33462 11.1567C5.08076 11.4105 4.6692 11.4105 4.41537 11.1567Z"
                                                                         fill="#52D017" />
                                                                 </svg>
-                                                                <div data-toggle="popover" class="queston-mark d-inline-block p-0 cursor-pointer photo_id_popover ml-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#D9D9D9" width="18" height="18">
-                                                                        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" />
-                                                                    </svg>                                                                      
+                                                                <div data-toggle="popover"
+                                                                    class="queston-mark d-inline-block p-0 cursor-pointer photo_id_popover ml-2">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        viewBox="0 0 24 24" fill="#D9D9D9" width="18"
+                                                                        height="18">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                                                                            clip-rule="evenodd" />
+                                                                    </svg>
                                                                 </div>
                                                             @endif
                                                     </li>
                                                     <li>
                                                         <p>Positive feedback:</p>
-                                                        <span>{{ $rating_percentage}}%</span>  
+                                                        <span>{{ $rating_percentage }}%</span>
                                                     </li>
                                                     <li>
                                                         <p>Total reviews:</p>
@@ -420,7 +455,7 @@
                                                     <li class="mt-0">
                                                         <p>Insurance cover:</p>
                                                         <span>
-                                                            @if(!empty($company_detail) && $company_detail->git_insurance_cover !== null)
+                                                            @if (!empty($company_detail) && $company_detail->git_insurance_cover !== null)
                                                                 £{{ $company_detail->git_insurance_cover }}
                                                             @endif
                                                         </span>
@@ -428,16 +463,16 @@
                                                     <li>
                                                         <p>Years established:</p>
                                                         <span>
-                                                            {{$company_detail->years_established ?? ''}}
+                                                            {{ $company_detail->years_established ?? '' }}
                                                         </span>
                                                     </li>
                                                     <li>
                                                         <p>Recovery trucks:</p>
-                                                        <span> {{$company_detail->no_of_tow_trucks ?? ''}}</span>
+                                                        <span> {{ $company_detail->no_of_tow_trucks ?? '' }}</span>
                                                     </li>
                                                     <li>
                                                         <p>Drivers:</p>
-                                                        <span>{{$company_detail->no_of_drivers ?? ''}}</span>
+                                                        <span>{{ $company_detail->no_of_drivers ?? '' }}</span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -447,7 +482,8 @@
                             </div>
                             <div class="row mx-0">
                                 <div class="col-lg-12">
-                                    <div class="feedback-tbl border-none bg-white border-0 rounded-0" id="feedback_listing">
+                                    <div class="feedback-tbl border-none bg-white border-0 rounded-0"
+                                        id="feedback_listing">
 
                                     </div>
                                 </div>
@@ -461,27 +497,27 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('assets/web/js/admin.js') }}"></script>
+    <script src="{{ asset('assets/web/js/admin.js') }}"></script>
 
-<script>
-        $(function () {
+    <script>
+        $(function() {
             $('.photo_id_popover').popover({
-            content: 'We have a copy of this transporters valid drivers license photo I.D to protect you and ensuring a safe market place for transporting your vehicle.',
-              container: '.photo_id_popover',
-              trigger: 'hover',
-              html: true,
-              placement:'bottom',
-              template:'<div class="popover" role="tooltip"><div class="arrow center"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+                content: 'We have a copy of this transporters valid drivers license photo I.D to protect you and ensuring a safe market place for transporting your vehicle.',
+                container: '.photo_id_popover',
+                trigger: 'hover',
+                html: true,
+                placement: 'bottom',
+                template: '<div class="popover" role="tooltip"><div class="arrow center"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
             })
             $('.insurance_popover').popover({
-            content: 'We have verified this transport providers insurance to ensure they have the correct goods in transit (GIT) cover to protect you and transport vehicles safe and securely.',
-              container: '.insurance_popover',
-              trigger: 'hover',
-              html: true,
-              placement:'bottom',
-              template:'<div class="popover" role="tooltip"><div class="arrow center"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+                content: 'We have verified this transport providers insurance to ensure they have the correct goods in transit (GIT) cover to protect you and transport vehicles safe and securely.',
+                container: '.insurance_popover',
+                trigger: 'hover',
+                html: true,
+                placement: 'bottom',
+                template: '<div class="popover" role="tooltip"><div class="arrow center"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
             })
-          })
+        })
         var globalSiteUrl = '<?php echo $path = url('/'); ?>'
 
         function fetch_data(page) {
@@ -513,7 +549,7 @@
         });
 
         $(document).ready(function() {
-            $('body').attr('id','transporter-feedback');
+            $('body').attr('id', 'transporter-feedback');
             $(document).on('click', '.read_more_show', function() {
                 var parentTr = $(this).closest('tr');
                 var readMoreContent = parentTr.find('.read_more_content');

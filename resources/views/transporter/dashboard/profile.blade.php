@@ -1237,7 +1237,7 @@
                                                         <div class="form-group">
                                                             <input type="checkbox" id="check5"
                                                                 data-email-type="saved_search_alerts"
-                                                                {{ $user->saved_search_alerts == 1 ? 'checked' : '' }}>
+                                                                {{ $user->job_email_preference == 1 ? 'checked' : '' }}>
                                                             <label for="check5"><span>Saved search alerts</span></label>
                                                         </div>
                                                     </li>
