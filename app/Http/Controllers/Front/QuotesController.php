@@ -255,7 +255,7 @@ class QuotesController extends WebController
         // Update quote data with the quotation ID
         $quoteData['quotation_id'] = $userQuote->id;
         Cache::forget('location_info');
-        $this->SaveSearchQuoteEmailSend($quoteData);
+        // $this->SaveSearchQuoteEmailSend($quoteData);
 
         // Send mail to transporters
         //$this->sendMailToTransporters($quoteData);
