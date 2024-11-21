@@ -283,8 +283,8 @@
                                         booking</a>
                                 </li>
 
-                                <li class=" job-access view-quote">
-                                    <a href="javascript:void(0)"
+                                <li class=" job-access view-quote" style="margin:0;">
+                                    <a href="javascript:void(0)" style="margin-bottom:auto;"
                                         data-href="{{ route('front.messages', ['thread_id' => $item->notification_thread->id]) }}"
                                         onclick="handleNotificationClick(event, this);">Message</a>
                                 </li>
