@@ -300,6 +300,7 @@ class DashboardController extends WebController
         $params['total_earning'] = $total_earning;
         $params['company_details'] = $company_details;
         $params['rating_percentage'] = $percentage;
+        $params['rating_average']  = $rating_average;
 
 
         $customRequest = new Request([

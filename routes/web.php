@@ -122,3 +122,4 @@ Route::get("/new/template/check", function () {
     $maildata['type'] = 'user';
     return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
 });
+
