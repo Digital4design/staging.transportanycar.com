@@ -307,7 +307,10 @@ ul.suggestions-list li {
                         required: true
                     },
                     phone: {
-                        required: true
+                        required: true,
+                        digits: true,
+                        minlength: 11,
+                        maxlength: 11
                     },
                     email: {
                         required: true,
@@ -369,7 +372,11 @@ ul.suggestions-list li {
                 },
                 messages: {
                     contact_name: "Please enter contact name",
-                    phone: "Please enter mobile number",
+                    phone: {
+                        required: "Please enter delivery mobile number",
+                        maxlength: "Please enter a valid mobile number",
+                        minlength:"Please enter a valid mobile number"
+                    },
                     email: {
                         required: "Please enter email address",
                         email: "Please enter a valid email address"
