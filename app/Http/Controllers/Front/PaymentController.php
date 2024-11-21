@@ -89,15 +89,15 @@ class PaymentController extends WebController
             $data['quote_by_transporter_id'] = $quote->id;
             //Optionally send email (uncomment and adjust as necessary)
 
-            $user = Auth::user();  
+            $user = User::find($quote->user_id);
             $email_to = $user->email;
             $subject = "Confirmed, Your Bid for ". $user_quote->vehicle_make . ' ' . $user_quote->vehicle_model ." Delivery Has Been Accepted.";
             $maildata['name'] =  $data['transporter_info']->first_name .' '.$data['transporter_info']->last_name;
             $maildata['model'] = $user_quote->vehicle_make . ' ' . $user_quote->vehicle_model;
             $maildata['price'] = isset($transaction->amount) ? $transaction->amount : '';
             $maildata['url'] = route('transporter.current_jobs', ['id' => $quote_by_transporter_id]);
-            $maildata['user'] = isset($user) ? $user : '';
-            // dd( $maildata['user']['username']);
+            $maildata['username'] = $quote->quote->user->username;
+            // dd( $maildata['username']);
             // return;
 
             $htmlContent = view('mail.General.quote-accepted-booking-mailtransporter', ['data' => $maildata])->render();
