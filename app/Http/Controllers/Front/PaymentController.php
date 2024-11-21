@@ -89,15 +89,16 @@ class PaymentController extends WebController
             $data['quote_by_transporter_id'] = $quote->id;
             //Optionally send email (uncomment and adjust as necessary)
 
-            $user = User::find($quote->user_id);
+            $user = Auth::user();  
             $email_to = $user->email;
-            $subject = "Confirmed, Your Bid for ". $user_quote->vehicle_make . ' ' . $user_quote->vehicle_model ."Delivery Has Been Accepted.";
+            $subject = "Confirmed, Your Bid for ". $user_quote->vehicle_make . ' ' . $user_quote->vehicle_model ." Delivery Has Been Accepted.";
             $maildata['name'] =  $data['transporter_info']->first_name .' '.$data['transporter_info']->last_name;
             $maildata['model'] = $user_quote->vehicle_make . ' ' . $user_quote->vehicle_model;
             $maildata['price'] = isset($transaction->amount) ? $transaction->amount : '';
             $maildata['url'] = route('transporter.current_jobs', ['id' => $quote_by_transporter_id]);
             $maildata['user'] = isset($user) ? $user : '';
-            
+            // dd( $maildata['user']['username']);
+            // return;
 
             $htmlContent = view('mail.General.quote-accepted-booking-mailtransporter', ['data' => $maildata])->render();
             $this->emailService->sendEmail($email_to, $htmlContent, $subject);
@@ -106,7 +107,7 @@ class PaymentController extends WebController
             try {
                 if ($quote->quote->user->job_email_preference) {
                     $email_to = $quote->quote->user->email;
-                    $subject = 'confirmation for delivery of your ' . $quote->quote->vehicle_make . ' ' . $quote->quote->vehicle_model;
+                    $subject = 'Confirmation for delivery of your ' . $quote->quote->vehicle_make . ' ' . $quote->quote->vehicle_model;
                     $maildata['quotation'] = $quote;
                     $maildata['transaction_id'] = isset($transaction->transaction_id) ? $transaction->transaction_id : '';
                     $maildata['transporter_info'] = $data['transporter_info'];

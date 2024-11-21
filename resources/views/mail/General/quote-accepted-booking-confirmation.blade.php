@@ -95,7 +95,7 @@
             style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
             alt="transport notifiaction" title="transport notifiaction" />
         <h2>Hi,</h2>
-        <p class="adjust-space">You have accepted {{ $data['transporter_info']->first_name }} quote of £<strong>{{ $data['quotation']->price }}</strong> to deliver your {{ $data['quotation']->quote->vehicle_make}} {{$data['quotation']->quote->vehicle_model}} @if (!empty($data['quotation']->quote->vehicle_make_1) && !empty($data['quotation']->quote->vehicle_model_1)) @endif</p>
+        <p class="adjust-space">You have accepted {{ $data['transporter_info']->username }} quote of £{{ $data['quotation']->price }} to deliver your {{ $data['quotation']->quote->vehicle_make}} {{$data['quotation']->quote->vehicle_model}} @if (!empty($data['quotation']->quote->vehicle_make_1) && !empty($data['quotation']->quote->vehicle_model_1)) @endif</p>
         <div class="message-wrap" style="text-align: center;">
             <p class="message">Payment ref:{{ $data['transaction_id'] }}</p>
             <p class="message">Booking ref: {{ $data['booking_ref'] }}</p> 
