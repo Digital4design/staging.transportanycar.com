@@ -652,5 +652,6 @@ $auth_user = Auth::user();
 
         handleEvent();
         $(window).on('resize', handleEvent);
+        $(window).on('scroll', handleEvent);
     });
 </script>
