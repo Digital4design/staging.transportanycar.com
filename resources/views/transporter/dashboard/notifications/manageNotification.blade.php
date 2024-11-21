@@ -102,7 +102,7 @@
                                 <li>
                                     <span>Saved search alerts</span>
                                     <input type="checkbox" id="saved_search_alerts" name="saved_search_alerts"
-                                        value="1" {{ $data->saved_search_alerts == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
+                                        value="1" {{ $data->job_email_preference == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
                                     <label class="switch" for="saved_search_alerts"></label>
                                 </li>
                             </ul>
