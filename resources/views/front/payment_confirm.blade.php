@@ -307,7 +307,10 @@ ul.suggestions-list li {
                         required: true
                     },
                     phone: {
-                        required: true
+                        required: true,
+                        digits: true,
+                        minlength: 11,
+                        maxlength: 11
                     },
                     email: {
                         required: true,
@@ -327,7 +330,10 @@ ul.suggestions-list li {
                         required: true
                     },
                     contact_number: {
-                        required: true
+                        required: true,
+                        digits: true,
+                        minlength: 11,
+                        maxlength: 11
                     },
                     delivery_email: {
                         required: true,
@@ -366,7 +372,11 @@ ul.suggestions-list li {
                 },
                 messages: {
                     contact_name: "Please enter contact name",
-                    phone: "Please enter mobile number",
+                    phone: {
+                        required: "Please enter delivery mobile number",
+                        maxlength: "Please enter a valid mobile number",
+                        minlength:"Please enter a valid mobile number"
+                    },
                     email: {
                         required: "Please enter email address",
                         email: "Please enter a valid email address"
@@ -374,7 +384,11 @@ ul.suggestions-list li {
                     start_point: "Please enter collection address",
                     end_point: "Please enter delivery address",
                     delivery_contact_name: "Please enter delivery contact name",
-                    contact_number: "Please enter delivery mobile number",
+                    contact_number: {
+                        required: "Please enter delivery mobile number",
+                        maxlength: "Please enter a valid mobile number",
+                        minlength:"Please enter a valid mobile number"
+                    },
                     delivery_email: {
                         required: "Please enter delivery email address",
                         email: "Please enter a valid delivery email address"

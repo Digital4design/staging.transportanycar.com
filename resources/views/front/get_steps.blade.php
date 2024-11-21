@@ -2,9 +2,9 @@
 
 @section('head_css')
     <style>
-        main {
+        /* main {
             padding-top: 104px;
-        }
+        } */    
         .error {
             color: red;
         }
@@ -13,7 +13,6 @@
             align-items: center;
             margin-top: 22px;
         }
-
         /* Style for the header */
         .check_group_blog h6 {
             margin-right: 20px; /* Space between header and checkboxes */
@@ -194,7 +193,9 @@
     font-size: 20px;
     font-weight: 500;
 }
-
+#otpModal .modal-title {
+    font-size: 20px;
+}
 
 @media(max-width: 580px){
     .wizard_btngrp {
@@ -207,6 +208,9 @@
 
     .back-icon {
         width: 22%;
+    }
+    #otpModal .modal-body {
+        padding: 0 0 20px;
     }
 }
 
@@ -257,7 +261,7 @@
         font-size: 14px;
         line-height: 18px;
         color:#000000;
-        font-weight: 300;
+        font-weight: 500;
         display: block;
     }
     .modal-body p a {

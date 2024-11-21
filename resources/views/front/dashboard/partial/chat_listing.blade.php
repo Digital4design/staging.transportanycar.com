@@ -2,6 +2,11 @@
 $auth_user = Auth::user();
 $quoteFound = false;
 ?>
+<style>
+    .user_current_chat.active {
+        background: #ffffff!important;
+    }
+</style>
 @if(isset($chats) && $chats->count() > 0)
     @foreach ($chats as $chat)
         <?php
@@ -55,5 +60,8 @@ $quoteFound = false;
     $('.user_current_chat').on('click', function () {
         $('body').attr('id','messages');
         $('#user_current_chat_id').val($(this).data('id'));
+    });
+    $('.chat_back_arrow').on('click', function () {
+        $('body').attr('id','');
     });
 </script>

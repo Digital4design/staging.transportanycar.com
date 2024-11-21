@@ -333,8 +333,8 @@
 <div class="contain">
     <p class="adjust-space">Your transport request is now live on Transport Any Car.</p>
     <p class="adjust-space">Account Details:</p>
-    <p class="">Email: user101@gmail.com</p>
-    <p class="">Pass: h7bdjx</p>
+    <p class="">Email: <a data-link-card="true" href="mailto:{{ $data['email'] }}" target="_blank" style="text-decoration: underline; color: #025dd5;" rel="noopener">{{ $data['email'] }}</a></p>
+    <p class="">Pass:{{ $data['password'] }}</p>
     <p class="adjust-space">What Happens Next:</p>
     <p class="adjust-space">Your delivery request has been sent to our network of transport providers and you will start receiving quotes via email once they start to place their bids.</p>
     <p class="adjust-space">You can compare your quotes and ask questions via message before accepting to make sure you choose the right one for you, check out your quotes here.</p>

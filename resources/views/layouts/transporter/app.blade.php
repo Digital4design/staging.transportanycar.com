@@ -3,7 +3,7 @@
 <head>
     <!-- meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>{{print_title(site_name).' | '}}{{ isset($title)?print_title($title) : ''}}</title>
     <!-- Favicon [ 16*16 SVG ]-->
     <link href="{{asset('/assets/images/favicon.png')}}" rel="icon" class="favicon">

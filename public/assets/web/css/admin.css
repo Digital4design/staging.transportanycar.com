@@ -2896,7 +2896,7 @@ a.chat_cross {
   font-weight: 600;
 }
 
-.admin-header .navbar .menu-item:last-child a {
+.admin-header .navbar .menu-item:last-child:not(.active) a {
   margin-right: 0;
 }
 
@@ -6609,9 +6609,9 @@ div#spam-banner button.btn {
     margin: 0 auto;
   }
 
-  .chat_list_body ul {
+  /* .chat_list_body ul {
     height: auto;
-  }
+  } */
 
   .jobsrch_form_blog {
     margin: 36px 0 20px;
@@ -7167,7 +7167,7 @@ button.swal2-confirm.swal2-styled:focus {
 }
 
 .great_job_sec {
-  padding: 40px 20px;
+  padding: 40px 20px 0;
   background: #fff;
 }
 
@@ -7312,6 +7312,7 @@ button.swal2-confirm.swal2-styled:focus {
 
 
 @media(max-width: 580px) {
+  .join_network_main .trans_login_blog {padding: 0px 20px; max-width: 100%;}
   .chat_accept_btn {padding: 7px 10px;}
   .chat_box,
   .chat_conversation_header, .chat_header {border-radius: 0;}
@@ -7876,9 +7877,10 @@ g.highcharts-input-group {
     /* height: 100%; */
     background: #f3f3f3;
   }
-  .message-color .active-job-box {height: calc(100svh - 105px)}
+  /* .message-color .active-job-box {height: calc(100svh - 105px)} */
+  .message-color .active-job-box {height: auto;}
   .message-color:not(#messages) .container-job .chat_box, .message-color:not(#messages) .message_container .chat_box {
-    height: calc(100% - 166px);
+    height: calc(100% - 214px);
   }
   #messages .active-job-box {
     height: calc(100svh - 116px)
@@ -7959,7 +7961,7 @@ g.highcharts-input-group {
   .msg_active_container .chat_box .scrollbar {
     /* height: auto;
     max-height: calc(100vh - 280px); */
-    height: calc(100% - 185px);
+    height: calc(100% - 200px);
     /* max-height: calc(100% - 213px);
     padding-bottom: 0; */
   }

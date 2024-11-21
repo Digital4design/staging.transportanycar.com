@@ -93,9 +93,9 @@
     <div class="contain" style="text-align: center;">
         <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
             style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
-            alt="transport notifiaction" title="transport notifiaction"></a>
+            alt="transport notifiaction" title="transport notifiaction" />
         <h2>Hi,</h2>
-          <p class="adjust-space">You have accepted {{ $data['transporter_info']->first_name }} quote of £{{ $data['quotation']->price }}</strong> to deliver your {{ $data['quotation']->quote->vehicle_make}} {{$data['quotation']->quote->vehicle_model}} @if (!empty($data['quotation']->quote->vehicle_make_1) && !empty($data['quotation']->quote->vehicle_model_1)) @endif</p>
+        <p class="adjust-space">You have accepted {{ $data['transporter_info']->first_name }} quote of £<strong>{{ $data['quotation']->price }}</strong> to deliver your {{ $data['quotation']->quote->vehicle_make}} {{$data['quotation']->quote->vehicle_model}} @if (!empty($data['quotation']->quote->vehicle_make_1) && !empty($data['quotation']->quote->vehicle_model_1)) @endif</p>
         <div class="message-wrap" style="text-align: center;">
             <p class="message">Payment ref:{{ $data['transaction_id'] }}</p>
             <p class="message">Booking ref: {{ $data['booking_ref'] }}</p> 
@@ -112,7 +112,7 @@
             <p class="adjust-half-space">Best Regards,</p>
             <p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>
             <p class="adjust-half-space">Manage notification <a href="{{ url('transporter/manage_notification') }}"
-                style="color:#0356D6; text-decoration: none;">preferences.</span></a></p>
+                style="color:#0356D6; text-decoration: none;">preferences.</a></p>
             <p style=" font-size: 12px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     </div>
 </body>

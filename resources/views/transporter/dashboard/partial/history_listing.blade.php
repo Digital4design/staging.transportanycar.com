@@ -3,28 +3,23 @@ $user = $thread->user_qot->user ? $thread->user_qot->user : null;
 $auth_user = Auth::user();
 ?>
 <style>
-    .transportor-chat-header {
-        font-size: 14px;
-        line-height: 18px;
-        font-weight: 300;
-        color: #000000;
-        gap: 10px;
-    }
-
-    .chat-note {
-        font-size: 10px;
-        line-height: 13px;
-        font-weight: 500;
-        color: #444444;
-        margin: 15px;
-        display: none;
-    }
-
-    .chat_outgoing_txt.chat_out_txt_bx {
-        margin-bottom: 5px;
-    }
-
-    @media screen and (max-width: 575px) {
+.transportor-chat-header {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 300;
+    color:#000000;
+    gap: 10px;
+}
+.chat-note {
+    font-size: 10px;
+    line-height: 13px;
+    font-weight: 500;
+    color:#444444;
+    padding: 15px;
+    display: none;
+}
+.chat_outgoing_txt.chat_out_txt_bx {margin-bottom: 5px;}
+@media screen and (max-width: 575px) {
         #messages .navbar {
             box-shadow: none;
         }

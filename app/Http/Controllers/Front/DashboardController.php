@@ -50,7 +50,7 @@ class DashboardController extends WebController
         ->groupBy('user_quote_id');
     
 
-        $quotes = UserQuote::where(['user_id' => $user_data->id])
+        $quotes = UserQuote::with('notification_thread')->where(['user_id' => $user_data->id])
         ->whereNotIn('status', ['completed','cancelled'])
         ->leftJoinSub($subQuery, 'sub', function($join) {
             $join->on('user_quotes.id', '=', 'sub.user_quote_id');
@@ -78,6 +78,7 @@ class DashboardController extends WebController
         })
         ->select('user_quotes.*', 'sub.quotes_count', 'sub.lowest_bid')
         ->get();
+        // return $quotes;
         return view('front.dashboard.index', [
             'title' => $title,
             'data' => $quotes,
@@ -397,6 +398,7 @@ class DashboardController extends WebController
 
     public function quotes($id)
     {
+        // return $id;
         $user_data = Auth::guard('web')->user();
         $job_status = UserQuote::where(['user_id' => $user_data->id, 'id' => $id])
         ->value('status');
@@ -405,6 +407,9 @@ class DashboardController extends WebController
         $quotes = QuoteByTransporter::where('user_quote_id', $id)
         ->orderByRaw('CAST(price AS UNSIGNED) ASC')
         ->get();
+        // return $quotes;
+        $my_quotes = QuoteByTransporter::where('user_id', $quotes[0]->user_id ?? 0)->pluck('id');
+        
         $rating_average = Feedback::whereIn('quote_by_transporter_id', $quotes->pluck('id'))
             ->selectRaw('(AVG(communication) + AVG(punctuality) + AVG(care_of_good) + AVG(professionalism)) / 4 as overall_avg')
             ->first();
@@ -420,15 +425,25 @@ class DashboardController extends WebController
                 $quote->thread_id = null; // Set to null or handle as needed if no thread matches
             }
         });
-        $overall_percentage = 100;
-        $overall_percentage += ($rating_average->overall_avg / 5) * 100;
+        // $overall_percentage = 100;
+        // $overall_percentage += ($rating_average->overall_avg / 5) * 100;
+       
+        $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+        ->whereNotNull('rating')
+        ->avg('rating');
+        $percentage = 0;
+        if ($rating_average !== null) { $my_quotes = QuoteByTransporter::where('user_id', $quotes[0]->user_id)->pluck('id');
+            $percentage = ($rating_average / 5) * 100;
+          
+        }
 
         $hasAcceptedQuote = $quotes->contains(function ($quote) {
             return strtolower($quote->status) === 'accept';
         });
+        
         // Pass the flag to the view
         $params['hasAcceptedQuote'] = $hasAcceptedQuote;
-        $params['overall_percentage'] = $overall_percentage;
+        $params['overall_percentage'] = $percentage;
         $params['quotes'] = $quotes;
         $params['user_quote_id'] = $id;
         $params['job_status'] = $job_status;
