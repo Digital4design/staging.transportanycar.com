@@ -7,7 +7,24 @@ $auth_user = Auth::user();
         .chat_title_bx,
         .chat_list {display: none!important;}
         .chat_conversation {display: block!important;}
-        
+        .message-color .chat_box {
+            height: 100dvh;
+            padding-top: 65px;
+        }
+        .chat-note {margin-bottom: 0;}
+        .admin-header {position:fixed;top:0;}
+        .chat_conversation_header {position:fixed; top:65px; right:0; left:0;}
+        .chat_conversation_footer {
+            position:fixed;
+            bottom:0;
+            left:0;
+            right:0;
+        }
+        .chat_box .scrollbar.chat_conversation_body {
+           height: 100%;
+           padding-top: 100px;
+           padding-bottom: 100px;
+        }
     /* Temeporary css */
 
     .user-chat-header-pic {
@@ -645,12 +662,16 @@ $auth_user = Auth::user();
     
     $(function () {
         // Function to handle load and resize
-        let windowHeight = $(window).height();
+        //let windowHeight = $(window).height();
         function handleEvent() {
-            $('.message-color .chat_box').css('height', `calc(${windowHeight} - 65px)`);
+            let windowHeight = $(window).innerHeight();
+            
+            console.log('hola dear', windowHeight);
+            $('.message-color .chat_box').css('height', `calc(${windowHeight}px - 65px)`);
         }
 
-        handleEvent();
-        $(window).on('resize', handleEvent);
+        // handleEvent();
+        // $(window).on('resize', handleEvent);
+        // $(window).on('scroll', handleEvent);
     });
 </script>
