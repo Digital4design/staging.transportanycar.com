@@ -3,13 +3,6 @@ $user = isset($thread->user) ? $thread->user : null;
 $auth_user = Auth::user();
 ?>
 <style>
-    /* Temeporary css */
-        .chat_title_bx,
-        .chat_list {display: none!important;}
-        .chat_conversation {display: block!important;}
-        
-    /* Temeporary css */
-
     .user-chat-header-pic {
         width: 33px;
         height: 33px;
