@@ -645,8 +645,9 @@ $auth_user = Auth::user();
     
     $(function () {
         // Function to handle load and resize
+        let windowHeight = $(window).height();
         function handleEvent() {
-            $('.message-color .chat_box').css('height', 'calc(100vh - 65px)');
+            $('.message-color .chat_box').css('height', `calc(${windowHeight} - 65px)`);
         }
 
         handleEvent();
