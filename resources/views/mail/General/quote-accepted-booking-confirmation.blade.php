@@ -102,7 +102,7 @@
             <p class="message">Deposit paid: {{ $data['quotation']->deposit }}</p>
             <p class="message">Remaining balance:£{{ $data['quotation']->transporter_payment }}</p>
             <p class="message">Total: £{{ $data['quotation']->price }}</p> 
-            <p class="message">Pay the remaining amount of £{{ $data['quotation']->transporter_payment }} directly to {{ $data['transporter_info']->first_name }}.</p>
+            <p class="message">Pay the remaining amount of £{{ $data['quotation']->transporter_payment }} directly to {{ $data['transporter_info']->username }}.</p>
         </div>
             <p class="adjust-space">What Happens Next:</p>
             <p>The transport provider will contact you to arrange the delivery of you vehicle.</p>
