@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\General\NotificationController;
+use Illuminate\Support\Facades\Mail;
+use App\Services\EmailService;
+use App\{User, Thread, UserQuote};
+use App\QuoteByTransporter;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +23,15 @@ use App\Http\Controllers\General\NotificationController;
 */
 
 // URL Mapping to Home Page
+Route::get('/example', function () {
+    return view('mail.General.customerWelcome'); // This will call the 'example.blade.php' file in the resources/views folder
+});
 Route::get('/car-delivery', 'Front\GuestController@index')->name('car_delivery');
 Route::get('/car-transport', 'Front\GuestController@index')->name('car_transport');
 Route::get('/car-transport-quote', 'Front\GuestController@index')->name('car_transport_quote');
 Route::get('/vehicle-transport', 'Front\GuestController@index')->name('vehicle_transport');
 
-Route::get("clear-cache","General\GeneralController@ClearCache");
+Route::get("clear-cache", "General\GeneralController@ClearCache");
 
 Route::group(['as' => 'front.'], function () {
     Route::group(['middleware' => 'guest:web', 'namespace' => 'Front'], function () {
@@ -66,7 +74,7 @@ Route::group(['as' => 'front.'], function () {
         Route::get('messages', 'DashboardController@messages')->name('messages');
         Route::get('leave-feedback/{id?}', 'DashboardController@leaveFeedback')->name('leave_feedback');
         Route::get('checkout/{id}', 'PaymentController@checkout')->name('checkout');
-        Route::post('/process-payment','PaymentController@processPayment')->name('process_payment');
+        Route::post('/process-payment', 'PaymentController@processPayment')->name('process_payment');
         Route::get('payment-confirm', 'PaymentController@paymentConfirm')->name('payment_confirm');
         Route::post('quote-change-status', 'QuotesController@quoteChangeStatus')->name('quote_change_status');
         Route::post('notification-status', 'DashboardController@notificationStatus')->name('notification_status');
@@ -88,11 +96,10 @@ Route::group(['as' => 'front.'], function () {
     Route::get('check-old-password', 'General\GeneralController@check_old_password')->name('check_old_password');
     Route::get('check-new-password', 'General\GeneralController@check_new_password')->name('check_new_password');
 
-     Route::group(['middleware' => ['auth:web'], 'namespace' => 'General'], function () {
+    Route::group(['middleware' => ['auth:web'], 'namespace' => 'General'], function () {
         Route::get('notifications', 'NotificationController@index')->name('notifications.index');
         Route::get('notifications/{notification}', 'NotificationController@show')->name('notifications.show');
     });
-
 });
 
 // Route::get('admin/login-as-transporter/{transporterId}', 'Admin\LoginController@loginAsTransporter')->name('admin.loginAsTransporter');
@@ -101,4 +108,17 @@ Route::middleware('auth:admin')->group(function () {
 });
 
 Route::get('/send-email', [EmailController::class, 'sendTestEmail']);
+Route::post('/send-otp', [App\Http\Controllers\Front\QuotesController::class, 'sendOtp'])->name('sendOtp');
+Route::post('/verify-otp', [App\Http\Controllers\Front\QuotesController::class, 'verifyOtp'])->name('verifyOtp');
 
+
+Route::get("/new/template/check", function () {
+    $maildata['user'] = User::where('id', "1104")->first();
+    $maildata['thread'] = Thread::where('id', '1707')->first();
+    $maildata['message'] = "hello how are you ahfkadfkj sdfhsdfhsod shsi gsf gsiof iosf g";
+    $maildata['from_page'] = 'quotes_admin';
+    $maildata['quotes'] =  UserQuote::where('id', 717)->first();
+    $maildata['quote_id'] = 21;
+    $maildata['type'] = 'user';
+    return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
+});

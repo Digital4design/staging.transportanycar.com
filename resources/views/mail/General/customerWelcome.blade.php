@@ -5,8 +5,76 @@
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]--><!--[if !mso]><!-->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet" type="text/css"><!--<![endif]-->
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet" type="text/css"><!--<![endif]--> --}}
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <style>
+        p {
+            margin: 0;
+        }
+
+        h2 {
+            margin: 0;
+        }
+        h1 {
+            margin: 0;
+        }
+		h2 {
+            margin: 0;
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            font-size: 16px;
+            line-height: 22px;
+        }
+        p {
+            margin: 0;
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            font-size: 16px;
+            line-height: 22px;
+        }
+        body {
+            margin: 0;
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        .contain {
+            max-width: 600px;
+            width: 100%;
+            margin: auto;
+            /* text-align: center; */
+            /* padding: 35px; */
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 400;
+        }
+
+        a.verify-btn {
+            color: #0356D6;
+            text-decoration: none;
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 400;
+            display: inline-block;
+        }
+
+        .adjust-space {
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .adjust-half-space {
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+    </style>
+    {{-- <style>
         * {
             box-sizing: border-box;
         }
@@ -85,11 +153,11 @@
                 padding: 30px 20px 20px !important;
             }
         }
-    </style>
+    </style> --}}
 </head>
 
 <body style="margin: 0; background-color: #ffffff; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
+{{-- <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
     <tbody>
     <tr>
         <td>
@@ -242,7 +310,7 @@
                                         <tr>
                                             <td class="pad" style="padding-bottom:40px;padding-left:10px;padding-right:10px;padding-top:10px;">
                                                 <div style="color:#ffffff;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:16.8px;">
-                                                    <p style="margin: 0; margin-bottom: 16px; color: #000;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+                                                    <p style="margin: 0; margin-bottom: 16px; color: #000; font-size: 12px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
                                                     <p style="margin: 0;"><a href="{{route('front.unsubscribe', ['unsub' => true]) }}" target="_blank" style="text-decoration: underline; color: #717171;" rel="noopener">Unsubscribe from all emails</a></p>
                                                 </div>
                                             </td>
@@ -259,7 +327,32 @@
         </td>
     </tr>
     </tbody>
-</table><!-- End -->
+</table> --}}
+<!-- End -->
+
+<div class="contain">
+    <p class="adjust-space">Your transport request is now live on Transport Any Car.</p>
+    <p class="adjust-space">Account Details:</p>
+    <p class="">Email: <a data-link-card="true" href="mailto:{{ $data['email'] }}" target="_blank" style="text-decoration: underline; color: #025dd5;" rel="noopener">{{ $data['email'] }}</a></p>
+    <p class="">Pass:{{ $data['password'] }}</p>
+    <p class="adjust-space">What Happens Next:</p>
+    <p class="adjust-space">Your delivery request has been sent to our network of transport providers and you will start receiving quotes via email once they start to place their bids.</p>
+    <p class="adjust-space">You can compare your quotes and ask questions via message before accepting to make sure you choose the right one for you, check out your quotes here.</p>
+    <p class="adjust-space">The prices you will receive are very low due our network of transport providers already travelling similar routes so they can conveniently carry out your delivery efficiently. </p>
+    <p class="adjust-space">Rest assured, the price you see is the total amount you pay, there are no additional costs.</p>
+    <p class="adjust-space">We look forward to providing you with the lowest quotes possible and hope you enjoy using the site.</p>
+    <p class="adjust-space">If you need any help or have any questions please contact our team at support@transportanycar.com.</p>
+
+ 
+    <p>Best Regards,</p>
+    <p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>
+    <p class="adjust-half-space" style="font-size: 12px; text-align: center;">Manage notification <a href="{{ url('transporter/manage_notification') }}"
+        style="color:#0356D6; text-decoration: none;">preferences.</span></a></p>
+    <p class="adjust-half-space" style="font-size: 12px; text-align:center;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+    
+</div>
+
+
 </body>
 
 </html>

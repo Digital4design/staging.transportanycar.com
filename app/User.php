@@ -224,5 +224,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserFreind::class,'receiver_id','id')->where('user_freinds.status', '=', 'accepted');
     }
-
+    public function companyDetail()
+    {
+        return $this->hasOne(CompanyDetail::class); // Assuming one-to-one relationship
+    }
 }

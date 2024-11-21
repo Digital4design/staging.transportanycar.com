@@ -84,25 +84,21 @@
     }
 
     /*******************************/
-    .leave_inner .form-group textarea:focus::-webkit-input-placeholder {
-        /* Chrome/Opera/Safari */
+    /* .leave_inner .form-group textarea:focus::-webkit-input-placeholder {
         color: #000000;
     }
 
     .leave_inner .form-group textarea:focus::-moz-placeholder {
-        /* Firefox 19+ */
         color: #000000;
     }
 
     .leave_inner .form-group textarea:focus:-ms-input-placeholder {
-        /* IE 10+ */
         color: #000000;
     }
 
     .leave_inner .form-group textarea:focus:-moz-placeholder {
-        /* Firefox 18- */
         color: #000000;
-    }
+    } */
 
     button.lve_feed_btn {
         font-size: 14px;
@@ -333,8 +329,8 @@
                                                     fill="#FFA800" />
                                             </svg>
                                         </span>
-                                        (12)
-                                        <!-- ({{ $transporter_feedback['overall_percentage'] }}%) -->
+                                      ({{$feedback_count}})
+                                        {{-- <!-- ({{ $transporter_feedback['overall_percentage'] }}%) --> --}}
                                         {{-- ({{ 100 }}%) --}}
                                     </div>
                                     <a href="javascript:;" class="verified_btns">
@@ -351,7 +347,7 @@
                         </div>
                         <div class="leave_tabs">
                             <!-- <span>Accepted:  08/01/2024 19:20</span> -->
-                            <p class="quote-accepted">Quote accepted: 08/01/2024 19:20</p>
+                            <p class="quote-accepted">Quote accepted: {{ \Carbon\Carbon::parse($data->updated_at)->format('d/m/Y H:i') }}</p>
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="positive" role="tabpanel"
                                     aria-labelledby="positive-tab">

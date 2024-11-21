@@ -5,9 +5,10 @@
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]--><!--[if !mso]><!-->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet" type="text/css"><!--<![endif]-->
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet" type="text/css"><!--<![endif]--> --}}
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
     <style>
-        * {
+        /* * {
             box-sizing: border-box;
         }
 
@@ -69,12 +70,97 @@
                 display: table !important;
                 max-height: none !important;
             }
+        } */
+        h2,
+        p,
+        body {
+            margin: 0;
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        p {
+            font-weight: 300;
+            font-family: "Outfit", sans-serif;
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        h1,
+        h2,
+        p {
+            margin: 0;
+        }
+
+        .contain {
+            max-width: 600px;
+            width: 100%;
+            margin: auto;
+            text-align: center;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 400;
+        }
+
+        a.verify-btn {
+            background: #52D017;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 400;
+            border: none;
+            display: inline-block;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 40px;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        .adjust-space {
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .adjust-half-space {
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
+        .message-wrap {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .message-wrap .message-title {
+            font-size: 20px;
+            line-height: 24px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .message-wrap .message {
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 300;
+            color: #000000;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 
 <body style="margin: 0; background-color: #ffffff; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
+{{-- <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
     <tbody>
     <tr>
         <td>
@@ -112,6 +198,7 @@
                                         <td class="pad" style="padding-bottom:20px;padding-left:50px;padding-right:50px;">
                                             <div style="color:#000f26;direction:ltr;font-family:'Montserrat', sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:19.2px;">
                                                 <p style="margin: 0;">
+                                                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                                                     from {{$data->getTransporters->username}} to deliver your {{$data->quote->vehicle_make}} {{$data->quote->vehicle_model}}
                                                     @if (!empty($data->quote->vehicle_make_1) && !empty($data->quote->vehicle_model_1))
                                                         / {{$data->quote->vehicle_make_1}} {{$data->quote->vehicle_model_1}}
@@ -221,7 +308,34 @@
         </td>
     </tr>
     </tbody>
-</table><!-- End -->
+</table><!-- End --> --}}
+
+<div class="contain">
+    <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
+        style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
+        alt="transport notifiaction" title="transport notifiaction"></a>
+    <h2>Hi,</h2>
+    <p class="adjust-space">You have received a quote for <span style="display: block; font-size: 24px; line-height: 30px; font-weight: 500; color:#222222; margin-top: 20px;">£{{$data->price}}</span></p>
+    <p class="adjust-space"> from {{$data->getTransporters->username}} to deliver your {{$data->quote->vehicle_make}} {{$data->quote->vehicle_model}}</p>
+    <a href="{{route('front.quotes', $data->quote->id)}}"class="verify-btn" style="border-radius: 50px;">
+        View quote
+    </a>
+    <p class="adjust-space">You can message the transporter to make aranagements before accepting the quote.</p>
+    <div class="message-wrap">
+        <p class="message-title">247transport sent you a message</p>
+        <p class="message">{{$data->message}}</p>
+        <a  href="{{route('front.messages', ['thread_id' => $thread_id])}}" class="verify-btn" style="padding-top: 6px; padding-bottom: 6px; padding-left: 30px; padding-right: 30px;">Reply</a>
+    </div>
+    <p class="adjust-space">Note: The quote shown is the total amount.  If you are happy with the quote then simply accept it and secure your booking.</p>
+    <p class="adjust-space">You may receive more quotes from our network of transporters so keep an eye out and you can accept your preferred quote at any time.</p>
+    <p>Best Regards,</p>
+    <p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>
+    <p class="adjust-half-space">Manage notification <a href="{{ url('transporter/manage_notification') }}"
+            style="color:#0356D6; text-decoration: none;">preferences.</span></a>
+    <p style=" font-size: 12px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+</div>
+
+
 </body>
 
 </html>

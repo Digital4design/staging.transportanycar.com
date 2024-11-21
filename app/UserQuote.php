@@ -53,4 +53,8 @@ class UserQuote extends Model
     {
         return checkFileExist($val);
     }
+    public function notification_thread()
+    {
+        return $this->hasOne(Thread::class, 'user_quote_id');
+    }
 }

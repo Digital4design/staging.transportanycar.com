@@ -64,6 +64,11 @@
     border: 1px solid #DADADA !important;
 }
 @media(max-width: 580px){
+    .trans-login {margin-top: 10px;}
+    .signnetwork {
+        max-width: 370px;
+        margin: auto;
+    }
     .col-lg-12.forgot-link {
         margin-bottom: -21px !important;
     }
@@ -82,9 +87,9 @@
     .great_job_sec_new {
     padding: 0 2px;
 }
-.trans_login_blog_sec {
+/* .trans_login_blog_sec {
     max-width: 366px;
-}
+} */
 
 .great_job_sec ul.checklist {
     padding: 0px 20px;

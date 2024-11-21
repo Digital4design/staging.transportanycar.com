@@ -2623,6 +2623,7 @@ i.fas.fa-check {
   font-weight: 400;
   max-width: 266px !important;
   width: 100%;
+  margin: 24px auto;
 }
 .iti {
   width: 100%;
@@ -2731,7 +2732,7 @@ select.form-control option {
   max-width: 266px !important;
 }
 .trans_login_blog {
-  max-width: 347px;
+  max-width: 370px;
   width: 100%;
   margin: 0 auto;
 }
@@ -2984,19 +2985,13 @@ form#payment-form .row .form-group label.error {
   font-weight: 400;
   font-size: 14px;
 }
-
-
-
-
-
-
 @media(max-width: 767px){
   #passwordIcon {
     top: 18px;
-}
-#chooseus .getqt_btnincld {
-  margin: 40px auto 0 !important; 
-}
+  }
+  #chooseus .getqt_btnincld {
+    margin: 40px auto 0 !important; 
+  }
 .mob_review .reviewblog img.star_rating {
   display: block;
 }

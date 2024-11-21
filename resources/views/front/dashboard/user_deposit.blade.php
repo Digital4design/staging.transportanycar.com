@@ -382,7 +382,7 @@ form#chat__form textarea.form-control.textarea {
                                 <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#FFA800"></path>
                             </svg>
                         </li>
-                        <!-- <li>({{$trans_feedback['overall_percentage']}}%)</li> -->
+                        {{-- <!-- <li>({{$trans_feedback['overall_percentage']}}%)</li> --> --}}
                         <li>({{100}}%)</li>
 
                     </ul>

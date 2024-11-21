@@ -258,7 +258,7 @@
                                         <tr>
                                             <td class="pad" style="padding-bottom:40px;padding-left:10px;padding-right:10px;padding-top:10px;">
                                                 <div style="color:#ffffff;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:16.8px;">
-                                                    <p style="margin: 0; margin-bottom: 16px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+                                                    <p style="margin: 0; margin-bottom: 16px; font-size: 12px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
                                                     <p style="margin: 0;"><a href="*|UNSUB|*" target="_blank" style="text-decoration: underline;" rel="noopener">Unsubscribe</a></p>
                                                 </div>
                                             </td>

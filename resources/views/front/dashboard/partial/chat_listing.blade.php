@@ -2,6 +2,11 @@
 $auth_user = Auth::user();
 $quoteFound = false;
 ?>
+<style>
+    .user_current_chat.active {
+        background: #ffffff!important;
+    }
+</style>
 @if(isset($chats) && $chats->count() > 0)
     @foreach ($chats as $chat)
         <?php
@@ -45,14 +50,18 @@ $quoteFound = false;
         @endif
     @endforeach
     @if(!$quoteFound)
-        <div class="get-chat-history text-center">-Currently none to show-</div>
+        <div class="get-chat-history text-left px-3 py-2">-Currently none to show-</div>
     @endif
 @else
-    <div class="get-chat-history text-center">-Currently none to show-</div>
+    <div class="get-chat-history text-left px-3 py-2">-Currently none to show-</div>
 @endif
 <script src="{{asset('assets/web/js/admin.js')}}"></script>
 <script>
     $('.user_current_chat').on('click', function () {
+        $('body').attr('id','messages');
         $('#user_current_chat_id').val($(this).data('id'));
+    });
+    $('.chat_back_arrow').on('click', function () {
+        $('body').attr('id','');
     });
 </script>

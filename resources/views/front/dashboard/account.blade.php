@@ -8,6 +8,27 @@
     .wd-active-job .container-job {
     padding-right: 25px !important;
 }
+#passwordIcon1,
+#passwordIcon2 {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    /* transform: translateY(-50%); */
+    cursor: pointer;
+    color: #ccc;
+}
+#togglePassword {
+    position: absolute;
+    top: 0;
+    bottom: 7px;
+    right: 15px;
+    z-index: 1;
+    cursor: pointer;
+    width: 45px;
+}
+.wd-deliver-box {
+    height: 100%;
+}
 </style>
     @include('layouts.web.dashboard.header')
     <section class="wd-active-job admin_account">
@@ -109,15 +130,21 @@
                                         </h2>
 
                                         <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="Current password" name="opassword" id="opassword" value="" autocomplete="on">
+                                            <input type="hidden" class="form-control" placeholder="Current password" name="opassword" id="opassword" value="{{Auth::guard('web')->user()->getAuthPassword()}}" autocomplete="on">
                                         </div>
 
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="New password" name="npassword" id="npassword" value="" autocomplete="on">
+                                        <div class="form-group" style="position: relative;">
+                                            <input type="password" class="form-control" placeholder="New password" name="npassword" id="npassword" autocomplete="on" style="padding-right: 30px;">
+                                            <span id="togglePassword1">
+                                                <i class="fas fa-eye" id="passwordIcon1"></i>
+                                            </span>
                                         </div>
-
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="Confirm new password" name="cpassword" id="cpassword" value="" autocomplete="on">
+                                        
+                                        <div class="form-group" style="position: relative;">
+                                            <input type="password" class="form-control" placeholder="Confirm new password" name="cpassword" id="cpassword" autocomplete="on" style="padding-right: 30px;">
+                                            <span id="togglePassword2">
+                                                <i class="fas fa-eye" id="passwordIcon2"></i>
+                                            </span>
                                         </div>
 
                                         <div class="wd-cstm-check">
@@ -145,6 +172,34 @@
     <script src="{{asset('/assets/admin/vendors/general/validate/jquery.validate.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+document.getElementById("togglePassword1").addEventListener("click", function () {
+    const passwordField = document.getElementById("npassword");
+    const icon = document.getElementById("passwordIcon1");
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+        passwordField.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+});
+
+// Toggle password visibility for confirm password
+document.getElementById("togglePassword2").addEventListener("click", function () {
+    const passwordField = document.getElementById("cpassword");
+    const icon = document.getElementById("passwordIcon2");
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+        passwordField.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+});
+
+
         function uploadImage(image)
         {
             var formData = new FormData();
@@ -247,15 +302,15 @@
             $(document).on('submit', '#form_account', function () {
                 $('#form_account').validate({
                     rules: {
-                        opassword: {
-                            required: true,
-                        },
+                        // opassword: {
+                        //     required: true,
+                        // },
                         npassword: {
-                            required: true,
+                            // required: true,
                             minlength: 6,
                         },
                         cpassword: {
-                            required: true,
+                            // required: true,
                             equalTo: "#npassword",
                         },
                         email: {

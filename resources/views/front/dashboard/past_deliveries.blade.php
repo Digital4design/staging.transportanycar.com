@@ -9,33 +9,46 @@
 <style>
 
 @media(max-width: 1400px){
-.wd-quote-box2 {
-    width: 100%;
-}
-
+    .wd-quote-box2 {
+        width: 100%;
+    }
 }
 
 @media(max-width: 580px){
-.accepted_quotes_row  .wd-quote-lft {
-    column-gap: 15px;
-}
-
-.accepted_quotes_row .wd-quote-lft {
-    display: flex;
-    flex-wrap: wrap;
-}
-.accepted_quotes_row .wd-quote-lft .list_detail {
-    width: 30%;
-}
-.new_dev_delivery .accepted_quotes_row .wd-quote-box.accepted_quotes_new .wd-quote-lft {
-    display: grid;
-}
+    .accepted_quotes_row  .wd-quote-lft {
+        column-gap: 15px;
+    }
+    .wd-quote-lft {
+        row-gap: 15px;
+    }
+    .accepted_quotes_row .wd-quote-lft {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .accepted_quotes_row .wd-quote-lft .list_detail {
+        width: 100%;
+    }
+    .new_dev_delivery .accepted_quotes_row .wd-quote-box .wd-quote-lft,
+    .new_dev_delivery .accepted_quotes_row .wd-quote-box.accepted_quotes_new .wd-quote-lft {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+    }
+    .wd-quote-rght a {margin-bottom: 15px;}
+    .wd-quote-box {align-items: flex-start;}
+    .wd-quote-rght {
+        width: 50%;
+        align-items: flex-start;
+    }
+    .wd-quote-box {
+        flex-direction: column;
+    }
 }
 
 @media(max-width: 380px){
-.accepted_quotes_row .wd-quote-lft .list_detail {
+/* .accepted_quotes_row .wd-quote-lft .list_detail {
     width: 29%;
-}
+} */
 }
 
 </style>
@@ -48,13 +61,13 @@
                     <div class="col-lg-4">
                         <div class="wd-deliver-lft">
                             <div class="wd-profl-delivr">
-                                <h1>My profile</h1>
+                                <h1>Past Deliveries</h1>
                                 <ul>
-                                    <li>
+                                    {{-- <li>
                                         <a href="javascript:;">
                                             <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M18.525 12.35H18.05V9.14081C18.05 8.76377 17.8986 8.40159 17.6314 8.1344L14.6656 5.16862C14.3984 4.90143 14.0363 4.75002 13.6592 4.75002H12.35V3.32502C12.35 2.53831 11.7117 1.90002 10.925 1.90002H1.425C0.638281 1.90002 0 2.53831 0 3.32502V12.825C0 13.6117 0.638281 14.25 1.425 14.25H1.9C1.9 15.8235 3.17656 17.1 4.75 17.1C6.32344 17.1 7.6 15.8235 7.6 14.25H11.4C11.4 15.8235 12.6766 17.1 14.25 17.1C15.8234 17.1 17.1 15.8235 17.1 14.25H18.525C18.7862 14.25 19 14.0363 19 13.775V12.825C19 12.5638 18.7862 12.35 18.525 12.35ZM4.75 15.675C3.96328 15.675 3.325 15.0367 3.325 14.25C3.325 13.4633 3.96328 12.825 4.75 12.825C5.53672 12.825 6.175 13.4633 6.175 14.25C6.175 15.0367 5.53672 15.675 4.75 15.675ZM14.25 15.675C13.4633 15.675 12.825 15.0367 12.825 14.25C12.825 13.4633 13.4633 12.825 14.25 12.825C15.0367 12.825 15.675 13.4633 15.675 14.25C15.675 15.0367 15.0367 15.675 14.25 15.675ZM16.625 9.50002H12.35V6.17502H13.6592L16.625 9.14081V9.50002Z" fill="white"/>
-                                            </svg> Accepted quotes
+                                            </svg> Booked Deliveries
                                         </a>
                                     </li>
 
@@ -64,9 +77,9 @@
                                                 <path d="M2.86533 2.86514C-0.345662 6.07613 -0.345662 11.2793 2.86533 14.4903C6.07631 17.7013 11.2795 17.7013 14.4905 14.4903C17.7015 11.2793 17.7015 6.07613 14.4905 2.86514C11.2795 -0.345845 6.07631 -0.345844 2.86533 2.86514ZM12.7092 5.95894C12.8639 6.11363 12.8639 6.36676 12.7092 6.52145L10.5529 8.67773L12.7092 10.834C12.8639 10.9887 12.8639 11.2418 12.7092 11.3965L11.3967 12.709C11.242 12.8637 10.9889 12.8637 10.8342 12.709L8.67792 10.5528L6.52163 12.709C6.36694 12.8637 6.11381 12.8637 5.95912 12.709L4.6466 11.3965C4.49191 11.2418 4.49191 10.9887 4.6466 10.834L6.80289 8.67773L4.6466 6.52145C4.49191 6.36676 4.49191 6.11363 4.6466 5.95894L5.95912 4.64642C6.11381 4.49173 6.36694 4.49173 6.52163 4.64642L8.67792 6.80271L10.8342 4.64642C10.9889 4.49173 11.242 4.49173 11.3967 4.64642L12.7092 5.95894Z" fill="white"/>
                                             </svg>
 
-                                            Expired deliveries
+                                            Expired Quote Requests
                                         </a>
-                                    </li>
+                                    </li> --}}
 
                                     <!-- <li>
                                         <a href="javascript:;">
@@ -104,7 +117,7 @@
                     </div>
                     <div class="col-lg-8 accepted_quotes_row">
                         <div class="wd-delivr-rght new_sec_delivr">
-                            <h2>Accepted quotes</h2>
+                            <h2>Booked Deliveries</h2>
                             @forelse($quotes_booked as $item)
                                 <div class="wd-quote-box accepted_quotes_new">
                                     <div class="wd-quote-lft">
@@ -118,10 +131,27 @@
 
                                         <div class="list_detail">
                                             <span>
+                                                <img src="{{ asset('assets/web/images/dashboard/calender.png') }}" alt="Calendar Icon">
+                                            </span>
+                                            <p>Accepted:</p>
+                                            <p><b>{{ $item->updated_at->format('d M Y') }}</b></p>
+                                        </div>
+
+                                        <div class="list_detail">
+                                            <span>
                                                 <img src="{{ asset('assets/web/images/dashboard/map-icon.svg') }}" alt="Map Icon">
                                             </span>
-                                            <p>Pick-up area:</p>
+                                            <p>Pick-up postcode:</p>
                                             <p><b>{{ $item->pickup_postcode }}</b></p>
+                                        </div>
+
+
+                                        <div class="list_detail">
+                                            <span>
+                                                <img src="{{ asset('assets/web/images/dashboard/red-map-icon.svg') }}" alt="Map Icon">
+                                            </span>
+                                            <p>Drop-off area:</p>
+                                            <p><b>{{ $item->drop_postcode }}</b></p>
                                         </div>
 
                                         <div class="list_detail">
@@ -134,25 +164,9 @@
 
                                         <div class="list_detail">
                                             <span>
-                                                <img src="{{ asset('assets/web/images/dashboard/calender.png') }}" alt="Calendar Icon">
-                                            </span>
-                                            <p>Accepted:</p>
-                                            <p><b>{{ $item->updated_at->format('d M Y') }}</b></p>
-                                        </div>
-
-                                        <div class="list_detail">
-                                            <span>
-                                                <img src="{{ asset('assets/web/images/dashboard/red-map-icon.svg') }}" alt="Map Icon">
-                                            </span>
-                                            <p>Drop-off area:</p>
-                                            <p><b>{{ $item->drop_postcode }}</b></p>
-                                        </div>
-
-                                        <div class="list_detail">
-                                            <span>
                                                 <img src="{{ asset('assets/web/images/dashboard/pound.png') }}" alt="Pound Icon">
                                             </span>
-                                            <p>Quote:</p>
+                                            <p>Quote amount:</p>
                                             <p><b>£@if($item->quoteByTransporter) {{ roundBasedOnDecimal($item->quoteByTransporter->price) }} @endif</b></p>
                                         </div>
                                     </div>
@@ -173,7 +187,7 @@
                             @empty
                                 <p>-Currently none to show-</p>
                             @endforelse
-                            <h2>Expired deliveries</h2>
+                            <h2>Expired Quote Requests</h2>
                             @forelse($quotes_cancelled as $item)
                             <div class="wd-quote-box">
                                 <div class="wd-quote-box2">
@@ -185,29 +199,28 @@
                                             <p>Make & model:</p>
                                             <p><b>{{$item->vehicle_make}} {{$item->vehicle_model}}</b></p>
                                         </div>
-
                                         <div class="list_detail">
-                                        <span>
-                                            <img src="{{asset('assets/web/images/dashboard/map-icon.svg')}}" alt="Map Icon">
-                                        </span>
-                                            <p>Pick-up area:</p>
-                                            <p><b>{{$item->pickup_postcode}}</b></p>
+                                            <span>
+                                              <img src="{{asset('assets/web/images/dashboard/calender.png')}}" alt="Map Icon">
+                                            </span>
+                                            <p>Expired:</p>
+                                            <p><b>{{ formatCustomDate($item->created_at->addDays(10)) }}</b></p>
                                         </div>
+                                       
                                     </div>
 
                                     <div class="wd-quote-lft">
                                         <div class="list_detail">
-                                        <span>
-                                          <img src="{{asset('assets/web/images/dashboard/calender.png')}}" alt="Map Icon">
-                                        </span>
-                                            <p>Expired:</p>
-                                            <p><b>{{ formatCustomDate($item->created_at->addDays(10)) }}</b></p>
+                                            <span>
+                                                <img src="{{asset('assets/web/images/dashboard/map-icon.svg')}}" alt="Map Icon">
+                                            </span>
+                                            <p>Pick-up postcode:</p>
+                                            <p><b>{{$item->pickup_postcode}}</b></p>
                                         </div>
-
                                         <div class="list_detail">
-                                        <span>
-                                          <img src="{{asset('assets/web/images/dashboard/red-map-icon.svg')}}" alt="Map Icon">
-                                        </span>
+                                            <span>
+                                            <img src="{{asset('assets/web/images/dashboard/red-map-icon.svg')}}" alt="Map Icon">
+                                            </span>
                                             <p>Drop-off area:</p>
                                             <p><b>{{$item->drop_postcode}}</b></p>
                                         </div>
@@ -222,9 +235,9 @@
                                     </div>
                                 </div>
 
-                                <!-- <div class="wd-quote-rght">
+                                <div class="wd-quote-rght">
                                     <a href="javascript:;" class="wd-leave-btn">Relist</a>
-                                </div> -->
+                                </div>
                             </div>
                             @empty
                                 <p>-Currently none to show-</p>

@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Mail\VerifyEmail;
+use Illuminate\Support\Facades\Mail;
 
 Route::group(['namespace' => 'Api\V1', 'prefix' => 'V1'], function () {
 
@@ -24,7 +25,9 @@ Route::group(['namespace' => 'Api\V1', 'prefix' => 'V1'], function () {
     });
 
     // New route for sending email
-    Route::post('send-email', 'MailController@sendEmail')->name('send-email');;
+    Route::post('send-email', 'MailController@sendEmail')->name('send-email');
+   
+
 });
 
 

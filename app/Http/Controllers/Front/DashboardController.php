@@ -10,6 +10,7 @@ use App\QuotationDetail;
 use App\Thread;
 use App\User;
 use App\UserQuote;
+use App\CompanyDetail;
 use App\Notification;
 use App\TransactionHistory;
 use Carbon\Carbon;
@@ -49,7 +50,7 @@ class DashboardController extends WebController
         ->groupBy('user_quote_id');
     
 
-        $quotes = UserQuote::where(['user_id' => $user_data->id])
+        $quotes = UserQuote::with('notification_thread')->where(['user_id' => $user_data->id])
         ->whereNotIn('status', ['completed','cancelled'])
         ->leftJoinSub($subQuery, 'sub', function($join) {
             $join->on('user_quotes.id', '=', 'sub.user_quote_id');
@@ -77,6 +78,7 @@ class DashboardController extends WebController
         })
         ->select('user_quotes.*', 'sub.quotes_count', 'sub.lowest_bid')
         ->get();
+        // return $quotes;
         return view('front.dashboard.index', [
             'title' => $title,
             'data' => $quotes,
@@ -144,25 +146,37 @@ class DashboardController extends WebController
 
     public function profile(Request $request)
     {
+       
         $user_data = Auth::guard('web')->user();
         $user_data->last_visited_at = now();
         $user_data->save();
+        // return $user_data->getAuthPassword();
         $request->validate([
             'email' => ['required', 'email', Rule::unique('users')->ignore($user_data->id)->whereNull('deleted_at')],
             'opassword' => ['required'],
-            'npassword' => ['required'],
-            'cpassword' => ['required', 'same:npassword'],
+            // 'npassword' => ['required'],
+            // 'cpassword' => [ 'same:npassword'],
         ], [
             'opassword.exists' => __('admin.change_password_not_match'),
             'cpassword.same' => __('admin.change_password_not_same'),
         ]);
-        if (Hash::check($request->opassword, $user_data->getAuthPassword())) {
+        
+        if ($request->opassword == $user_data->getAuthPassword()) {
+            if ($request->npassword == ''){
+                $is_update = $user_data->update(['email' => $request->email]);
+                if ($is_update) {
+                    success_session(__('admin.chang_profile_updated'));
+                } else {
+                    error_session(__('admin.chang_fail_to_update'));
+                }
+            }else{
             $is_update = $user_data->update(['password' => $request->npassword, 'email' => $request->email]);
             if ($is_update) {
                 success_session(__('admin.chang_profile_updated'));
             } else {
                 error_session(__('admin.chang_fail_to_update'));
             }
+        }
         } else {
             error_session(__('admin.change_password_not_match'));
         }
@@ -229,61 +243,72 @@ class DashboardController extends WebController
     public function feedback_listing($transporter_id)
     {
         $my_quotes = QuoteByTransporter::where('user_id', $transporter_id)->pluck('id');
-        $feedbacks = Feedback::query();
-        $feedbacks = $feedbacks->whereIn('quote_by_transporter_id', $my_quotes);
-        $feedbacks = $feedbacks->paginate(6);
-        $params['html'] = view('front.dashboard.partial.feedback_listing', compact('feedbacks'))->render();
+        $all_feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->get();
+        $feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->paginate(10);
+        $total_feedbacks = $all_feedbacks->count();
+
+        $total_feedbacks = $feedbacks->count();
+
+
+        $ratings = collect([5, 4, 3, 2, 1])->mapWithKeys(function ($rating) use ($all_feedbacks, $total_feedbacks) {
+            $count = $all_feedbacks->where('rating', $rating)->count();
+            $percentage = $total_feedbacks > 0 ? ($count / $total_feedbacks) * 100 : 0;
+            return ['star_' . $rating  =>  $percentage];
+        });
+
+        $average_rating = $total_feedbacks > 0 ? round($all_feedbacks->avg('rating'), 1) : 0;
+        $params['html'] = view('front.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings','average_rating'))->render();
         return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $params]);
     }
 
     private function get_transporter_feedback ($transporter_id) {
+        $user_data = user::find($transporter_id);
+        // dd($user_data);
         $my_quotes = QuoteByTransporter::where('user_id', $transporter_id)->pluck('id');
-        $user_data = User::where('id',$transporter_id)->first();
-        $month = Carbon::now()->month;
-        $six_month_start = Carbon::now()->subMonths(6)->startOfMonth();
-        $six_month_end = Carbon::now()->endOfMonth();
-        $currentYear = Carbon::now()->year;
-        $params = [
-            'user' => $user_data,
-            'feedback' => [],
-        ];
+        $quotes = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)->get();
+
+        $totalDistance = $quotes->sum(function ($transaction) {
+            if ($transaction->quote) {
+                $distanceString = $transaction->quote->distance;
+                $cleanedDistance = str_replace(['mi', ',', ' '], '', $distanceString);
+                return is_numeric($cleanedDistance) ? (float)$cleanedDistance : 0;
+            }
+            return 0;
+        });
+
+        $totalDistanceFormatted = number_format($totalDistance);
+        $completedCount = $quotes->filter(function ($transaction) {
+            return $transaction->quote && $transaction->quote->status == 'completed';
+        })->count();
+
+        $total_earning = $quotes->sum('amount');
+       
         $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
-            ->selectRaw('(AVG(communication) + AVG(punctuality) + AVG(care_of_good) + AVG(professionalism)) / 4 as overall_avg')
-            ->first();
-        $overall_percentage = 100;
-        $overall_percentage += ($rating_average->overall_avg / 5) * 100;
-
-        $positive_feedback_count = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->where('type', 'positive')->count();
-        $total_feedback_count = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->count();
-        $positive_feedback_percentage = ($total_feedback_count > 0) ? ($positive_feedback_count / $total_feedback_count) * 100 : 100;
-
-        $feedbackTypes = ['positive', 'neutral', 'negative'];
-        foreach ($feedbackTypes as $type) {
-            // Monthly count
-            $params["monthly_{$type}_feedback"] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
-                ->where('type', $type)
-                ->whereYear('created_at', $currentYear)
-                ->whereMonth('created_at', $month)
-                ->count();
-
-            // Six-monthly count
-            $params["six_monthly_{$type}_feedback"] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
-                ->where('type', $type)
-                ->whereBetween('created_at', [$six_month_start, $six_month_end])
-                ->count();
-
-            // Yearly count
-            $params["yearly_{$type}_feedback"] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
-                ->where('type', $type)
-                ->whereYear('created_at', $currentYear)
-                ->count();
+        ->whereNotNull('rating')
+        ->avg('rating');
+        $percentage = 0;
+        if ($rating_average !== null) {
+            $percentage = ($rating_average / 5) * 100;
+          
         }
+       
+        $company_details = CompanyDetail::where('user_id', $transporter_id)->first();
 
         $params['user'] = $user_data;
         $params['feedback'] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->with('quote_by_transporter.quote')->get();
-        $params['completed_job'] = UserQuote::whereIn('id', $my_quotes)->where('status', 'completed')->count();
-        $params['overall_percentage'] = $overall_percentage;
-        $params['positive_feedback_percentage'] = $positive_feedback_percentage;
+        $params['completed_job'] =  $completedCount;
+        $params['distance'] = $totalDistanceFormatted;
+        $params['total_earning'] = $total_earning;
+        $params['company_details'] = $company_details;
+        $params['rating_percentage'] = $percentage;
+
+
+        $customRequest = new Request([
+            'type' => 'feedback'
+        ]);
+
+        // Call notificationStatus with the custom request
+        $this->notificationStatus($customRequest);
         return $params;
     }
 
@@ -372,6 +397,7 @@ class DashboardController extends WebController
 
     public function quotes($id)
     {
+        // return $id;
         $user_data = Auth::guard('web')->user();
         $job_status = UserQuote::where(['user_id' => $user_data->id, 'id' => $id])
         ->value('status');
@@ -380,6 +406,9 @@ class DashboardController extends WebController
         $quotes = QuoteByTransporter::where('user_quote_id', $id)
         ->orderByRaw('CAST(price AS UNSIGNED) ASC')
         ->get();
+        // return $quotes;
+        $my_quotes = QuoteByTransporter::where('user_id', $quotes[0]->user_id ?? 0)->pluck('id');
+        
         $rating_average = Feedback::whereIn('quote_by_transporter_id', $quotes->pluck('id'))
             ->selectRaw('(AVG(communication) + AVG(punctuality) + AVG(care_of_good) + AVG(professionalism)) / 4 as overall_avg')
             ->first();
@@ -395,15 +424,25 @@ class DashboardController extends WebController
                 $quote->thread_id = null; // Set to null or handle as needed if no thread matches
             }
         });
-        $overall_percentage = 100;
-        $overall_percentage += ($rating_average->overall_avg / 5) * 100;
+        // $overall_percentage = 100;
+        // $overall_percentage += ($rating_average->overall_avg / 5) * 100;
+       
+        $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+        ->whereNotNull('rating')
+        ->avg('rating');
+        $percentage = 0;
+        if ($rating_average !== null) { $my_quotes = QuoteByTransporter::where('user_id', $quotes[0]->user_id)->pluck('id');
+            $percentage = ($rating_average / 5) * 100;
+          
+        }
 
         $hasAcceptedQuote = $quotes->contains(function ($quote) {
             return strtolower($quote->status) === 'accept';
         });
+        
         // Pass the flag to the view
         $params['hasAcceptedQuote'] = $hasAcceptedQuote;
-        $params['overall_percentage'] = $overall_percentage;
+        $params['overall_percentage'] = $percentage;
         $params['quotes'] = $quotes;
         $params['user_quote_id'] = $id;
         $params['job_status'] = $job_status;
@@ -421,15 +460,19 @@ class DashboardController extends WebController
         }
     }
 
-    public function leaveFeedback($id=305)
+    public function leaveFeedback($id)
     {
+        $user_data = Auth::guard('web')->user();
         if($id != null){
             $quote = $id ? QuoteByTransporter::with(['getTransporters', 'quote'])->where(['id' => $id])->first() : null;
             $user_info = null;
+            // dd($quote);
             if ($quote) {
                 $transporter_detail = $quote->getTransporters;
                 $transporter_feedback = $this->get_transporter_feedback($transporter_detail->id);
+                $feedback_count= Feedback::where('transporter_id',$user_data->id)->count();
                 $quote_info = $quote->quote;
+
             } else {
                 return redirect()->back();
             }
@@ -438,7 +481,8 @@ class DashboardController extends WebController
                 'data' => $quote,
                 'transporter_detail' => $transporter_detail,
                 'quote_info' => $quote_info,
-                'transporter_feedback' => $transporter_feedback
+                'transporter_feedback' => $transporter_feedback,
+                'feedback_count'=>$feedback_count
             ]);
         }
         else {
@@ -449,29 +493,11 @@ class DashboardController extends WebController
     public function saveFeedbackQuote(Request $request)
     {
         $user_data = Auth::guard('web')->user();
-        // Determine the type of feedback and get the ratings array
-        // $feedbackType = null;
-        // $ratings = null;
-
+       
         $feedbackComment = $request->input('feedback');
             $quoteByTransporterId = $request->input('quote_by_transporter_id');
             $rating=$request->input('rating');
-        // if ($request->has('positiveRatings')) {
-        //     $feedbackType = 'positive';
-        //     $ratings = $request->input('positiveRatings');
-        // } elseif ($request->has('neutralRatings')) {
-        //     $feedbackType = 'neutral';
-        //     $ratings = $request->input('neutralRatings');
-        // } elseif ($request->has('negativeRatings')) {
-        //     $feedbackType = 'negative';
-        //     $ratings = $request->input('negativeRatings');
-        // }
-
-        // if ($feedbackType && $ratings) {
-        //     $feedbackComment = $request->input('feedback');
-        //     $quoteByTransporterId = $request->input('quote_by_transporter_id');
-        //     $mappedRatings = $this->mapRatings($ratings, $feedbackType);
-             // Update or create feedback entry based on quote_by_transporter_id
+        // 
             Feedback::updateOrCreate(
                 ['quote_by_transporter_id' => $quoteByTransporterId],
                 [
@@ -480,6 +506,7 @@ class DashboardController extends WebController
                     // 'punctuality' => $mappedRatings['punctuality'],
                     // 'care_of_good' => $mappedRatings['care_of_good'],
                     // 'professionalism' => $mappedRatings['professionalism'],
+                    'transporter_id'=>$user_data->id,
                     'rating'=>$rating,
                     'comment' => $feedbackComment
                 ]

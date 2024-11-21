@@ -30,7 +30,7 @@
         font-size: 14px !important;
         font-weight: 300;
         color: #000000;
-        margin-bottom: 28px !important;
+        margin: 0 0 28px !important;
     }
 
     .submit_btn {
@@ -80,11 +80,14 @@
 
     /**/
     /* Hide the default checkbox */
-    .custom-checkbox input[type="checkbox"] {
+    /* .custom-checkbox input[type="checkbox"] {
         display: none;
-    }
+    } */
 
     /* Create custom checkbox */
+    .custom-checkbox input[type="checkbox"] {
+        display: none; /* Hide the default checkbox */
+    }
     .custom-checkbox input[type="checkbox"]+label::before {
         content: "";
         display: inline-block;
@@ -123,6 +126,9 @@
         position: relative;
         cursor: pointer;
     }
+    @media screen and (max-width: 580px) {
+        .get_quote .modal-footer p {font-size: 12px!important;}
+    }
 </style>
 <div class="modal get_quote fade" id="saveSrchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
@@ -151,11 +157,15 @@
                         <p class="save-search-example">e.g. (London to Anywhere)</p>
                     </div>
                     <div class="form-group custom-checkbox">
-                        <input class="form-check-input m-0 position-absolute" type="checkbox" value="true"
-                            id="emailNtf" name="emailNtf">
-                        <label class="form-check-label save-search-email position-relative" for="emailNtf">
+                        <input type="checkbox" id="save-search" name="save-search" value="test" class="m-0 position-absolute" checked />
+                        <label for="save-search" class="font-weight-light save-search-email"> Get emails for jobs that match this search.</label>
+                          
+                        {{-- <input class="form-check-input m-0 position-absolute" id="emailNtf" name="emailNtf"  type="checkbox" value="" checked /> --}}
+
+                        {{-- <input class="form-check-input m-0 position-absolute" type="checkbox" value="1" checked /> --}}
+                        {{-- <label class="form-check-label save-search-email position-relative" for="emailNtf">
                             Get emails for jobs that match this search.
-                        </label>
+                        </label> --}}
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -2,6 +2,9 @@
 
 @section('head_css')
     <style>
+        /* main {
+            padding-top: 104px;
+        } */    
         .error {
             color: red;
         }
@@ -10,7 +13,6 @@
             align-items: center;
             margin-top: 22px;
         }
-
         /* Style for the header */
         .check_group_blog h6 {
             margin-right: 20px; /* Space between header and checkboxes */
@@ -191,28 +193,124 @@
     font-size: 20px;
     font-weight: 500;
 }
-
+#otpModal .modal-title {
+    font-size: 20px;
+}
 
 @media(max-width: 580px){
     .wizard_btngrp {
         margin-top: 1rem;
     }
     a.form-wizard-previous-btn.back-icon {
-    margin-top: 13px;
-    margin-bottom: -11px;
-}
+        margin-top: 13px;
+        margin-bottom: -11px;
+    }
 
-.back-icon {
-    width: 22%;
-}
+    .back-icon {
+        width: 22%;
+    }
+    #otpModal .modal-body {
+        padding: 0 0 20px;
+    }
 }
 
 @media(max-width: 400px){
-.check_group_blog .custom-checkbox {
-    margin-right: 25px;
+    .check_group_blog .custom-checkbox {
+        margin-right: 25px;
+    }
 }
-}
+/* added for modal number*/
+/* Styling for the OTP input fields */
+    .otp-input input {
+        width: 35px;
+        height: 43px;
+        text-align: center;
+        font-size: 20px;
+        margin: 0 5px;
+        border: 1px solid #dadada;
+        border-radius: 2px;
+    }
 
+    /* Centering and customizing modal content */
+    .modal-content {
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    /* Adjust cross button position */
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 24px;
+    }
+
+    /* Modal body custom styling */
+    .modal-body {
+        padding: 0 40px 20px;
+    }
+    .modal-body p {
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 300;
+        color:#5F5F5F;
+        margin-bottom: 0;
+    }
+    .modal-body p strong {
+        font-size: 14px;
+        line-height: 18px;
+        color:#000000;
+        font-weight: 500;
+        display: block;
+    }
+    .modal-body p a {
+        font-size: 12px;
+        line-height: 15px;
+        font-weight: 300;
+        color:#008DD4;
+        text-decoration: underline;
+    }
+    #confirmOtp {
+        font-size: 12px;
+        line-height: 15px;
+        font-weight: 500;
+        color:#F3F8FF;
+        text-transform: capitalize;
+        background: #52D017;
+        padding: 8px 38px;
+        border-radius: 7px;
+    }
+    label[for="terms"] {
+        font-size: 12px;
+        line-height: 16px;
+        color: #5F5F5F;
+        font-weight: 300;
+        margin-bottom: 0;
+        cursor: pointer;
+        padding-left: 20px;
+    }
+    label[for="terms"].error {color:#ff0000;}
+    label[for="terms"] ~ p {
+        margin-bottom: 0;
+        margin-top: 10px;
+        color: #5F5F5F;
+        /* font-size: 14px;
+        line-height: 18px; */
+        font-size: 12px;
+        line-height: 16px;
+    }
+    label[for="terms"] a {
+        color: #008DD4;
+        text-decoration: underline;
+    }
+    /*  added css for terms and condition */
+    #terms.error {
+        position: static; /* Ensure the position doesn't change */
+        margin: 0; /* Reset any margins that may have been added by the error class */
+        outline: none; /* Optional: Remove outline if the error focuses on it */
+        width: auto;
+    }
     </style>
 @endsection
 
@@ -434,8 +532,8 @@
                             </div>
                         </fieldset>
                         <fieldset class="wizard-fieldset wizard_laststep">
-                            <h5>Enter your email address to start receiving quotes within minutes.</h5>
-                            <p class="mb-3 d-block">Quotes are provided to you directly from our network of car transport companies, they are able to offer you the most competitive prices due to backloads and return jobs.</p>
+                            <h5>Enter your details below to start receiving your quotes in minutes.</h5>
+                            <p class="mb-3 d-block">Quotes are provided to you by our network of reputable car transporters.</p>
                             @if(Auth::guard('web')->user() && Auth::guard('web')->user()->type == 'user')
                                 @php
                                     $user = Auth::guard('web')->user();
@@ -444,21 +542,35 @@
                             <div class="form-group">
                                 <div class="inputgrp position-relative">
                                       <span class="wd_icon">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path opacity="0.4" d="M20 14.3779C20 17.4778 17.76 19.9889 14.97 20H14.96H5.05C2.27 20 0 17.5001 0 14.4002V14.3891C0 14.3891 0.006 9.47144 0.014 6.99819C0.015 6.53376 0.495 6.27377 0.822 6.56265C3.198 8.65703 7.447 12.4758 7.5 12.5258C8.21 13.158 9.11 13.5146 10.03 13.5146C10.95 13.5146 11.85 13.158 12.56 12.5136C12.613 12.4747 16.767 8.77036 19.179 6.64154C19.507 6.35155 19.989 6.61154 19.99 7.07486C20 9.52922 20 14.3779 20 14.3779Z" fill="#717E92" />
-                                          <path d="M19.4761 2.97101C18.6101 1.15774 16.9061 0 15.0301 0H5.05009C3.17409 0 1.47009 1.15774 0.60409 2.97101C0.41009 3.37655 0.50209 3.88209 0.82509 4.16875L8.25009 10.7674C8.77009 11.2341 9.40009 11.4663 10.0301 11.4663C10.0341 11.4663 10.0371 11.4663 10.0401 11.4663C10.0431 11.4663 10.0471 11.4663 10.0501 11.4663C10.6801 11.4663 11.3101 11.2341 11.8301 10.7674L19.2551 4.16875C19.5781 3.88209 19.6701 3.37655 19.4761 2.97101Z" fill="#717E92" />
-                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                            <path d="M15.2505 5.02905C15.2652 5.443 15.6127 5.76663 16.0267 5.75189C16.4406 5.73715 16.7643 5.38962 16.7495 4.97567L15.2505 5.02905ZM11.714 1.00236V1.75236C11.7224 1.75236 11.7307 1.75222 11.7391 1.75194L11.714 1.00236ZM5.286 1.00236L5.26095 1.75194C5.2693 1.75222 5.27765 1.75236 5.286 1.75236V1.00236ZM0.250475 4.97567C0.235735 5.38962 0.559359 5.73715 0.97331 5.75189C1.38726 5.76663 1.73478 5.443 1.74952 5.02905L0.250475 4.97567ZM16.75 5.00236C16.75 4.58815 16.4142 4.25236 16 4.25236C15.5858 4.25236 15.25 4.58815 15.25 5.00236H16.75ZM16 11.0024L16.7495 11.029C16.7498 11.0202 16.75 11.0113 16.75 11.0024H16ZM11.714 15.0024L11.7391 14.2528C11.7307 14.2525 11.7224 14.2524 11.714 14.2524V15.0024ZM5.286 15.0024V14.2524C5.27765 14.2524 5.2693 14.2525 5.26095 14.2528L5.286 15.0024ZM1 11.0024H0.25C0.25 11.0113 0.250158 11.0202 0.250475 11.029L1 11.0024ZM1.75 5.00236C1.75 4.58815 1.41421 4.25236 1 4.25236C0.585786 4.25236 0.25 4.58815 0.25 5.00236H1.75ZM16.3783 5.64996C16.736 5.44103 16.8565 4.98172 16.6476 4.62406C16.4387 4.2664 15.9794 4.14583 15.6217 4.35476L16.3783 5.64996ZM10.736 8.07736L10.3577 7.42973L10.3515 7.43345L10.736 8.07736ZM6.264 8.07736L6.64856 7.43342L6.6423 7.42976L6.264 8.07736ZM1.3783 4.35476C1.02064 4.14583 0.561328 4.2664 0.352398 4.62406C0.143468 4.98172 0.264038 5.44103 0.621699 5.64996L1.3783 4.35476ZM16.7495 4.97567C16.6534 2.27536 14.3895 0.16252 11.6889 0.252779L11.7391 1.75194C13.6129 1.68931 15.1838 3.15537 15.2505 5.02905L16.7495 4.97567ZM11.714 0.252361H5.286V1.75236H11.714V0.252361ZM5.31105 0.252779C2.61054 0.16252 0.34663 2.27536 0.250475 4.97567L1.74952 5.02905C1.81625 3.15537 3.38712 1.68931 5.26095 1.75194L5.31105 0.252779ZM15.25 5.00236V11.0024H16.75V5.00236H15.25ZM15.2505 10.9757C15.1838 12.8494 13.6129 14.3154 11.7391 14.2528L11.6889 15.7519C14.3895 15.8422 16.6534 13.7294 16.7495 11.029L15.2505 10.9757ZM11.714 14.2524H5.286V15.7524H11.714V14.2524ZM5.26095 14.2528C3.38712 14.3154 1.81624 12.8494 1.74952 10.9757L0.250475 11.029C0.34663 13.7294 2.61054 15.8422 5.31105 15.7519L5.26095 14.2528ZM1.75 11.0024V5.00236H0.25V11.0024H1.75ZM15.6217 4.35476L10.3577 7.42976L11.1143 8.72496L16.3783 5.64996L15.6217 4.35476ZM10.3515 7.43345C9.21109 8.11447 7.78891 8.11447 6.64854 7.43345L5.87946 8.72127C7.49352 9.68519 9.50647 9.68519 11.1205 8.72127L10.3515 7.43345ZM6.6423 7.42976L1.3783 4.35476L0.621699 5.64996L5.8857 8.72496L6.6423 7.42976Z" fill="#BABABA"/>
+                                            </svg>
                                       </span>
                                     <input type="email" class="form-control wizard-required email" placeholder="Enter your email" name="email" value="{{ $user->email ?? '' }}"/>
                                 </div>
-                                <small class="exm_text d-block">e.g. abc@gmail.com</small>
+                                {{-- <small class="exm_text d-block">e.g. abc@gmail.com</small> --}}
+                            </div>
+                            <div class="form-group" bis_skin_checked="1">
+                                    <div class="inputgrp position-relative" bis_skin_checked="1">
+                                        <span class="wd_icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.86343 2.36195C2.74343 1.43495 3.05443 1.17495 3.42943 1.05395C3.68895 0.985949 3.96112 0.982174 4.22243 1.04295C4.56643 1.14295 4.65743 1.21895 5.78543 2.34295C6.77643 3.32995 6.87543 3.43695 6.97043 3.62995C7.15208 3.96873 7.18046 4.36894 7.04843 4.72995C6.94843 5.00495 6.80643 5.18695 6.20543 5.78995L5.81343 6.18295C5.71048 6.28757 5.68629 6.44643 5.75343 6.57695C6.62437 8.06281 7.86 9.30189 9.34343 10.177C9.51418 10.2684 9.72445 10.2389 9.86343 10.104L10.2404 9.73295C10.4734 9.4941 10.7202 9.26905 10.9794 9.05895C11.3866 8.80896 11.8939 8.78666 12.3214 8.99995C12.5304 9.09995 12.5994 9.16195 13.6214 10.182C14.6754 11.233 14.7054 11.266 14.8214 11.507C15.0397 11.9059 15.0374 12.3891 14.8154 12.786C14.7024 13.01 14.6334 13.091 14.0404 13.697C13.6824 14.063 13.3454 14.397 13.2914 14.446C12.8022 14.851 12.1746 15.0497 11.5414 15C10.383 14.8944 9.26169 14.5363 8.25643 13.951C6.02956 12.7711 4.13383 11.0521 2.74243 8.95095C2.43937 8.51122 2.16994 8.04924 1.93643 7.56895C1.31001 6.49532 0.986529 5.27189 1.00043 4.02895C1.04825 3.37871 1.36008 2.77637 1.86343 2.36195Z" stroke="#BABABA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
+                                        <input type="text" class="form-control wizard-required" placeholder="Enter your mobile" name="phone" value="{{ $user->mobile ?? '' }}">
+                                    </div>
+                                </div>
+                            <div class="form-group text-left d-flex flex-wrap align-items-center" style="gap:5px;">
+                                <input type="checkbox" name="terms" id="terms" style="position: absolute; left: 0; top: 1px;" />
+                                <label for="terms">I accept the <a target="_blank" href="{{route('front.term_condition')}}">terms & conditions</a> and <a target="_blank" href="{{route('front.privacy_policy')}}">privacy policy</a>.</label>
+                                <p>We will only use your contact details to send you competitive quotes in relation to this transport request. You can opt out of receiving quotes at any time.</p>
                             </div>
                             <div class="form-group wizard_btngrp">
                                 {{--<a href="getsteps.html" class="wd_nextbtn form-wizard-submit">Get Instant Quotes <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1.4848 1.62598L8.35854 8.49971L1.4848 15.3734" stroke="white" stroke-width="2.06212" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </a>--}}
-                                <button type="submit" class="wd_nextbtn form-wizard-submit" id="SaveAccount">Get Instant Quotes <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <button type="submit" class="wd_nextbtn form-wizard-submit" id="SaveAccount">Get Quotes <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1.4848 1.62598L8.35854 8.49971L1.4848 15.3734" stroke="white" stroke-width="2.06212" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </button>
@@ -480,6 +592,7 @@
         </div>
     </section>
 </main>
+@include('front.modal.phoneVerifyModal');
 @endsection
 
 @section('script')
@@ -488,6 +601,89 @@
     <script src="{{asset('assets/web/js/wizard.js')}}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    let in1 = document.getElementById('otp1'),
+    ins = document.querySelectorAll('input[type="number"].otpNumber'),
+	 splitNumber = function(e) {
+		let data = e.data || e.target.value; // Chrome doesn't get the e.data, it's always empty, fallback to value then.
+		if ( ! data ) return; // Shouldn't happen, just in case.
+		if ( data.length === 1 ) return; // Here is a normal behavior, not a paste action.
+		
+		popuNext(e.target, data);
+		//for (i = 0; i < data.length; i++ ) { ins[i].value = data[i]; }
+
+        // Focus on the last input
+        ins[ins.length - 1].focus();
+        if (ins.length > 0) {
+                ins[ins.length - 1].focus();
+            }
+	},
+	popuNext = function(el, data) {
+		el.value = data[0]; // Apply first item to first input
+		data = data.substring(1); // remove the first char.
+		if ( el.nextElementSibling && data.length ) {
+			// Do the same with the next element and next data
+			popuNext(el.nextElementSibling, data);
+		}
+
+        
+	};
+    console.log("in1:", in1); // Should log the first input element
+    console.log("ins:", ins); // 
+
+ins.forEach(function(input) {
+	/**
+	 * Control on keyup to catch what the user intent to do.
+	 * I could have check for numeric key only here, but I didn't.
+	 */
+	input.addEventListener('keyup', function(e){
+		// Break if Shift, Tab, CMD, Option, Control.
+		if (e.keyCode === 16 || e.keyCode == 9 || e.keyCode == 224 || e.keyCode == 18 || e.keyCode == 17) {
+			 return;
+		}
+		
+		// On Backspace or left arrow, go to the previous field.
+		if ( (e.keyCode === 8 || e.keyCode === 37) && this.previousElementSibling && this.previousElementSibling.tagName === "INPUT" ) {
+			this.previousElementSibling.select();
+		} else if (e.keyCode !== 8 && this.nextElementSibling) {
+			this.nextElementSibling.select();
+		}
+		
+		// If the target is populated to quickly, value length can be > 1
+		if ( e.target.value.length > 1 ) {
+			splitNumber(e);
+		}
+	});
+	
+	/**
+	 * Better control on Focus
+	 * - don't allow focus on other field if the first one is empty
+	 * - don't allow focus on field if the previous one if empty (debatable)
+	 * - get the focus on the first empty field
+	 */
+	input.addEventListener('focus', function(e) {
+		// If the focus element is the first one, do nothing
+		if ( this === in1 ) return;
+		
+		// If value of input 1 is empty, focus it.
+		if ( in1.value == '' ) {
+			in1.focus();
+		}
+		
+		// If value of a previous input is empty, focus it.
+		// To remove if you don't wanna force user respecting the fields order.
+		if ( this.previousElementSibling.value == '' ) {
+			this.previousElementSibling.focus();
+		}
+	});
+});
+
+/**
+ * Handle copy/paste of a big number.
+ * It catches the value pasted on the first field and spread it into the inputs.
+ */
+in1.addEventListener('input', splitNumber);
+});
         const car1 = document.getElementById('file-upload');
         const previewPhoto = () => {
             const file = car1.files;
@@ -513,6 +709,7 @@
         }
 
         $(document).ready(function() {
+            
             var readURL = function(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
@@ -583,7 +780,7 @@
             var contains_six_or_more_digits = /\d{6,}/.test(value.replace(/\D/g, ''));
             return !(contains_email || contains_six_or_more_digits);
         });
-
+         let otpVerified = false; // Flag to control submission
         // Custom method to check if delivery_timeframe_date is required
         $.validator.addMethod("deliveryDateRequired", function (value, element) {
             if ((selectedDeliveryTimeframe === 'On a Specific Date' || selectedDeliveryTimeframe === 'Between Specific Dates') && value === "") {                
@@ -602,6 +799,7 @@
                     noPhoneOrEmail: true
                 },
                 email: {required: true},
+                phone: {required: true,digits: true,maxlength: 11,minlength: 11},
                 //starts_drives: {required: true},
                 vehicle_make_1: {required: true},
                 vehicle_model_1: {required: true},
@@ -609,6 +807,9 @@
                     deliveryDateRequired: function() {
                         return selectedDeliveryTimeframe === 'On a Specific Date';
                     }
+                },
+                 terms: {
+                  required: true // Add validation for the checkbox
                 }
                 //starts_drives_1: {required: true},
             },
@@ -625,12 +826,25 @@
                 vehicle_make_1: {required: "Please enter vehicle make."},
                 vehicle_model_1: {required: "Please enter vehicle model."},
                 email: {required: "Please enter email."},
-                delivery_timeframe_date: { deliveryDateRequired: "Please enter a delivery date." }
+                phone : {required: "Please enter a valid mobile number.",digits: "Please enter a valid mobile number",maxlength: "Please enter a valid mobile number.",minlength: "Please enter a valid mobile number."},
+                delivery_timeframe_date: { deliveryDateRequired: "Please enter a delivery date." },
+                terms: {
+                        required: "Please accept the terms & conditions." // Custom error message
+                }
                 //starts_drives_1: {required: "Please select starts drives."},
+            },
+           errorPlacement: function(error, element) {
+                if (element.attr("name") == "terms") {
+                    // Wrap error inside a <span> and insert after the label
+                    error.addClass('').wrap('<span></span>').parent().insertAfter(element.next("label"));
+                } else {
+                    error.insertAfter(element);
+                }
             },
             submitHandler: function (form) {
                 addOverlay();
-                $('#popup').addClass('show'); // Show the popup
+                //$('#popup').addClass('show'); 
+                // Show the popup
                 // Trigger the gtag event with additional parameters
                 gtag('event', 'conversion', {
                 'send_to': 'AW-16465579063/7cfLCJy7gb8ZELeYs6s9',
@@ -643,9 +857,141 @@
                 if (typeof uetq !== 'undefined') {
                     uet_report_conversion();
                 }
-                form.submit();
+                if (!otpVerified) {
+                        
+                        sendOTP();
+                 } else {
+                      // If OTP is verified, submit the form directly
+                        form.submit();
+                 }
+                
             }
         });
+        
+
+         //ravi jquery functionalties
+      $('#otpForm').on('submit', function(e) {
+        e.preventDefault();
+
+        // Collect OTP input values
+        var phoneNumber = $('input[name="phone"]').val();
+        var otp = $('#otp1').val() + $('#otp2').val() + $('#otp3').val() + $('#otp4').val();
+
+        // Check if OTP fields are fully filled
+        if (otp.length === 4) {
+            // Make AJAX call to Laravel controller to verify OTP
+            $.ajax({
+                url: '{{route("verifyOtp")}}', // Laravel route for verification
+                type: 'POST',
+                data: {
+                    phoneNumber:phoneNumber,
+                    otp: otp,
+                    _token: "{{ csrf_token() }}" // CSRF token for security
+                },
+                success: function(response) {
+                    if (response.success) {
+                        //alert('OTP verified successfully!');
+                         toastr.success("OTP verified successfully!");
+                         otpVerified = true; // Set the flag to true on successful verification
+                        $('#otpModal').modal('hide'); // Optionally close the OTP modal
+                        $("#main_form").submit(); // Submit the main form
+                    } else {
+                        toastr.error("Invalid OTP. Please try again.");
+                        //alert('Invalid OTP. Please try again.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                     console.error(xhr.responseText);
+                     toastr.error("An error occurred. Please try again.");
+                     //alert('An error occurred. Please try again.');
+                }
+            });
+        } else {
+            toastr.error("OTP sended successfully");
+            //alert('Please enter the complete 4-digit OTP.');
+        }
+    });
+    $('.otp-input input').on('input', function() {
+        if ($(this).val().length === 1) {
+            $(this).next('input').focus();
+        }
+    });
+
+    $('.otp-input input').on('keydown', function(e) {
+        if (e.key === "Backspace" && $(this).val() === "") {
+            $(this).prev('input').focus();
+        }
+    });
+
+    //$('.otp-input input').on('paste', function(e) {
+    //    e.preventDefault();
+    //    const pasteData = e.originalEvent.clipboardData.getData('text').slice(0, 4); // Only take first 4 characters
+    //
+    //    $('.otp-input input').each(function(index) {
+    //        $(this).val(pasteData[index] || '');  // Set each input value to the respective character
+    //    });
+    //
+    //    // Focus on the last filled input
+    //    $('.otp-input input').eq(pasteData.length - 1).focus();
+    //});
+
+   // $(document).on('paste', '.otp-input input', function (e) {
+   // e.preventDefault();
+
+    // Get pasted OTP and split it across the inputs
+    //const pasteData = e.originalEvent.clipboardData.getData('text').trim();
+    //$('.otp-input input').each(function (index) {
+    //    $(this).val(pasteData[index] || '');
+    //});
+
+    // Focus on the last filled input
+    //$('.otp-input input').eq(pasteData.length - 1).focus();
+    //});
+
+    function sendOTP()
+    {
+        var phoneNumber = $('input[name="phone"]').val();
+        $("#mobile-number").html('');
+        $.ajax({
+                url: '{{route("sendOtp")}}', // Laravel route for verification
+                type: 'POST',
+                data: {
+                    phoneNumber: phoneNumber,
+                    _token: "{{ csrf_token() }}" // CSRF token for security
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response.success) {
+                        // toastr.success("OTP sended successfully");
+                        //alert('OTP sended to successfully');
+                        $("#mobile-number").html(phoneNumber);
+                        $("#otp1,#otp2,#otp3,#otp4").val('');
+                        $('#otpModal').modal('show');
+                        // Add logic to redirect or close modal if needed
+                    } else {
+                        if(response.data.status == 400)
+                        {
+                          toastr.error('Invalid mobile number');
+                        }else
+                        {
+                        toastr.error(response.message);
+                        //alert('Invalid OTP. Please try again.');
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    toastr.error('An error occurred. Please try again.');
+                    //alert('An error occurred. Please try again.');
+                }
+            });
+        
+    }
+    $('#resendOtp').click(function() {
+        // Optionally, disable the button to prevent multiple clicks
+        sendOTP();
+    });
+    //ravi code end
         function isIOSDevice() {
             return /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
         }
@@ -851,6 +1197,8 @@
                 },
                 minLength: 1,
             });
+
+            
         });
         $(document).on('keyup', '.email', function() {
             $('.email').next('#api-error').remove();
@@ -889,6 +1237,8 @@
                 }
             });
         }
+
+        
     </script>
     <script>
         $(document).ready(function() {
@@ -908,6 +1258,8 @@
                 $(".file-upload").click();
                 $(".p-image").addClass("active_profile");
             });
+
+            
         });
     </script>
 @endsection

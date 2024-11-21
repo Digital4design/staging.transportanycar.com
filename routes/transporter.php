@@ -35,6 +35,7 @@ Route::group(['as' => 'transporter.'], function () {
         Route::get('profile', 'DashboardController@profile')->name('profile');
         Route::post('profile-post', 'DashboardController@profilePost')->name('profile_post');
         Route::get('messages', 'DashboardController@messages')->name('messages');
+
         Route::get('feedback', 'DashboardController@feedback')->name('feedback');
         // Route::get('current-jobs', 'DashboardController@currentJobs')->name('current_jobs');
         Route::get('current-jobs/{id?}', 'DashboardController@currentJobs')->name('current_jobs');
@@ -66,11 +67,16 @@ Route::group(['as' => 'transporter.'], function () {
         Route::post('/watchlist/store', 'WatchlistController@watchlistStore')->name('watchlist.store');
         Route::post('/watchlist/remove', 'WatchlistController@watchlistRemove')->name('watchlist.remove');
         // end d4d developer - k
-         // D4dDeveoper-r 
-         Route::post('save/search','DashboardController@savesearch')->name('save.search');
-         Route::get('save/search','DashboardController@savesearchview')->name('view.save.search');
-         Route::post('save/search/delete','DashboardController@savesearchdlt')->name('delete.save.search');
-         // end
+        // D4dDeveoper-r 
+        Route::post('save/search', 'DashboardController@savesearch')->name('save.search');
+        Route::get('save/search', 'DashboardController@savesearchview')->name('view.save.search');
+        Route::post('save-find-job', 'DashboardController@savedFindJob')->name('saved_Find_job');
+        Route::get('/saved-find-job-results', 'DashboardController@savedFindJobResults')->name('savedFindJobResults');
+        Route::post('save/search/delete', 'DashboardController@savesearchdlt')->name('delete.save.search');
+        // end
+        Route::get('manage_notification', 'DashboardController@manageNotification')->name('manage_notification');
+        Route::post('update-manage-notification', 'DashboardController@updateManageNotification')->name('updateManageNotification');
+        Route::get('howItWorks', 'DashboardController@howItWorks')->name('howItWork');
     });
 
     Route::group(['middleware' => ['auth:transporter']], function () {
@@ -82,3 +88,10 @@ Route::group(['as' => 'transporter.'], function () {
         Route::get('/notifications/{notification}', 'NotificationController@show')->name('notifications.show');
     });
 });
+Route::group(['namespace' => 'Api\V1'], function () {
+    Route::post('verify-email', 'MailController@transporterEmailVerify')->name('sendVerifyEmail');
+    Route::get('verify-email/{token}', 'MailController@verifyEmail')->name('verify.email');
+});
+// Route::get('/email-template', function () {
+//     return view('mail.General.transporterEmailVerify');
+// })->name('mail.General.transporterEmailVerify');

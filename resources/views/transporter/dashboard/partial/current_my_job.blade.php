@@ -53,7 +53,8 @@
                         <img src="{{ $quote->image }}">
 
                         @if ($transporterQuotesCount > 0)
-                        <p>£{{(roundBasedOnDecimal($lowestBid)) }}</p>
+                        {{-- <p class="font-weight-light">£{{(roundBasedOnDecimal($lowestBid)) }}</p> --}}
+                        <p class="">£{{ new_roundBasedOnDecimal($quote->transporter_payment) ?? 'N/A' }}</p>
                         @endif
 
                         <span>Posted {{ getTimeAgo($quote->created_at->toDateTimeString()) }}</span>
@@ -128,7 +129,7 @@
                         </a>
                     @endif
                 @elseif($type == 'won')
-                    @if ($quote->status == 'completed')
+                    @if ($quote->status == 'ongoing' ||$quote->status == 'completed')
                         <div class="won_details">
                             <a href="{{ route('transporter.current_jobs', ['id' => $quote->quote_by_transporter_id]) }}"
                                 class="view_btn"> View details </a>
@@ -162,7 +163,11 @@
                         </a>
                     @endif
                 @elseif($type == 'cancel')
-                    <a href="javascript:;" class="view_btn cancel_btn_mobile"> View details </a>
+                <a href="javascript:;" id="edit_quote_{{ $quote->id }}"
+                    onclick="edit_quote_amount(this, '{{ $quote->id }}');"
+                    data-amount="{{ roundBasedOnDecimal($quote->transporter_payment) }}"
+                    data-lowbid="{{ $lowestBid }}" data-bidcount="{{ $transporterQuotesCount }}"
+                    class="view_btn edit_quote_btn won_details">Edit bid</a>
                 @endif
             </li>
             <div class="bidding_new_design">

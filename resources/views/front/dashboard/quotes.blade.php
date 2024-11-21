@@ -56,8 +56,9 @@
 }
 .card_lft .rating-star li:last-child {
     margin-left: 0;
-    padding-top: 2px;
+    /* padding-top: 2px; */
 }
+.card_lft .rating-star li:last-child span {font-size: 14px;}
 .wd-quote-data .card_lft h4 {
     width: 15%;
 }
@@ -72,6 +73,10 @@
 
 .wd-quote-head p.quote-table-Verified {
     margin-left: -103px;
+}
+.choose_quote_rating li svg {
+    width: 16px;
+    height: 16px;
 }
 
 @media(max-width: 580px){
@@ -172,46 +177,88 @@
                 <div class="card">
                     <div class="card-header @if($key == 0) active @endif" id="heading{{$key}}">
                         <div class="card_lft">
-                            <a href="{{ route('front.feedback_view', $quote->id)}}">
-                                <h4>{{$quote->getTransporters->username}}</h4>
-                            </a>
-                            <ul class="rating-star">
-                                <li>
-                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
-                                    </svg>
-                                </li>
-                                <li>
-                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
-                                    </svg>
-                                </li>
-                                <li>
-                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
-                                    </svg>
-                                </li>
-                                <li>
-                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
-                                    </svg>
-                                </li>
-                                <li>
-                                    <!-- <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
-                                    </svg> -->
-                                    <svg width="22" height="20" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z" fill="#DCDCDE"/>
-                                        <mask id="mask0_5_1268" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="23" height="44">
-                                        <rect width="23" height="44" fill="#D9D9D9"/>
-                                        </mask>
-                                        <g mask="url(#mask0_5_1268)">
-                                        <path d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z" fill="#FFB902"/>
-                                        </g>
-                                    </svg>
-                                </li>
-                                <!-- <li><span>({{$overall_percentage}}%)</span></li> -->
-                            </ul>
+                            <div class="d-flex flex-wrap align-items-center" style="gap:5px;">
+                                <a href="{{ route('front.feedback_view', $quote->id)}}">
+                                    <h4 style="width: 100%; line-height: 24px;">{{$quote->getTransporters->username ??""}}</h4>
+                                </a>
+                                @if ($overall_percentage == 0)
+                                <ul class="rating-star choose_quote_rating">
+                                    <li>
+                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#D9D9D9"/>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#D9D9D9"/>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#D9D9D9"/>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#D9D9D9"/>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <!-- <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
+                                        </svg> -->
+                                        <svg width="22" height="20" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z" fill="#DCDCDE"/>
+                                            <mask id="mask0_5_1268" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="23" height="44">
+                                            <rect width="23" height="44" fill="#D9D9D9"/>
+                                            </mask>
+                                            <g mask="url(#mask0_5_1268)">
+                                            <path d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z" fill="#D9D9D9"/>
+                                            </g>
+                                        </svg>
+                                    </li>
+                                    <li><span class="ml-1">({{$overall_percentage}}%)</span></li> 
+                                </ul>
+                                @else
+                                <ul class="rating-star choose_quote_rating">
+                                    <li>
+                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <!-- <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
+                                        </svg> -->
+                                        <svg width="22" height="20" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z" fill="#DCDCDE"/>
+                                            <mask id="mask0_5_1268" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="23" height="44">
+                                            <rect width="23" height="44" fill="#D9D9D9"/>
+                                            </mask>
+                                            <g mask="url(#mask0_5_1268)">
+                                            <path d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z" fill="#FFB902"/>
+                                            </g>
+                                        </svg>
+                                    </li>
+                                <li><span class="ml-1">({{$overall_percentage}}%)</span></li>
+                                </ul>
+                                @endif
+                            </div>
                             <img src="{{asset('assets/web/images/right-mark.png')}}" class="right_mark" alt="right mark">
                             <div class="icon_hover_sec">
                                 <div class="flex_blog "><span>Flexible</span>

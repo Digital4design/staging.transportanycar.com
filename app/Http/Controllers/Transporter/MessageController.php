@@ -16,12 +16,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use App\Services\SmsService;
+use App\TransactionHistory;
 
 class MessageController extends WebController
 {
     public $chat_obj;
     public $user_obj;
     public $thread_obj;
+    public $sendSMS;
 
     public function __construct(EmailService $emailService)
     {
@@ -29,11 +32,14 @@ class MessageController extends WebController
         $this->chat_obj = new Message();
         $this->user_obj = new User();
         $this->emailService = $emailService;
+        $this->sendSMS = new SmsService;
     }
 
     public function getChatHistory(Request $request, $id)
     {
         $thread = Thread::with(['user_qot', 'messages', 'messages.sender'])->where('id', '=', $id)->first();
+        $quote_by_transporter = QuoteByTransporter::where(['user_quote_id' => $thread->user_quote_id, 'user_id'=> $thread->friend_id])->first();
+        $transaction = TransactionHistory::where('quote_by_transporter_id',$quote_by_transporter->id)->where('status','completed')->exists() ? "true":"false";
         if (!empty($thread)) {
             $firend_data = $this->user_obj->find($request->to);
             $thread->messages()->update(['status' => "read"]);
@@ -43,7 +49,7 @@ class MessageController extends WebController
         } else {
             $messages = collect();
         }
-        return view('transporter.dashboard.partial.history_listing')->with(compact('messages', 'thread'));
+        return view('transporter.dashboard.partial.history_listing')->with(compact('messages', 'thread','transaction'));
     }
 
     public function store(Request $request, $id)
@@ -51,7 +57,8 @@ class MessageController extends WebController
         $request->validate([
             'message' => [
                 'required',
-                'regex:/^[^\d]*$/', // Ensure no digits are present
+                $request->check !== "true" ? 'regex:/^[^\d]*$/' : 'nullable',
+                // 'regex:/^[^\d]*$/', // Ensure no digits are present
             ],
         ]);
         $auth_user = Auth::user();
@@ -94,6 +101,8 @@ class MessageController extends WebController
         }
         if ($message) {
             try {
+                $subject= 'You Have a Message from ' . ($auth_user->username ?? 'User') . ' Regarding ' . ($userQuote->vehicle_make ?? '') . ' ' . ($userQuote->vehicle_model ?? '') . ' Delivery.';
+
                 if($customer_user->job_email_preference) {
                     $email_to = $customer_user->email;
                     $maildata['user'] = $auth_user;
@@ -110,7 +119,7 @@ class MessageController extends WebController
                     $maildata['quote_id'] = $from_quote_id;
                     $maildata['type'] = 'user';
                     $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
-                    $this->emailService->sendEmail($email_to, $htmlContent, 'You have a new message');
+                    $this->emailService->sendEmail($email_to, $htmlContent,  $subject);
 
                     // Call create_notification to notify the user
                     create_notification(
@@ -124,6 +133,11 @@ class MessageController extends WebController
                     );
                 } else {
                     Log::info('User with email ' . $customer_user->email . ' has opted out of receiving emails. Message email not sent.');
+                }
+                if($customer_user->mobile)
+                {
+                    $smS = "Transport Any Car: New message from $auth_user->username to deliver your $userQuote->vehicle_make $userQuote->vehicle_model. ".request()->getSchemeAndHttpHost()."/messages"." ".request()->getSchemeAndHttpHost()."/account";
+                    $this->sendSMS->sendSms($customer_user->mobile,$smS);
                 }
             } 
             catch (\Exception $ex) {
@@ -151,7 +165,7 @@ class MessageController extends WebController
         $user_id = $user->id;
         $front_user=array();
         $my_quotes = QuoteByTransporter::where('user_id', $user_id)->get();
-        $quotes = UserQuote::whereIn('id', $my_quotes->pluck('user_quote_id'))->get();
+        $quotes = UserQuote::whereIn('id', $my_quotes->pluck('user_quote_id'))->where('created_at', '>=', Carbon::now()->subDays(10))->get();
         foreach ($quotes as $quote) {
             // $existingThread = Thread::where('friend_id', $quote->user_id)
             //     ->where('user_id', $user_id)

@@ -8,6 +8,7 @@ use App\User;
 use App\UserQuote;
 use Carbon\Carbon;
 use App\QuotationDetail;
+use App\MobileVerification;
 use App\Services\EmailService;
 use App\Jobs\SendTransporterEmail;
 use GuzzleHttp\Client;
@@ -19,6 +20,11 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+
+use App\Services\SmsService;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 
 class QuotesController extends WebController
 {
@@ -63,7 +69,8 @@ class QuotesController extends WebController
         //return response()->json(['success' => true, 'route' => $route]);
         //$location = Cache::get('location_'.$user_data->id);
     }
-    public function quoteSave(Request $request) {
+    public function quoteSave(Request $request)
+    {
         // Check if a user is authenticated with the 'web' guard
         $user_info = Auth::guard('web')->check();
         $current_user_data = $user_info ? Auth::guard('web')->user() : null;
@@ -98,7 +105,9 @@ class QuotesController extends WebController
             $request->session()->regenerateToken();
             if ($user) {
                 // If the email exists in the database, log out current user and redirect to login page
-                $this->saveQuoteAndNotifyTransporters($user->id,$request, $dis_dur);
+                $this->saveQuoteAndNotifyTransporters($user->id, $request, $dis_dur);
+                $user->mobile = $request->phone;
+                $user->save();
                 $user_info = false;
                 $current_user_data = null;
                 $request->session()->flash('login_email', $request->email);
@@ -107,8 +116,8 @@ class QuotesController extends WebController
             } else {
                 // If the email does not exist, create a new account and login with new account
                 $temp_password = genUniqueStr('', 6, 'users', 'password', true);
-                $user_data = $this->createNewUserAndNotify($request,$temp_password);
-                $this->saveQuoteAndNotifyTransporters($user_data->id,$request, $dis_dur);
+                $user_data = $this->createNewUserAndNotify($request, $temp_password);
+                $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
                 // Set session variable to indicate user came from quote page
                 $request->session()->flash('came_from', 'quote_save');
                 $creds = ['email' => $request->email, 'password' => $temp_password ?? null, 'type' => 'user'];
@@ -129,15 +138,19 @@ class QuotesController extends WebController
             // If user is not logged in, use the found user or create a new user
             if ($user) {
                 $user_data = $user;
+                $user->mobile = $request->phone;
+                $user->save();
             } else {
                 $temp_password = genUniqueStr('', 6, 'users', 'password', true);
-                $user_data = $this->createNewUserAndNotify($request,$temp_password);
+                $user_data = $this->createNewUserAndNotify($request, $temp_password);
             }
-            $this->saveQuoteAndNotifyTransporters($user_data->id,$request, $dis_dur);
+            $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
         } else {
             // If user is logged in and the email is the same, use current user data
             $user_data = $current_user_data;
-            $this->saveQuoteAndNotifyTransporters($user_data->id,$request, $dis_dur);
+            $user->mobile = $request->phone;
+            $user->save();
+            $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
         }
 
 
@@ -179,7 +192,7 @@ class QuotesController extends WebController
             'email' => $request->email,
             'name' => $request->name ?? null,
             'country_code' => $request->country_code ?? null,
-            'mobile' => $request->mobile ?? null,
+           'mobile' =>  $request->mobile ?? $request->phone ?? null,
             'profile_image' => config('constants.default.user_image'),
         ]);
 
@@ -242,11 +255,14 @@ class QuotesController extends WebController
         // Update quote data with the quotation ID
         $quoteData['quotation_id'] = $userQuote->id;
         Cache::forget('location_info');
+        $this->SaveSearchQuoteEmailSend($quoteData);
 
         // Send mail to transporters
         //$this->sendMailToTransporters($quoteData);
-        $command = '/usr/local/bin/php /home/pfltvaho/public_html/artisan schedule:run';
-        exec($command, $output, $returnVar);
+        // this is commented because of client requirement
+        // $command = '/usr/local/bin/php /home/pfltvaho/public_html/artisan schedule:run';
+        // exec($command, $output, $returnVar);
+        // comment end
     }
 
     private function saveMapImage($dis_dur) {
@@ -472,5 +488,153 @@ class QuotesController extends WebController
             ], 500);
         }
     }
+
+    public function SaveSearchQuoteEmailSend($quote)
+    {
+        $pickupWords = array_map('trim', preg_split('/[\s,]+/', strtolower($quote['pickup_postcode'])));
+        $dropWords = array_map('trim', preg_split('/[\s,]+/', strtolower($quote['drop_postcode'])));
+        //    dd($pickupWords);
+        $transporter = DB::table('save_searches')
+            ->join('users', function ($join) {
+                $join->on('users.id', '=', 'save_searches.user_id')
+                    ->where('users.status', 'active')
+                    ->where('users.type', 'car_transporter')
+                    ->where('users.is_status', 'approved');
+                // ->where('users.job_email_preference', 1);
+            })
+            ->where(function ($query) use ($pickupWords) {
+                foreach ($pickupWords as $word) {
+                    $query->orWhere(DB::raw('LOWER(save_searches.pick_area)'), 'LIKE', '%' . $word . '%');
+                }
+            })
+            // Match if any of the words in the drop_postcode input match the drop_area
+            ->where(function ($query) use ($dropWords) {
+                $query->orWhere(function ($innerQuery) use ($dropWords) {
+                    foreach ($dropWords as $word) {
+                        $innerQuery->orWhere(DB::raw('LOWER(save_searches.drop_area)'), 'LIKE', '%' . $word . '%');
+                    }
+                })
+                    ->orWhereNull('save_searches.drop_area') // Match if drop_area is NULL
+                    ->orWhere('save_searches.drop_area', 'anywhere'); // Match if drop_area is 'anywhere'
+            })
+            ->where('save_searches.email_notification', 'true')
+            ->groupBy('users.id')
+            ->get();
+            $last24HoursCount = UserQuote::where('created_at', '>=', Carbon::now()->subDay())->count();
+             
+            foreach($transporter as $transport)
+            {
+            $mailData = [
+                'last24HoursCount' =>$last24HoursCount,
+               'name'=>$transport->first_name,
+            ]; 
+         
+            $htmlContent = view('mail.General.today-transporter-leads', ['quote' => $mailData])->render();
+            $subject='Todays Transport Leads';
+
+
+          
+              $this->emailService->sendEmail($transport->email, $htmlContent, $subject);
+           }
+
+    }
+
+    public function sendOtp(Request $request,SmsService $service)
+    {
+        $validator = Validator::make($request->all(), [
+            'phoneNumber' => 'required|string',
+        ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ], 400);
+        }
+    
+        // Generate a new OTP (e.g., a 6-digit code)
+        $otp = rand(1000, 9999);
+    
+        // Create or update the phone verification record
+        MobileVerification::updateOrCreate(
+            ['mobile_number' => $request->phoneNumber],
+            [
+                'otp_code' => $otp,
+                'otp_expires_at' => now()->addMinutes(15), // Set OTP expiry
+            ]
+        );
+        $result = $service->sendSms($request->phoneNumber,"Transport Any Car: $otp is your verification code. It expires in 15 minutes. Don’t share this with anyone.");
+        if (isset($result['sid'])) {
+            return response()->json([
+                'success' => true,
+                'message' => 'SMS sent successfully!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to send SMS',
+                'data' => $result
+            ]);
+        }
+        return response()->json([
+            'success' => true,
+            // 'message' => 'OTP sent successfully.',
+        ]);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        
+            $validator = Validator::make($request->all(), [
+                'phoneNumber' => 'required|string',
+                'otp' => 'required|string|size:4', 
+            ]);
+
+             // Check if validation fails
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => $validator->errors()->first(),
+                ], 200);
+            }
+
+            // Find the verification record by mobile number
+            $verification = MobileVerification::where('mobile_number', $request->phoneNumber)->first();
+
+            if (!$verification) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid mobile number.',
+                ], 200);
+            }
+
+            // Check if the OTP matches
+            if ($verification->otp_code !== $request->otp) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid OTP.',
+                    'data'=>$request->all()
+                ], 200);
+            }
+
+            // Check if the OTP has expired (15 minutes expiration)
+            if (now()->greaterThan($verification->otp_expires_at)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'OTP has expired.',
+                ], 200);
+            }
+
+            // OTP is valid, proceed with the user's action
+            // Optionally remove the verification record
+            $verification->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'OTP verified successfully.',
+            ]);
+    }
+
 
 }

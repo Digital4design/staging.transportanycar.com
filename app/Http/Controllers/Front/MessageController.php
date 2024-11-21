@@ -7,6 +7,7 @@ use App\Message;
 use App\QuoteByTransporter;
 use App\Services\EmailService;
 use App\Thread;
+use App\TransactionHistory;
 use App\User;
 use App\UserQuote;
 use Illuminate\Database\Eloquent\Model;
@@ -40,6 +41,7 @@ class MessageController extends WebController
             $thread = Thread::with(['user_qot', 'messages', 'messages.sender'])->where('id', '=', $id)->first();
             $quote_by_transporter = QuoteByTransporter::where(['user_quote_id' => $thread->user_quote_id, 'user_id'=> $thread->friend_id])->first();
             $transporter_username = User::where('id', $quote_by_transporter->user_id)->first()->username ?? null;
+            $transaction = TransactionHistory::where('quote_by_transporter_id',$quote_by_transporter->id)->where('status','completed')->exists() ? "true":"false";
             $quote_by_transporter_id = $quote_by_transporter ? $quote_by_transporter->id : null;
             //$transporter_username = $quote_by_transporter ? $quote_by_transporter->getTransporters->username : null;
         
@@ -51,7 +53,8 @@ class MessageController extends WebController
                 });
             } 
         }
-        return view('front.dashboard.partial.history_listing')->with(compact('messages', 'thread', 'quote_by_transporter_id', 'transporter_username'));
+        // return ["transaction"=>$transaction];
+        return view('front.dashboard.partial.history_listing')->with(compact('messages', 'thread', 'quote_by_transporter_id', 'transporter_username','transaction'));
     }
     
 
@@ -60,7 +63,8 @@ class MessageController extends WebController
         $request->validate([
             'message' => [
                 'required',
-                'regex:/^[^\d]*$/', // Ensure no digits are present
+                $request->check !== "true" ? 'regex:/^[^\d]*$/' : 'nullable',
+                //'regex:/^[^\d]*$/', // Ensure no digits are present
             ],
         ]);
         $auth_user = Auth::User();
@@ -117,7 +121,7 @@ class MessageController extends WebController
             }
             $maildata['quotes'] = $userQuote;
             $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
-            $this->emailService->sendEmail($email_to, $htmlContent, 'You have a new message');
+            $this->emailService->sendEmail($email_to, $htmlContent, 'You Have a Message from '.$auth_user->username.' Regarding '.$userQuote->vehicle_make.' '.$userQuote->vehicle_model.'Delivery.');
 
             // Call create_notification to notify the user
             create_notification(
@@ -225,20 +229,27 @@ class MessageController extends WebController
             'message' => $request->message ?? null,
             'type' => "message",
         ]);
+        
+     
         if ($message) {
             try {
+                $quotes = UserQuote::where('id', $request->user_quote_id)->first();
+                $my_quote = QuoteByTransporter::where('user_quote_id', $request->user_quote_id)->first();
+
+                $subject= 'You Have a Message from ' . ($user->username ?? 'User') . ' Regarding ' . ($quotes->vehicle_make ?? '') . ' ' . ($quotes->vehicle_model ?? '') . ' Delivery.';
                 $transporter = User::where('id', $request->transporter_id)->first();
                 $email_to = $transporter->email;
                 $maildata['user'] = $user;
                 $maildata['thread'] = $thread;
                 $maildata['message'] = $request->message;
                 $maildata['from_page'] = $request->form_page;
-                $my_quote = QuoteByTransporter::where('user_quote_id', $request->user_quote_id)->first();
-                $quotes = UserQuote::where('id', $request->user_quote_id)->first();
                 $maildata['quotes'] = $quotes;
                 $maildata['quote_by_transporter_id'] = $my_quote->id;
                 $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
-                $this->emailService->sendEmail($email_to, $htmlContent, 'You have a new message');
+                $this->emailService->sendEmail(
+                    $email_to,
+                    $htmlContent,$subject
+                );
             } 
             catch (\Exception $ex) {
                     Log::error('Error sending email: ' . $ex->getMessage());
@@ -271,6 +282,9 @@ class MessageController extends WebController
                 return $query->created_at->format('d-m-Y');
             });
 
+            $quote_id=QuoteByTransporter::where('user_id',$thread->friend_id)->where('user_quote_id',$thread->user_qot->id)->first();
+
+
             // Fetch total message count for all threads of the logged-in user
             $threads = Thread::where(['user_id' => $user->id, 'user_quote_id' => $thread->user_qot->id])->get();
             if ($threads->isNotEmpty()) {
@@ -283,10 +297,10 @@ class MessageController extends WebController
             $messageCounts = collect();
         }
         if($request->from_page == 'delivery') {
-            $view = view('front.dashboard.partial.delivery_chat_history', compact('messages', 'thread', 'user'))->render();
+            $view = view('front.dashboard.partial.delivery_chat_history', compact('messages', 'thread', 'user','quote_id'))->render();
         } 
         else {
-            $view = view('front.dashboard.partial.quote_history_listing', compact('messages', 'thread', 'user'))->render();
+            $view = view('front.dashboard.partial.quote_history_listing', compact('messages', 'thread', 'user','quote_id'))->render();
         }
         return response()->json([
             'html' => $view,

@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/web/css/header_footer.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('assets/web/css/style.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('assets/web/css/responsive.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/web/css/admin.css')}}" />
     <link href="{{asset('assets/admin/vendors/general/toastr/build/toastr.css')}}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">

@@ -1,9 +1,15 @@
 @extends('layouts.web.app')
+{{-- @extends('layouts.web.dashboard.app') --}}
+
 
 @section('head_css')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
 @endsection
 <style>
+    main,
+    .admin-header {
+        padding:0!important;
+    }
 .error{
   font-size: 14px;
   color: red;
@@ -71,11 +77,47 @@ ul.suggestions-list li {
 }
 
 
-
+@media screen and (max-width: 991px) {
+    header.admin-header .admin-menu {display: none;}
+    header.admin-header .navbar .brand img {height: auto; max-width: 190px; width: 100%;}
+    header.admin-header .navbar {
+        padding: 30px 0px;
+    }
+    header.admin-header {
+        background: linear-gradient(180deg, rgba(0, 141, 212, 0.31) 0%, rgba(245, 251, 254, 0) 100%);
+        position: relative;        
+        box-shadow: none;
+    }
+    .admin-header .navbar #nav:checked~.wrapper .menu {
+        padding: 0;
+        box-shadow: none;
+    }
+    .admin-header .navbar .wrapper .menu-item {
+        padding: 0 0 15px;
+    }
+    .admin-header .navbar #nav:checked~.wrapper .menu {
+        box-shadow: none;
+    }
+    .admin-header .navbar .wrapper .menu-item a {
+        padding: 6px 23px!important;
+        font-size: 15px;
+        font-weight: 400;
+        max-width: initial;
+        border: none;
+        border-radius: 0;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .admin-header .navbar .wrapper .menu-item:nth-child(2) a {margin-top: 0;}
+}
 </style>
 
 @section('content')
-    @include('layouts.web.head-web-menu-without-mobile')
+    {{-- @include('layouts.web.head-web-menu-without-mobile') --}}
+    @include('layouts.web.dashboard.header')
+
     <main>
         <section class="join_network_main payment_confirm_main">
             <div class="container">
@@ -180,6 +222,8 @@ ul.suggestions-list li {
                                     <input id="contact_number" name ="contact_number" type="tel" placeholder="Mobile number" class="form-control" />
                                 </div>
                             </div>
+
+                            
                             <div class="col-lg-6">
                                 <div class="form_group_sec">
                                     <input type="email" id="delivery_email" name="delivery_email" placeholder="Email address" class="form-control"  value="{{ $user_email }}"/>
@@ -263,7 +307,10 @@ ul.suggestions-list li {
                         required: true
                     },
                     phone: {
-                        required: true
+                        required: true,
+                        digits: true,
+                        minlength: 11,
+                        maxlength: 11
                     },
                     email: {
                         required: true,
@@ -283,7 +330,10 @@ ul.suggestions-list li {
                         required: true
                     },
                     contact_number: {
-                        required: true
+                        required: true,
+                        digits: true,
+                        minlength: 11,
+                        maxlength: 11
                     },
                     delivery_email: {
                         required: true,
@@ -322,7 +372,11 @@ ul.suggestions-list li {
                 },
                 messages: {
                     contact_name: "Please enter contact name",
-                    phone: "Please enter mobile number",
+                    phone: {
+                        required: "Please enter delivery mobile number",
+                        maxlength: "Please enter a valid mobile number",
+                        minlength:"Please enter a valid mobile number"
+                    },
                     email: {
                         required: "Please enter email address",
                         email: "Please enter a valid email address"
@@ -330,7 +384,11 @@ ul.suggestions-list li {
                     start_point: "Please enter collection address",
                     end_point: "Please enter delivery address",
                     delivery_contact_name: "Please enter delivery contact name",
-                    contact_number: "Please enter delivery mobile number",
+                    contact_number: {
+                        required: "Please enter delivery mobile number",
+                        maxlength: "Please enter a valid mobile number",
+                        minlength:"Please enter a valid mobile number"
+                    },
                     delivery_email: {
                         required: "Please enter delivery email address",
                         email: "Please enter a valid delivery email address"
@@ -375,18 +433,18 @@ ul.suggestions-list li {
                 }
             });
 
-            const input = document.querySelector("#phone");
-            window.intlTelInput(input, {
-                initialCountry: 'gb',
-                utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
-                separateDialCode: true
-            });
+            // const input = document.querySelector("#phone");
+            // window.intlTelInput(input, {
+            //     initialCountry: 'gb',
+            //     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+            //     separateDialCode: true
+            // });
             const contact_number = document.querySelector("#contact_number");
-            window.intlTelInput(contact_number, {
-                initialCountry: 'gb',
-                utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
-                separateDialCode: true
-            });
+            // window.intlTelInput(contact_number, {
+            //     initialCountry: 'gb',
+            //     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+            //     separateDialCode: true
+            // });
             // Toggle and validate manual address for collection
             $("#pay_address").click(function() {
                 clearStartPoint();

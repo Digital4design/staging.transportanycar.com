@@ -181,7 +181,9 @@
     width: 170px;
     max-width: 70%;
 }
-
+.srch-data .srch-data-filter ~ a {
+    font-weight: 400;
+}
 /* .boxContentList .contentBlockBtn .btnCol {
     width: 18%;
     display: flex;
@@ -260,14 +262,18 @@
 
 .wishList-bidInfo .bidTnfo p {
     margin: 0;
+    font-weight: 300;
+    line-height: 18px;
 }
 
 .wishList-bidInfo .bidTnfo p .green {
+    font-weight: 500;
     color: #52D017;
 }
 
 .wishList-bidInfo .bidTnfo p .blue {
     color: #0356D6;
+    font-weight: 500;   
 }
 
 .boxContentList h2.imgHeading {
@@ -495,11 +501,13 @@ span.grey {
 .review-count-bar span {margin-right: 10px;}
 /* User Feedback Page */
 
+
 @media (min-width:992px) {
     .jobsrch_form_blog .form-group.where_custom {
-        padding: 15px 30px;
+        padding: 10px 40px;
     }
 
+    .jobsrch_form_blog .form-group.drop_off_box label,
     .jobsrch_form_blog .form-group.where_custom label {
         font-size: 20px;
         font-weight: 500;
@@ -697,7 +705,7 @@ body.modal-open {
 
 @media (max-width:991px) {
     #page-content-wrapper .navbar {
-        box-shadow: none;
+        /* box-shadow: none; */
         background-color: #ffffff;
         /* background: linear-gradient(180deg, rgba(0, 141, 212, 0.31) 0%, rgba(245, 251, 254, 0) 100%); */
     }   

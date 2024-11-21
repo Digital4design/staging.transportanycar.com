@@ -2,41 +2,37 @@
 
 @section('head_css')
     <style>
-        .yes-btn {
-            background-color:#1e7e34;
-            border-color:#1e7e34;
-            color:#ffffff;
+        .jobsrch_blogs {
+            padding-top: 10px;
         }
-        .yes-btn:hover {
-            background-color: transparent;
-            color:#1e7e34;
+        .delete_btn_mobile {
+            cursor: pointer;
+        }
+        .delete_btn_mobile:hover svg path {
+            fill:#db0808;
+        }
+        .card {
+            box-shadow:0 0 4px 0 rgba(0,0,0,0.25);
+        }
+        .adjust-space-in-mobile {
+            margin-bottom: 45px;
+        }
+        .text-label {
+            font-size: 16px;
+            color:#000000;
+        }
+        .font-weight-500 {font-weight: 500;}
+        .job-available {font-size: 12px; line-height: 15px;}
+        .job-available span {color:#0372D6;}
+        .adjust-space-without-btn {
+            margin-bottom: 40px!important;
         }
         .jobsrch_info_list h6 {
             width: 10% !important;
         }
 
-        .jobserch_mob .close-btn {
-                position: absolute;
-                right: 16px;
-                top: 16px;
-                z-index: 2;
-            }
-
-        .jobserch_mob form button {
-            opacity: 1 !important;
-        }
-
-        .job-available {
-            font-size: 12px;
-        }
-
         .vehicle_image {
             width: 500px !important;
-        }
-
-        .search-name:first-letter {
-            text-transform: capitalize;
-            display: inline-block;
         }
 
         a.make_offer_btn {
@@ -86,8 +82,8 @@
 
 
         /* .jobsrch_form_blog .form-control {
-                                                        color: #000000;
-                                                    } */
+                            color: #000000;
+                        } */
         .jobsrch_form_blog .error-message {
             position: absolute;
             bottom: -34px;
@@ -161,10 +157,10 @@
             height: 17px;
         }
 
-        .get_quote .modal-header .close {
-            position: absolute;
-            right: 15px;
-        }
+        /* .get_quote .modal-header .close {
+                    position: absolute;
+                    right: 15px;
+                } */
 
         /* Add your CSS styling here */
         #popup {
@@ -250,7 +246,7 @@
 
         .job-data {
             margin-left: 0px;
-            margin-bottom: 8px;
+            margin-bottom: 0px;
         }
 
         .job-data span {
@@ -258,11 +254,11 @@
             font-size: 15px;
         }
 
-        #carDetailsModal .modal-header button.btn-close {
-            position: absolute;
-            top: 11px;
-            right: 15px;
-        }
+        /* #carDetailsModal .modal-header button.btn-close {
+                    position: absolute;
+                    top: 11px;
+                    right: 15px;
+                } */
 
         #carDetailsModal .modal-header span {
             display: flex;
@@ -287,6 +283,10 @@
             color: #9C9C9C;
             padding: 0;
             margin-left: auto;
+            line-height: 18px;
+            /* position: absolute;
+            right: 21px;
+            top: 21px; */
         }
 
         #carDetailsModal .jobsrch_box {
@@ -383,8 +383,13 @@
         #page-content-wrapper {
             padding-bottom: 20px;
         }
+        .delete_btn_mobile {
+            right: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+        }
 
-        .adjust-space-in-mobile {margin-bottom: 48px;}
         @media (min-width: 579px) {
 
             .jobserch_mob .jobsrch_box {
@@ -557,8 +562,6 @@
             .jobserch_mob .job_new_grid_vehi_modal span {
                 width: 100%;
             }
-
-
         }
 
         @media (min-width: 768px) {
@@ -730,15 +733,7 @@
             .jobserch_mob li p {
                 display: none !important;
             }
-
-
-
-
-
         }
-
-
-
 
         @media screen and (min-width: 1000px) and (max-width: 1199px) {
 
@@ -912,7 +907,6 @@
 
         }
 
-
         @media(min-width: 1366px) {
             .jobserch_mob .jobsrch_box {
                 border-radius: 10px;
@@ -1083,7 +1077,6 @@
 
         }
 
-
         @media(min-width: 1600px) {
             .jobserch_mob .jobsrch_box {
                 border-radius: 10px;
@@ -1250,18 +1243,17 @@
 
         }
 
-
         @media(max-width: 767px) {
-            .adjust-space-in-mobile {margin-bottom: 36px;}
             .jobserch_mob li p {
                 display: none !important;
             }
         }
 
         /* end 16-09-2024 */
-
-
         @media(max-width: 580px) {
+            .job_container .job-data.job-data-mobile {
+                margin-left: -30px!important;
+            }
             .jobsrch_info_list li small {
                 font-size: 14px;
                 margin-left: 7px;
@@ -1335,8 +1327,11 @@
             .jobserch_mob {
                 width: calc(100% + 60px);
                 margin-left: -30px;
+                margin-right: -30px;
+                /* width: 100%; */
+                padding-top: 10px;
             }
-.card{border-width: 0!important;}
+
             .jobserch_mob .jobsrch_box {
                 padding: 20px;
                 margin-bottom: 7px;
@@ -1403,7 +1398,7 @@
 
             .jobsrch_form_blog .form-control {
                 font-size: 18px;
-                color: #000000;
+                /* color: #000000; */
             }
 
             .jobsrch_form_blog .error-message {
@@ -1427,11 +1422,11 @@
                 height: 203px !important;
             }
 
-            .modal-header button.btn-close {
-                position: absolute;
-                top: 11px;
-                right: 15px;
-            }
+            /* .modal-header button.btn-close {
+                        position: absolute;
+                        top: 11px;
+                        right: 15px;
+                    } */
 
             .jobserch_mob .jobsrch_box {
                 padding: 20px 20px 10px;
@@ -1647,12 +1642,6 @@
 
         }
 
-        @media (max-width: 575px) {
-            .card {
-                border-radius: 0 !important;
-            }
-        }
-
         @media(max-width: 400px) {
             .jobsrch_box {
                 padding: 10px;
@@ -1663,38 +1652,10 @@
                 right: 5%;
             }
         }
-
-        /*d4ddeveloper-r */
-
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background: #FFF;
-            box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-            /* width: 420px; */
-        }
-
-        .card span {
-            font-size: 16px;
-        }
-
-        .close {
-            font-size: 1.2rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .text-success i,
-        .text-danger i {
-            margin-right: 5px;
-        }
     </style>
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/web/css/rangeslider.css') }}" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/globle.css') }}" />
 @endsection
+
 
 @section('content')
     <div id="wrapper">
@@ -1722,7 +1683,9 @@
                                 <img src="/uploads/loading-popup.gif" alt="Loading">
                             </div>
                             <p class="pera_srch adjust-space-in-mobile">Here are your current saved searches. </p>
-                            <div class="job-data">
+
+                            
+                            <div class="job-data job-data-mobile">
                                 @if ($savedSearches->total() == 0)
                                     <span>Results: 0</span>
                                 @else
@@ -1742,34 +1705,33 @@
                                 @endif
                             </div>
                             @foreach ($savedSearches as $savedSearch)
-                            <div class="jobsrch_blogs jobserch_mob">
-                               
-                                    <div class="card p-3 mb-2">
+                                <div class="jobsrch_blogs jobserch_mob">
+                                    <div class="card">
+
+                                        <a data-toggle="modal" data-target="#delete_quote_{{ $savedSearch->id }}"
+                                            class="d-flex delete_btn_mobile align-items-center position-absolute justify-content-center flex-wrap">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 14 14" fill="none">
+                                                <path
+                                                    d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303299 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08075 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM9.247 8.253C9.31261 8.31807 9.36469 8.39549 9.40023 8.48079C9.43576 8.5661 9.45406 8.65759 9.45406 8.75C9.45406 8.84241 9.43576 8.9339 9.40023 9.0192C9.36469 9.1045 9.31261 9.18192 9.247 9.247C9.18193 9.31261 9.10451 9.36468 9.01921 9.40022C8.9339 9.43576 8.84241 9.45406 8.75 9.45406C8.65759 9.45406 8.5661 9.43576 8.4808 9.40022C8.3955 9.36468 8.31808 9.31261 8.253 9.247L7 7.987L5.747 9.247C5.68193 9.31261 5.60451 9.36468 5.51921 9.40022C5.4339 9.43576 5.34241 9.45406 5.25 9.45406C5.15759 9.45406 5.0661 9.43576 4.9808 9.40022C4.8955 9.36468 4.81808 9.31261 4.753 9.247C4.68739 9.18192 4.63532 9.1045 4.59978 9.0192C4.56424 8.9339 4.54594 8.84241 4.54594 8.75C4.54594 8.65759 4.56424 8.5661 4.59978 8.48079C4.63532 8.39549 4.68739 8.31807 4.753 8.253L6.013 7L4.753 5.747C4.62119 5.61519 4.54714 5.43641 4.54714 5.25C4.54714 5.06359 4.62119 4.88481 4.753 4.753C4.88481 4.62119 5.06359 4.54713 5.25 4.54713C5.43641 4.54713 5.61519 4.62119 5.747 4.753L7 6.013L8.253 4.753C8.38481 4.62119 8.56359 4.54713 8.75 4.54713C8.93641 4.54713 9.11519 4.62119 9.247 4.753C9.37881 4.88481 9.45287 5.06359 9.45287 5.25C9.45287 5.43641 9.37881 5.61519 9.247 5.747L7.987 7L9.247 8.253Z"
+                                                    fill="#ED1C24" />
+                                            </svg>
+                                           
+                                        </a>
+
                                        
-                                                <a data-toggle="modal" data-target="#delete_quote_{{ $savedSearch->id }}"
-                                                    class="d-lg-block delete_btn_mobile align-self-end">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                    viewBox="0 0 14 14" fill="none">
-                                                    <path
-                                                        d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303299 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08075 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM9.247 8.253C9.31261 8.31807 9.36469 8.39549 9.40023 8.48079C9.43576 8.5661 9.45406 8.65759 9.45406 8.75C9.45406 8.84241 9.43576 8.9339 9.40023 9.0192C9.36469 9.1045 9.31261 9.18192 9.247 9.247C9.18193 9.31261 9.10451 9.36468 9.01921 9.40022C8.9339 9.43576 8.84241 9.45406 8.75 9.45406C8.65759 9.45406 8.5661 9.43576 8.4808 9.40022C8.3955 9.36468 8.31808 9.31261 8.253 9.247L7 7.987L5.747 9.247C5.68193 9.31261 5.60451 9.36468 5.51921 9.40022C5.4339 9.43576 5.34241 9.45406 5.25 9.45406C5.15759 9.45406 5.0661 9.43576 4.9808 9.40022C4.8955 9.36468 4.81808 9.31261 4.753 9.247C4.68739 9.18192 4.63532 9.1045 4.59978 9.0192C4.56424 8.9339 4.54594 8.84241 4.54594 8.75C4.54594 8.65759 4.56424 8.5661 4.59978 8.48079C4.63532 8.39549 4.68739 8.31807 4.753 8.253L6.013 7L4.753 5.747C4.62119 5.61519 4.54714 5.43641 4.54714 5.25C4.54714 5.06359 4.62119 4.88481 4.753 4.753C4.88481 4.62119 5.06359 4.54713 5.25 4.54713C5.43641 4.54713 5.61519 4.62119 5.747 4.753L7 6.013L8.253 4.753C8.38481 4.62119 8.56359 4.54713 8.75 4.54713C8.93641 4.54713 9.11519 4.62119 9.247 4.753C9.37881 4.88481 9.45287 5.06359 9.45287 5.25C9.45287 5.43641 9.37881 5.61519 9.247 5.747L7.987 7L9.247 8.253Z"
-                                                        fill="#ED1C24" />
-                                                </svg>
-                                                {{-- <span aria-hidden="true">&times;</span> --}}
-                                            </a>
-                                        
-                                        <form action="">
-                                            <input type="hidden" value="{{ $savedSearch->pick_area }}" name="pick_area">
-                                            <input type="hidden" value="{{ $savedSearch->drop_area}}" name="drop_area">
+                                            <a href="#" id="saved_find_job" class="p-3 saved_find_job" data-value="{{ $savedSearch->id }}">
+
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
-                                                    <span class="font-weight-bold">Name of search:</span>
+                                                    <span class="text-label font-weight-500">Name of search:</span>
                                                     <span
-                                                        class="font-weight-light search-name ml-1 d-inline-block">{{ $savedSearch->search_name }}</span>
+                                                        class="text-label font-weight-light search-name ml-1 d-inline-block">{{ $savedSearch->search_name }}</span>
                                                 </div>
                                             </div>
-                                            <div class="my-3">
-                                                <span class="font-weight-bold">Search locations:</span>
-                                                <span class="font-weight-light text-capitalize ml-1">
+                                            <div class="my-2">
+                                                <span class="text-label font-weight-500">Search locations:</span>
+                                                <span class="text-label font-weight-light text-capitalize ml-1">
                                                     <svg width="16" height="22" viewBox="0 0 16 22" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg" class="mr-1">
                                                         <path
@@ -1777,7 +1739,8 @@
                                                             fill="#52D017"></path>
                                                     </svg> {{ $savedSearch->pick_area }}
                                                 </span>
-                                                <span class="ml-3 font-weight-light text-capitalize">
+                                                @if ( $savedSearch->drop_area )
+                                                <span class="text-label ml-3 font-weight-light text-capitalize">
                                                     <svg width="16" height="22" viewBox="0 0 16 22" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg" class="mr-1">
                                                         <path
@@ -1785,47 +1748,61 @@
                                                             fill="#ED1C24"></path>
                                                     </svg> {{ $savedSearch->drop_area }}
                                                 </span>
-                                            </div>
-                                            <div class="font-weight-light job-available">
-                                                Jobs available: <a href="#"
-                                                    class="font-weight-bold text-primary ml-1">{{ $savedSearch->quote_count }}</a>
-                                            </div>
-                                            <button type="submit" class="position-absolute w-100 h-100 border-0 bg-transparent rounded-md" style="left:0; top:0; z-index:-10;"></button>
-                                        </form>
-                                    </div>
-                                    
-                                
-                            </div>
-                            <div class="modal fade mark_bx" id="delete_quote_{{ $savedSearch->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">
-                                                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
+                                                @else
+                                                <span class="text-label ml-3 font-weight-light text-capitalize">
+                                                    <svg width="16" height="22" viewBox="0 0 16 22" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg" class="mr-1">
                                                         <path
-                                                            d="M0.93934 15.9393C0.353553 16.5251 0.353553 17.4749 0.93934 18.0607C1.52513 18.6464 2.47487 18.6464 3.06066 18.0607L0.93934 15.9393ZM10.5607 10.5607C11.1464 9.97487 11.1464 9.02513 10.5607 8.43934C9.97487 7.85355 9.02513 7.85355 8.43934 8.43934L10.5607 10.5607ZM8.43934 8.43934C7.85355 9.02513 7.85355 9.97487 8.43934 10.5607C9.02513 11.1464 9.97487 11.1464 10.5607 10.5607L8.43934 8.43934ZM18.0607 3.06066C18.6464 2.47487 18.6464 1.52513 18.0607 0.93934C17.4749 0.353553 16.5251 0.353553 15.9393 0.93934L18.0607 3.06066ZM10.5607 8.43934C9.97487 7.85355 9.02513 7.85355 8.43934 8.43934C7.85355 9.02513 7.85355 9.97487 8.43934 10.5607L10.5607 8.43934ZM15.9393 18.0607C16.5251 18.6464 17.4749 18.6464 18.0607 18.0607C18.6464 17.4749 18.6464 16.5251 18.0607 15.9393L15.9393 18.0607ZM8.43934 10.5607C9.02513 11.1464 9.97487 11.1464 10.5607 10.5607C11.1464 9.97487 11.1464 9.02513 10.5607 8.43934L8.43934 10.5607ZM3.06066 0.93934C2.47487 0.353553 1.52513 0.353553 0.93934 0.93934C0.353553 1.52513 0.353553 2.47487 0.93934 3.06066L3.06066 0.93934ZM3.06066 18.0607L10.5607 10.5607L8.43934 8.43934L0.93934 15.9393L3.06066 18.0607ZM10.5607 10.5607L18.0607 3.06066L15.9393 0.93934L8.43934 8.43934L10.5607 10.5607ZM8.43934 10.5607L15.9393 18.0607L18.0607 15.9393L10.5607 8.43934L8.43934 10.5607ZM10.5607 8.43934L3.06066 0.93934L0.93934 3.06066L8.43934 10.5607L10.5607 8.43934Z"
-                                                            fill="#CFCFCF" />
-                                                    </svg>
+                                                            d="M8.00002 0.16C7.5361 0.15999 7.16001 0.536063 7.16 0.999982C7.15999 1.4639 7.53606 1.83999 7.99998 1.84L8.00002 0.16ZM10.6782 1.5264L10.9964 0.748992L10.9961 0.748881L10.6782 1.5264ZM13.8198 4.08L13.1238 4.5503L13.1243 4.55106L13.8198 4.08ZM15 7.916H15.84L15.84 7.91465L15 7.916ZM12.949 12.8062L12.271 12.3103C12.2608 12.3243 12.251 12.3386 12.2417 12.3531L12.949 12.8062ZM10.9162 15.98L10.2088 15.5269L10.2059 15.5316L10.9162 15.98ZM8 20.6L7.2901 21.049C7.44414 21.2926 7.71225 21.4401 8.0004 21.44C8.28855 21.4399 8.55652 21.292 8.71033 21.0484L8 20.6ZM5.0838 15.9898L5.79371 15.5407L5.79151 15.5373L5.0838 15.9898ZM3.051 12.8104L3.75871 12.3579C3.74942 12.3434 3.73969 12.3291 3.72952 12.3152L3.051 12.8104ZM1 7.9202L0.16 7.91937V7.9202H1ZM2.1802 4.08L2.87569 4.55106L2.87573 4.551L2.1802 4.08ZM5.3218 1.5306L5.63951 2.3082L5.64092 2.30762L5.3218 1.5306ZM8.00124 1.84C8.46516 1.83932 8.84068 1.46268 8.84 0.998763C8.83932 0.534845 8.46268 0.159318 7.99876 0.160001L8.00124 1.84ZM8 9.38182C7.53608 9.38182 7.16 9.7579 7.16 10.2218C7.16 10.6857 7.53608 11.0618 8 11.0618V9.38182ZM8 4.77022C7.53608 4.77022 7.16 5.1463 7.16 5.61022C7.16 6.07414 7.53608 6.45022 8 6.45022V4.77022ZM8.02068 11.07C8.48445 11.0585 8.85116 10.6733 8.83973 10.2095C8.82829 9.74574 8.44306 9.37903 7.97928 9.39046L8.02068 11.07ZM5.95582 9.09437L6.67981 8.66841L5.95582 9.09437ZM5.95582 6.75585L5.23184 6.32989L5.95582 6.75585ZM7.97928 6.45975C8.44306 6.47119 8.82829 6.10449 8.83973 5.64071C8.85116 5.17693 8.48446 4.7917 8.02068 4.78026L7.97928 6.45975ZM7.99998 1.84C8.8094 1.84002 9.61108 1.99759 10.3603 2.30392L10.9961 0.748881C10.0451 0.360035 9.02746 0.160022 8.00002 0.16L7.99998 1.84ZM10.36 2.30381C11.4829 2.76336 12.4445 3.54504 13.1238 4.5503L14.5158 3.6097C13.6508 2.32959 12.4262 1.3342 10.9964 0.748992L10.36 2.30381ZM13.1243 4.55106C13.7974 5.54482 14.1581 6.7171 14.16 7.91735L15.84 7.91465C15.8375 6.37945 15.3762 4.88002 14.5153 3.60894L13.1243 4.55106ZM14.16 7.916C14.16 8.72866 14.0336 9.33192 13.7568 9.95594C13.4676 10.608 13.0038 11.3082 12.271 12.3103L13.627 13.3021C14.3614 12.298 14.9231 11.4701 15.2926 10.6371C15.6745 9.77608 15.84 8.93734 15.84 7.916H14.16ZM12.2417 12.3531L10.2089 15.5269L11.6235 16.4331L13.6563 13.2593L12.2417 12.3531ZM10.2059 15.5316L7.28967 20.1516L8.71033 21.0484L11.6265 16.4284L10.2059 15.5316ZM8.7099 20.151L5.7937 15.5408L4.3739 16.4388L7.2901 21.049L8.7099 20.151ZM5.79151 15.5373L3.75871 12.3579L2.34329 13.2629L4.37609 16.4423L5.79151 15.5373ZM3.72952 12.3152C2.99627 11.3105 2.5324 10.6102 2.24307 9.95836C1.96633 9.33489 1.84 8.73275 1.84 7.9202H0.16C0.16 8.94165 0.325572 9.7794 0.707534 10.6399C1.0769 11.4721 1.63853 12.2999 2.37248 13.3056L3.72952 12.3152ZM1.84 7.92103C1.84119 6.71953 2.20189 5.54586 2.87569 4.55106L1.48471 3.60894C0.622887 4.88135 0.161527 6.38255 0.16 7.91937L1.84 7.92103ZM2.87573 4.551C3.55555 3.54711 4.51715 2.76676 5.63951 2.3082L5.00409 0.752999C3.57488 1.33694 2.35036 2.33063 1.48467 3.609L2.87573 4.551ZM5.64092 2.30762C6.38988 2.00002 7.19157 1.84119 8.00124 1.84L7.99876 0.160001C6.97101 0.161514 5.95338 0.363125 5.00268 0.75358L5.64092 2.30762ZM8 11.0618C9.12389 11.0618 10.1624 10.4622 10.7243 9.48892L9.26942 8.64892C9.00758 9.10244 8.52368 9.38182 8 9.38182V11.0618ZM10.7243 9.48892C11.2863 8.5156 11.2863 7.31643 10.7243 6.34312L9.26942 7.18312C9.53126 7.63664 9.53126 8.1954 9.26942 8.64892L10.7243 9.48892ZM10.7243 6.34312C10.1624 5.3698 9.12389 4.77022 8 4.77022V6.45022C8.52368 6.45022 9.00758 6.7296 9.26942 7.18312L10.7243 6.34312ZM7.97928 9.39046C7.44715 9.40358 6.94973 9.12719 6.67981 8.66841L5.23184 9.52033C5.81113 10.5049 6.87865 11.0981 8.02068 11.07L7.97928 9.39046ZM6.67981 8.66841C6.40989 8.20964 6.40989 7.64058 6.67981 7.18181L5.23184 6.32989C4.65254 7.31448 4.65254 8.53574 5.23184 9.52033L6.67981 8.66841ZM6.67981 7.18181C6.94973 6.72303 7.44715 6.44664 7.97928 6.45975L8.02068 4.78026C6.87865 4.75212 5.81113 5.34529 5.23184 6.32989L6.67981 7.18181Z"
+                                                            fill="#ED1C24"></path>
+                                                    </svg> Anywhere
                                                 </span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h3 class="d-block text-center">Are you sure you want to <br /> cancel your bid ?</h3>
-                                        </div>
-                                        <div class="modal-footer d-flex flex-wrap align-items-center p-0">
-                                            <a href="javascript:;" class="no_btn" data-dismiss="modal">No</a>
-                                            <form action="{{ route('transporter.delete.save.search') }}" method="POST" class="close-btn">
-                                                @csrf
-                                                <button type="submit" class="no_btn yes-btn"
-                                                    value="{{ $savedSearch->id }}" name="id" aria-label="Close">Yes</button>
-                                            </form>
+                                                @endif
+                                            </div>
+                                            <div class="font-weight-light text-black job-available">
+                                                Jobs available: <span
+                                                    class="font-weight-500 ml-1">{{ $savedSearch->quote_count }}</span>
+                                            </div>
+                                            {{-- <button type="submit"
+                                                class="position-absolute w-100 h-100 border-0 bg-transparent rounded-md"
+                                                style="left:0; top:0; z-index:-10;"></button> --}}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="modal fade mark_bx" id="delete_quote_{{ $savedSearch->id }}" tabindex="-1"
+                                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">
+                                                        <svg width="19" height="19" viewBox="0 0 19 19"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M0.93934 15.9393C0.353553 16.5251 0.353553 17.4749 0.93934 18.0607C1.52513 18.6464 2.47487 18.6464 3.06066 18.0607L0.93934 15.9393ZM10.5607 10.5607C11.1464 9.97487 11.1464 9.02513 10.5607 8.43934C9.97487 7.85355 9.02513 7.85355 8.43934 8.43934L10.5607 10.5607ZM8.43934 8.43934C7.85355 9.02513 7.85355 9.97487 8.43934 10.5607C9.02513 11.1464 9.97487 11.1464 10.5607 10.5607L8.43934 8.43934ZM18.0607 3.06066C18.6464 2.47487 18.6464 1.52513 18.0607 0.93934C17.4749 0.353553 16.5251 0.353553 15.9393 0.93934L18.0607 3.06066ZM10.5607 8.43934C9.97487 7.85355 9.02513 7.85355 8.43934 8.43934C7.85355 9.02513 7.85355 9.97487 8.43934 10.5607L10.5607 8.43934ZM15.9393 18.0607C16.5251 18.6464 17.4749 18.6464 18.0607 18.0607C18.6464 17.4749 18.6464 16.5251 18.0607 15.9393L15.9393 18.0607ZM8.43934 10.5607C9.02513 11.1464 9.97487 11.1464 10.5607 10.5607C11.1464 9.97487 11.1464 9.02513 10.5607 8.43934L8.43934 10.5607ZM3.06066 0.93934C2.47487 0.353553 1.52513 0.353553 0.93934 0.93934C0.353553 1.52513 0.353553 2.47487 0.93934 3.06066L3.06066 0.93934ZM3.06066 18.0607L10.5607 10.5607L8.43934 8.43934L0.93934 15.9393L3.06066 18.0607ZM10.5607 10.5607L18.0607 3.06066L15.9393 0.93934L8.43934 8.43934L10.5607 10.5607ZM8.43934 10.5607L15.9393 18.0607L18.0607 15.9393L10.5607 8.43934L8.43934 10.5607ZM10.5607 8.43934L3.06066 0.93934L0.93934 3.06066L8.43934 10.5607L10.5607 8.43934Z"
+                                                                fill="#CFCFCF" />
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h3 class="d-block text-center">Are you sure you want to delete this search?
+                                                </h3>
+                                            </div>
+                                            <div class="modal-footer d-flex flex-wrap align-items-center p-0">
+                                                <a href="javascript:;" class="no_btn" data-dismiss="modal">No</a>
+                                                <form action="{{ route('transporter.delete.save.search') }}"
+                                                    method="POST" class="close-btn">
+                                                    @csrf
+                                                    <button type="submit" class="yes_btn"
+                                                        value="{{ $savedSearch->id }}" name="id"
+                                                        aria-label="Close">Yes</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -1836,7 +1813,7 @@
     <div class="pagination before_search">
         {{ $savedSearches->links() }}
     </div>
-    
+
 
 @endsection
 
@@ -1851,7 +1828,38 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
         $(document).ready(function() {
+            var globalSiteUrl = '<?php echo $path = url('/'); ?>';
 
+            $('.saved_find_job').on('click', function(event) {
+
+                event.preventDefault(); // Prevent default anchor click behavior
+                var id= $(this).data('value'); 
+                // console.log(id);
+                // var search_pick_up_area = $('#search_pick_up_area').val();
+                // var search_drop_off_area = $('#search_drop_off_area').val();
+                $.ajax({
+                     url: "{{ route('transporter.saved_Find_job') }}",
+                    data: {
+                        id: id,
+                        // search_drop_off_area: search_drop_off_area,
+                         _token: "{{ csrf_token() }}"
+                    },
+                    type: "post",
+                    success: function(res) {
+                        console.log(res.saveSearch);
+                        if (res.success == true) {
+                            window.location.href = res.redirect_url;  
+                        } else {
+                            $('#popup').removeClass('show');
+                            toastr.error(res.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Response:', xhr.responseText); // Full
+                    }
+                });
+
+            });
         });
     </script>
 @endsection

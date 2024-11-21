@@ -46,6 +46,7 @@
 	.join_network_main .pera_netext{font-size: 20px;background: transparent;margin: 1rem 0 2rem;padding: 0;color: rgb(0 0 0 / 50%);}
 	.network_step_content h1{font-size: 35px;margin-bottom: 15px;}
 	.join_network_main{padding: 0;}
+	.join_network_main.payment_confirm_main{padding-top: 50px;}
 	ul.network_list li:last-child{margin-bottom: 30px;}
 	.network_steps::-webkit-scrollbar-track
 	{

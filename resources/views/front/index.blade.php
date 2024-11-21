@@ -60,7 +60,7 @@
             <div class="container">
                 <h1 class="banner_newtext">Get an <b>instant</b> car transport quote </h1>
                 <p class="pera_netext">
-                    <strong>Save up to 70%</strong> by getting quotes from car transport companies <br /> that are already travelling your route.
+                    <strong>Save over 70%</strong> by getting quotes from car transport companies <br /> that are already travelling your route.
                 </p>
                 <!-- Display the error message if it exists -->
                 @if ($errors->has('general'))
@@ -441,6 +441,7 @@
 
             autocomplete.addListener('place_changed', function() {
                 var place = autocomplete.getPlace();
+                console.log(place);
 
                 if (!place.geometry) {
                     return;
