@@ -260,7 +260,7 @@ class QuotesController extends WebController
         // Send mail to transporters
         //$this->sendMailToTransporters($quoteData);
         // this is commented because of client requirement
-        $command = '/usr/local/bin/php /home/pfltvaho/public_html/artisan schedule:run';
+        $command = '/usr/local/bin/php /home/pfltvaho/staging.transportanycar.com/artisan schedule:run';
         exec($command, $output, $returnVar);
         // comment end
     }
