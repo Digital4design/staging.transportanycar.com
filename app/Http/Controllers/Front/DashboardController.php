@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use PDF;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends WebController
 {
@@ -301,6 +302,7 @@ class DashboardController extends WebController
         $params['total_earning'] = $total_earning;
         $params['company_details'] = $company_details;
         $params['rating_percentage'] = $percentage;
+        $params['rating_average']  = $rating_average;
 
 
         $customRequest = new Request([
@@ -446,6 +448,7 @@ class DashboardController extends WebController
         $params['quotes'] = $quotes;
         $params['user_quote_id'] = $id;
         $params['job_status'] = $job_status;
+        $params['rating_average'] = $rating_average;
         return view('front.dashboard.quotes', $params);
     }
 
@@ -636,5 +639,38 @@ class DashboardController extends WebController
         $pdf = PDF::loadView('pdf.vat_receipt', $data);
         return $pdf->download('vat_receipt.pdf');
     
+    }
+    public function manageNotification(Request $request)
+    {
+        // return "yessssssssss";
+        $user=  Auth::guard('web')->user();
+        return view('front.dashboard.notifications.manageNotification', [
+            'data' => $user,
+        ]);
+    }
+    public function updateManageNotification(Request $request)
+    {
+// return $request->all();
+        $request->validate([
+            'job_email_preference' => 'nullable|boolean',
+            'sms_alert' => 'nullable|boolean',
+            
+        ]);
+
+        // Update user preferences
+        try {
+            $user = Auth::user();
+            
+            $user->user_sms_alert = $request->sms_alert ?? 0;
+            $user->job_email_preference = $request->job_email_preference ?? 0;
+            // return $user;
+            $user->save();
+
+            return response()->json(['success' => true, 'message' => 'Preferences updated successfully.']);
+        } catch (\Exception $e) {
+            // Log the error for debugging
+            // Log::error('Error updating preferences: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' =>  $e->getMessage()], 500);
+        }
     }
 }

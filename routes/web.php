@@ -84,6 +84,8 @@ Route::group(['as' => 'front.'], function () {
         Route::get('message/chat_list', 'MessageController@getChatList')->name('message.chat_list');
         Route::post('quote/message/send_message', 'MessageController@QuoteSendMessage')->name('message.quote_send_message');
         Route::get('/quotemessage/history/{id}', 'MessageController@getQuoteChatHistory')->name('message.quote_history');
+        Route::get('manage_notification', 'DashboardController@manageNotification')->name('manage_notification');
+        Route::post('update-manage-notification', 'DashboardController@updateManageNotification')->name('updateManageNotification');
     });
     Route::group(['middleware' => 'auth:web'], function () {
         Route::get('/logout', 'General\GeneralController@logout')->name('logout');
@@ -122,3 +124,4 @@ Route::get("/new/template/check", function () {
     $maildata['type'] = 'user';
     return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
 });
+
