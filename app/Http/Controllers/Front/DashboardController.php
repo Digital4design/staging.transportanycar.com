@@ -639,6 +639,13 @@ class DashboardController extends WebController
         return $pdf->download('vat_receipt.pdf');
     
     }
+    public function manageNotification(Request $request)
+    {
+        $user = Auth::guard('user')->user();
+        return view('front.dashboard.notifications.manageNotification', [
+            'data' => $user,
+        ]);
+    }
     public function updateManageNotification(Request $request)
     {
 

@@ -1,4 +1,5 @@
-@extends('layouts.transporter.dashboard.app')
+@extends('layouts.web.dashboard.app')
+
 
 @section('head_css')
     <style>
@@ -73,10 +74,10 @@
 @section('content')
     <div id="wrapper">
         <!-- SIDEBAR -->
-        @include('layouts.transporter.dashboard.sidebar')
+        {{-- @include('layouts.transporter.dashboard.sidebar') --}}
         <div id="page-content-wrapper">
-            @include('layouts.transporter.dashboard.top_head')
-            <!-- content part -->
+            @include('layouts.web.dashboard.header')
+     <!-- content part -->
             <div class="content_container adjust_spacing">
                 <div class="inner_content set_banner_position">
                     <div class="wd-white-box">
