@@ -305,7 +305,7 @@
                                                     @endphp
                                                     <ul class="wd-star-lst user-feedback-stars">
 
-                                                        @for ($i = 1; $i < $totalStars; $i++)
+                                                        @for ($i = 1; $i <= $totalStars; $i++)
                                                             <li>
                                                                 <svg width="20" height="20" viewBox="0 0 12 12"
                                                                     fill="none" xmlns="http://www.w3.org/2000/svg">

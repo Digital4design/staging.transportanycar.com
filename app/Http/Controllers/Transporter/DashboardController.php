@@ -623,7 +623,7 @@ class DashboardController extends WebController
                     return response()->json(['status' => false, 'message' => 'Failed to update preference.']);
                 }
             } elseif ($request->email_type == 'saved_search_alerts') {
-                $status = $user->update(['saved_search_alerts' => $request->value]);
+                $status = $user->update(['job_email_preference' => $request->value]);
                 if ($status) {
                     return response()->json(['status' => true,  'message' => 'Preference updated successfully.']);
                 } else {
@@ -1297,7 +1297,7 @@ class DashboardController extends WebController
             $user = Auth::user();
             $user->summary_of_leads = $request->input('summary_of_leads', 0);
             $user->outbid_email_unsubscribe = $request->input('outbid_email_unsubscribe', 0);
-            $user->saved_search_alerts = $request->input('saved_search_alerts', 0);
+            $user->job_email_preference = $request->input('saved_search_alerts', 0);
             $user->save();
 
             return response()->json(['success' => true, 'message' => 'Preferences updated successfully.']);

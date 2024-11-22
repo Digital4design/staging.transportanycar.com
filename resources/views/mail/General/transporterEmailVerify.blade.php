@@ -78,7 +78,7 @@
         <p class="adjust-half-space">Manage notification <a href="{{ url('transporter/manage_notification') }}" style="color:#0356D6; text-decoration: none;">preferences.</span></a>
         <p style=" font-size: 12px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     </div>
-    <a href="{{ $verificationLink }}">Verify Email</a>
+    {{-- <a href="{{ $verificationLink }}">Verify Email</a> --}}
     {{-- <p>If you did not create an account, please ignore this email.</p> --}}
 </body>
 

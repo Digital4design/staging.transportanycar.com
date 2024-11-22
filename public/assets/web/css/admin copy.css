@@ -6274,7 +6274,7 @@ div#spam-banner button.btn {
 }
 @media (max-width: 767px) {
   .message-color .message_container {
-    height: 100%;
+    height: 100svh;
   }
   .chat_title_bx.active_chat_title {
     display: none;
@@ -7879,9 +7879,9 @@ g.highcharts-input-group {
   }
   /* .message-color .active-job-box {height: calc(100svh - 105px)} */
   .message-color .active-job-box {height: auto;}
-  /* .message-color:not(#messages) .container-job .chat_box, .message-color:not(#messages) .message_container .chat_box {
+  .message-color:not(#messages) .container-job .chat_box, .message-color:not(#messages) .message_container .chat_box {
     height: calc(100% - 214px);
-  } */
+  }
   #messages .active-job-box {
     height: calc(100svh - 116px)
   }

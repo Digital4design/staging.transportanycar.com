@@ -255,13 +255,13 @@ class QuotesController extends WebController
         // Update quote data with the quotation ID
         $quoteData['quotation_id'] = $userQuote->id;
         Cache::forget('location_info');
-        $this->SaveSearchQuoteEmailSend($quoteData);
+        // $this->SaveSearchQuoteEmailSend($quoteData);
 
         // Send mail to transporters
         //$this->sendMailToTransporters($quoteData);
         // this is commented because of client requirement
-        // $command = '/usr/local/bin/php /home/pfltvaho/public_html/artisan schedule:run';
-        // exec($command, $output, $returnVar);
+        $command = '/usr/local/bin/php /home/pfltvaho/staging.transportanycar.com/artisan schedule:run';
+        exec($command, $output, $returnVar);
         // comment end
     }
 

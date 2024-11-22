@@ -337,7 +337,8 @@
     <p class="">Pass:{{ $data['password'] }}</p>
     <p class="adjust-space">What Happens Next:</p>
     <p class="adjust-space">Your delivery request has been sent to our network of transport providers and you will start receiving quotes via email once they start to place their bids.</p>
-    <p class="adjust-space">You can compare your quotes and ask questions via message before accepting to make sure you choose the right one for you, check out your quotes here.</p>
+    <p class="adjust-space">You can compare your quotes and ask questions via message before accepting to make sure you choose the right one for you, check out <a href="{{ url('/dashboard') }}">
+        your quotes here.</a> </p>
     <p class="adjust-space">The prices you will receive are very low due our network of transport providers already travelling similar routes so they can conveniently carry out your delivery efficiently. </p>
     <p class="adjust-space">Rest assured, the price you see is the total amount you pay, there are no additional costs.</p>
     <p class="adjust-space">We look forward to providing you with the lowest quotes possible and hope you enjoy using the site.</p>
@@ -346,7 +347,7 @@
  
     <p>Best Regards,</p>
     <p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>
-    <p class="adjust-half-space" style="font-size: 12px; text-align: center;">Manage notification <a href="{{ url('transporter/manage_notification') }}"
+    <p class="adjust-half-space" style="font-size: 12px; text-align: center;">Manage notification <a href="{{ url('front/manage_notification') }}"
         style="color:#0356D6; text-decoration: none;">preferences.</span></a></p>
     <p class="adjust-half-space" style="font-size: 12px; text-align:center;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     
