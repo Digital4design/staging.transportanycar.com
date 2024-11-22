@@ -118,7 +118,7 @@ class MessageController extends WebController
                     $maildata['quotes'] = $userQuote;
                     $maildata['quote_id'] = $from_quote_id;
                     $maildata['type'] = 'user';
-                    $maildata['url'] =  route('transporter.manage_notification');
+                    $maildata['url'] =  route('front.manage_notification');
                     $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
                     $this->emailService->sendEmail($email_to, $htmlContent,  $subject);
 
