@@ -272,8 +272,8 @@
         text-decoration: underline;
     }
     #confirmOtp {
-        font-size: 12px;
-        line-height: 15px;
+        font-size: 16px;
+        line-height: 24px;
         font-weight: 500;
         color:#F3F8FF;
         text-transform: capitalize;
