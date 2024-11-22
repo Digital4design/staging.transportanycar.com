@@ -4,20 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/web/vendors/owl.carousel/css/owl.carousel.min.css')}}" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
-<style>
-    /* body.keyboard-open.message-color .message_container{
-        height: calc(100% - 300px);
-        overflow: hidden;
-    } */
-     @media screen and (max-width: 580px) {
-        html, body {
-            overflow: hidden; /* Prevent extra scrolling */
-            position: fixed;  /* Prevent body movement when the keyboard is open */
-            width: 100%;
-            height: 100%;
-        }
-    }
-</style>
+
 <?php
 use Illuminate\Support\Str;
 $auth_user = Auth::user();
