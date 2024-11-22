@@ -137,7 +137,7 @@ class MessageController extends WebController
                 }
                 if($customer_user->mobile && $customer_user->user_sms_alert > 0)
                 {
-                    $smS = "Transport Any Car: New message from $auth_user->username to deliver your $userQuote->vehicle_make $userQuote->vehicle_model. ".request()->getSchemeAndHttpHost()."/messages"." ".request()->getSchemeAndHttpHost()."/account";
+                    $smS = "Transport Any Car: New message from $auth_user->username to deliver your $userQuote->vehicle_make $userQuote->vehicle_model. \n".request()->getSchemeAndHttpHost()."/messages \n"." ".request()->getSchemeAndHttpHost()."/manage_notification";
                     $this->sendSMS->sendSms($customer_user->mobile,$smS);
                 }
             } 
