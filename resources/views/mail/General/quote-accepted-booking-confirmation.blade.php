@@ -99,7 +99,7 @@
         <div class="message-wrap" style="text-align: center;">
             <p class="message">Payment ref:{{ $data['transaction_id'] }}</p>
             <p class="message">Booking ref: {{ $data['booking_ref'] }}</p> 
-            <p class="message">Deposit paid: {{ $data['quotation']->deposit }}</p>
+            <p class="message">Deposit paid: £{{ $data['quotation']->deposit }}</p>
             <p class="message">Remaining balance:£{{ $data['quotation']->transporter_payment }}</p>
             <p class="message">Total: £{{ $data['quotation']->price }}</p> 
             <p class="message">Pay the remaining amount of £{{ $data['quotation']->transporter_payment }} directly to {{ $data['transporter_info']->username }}.</p>
