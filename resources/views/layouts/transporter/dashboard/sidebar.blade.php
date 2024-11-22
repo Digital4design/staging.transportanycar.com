@@ -460,10 +460,10 @@ $currentRoute = request()->route()->getName();
             else if(companyDetails === null || git_insurance_cover === null || years_established === null || no_of_tow_trucks === null || no_of_drivers === null)
             {
                 Swal.fire({
-                    title: '<span class="swal-title" style="color:#ED1C24">Verify your account</span>',
-                    html: '<span class="swal-text"> You must upload your drivers license,goods in transit insurance,verify your email and complete your company details within your profile before you are able to bid for jobs.</span>',
+                    title: '<span class="swal-title" style="color:#ED1C24">Complete your profile</span>',
+                    html: '<span class="swal-text"> You must upload your drivers license, goods in transit insurance, verify your email and complete your company details within your profile before you are able to bid for jobs.</span>',
                     confirmButtonColor: '#52D017',
-                    confirmButtonText: 'Verify',
+                    confirmButtonText: 'Go to profile',
                     customClass: {
                         title: 'swal-title',
                         htmlContainer: 'swal-text-container',
