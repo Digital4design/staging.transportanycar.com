@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use PDF;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends WebController
 {
@@ -641,32 +642,35 @@ class DashboardController extends WebController
     }
     public function manageNotification(Request $request)
     {
-        $user = Auth::guard('user')->user();
+        // return "yessssssssss";
+        $user=  Auth::guard('web')->user();
         return view('front.dashboard.notifications.manageNotification', [
             'data' => $user,
         ]);
     }
     public function updateManageNotification(Request $request)
     {
-
+// return $request->all();
         $request->validate([
             'job_email_preference' => 'nullable|boolean',
-            'sms_alerts' => 'nullable|boolean',
+            'sms_alert' => 'nullable|boolean',
             
         ]);
 
         // Update user preferences
         try {
             $user = Auth::user();
-            $user->sms_alerts = $request->input('sms_alerts', 0);
-            $user->job_email_preference = $request->input('job_email_preference', 0);
+            
+            $user->user_sms_alert = $request->sms_alert ?? 0;
+            $user->job_email_preference = $request->job_email_preference ?? 0;
+            // return $user;
             $user->save();
 
             return response()->json(['success' => true, 'message' => 'Preferences updated successfully.']);
         } catch (\Exception $e) {
             // Log the error for debugging
-            Log::error('Error updating preferences: ' . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Could not update preferences.'], 500);
+            // Log::error('Error updating preferences: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' =>  $e->getMessage()], 500);
         }
     }
 }
