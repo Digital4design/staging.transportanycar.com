@@ -533,7 +533,7 @@ class DashboardController extends WebController
             } else {
                 Log::info('User with email ' . $quote->quote->user->email . ' has opted out of receiving emails. Quotation email not sent.');
             }
-            if ($quote->quote->user->mobile) {
+            if ($quote->quote->user->mobile && $quote->quote->user->user_sms_alert > 0) {
                 $smS = "Transport Any Car: New quote for £" . $quoteDetails['customer_quote'] . " to deliver your " . $quote->quote->vehicle_make . " " . $quote->quote->vehicle_model . ". " . request()->getSchemeAndHttpHost() . "/quotes/" . $quote->quote->id . " " . request()->getSchemeAndHttpHost() . "/account";
                 $this->sendSMS->sendSms($quote->quote->user->mobile, $smS);
             }
@@ -944,7 +944,7 @@ class DashboardController extends WebController
                 } else {
                     Log::info('User with email ' . $quote->user->email . ' has opted out of receiving emails. Edit quotation email not sent.');
                 }
-                if ($customer_user->mobile && ($quoteDetails['customer_quote'] < $oldPrice)) {
+                if ($customer_user->mobile &&  $customer_user->user_sms_alert > 0 && ($quoteDetails['customer_quote'] < $oldPrice)) {
                     $smS = "Transport Any Car:  Quote reduced from £$oldPrice to £" . $quoteDetails['customer_quote'] . " to deliver your $quote->vehicle_make $quote->vehicle_model. " . request()->getSchemeAndHttpHost() . "/quotes/$quote->id  " . " " . request()->getSchemeAndHttpHost() . "/account";
                     $this->sendSMS->sendSms($customer_user->mobile, $smS);
                 }
