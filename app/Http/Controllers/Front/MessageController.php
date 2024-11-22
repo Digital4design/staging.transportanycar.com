@@ -119,7 +119,9 @@ class MessageController extends WebController
             } else {
                 $maildata['from_page'] = '';
             }
+            $maildata['url'] =  route('front.manage_notification');
             $maildata['quotes'] = $userQuote;
+           
             $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
             $this->emailService->sendEmail($email_to, $htmlContent, 'You Have a Message from '.$auth_user->username.' Regarding '.$userQuote->vehicle_make.' '.$userQuote->vehicle_model.'Delivery.');
 
