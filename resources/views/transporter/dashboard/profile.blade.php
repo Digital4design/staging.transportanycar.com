@@ -1684,7 +1684,7 @@
                         required: true,
                         digits: true,
                         minlength: 11,
-                        maxlength: 11,
+                        maxlength: 12,
                         remote: {
                             type: 'get',
                             url: "{{ route('front.user_availability_checker') }}",
