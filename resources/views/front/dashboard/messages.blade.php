@@ -178,7 +178,7 @@
         function getChatHistory(url,thisobj){
             var elems = document.querySelector(".active");
             var timezone = moment.tz.guess();
-            //console.log(timezone);
+            console.log(timezone);
             // if(elems !==null){
             //     elems.classList.remove("active");
             // }
@@ -187,11 +187,7 @@
                 url: url,
                 data:{"timezone":timezone},
             }).done(function(response) {
-<<<<<<< HEAD
-                //console.log(response,"------------hello world-----------------");
-=======
                 // console.log(response,"------------hello world-----------------");
->>>>>>> bdd8629f30110aecd552e92de4453796bc62a861
                 $("#chat_history_main").html(response);
                 // $(thisobj).find(".kt-widget__item").find('.kt-widget__action').html('');
                 // KTAppChat.init();
@@ -237,7 +233,7 @@
             //open particular chat
             const urlParams = new URLSearchParams(window.location.search);
             const threadId = urlParams.get('thread_id');
-            //console.log(threadId,'------------urlparams');
+            console.log(threadId,'------------urlparams');
             if (threadId) {
                 const clickAnchorTag = () => {
                     const targetElement = document.querySelector(`li[data-id="${threadId}"] a.get-chat-history`);
