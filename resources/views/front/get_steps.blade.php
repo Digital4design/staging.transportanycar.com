@@ -971,7 +971,7 @@ in1.addEventListener('input', splitNumber);
                     } else {
                         if(response.data.status == 400)
                         {
-                          toastr.error('Invalid mobile number');
+                          toastr.error('Please enter a valid mobile number');
                         }else
                         {
                         toastr.error(response.message);

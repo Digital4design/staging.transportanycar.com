@@ -447,6 +447,7 @@ class DashboardController extends WebController
         $params['quotes'] = $quotes;
         $params['user_quote_id'] = $id;
         $params['job_status'] = $job_status;
+        $params['rating_average'] = $rating_average;
         return view('front.dashboard.quotes', $params);
     }
 
