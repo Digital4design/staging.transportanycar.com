@@ -432,7 +432,7 @@ $currentRoute = request()->route()->getName();
                         "{{ route('transporter.profile') }}"; // Change this to your actual dashboard URL
                     }
                 });
-            } else if (email_status == '0') {
+            } else if (email_verify_status == '0') {
                 e.preventDefault();
                 Swal.fire({
                     title: '<span class="swal-title" style="color:#ED1C24">Verify your email</span>',
