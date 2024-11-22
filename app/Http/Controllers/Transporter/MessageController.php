@@ -135,7 +135,7 @@ class MessageController extends WebController
                 } else {
                     Log::info('User with email ' . $customer_user->email . ' has opted out of receiving emails. Message email not sent.');
                 }
-                if($customer_user->mobile)
+                if($customer_user->mobile && $customer_user->user_sms_alert > 0)
                 {
                     $smS = "Transport Any Car: New message from $auth_user->username to deliver your $userQuote->vehicle_make $userQuote->vehicle_model. ".request()->getSchemeAndHttpHost()."/messages"." ".request()->getSchemeAndHttpHost()."/account";
                     $this->sendSMS->sendSms($customer_user->mobile,$smS);
