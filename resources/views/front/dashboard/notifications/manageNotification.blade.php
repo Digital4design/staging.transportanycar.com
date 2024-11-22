@@ -87,16 +87,16 @@
                         <div class="notification-settings">
                             <ul>
                                 <li>
-                                    <span>Summary of leads</span>
-                                    <input type="checkbox" id="summary_of_leads" name="summary_of_leads" value="1"
-                                        {{ $data->summary_of_leads == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
-                                    <label class="switch" for="summary_of_leads"></label>
+                                    <span>Email alerts</span>
+                                    <input type="checkbox" id="job_email_preference" name="" value="1"
+                                        {{ $data->job_email_preference == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
+                                    <label class="switch" for="job_email_preference	"></label>
                                 </li>
                                 <li>
-                                    <span>Outbid alerts</span>
-                                    <input type="checkbox" id="outbid_email_unsubscribe" name="outbid_email_unsubscribe"
-                                        value="1" {{ $data->outbid_email_unsubscribe == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
-                                    <label class="switch" for="outbid_email_unsubscribe"></label>
+                                    <span>SMS alerts</span>
+                                    <input type="checkbox" id="sms_alerts" name="sms_alerts"
+                                        value="1" {{ $data->sms_alerts == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
+                                    <label class="switch" for="sms_alerts"></label>
                                 </li>
                             </ul>
                         </div>
@@ -114,18 +114,17 @@
             // Attach change event to checkboxes
             $('input[type="checkbox"]').change(function() {
                 // Gather the checkbox values
-                var summaryOfLeads = $('#summary_of_leads').is(':checked') ? 1 : 0;
-                var outbidEmailUnsubscribe = $('#outbid_email_unsubscribe').is(':checked') ? 1 : 0;
-                var savedSearchAlerts = $('#saved_search_alerts').is(':checked') ? 1 : 0;
-
+                var job_email_preference = $('#job_email_preference').is(':checked') ? 1 : 0;
+                var sms_alerts = $('#sms_alerts').is(':checked') ? 1 : 0;
+               
                 // Send the AJAX request
+               
                 $.ajax({
-                    url: "{{ route('transporter.updateManageNotification') }}",
+                    url: "{{ route('front.updateManageNotification') }}",
                     method: "POST",
                     data: {
-                        summary_of_leads: summaryOfLeads,
-                        outbid_email_unsubscribe: outbidEmailUnsubscribe,
-                        saved_search_alerts: savedSearchAlerts,
+                        job_email_preference: job_email_preference,
+                        sms_alerts: sms_alerts,
                         _token: '{{ csrf_token() }}' // Include CSRF token
                     },
                     success: function(response) {

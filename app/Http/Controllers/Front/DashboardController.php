@@ -638,4 +638,27 @@ class DashboardController extends WebController
         return $pdf->download('vat_receipt.pdf');
     
     }
+    public function updateManageNotification(Request $request)
+    {
+
+        $request->validate([
+            'job_email_preference' => 'nullable|boolean',
+            'sms_alerts' => 'nullable|boolean',
+            
+        ]);
+
+        // Update user preferences
+        try {
+            $user = Auth::user();
+            $user->sms_alerts = $request->input('sms_alerts', 0);
+            $user->job_email_preference = $request->input('job_email_preference', 0);
+            $user->save();
+
+            return response()->json(['success' => true, 'message' => 'Preferences updated successfully.']);
+        } catch (\Exception $e) {
+            // Log the error for debugging
+            Log::error('Error updating preferences: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Could not update preferences.'], 500);
+        }
+    }
 }
