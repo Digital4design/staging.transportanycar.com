@@ -6273,9 +6273,9 @@ div#spam-banner button.btn {
   }
 }
 @media (max-width: 767px) {
-  /* .message-color .message_container {
-    height: 100svh;
-  } */
+  .message-color .message_container {
+    height: 100%;
+  }
   .chat_title_bx.active_chat_title {
     display: none;
   }
