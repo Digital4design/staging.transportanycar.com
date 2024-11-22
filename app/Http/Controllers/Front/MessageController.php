@@ -119,7 +119,7 @@ class MessageController extends WebController
             } else {
                 $maildata['from_page'] = '';
             }
-            $maildata['url'] =  route('front.manage_notification');
+            $maildata['url'] =  route('transporter.manage_notification');
             $maildata['quotes'] = $userQuote;
            
             $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
