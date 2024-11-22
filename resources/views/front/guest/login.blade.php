@@ -3,6 +3,9 @@
 @endsection
 @section('content')
 <style>
+    .great_job_sec {
+        padding: 0!important;
+    }
     .col-lg-12.forgot-link {
         margin-top: -7px;
     }
@@ -87,9 +90,9 @@
     .great_job_sec_new {
     padding: 0 2px;
 }
-/* .trans_login_blog_sec {
+.trans_login_blog_sec {
     max-width: 366px;
-} */
+}
 
 .great_job_sec ul.checklist {
     padding: 0px 20px;
