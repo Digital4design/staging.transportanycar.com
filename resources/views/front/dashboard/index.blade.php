@@ -60,6 +60,8 @@
     }
 
     @media(max-width: 580px) {
+        .active_quotes .job-listing ul li {width: calc(50% - 5px)!important;}
+        .active_quotes .job-listing ul li.view-quote a {white-space: normal;}
         .active-job-box.active_job_mobile {
             margin: 0;
         }
@@ -80,7 +82,7 @@
             clear: both;
             justify-content: unset;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 5px;
             row-gap: 30px;
         }
 
@@ -111,7 +113,7 @@
             position: absolute;
             right: 8px;
             top: 85px;
-            /* display: none; */
+            display: none;
         }
 
         .active-job-box.active_job_mobile ul li.job-access.completed_jobs {
@@ -162,7 +164,7 @@
 </style>
 @section('content')
     @include('layouts.web.dashboard.header')
-    <section class="wd-active-job great_job_sec_new">
+    <section class="wd-active-job great_job_sec_new active_quotes">
         <div class="container great_job_sec">
             @if (session()->has('came_from') && session('came_from') == 'quote_save')
                 <h2>Great news!</h2>
@@ -281,6 +283,9 @@
                                 <li class="view-quote">
                                     <a href="{{ route('front.booking_confirm_page', $item->id) }}"class="wd-accepted-btn">Complete
                                         booking</a>
+                                    <a href="javascript:void(0)" style="margin-bottom:auto;" class="d-sm-none"
+                                        data-href="{{ route('front.messages', ['thread_id' => $item->notification_thread->id]) }}"
+                                        onclick="handleNotificationClick(event, this);">Message</a>
                                 </li>
 
                                 <li class=" job-access view-quote" style="margin:0;">
