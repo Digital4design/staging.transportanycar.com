@@ -386,7 +386,7 @@ $currentRoute = request()->route()->getName();
             var no_of_tow_trucks = @json(optional(Auth::user()->companyDetail)->no_of_tow_trucks ?? null);
             var no_of_drivers = @json(optional(Auth::user()->companyDetail)->no_of_drivers ?? null);
 
-            if (driver_license == null && goods_in_transit_insurance == null && email_verify_status == '0') {
+            if (driver_license == null && goods_in_transit_insurance == null && email_status == '0') {
                 e.preventDefault();
                 Swal.fire({
                     title: '<span class="swal-title" style="color:#ED1C24">Verify your account</span>',
@@ -432,7 +432,7 @@ $currentRoute = request()->route()->getName();
                         "{{ route('transporter.profile') }}"; // Change this to your actual dashboard URL
                     }
                 });
-            } else if (email_verify_status == '0') {
+            } else if (email_status == '0') {
                 e.preventDefault();
                 Swal.fire({
                     title: '<span class="swal-title" style="color:#ED1C24">Verify your email</span>',
