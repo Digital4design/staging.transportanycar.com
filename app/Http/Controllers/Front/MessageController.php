@@ -10,6 +10,7 @@ use App\Thread;
 use App\TransactionHistory;
 use App\User;
 use App\UserQuote;
+use App\Feedback;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +45,15 @@ class MessageController extends WebController
             $transaction = TransactionHistory::where('quote_by_transporter_id',$quote_by_transporter->id)->where('status','completed')->exists() ? "true":"false";
             $quote_by_transporter_id = $quote_by_transporter ? $quote_by_transporter->id : null;
             //$transporter_username = $quote_by_transporter ? $quote_by_transporter->getTransporters->username : null;
+            $my_quotes = QuoteByTransporter::where('user_id', $thread->friend_id ?? 0)->pluck('id');
+            $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+            ->whereNotNull('rating')
+            ->avg('rating');
+            $percentage = 0;
+            if ($rating_average !== null) { $my_quotes = QuoteByTransporter::where('user_id', $quotes[0]->user_id)->pluck('id');
+                $percentage = round(($rating_average / 5) * 100);
+              
+            }
         
             if (!empty($thread)) {
                 $firend_data = $this->user_obj->find($request->to);
@@ -54,7 +64,7 @@ class MessageController extends WebController
             } 
         }
         // return ["transaction"=>$transaction];
-        return view('front.dashboard.partial.history_listing')->with(compact('messages', 'thread', 'quote_by_transporter_id', 'transporter_username','transaction'));
+        return view('front.dashboard.partial.history_listing')->with(compact('messages', 'thread', 'quote_by_transporter_id', 'transporter_username','transaction','percentage','rating_average'));
     }
     
 
