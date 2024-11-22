@@ -6,14 +6,14 @@ use Illuminate\Console\Command;
 use Carbon\Carbon;
 use App\UserQuote;
 use App\SaveSearch;
-use DB;
+use Illuminate\Support\Facades\DB;
 use App\Services\EmailService;
 
 
 class SendTransporterEmail extends Command
 {
-    protected $signature = 'send:quotes-summary-email';
-    protected $description = 'Send quotes summary emails after 2 and 4 days of job creation';
+    protected $signature = 'send:save-search-mail';
+    protected $description = 'Send quatation description to transporter';
     protected $emailService;
 
     public function __construct(EmailService $emailService)
@@ -67,9 +67,19 @@ class SendTransporterEmail extends Command
             $htmlContent = view('mail.General.today-transporter-leads', ['quote' => $mailData])->render();
             $subject='Todays Transport Leads';
 
-
-          
-              $this->emailService->sendEmail($transport->email, $htmlContent, $subject);
+             
+              try
+              {
+                if($transport->summary_of_leads == 1)
+                {
+                $this->emailService->sendEmail($transport->email, $htmlContent, $subject);
+                }
+              }
+              catch(\Exception $ex)
+              {
+                Log::error('Error sending email: ' . $ex->getMessage());
+              }
+              
            }
         }
     }
