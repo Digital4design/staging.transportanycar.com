@@ -226,7 +226,7 @@
                                 @endphp
                                 <ul class="rating-star choose_quote_rating">
 
-                                    @for ($i = 1; $i < $totalStars; $i++)
+                                    @for ($i = 1; $i <= $totalStars; $i++)
                                         <li>
                                             <svg width="20" height="20" viewBox="0 0 12 12"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -236,7 +236,7 @@
                                             </svg>
                                         </li>
                                     @endfor
-                                    <li>
+                                    {{-- <li>
                                         <!-- <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
                                         </svg> -->
@@ -249,7 +249,7 @@
                                             <path d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z" fill="#FFB902"/>
                                             </g>
                                         </svg>
-                                    </li>
+                                    </li> --}}
                                 <li><span class="ml-1">({{$overall_percentage}}%)</span></li>
                                 </ul>
                                 @endif
