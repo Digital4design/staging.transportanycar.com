@@ -387,7 +387,7 @@ $currentRoute = request()->route()->getName();
             var no_of_tow_trucks = @json(optional(Auth::user()->companyDetail)->no_of_tow_trucks ?? null);
             var no_of_drivers = @json(optional(Auth::user()->companyDetail)->no_of_drivers ?? null);
 
-            if (driver_license == '' || goods_in_transit_insurance == '' || email_status == '0') {
+            if (driver_license == '' || goods_in_transit_insurance == '') {
                 e.preventDefault();
                 Swal.fire({
                     title: '<span class="swal-title" style="color:#ED1C24">Verify your account</span>',
