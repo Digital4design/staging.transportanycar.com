@@ -67,7 +67,7 @@
             title="transport notifiaction" />
 
         {{-- <h2>Hi {{ $name }},</h2> --}}
-        <p class="adjust-space">Your £{{ $data['price'] }} bid for {{ $data['model'] }} delivery has been accepted by
+        <p class="adjust-space">Your £{{round($data['price']) }} bid for {{ $data['model'] }} delivery has been accepted by
              {{ $data['username']}}.</p>
         <p>We will send you another email shortly once they have provided their full contact information and full
             delivery details.</p>
