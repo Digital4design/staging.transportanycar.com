@@ -187,7 +187,7 @@
                 url: url,
                 data:{"timezone":timezone},
             }).done(function(response) {
-                console.log(response,"------------hello world-----------------");
+                // console.log(response,"------------hello world-----------------");
                 $("#chat_history_main").html(response);
                 // $(thisobj).find(".kt-widget__item").find('.kt-widget__action').html('');
                 // KTAppChat.init();

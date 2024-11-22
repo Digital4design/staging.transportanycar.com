@@ -1894,7 +1894,7 @@ text.highcharts-credits {
   box-shadow: 0px 13px 35px rgba(0, 0, 0, 0.11);
   display: flex;
   flex-wrap:wrap;
-  /* height: 100%; */
+  height: 100%;
   border-radius: 9px;
   border: 1px solid #DBDBDB;
 }
@@ -2110,7 +2110,7 @@ span.chat_count {
   margin: 0 auto;
   text-align: center;
   max-width: calc(100% - 381px);
-  /* height: 100%; */
+  height: 100%;
   /* height: calc(100vh - 263px); */
 }
 
@@ -2402,8 +2402,8 @@ a.wd-send-btn {
 /*scrollbar*/
 .chat_box .scrollbar {
   /* max-height: calc(100% - 174px); */
-  /* height: calc(100% - 174px);
-  overflow-x: hidden; */
+  height: calc(100% - 174px);
+  overflow-x: hidden;
   /* min-height: calc(100% - 174px); */
 }
 
@@ -5552,10 +5552,10 @@ div#spam-banner button.btn {
     border-radius: 10px;
     height: auto;
   }
-  /* .message-color:not(#messages) .container-job .chat_box, .message-color:not(#messages) .message_container .chat_box {
+  .message-color:not(#messages) .container-job .chat_box, .message-color:not(#messages) .message_container .chat_box {
     height: calc(100% - 166px);
     overflow: hidden;
-  } */
+  }
 
   /********************sanjay 26-09-2024*********************/
   .jobsrch_blogs ul li span {
@@ -6274,7 +6274,7 @@ div#spam-banner button.btn {
 }
 @media (max-width: 767px) {
   .message-color .message_container {
-    height: 100svh;
+    height: 100%;
   }
   .chat_title_bx.active_chat_title {
     display: none;
@@ -6486,10 +6486,10 @@ div#spam-banner button.btn {
   }
 
   /* Transporter Message */
-  /* .chat_box {
+  .chat_box {
     display: block;
     height: 100%;
-  } */
+  }
 
   .chat_list,
   .chat_header form .form-group {
@@ -6744,7 +6744,7 @@ div#spam-banner button.btn {
   .get_quote .modal-footer p {
     font-size: 12px;
   }
-  /* .chat_conversation {height: 100%;} */
+  .chat_conversation {height: 100%;}
   .chat_conversation_footer {
     /* position: fixed;
     bottom: 0;
@@ -6759,7 +6759,7 @@ div#spam-banner button.btn {
   }
   .chat_box .scrollbar {
     /* height: auto; */
-    /* height:calc(100% - 164px); */
+    height:calc(100% - 164px);
   }
 
   .chat_conversation_footer #chat__form {
@@ -7402,9 +7402,9 @@ button.swal2-confirm.swal2-styled:focus {
     padding: 0;
   }
 
-  /* .new_message_section .chat_box .scrollbar {
+  .new_message_section .chat_box .scrollbar {
     height: 765px;
-  } */
+  }
 
   .new_message_section .active-job-box {
     margin: 0;
@@ -7959,9 +7959,9 @@ g.highcharts-input-group {
 
   .new_message_section .chat_box .scrollbar,
   .msg_active_container .chat_box .scrollbar {
-    /* height: calc(100% - 200px); */
     /* height: auto;
     max-height: calc(100vh - 280px); */
+    height: calc(100% - 200px);
     /* max-height: calc(100% - 213px);
     padding-bottom: 0; */
   }
