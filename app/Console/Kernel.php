@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SendQuotesSummaryEmail::class,
         \App\Console\Commands\CheckJobStatus::class,
         \App\Console\Commands\SendFeedbackReminder::class,
+        \App\Console\Commands\SendTransporterEmail::class,
 
     ];
 
@@ -38,7 +39,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('send:collection-delivery-reminder')->everyThirtyMinutes();
         $schedule->command('send:quotes-summary-email')->daily();
         $schedule->command('check:job-status')->daily();
-
+        $schedule->command('send:save-search-mail')->dailyAt('07:00');
     }
 
     /**

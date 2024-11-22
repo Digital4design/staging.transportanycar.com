@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Services\EmailService;
 use App\{User, Thread, UserQuote};
 use App\QuoteByTransporter;
-
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,4 +125,5 @@ Route::get("/new/template/check", function () {
     $maildata['type'] = 'user';
     return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
 });
+
 
