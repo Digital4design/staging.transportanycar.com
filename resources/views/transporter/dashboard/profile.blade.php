@@ -734,20 +734,13 @@
 
 
                                         @if ($user->is_status == '' || $user->is_status == 'pending')
-
-                                            @if (
-                                                $user->is_status == 'pending' &&
-                                                    ($user->driver_license != null &&
-                                                        $user->goods_in_transit_insurance != null &&
-                                                        $user->email_verify_status == '1'))
+                                            @if ($user->is_status == 'pending' && ($user->driver_license != null && $user->goods_in_transit_insurance != null && $user->email_verify_status == '1'))
                                                 <div class="requied_sec px-md-3 mx-xl-4" style="color:red">
                                                     <h2>Account approval pending</h2>
                                                 </div>
                                             @endif
                                             <div class="row mx-0 mx-xl-4">
-                                                @if (
-                                                    ($user->is_status != 'approved' && $user->is_status != 'pending') ||
-                                                        ($user->driver_license == null || $user->goods_in_transit_insurance == null))
+                                                @if (($user->is_status != 'approved' && $user->is_status != 'pending') || ($user->driver_license == null || $user->goods_in_transit_insurance == null))
                                                     <div class="col-md-6 col-xl-6 requied_sec mb-0 upload_docs px-0 px-md-3 pl-lg-0 px-xl-3"
                                                         style="{{ $user->is_status == 'approved' ? 'display:block' : '' }}">
                                                         <h2 class="upload-heading">Upload Documents:
@@ -790,6 +783,7 @@
                                                             bidding.</p>
                                                         <p class="subtitle text-danger message">Upload your documents</p>
                                                         <div class="upload-section">
+                                                        @if ($user->driver_license == null)
                                                             <div class="requied_sec_row">
                                                                 <div class="form-group">
                                                                     <div class="document border-danger">
@@ -820,6 +814,8 @@
                                                                         Successfully</span>
                                                                 </div>
                                                             </div>
+                                                        @endif
+                                                        @if ($user->goods_in_transit_insurance == null)
                                                             <div class="requied_sec_row">
                                                                 <div class="form-group">
                                                                     <div class="document border-danger">
@@ -851,6 +847,7 @@
                                                                         Successfully</span>
                                                                 </div>
                                                             </div>
+                                                        @endif
                                                         </div>
                                                     </div>
                                                 @endif
