@@ -225,6 +225,7 @@ class DashboardController extends WebController
         $total_earning_count = $my_quotes->where('status', 'accept')->whereIn('user_quote_id', $quotes->where('status', 'completed')->pluck('id')->toArray())->sum('transporter_payment');
         // dd($user);
         // die;
+        // dd(($user->email_verify_status === "0"));
         $companyDetail = $user->companyDetail; // Access the related company details
 
         return view('transporter.dashboard.profile', ['user' => $user, 'jobs_completed_count' => $jobs_completed_count, 'total_earning_count' => $total_earning_count, 'companyDetail' => $companyDetail]);
