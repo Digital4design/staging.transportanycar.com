@@ -330,7 +330,7 @@
     <p class="adjust-space">You may receive more quotes from our network of transporters so keep an eye out and you can accept your preferred quote at any time.</p>
     <p>Best Regards,</p>
     <p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>
-    <p class="adjust-half-space">Manage notification <a href="{{ url('front/manage_notification') }}"
+    <p class="adjust-half-space">Manage notification <a href="{{ url('/manage_notification') }}"
             style="color:#0356D6; text-decoration: none;">preferences.</span></a>
     <p style=" font-size: 12px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
 </div>
