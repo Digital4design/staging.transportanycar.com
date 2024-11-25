@@ -51,6 +51,7 @@ class SendOutbidNotification extends Command
                     $maildata['email'] = $transporterEmail;
                     $mailSubject = 'You have been outbid.';
                     $htmlContent = view('mail.General.transporter-outbid', [
+                        'transporter_name'=>$existingQuote->getTransporters->username,
                         'quote' => $quoteDetails,
                         'existingQuote' => $existingQuote,
                     ])->render();
