@@ -904,8 +904,7 @@
                                                 <div class="col-md-6 col-xl-6 requied_sec verify_email_sec px-0 px-md-3  mt-3 pt-2"
                                                     style="{{ $user->is_status == 'approved' ? 'display:block' : '' }}">
                                                     <h2 class="upload-heading mb-0">Verify email:</h2>
-                                                   
-                                                    @if ($user->email_verify_status == 0)
+                                                    @if ($user->email_verify_status == '0')
                                                         <p class="subtitle">You must verify your email address before you
                                                             can start bidding.</p>
                                                         <p class="subtitle text-danger message">Please verify your email

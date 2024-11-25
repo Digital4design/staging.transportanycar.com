@@ -379,6 +379,7 @@ $currentRoute = request()->route()->getName();
             var email_status = "{{ Auth::user()->email_verify_status }}";
             var driver_license = "{{ Auth::user()->driver_license }}";
             var goods_in_transit_insurance = "{{ Auth::user()->goods_in_transit_insurance }}";
+            console.log('yyyyyyyyy',driver_license);
 
             var companyDetails = @json(optional(Auth::user()->companyDetail)->id);
             var git_insurance_cover = @json(optional(Auth::user()->companyDetail)->git_insurance_cover ?? null);
@@ -386,7 +387,7 @@ $currentRoute = request()->route()->getName();
             var no_of_tow_trucks = @json(optional(Auth::user()->companyDetail)->no_of_tow_trucks ?? null);
             var no_of_drivers = @json(optional(Auth::user()->companyDetail)->no_of_drivers ?? null);
 
-            if (driver_license == null && goods_in_transit_insurance == null && email_status == '0') {
+            if (driver_license == '' || goods_in_transit_insurance == '') {
                 e.preventDefault();
                 Swal.fire({
                     title: '<span class="swal-title" style="color:#ED1C24">Verify your account</span>',
@@ -409,7 +410,7 @@ $currentRoute = request()->route()->getName();
                         "{{ route('transporter.profile') }}"; // Change this to your actual dashboard URL
                     }
                 });
-            } else if (driver_license == null || goods_in_transit_insurance == null) {
+            } else if (driver_license == '' || goods_in_transit_insurance == '') {
                 e.preventDefault();
                 Swal.fire({
                     title: '<span class="swal-title" style="color:#ED1C24">Upload documents</span>',
@@ -457,30 +458,7 @@ $currentRoute = request()->route()->getName();
                 });
 
             }
-            else if(companyDetails === null || git_insurance_cover === null || years_established === null || no_of_tow_trucks === null || no_of_drivers === null)
-            {
-                Swal.fire({
-                    title: '<span class="swal-title" style="color:#ED1C24">Complete your profile</span>',
-                    html: '<span class="swal-text"> You must upload your drivers license, goods in transit insurance, verify your email and complete your company details within your profile before you are able to bid for jobs.</span>',
-                    confirmButtonColor: '#52D017',
-                    confirmButtonText: 'Go to profile',
-                    customClass: {
-                        title: 'swal-title',
-                        htmlContainer: 'swal-text-container',
-                        popup: 'swal-popup', // Add custom class for the popup
-                        cancelButton: 'swal-button--cancel' // Add custom class for the cancel button
-                    },
-                    showCloseButton: true, // Add this line to show the close button
-                    showConfirmButton: true, // Add this line to hide the confirm button
-                    allowOutsideClick: false
-                }).then((result) => {
-                    // Redirect to the dashboard if the confirm button or close button is clicked
-                    if (result.isConfirmed || result.dismiss) {
-                        window.location.href =
-                        "{{ route('transporter.profile') }}"; // Change this to your actual dashboard URL
-                    }
-                });
-            } 
+           
             else if (isStatus == 'pending' || isStatus == 'rejected') {
                 e.preventDefault();
                 Swal.fire({
@@ -504,7 +482,31 @@ $currentRoute = request()->route()->getName();
                         "{{ route('transporter.dashboard') }}"; // Change this to your actual dashboard URL
                     }
                 });
-            } else {
+            } else if(companyDetails === null || git_insurance_cover === null || years_established === null || no_of_tow_trucks === null || no_of_drivers === null)
+            {
+                Swal.fire({
+                    title: '<span class="swal-title" style="color:#ED1C24">Complete your profile</span>',
+                    html: '<span class="swal-text"> You must upload your drivers license, goods in transit insurance, verify your email and complete your company details within your profile before you are able to bid for jobs.</span>',
+                    confirmButtonColor: '#52D017',
+                    confirmButtonText: 'Go to profile',
+                    customClass: {
+                        title: 'swal-title',
+                        htmlContainer: 'swal-text-container',
+                        popup: 'swal-popup', // Add custom class for the popup
+                        cancelButton: 'swal-button--cancel' // Add custom class for the cancel button
+                    },
+                    showCloseButton: true, // Add this line to show the close button
+                    showConfirmButton: true, // Add this line to hide the confirm button
+                    allowOutsideClick: false
+                }).then((result) => {
+                    // Redirect to the dashboard if the confirm button or close button is clicked
+                    if (result.isConfirmed || result.dismiss) {
+                        window.location.href =
+                        "{{ route('transporter.profile') }}"; // Change this to your actual dashboard URL
+                    }
+                });
+            } 
+             else {
                 if (isStatus != 'approved') {
                     e.preventDefault();
                     Swal.fire({

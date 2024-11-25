@@ -9,7 +9,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
     <style>
-        /* * {
+         {
             box-sizing: border-box;
         }
 
@@ -92,8 +92,8 @@
             font-family: "Outfit", sans-serif;
             font-size: 10px;
             line-height: 13px;
-        } */
-
+        } 
+/*
         h1,
         h2,
         p {
@@ -170,7 +170,7 @@
             font-weight: 300;
             color: #000000;
             margin-bottom: 15px;
-        }
+        }*/
     </style>
 </head>
 
