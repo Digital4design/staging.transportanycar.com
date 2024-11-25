@@ -351,6 +351,7 @@ class DashboardController extends WebController
                         'formattedDilveryDate'=> $formattedDilveryDate,
                         'delivery_info' => $delivery_info,
                         'percentage'=>$percentage,
+                        'rating_average'=>$rating_average,
                     ];
                     // return $result;
                     return view('front.dashboard.user_deposit',$result);
