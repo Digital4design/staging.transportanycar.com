@@ -16,6 +16,7 @@
         body {
             margin: 0;
             padding: 0;
+            text-align: center!important;
         }
 
         a[x-apple-data-detectors] {
