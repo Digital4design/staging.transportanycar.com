@@ -353,7 +353,7 @@ form#chat__form textarea.form-control.textarea {
                 </div>
                 <div class="wd-dlvr-contact">
                     <a href="{{ route('front.feedback_view', $quote_by_transporter->id)}}"><h3>{{ $transporter_detail->username }}
-                            <!-- <span>({{count($trans_feedback['feedback'])}})</span> -->
+                          {{-- <span>({{count($trans_feedback['feedback'])}})</span>  --}}
                         </h3>
                     </a>
                     <ul class="wd-star-lst">
@@ -383,7 +383,7 @@ form#chat__form textarea.form-control.textarea {
                             </svg>
                         </li>
                         {{-- <!-- <li>({{$trans_feedback['overall_percentage']}}%)</li> --> --}}
-                        <li>({{100}}%)</li>
+                        <li>({{$percentage}}%)</li>
 
                     </ul>
                     <a href="javascript:;" class="verify-btn">

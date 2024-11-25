@@ -331,6 +331,17 @@ class DashboardController extends WebController
                     $formattedDilveryDate = Carbon::createFromFormat('Y-m-d H:i:s', $transporter_detail->created_at)
                     ->setTimezone('Europe/London')
                     ->format('F d, H:i');
+
+                    $my_quotes = QuoteByTransporter::where('user_id', $transporter_detail->id)->pluck('id');
+                    $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+                    ->whereNotNull('rating')
+                    ->avg('rating');
+                    $percentage = 0;
+                    if ($rating_average !== null) {
+                        $percentage = ($rating_average / 5) * 100;
+                      
+                    }
+                    // return $percentage;
                     $result = [
                         'transporter_detail' => $transporter_detail,
                         'user_info' => $user_info,
@@ -338,9 +349,10 @@ class DashboardController extends WebController
                         'trans_feedback'=>$transporter_feedback,
                         'last_visited_at' => $formattedLastVisitedAt,
                         'formattedDilveryDate'=> $formattedDilveryDate,
-                        'delivery_info' => $delivery_info
-        
+                        'delivery_info' => $delivery_info,
+                        'percentage'=>$percentage,
                     ];
+                    // return $result;
                     return view('front.dashboard.user_deposit',$result);
                 } else {
                     return redirect()->route('front.dashboard');

@@ -329,7 +329,7 @@ class DashboardController extends WebController
 
         $average_rating = $total_feedbacks > 0 ? round($all_feedbacks->avg('rating'), 1) : 0;
 
-        return $feedbacks;
+       
         $params['html'] = view('transporter.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings', 'average_rating'))->render();
         if ($request->ajax()) {
             return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $params]);
