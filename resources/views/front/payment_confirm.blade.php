@@ -142,7 +142,7 @@ ul.suggestions-list li {
                             </div>
                             <div class="col-lg-6">
                                 <div class="form_group_sec">
-                                    <input id="phone" name="phone" type="number" placeholder="Mobile number" class="form-control" />
+                                    <input id="phone" name="phone" type="tel" placeholder="Mobile number" class="form-control" />
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -219,7 +219,7 @@ ul.suggestions-list li {
                             </div>
                             <div class="col-lg-6">
                                 <div class="form_group_sec">
-                                    <input id="contact_number" name ="contact_number" type="number" placeholder="Mobile number" class="form-control" />
+                                    <input id="contact_number" name ="contact_number" type="tel" placeholder="Mobile number" class="form-control" />
                                 </div>
                             </div>
 

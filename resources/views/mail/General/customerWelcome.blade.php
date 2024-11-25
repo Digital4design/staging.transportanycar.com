@@ -331,7 +331,7 @@
 <!-- End -->
 
 <div class="contain">
-    <p class="adjust-space">Your transport request is now live on Transport Any Car.</p>
+    <p class="adjust-space">Your customerWelcomequest is now live on Transport Any Car.</p>
     <p class="adjust-space">Account Details:</p>
     <p class="">Email: <a data-link-card="true" href="mailto:{{ $data['email'] }}" target="_blank" style="text-decoration: underline; color: #025dd5;" rel="noopener">{{ $data['email'] }}</a></p>
     <p class="">Pass:{{ $data['password'] }}</p>
