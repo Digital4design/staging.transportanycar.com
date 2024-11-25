@@ -281,7 +281,8 @@
     <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
         style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
         alt="transport notifiaction" title="transport notifiaction"></a>
-    <h2>Hi,{{$transportername}}</h2>
+    {{-- <h2>Hi,{{$transportername}}</h2>
+     --}}
     <p class="adjust-space">You have been outbid for the 
         {{$quote->vehicle_make}} {{$quote->vehicle_model}} 
         delivery, reduce your bid now for a better chance of winning.</p>
