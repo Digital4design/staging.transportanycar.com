@@ -539,7 +539,7 @@
                         <div class="form-group">
                             <div class="edit_budding_sec">
                                 <span class="icon_includes">£</span>
-                                <input type="number" class="form-control" id="quote_amount"
+                                <input type="tel" class="form-control" id="quote_amount"
                                     placeholder="Enter your bid" aria-describedby="emailHelp"
                                     placeholder="Enter quote amount" name="amount" pattern="\d*">
                             </div>
