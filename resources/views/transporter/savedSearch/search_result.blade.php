@@ -2165,7 +2165,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <span class="icon_includes">£</span>
-                            <input type="number" class="form-control" aria-describedby="emailHelp"
+                            <input type="tel" class="form-control" aria-describedby="emailHelp"
                                 placeholder="Enter your bid" id="amount" name="amount">
                             <!-- <p style="font-size:12px; margin-top: 10px;"><b> Note:</b> The amount you bid will be the total amount you get paid directly by the customer.</p> -->
                             <div class="modal_current">
@@ -2214,7 +2214,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <span class="icon_includes">£</span>
-                            <input type="number" class="form-control" aria-describedby="emailHelp"
+                            <input type="tel" class="form-control" aria-describedby="emailHelp"
                                 placeholder="Enter your bid" id="editamount" name="amount">
                             <!-- <p style="font-size:12px; margin-top: 10px;"><b> Note:</b> The amount you bid will be the total amount you get paid directly by the customer.</p> -->
                             <div class="modal_current">
