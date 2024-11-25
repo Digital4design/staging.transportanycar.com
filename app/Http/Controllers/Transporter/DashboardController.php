@@ -226,7 +226,7 @@ class DashboardController extends WebController
         // dd($user);
         // die;
         $companyDetail = $user->companyDetail; // Access the related company details
-
+// return $companyDetail;
         return view('transporter.dashboard.profile', ['user' => $user, 'jobs_completed_count' => $jobs_completed_count, 'total_earning_count' => $total_earning_count, 'companyDetail' => $companyDetail]);
     }
 
@@ -329,7 +329,7 @@ class DashboardController extends WebController
 
         $average_rating = $total_feedbacks > 0 ? round($all_feedbacks->avg('rating'), 1) : 0;
 
-        // return $ratings['star_5'];
+        return $feedbacks;
         $params['html'] = view('transporter.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings', 'average_rating'))->render();
         if ($request->ajax()) {
             return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $params]);
@@ -1142,6 +1142,7 @@ class DashboardController extends WebController
 
             return $search;
         });
+       
         return view('transporter.savedSearch.index', ['savedSearches' => $data]);
     }
 
