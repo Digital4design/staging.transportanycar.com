@@ -339,8 +339,8 @@ class DashboardController extends WebController
                         'last_visited_at' => $formattedLastVisitedAt,
                         'formattedDilveryDate'=> $formattedDilveryDate,
                         'delivery_info' => $delivery_info
-        
                     ];
+                    return $result;
                     return view('front.dashboard.user_deposit',$result);
                 } else {
                     return redirect()->route('front.dashboard');
