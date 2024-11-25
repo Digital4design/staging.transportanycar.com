@@ -9,7 +9,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
     <style>
-         {
+          {
             box-sizing: border-box;
         }
 
@@ -86,6 +86,7 @@
             font-family: "Outfit", sans-serif;
             font-size: 10px;
             line-height: 13px;
+            text-align: center!important;
         }
 
         p {
@@ -94,8 +95,8 @@
             font-size: 10px;
             line-height: 13px;
         } 
-/*
-        h1,
+
+        /*h1,
         h2,
         p {
             margin: 0;
@@ -176,7 +177,7 @@
 </head>
 
 <body style="margin: 0; background-color: #ffffff; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
+ <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;">
     <tbody>
     <tr>
         <td>
@@ -192,9 +193,7 @@
                                         <tr>
                                             <td class="pad" style="width:100%;">
                                                 <div class="alignment" align="center" style="line-height:10px">
-                                                    <!-- <div style="max-width: 600px;">
-                                                        <img src="https://image.optimite.email/wp-content/uploads/2024/02/Transport-any-car-2-19-2024-Email-2.png" style="display: block; height: auto; border: 0; width: 100%;" width="600" alt="Transport quotes expired" title="Transport quotes expired">
-                                                    </div> -->
+                                                   
                                                     <p style="margin: 0; font-size: 14px;"><a href="{{route('transporter.profile', ['unsub' => true]) }}" target="_blank" style="text-decoration: underline; color: #5f5f5f;" rel="noopener">Unsubscribe from outbid emails</a></p>
                                                     <a href="https://transportanycar.com/">
                                                     <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg" style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;" alt="Delivery Expiring" title="Delivery Expiring"></a>                                           
@@ -216,12 +215,7 @@
                                     <table class="button_block block-3" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
                                         <tr>
                                             <td class="pad">
-                                                <div class="alignment" align="center"><!--[if mso]>
-                                                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://transportanycar.com/" style="height:42px;width:188px;v-text-anchor:middle;" arcsize="72%" stroke="false" fillcolor="#52d017">
-                                                        <w:anchorlock/>
-                                                        <v:textbox inset="0px,0px,0px,0px">
-                                                            <center style="color:#ffffff; font-family:sans-serif; font-size:16px">
-                                                    <![endif]--><a href="{{route('transporter.current_jobs', ['source' => 'email','quote-id' => $quote->id])}}" target="_blank" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#52d017;border-radius:30px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:5px;padding-bottom:5px;font-family:'Montserrat', sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:50px;padding-right:50px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;">Place Bid</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
+                                                <div class="alignment" align="center"><a href="{{route('transporter.current_jobs', ['source' => 'email','quote-id' => $quote->id])}}" target="_blank" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#52d017;border-radius:30px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:5px;padding-bottom:5px;font-family:'Montserrat', sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:50px;padding-right:50px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;">Place Bid</span></span></a></div>
                                             </td>
                                         </tr>
                                     </table>
@@ -281,23 +275,29 @@
         </td>
     </tr>
     </tbody>
-</table>
+</table> 
 <!-- End -->
-{{-- <div class="contain">
-    <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
-        style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
-        alt="transport notifiaction" title="transport notifiaction"></a>
-    <h2>Hi,{{$transportername}}</h2>
-    <p class="adjust-space">You have been outbid for the {{$quote->vehicle_make}} {{$quote->vehicle_model}} delivery, reduce your bid now for a better chance of winning.</p>
-    <a href="{{route('transporter.current_jobs', ['source' => 'email','quote-id' => $quote->id])}}"class="verify-btn" style="border-radius: 50px; margin-bottom: 25px;">
-        Place bid
-    </a>
-    <p>Best Regards,</p>
-    <p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>
-    <p class="adjust-half-space">Manage notification <a href="{{ url('transporter/manage_notification') }}"
-            style="color:#0356D6; text-decoration: none;">preferences.</span></a>
-    <p>© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
-</div>
-</body> --}}
+<!--<div class="contain">-->
+<!--    <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"-->
+<!--        style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"-->
+<!--        alt="transport notifiaction" title="transport notifiaction"></a>-->
+<!--    {{-- <h2>Hi,{{$transportername}}</h2>-->
+<!--     --}}-->
+<!--    <p class="adjust-space">You have been outbid for the -->
+<!--        {{$quote->vehicle_make}} {{$quote->vehicle_model}} -->
+<!--        delivery, reduce your bid now for a better chance of winning.</p>-->
+<!--    <a -->
+<!--    href="{{route('transporter.current_jobs', ['source' => 'email','quote-id' => $quote->id])}}" -->
+<!--    class="verify-btn" style="border-radius: 50px; margin-bottom: 25px;">-->
+<!--        Place bid-->
+<!--    </a>-->
+<!--    <p>Best Regards,</p>-->
+<!--    <p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>-->
+<!--    <p class="adjust-half-space">Manage notification <a -->
+<!--        href="{{ url('transporter/manage_notification') }}"-->
+<!--            style="color:#0356D6; text-decoration: none;">preferences.</span></a>-->
+<!--    <p style="margin: 0; margin-bottom: 16px; color: #000; font-size: 12px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>-->
+<!--</div>-->
+</body>
 
 </html>
