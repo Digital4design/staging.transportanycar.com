@@ -222,6 +222,12 @@
                         </svg>
                     </li>
                 @endfor
+                <div class="feedback-user-verified">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9" viewBox="0 0 11 9" fill="none">
+                        <path d="M3.73608 8.04173L0.161084 4.46672C-0.0536948 4.25195 -0.0536948 3.90371 0.161084 3.6889L0.938883 2.91108C1.15366 2.69628 1.50192 2.69628 1.7167 2.91108L4.125 5.31935L9.28329 0.161084C9.49807 -0.0536948 9.84633 -0.0536948 10.0611 0.161084L10.8389 0.938905C11.0537 1.15368 11.0537 1.50192 10.8389 1.71672L4.51391 8.04175C4.2991 8.25653 3.95086 8.25653 3.73608 8.04173Z" fill="#52D017"/>
+                    </svg>
+                    <span>Verified</span>
+                </div>
             </ul>
             <div class="font-weight-light">{{ general_date($feedback->created_at) }}</div>
             <div class="feedback-item">{{ $feedback->quote_by_transporter->quote->vehicle_make }}
