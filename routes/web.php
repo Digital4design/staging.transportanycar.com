@@ -25,7 +25,7 @@ use Carbon\Carbon;
 
 // URL Mapping to Home Page
 Route::get('/example', function () {
-    return view('mail.General.customerWelcome'); // This will call the 'example.blade.php' file in the resources/views folder
+    return view('mail.General.transporter-outbid'); // This will call the 'example.blade.php' file in the resources/views folder
 });
 Route::get('/car-delivery', 'Front\GuestController@index')->name('car_delivery');
 Route::get('/car-transport', 'Front\GuestController@index')->name('car_transport');
@@ -125,5 +125,3 @@ Route::get("/new/template/check", function () {
     $maildata['type'] = 'user';
     return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
 });
-
-
