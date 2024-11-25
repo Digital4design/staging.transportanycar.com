@@ -340,7 +340,7 @@ class DashboardController extends WebController
                         'formattedDilveryDate'=> $formattedDilveryDate,
                         'delivery_info' => $delivery_info
                     ];
-                    return $result;
+                    // return $result;
                     return view('front.dashboard.user_deposit',$result);
                 } else {
                     return redirect()->route('front.dashboard');
