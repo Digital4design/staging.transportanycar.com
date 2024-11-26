@@ -181,7 +181,7 @@
                                 <a href="{{ route('front.feedback_view', $quote->id)}}">
                                     <h4 style="width: 100%; line-height: 24px;">{{$quote->getTransporters->username ??""}}</h4>
                                 </a>
-                                @if ($overall_percentage == 0)
+                                @if ($quote->percentage == 0)
                                 <ul class="rating-star choose_quote_rating">
                                     <li>
                                         <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -217,12 +217,12 @@
                                             </g>
                                         </svg>
                                     </li>
-                                    <li><span class="ml-1">({{$overall_percentage}}%)</span></li> 
+                                    <li><span class="ml-1">({{$quote->percentage}}%)</span></li> 
                                 </ul>
                                 @else
                                  @php
                                     $totalStars = 5; // Total number of stars
-                                    $yellowStars = round($rating_average); // Full yellow stars
+                                    $yellowStars = round($quote->rating_average); // Full yellow stars
                                 @endphp
                                 <ul class="rating-star choose_quote_rating">
 
@@ -250,7 +250,7 @@
                                             </g>
                                         </svg>
                                     </li> --}}
-                                <li><span class="ml-1">({{$overall_percentage}}%)</span></li>
+                                <li><span class="ml-1">({{$quote->percentage}}%)</span></li>
                                 </ul>
                                 @endif
                             </div>
