@@ -15,14 +15,14 @@
     </style>
 </head>
 
-<body style="margin: 0; background-color: #ffffff; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
+<body style="margin: 0; background-color: #ffffff; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none; font-family: 'Outfit', sans-serif;">
 
-    <div class="contain" style="max-width: 600px; width: 100%; margin: auto; text-align: center; box-sizing: border-box;">
+    <div style=" font-family: 'Outfit', sans-serif; max-width: 600px; width: 100%; margin: auto; text-align: center; box-sizing: border-box;">
         <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
             style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
             alt="transport notifiaction" title="transport notifiaction" />
-        <h2 style="margin: 0;font-weight: 300;font-size: 16px;line-height: 22px;">Hi,</h2>
-        <p style="margin-top: 25px; margin-bottom: 25px; font-weight: 300; font-size: 16px; line-height: 22px;">You have received a new message from
+        <h2 style="margin: 0;font-family: 'Outfit', sans-serif;font-weight: 300;font-size: 16px;line-height: 22px;">Hi,</h2>
+        <p style="margin-top: 25px; font-family: 'Outfit', sans-serif;margin-bottom: 25px; font-weight: 300; font-size: 16px; line-height: 22px;">You have received a new message from
              {{ $data['user']->username }} for
             {{ $data['quotes']->vehicle_make }} {{ $data['quotes']->vehicle_model }}
             @if (!is_null($data['quotes']->vehicle_make_1) && !is_null($data['quotes']->vehicle_model_1))
@@ -30,14 +30,14 @@
             @endif
             delivery.
         </p>
-        <div class="message-wrap" style="background-color: #f1f1f1; padding-top: 40px; padding-bottom: 40px; padding-left: 40px; padding-right: 40px; text-align: center;">
-            <p class="message-title" style="font-size: 20px; line-height: 24px; font-weight: 500; margin-bottom: 10px; text-align: left;">
+        <div class="message-wrap" style="font-family: 'Outfit', sans-serif; background-color: #f1f1f1; padding-top: 40px; padding-bottom: 40px; padding-left: 40px; padding-right: 40px; text-align: center;">
+            <p class="message-title" style="font-family: 'Outfit', sans-serif;font-size: 20px; line-height: 24px; font-weight: 500; margin-bottom: 10px; text-align: left;">
                 {{ $data['user']->username }} 
                 sent you a message</p>
-            <p class="message" style="font-size: 16px; line-height: 20px; font-weight: 300; color: #000000; margin-bottom: 15px; text-align:left;">
+            <p class="message" style="font-family: 'Outfit', sans-serif;font-size: 16px; line-height: 20px; font-weight: 300; color: #000000; margin-bottom: 15px; text-align:left;">
                 {{ $data['message'] }}
             </p>
-            <p style="text-align:left;">
+            <p style="text-align:left; font-family: 'Outfit', sans-serif;">
             @if ($data['from_page'] == 'delivery')
                 <a 
                 href="{{ route('transporter.current_jobs', ['id' => $data['quote_by_transporter_id']]) }}"
@@ -137,14 +137,14 @@
             </p>
         </div>
 
-        <p style="margin-top: 25px; margin-bottom: 25px; font-weight: 300;font-size: 16px;line-height: 22px;">Note: Please click the button above to message the transport provider, don't reply
+        <p style="font-family: 'Outfit', sans-serif;margin-top: 25px; margin-bottom: 25px; font-weight: 300;font-size: 16px;line-height: 22px;">Note: Please click the button above to message the transport provider, don't reply
             directly to this message.</p>
-        <p style="font-weight: 300;font-size: 16px;line-height: 22px;">Best Regards,</p>
-        <p style="margin-top: 12px; margin-bottom: 60px; font-weight: 300;font-size: 16px;line-height: 22px;">Transport Any Car Team</p>
-        <p style="margin-top:12px; margin-bottom: 12px; font-weight: 300; font-size: 16px;line-height: 22px;">Manage notification <a 
+        <p style="font-family: 'Outfit', sans-serif;font-weight: 300;font-size: 16px;line-height: 22px;">Best Regards,</p>
+        <p style="font-family: 'Outfit', sans-serif;margin-top: 12px; margin-bottom: 60px; font-weight: 300;font-size: 16px;line-height: 22px;">Transport Any Car Team</p>
+        <p style="font-family: 'Outfit', sans-serif;margin-top:12px; margin-bottom: 12px; font-weight: 300; font-size: 16px;line-height: 22px;">Manage notification <a 
             href="{{ $data['url'] }}"
-                style="color:#0356D6; text-decoration: none;">preferences.</a></p>
-        <p style=" font-size: 12px; font-weight: 300;line-height: 22px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+                style="font-family: 'Outfit', sans-serif;color:#0356D6; text-decoration: none;">preferences.</a></p>
+        <p style=" font-family: 'Outfit', sans-serif;font-size: 12px; font-weight: 300;line-height: 22px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     </div>
 </body>
 
