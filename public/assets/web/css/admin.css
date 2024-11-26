@@ -6759,7 +6759,7 @@ div#spam-banner button.btn {
   }
   .chat_box .scrollbar {
     /* height: auto; */
-    height:calc(100% - 164px);
+    height:calc(100vh - 265px);
   }
 
   .chat_conversation_footer #chat__form {
@@ -7961,7 +7961,7 @@ g.highcharts-input-group {
   .msg_active_container .chat_box .scrollbar {
     /* height: auto;
     max-height: calc(100vh - 280px); */
-    height: calc(100% - 200px);
+    height: calc(100vh - 265px);
     /* max-height: calc(100% - 213px);
     padding-bottom: 0; */
   }
