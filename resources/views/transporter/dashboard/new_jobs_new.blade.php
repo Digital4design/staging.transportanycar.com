@@ -1820,7 +1820,7 @@
                                                                             fill="#52D017"></path>
                                                                     </svg>
                                                                 </i>
-                                                                <span>{{ $quote->pickup_postcode ? $quote->pickup_postcode : '-' }}</span>
+                                                                <span>{{ $quote->pickup_postcode ? hidePostcode($quote->pickup_postcode) : '-' }}</span>
                                                             </li>
 
                                                             <li>
@@ -1833,7 +1833,7 @@
                                                                             fill="#ED1C24"></path>
                                                                     </svg>
                                                                 </i>
-                                                                <span>{{ $quote->drop_postcode ? $quote->drop_postcode : '-' }}</span>
+                                                                <span>{{ $quote->drop_postcode ? hidePostcode($quote->drop_postcode) : '-' }}</span>
                                                             </li>
                                                         </ul>
                                                     </div>
