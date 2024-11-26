@@ -183,7 +183,9 @@
     <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
         style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
         alt="transport notifiaction" title="transport notifiaction"/>
-        <h2 style=" margin: 0;font-weight: 300;font-family: 'Outfit', sans-serif;font-size: 16px;line-height: 22px;">Hi,</h2>
+
+        <h2 style=" margin: 0;font-weight: 300;font-family: 'Outfit', sans-serif;font-size: 16px;line-height: 22px;">Hi, {{$transporter_name}}</h2>
+
     <!--<h3 style="font-size: 22px; line-height: normal;">Outbid <span style="color: #018dd4;">alert</span></h3>-->
     <p class="adjust-space">You have been outbid for the 
         {{$quote->vehicle_make}} {{$quote->vehicle_model}} 
