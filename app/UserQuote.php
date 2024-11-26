@@ -22,7 +22,7 @@ class UserQuote extends Model
     // d4d developer - k
     public function watchlist()
     {
-        return $this->belongsTo(Watchlist::class, 'id', 'user_quote_id');
+        return $this->belongsTo(Watchlist::class, 'id', 'user_quote_id')->where('user_id', auth()->id());
     }
     public function watchlists()
     {
