@@ -674,20 +674,20 @@ class DashboardController extends WebController
         $user_data->save();
         // Validate the incoming request data
         $validatedData = $request->validate([
-            'git_insurance_cover' => 'required|string',
-            'years_established' => 'required|string',
-            'no_of_tow_trucks' => 'required|string',
-            'no_of_drivers' => 'required|string',
+            'git_insurance_cover' => 'string',
+            'years_established' => 'string',
+            'no_of_tow_trucks' => 'string',
+            'no_of_drivers' => 'string',
         ]);
 
         // Use updateOrCreate to create a new record or update an existing one
         CompanyDetail::updateOrCreate(
             ['user_id' => auth()->id()], // The condition to find an existing record
             [
-                'git_insurance_cover' => $validatedData['git_insurance_cover'],
-                'years_established' => $validatedData['years_established'],
-                'no_of_tow_trucks' => $validatedData['no_of_tow_trucks'],
-                'no_of_drivers' => $validatedData['no_of_drivers'],
+                'git_insurance_cover' => $validatedData['git_insurance_cover'] ?? '',
+                'years_established' => $validatedData['years_established'] ?? '',
+                'no_of_tow_trucks' => $validatedData['no_of_tow_trucks'] ?? '',
+                'no_of_drivers' => $validatedData['no_of_drivers'] ?? '',
             ]
         );
 
