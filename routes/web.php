@@ -125,3 +125,20 @@ Route::get("/new/template/check", function () {
     $maildata['type'] = 'user';
     return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
 });
+
+Route::get("/check/postcode",function(){
+    $data = UserQuote::latest()->get();
+    $i = 0;
+    $arr = [];
+    foreach($data as $datas)
+    {
+        $i++;
+        $arr["original"][] = $datas->drop_postcode;
+       $arr["hide"][] =   hidePostcode($datas->drop_postcode);
+       if($i === 2)
+       {
+        break;
+       }
+    }
+    return $arr;
+});
