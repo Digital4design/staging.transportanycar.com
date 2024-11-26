@@ -70,7 +70,7 @@ class SendTransporterEmail extends Command
              
               try
               {
-                if($transport->summary_of_leads == 1)
+                if($transport->summary_of_leads == 1 && $transport->email_notification == true)
                 {
                 $this->emailService->sendEmail($transport->email, $htmlContent, $subject);
                 }
