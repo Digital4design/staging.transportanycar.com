@@ -438,7 +438,7 @@
             };
 
             var autocomplete = new google.maps.places.Autocomplete(input, options);
-
+          
             autocomplete.addListener('place_changed', function() {
                 var place = autocomplete.getPlace();
                 console.log(place);
@@ -446,7 +446,7 @@
                 if (!place.geometry) {
                     return;
                 }
-
+                console.log('autocomplete',place);
                 document.getElementById('start_latitude').value = place.geometry.location.lat();
                 document.getElementById('start_longitude').value = place.geometry.location.lng();
             });

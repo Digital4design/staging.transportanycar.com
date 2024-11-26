@@ -22,4 +22,5 @@ class QuoteByTransporter extends Model
     {
         return $this->hasOne(Feedback::class,'id','quote_by_transporter_id');
     }
+   
 }
