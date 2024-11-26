@@ -44,8 +44,6 @@
             max-width: 600px;
             width: 100%;
             margin: auto;
-            /* text-align: center; */
-            /* padding: 35px; */
             box-sizing: border-box;
         }
 
@@ -330,26 +328,26 @@
 </table> --}}
 <!-- End -->
 
-<div class="contain">
-    <p class="adjust-space">Your customerWelcomequest is now live on Transport Any Car.</p>
-    <p class="adjust-space">Account Details:</p>
+<div class="contain" style="max-width: 600px; width: 100%; margin: auto; box-sizing: border-box;">
+    <p class="adjust-space" style="margin-top: 25px; margin-bottom: 25px;">Your customerWelcomequest is now live on Transport Any Car.</p>
+    <p class="adjust-space" style="margin-top: 25px; margin-bottom: 25px;">Account Details:</p>
     <p class="">Email: <a data-link-card="true" href="mailto:{{ $data['email'] }}" target="_blank" style="text-decoration: underline; color: #025dd5;" rel="noopener">{{ $data['email'] }}</a></p>
     <p class="">Pass:{{ $data['password'] }}</p>
-    <p class="adjust-space">What Happens Next:</p>
-    <p class="adjust-space">Your delivery request has been sent to our network of transport providers and you will start receiving quotes via email once they start to place their bids.</p>
-    <p class="adjust-space">You can compare your quotes and ask questions via message before accepting to make sure you choose the right one for you, check out <a href="{{ url('/dashboard') }}">
+    <p class="adjust-space" style="margin-top: 25px; margin-bottom: 25px;">What Happens Next:</p>
+    <p class="adjust-space" style="margin-top: 25px; margin-bottom: 25px;">Your delivery request has been sent to our network of transport providers and you will start receiving quotes via email once they start to place their bids.</p>
+    <p class="adjust-space" style="margin-top: 25px; margin-bottom: 25px;">You can compare your quotes and ask questions via message before accepting to make sure you choose the right one for you, check out <a href="{{ url('/dashboard') }}">
         your quotes here.</a> </p>
-    <p class="adjust-space">The prices you will receive are very low due our network of transport providers already travelling similar routes so they can conveniently carry out your delivery efficiently. </p>
-    <p class="adjust-space">Rest assured, the price you see is the total amount you pay, there are no additional costs.</p>
-    <p class="adjust-space">We look forward to providing you with the lowest quotes possible and hope you enjoy using the site.</p>
-    <p class="adjust-space">If you need any help or have any questions please contact our team at support@transportanycar.com.</p>
+    <p class="adjust-space" style="margin-top: 25px; margin-bottom: 25px;">The prices you will receive are very low due our network of transport providers already travelling similar routes so they can conveniently carry out your delivery efficiently. </p>
+    <p class="adjust-space" style="margin-top: 25px; margin-bottom: 25px;">Rest assured, the price you see is the total amount you pay, there are no additional costs.</p>
+    <p class="adjust-space" style="margin-top: 25px; margin-bottom: 25px;">We look forward to providing you with the lowest quotes possible and hope you enjoy using the site.</p>
+    <p class="adjust-space" style="margin-top: 25px; margin-bottom: 25px;">If you need any help or have any questions please contact our team at support@transportanycar.com.</p>
 
  
     <p>Best Regards,</p>
-    <p class="adjust-half-space" style="margin-bottom: 60px;">Transport Any Car Team</p>
-    <p class="adjust-half-space" style="font-size: 12px; text-align: center;">Manage notification <a href="{{ url('/manage_notification') }}"
+    <p class="adjust-half-space" style="margin-top: 12px; margin-bottom: 60px;">Transport Any Car Team</p>
+    <p class="adjust-half-space" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px; text-align: center;">Manage notification <a href="{{ url('/manage_notification') }}"
         style="color:#0356D6; text-decoration: none;">preferences.</span></a></p>
-    <p class="adjust-half-space" style="font-size: 12px; text-align:center;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+    <p class="adjust-half-space" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px; text-align:center;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     
 </div>
 

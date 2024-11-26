@@ -1110,7 +1110,7 @@
                                         <div class="row align-items-end mx-4">
                                             <div class="col-lg-6 pr-lg-3">
                                                 <div class="form-group ">
-                                                    <label for="" class="mb-1">GIT insurance cover</label>
+                                                    <label for="" class="mb-1 {{ empty($companyDetail) || empty($companyDetail->git_insurance_cover) ? 'text-danger' : '' }}">GIT insurance cover</label>
                                                     <select class="form-control {{ empty($companyDetail) || empty($companyDetail->git_insurance_cover) ? 'border-danger' : '' }}" name="git_insurance_cover" id="git_insurance_cover">
                                                         <option value="" disabled {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '' ? 'selected' : '' }}>Select git insurance cover</option>
                                                         @foreach ([10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000] as $amount)
@@ -1122,8 +1122,8 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="" class="mb-1">Years established</label>
-                                                    <select class="form-control {{ empty($companyDetail) || empty($companyDetail->years_established) ? 'border-danger' : '' }}" " name="years_established" id="years_established">
+                                                    <label for="" class="mb-1 {{ empty($companyDetail) || empty($companyDetail->years_established) ? 'text-danger' : '' }}">Years established</label>
+                                                    <select class="form-control {{ empty($companyDetail) || empty($companyDetail->years_established) ? 'border-danger' : '' }}" name="years_established" id="years_established">
                                                         <option value="" disabled {{ old('years_established', optional($companyDetail)->years_established) == '' ? 'selected' : '' }}>Years established</option>
                                                         @foreach (range(1, 9) as $year)
                                                             <option value="{{ $year }}" {{ old('years_established', optional($companyDetail)->years_established) == (string)$year ? 'selected' : '' }}>{{ $year }}</option>
@@ -1135,8 +1135,8 @@
                                         
                                             <div class="col-lg-6 pl-lg-3">
                                                 <div class="form-group">
-                                                    <label for="" class="mb-1">No of tow trucks</label>
-                                                    <select class="form-control {{ empty($companyDetail) || empty($companyDetail->no_of_tow_trucks) ? 'border-danger' : '' }}" " name="no_of_tow_trucks" id="no_of_tow_trucks">
+                                                    <label for="" class="mb-1 {{ empty($companyDetail) || empty($companyDetail->no_of_tow_trucks) ? 'text-danger' : '' }}">No of tow trucks</label>
+                                                    <select class="form-control {{ empty($companyDetail) || empty($companyDetail->no_of_tow_trucks) ? 'border-danger' : '' }}" name="no_of_tow_trucks" id="no_of_tow_trucks">
                                                         <option value="" disabled {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == '' ? 'selected' : '' }}>Number of tow trucks</option>
                                                         @foreach (range(1, 9) as $number)
                                                             <option value="{{ $number }}" {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == (string)$number ? 'selected' : '' }}>{{ $number }}</option>
@@ -1146,8 +1146,8 @@
                                                     
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="" class="mb-1">No of drivers</label>
-                                                    <select class="form-control {{ empty($companyDetail) || empty($companyDetail->no_of_drivers) ? 'border-danger' : '' }}" " name="no_of_drivers" id="no_of_drivers">
+                                                    <label for="" class="mb-1 {{ empty($companyDetail) || empty($companyDetail->no_of_drivers) ? 'text-danger' : '' }}">No of drivers</label>
+                                                    <select class="form-control {{ empty($companyDetail) || empty($companyDetail->no_of_drivers) ? 'border-danger' : '' }}" name="no_of_drivers" id="no_of_drivers">
                                                         <option value="" disabled {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == '' ? 'selected' : '' }}>Number of drivers</option>
                                                         @foreach (range(1, 9) as $number)
                                                             <option value="{{ $number }}" {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == (string)$number ? 'selected' : '' }}>{{ $number }}</option>
