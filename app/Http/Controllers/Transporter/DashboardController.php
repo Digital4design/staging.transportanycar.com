@@ -918,6 +918,7 @@ class DashboardController extends WebController
 
             try {
                 if ($quote->user->job_email_preference) {
+                    // return "yesss";
                     $price_reduced = $quoteDetails['customer_quote'] < $oldPrice; // Flag to indicate if the price 
                     $mailSubject = ($price_reduced ? 'Transport Quote Reduced' : 'Transport Quote Increased') . ' from £' . $subjectoldPrice . ' to £' . $quoteDetails['customer_quote'] . ' to Deliver Your ' . $quoteByTransporter->quote->vehicle_make . ' ' . $quoteByTransporter->quote->vehicle_model;
                     if (!empty($quoteByTransporter->quote->vehicle_make_1) && !empty($quoteByTransporter->quote->vehicle_model_1)) {
