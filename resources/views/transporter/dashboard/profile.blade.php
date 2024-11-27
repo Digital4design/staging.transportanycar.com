@@ -809,7 +809,7 @@
                                                                         </label>
                                                                     </div>
                                                                     <span id="driver_license_success"
-                                                                        class="d-none success_msg"
+                                                                        class="d-none success_msg subtitle message"
                                                                         style="color: #52D017;">Uploaded
                                                                         Successfully</span>
                                                                 </div>
@@ -842,7 +842,7 @@
                                                                         </label>
                                                                     </div>
                                                                     <span id="goods_in_transit_insurance_success"
-                                                                        class=" success_msg d-none"
+                                                                        class=" success_msg d-none subtitle message"
                                                                         style="color: #52D017;">Uploaded
                                                                         Successfully</span>
                                                                 </div>
@@ -919,7 +919,7 @@
 
                                                                         </label>
 
-                                                                        <span class="send-link" id="sendLinkBtn"
+                                                                        <span class="send-link" id="sendLinkBtn" onclick="handleSendLink()"
                                                                             style="cursor: pointer;">Send Link</span>
 
                                                                         <div id="message" style="display: none;"></div>
@@ -1393,9 +1393,9 @@
                         },
                         //allowOutsideClick: false, // Prevent modal from closing when clicking outside
                     }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
+                        // if (result.isConfirmed) {
+                        //     location.reload();
+                        // }
                     });
                 },
                 error: function(xhr, status, error) {}
@@ -1536,6 +1536,31 @@
             }
 
         }
+        let isLinkSent = false; // Track if the link is already sent
+
+function handleSendLink() {
+    const button = document.getElementById('sendLinkBtn');
+    const statusMessage = document.getElementById('statusMessage');
+
+    // Update button text and status message
+    if (!isLinkSent) {
+        button.innerText = 'Resend Link';
+        statusMessage.innerText = 'Link sent successfully!';
+        statusMessage.classList.remove('text-muted', 'text-danger');
+        statusMessage.classList.add('text-success');
+        isLinkSent = true;
+
+        // Call function to send the link
+       
+    } else {
+        statusMessage.innerText = 'Resending link...';
+        statusMessage.classList.remove('text-muted', 'text-success', 'text-danger');
+        statusMessage.classList.add('text-warning');
+
+        // Call function to resend the link
+       
+    }
+}
 
         function sendEmail() {
             const email = "{{ config('constants.default.admin_email') }}";
@@ -1816,5 +1841,5 @@ function updateBorderColor(selectElement) {
     }
 }
 
-    </script
+    </script>
 @endsection
