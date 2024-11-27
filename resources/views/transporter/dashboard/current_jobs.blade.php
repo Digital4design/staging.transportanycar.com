@@ -362,8 +362,8 @@
                     <div class="admin_job_bx my_job_pagination" id="style-1">
                         <div class="admin_job_top">
                             <h3>My jobs</h3>
-                            {{-- <form id="searchForm">
-                                <div class="form-group">
+                            <form id="searchForm">
+                                <div class="form-group d-none">
                                     <input type="text" class="form-control" id="search" placeholder="Search jobs">
                                     <button class="search_btn">
                                         <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
@@ -378,7 +378,7 @@
                                         Search
                                     </button>
                                 </div>
-                            </form> --}}
+                            </form>
                         </div>
                         <div class="nav nav-pills">
                             <a class="nav-link active job_type" data-toggle="pill" href="#won" data-type="won"

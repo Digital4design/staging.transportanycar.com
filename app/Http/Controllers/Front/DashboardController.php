@@ -233,7 +233,6 @@ class DashboardController extends WebController
         }
     }
 
-
     public function feedbackView($quote_id)
     {
         $quote = QuoteByTransporter::where('id', $quote_id)->first();
