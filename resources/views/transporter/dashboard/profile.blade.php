@@ -1816,5 +1816,5 @@ function updateBorderColor(selectElement) {
     }
 }
 
-    </script
+    </script>
 @endsection
