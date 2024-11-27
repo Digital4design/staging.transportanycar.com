@@ -809,7 +809,7 @@
                                                                         </label>
                                                                     </div>
                                                                     <span id="driver_license_success"
-                                                                        class="d-none success_msg"
+                                                                        class="d-none success_msg subtitle message"
                                                                         style="color: #52D017;">Uploaded
                                                                         Successfully</span>
                                                                 </div>
@@ -842,7 +842,7 @@
                                                                         </label>
                                                                     </div>
                                                                     <span id="goods_in_transit_insurance_success"
-                                                                        class=" success_msg d-none"
+                                                                        class=" success_msg d-none subtitle message"
                                                                         style="color: #52D017;">Uploaded
                                                                         Successfully</span>
                                                                 </div>
