@@ -11,7 +11,7 @@
 
 <body style="margin: 0; background-color: #ffffff; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">
 <div style="max-width: 600px; width: 100%; margin: auto; box-sizing: border-box; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">
-    <p style="margin-top: 25px; margin-bottom: 25px; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Your customerWelcomequest is now live on Transport Any Car.</p>
+    <p style="margin-top: 25px; margin-bottom: 25px; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Your transport request is now live on Transport Any Car.</p>
     <p style="margin-top: 25px; margin-bottom: 25px; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Account Details:</p>
     <p style="font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Email: <a data-link-card="true" href="mailto:{{ $data['email'] }}" target="_blank" style="text-decoration: underline; color: #025dd5;" rel="noopener">{{ $data['email'] }}</a></p>
     <p class="font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Pass:{{ $data['password'] }}</p>
