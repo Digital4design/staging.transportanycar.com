@@ -34,6 +34,8 @@
 .series_rgt ul li.series_rgt_img img {
     border-radius: 6px;
     width: 162px;
+    height: 108px;
+    object-fit: cover;
 }
 
 .wd-resolve-btn {
@@ -357,7 +359,7 @@ form#chat__form textarea.form-control.textarea {
                         </h3>
                     </a>
                     @if ($percentage == 0)
-                    <ul class="rating-star choose_quote_rating">
+                    <ul class="rating-star choose_quote_rating mb-3">
                         <li>
                             <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#D9D9D9"/>
@@ -429,7 +431,7 @@ form#chat__form textarea.form-control.textarea {
                     </ul>
                     @endif
 
-                    <a href="javascript:;" class="verify-btn">
+                    <a href="javascript:;" class="verify-btn d-flex">
                         <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4.41537 11.1567L0.190373 6.93169C-0.0634575 6.67786 -0.0634575 6.2663 0.190373 6.01245L1.10959 5.0932C1.36342 4.83935 1.775 4.83935 2.02883 5.0932L4.87499 7.93934L10.9712 1.8432C11.225 1.58937 11.6366 1.58937 11.8904 1.8432L12.8096 2.76245C13.0634 3.01628 13.0634 3.42783 12.8096 3.68169L5.33462 11.1567C5.08076 11.4105 4.6692 11.4105 4.41537 11.1567Z" fill="#52D017"></path>
                         </svg>Verified
