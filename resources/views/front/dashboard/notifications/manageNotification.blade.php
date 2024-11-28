@@ -101,7 +101,7 @@
                             <span>SMS alerts</span>
                             <input type="checkbox" id="sms_alert" 
                                 value="1" 
-                                {{ $data->sms_alert == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
+                                {{ $data->user_sms_alert == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
                             <label class="switch" for="sms_alert"></label>
                         </li>
                     </ul>
