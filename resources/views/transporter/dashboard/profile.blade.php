@@ -1544,7 +1544,7 @@ function handleSendLink() {
 
     // Update button text and status message
     if (!isLinkSent) {
-        button.innerText = 'Resend Link';
+        button.innerText = 'Resend';
         statusMessage.innerText = 'Link sent successfully!';
         statusMessage.classList.remove('text-muted', 'text-danger');
         statusMessage.classList.add('text-success');
@@ -1553,7 +1553,7 @@ function handleSendLink() {
         // Call function to send the link
        
     } else {
-        statusMessage.innerText = 'Resending link...';
+        statusMessage.innerText = 'Resend link...';
         statusMessage.classList.remove('text-muted', 'text-success', 'text-danger');
         statusMessage.classList.add('text-warning');
 
