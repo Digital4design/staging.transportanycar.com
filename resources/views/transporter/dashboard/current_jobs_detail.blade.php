@@ -23,11 +23,12 @@
     margin-bottom: 0;
     
 }
-.car_service_right img {
-    max-width: 149px;
-    height: 100px;
+.car_service_right .img-wrap {
+    width: 168px;
+    height: 112px;
     border-radius: 7px;
-    object-fit: contain;
+    object-fit: cover;
+    overflow:hidden;
 }
 .car_service_right p {
     width: 100%;
@@ -154,11 +155,11 @@
     font-size: 16px;
     margin-bottom: 10px;
 }
-.car_service_right img {
+/* .car_service_right img {
     max-width: 100px;
     height: 65px;
     border-radius: 5px;  margin-bottom: 25px;
-}
+} */
 .car_service_right p {
     text-align: left;
     font-size: 12px;
@@ -285,21 +286,23 @@
                         </div>
                     </div>
                     <div class="car_service_right">
-                    <h1>{{$user_job->vehicle_make}} {{$user_job->vehicle_model}}
-                    @if(!is_null($user_job->vehicle_make_1) && !is_null($user_job->vehicle_model_1))
-                    / {{$user_job->vehicle_make_1}} {{$user_job->vehicle_model_1}}
-                    @endif
-                    </h1>
-                    @php
-                        $image = $user_job->image;
-                        $defaultImage = asset('uploads/no_car_image.png');
-                        $noQuoteImage = asset('uploads/no_quote.png');
+                        <h1>{{$user_job->vehicle_make}} {{$user_job->vehicle_model}}
+                            @if(!is_null($user_job->vehicle_make_1) && !is_null($user_job->vehicle_model_1))
+                            / {{$user_job->vehicle_make_1}} {{$user_job->vehicle_model_1}}
+                            @endif
+                        </h1>
+                        @php
+                            $image = $user_job->image;
+                            $defaultImage = asset('uploads/no_car_image.png');
+                            $noQuoteImage = asset('uploads/no_quote.png');
 
-                        if (is_null($image) || $image == $noQuoteImage) {
-                            $image = $defaultImage;
-                        }
-                    @endphp
-                    <img src="{{ $image }}" class="img-fluid" alt="book delivery">
+                            if (is_null($image) || $image == $noQuoteImage) {
+                                $image = $defaultImage;
+                            }
+                        @endphp
+                        <div class="img-wrap">
+                            <img src="{{ $image }}" class="img-fluid" alt="book delivery">
+                        </div>
                         <p class="issue-txt">Having an issue with this delivery?</p>
                         <a href="javascript:;" class="wd-resolve-btn" data-toggle="modal" data-target="#resolve">Resolve now</a>
                     </div>
