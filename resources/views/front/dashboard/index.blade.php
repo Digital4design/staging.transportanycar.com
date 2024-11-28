@@ -12,7 +12,7 @@
         width: 40px !important;
         height: 40px !important;
         object-fit: contain !important;
-        margin-bottom: 4px !important;
+        /* margin-bottom: 4px !important; */
     }
 
     .great_job_sec h2 {
