@@ -357,7 +357,7 @@ form#chat__form textarea.form-control.textarea {
                         </h3>
                     </a>
                     @if ($percentage == 0)
-                    <ul class="rating-star choose_quote_rating">
+                    <ul class="rating-star choose_quote_rating mb-3">
                         <li>
                             <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#D9D9D9"/>
