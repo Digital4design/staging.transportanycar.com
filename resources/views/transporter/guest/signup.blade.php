@@ -208,7 +208,18 @@ fa-eye:before {
                             <div class="col-lg-6">
                                 <div class="form-group form-error">
                                     {{-- <input type="hidden" id="country_code" name="country_code" value="+44"> --}}
-                                    <input id="phone" type="tel" placeholder="Phone number" name="mobile" class="form-control" />
+                                    {{-- <input id="phone" type="tel" placeholder="Phone number" name="mobile" class="form-control" /> --}}
+                                    <input 
+                                                        type="tel" 
+                                                        id="phone" 
+                                                        class="form-control" 
+                                                        placeholder="Mobile Phone" 
+                                                        name="mobile" 
+                                                        value="{{ old('mobile', $user->mobile ?? '') }}" 
+                                                        pattern="^0[0-9]{9}$" 
+                                                        title="Mobile number must start with 0 and have exactly 10 digits."
+                                                        required 
+                                                    />
                                 </div>
                             </div>
                             <div class="col-lg-6 desk_input">

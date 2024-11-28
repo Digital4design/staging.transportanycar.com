@@ -1194,10 +1194,20 @@
                                                 <div class="form-group">
                                                    
                                                         <label for="" class="mb-1">Mobile phone</label>
-                                                        <input type="tel" id="mobile" class="form-control"
+                                                        {{-- <input type="tel" id="mobile" class="form-control"
                                                         placeholder="Mobile Phone" name="mobile"
-                                                        value="{{ old('mobile', ($user->mobile ?? '')) ? '0' . ltrim(old('mobile', $user->mobile), '0') : '' }}" />
-                                                 
+                                                        value="{{ old('mobile', ($user->mobile ?? '')) ? '0' . ltrim(old('mobile', $user->mobile), '0') : '' }}" /> --}}
+                                                        <input 
+                                                        type="tel" 
+                                                        id="mobile" 
+                                                        class="form-control" 
+                                                        placeholder="Mobile Phone" 
+                                                        name="mobile" 
+                                                        value="{{ old('mobile', $user->mobile ?? '') }}" 
+                                                        pattern="^0[0-9]{9}$" 
+                                                        title="Mobile number must start with 0 and have exactly 10 digits."
+                                                        required 
+                                                    />
                                                   
                                                 </div>
                                                 <div class="form-group" style="position: relative;">
@@ -1709,7 +1719,7 @@ function handleSendLink() {
                         required: true,
                         digits: true,
                         minlength: 11,
-                        maxlength: 12,
+                        maxlength: 11,
                         remote: {
                             type: 'get',
                             url: "{{ route('front.user_availability_checker') }}",
