@@ -1406,10 +1406,10 @@
 
 
 
-            .job_se_sec.slick-initialized .slick-slide {
+            /* .job_se_sec.slick-initialized .slick-slide {
                 display: block;
                 width: 380px !important;
-            }
+            } */
 
             .job_se_sec .slick-track {
                 width: 760px !important;
