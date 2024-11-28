@@ -27,6 +27,10 @@ $auth_user = Auth::user();
         padding: 15px;
         display: none;
     }
+    #message .admin-header {
+        position: sticky!important;
+        top: 0;
+    }
 
     @media screen and (max-width: 575px) {
         #messages .admin-header {
@@ -633,11 +637,17 @@ $auth_user = Auth::user();
             $(this).val(newValue);
         }
     });
+    $(window).on('resize', function() {
+      const viewportHeight = $(window).height();
+      console.log(`Viewport height on resize: ${viewportHeight}px`);
+      $('body').addClass('message-color').attr('data-height', `${viewportHeight}px`);
+    });
     $(document).ready(function() {
         const viewportHeight = $(window).height();
         setTimeout(()=>{
             console.log(`Viewport height: ${viewportHeight}px`);
         },1000);
-        $('body').addClass('message-color');
+        
+        $('body').addClass('message-color').attr('data-height', `${viewportHeight}px`);
     })
 </script>
