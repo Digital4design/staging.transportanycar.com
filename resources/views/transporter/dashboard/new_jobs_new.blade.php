@@ -2142,7 +2142,7 @@
 @section('script')
     <script src="{{ asset('assets/web/js/admin.js') }}"></script>
     <script src="{{ asset('assets/web/js/main.js') }}"></script>
-    {{-- <script src="{{ asset('assets/web/js/rangeslider.js') }}"></script> --}}
+    <script src="{{ asset('assets/web/js/rangeslider.js') }}"></script>
     <script type="text/javascript"
         src="https://maps.google.com/maps/api/js?key={{ config('constants.google_map_key') }}&libraries=places"></script>
     {{--    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('constants.google_map_key') }}&loading=async&libraries=places&callback=initMap" async defer></script> --}}
