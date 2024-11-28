@@ -634,6 +634,10 @@ $auth_user = Auth::user();
         }
     });
     $(document).ready(function() {
+        const viewportHeight = $(window).height();
+        setTimeout(()=>{
+            console.log(`Viewport height: ${viewportHeight}px`);
+        },1000);
         $('body').addClass('message-color');
     })
 </script>

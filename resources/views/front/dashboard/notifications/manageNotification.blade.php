@@ -135,7 +135,7 @@
                         _token: '{{ csrf_token() }}' // Include CSRF token
                     },
                     success: function(response) {
-                        toastr.success(response.message); // Optional: Notify the user of success
+                        // toastr.success(response.message); // Optional: Notify the user of success
                     },
                     error: function(xhr) {
                         var errorMessage = xhr.responseJSON.message ||
