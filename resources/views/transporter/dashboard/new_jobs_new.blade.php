@@ -2551,6 +2551,7 @@
                 }
             });
             $(document).on('click', '.car-row', function() {
+               
                 var carId = $(this).data('car-id');
                 var carData = carDetails.data.find(function(car) {
                     return car.id == carId;
@@ -2579,45 +2580,40 @@
 
                     var switch_custom = '';
                     if (carData?.quote_by_transporter) {
-                        // switch_custom =
-                        switch_custom = `<a href="javascript:;"
-                                            onclick="share_edit_quote('${carData.id}');"
-                                            class="make_offer_btn checkStatus">Edit bid</a>`
+                        switch_custom = `<a href="javascript:;" onclick="share_edit_quote('${carData.id}');" class="make_offer_btn checkStatus">Edit bid</a>`
                     } else {
-                        switch_custom = ` <a href="javascript:;"
-                                            onclick="share_give_quote(${carData.id});"
-                                            class="make_offer_btn checkStatus">Place bid</a>`
+                        switch_custom = ` <a href="javascript:;" onclick="share_give_quote(${carData.id});" class="make_offer_btn checkStatus">Place bid</a>`
                     }
 
                     // Dynamically update modal body content
-                    var modalBodyContent = `
+                    var modalBodyContent = `                    
                     <div class="jobsrch_box">
                         <div class="row">                           
                             <div class="col-lg-6">
-                                <div class="jobsrch_top_box position-relative">
+                                <div class="jobsrch_top_box position-relative ddd">
                                     ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
-                                                        <div>
-                                                            <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
-                                                        </div>
-                                                        ` : `
-                                                        <div class="job_se_sec slider">
-                                                            <div>
-                                                                <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
-                                                            </div>
-                                                            ${carData.image_1 ? `
+                                        <div>
+                                            <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+                                        </div>
+                                        ` : `
+                                            <div class="job_se_sec slider">
                                                 <div>
-                                                    <img src="/${carData.image_1}" class="vehicle_image" alt="Vehicle Image" />
+                                                    <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
                                                 </div>
-                                            ` : `
-                                                <div>
-                                                    <img src="/uploads/no_car_image.png" class="vehicle_image" alt="No Image Available" />
-                                                </div>
-                                            `}
-                                                        </div>
-                                                        <div class="custom-navigation">
-                                                            <span class="current-slide">1</span> of <span class="total-slides">2</span>
-                                                        </div>
-                                                    `}                                   
+                                                ${carData.image_1 ? `
+                                                    <div>
+                                                        <img src="/${carData.image_1}" class="vehicle_image" alt="Vehicle Image" />
+                                                    </div>
+                                                ` : `
+                                                    <div>
+                                                        <img src="/uploads/no_car_image.png" class="vehicle_image" alt="No Image Available" />
+                                                    </div>
+                                                `}
+                                            </div>
+                                            <div class="custom-navigation">
+                                                <span class="current-slide">1</span> of <span class="total-slides">2</span>
+                                            </div>
+                                    `}                                   
                                 </div>
                                 
                                 <div class="btnCustom">${switch_custom}</div>
@@ -2685,21 +2681,24 @@
                 }
                 $('#expiry_date').html(`<p>Expiry date: ${formattedDate}</p>`);
                 $('#carDetailsModal').modal('show');
+                
+                
+                setTimeout(function() {
                 var $slider = $('.slider');
-                $slider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide) {
-                    var i = (currentSlide ? currentSlide : 0) + 1;
-                    $('.current-slide').text(i);
-                    $('.total-slides').text(slick.slideCount);
-                });
-
                 $slider.slick({
                     infinite: false,
-                    speed: 300,
+                    speed: 300, 
                     slidesToShow: 1,
                     adaptiveHeight: true,
                     prevArrow: '<div class="slick-prev"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.0756 16.5115L1.85822 10.7965C1.31976 10.4441 1 9.87387 1 9.26607C1 8.65827 1.31976 8.08803 1.85822 7.73561L10.0756 1.48823C10.7708 0.976677 11.7151 0.857068 12.5347 1.17696C13.3543 1.49685 13.917 2.20438 14 3.01972V14.984L14 14.984C13.9156 15.7986 13.3523 16.5049 12.533 16.8238C11.7136 17.1427 10.7702 17.0228 10.0756 16.5115Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>',
                     nextArrow: '<div class="slick-next"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.9244 1.48852L13.1418 7.20349C13.6802 7.5559 14 8.12613 14 8.73393C14 9.34173 13.6802 9.91197 13.1418 10.2644L4.9244 16.5118C4.22923 17.0233 3.28491 17.1429 2.46532 16.823C1.64573 16.5032 1.08303 15.7956 1 14.9803L1 3.01597C1.08445 2.20143 1.6477 1.49505 2.46703 1.17615C3.28636 0.857255 4.22984 0.977185 4.9244 1.48852Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
                 });
+                $slider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide) {
+                    var i = (currentSlide ? currentSlide : 0) + 1;
+                    $('.current-slide').text(i);
+                    $('.total-slides').text(slick.slideCount);
+                });
+            },250)
             });
             $('#backButton').on('click', function() {
                 $('#carDetailsModal').modal('hide');
