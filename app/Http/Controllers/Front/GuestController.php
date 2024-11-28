@@ -180,7 +180,7 @@ class GuestController extends WebController
     {
         $user = Auth::guard('web')->user();
         if ($user) {
-                $status = $user->update(['job_email_preference' => 0]);
+                $status = $user->update(['job_email_preference' => 1]);
                 return view('front.guest.unsubscribe', [
                     'title' => 'Unsubscribe',
                 ]);
