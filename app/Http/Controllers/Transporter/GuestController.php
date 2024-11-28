@@ -163,7 +163,7 @@ class GuestController extends WebController
             'country_code' => $request->country_code ?? null,
             'mobile' => $request->mobile,
             'type' => 'car_transporter',
-            'job_email_preference' => 0,
+            'job_email_preference' => 1,
             //'driver_license' => $driver_license ?? null,
             //'motor_trade_insurance' => $motor_trade_insurance ?? null,
             'profile_image' => config('constants.default.user_image'),
