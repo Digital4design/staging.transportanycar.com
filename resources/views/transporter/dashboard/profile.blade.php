@@ -733,14 +733,14 @@
 
 
 
-                                        @if ($user->is_status == '' || $user->is_status == 'pending')
-                                            @if ($user->is_status == 'pending' && ($user->driver_license != null && $user->goods_in_transit_insurance != null && $user->email_verify_status == '1'))
+                                        @if ($user->is_status == '' || $user->is_status == 'pending' || $user->is_status == 'rejected')
+                                            @if ($user->is_status == 'pending' || $user->is_status == 'rejected' && ($user->driver_license != null && $user->goods_in_transit_insurance != null && $user->email_verify_status == '1'))
                                                 <div class="requied_sec px-md-3 mx-xl-4" style="color:red">
                                                     <h2>Account approval pending</h2>
                                                 </div>
                                             @endif
                                             <div class="row mx-0 mx-xl-4">
-                                                @if (($user->is_status != 'approved' && $user->is_status != 'pending') || ($user->driver_license == null || $user->goods_in_transit_insurance == null))
+                                                @if (($user->is_status != 'approved' && $user->is_status != 'pending'  && $user->is_status != 'rejected') || ($user->driver_license == null || $user->goods_in_transit_insurance == null))
                                                     <div class="col-md-6 col-xl-6 requied_sec mb-0 upload_docs px-0 px-md-3 pl-lg-0 px-xl-3"
                                                         style="{{ $user->is_status == 'approved' ? 'display:block' : '' }}">
                                                         <h2 class="upload-heading">Upload Documents:
@@ -852,7 +852,7 @@
                                                     </div>
                                                 @endif
 
-                                                @if ($user->driver_license != null || $user->goods_in_transit_insurance != null || $user->motor_trade_insurance != null)
+                                                @if ($user->driver_license != null || $user->goods_in_transit_insurance != null )
                                                     <div class="col-md-6 col-xl-6 mb-0 px-0 px-md-3 mt-3 pt-2 requied_sec ">
                                                         <h2 class="upload-heading p-0 m-0">Uploaded documents</h2>
                                                         <p class="subtitle text-success message">Documents uploaded</p>
