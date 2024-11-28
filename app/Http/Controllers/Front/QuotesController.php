@@ -241,6 +241,7 @@ class QuotesController extends WebController
             'starts_drives_1' => $starts_drives_1,
             'image_1' => $up1,
             'map_image' => null,
+            'job_email_preference'=>'1',
             'created_at'=> $now = Carbon::now('Europe/London'),
             'updated_at'=> $now = Carbon::now('Europe/London'),
             'how_moved' => $request->how_moved ? implode(',', $request->how_moved) : null,
