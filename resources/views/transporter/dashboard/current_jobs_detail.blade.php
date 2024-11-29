@@ -29,6 +29,9 @@
     border-radius: 7px;
     object-fit: cover;
     overflow:hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .car_service_right p {
     width: 100%;
