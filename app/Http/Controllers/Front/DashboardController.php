@@ -501,7 +501,7 @@ class DashboardController extends WebController
                 $feedback_count= Feedback::where('transporter_id',$user_data->id)->count();
                 $quote_info = $quote->quote;
 
-                $my_quotes = QuoteByTransporter::where('user_id', $id)->pluck('id');
+                $my_quotes = QuoteByTransporter::where('user_id', $transporter_detail->id)->pluck('id');
         $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
         ->whereNotNull('rating')
         ->avg('rating');
@@ -510,7 +510,7 @@ class DashboardController extends WebController
             $percentage = ($rating_average / 5) * 100;
           
         }
-
+// return  $percentage;
             } else {
                 return redirect()->back();
             }
