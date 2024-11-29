@@ -213,6 +213,7 @@ class MessageController extends WebController
 
     public function QuoteSendMessage(Request $request)
     {
+        // return "yesssssssssssss";
         if(isset($request->form_page) && $request->form_page == 'quote') {
             $request->validate([
                 'message' => [
@@ -247,6 +248,8 @@ class MessageController extends WebController
      
         if ($message) {
             try {
+                // dd('aaaaaaaaaaaaa');
+                // return ;
                 $quotes = UserQuote::where('id', $request->user_quote_id)->first();
                 $my_quote = QuoteByTransporter::where('user_quote_id', $request->user_quote_id)->first();
 
