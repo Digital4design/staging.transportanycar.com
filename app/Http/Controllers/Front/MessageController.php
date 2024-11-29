@@ -213,7 +213,6 @@ class MessageController extends WebController
 
     public function QuoteSendMessage(Request $request)
     {
-        // return "yesssssssssssss";
         if(isset($request->form_page) && $request->form_page == 'quote') {
             $request->validate([
                 'message' => [
@@ -248,8 +247,6 @@ class MessageController extends WebController
      
         if ($message) {
             try {
-                // dd('aaaaaaaaaaaaa');
-                // return ;
                 $quotes = UserQuote::where('id', $request->user_quote_id)->first();
                 $my_quote = QuoteByTransporter::where('user_quote_id', $request->user_quote_id)->first();
 
@@ -262,6 +259,7 @@ class MessageController extends WebController
                 $maildata['from_page'] = $request->form_page;
                 $maildata['quotes'] = $quotes;
                 $maildata['quote_by_transporter_id'] = $my_quote->id;
+                $maildata['url'] =  route('transporter.manage_notification');
                 $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
                 $this->emailService->sendEmail(
                     $email_to,
