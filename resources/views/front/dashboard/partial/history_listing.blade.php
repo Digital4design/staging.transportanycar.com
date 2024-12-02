@@ -27,10 +27,6 @@ $auth_user = Auth::user();
         padding: 15px;
         display: none;
     }
-    #message .admin-header {
-        position: sticky!important;
-        top: 0;
-    }
 
     @media screen and (max-width: 575px) {
         #messages .admin-header {
@@ -637,9 +633,8 @@ $auth_user = Auth::user();
             $(this).val(newValue);
         }
     });
-   
+
     $(document).ready(function() {
-        
         $('body').addClass('message-color');
-    })
+    });
 </script>

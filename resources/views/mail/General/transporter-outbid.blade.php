@@ -33,7 +33,7 @@
         <p style="margin-top: 12px; margin-bottom: 60px; font-weight: 300;font-family: 'Outfit', sans-serif;font-size: 16px;line-height: 22px;">Transport Any Car Team</p>
         <p style="margin-top: 12px; margin-bottom: 12px; font-weight: 300;font-family: 'Outfit', sans-serif;font-size: 16px;line-height: 22px;">Manage notification <a href="{{ url('transporter/manage_notification') }}"
                 style="color:#0356D6; text-decoration: none;">preferences.</a></p>
-        <p style="margin: 0; margin-bottom: 16px; color: #000; font-size: 12px;">© 2024 Transport Any Car. 128 City
+        <p style="margin: 0; margin-bottom: 16px; color: #000;font-size: 16px; line-height: 22px;">© 2024 Transport Any Car. 128 City
             Road, London, EC1V 2NX.</p>
     </div>
 </body>

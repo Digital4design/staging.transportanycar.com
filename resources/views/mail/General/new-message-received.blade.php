@@ -144,7 +144,7 @@
         <p style="font-family: 'Outfit', sans-serif;margin-top:12px; margin-bottom: 12px; font-weight: 300; font-size: 16px;line-height: 22px;">Manage notification <a 
             href="{{ $data['url'] }}"
                 style="font-family: 'Outfit', sans-serif;color:#0356D6; text-decoration: none;">preferences.</a></p>
-        <p style=" font-family: 'Outfit', sans-serif;font-size: 12px; font-weight: 300;line-height: 22px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+        <p style=" font-family: 'Outfit', sans-serif;font-size: 16px; line-height: 22px; font-weight: 300;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     </div>
 </body>
 

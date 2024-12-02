@@ -96,7 +96,7 @@
                                         <tr>
                                             <td class="pad" style="width:100%;">
                                                 <div class="alignment" align="center" style="line-height:10px">
-                                                <p style="margin: 0; font-size: 14px;"><a href="{{route('front.unsubscribe', ['unsub' => true]) }}" target="_blank" style="text-decoration: underline; color: #5f5f5f;" rel="noopener">Unsubscribe from all emails</a></p>
+                                                <p style="margin: 0; font-size: 14px;"><a href="{{ url('/manage_notification') }}" target="_blank" style="text-decoration: underline; color: #5f5f5f;" rel="noopener">Manage notification preferences</a></p>
                                                 <a href="https://transportanycar.com/"><img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg" style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;" alt="Leave Feedback" title="Leave Feedback"></a>       
                                                 </div>                                    
                                             </td>
@@ -170,7 +170,7 @@
                             <tbody>
                             <tr>
                                 <td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                    <table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                    {{-- <table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
                                         <tr>
                                             <td class="pad" style="padding-bottom:15px;padding-left:10px;padding-right:10px;padding-top:30px;width:100%;">
                                                 <div class="alignment" align="center" style="line-height:10px">
@@ -178,13 +178,13 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    </table>
+                                    </table> --}}
                                     <table class="paragraph_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
                                         <tr>
                                             <td class="pad" style="padding-bottom:40px;padding-left:10px;padding-right:10px;padding-top:10px;">
                                                 <div style="color:#ffffff;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:16.8px;">
-                                                    <p style="margin: 0; margin-bottom: 16px; color: #000; font-size: 12px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
-                                                    <p style="margin: 0;"><a href="{{route('front.unsubscribe', ['unsub' => true]) }}" target="_blank" style="text-decoration: underline; color: #717171;" rel="noopener">Unsubscribe from all emails</a></p>
+                                                    <p style="margin: 0; margin-bottom: 16px; color: #000; font-size: 16px; line-height: 22px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+                                                    <p style="margin: 0;"><a href="{{ url('/manage_notification') }}" target="_blank" style="text-decoration: underline; color: #717171;" rel="noopener">Manage notification preferences</a></p>
                                                 </div>
                                             </td>
                                         </tr>

@@ -458,7 +458,7 @@
                                                                 <div
                                                                     style="color:#ffffff;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:16.8px;">
                                                                     <p
-                                                                        style="margin: 0; margin-bottom: 16px; color: #000; font-size: 12px;">
+                                                                        style="margin: 0; margin-bottom: 16px; color: #000; font-size: 16px; line-height: 22px;">
                                                                         © 2024 Transport Any Car. 128 City Road, London,
                                                                         EC1V 2NX.</p>
                                                                         <p class="adjust-half-space">Manage notification <a href="{{ url('transporter/manage_notification') }}"
