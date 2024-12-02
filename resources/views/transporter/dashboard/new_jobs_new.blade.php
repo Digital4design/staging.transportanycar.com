@@ -2164,7 +2164,7 @@
             rules: {
                 amount: {
                     required: true,
-                    noPhoneOrEmail: true,
+                    noPhoneOrEmail: false,
                     greaterThanZero: true
                 },
                 message: {
@@ -2305,7 +2305,7 @@
             rules: {
                 amount: {
                     required: true,
-                    noPhoneOrEmail: true,
+                    noPhoneOrEmail: false,
                     greaterThanZero: true
                 },
                 message: {
