@@ -270,6 +270,7 @@
             window.location.href = url;
             return;
         }
+        
     </script>
 @endsection
 
