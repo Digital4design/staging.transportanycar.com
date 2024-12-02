@@ -8,7 +8,7 @@
 	{{-- <link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet" type="text/css"><!--<![endif]--> --}}
 	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
 	<style>
-		/* * {
+		* {
 			box-sizing: border-box;
 		}
 
@@ -70,7 +70,7 @@
 				display: table !important;
 				max-height: none !important;
 			}
-		} */
+		}
 		h1,
         h2,
         p {
@@ -86,14 +86,14 @@
             line-height: 22px;
         }
 
-        .contain {
+        /* .contain {
             max-width: 600px;
             width: 100%;
             margin: auto;
             text-align: center;
             padding: 0;
             box-sizing: border-box;
-        }
+        } */
 
         h1 {
             font-size: 16px;
@@ -101,7 +101,7 @@
             font-weight: 400;
         }
 
-        a.verify-btn {
+        /* a.verify-btn {
             background: #52D017;
             color: #ffffff;
             text-decoration: none;
@@ -115,9 +115,9 @@
             padding-left: 30px;
             padding-right: 30px;
             cursor: pointer;
-        }
+        } */
 
-        .adjust-space {
+        /* .adjust-space {
             margin-top: 25px;
             margin-bottom: 25px;
         }
@@ -125,9 +125,9 @@
         .adjust-half-space {
             margin-top: 12px;
             margin-bottom: 12px;
-        }
+        } */
 
-        .message-wrap {
+        /* .message-wrap {
             background-color: #f1f1f1;
             padding: 20px;
             text-align: left;
@@ -147,22 +147,22 @@
             font-weight: 300;
             color: #000000;
             margin-bottom: 15px;
-        }
-		.details {
+        } */
+		/* .details {
 			margin-bottom: 25px;
 			border-bottom: 1px solid #ddd5d5;
 			padding-bottom: 25px;
-		}
-		.details h2 {
+		} */
+		/* .details h2 {
 			font-size: 14px;
 			text-align: left;
 			margin-bottom: 10px;
 			font-weight: 500;
-		}
-		.details > div {
+		} */
+		/* .details > div {
 			font-weight: 500;
-		}
-		.job-info > div,
+		} */
+		/* .job-info > div,
 		.details > div {
 			display: flex;
 			flex-wrap: wrap;
@@ -180,7 +180,7 @@
 			flex-direction: column;
 			margin-bottom: 50px;
 		}
-		.job-info > div > div {width: 50%; box-sizing: border-box}
+		.job-info > div > div {width: 50%; box-sizing: border-box} */
 	</style>
 </head>
 
@@ -202,10 +202,10 @@
 															<td class="pad" style="width:100%;">
 																<div class="alignment" align="center" style="line-height:10px">
 																	<!-- <div style="max-width: 600px;"><img src="https://image.optimite.email/wp-content/uploads/2024/02/Email-4-copy-1.png" style="display: block; height: auto; border: 0; width: 100%;" width="600" alt="Finalise your collection &amp; delivery." title="Finalise your collection &amp; delivery."></div> -->
-																	<p style="margin: 0; font-size: 14px;"><a href="{{route('front.unsubscribe', ['unsub' => true]) }}" target="_blank" style="text-decoration: underline; color: #5f5f5f;" rel="noopener">Unsubscribe from all emails</a></p>
+																	<p style="margin: 0; font-size: 14px;"><a href="{{ url('/manage_notification') }}" target="_blank" style="text-decoration: underline; color: #5f5f5f;" rel="noopener">Manage notification preferences</a></p>
 																	<a href="https://transportanycar.com/">
 																	<img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg" style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;" alt="Finalise your collection &amp; delivery." title="Finalise your collection &amp; delivery."></a>                                           
-																	<h3 style="font-size: 22px; line-height: normal;">Finalise your<br> <span style="color: #018dd4;">collection &amp; delivery.</span></h3>
+																	{{-- <h3 style="font-size: 22px; line-height: normal;">Finalise your<br> <span style="color: #018dd4;">collection &amp; delivery.</span></h3> --}}
 																</div>
 															</td>
 														</tr>
@@ -214,7 +214,7 @@
 														<tr>
 															<td class="pad" style="padding-bottom:10px;padding-left:50px;padding-right:50px;padding-top:30px;">
 																<div style="color:#000f26;direction:ltr;font-family:'Montserrat', sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:19.2px;">
-																	<p style="margin: 0;">Congratulations, you’ve accepted {{$data['trans_name']}} quote.</p>
+																	<p style="margin: 0; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Congratulations, you’ve accepted {{$data['trans_name']}} quote.</p>
 																</div>
 															</td>
 														</tr>
@@ -223,8 +223,8 @@
 														<tr>
 															<td class="pad" style="padding-bottom:20px;padding-left:50px;padding-right:50px;padding-top:15px;">
 																<div style="color:#000f26;direction:ltr;font-family:'Montserrat', sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:19.2px;">
-																	<p style="margin: 0; margin-bottom: 16px;">Please provide them with the rest of your collection and delivery information so you can make arrangements.</p>
-																	<p style="margin: 0;">Click the button below to finalise your accepted transport job.</p>
+																	<p style="margin: 0; margin-bottom: 16px; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Please provide them with the rest of your collection and delivery information so you can make arrangements.</p>
+																	<p style="margin: 0; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Click the button below to finalise your accepted transport job.</p>
 																</div>
 															</td>
 														</tr>
@@ -240,9 +240,9 @@
 														<tr>
 															<td class="pad" style="padding-bottom:30px;padding-left:50px;padding-right:50px;padding-top:15px;">
 																<div style="color:#000f26;direction:ltr;font-family:'Montserrat', sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:16.8px;">
-																	<p style="margin: 0; margin-bottom: 16px;">Thank you for using Transport Any Car!</p>
-																	<p style="margin: 0; margin-bottom: 16px;">Best regards,</p>
-																	<p style="margin: 0;">The Transport Any Car Team</p>
+																	<p style="margin: 0; margin-bottom: 16px; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Thank you for using Transport Any Car!</p>
+																	<p style="margin: 0; margin-bottom: 16px; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Best regards,</p>
+																	<p style="margin: 0; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">The Transport Any Car Team</p>
 																</div>
 															</td>
 														</tr>
@@ -263,7 +263,7 @@
 									<tbody>
 									<tr>
 										<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-											<table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+											{{-- <table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 												<tr>
 													<td class="pad" style="padding-bottom:15px;padding-left:10px;padding-right:10px;padding-top:30px;width:100%;">
 														<div class="alignment" align="center" style="line-height:10px">
@@ -271,13 +271,13 @@
 														</div>
 													</td>
 												</tr>
-											</table>
+											</table> --}}
 											<table class="paragraph_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
 												<tr>
 													<td class="pad" style="padding-bottom:40px;padding-left:10px;padding-right:10px;padding-top:10px;">
 														<div style="color:#ffffff;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:16.8px;">
 															<p style="margin: 0; margin-bottom: 16px; color: #000; font-size: 16px; line-height: 22px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
-															<p style="margin: 0;"><a href="{{route('front.unsubscribe', ['unsub' => true]) }}" target="_blank" style="text-decoration: underline; color: #717171;" rel="noopener">Unsubscribe from all emails</a></p>
+															<p style="margin: 0;"><a href="{{ url('/manage_notification') }}" target="_blank" style="text-decoration: underline; color: #717171; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;" rel="noopener">Manage notification preferences</a></p>
 														</div>
 													</td>
 												</tr>
