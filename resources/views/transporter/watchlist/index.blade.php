@@ -2488,13 +2488,15 @@
                                         <div class="jpbsrch_inner">                                           
                                             <small>Pick-up area:</small>
                                         </div>
-                                        <span>${carData.pickup_postcode ? formatAddress(carData.pickup_postcode) : '-'}</span>
+                                        <span>${carData.pickup_postcode ? hidePostcode(carData.pickup_postcode) : '-'}</span>
                                     </li>
                                     <li>
                                         <div class="jpbsrch_inner">                                            
                                             <small>Drop-off area:</small>
                                         </div>
-                                        <span>${carData.drop_postcode ? formatAddress(carData.drop_postcode) : '-'}</span>
+                                        <span>
+                                            ${carData.drop_postcode ? hidePostcode(carData.drop_postcode) : '-'}
+                                            </span>
                                     </li>
                                     <li>
                                         <div class="jpbsrch_inner">                                           

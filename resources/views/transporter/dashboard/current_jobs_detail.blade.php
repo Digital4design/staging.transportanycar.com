@@ -29,6 +29,9 @@
     border-radius: 7px;
     object-fit: cover;
     overflow:hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .car_service_right p {
     width: 100%;
@@ -318,7 +321,7 @@
                     </div>
                     <div class="collection_list">
                         <span>Mobile number:</span>
-                        <b>{{ optional($quotation_detail)->delivery_mobile_number ? '0' . $quotation_detail->delivery_mobile_number : 'Waiting for details' }}</b>
+                        <b>{{ optional($quotation_detail)->collection_mobile_number ?? 'Waiting for details' }}</b>
 
                     </div>
                     <div class="collection_list">
@@ -349,7 +352,7 @@
                     </div>
                     <div class="collection_list">
                         <span>Mobile number:</span>
-                        <b>{{ optional($quotation_detail)->delivery_mobile_number ? '0' . $quotation_detail->delivery_mobile_number : 'Waiting for details' }}</b>
+                        <b>{{ optional($quotation_detail)->delivery_mobile_number ?? 'Waiting for details' }}</b>
 
                     </div>
                     <div class="collection_list">

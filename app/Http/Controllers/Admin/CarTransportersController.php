@@ -119,8 +119,13 @@ class CarTransportersController extends WebController
         $find = User::find($user_id);
         if ($find) {
             $email_to = $find->email;
-            $find->update(['is_status' =>$status]);
-            $response['result'] = true;
+            if($status=='approved'){
+                $find->update(['is_status' =>$status]);
+            }else{
+                $find->update(['is_status' =>$status,'driver_license'=>null,'goods_in_transit_insurance'=>null]);
+            }
+           
+            $response['result'] = true; 
             if($status == 'approved') {
                 $response['tStatus'] = 'approved';
                 try {

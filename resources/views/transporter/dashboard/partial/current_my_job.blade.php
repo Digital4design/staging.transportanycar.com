@@ -65,14 +65,20 @@
                         <img src="{{ asset('assets/web/images/dashboard/map-icon.svg') }}" alt="Map Icon">
                     </span>
                     <p>Pick-up area:</p>
-                    <p><b>{{ $quote->pickup_postcode ? formatAddress($quote->pickup_postcode) : '-' }}</b></p>
+                    <p><b>
+                        {{ $quote->pickup_postcode ? hidePostcode($quote->pickup_postcode) : '-' }}
+                        {{-- {{ $quote->pickup_postcode ? formatAddress($quote->pickup_postcode) : '-' }} --}}
+                    </b></p>
                 </div>
                 <div class="list_detail">
                     <span>
                         <img src="{{ asset('assets/web/images/dashboard/red-map-icon.svg') }}" alt="Map Icon">
                     </span>
                     <p>Drop-off area:</p>
-                    <p><b>{{ $quote->drop_postcode ? formatAddress($quote->drop_postcode) : '-' }}</b></p>
+                    <p><b>
+                        {{-- {{ $quote->drop_postcode ? formatAddress($quote->drop_postcode) : '-' }} --}}
+                        {{ $quote->drop_postcode ? hidePostcode($quote->drop_postcode) : '-' }}
+                    </b></p>
                 </div>
                 <div class="list_detail">
                     <span>

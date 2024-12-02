@@ -535,7 +535,7 @@ class DashboardController extends WebController
                 Log::info('User with email ' . $quote->quote->user->email . ' has opted out of receiving emails. Quotation email not sent.');
             }
             if ($quote->quote->user->mobile && $quote->quote->user->user_sms_alert > 0) {
-                $smS = "Transport Any Car: New quote for £" . $quoteDetails['customer_quote'] . " to deliver your " . $quote->quote->vehicle_make . " " . $quote->quote->vehicle_model . ".\n" . request()->getSchemeAndHttpHost() . "/quotes/" . $quote->quote->id . " " . request()->getSchemeAndHttpHost() . "/manage_notification";
+                $smS = "Transport Any Car: New quote for £" . $quoteDetails['customer_quote'] . " to deliver your " . $quote->quote->vehicle_make . " " . $quote->quote->vehicle_model . ".\n\n" . request()->getSchemeAndHttpHost() . "/quotes/" . $quote->quote->id . "\n\n" . request()->getSchemeAndHttpHost() . "/manage_notification";
                 $this->sendSMS->sendSms($quote->quote->user->mobile, $smS);
             }
         } catch (\Exception $ex) {
@@ -947,7 +947,7 @@ class DashboardController extends WebController
                     Log::info('User with email ' . $quote->user->email . ' has opted out of receiving emails. Edit quotation email not sent.');
                 }
                 if ($customer_user->mobile &&  $customer_user->user_sms_alert > 0 && ($quoteDetails['customer_quote'] < $oldPrice)) {
-                    $smS = "Transport Any Car:  Quote reduced from £$oldPrice to £" . $quoteDetails['customer_quote'] . " to deliver your $quote->vehicle_make $quote->vehicle_model. \n" . request()->getSchemeAndHttpHost() . "/quotes/$quote->id  \n" . " " . request()->getSchemeAndHttpHost() . "/manage_notification";
+                    $smS = "Transport Any Car:  Quote reduced from £$oldPrice to £" . $quoteDetails['customer_quote'] . " to deliver your $quote->vehicle_make $quote->vehicle_model. \n\n" . request()->getSchemeAndHttpHost() . "/quotes/$quote->id  \n" . " " . request()->getSchemeAndHttpHost() . "/manage_notification";
                     $this->sendSMS->sendSms($customer_user->mobile, $smS);
                 }
             } catch (\Exception $ex) {

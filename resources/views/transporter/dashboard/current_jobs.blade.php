@@ -363,7 +363,7 @@
                         <div class="admin_job_top">
                             <h3>My jobs</h3>
                             <form id="searchForm">
-                                <div class="form-group">
+                                <div class="form-group d-none">
                                     <input type="text" class="form-control" id="search" placeholder="Search jobs">
                                     <button class="search_btn">
                                         <svg width="16" height="17" viewBox="0 0 16 17" fill="none"

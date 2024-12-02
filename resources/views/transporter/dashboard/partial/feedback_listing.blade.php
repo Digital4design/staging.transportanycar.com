@@ -53,7 +53,8 @@
     @else
         @php
             $total_stars = 5; // Total number of stars
-            $yellow_stars = round($average_rating); // Full yellow stars
+            $yellow_stars = round($average_rating);
+            // $ratings =round($ratings);// Full yellow stars
            // $half_star = $average_rating - $yellow_stars > 0 ? true : false; // Check for a half-star
            // $grey_stars = $total_stars - $yellow_stars - ($half_star ? 1 : 0); // Remaining grey stars
         @endphp

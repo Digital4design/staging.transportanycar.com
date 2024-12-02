@@ -19,7 +19,7 @@ class CreateSaveSearchesTable extends Migration
             $table->string('search_name')->nullable();
             $table->string('pick_area')->nullable();
             $table->string('drop_area')->nullable();
-            $table->enum('email_notification',['true','false'])->default('false');
+            $table->enum('email_notification',['true','false'])->default('true');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

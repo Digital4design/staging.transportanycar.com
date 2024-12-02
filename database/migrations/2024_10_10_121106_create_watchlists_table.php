@@ -17,7 +17,7 @@ class CreateWatchlistsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('user_quote_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('user_quotes')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('user_quote_id')->references('id')->on('user_quotes')->onDelete('cascade');
             $table->timestamps();
         });

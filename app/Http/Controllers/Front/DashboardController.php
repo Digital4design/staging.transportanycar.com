@@ -233,7 +233,6 @@ class DashboardController extends WebController
         }
     }
 
-
     public function feedbackView($quote_id)
     {
         $quote = QuoteByTransporter::where('id', $quote_id)->first();
@@ -502,6 +501,16 @@ class DashboardController extends WebController
                 $feedback_count= Feedback::where('transporter_id',$user_data->id)->count();
                 $quote_info = $quote->quote;
 
+                $my_quotes = QuoteByTransporter::where('user_id', $transporter_detail->id)->pluck('id');
+        $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+        ->whereNotNull('rating')
+        ->avg('rating');
+        $percentage = 0;
+        if ($rating_average !== null) {
+            $percentage = ($rating_average / 5) * 100;
+          
+        }
+// return  $percentage;
             } else {
                 return redirect()->back();
             }
@@ -511,7 +520,9 @@ class DashboardController extends WebController
                 'transporter_detail' => $transporter_detail,
                 'quote_info' => $quote_info,
                 'transporter_feedback' => $transporter_feedback,
-                'feedback_count'=>$feedback_count
+                'feedback_count'=>$feedback_count,
+                'percentage'=>$percentage,
+                'rating_average'=>$rating_average
             ]);
         }
         else {

@@ -101,7 +101,7 @@
                             <span>SMS alerts</span>
                             <input type="checkbox" id="sms_alert" 
                                 value="1" 
-                                {{ $data->sms_alert == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
+                                {{ $data->user_sms_alert == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
                             <label class="switch" for="sms_alert"></label>
                         </li>
                     </ul>
@@ -135,7 +135,7 @@
                         _token: '{{ csrf_token() }}' // Include CSRF token
                     },
                     success: function(response) {
-                        toastr.success(response.message); // Optional: Notify the user of success
+                        // toastr.success(response.message); // Optional: Notify the user of success
                     },
                     error: function(xhr) {
                         var errorMessage = xhr.responseJSON.message ||

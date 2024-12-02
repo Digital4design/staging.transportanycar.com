@@ -15,6 +15,7 @@ class AddPostCodeUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('postcode')->nullable()->after('address_line_2');
+            $table->text('payment_methods')->nullable();
         });
     }
 

@@ -137,7 +137,7 @@ class MessageController extends WebController
                 }
                 if($customer_user->mobile && $customer_user->user_sms_alert > 0)
                 {
-                    $smS = "Transport Any Car: New message from $auth_user->username to deliver your $userQuote->vehicle_make $userQuote->vehicle_model. \n".request()->getSchemeAndHttpHost()."/messages \n"." ".request()->getSchemeAndHttpHost()."/manage_notification";
+                    $smS = "Transport Any Car: New message from $auth_user->username to deliver your $userQuote->vehicle_make $userQuote->vehicle_model. \n\n".request()->getSchemeAndHttpHost()."/messages \n"." ".request()->getSchemeAndHttpHost()."/manage_notification";
                     $this->sendSMS->sendSms($customer_user->mobile,$smS);
                 }
             } 
@@ -269,6 +269,7 @@ class MessageController extends WebController
                     $quotes = UserQuote::where('id', $request->user_quote_id)->first();
                     $maildata['quotes'] = $quotes;
                     $maildata['type'] = 'user';
+                    $maildata['url'] =  route('front.manage_notification');
                     $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
                     $this->emailService->sendEmail($email_to, $htmlContent, 'You have a new message');
 

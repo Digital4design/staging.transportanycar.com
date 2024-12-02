@@ -264,7 +264,7 @@
 
 
 
-                            @if ($item->status == 'pending')
+                            @if ($item->status == 'pending' || $item->status == 'approved')
                                 <li class="view-quote">
                                     <a href="{{ route('front.quotes', $item->id) }}">View quotes</a>
                                 </li>

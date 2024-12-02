@@ -827,7 +827,7 @@
                         <div class="form-group">
                             <div class="edit_budding_sec">
                                 <span class="icon_includes">£</span>
-                                <input type="number" class="form-control" id="quote_amount" aria-describedby="emailHelp" placeholder="Enter quote amount" name="amount">
+                                <input type="tel" class="form-control" id="quote_amount" aria-describedby="emailHelp" placeholder="Enter quote amount" name="amount">
                             </div>
                         </div>
                         <div class="modal_current">
