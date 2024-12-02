@@ -5529,9 +5529,9 @@ div#spam-banner button.btn {
     padding: 30px 30px 0 30px;
   }
 
-  .admin_job_bx .list_detail p {
-    white-space: nowrap;
-  }
+  /*.admin_job_bx .list_detail p {*/
+  /*  white-space: nowrap;*/
+  /*}*/
 
   .admin_job_bx .tab-content ul li {
     overflow: scroll;
@@ -7880,9 +7880,9 @@ g.highcharts-input-group {
   }
   /* .message-color .active-job-box {height: calc(100svh - 105px)} */
   .message-color .active-job-box {height: auto;}
-  .message-color:not(#messages) .container-job .chat_box, .message-color:not(#messages) .message_container .chat_box {
+  /* .message-color:not(#messages) .container-job .chat_box, .message-color:not(#messages) .message_container .chat_box {
     height: calc(100% - 214px);
-  }
+  } */
   #messages .active-job-box {
     height: calc(100svh - 116px)
   }
