@@ -78,7 +78,7 @@ class SendFeedbackReminder extends Command
                         $maildata['transporter_name'] = $transporterName;
                         $maildata['quote_by_transporter_id'] = $quoteByTransporter->quote_by_transporter_id; // Include transporter name in the email data
                         $htmlContent = view('mail.General.leave-feedback', ['data' => $maildata])->render();
-                        $this->emailService->sendEmail($maildata['email'], $htmlContent, 'Leave Feedback for your Ford Fiesta Delivery in a Few Seconds');
+                        $this->emailService->sendEmail($maildata['email'], $htmlContent, 'Leave Feedback for your'.$maildata['user_quotes']->vehicle_make.' '.$maildata['user_quotes']->vehicle_model.'Delivery in a Few Seconds');
                         // Update cron status for feedback reminder
                         $cronStatuses['leave_feedback_reminder'] = true;
                         $userQuote->cron_statuses = json_encode($cronStatuses);

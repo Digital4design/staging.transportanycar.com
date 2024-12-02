@@ -137,7 +137,7 @@ class MessageController extends WebController
                 }
                 if($customer_user->mobile && $customer_user->user_sms_alert > 0)
                 {
-                    $smS = "Transport Any Car: New message from $auth_user->username to deliver your $userQuote->vehicle_make $userQuote->vehicle_model. \n\n".request()->getSchemeAndHttpHost()."/messages \n"." ".request()->getSchemeAndHttpHost()."/manage_notification";
+                    $smS = "Transport Any Car: New message from $auth_user->username to deliver your $userQuote->vehicle_make $userQuote->vehicle_model. \n\n".request()->getSchemeAndHttpHost()."/messages \n\n"." ".request()->getSchemeAndHttpHost()."/manage_notification";
                     $this->sendSMS->sendSms($customer_user->mobile,$smS);
                 }
             } 
@@ -228,6 +228,7 @@ class MessageController extends WebController
 
     public function QuoteSendMessage(Request $request)
     {
+       
         $user = Auth::user();
         $friend_id = $request->user_id ?? 0;
         $quoteId = $request->user_quote_id;
@@ -285,6 +286,11 @@ class MessageController extends WebController
                     );
                 } else {
                     Log::info('User with email ' . $customer_user->email . ' has opted out of receiving emails. Message email not sent.');
+                }
+                if($customer_user->mobile && $customer_user->user_sms_alert > 0)
+                {
+                    $smS = "Transport Any Car: New message from $auth_user->username to deliver your $quotes->vehicle_make $quotes->vehicle_model. \n\n".request()->getSchemeAndHttpHost()."/messages \n\n"." ".request()->getSchemeAndHttpHost()."/manage_notification";
+                    $this->sendSMS->sendSms($customer_user->mobile,$smS);
                 }
             } 
             catch (\Exception $ex) {
