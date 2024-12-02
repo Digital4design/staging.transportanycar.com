@@ -110,15 +110,18 @@ class MessageController extends WebController
                     $maildata['message'] = $request->message;
                     if($userQuote->status == 'pending'){
                         $maildata['from_page'] = 'quotes_admin';
+                        
                     } else if($userQuote->status == 'completed') {
                         $maildata['from_page'] = 'delivery_admin';
                     } else {
                         $maildata['from_page'] = 'message_admin';
                     }
+                  
                     $maildata['quotes'] = $userQuote;
                     $maildata['quote_id'] = $from_quote_id;
                     $maildata['type'] = 'user';
                     $maildata['url'] =  route('front.manage_notification');
+                    
                     $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
                     $this->emailService->sendEmail($email_to, $htmlContent,  $subject);
 
@@ -259,14 +262,16 @@ class MessageController extends WebController
         ]);
         if ($message) {
             try {
+               
                 $customer_user = User::where('id', $friend_id)->first();
+                $quote_id= QuoteByTransporter::where('user_quote_id',$request->user_quote_id)->where('user_id',$user->id)->first();
                 if($customer_user->job_email_preference) {
                     $email_to = $customer_user->email;
                     $maildata['user'] = $user;
                     $maildata['thread'] = $thread;
                     $maildata['message'] = $request->message;
                     $maildata['from_page'] = $request->form_page;
-                    $maildata['quote_id'] = $request->user_quote_id;
+                    $maildata['quote_id'] = $quote_id->id;
                     $quotes = UserQuote::where('id', $request->user_quote_id)->first();
                     $maildata['quotes'] = $quotes;
                     $maildata['type'] = 'user';
