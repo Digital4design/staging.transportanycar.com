@@ -284,13 +284,13 @@
                                     <a href="{{ route('front.booking_confirm_page', $item->id) }}"class="wd-accepted-btn">Complete
                                         booking</a>
                                     <a href="javascript:void(0)" style="margin-bottom:auto;" class="d-sm-none"
-                                        data-href="{{ route('front.messages', ['thread_id' => $item->notification_thread->id]) }}"
+                                        data-href="{{ route('front.messages', ['thread_id' => $item->notification_thread->id ??'']) }}"
                                         onclick="handleNotificationClick(event, this);">Message</a>
                                 </li>
 
                                 <li class=" job-access view-quote" style="margin:0;">
                                     <a href="javascript:void(0)" style="margin-bottom:auto;"
-                                        data-href="{{ route('front.messages', ['thread_id' => $item->notification_thread->id]) }}"
+                                        data-href="{{ route('front.messages', ['thread_id' => $item->notification_thread->id ??'']) }}"
                                         onclick="handleNotificationClick(event, this);">Message</a>
                                 </li>
                             @endif

@@ -14,7 +14,7 @@
         <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
             style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
             alt="transport notifiaction" title="transport notifiaction" />
-        <h2>Hi,</h2>
+        <h2 style="font-weight: 300;font-family: 'Outfit', sans-serif;font-size: 16px;line-height: 22px; color: #000000;">Hi,</h2>
         <p style="margin-top: 25px; margin-bottom: 25px; font-weight: 300;font-family: 'Outfit', sans-serif;font-size: 16px;line-height: 22px;">You have accepted {{ $data['transporter_info']->username }} quote of £{{ $data['quotation']->price }} to deliver your {{ $data['quotation']->quote->vehicle_make}} {{$data['quotation']->quote->vehicle_model}} @if (!empty($data['quotation']->quote->vehicle_make_1) && !empty($data['quotation']->quote->vehicle_model_1)) @endif</p>
         <div style="background-color: #f1f1f1; padding: 20px; text-align: left;">
             <p style="font-weight: 300;font-family: 'Outfit', sans-serif;font-size: 16px;line-height: 22px; color: #000000;margin-bottom: 15px;">Payment ref:{{ $data['transaction_id'] }}</p>
@@ -33,7 +33,7 @@
             <p class="adjust-half-space" style="margin-top: 12px; margin-bottom: 60px; font-weight: 300;font-family: 'Outfit', sans-serif;font-size: 16px;line-height: 22px;">Transport Any Car Team</p>
             <p class="adjust-half-space" style="margin-top: 12px; margin-bottom: 12px; font-weight: 300;font-family: 'Outfit', sans-serif;font-size: 16px;line-height: 22px;">Manage notification <a href="{{ url('/manage_notification') }}"
                 style="color:#0356D6; text-decoration: none;">preferences.</a></p>
-            <p style=" font-size: 12px; font-weight: 300;font-family: 'Outfit', sans-serif;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+            <p style="font-size: 16px; line-height: 22px; font-weight: 300;font-family: 'Outfit', sans-serif;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     </div>
 </body>
 

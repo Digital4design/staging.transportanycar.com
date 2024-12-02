@@ -173,7 +173,9 @@ $auth_user = Auth::user();
             event.preventDefault();
             getChatListing();
         });
-
+        $(document).ready(function() {
+            $('body').addClass('message-color');
+        })
     </script>
 
 @endsection

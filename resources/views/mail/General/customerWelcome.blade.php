@@ -25,9 +25,9 @@
     <p style="font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;margin-top: 25px; margin-bottom: 25px;">If you need any help or have any questions please contact our team at support@transportanycar.com.</p>
     <p style="font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top:0; margin-bottom:0;">Best Regards,</p>
     <p style="font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 12px; margin-bottom: 60px;">Transport Any Car Team</p>
-    <p style="font-weight: 300; font-family: 'Outfit', sans-serif; margin-top: 12px; margin-bottom: 12px; font-size: 12px; text-align: center;">Manage notification <a href="{{ url('/manage_notification') }}"
+    <p style="font-weight: 300; font-family: 'Outfit', sans-serif; margin-top: 12px; margin-bottom: 12px; font-size: 16px; line-height: 22px; text-align: center;">Manage notification <a href="{{ url('/manage_notification') }}"
         style="color:#0356D6; text-decoration: none;">preferences.</span></a></p>
-    <p style="font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 12px; margin-bottom: 12px; font-size: 12px; text-align:center;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+    <p style="font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 12px; margin-bottom: 12px; text-align:center;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     
 </div>
 

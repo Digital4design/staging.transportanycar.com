@@ -125,7 +125,7 @@
     </div>
     <p style="margin-top:0; margin-bottom:0; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Best Regards,</p>
     <p style="margin-top:12px; font-weight: 300;font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-bottom: 60px;">Transport Any Car Team</p>
-    <p style="font-weight: 300;font-family: 'Outfit', sans-serif;font-size: 12px; margin-top: 0; margin-bottom: 0;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+    <p style="font-weight: 300;font-family: 'Outfit', sans-serif;font-size: 16px; line-height: 22px; margin-top: 0; margin-bottom: 0;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
 </div>
 </body>
 
