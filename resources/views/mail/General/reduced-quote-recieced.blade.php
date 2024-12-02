@@ -28,7 +28,7 @@
         <p style="margin-top: 0; margin-bottom: 0; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Best Regards,</p>
         <p class="adjust-half-space" style="margin-top: 12px; margin-bottom: 60px; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Transport Any Car Team</p>
         <p class="adjust-half-space" style="margin-top: 12px; margin-bottom: 12px; font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Manage notification <a href="{{ url('/manage_notification') }}" style="color:#0356D6; text-decoration: none;">preferences.</span></a>
-        <p style="font-size: 12px; font-weight: 300; font-family: 'Outfit', sans-serif;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+        <p style="font-size: 16px; line-height: 22px; font-weight: 300; font-family: 'Outfit', sans-serif;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     </div>
 </body>
 

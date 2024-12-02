@@ -270,6 +270,9 @@
             window.location.href = url;
             return;
         }
+        $(document).ready(function() {
+            $('body').addClass('message-color');
+        })
     </script>
 @endsection
 

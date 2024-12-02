@@ -16,7 +16,7 @@
         <p style="font-weight: 300; font-family:'Outfit', sans-serif; font-size: 16px;line-height: 22px; margin-top: 25px; margin-bottom: 25px;">Go to <a class="verify-btn" href="{{ $data['url'] }}">booking</a>.</p>
         <p style="font-weight: 300; font-family:'Outfit', sans-serif; font-size: 16px;line-height: 22px;">Best Regards,</p>
         <p style="font-weight: 300; font-family:'Outfit', sans-serif; font-size: 16px;line-height: 22px;margin-top: 12px; margin-bottom: 60px;">Transport Any Car Team</p>
-        <p style="font-weight: 300; font-family:'Outfit', sans-serif; margin-top: 25px; margin-bottom: 25px; font-size: 12px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+        <p style="font-weight: 300; font-family:'Outfit', sans-serif; margin-top: 25px; margin-bottom: 25px; font-size: 16px; line-height: 22px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
     </div>
 </body>
 
