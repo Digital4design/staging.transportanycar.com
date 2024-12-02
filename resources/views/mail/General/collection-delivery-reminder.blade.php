@@ -202,7 +202,7 @@
 															<td class="pad" style="width:100%;">
 																<div class="alignment" align="center" style="line-height:10px">
 																	<!-- <div style="max-width: 600px;"><img src="https://image.optimite.email/wp-content/uploads/2024/02/Email-4-copy-1.png" style="display: block; height: auto; border: 0; width: 100%;" width="600" alt="Finalise your collection &amp; delivery." title="Finalise your collection &amp; delivery."></div> -->
-																	<p style="margin: 0; font-size: 14px;"><a href="{{ url('/manage_notification') }}" target="_blank" style="text-decoration: underline; color: #5f5f5f;" rel="noopener">Manage notification preferences</a></p>
+																	{{-- <p style="margin: 0; font-size: 14px;"><a href="{{ url('/manage_notification') }}" target="_blank" style="text-decoration: underline; color: #5f5f5f;" rel="noopener">Manage notification preferences</a></p> --}}
 																	<a href="https://transportanycar.com/">
 																	<img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg" style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;" alt="Finalise your collection &amp; delivery." title="Finalise your collection &amp; delivery."></a>                                           
 																	{{-- <h3 style="font-size: 22px; line-height: normal;">Finalise your<br> <span style="color: #018dd4;">collection &amp; delivery.</span></h3> --}}
