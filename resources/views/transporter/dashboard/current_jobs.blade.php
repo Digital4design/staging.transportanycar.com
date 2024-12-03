@@ -632,7 +632,7 @@
             rules: {
                 amount: {
                     required: true,
-                    greaterThanZero: true,
+                    greaterThanZero: false,
                     noPhoneOrEmail: true,
                 },
             },

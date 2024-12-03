@@ -318,8 +318,10 @@ class DashboardController extends WebController
         if($id) {
             $user_data = Auth::guard('web')->user();
             $quote_by_transporter_data = QuoteByTransporter::where('id', $id)->first();
+            //   return $quote_by_transporter_data;
             if ($quote_by_transporter_data) {
                 $delivery_info = QuotationDetail::where('user_quote_id', $quote_by_transporter_data->user_quote_id)->first();
+                // return $delivery_info;
                 if ($delivery_info) {
                     //$quote = QuoteByTransporter::where('user_quote_id', $id)->first();
                     $transporter_detail = User::where('id', $quote_by_transporter_data->user_id)->first();
