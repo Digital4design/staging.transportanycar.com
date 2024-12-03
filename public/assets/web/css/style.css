@@ -398,15 +398,15 @@ input[type=number]::-webkit-inner-spin-button {
   border-color: #008ED4;
 }
 .wd_nextbtn {
-  background: #52D017;
-  border: none;
+    background: #52D017;
+    border: none;
     box-shadow: 0px 5px 10px 0px #0148B93B;
     font-size: 20px;
     font-weight: 400;
     display: block;
     padding: 12px 10px;
     color: #fff;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
     border-radius: 32px;
     width: 100%;
     max-width: 370px;

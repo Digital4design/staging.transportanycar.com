@@ -288,7 +288,7 @@
         font-weight: 300;
         margin-bottom: 0;
         cursor: pointer;
-        padding-left: 20px;
+        /* padding-left: 20px; */
     }
     label[for="terms"].error {color:#ff0000;}
     label[for="terms"] ~ p {
@@ -301,16 +301,16 @@
         line-height: 16px;
     }
     label[for="terms"] a {
-        color: #008DD4;
+        color: #5F5F5F;
         text-decoration: underline;
     }
     /*  added css for terms and condition */
-    #terms.error {
-        position: static; /* Ensure the position doesn't change */
-        margin: 0; /* Reset any margins that may have been added by the error class */
-        outline: none; /* Optional: Remove outline if the error focuses on it */
+    /* #terms.error {
+        position: static;
+        margin: 0; 
+        outline: none;
         width: auto;
-    }
+    } */
     </style>
 @endsection
 
@@ -566,13 +566,13 @@
                                         <path d="M1.4848 1.62598L8.35854 8.49971L1.4848 15.3734" stroke="white" stroke-width="2.06212" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </a>--}}
-                                <button type="submit" class="wd_nextbtn form-wizard-submit" id="SaveAccount">Get Quotes <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <button type="submit" class="wd_nextbtn form-wizard-submit" id="SaveAccount">Get my quotes <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1.4848 1.62598L8.35854 8.49971L1.4848 15.3734" stroke="white" stroke-width="2.06212" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </button>
                             </div>
                             <div class="form-group text-left d-flex flex-wrap align-items-center" style="gap:5px;">
-                                <input type="checkbox" name="terms" id="terms" style="position: absolute; left: 0; top: 1px;" />
+                                {{-- <input type="checkbox" name="terms" id="terms" style="position: absolute; left: 0; top: 1px;" /> --}}
                                 <label for="terms">By proceeding you confirm you accept our <a target="_blank" href="{{route('front.term_condition')}}">T&Cs</a> and <a target="_blank" href="{{route('front.privacy_policy')}}">Privacy policy</a>.</label>
                                 <p>We will only use your contact details to send you competitive quotes in relation to this transport request. You can opt out of receiving quotes at any time.</p>
                             </div>
@@ -809,9 +809,9 @@ in1.addEventListener('input', splitNumber);
                         return selectedDeliveryTimeframe === 'On a Specific Date';
                     }
                 },
-                 terms: {
-                  required: true // Add validation for the checkbox
-                }
+                 //terms: {
+                  //required: true 
+                //}
                 //starts_drives_1: {required: true},
             },
             messages: {
@@ -829,18 +829,18 @@ in1.addEventListener('input', splitNumber);
                 email: {required: "Please enter email."},
                 phone : {required: "Please enter a valid mobile number.",digits: "Please enter a valid mobile number",maxlength: "Please enter a valid mobile number.",minlength: "Please enter a valid mobile number."},
                 delivery_timeframe_date: { deliveryDateRequired: "Please enter a delivery date." },
-                terms: {
-                        required: "Please accept the terms & conditions." // Custom error message
-                }
+                // terms: {
+                //         required: "Please accept the terms & conditions." // Custom error message
+                // }
                 //starts_drives_1: {required: "Please select starts drives."},
             },
            errorPlacement: function(error, element) {
-                if (element.attr("name") == "terms") {
-                    // Wrap error inside a <span> and insert after the label
-                    error.addClass('').wrap('<span></span>').parent().insertAfter(element.next("label"));
-                } else {
+                // if (element.attr("name") == "terms") {
+                //     // Wrap error inside a <span> and insert after the label
+                //     error.addClass('').wrap('<span></span>').parent().insertAfter(element.next("label"));
+                // } else {
                     error.insertAfter(element);
-                }
+                // }
             },
             submitHandler: function (form) {
                 addOverlay();
