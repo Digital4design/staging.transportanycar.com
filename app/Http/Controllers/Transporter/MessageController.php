@@ -85,6 +85,7 @@ class MessageController extends WebController
             $message_type = "file";
         }
         $isThread = Thread::where('id', $thread_id)->first();
+        
         $userQuote = UserQuote::where('id', $from_quote_id)->first();
         $customer_user = $userQuote->user;
         $message = Message::create([

@@ -137,7 +137,7 @@
                                             <tr>
                                                 <td class="column column-1" width="100%"
                                                     style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    {{-- <table class="image_block block-1" width="100%" border="0"
+                                                    <table class="image_block block-1" width="100%" border="0"
                                                         cellpadding="0" cellspacing="0" role="presentation"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
                                                         <tr>
@@ -160,13 +160,13 @@
                                                                             style="color: #018dd4;">notification</span>
                                                                     </h3>
 
-                                                                    <div style="max-width: 600px;">
+                                                                    {{-- <div style="max-width: 600px;">
                                                         <img src="https://image.optimite.email/wp-content/uploads/2024/02/Email-2-copy.png" style="display: block; height: auto; border: 0; width: 100%;" width="600" alt="transport notifiaction" title="transport notifiaction">
-                                                    </div> 
+                                                    </div>  --}}
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                    </table> --}}
+                                                    </table>
                                                     <!-- <table class="paragraph_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
                                         <tr>
                                             <td class="pad" style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:30px;">
@@ -205,11 +205,11 @@
                                                                             </small>
                                                                         </div>
                                                                         <span style="width: 45%;">
-                                                                            {{ $quote['vehicle_make'] }}
-                                                                            {{ $quote['vehicle_model'] }}
+                                                                            {{ $quote['vehicle_make'] ?? " " }}
+                                                                            {{ $quote['vehicle_model'] ??" " }}
                                                                             @if (!is_null($quote['vehicle_make_1']) && !is_null($quote['vehicle_model_1']))
-                                                                                / {{ $quote['vehicle_make_1'] }}
-                                                                                {{ $quote['vehicle_model_1'] }}
+                                                                                / {{ $quote['vehicle_make_1'] ?? " " }}
+                                                                                {{ $quote['vehicle_model_1'] ?? " " }}
                                                                             @endif
                                                                         </span>
                                                                     </li>
@@ -266,9 +266,9 @@
                                                                         </div>
                                                                         <span style="width: 45%;">
                                                                             @if ($quote['delivery_timeframe_from'])
-                                                                                <span>{{ formatCustomDate($quote['delivery_timeframe_from']) }}</span>
+                                                                                <span>{{ formatCustomDate($quote['delivery_timeframe_from']) ?? " "}}</span>
                                                                             @else
-                                                                                <span>{{ $quote['delivery_timeframe'] }}</span>
+                                                                                <span>{{ $quote['delivery_timeframe'] ?? " "}}</span>
                                                                             @endif
                                                                         </span>
                                                                     </li>
@@ -294,7 +294,7 @@
                                                                         </div>
                                                                         <span style="width: 45%;">
                                                                             {{ $quote['starts_drives'] == 0 ? 'No' : 'Yes' }}
-                                                                            @if (!is_null($quote['starts_drives_1']))
+                                                                            @if (!is_null($quote['starts_drives_1'] ?? " "))
                                                                                 /
                                                                                 {{ $quote['starts_drives_1'] == 0 ? 'No' : 'Yes' }}
                                                                             @endif
@@ -328,7 +328,7 @@
                                                                             </small>
                                                                         </div>
                                                                         <span
-                                                                            style="width: 45%;">{{ $quote['how_moved'] }}</span>
+                                                                            style="width: 45%;">{{ $quote['how_moved'] ?? " " }}</span>
                                                                     </li>
                                                                 </ul>
                                                             </td>
@@ -345,12 +345,12 @@
                                                                     <h4 class="distance_text"
                                                                         style="font-size: 15px; font-weight: bold; font-family: 'Montserrat', sans-serif; margin-bottom: 20px;  text-align: center;";>
                                                                         Journey Distance:
-                                                                        <b>{{ $quote['distance'] }}les</b>
+                                                                        <b>{{ $quote['distance']??" " }}les</b>
                                                                         <strong
-                                                                            style="color: #898989;">({{ $quote['duration'] }})</strong>
+                                                                            style="color: #898989;">({{ $quote['duration'] ?? " " }})</strong>
                                                                     </h4>
-                                                                    <!-- <img src="{{ asset($quote['map_image']) }}" alt="image" style="width: 100%;" class="mapimg_jobsrch" /> -->
-                                                                    <a href="{{ route('transporter.new_jobs_new', ['share_quotation' => $quote['id']]) }}"
+                                                                    
+                                                                    <a href="{{ route('transporter.new_jobs_new', ['share_quotation' => $quote['id'] ?? " "]) }}"
                                                                         class="make_offer_btn"
                                                                         style="background: #52D017; width: 100%;padding: 14px 20px;border-radius: 33px; display: block;text-align: center;font-size: 125%;color: #fff;text-decoration: none;font-family: 'Montserrat', sans-serif; margin-top: 10px;">Place
                                                                         Bid</a>
