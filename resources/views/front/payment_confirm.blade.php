@@ -404,9 +404,10 @@ ul.suggestions-list li {
 
             $(".getqt_btnincld").click(function(e) {
                 e.preventDefault(); // Prevent default form submission
-                $('.getqt_btnincld').prop('disabled', true);
+              
                 if ($("#payment_confirm_form").valid()) {
                     var formData = $("#payment_confirm_form").serialize();
+                      $('.getqt_btnincld').prop('disabled', true);
                     $.ajax({
                         type: "POST",
                         url: "{{ route('front.quote_detail_save') }}",
