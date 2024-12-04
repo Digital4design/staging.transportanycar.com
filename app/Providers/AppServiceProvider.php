@@ -115,8 +115,6 @@ class AppServiceProvider extends ServiceProvider
                          ->with('unseenMessageCount', $unseenMessageCount)
                          ->with('quotationCounts', $quotationCounts);
 
-
-
                 }
             }
         });
