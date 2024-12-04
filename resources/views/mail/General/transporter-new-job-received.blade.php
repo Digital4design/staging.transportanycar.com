@@ -144,21 +144,21 @@
                                                             <td class="pad" style="width:100%;">
                                                                 <div class="alignment" align="center"
                                                                     style="line-height:10px">
-                                                                    <p style="margin: 0;font-size: 14px;"><a
+                                                                    {{-- <p style="margin: 0;font-size: 14px;"><a
                                                                             href="{{ route('transporter.profile', ['unsub' => true]) }}"
                                                                             target="_blank"
                                                                             style="text-decoration: underline;color: #5f5f5f;"
                                                                             rel="noopener">Unsubscribe from
-                                                                            notifications</a></p> 
+                                                                            notifications</a></p>  --}}
                                                                     <a href="https://transportanycar.com/">
                                                                         <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
                                                                             style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
                                                                             alt="transport notifiaction"
                                                                             title="transport notifiaction"></a>
-                                                                    <h3 style="font-size: 22px;line-height: normal;">
+                                                                    {{-- <h3 style="font-size: 22px;line-height: normal;">
                                                                         Transport<br> <span
                                                                             style="color: #018dd4;">notification</span>
-                                                                    </h3>
+                                                                    </h3> --}}
 
                                                                     {{-- <div style="max-width: 600px;">
                                                         <img src="https://image.optimite.email/wp-content/uploads/2024/02/Email-2-copy.png" style="display: block; height: auto; border: 0; width: 100%;" width="600" alt="transport notifiaction" title="transport notifiaction">
@@ -457,12 +457,15 @@
                                                                 style="padding-bottom:40px;padding-left:10px;padding-right:10px;padding-top:10px;">
                                                                 <div
                                                                     style="color:#ffffff;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:16.8px;">
+                                                                    <p style="font-family: 'Outfit', sans-serif;margin-top:12px; margin-bottom: 12px; font-weight: 300; font-size: 16px;line-height: 22px;">Manage notification <a 
+                                                                        href="{{ url('transporter/manage_notification') }}"
+                                                                            style="font-family: 'Outfit', sans-serif;color:#0356D6; text-decoration: none;">preferences.</a></p>
                                                                     <p
                                                                         style="margin: 0; margin-bottom: 16px; color: #000; font-size: 16px; line-height: 22px;">
                                                                         © 2024 Transport Any Car. 128 City Road, London,
                                                                         EC1V 2NX.</p>
-                                                                        <p class="adjust-half-space">Manage notification <a href="{{ url('transporter/manage_notification') }}"
-                                                                            style="color:#0356D6; text-decoration: none;">preferences.</span></a></p>
+                                                                        {{-- <p class="adjust-half-space">Manage notification <a href="{{ url('transporter/manage_notification') }}"
+                                                                            style="color:#0356D6; text-decoration: none;">preferences.</span></a></p> --}}
                                                                 </div>
                                                             </td>
                                                         </tr>
