@@ -72,6 +72,7 @@ class SendFeedbackReminder extends Command
                     // Step 4: Send feedback reminder email
                     if ($userQuote->job_email_preference) { // Check if email preference allows sending emails
                         $quoteByTransporter = $quotesWithoutFeedback->firstWhere('user_quote_id', $userQuote->id);
+                        // return "yessss";
                         $transporterName = $transporterNames[$quotesWithoutFeedback->firstWhere('user_quote_id', $userQuote->id)->user_id] ?? 'Transporter'; // Get the transporter's name
                         $maildata['email'] = $userQuote->email;
                         $maildata['user_quotes'] = $userQuote;

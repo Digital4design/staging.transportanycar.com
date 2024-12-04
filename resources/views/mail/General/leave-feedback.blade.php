@@ -96,7 +96,7 @@
                                         <tr>
                                             <td class="pad" style="width:100%;">
                                                 <div class="alignment" align="center" style="line-height:10px">
-                                                <p style="margin: 0; font-size: 14px;"><a href="{{ url('/manage_notification') }}" target="_blank" style="text-decoration: underline; color: #5f5f5f;" rel="noopener">Manage notification preferences</a></p>
+                                                {{-- <p style="margin: 0; font-size: 14px;"><a href="{{ url('/manage_notification') }}" target="_blank" style="text-decoration: underline; color: #5f5f5f;" rel="noopener">Manage notification preferences</a></p> --}}
                                                 <a href="https://transportanycar.com/"><img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg" style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;" alt="Leave Feedback" title="Leave Feedback"></a>       
                                                 </div>                                    
                                             </td>
