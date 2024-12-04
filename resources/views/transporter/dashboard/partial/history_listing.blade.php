@@ -428,7 +428,7 @@ $auth_user = Auth::user();
         // });
 
         //new code
-        console.log("///", $('#last_message_sender').val());
+        // console.log("///", $('#last_message_sender').val());
         $('#chat__form').on('submit', function(e) {
             e.preventDefault();
 
@@ -465,8 +465,8 @@ $auth_user = Auth::user();
 
                 var file_type = $('#file_type').val();
                 var lastMessageSender = $('#last_message_sender').val(); // Store the last sender
-                console.log("///", $('.chat_conversation_body .chat_messages_outgoing').last().data(
-                    'sender-id'));
+                // console.log("///", $('.chat_conversation_body .chat_messages_outgoing').last().data(
+                    // 'sender-id'));
                 $('.textarea').val(''); // Clear the textarea after fetching message
 
                 $.ajaxSetup({
@@ -498,10 +498,11 @@ $auth_user = Auth::user();
 
                     if (response.status === "success") {
                         var data = response.data;
+                        console.log(data);
                         var message_clone = $("#send_message_main").clone();
                         message_clone.removeClass("d-none");
 
-                        console.log(response.data.sender_id);
+                      
 
                         // Check if the sender is the same as the last message sender
                         if (lastMessageSender == data.sender_id) {
