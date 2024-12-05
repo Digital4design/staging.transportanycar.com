@@ -113,7 +113,7 @@
             position: absolute;
             right: 8px;
             top: 85px;
-            display: none;
+            /* display: none; */
         }
 
         .active-job-box.active_job_mobile ul li.job-access.completed_jobs {
