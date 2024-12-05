@@ -63,9 +63,10 @@ class Quote_email_send extends Command
             ->where('email_sent', 0)
             ->orderBy('id', 'asc')
             ->get();
-        foreach ($transporter as $email) {
-            if ($email->job_email_preference == 1) {
-                foreach ($quotes as $quote) {
+            
+        foreach ($quotes as $quote) { 
+                foreach ($transporter as $email) {
+                    if ($email->job_email_preference == 1) {
                     $mailData = [
                         'id' => $quote->id,
                         'vehicle_make' => $quote->vehicle_make,
@@ -101,9 +102,10 @@ class Quote_email_send extends Command
                     }
                 }
             }
+            DB::table('user_quotes')
+            ->where('id', $quote->id)
+            ->update(['email_sent' => 1]);
         }
-        DB::table('user_quotes')
-        ->where('id', $quote->id)
-        ->update(['email_sent' => 1]);
+       
     }
 }
