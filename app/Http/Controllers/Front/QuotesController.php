@@ -62,15 +62,15 @@ class QuotesController extends WebController
         $data['end_point'] = $request->end_point ?? '';
         $data['end_latitude'] = $request->end_latitude ?? '';
         $data['end_longitude'] = $request->end_longitude ?? '';
-        
+
         // Store data in the cache
-         $isCached = Cache::put('location_info', $data);
+        $isCached = Cache::put('location_info', $data);
         if (!$isCached) {
             throw new Exception('Failed to store data in cache');
-        }else{
-        //$route = route('front.quote_steps');
-        return redirect()->route('front.quote_steps');
-      }
+        } else {
+            //$route = route('front.quote_steps');
+            return redirect()->route('front.quote_steps');
+        }
         //return response()->json(['success' => true, 'route' => $route]);
         //$location = Cache::get('location_'.$user_data->id);
     }
@@ -187,17 +187,16 @@ class QuotesController extends WebController
             // If user is already logged in, redirect to the dashboard
             return redirect()->route('front.dashboard');
         }
-
     }
 
-    private function createNewUserAndNotify($request,$password)
+    private function createNewUserAndNotify($request, $password)
     {
         $user_data = User::create([
             'password' => $password,
             'email' => $request->email,
             'name' => $request->name ?? null,
             'country_code' => $request->country_code ?? null,
-           'mobile' =>  $request->mobile ?? $request->phone ?? null,
+            'mobile' =>  $request->mobile ?? $request->phone ?? null,
             'profile_image' => config('constants.default.user_image'),
         ]);
 
@@ -214,7 +213,7 @@ class QuotesController extends WebController
         return $user_data;
     }
 
-    private function saveQuoteAndNotifyTransporters($userId,$request, $dis_dur)
+    private function saveQuoteAndNotifyTransporters($userId, $request, $dis_dur)
     {
         // Process vehicle information
         $vehicle_make_1 = $request->vehicle_make_1 ?? null;
@@ -246,8 +245,8 @@ class QuotesController extends WebController
             'starts_drives_1' => $starts_drives_1,
             'image_1' => $up1,
             'map_image' => null,
-            'created_at'=> $now = Carbon::now('Europe/London'),
-            'updated_at'=> $now = Carbon::now('Europe/London'),
+            'created_at' => $now = Carbon::now('Europe/London'),
+            'updated_at' => $now = Carbon::now('Europe/London'),
             'how_moved' => $request->how_moved ? implode(',', $request->how_moved) : null,
             'delivery_timeframe_from' => $request->delivery_timeframe_date ? (\DateTime::createFromFormat('d/m/Y', $request->delivery_timeframe_date) ? \DateTime::createFromFormat('d/m/Y', $request->delivery_timeframe_date)->format('Y-m-d') : null) : null,
             'delivery_timeframe' => $request->delivery_timeframe ?? null,
@@ -260,46 +259,47 @@ class QuotesController extends WebController
         // Update quote data with the quotation ID
         $quoteData['quotation_id'] = $userQuote->id;
         Cache::forget('location_info');
-        // $this->SaveSearchQuoteEmailSend($quoteData);
+        $this->SaveSearchQuoteEmailSend($quoteData);
 
         // Send mail to transporters
         //$this->sendMailToTransporters($quoteData);
         // this is commented because of client requirement
-        $command=  \Illuminate\Support\Facades\Artisan::call('send:quote_email_sent', [
-            'pickup_postcode' => $dis_dur['start_point'],
-            'drop_postcode' => $dis_dur['end_point'],
-        ]);
+        // $command =  \Illuminate\Support\Facades\Artisan::call('send:quote_email_sent', [
+        //     'pickup_postcode' => $dis_dur['start_point'],
+        //     'drop_postcode' => $dis_dur['end_point'],
+        // ]);
 
-        // $command = '/usr/local/bin/php /home/pfltvaho/public_html/artisan schedule:run';
-        exec($command, $output, $returnVar);
+        // // $command = '/usr/local/bin/php /home/pfltvaho/public_html/artisan schedule:run';
+        // exec($command, $output, $returnVar);
         // comment end
     }
 
-    private function saveMapImage($dis_dur) {
+    private function saveMapImage($dis_dur)
+    {
 
         $startPoint = $dis_dur['start_point']; // Replace with your start point
         $endPoint = $dis_dur['end_point']; // Replace with your end point
         $apiKey = get_constants('google_map_key'); // Replace with your API key
         $carImageURL = urlencode(config('constants.default.map_icon')); // URL of the car image
-    
+
         // Step 1: Get the route from the Directions API
         $directionsUrl = "https://maps.googleapis.com/maps/api/directions/json?units=imperial&";
         $directionsUrl .= "origin=" . urlencode($startPoint) . "&destination=" . urlencode($endPoint) . "&key={$apiKey}";
-        
+
         $client = new Client();
         $directionsResponse = $client->get($directionsUrl);
         $directionsData = json_decode($directionsResponse->getBody()->getContents(), true);
-    
+
         if ($directionsData['status'] == 'OK') {
             // // Step 2: Extract the polyline encoding
             // $route = $directionsData['routes'][0]['overview_polyline']['points'];
-            
+
             // // Map parameters
             // $center = "52.3555,-1.1743"; // Center point for the map (central UK)
             // $zoom = "7"; // Zoom level for a broad view
             // $size = "600x400"; // Size of the map
             // $mapType = "roadmap"; // Map type
-    
+
             // // No styles to hide features, showing all features
             // $styles = [
             //     'feature:road|element:geometry|visibility:on',
@@ -314,7 +314,7 @@ class QuotesController extends WebController
             //     'feature:water|element:geometry|visibility:on',
             // ];
             // $styleString = implode('&style=', $styles);
-    
+
             // // Step 3: Generate the Static Map URL with the route
             // $staticMapUrl = "https://maps.googleapis.com/maps/api/staticmap?";
             // $staticMapUrl .= "center={$center}&zoom={$zoom}&size={$size}&maptype={$mapType}";
@@ -323,7 +323,7 @@ class QuotesController extends WebController
             // $staticMapUrl .= "&path=enc:{$route}";
             // $staticMapUrl .= "&style={$styleString}";
             // $staticMapUrl .= "&key={$apiKey}";
-    
+
             // // Step 4: Fetch the image
             // $response = $client->get($staticMapUrl);
             // $image = $response->getBody()->getContents();
@@ -341,9 +341,8 @@ class QuotesController extends WebController
             // Handle the error appropriately
             //throw new Exception('Failed to get directions: ' . $directionsData['status']);
             return redirect()->route('front.home')->withErrors(['general' => 'Failed to get directions. Please try with correct location']);
-
         }
-    } 
+    }
 
     // private function sendMailToTransporters($quotation_data) {
     //     $mailData = $this->getMailData($quotation_data);
@@ -366,7 +365,8 @@ class QuotesController extends WebController
     //     }
     // }
 
-    private function getMailData($quotation_data) {
+    private function getMailData($quotation_data)
+    {
         $mailData = [
             'id' => $quotation_data['quotation_id'],
             'vehicle_make' => $quotation_data['vehicle_make'],
@@ -383,7 +383,7 @@ class QuotesController extends WebController
             'duration' => $quotation_data['duration'],
             'map_image' => $quotation_data['map_image'],
             'delivery_timeframe' => $quotation_data['delivery_timeframe']
-        ]; 
+        ];
         return $mailData;
     }
 
@@ -409,7 +409,7 @@ class QuotesController extends WebController
             } else {
                 $quote->update(['status' => $request->status]);
             }
-            return response()->json(['success' => true, 'message' => 'Quote '.$request->status.' successfully']);
+            return response()->json(['success' => true, 'message' => 'Quote ' . $request->status . ' successfully']);
         } else {
             return response()->json(['success' => false, 'message' => 'something went wrong!.. Please try again']);
         }
@@ -435,7 +435,7 @@ class QuotesController extends WebController
 
         $quotationDetail = [
             'user_id' => Auth::id(),
-            'delivery_reference_id' =>$request['delivery_reference_id'],
+            'delivery_reference_id' => $request['delivery_reference_id'],
             'transaction_id' => $request['transaction_id'],
             'collection_contact_name' => $request['contact_name'],
             'collection_mobile_number' => $request['phone'],
@@ -457,9 +457,9 @@ class QuotesController extends WebController
 
         try {
             $quote = QuoteByTransporter::where('quote_by_transpoters.id', $request['quote_by_transporter_id'])
-                                    ->join('users', 'users.id', '=', 'quote_by_transpoters.user_id')
-                                    ->select('users.email', 'quote_by_transpoters.transporter_payment')
-                                    ->first();
+                ->join('users', 'users.id', '=', 'quote_by_transpoters.user_id')
+                ->select('users.email', 'quote_by_transpoters.transporter_payment')
+                ->first();
             $existingRecord = QuotationDetail::where('user_quote_id', $request['user_quote_id'])->first();
             if ($existingRecord) {
                 $existingRecord->update($quotationDetail);
@@ -488,7 +488,7 @@ class QuotesController extends WebController
             return response()->json([
                 'success' => true,
                 'id' => $details->user_quote_id,
-                'quote_by_transporter_id' =>$request['quote_by_transporter_id'],
+                'quote_by_transporter_id' => $request['quote_by_transporter_id'],
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -530,26 +530,74 @@ class QuotesController extends WebController
             ->where('save_searches.email_notification', 'true')
             ->groupBy('users.id')
             ->get();
-            $last24HoursCount = UserQuote::where('created_at', '>=', Carbon::now()->subDay())->count();
-             
-            foreach($transporter as $transport)
-            {
-            $mailData = [
-                'last24HoursCount' =>$last24HoursCount,
-               'name'=>$transport->first_name,
-            ]; 
-         
-            $htmlContent = view('mail.General.today-transporter-leads', ['quote' => $mailData])->render();
-            $subject='Todays Transport Leads';
+        // $last24HoursCount = UserQuote::where('created_at', '>=', Carbon::now()->subDay())->count();
+
+        //     foreach($transporter as $transport)
+        //     {
+        //     $mailData = [
+        //         'last24HoursCount' =>$last24HoursCount,
+        //        'name'=>$transport->first_name,
+        //     ]; 
+
+        //     $htmlContent = view('mail.General.today-transporter-leads', ['quote' => $mailData])->render();
+        //     $subject='Todays Transport Leads';
 
 
-          
-              $this->emailService->sendEmail($transport->email, $htmlContent, $subject);
-           }
 
+        //       $this->emailService->sendEmail($transport->email, $htmlContent, $subject);
+        // //    }
+        // $quotes = DB::table('user_quotes')
+        //     ->where('email_sent', 0)
+        //     ->orderBy('id', 'asc')
+        //     ->get();
+    //   dd($quote['quotation_id']);
+            foreach ($transporter as $email) {
+                if ($email->job_email_preference == 1) {
+                    $mailData = [
+                      
+                            'id' => $quote['quotation_id'],
+                            'vehicle_make' => $quote['vehicle_make'],
+                            'vehicle_model' => $quote['vehicle_model'],
+                            'vehicle_make_1' => $quote['vehicle_make_1'],
+                            'vehicle_model_1' => $quote['vehicle_model_1'],
+                            'pickup_postcode' => formatAddress($quote['pickup_postcode']),
+                            'drop_postcode' => formatAddress($quote['drop_postcode']),
+                            'delivery_timeframe_from' => isset($quote['delivery_timeframe_from']) ? $quote['delivery_timeframe_from'] : null,
+                            'starts_drives' => isset($quote['starts_drives']) && $quote['starts_drives'] == 1 ? 'Yes' : 'No',
+                            'starts_drives_1' => $quote['starts_drives_1'],
+                            'how_moved' => $quote['how_moved'],
+                            'distance' => $quote['distance'],
+                            'duration' => $quote['duration'],
+                            'map_image' => $quote['map_image'],
+                            'delivery_timeframe' => $quote['delivery_timeframe'],
+                       
+                        
+                    ];
+
+                    try {
+                        // Generate email content
+                        $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
+                        $subject = 'You have received a transport notification';
+
+                        // Send the email
+                        $this->emailService->sendEmail($email->email, $htmlContent, $subject);
+
+                        // Update email_sent status
+
+
+                        \Log::info('Email sent successfully for Quote ID: ' .$quote['quotation_id']);
+                    } catch (\Exception $ex) {
+                        \Log::error('Error sending email to transporter: ' . $ex->getMessage());
+                    }
+                }
+            }
+            DB::table('user_quotes')
+                ->where('id', $quote['quotation_id'])
+                ->update(['email_sent' => 1]);
+        
     }
 
-    public function sendOtp(Request $request,SmsService $service)
+    public function sendOtp(Request $request, SmsService $service)
     {
         $validator = Validator::make($request->all(), [
             'phoneNumber' => 'required|string',
@@ -562,10 +610,10 @@ class QuotesController extends WebController
                 'message' => $validator->errors()->first(),
             ], 400);
         }
-    
+
         // Generate a new OTP (e.g., a 6-digit code)
         $otp = rand(1000, 9999);
-    
+
         // Create or update the phone verification record
         MobileVerification::updateOrCreate(
             ['mobile_number' => $request->phoneNumber],
@@ -574,7 +622,7 @@ class QuotesController extends WebController
                 'otp_expires_at' => now()->addMinutes(15), // Set OTP expiry
             ]
         );
-        $result = $service->sendSms($request->phoneNumber,"Transport Any Car: $otp is your verification code. It expires in 15 minutes. Don’t share this with anyone.");
+        $result = $service->sendSms($request->phoneNumber, "Transport Any Car: $otp is your verification code. It expires in 15 minutes. Don’t share this with anyone.");
         if (isset($result['sid'])) {
             return response()->json([
                 'success' => true,
@@ -595,56 +643,54 @@ class QuotesController extends WebController
 
     public function verifyOtp(Request $request)
     {
-        
-            $validator = Validator::make($request->all(), [
-                'phoneNumber' => 'required|string',
-                'otp' => 'required|string|size:4', 
-            ]);
 
-             // Check if validation fails
-            if ($validator->fails()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => $validator->errors()->first(),
-                ], 200);
-            }
+        $validator = Validator::make($request->all(), [
+            'phoneNumber' => 'required|string',
+            'otp' => 'required|string|size:4',
+        ]);
 
-            // Find the verification record by mobile number
-            $verification = MobileVerification::where('mobile_number', $request->phoneNumber)->first();
-
-            if (!$verification) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Invalid mobile number.',
-                ], 200);
-            }
-
-            // Check if the OTP matches
-            if ($verification->otp_code !== $request->otp) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Invalid OTP.',
-                    'data'=>$request->all()
-                ], 200);
-            }
-
-            // Check if the OTP has expired (15 minutes expiration)
-            if (now()->greaterThan($verification->otp_expires_at)) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'OTP has expired.',
-                ], 200);
-            }
-
-            // OTP is valid, proceed with the user's action
-            // Optionally remove the verification record
-            $verification->delete();
-
+        // Check if validation fails
+        if ($validator->fails()) {
             return response()->json([
-                'success' => true,
-                'message' => 'OTP verified successfully.',
-            ]);
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ], 200);
+        }
+
+        // Find the verification record by mobile number
+        $verification = MobileVerification::where('mobile_number', $request->phoneNumber)->first();
+
+        if (!$verification) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid mobile number.',
+            ], 200);
+        }
+
+        // Check if the OTP matches
+        if ($verification->otp_code !== $request->otp) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid OTP.',
+                'data' => $request->all()
+            ], 200);
+        }
+
+        // Check if the OTP has expired (15 minutes expiration)
+        if (now()->greaterThan($verification->otp_expires_at)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'OTP has expired.',
+            ], 200);
+        }
+
+        // OTP is valid, proceed with the user's action
+        // Optionally remove the verification record
+        $verification->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'OTP verified successfully.',
+        ]);
     }
-
-
 }
