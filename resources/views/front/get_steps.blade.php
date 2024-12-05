@@ -844,7 +844,7 @@ in1.addEventListener('input', splitNumber);
             },
             submitHandler: function (form) {
                 addOverlay();
-                //$('#popup').addClass('show'); 
+                $('#popup').addClass('show'); 
                 // Show the popup
                 // Trigger the gtag event with additional parameters
                 gtag('event', 'conversion', {
@@ -859,9 +859,11 @@ in1.addEventListener('input', splitNumber);
                     uet_report_conversion();
                 }
                 if (!otpVerified) {
-                        
-                        sendOTP();
-                 } else {
+                    // setTimeout(() => {
+                        // $('#popup').removeClass('show');
+                        sendOTP();                        
+                    // }, 1000);
+                } else {
                       // If OTP is verified, submit the form directly
                         form.submit();
                  }
