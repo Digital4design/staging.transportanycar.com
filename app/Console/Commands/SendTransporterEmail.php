@@ -8,6 +8,7 @@ use App\UserQuote;
 use App\SaveSearch;
 use Illuminate\Support\Facades\DB;
 use App\Services\EmailService;
+use Illuminate\Support\Facades\Http;
 
 
 class SendTransporterEmail extends Command
