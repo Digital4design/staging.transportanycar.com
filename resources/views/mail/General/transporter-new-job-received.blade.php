@@ -294,7 +294,7 @@
                                                                         </div>
                                                                         <span style="width: 45%;">
                                                                             {{ $quote['starts_drives'] == 0 ? 'No' : 'Yes' }}
-                                                                            @if (!is_null($quote['starts_drives_1'] ?? " "))
+                                                                            @if (!is_null($quote['starts_drives_1']))
                                                                                 /
                                                                                 {{ $quote['starts_drives_1'] == 0 ? 'No' : 'Yes' }}
                                                                             @endif
