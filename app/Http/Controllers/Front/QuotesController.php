@@ -265,7 +265,10 @@ class QuotesController extends WebController
         // Send mail to transporters
         //$this->sendMailToTransporters($quoteData);
         // this is commented because of client requirement
-        $command=  \Illuminate\Support\Facades\Artisan::call('send:quote_email_sent');
+        $command=  \Illuminate\Support\Facades\Artisan::call('send:quote_email_sent', [
+            'pickup_postcode' => $dis_dur['start_point'],
+            'drop_postcode' => $dis_dur['end_point'],
+        ]);
 
         // $command = '/usr/local/bin/php /home/pfltvaho/public_html/artisan schedule:run';
         exec($command, $output, $returnVar);
