@@ -29,23 +29,23 @@ class Quote_email_send extends Command
 
 
         $transporter = DB::table('save_searches')
-    ->join('users', function ($join) {
-        $join->on('users.id', '=', 'save_searches.user_id')
-            ->where('users.status', 'active')
-            ->where('users.type', 'car_transporter')
-            ->where('users.is_status', 'approved');
-    })
-    ->where(function ($query) use ($pickupPostcode, $dropPostcode) {
-        $query->where(DB::raw('LOWER(save_searches.pick_area)'), 'LIKE', '%' . strtolower($pickupPostcode) . '%')
-            ->orWhere(function ($innerQuery) use ($dropPostcode) {
-                $innerQuery->where(DB::raw('LOWER(save_searches.drop_area)'), 'LIKE', '%' . strtolower($dropPostcode) . '%')
+            ->join('users', function ($join) {
+                $join->on('users.id', '=', 'save_searches.user_id')
+                    ->where('users.status', 'active')
+                    ->where('users.type', 'car_transporter')
+                    ->where('users.is_status', 'approved');
+            })
+            ->where(function ($query) use ($pickupPostcode) {
+                $query->where(DB::raw('LOWER(save_searches.pick_area)'), 'LIKE', '%' . strtolower($pickupPostcode) . '%');
+            })
+            ->where(function ($query) use ($dropPostcode) {
+                $query->where(DB::raw('LOWER(save_searches.drop_area)'), 'LIKE', '%' . strtolower($dropPostcode) . '%')
                     ->orWhereNull('save_searches.drop_area') // Match if drop_area is NULL
                     ->orWhere('save_searches.drop_area', 'anywhere'); // Match if drop_area is 'anywhere'
-            });
-    })
-    ->where('save_searches.email_notification', true)
-    ->groupBy('users.id')
-    ->get();
+            })
+            ->where('save_searches.email_notification', true)
+            ->groupBy('users.id')
+            ->get();
         \Log::info('Email sent successfully for emails: ' . $transporter);
         // $emails = DB::table('users')
         //     ->where('status', 'active')

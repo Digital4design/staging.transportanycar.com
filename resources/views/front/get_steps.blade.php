@@ -5,6 +5,9 @@
         /* main {
             padding-top: 104px;
         } */    
+        .ui-datepicker {
+            z-index: 99!important;
+        }
         .error {
             color: red;
         }
