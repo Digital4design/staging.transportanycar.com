@@ -46,7 +46,7 @@ class Quote_email_send extends Command
     ->where('save_searches.email_notification', true)
     ->groupBy('users.id')
     ->get();
-    \Log::info('Email sent successfully for Quote ID: ' .$transporter);
+    \Log::info('Email sent successfully for emails: ' .$transporter);
         // $emails = DB::table('users')
         //     ->where('status', 'active')
         //     ->where('type', 'car_transporter')
@@ -90,7 +90,7 @@ class Quote_email_send extends Command
                     $subject = 'You have received a transport notification';
 
                     // Send the email
-                    $this->emailService->sendEmail($email, $htmlContent, $subject);
+                    $this->emailService->sendEmail($email->email, $htmlContent, $subject);
 
                     // Update email_sent status
                     DB::table('user_quotes')
