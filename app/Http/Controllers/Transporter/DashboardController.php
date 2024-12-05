@@ -227,7 +227,7 @@ class DashboardController extends WebController
         // die;
         // dd(($user->email_verify_status === "0"));
         $companyDetail = $user->companyDetail; // Access the related company details
-// return $companyDetail;
+        // return $companyDetail;
         return view('transporter.dashboard.profile', ['user' => $user, 'jobs_completed_count' => $jobs_completed_count, 'total_earning_count' => $total_earning_count, 'companyDetail' => $companyDetail]);
     }
 
@@ -330,7 +330,7 @@ class DashboardController extends WebController
 
         $average_rating = $total_feedbacks > 0 ? round($all_feedbacks->avg('rating'), 1) : 0;
 
-       
+
         $params['html'] = view('transporter.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings', 'average_rating'))->render();
         if ($request->ajax()) {
             return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $params]);
@@ -1072,242 +1072,269 @@ class DashboardController extends WebController
 
     public function saveSearchView(Request $request)
     {
-        // Retrieve paginated saved search data
-        $data = SaveSearch::where('user_id', auth()->user()->id)->paginate(50);
+        try {
+            // Retrieve paginated saved search data
+            $data = SaveSearch::where('user_id', auth()->user()->id)->paginate(50);
 
-        // Transform each search item to include a correct quote count
-        $data->getCollection()->transform(function ($search) {
-            // Define coordinates and distance range
-            $maxDistance = config('constants.max_range_km');
-            $user_data = Auth::guard('transporter')->user();
-            $my_quote_ids = QuoteByTransporter::where('user_id', $user_data->id)->pluck('user_quote_id');
+            // Transform each search item to include a correct quote count
+            $data->getCollection()->transform(function ($search) {
+                // Define coordinates and distance range
+                $maxDistance = config('constants.max_range_km');
+                $user_data = Auth::guard('transporter')->user();
+                $my_quote_ids = QuoteByTransporter::where('user_id', $user_data->id)->pluck('user_quote_id');
 
-            // Fetch pickup coordinates
-            $pickUpResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
-                'address' => $search->pick_area,
-                'key' => config('constants.google_map_key'),
-            ]);
-            $pickUpData = $pickUpResponse->json();
-            if ($pickUpData['status'] !== 'OK') {
-                $search->quote_count = 0; // Return zero if coordinates not found
-                return $search;
-            }
-            $pick_up_latitude = $pickUpData['results'][0]['geometry']['location']['lat'];
-            $pick_up_longitude = $pickUpData['results'][0]['geometry']['location']['lng'];
-
-            // Fetch drop-off coordinates if specified
-            $drop_off_latitude = null;
-            $drop_off_longitude = null;
-            if (!empty($search->drop_area) && $search->drop_area !== 'Anywhere') {
-                $dropOffResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
-                    'address' => $search->drop_area,
+                // Fetch pickup coordinates
+                $pickUpResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+                    'address' => $search->pick_area,
                     'key' => config('constants.google_map_key'),
                 ]);
-                $dropOffData = $dropOffResponse->json();
-                if ($dropOffData['status'] === 'OK') {
-                    $drop_off_latitude = $dropOffData['results'][0]['geometry']['location']['lat'];
-                    $drop_off_longitude = $dropOffData['results'][0]['geometry']['location']['lng'];
+                $pickUpData = $pickUpResponse->json();
+                if ($pickUpData['status'] !== 'OK') {
+                    $search->quote_count = 0; // Return zero if coordinates not found
+                    return $search;
                 }
-            }
+                $pick_up_latitude = $pickUpData['results'][0]['geometry']['location']['lat'];
+                $pick_up_longitude = $pickUpData['results'][0]['geometry']['location']['lng'];
 
-            // Build the query to count quotes based on multiple criteria
-            $quoteQuery = UserQuote::query()
-                // ->join('users', 'users.id', '=', 'user_quotes.user_id')
-                // ->leftJoin('quote_by_transpoters', function ($join) {
-                //     $join->on('quote_by_transpoters.user_quote_id', '=', 'user_quotes.id')
-                //         ->where('quote_by_transpoters.user_id', auth()->id());
-                // })
-                // ->whereNotIn('user_quotes.id', $my_quote_ids)
-                ->where(function ($query) {
-                    $query->where('user_quotes.status', 'pending')
-                        ->orWhere('user_quotes.status', 'approved');
-                })
-                ->whereDate('user_quotes.created_at', '>=', now()->subDays(10));
+                // Fetch drop-off coordinates if specified
+                $drop_off_latitude = null;
+                $drop_off_longitude = null;
+                if (!empty($search->drop_area) && $search->drop_area !== 'Anywhere') {
+                    $dropOffResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+                        'address' => $search->drop_area,
+                        'key' => config('constants.google_map_key'),
+                    ]);
+                    $dropOffData = $dropOffResponse->json();
+                    if ($dropOffData['status'] === 'OK') {
+                        $drop_off_latitude = $dropOffData['results'][0]['geometry']['location']['lat'];
+                        $drop_off_longitude = $dropOffData['results'][0]['geometry']['location']['lng'];
+                    }
+                }
 
-            // Apply distance calculations
-            if ($drop_off_latitude) {
-                $quoteQuery->select(
-                    \DB::raw("(6371 * acos(cos(radians($pick_up_latitude)) * cos(radians(pickup_lat)) * cos(radians(pickup_lng) - radians($pick_up_longitude)) + sin(radians($pick_up_latitude)) * sin(radians(pickup_lat)))) AS distance_pickup"),
-                    \DB::raw("(6371 * acos(cos(radians($drop_off_latitude)) * cos(radians(drop_lat)) * cos(radians(drop_lng) - radians($drop_off_longitude)) + sin(radians($drop_off_latitude)) * sin(radians(drop_lat)))) AS distance_drop_off")
-                )
-                    ->having('distance_pickup', '<=', $maxDistance)
-                    ->having('distance_drop_off', '<=', $maxDistance);
-            } else {
-                $quoteQuery->select(
-                    \DB::raw("(6371 * acos(cos(radians($pick_up_latitude)) * cos(radians(pickup_lat)) * cos(radians(pickup_lng) - radians($pick_up_longitude)) + sin(radians($pick_up_latitude)) * sin(radians(pickup_lat)))) AS distance_pickup")
-                )
-                    ->having('distance_pickup', '<=', $maxDistance);
-            }
+                // Build the query to count quotes based on multiple criteria
+                $quoteQuery = UserQuote::query()
+                    // ->join('users', 'users.id', '=', 'user_quotes.user_id')
+                    // ->leftJoin('quote_by_transpoters', function ($join) {
+                    //     $join->on('quote_by_transpoters.user_quote_id', '=', 'user_quotes.id')
+                    //         ->where('quote_by_transpoters.user_id', auth()->id());
+                    // })
+                    // ->whereNotIn('user_quotes.id', $my_quote_ids)
+                    ->where(function ($query) {
+                        $query->where('user_quotes.status', 'pending')
+                            ->orWhere('user_quotes.status', 'approved');
+                    })
+                    ->whereDate('user_quotes.created_at', '>=', now()->subDays(10));
 
-            // Calculate and set the count for this search
-            $search->quote_count = $quoteQuery->count();
+                // Apply distance calculations
+                if ($drop_off_latitude) {
+                    $quoteQuery->select(
+                        \DB::raw("(6371 * acos(cos(radians($pick_up_latitude)) * cos(radians(pickup_lat)) * cos(radians(pickup_lng) - radians($pick_up_longitude)) + sin(radians($pick_up_latitude)) * sin(radians(pickup_lat)))) AS distance_pickup"),
+                        \DB::raw("(6371 * acos(cos(radians($drop_off_latitude)) * cos(radians(drop_lat)) * cos(radians(drop_lng) - radians($drop_off_longitude)) + sin(radians($drop_off_latitude)) * sin(radians(drop_lat)))) AS distance_drop_off")
+                    )
+                        ->having('distance_pickup', '<=', $maxDistance)
+                        ->having('distance_drop_off', '<=', $maxDistance);
+                } else {
+                    $quoteQuery->select(
+                        \DB::raw("(6371 * acos(cos(radians($pick_up_latitude)) * cos(radians(pickup_lat)) * cos(radians(pickup_lng) - radians($pick_up_longitude)) + sin(radians($pick_up_latitude)) * sin(radians(pickup_lat)))) AS distance_pickup")
+                    )
+                        ->having('distance_pickup', '<=', $maxDistance);
+                }
 
-            return $search;
-        });
-       
-        return view('transporter.savedSearch.index', ['savedSearches' => $data]);
+                // Calculate and set the count for this search
+                $search->quote_count = $quoteQuery->count();
+
+                return $search;
+            });
+
+            return view('transporter.savedSearch.index', ['savedSearches' => $data]);
+        } catch (\Exception $ex) {
+            return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
+        }
     }
 
 
 
     public function saveSearchDlt(Request $request)
     {
-        $data = SaveSearch::find($request->id);
-        $data->delete();
-        return redirect()->back()->with('saveSearchSuccess', 'Item deleted successfully');
+        try {
+            $data = SaveSearch::find($request->id);
+            $data->delete();
+            return redirect()->back()->with('saveSearchSuccess', 'Item deleted successfully');
+        } catch (\Exception $ex) {
+            return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
+        }
     }
     public function savesearchredirect(Request $request)
     {
-        return view('transporter.savedSearch.result', ["pick_area" => $request->pick_area, "drop_area" => $request->drop_area]);
-        return $request->all();
+        try {
+            return view('transporter.savedSearch.result', ["pick_area" => $request->pick_area, "drop_area" => $request->drop_area]);
+            return $request->all();
+        } catch (\Exception $ex) {
+            return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
+        }
     }
 
     public function savedFindJob(Request $request)
     {
-        $saveSearch = SaveSearch::find($request->id);
-        $pickup =  $saveSearch->pick_area;
-        $dropoff =  $saveSearch->drop_area;
-        return response()->json([
-            'success' => true,
-            'redirect_url' => route('transporter.savedFindJobResults', [
-                'pickup' => $pickup,
-                'dropoff' => $dropoff
-            ])
-        ]);
+        try {
+            $saveSearch = SaveSearch::find($request->id);
+            $pickup =  $saveSearch->pick_area;
+            $dropoff =  $saveSearch->drop_area;
+            return response()->json([
+                'success' => true,
+                'redirect_url' => route('transporter.savedFindJobResults', [
+                    'pickup' => $pickup,
+                    'dropoff' => $dropoff
+                ])
+            ]);
+        } catch (\Exception $ex) {
+            return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
+        }
     }
     public function savedFindJobResults(Request $request)
     {
-        if (empty($request->pickup)) {
-            return response()->json(['success' => false, 'message' => 'Currently no jobs to show']);
-        }
+        try {
+            if (empty($request->pickup)) {
+                return response()->json(['success' => false, 'message' => 'Currently no jobs to show']);
+            }
 
-        $pickUpResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
-            'address' => $request->pickup,
-            'key' => config('constants.google_map_key'),
-        ]);
-        $pickUpData = $pickUpResponse->json();
-        if ($pickUpData['status'] === 'OK') {
-            $pick_up_latitude = $pickUpData['results'][0]['geometry']['location']['lat'];
-            $pick_up_longitude = $pickUpData['results'][0]['geometry']['location']['lng'];
-        } else {
-            return response()->json(['success' => false, 'message' => 'Currently no jobs to show']);
-        }
-        $drop_off_latitude = null;
-        $drop_off_longitude = null;
-        if ($request->dropoff && $request->dropoff != 'Anywhere') {
-            $dropOffResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
-                'address' => $request->dropoff,
+            $pickUpResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+                'address' => $request->pickup,
                 'key' => config('constants.google_map_key'),
             ]);
-            $dropOffData = $dropOffResponse->json();
-            if ($dropOffData['status'] === 'OK') {
-                $drop_off_latitude = $dropOffData['results'][0]['geometry']['location']['lat'];
-                $drop_off_longitude = $dropOffData['results'][0]['geometry']['location']['lng'];
+            $pickUpData = $pickUpResponse->json();
+            if ($pickUpData['status'] === 'OK') {
+                $pick_up_latitude = $pickUpData['results'][0]['geometry']['location']['lat'];
+                $pick_up_longitude = $pickUpData['results'][0]['geometry']['location']['lng'];
             } else {
                 return response()->json(['success' => false, 'message' => 'Currently no jobs to show']);
             }
-        }
+            $drop_off_latitude = null;
+            $drop_off_longitude = null;
+            if ($request->dropoff && $request->dropoff != 'Anywhere') {
+                $dropOffResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+                    'address' => $request->dropoff,
+                    'key' => config('constants.google_map_key'),
+                ]);
+                $dropOffData = $dropOffResponse->json();
+                if ($dropOffData['status'] === 'OK') {
+                    $drop_off_latitude = $dropOffData['results'][0]['geometry']['location']['lat'];
+                    $drop_off_longitude = $dropOffData['results'][0]['geometry']['location']['lng'];
+                } else {
+                    return response()->json(['success' => false, 'message' => 'Currently no jobs to show']);
+                }
+            }
 
-        $maxDistance = config('constants.max_range_km');
-        $user_data = Auth::guard('transporter')->user();
-        $my_quotes = QuoteByTransporter::where('user_id', $user_data->id)->get();
+            $maxDistance = config('constants.max_range_km');
+            $user_data = Auth::guard('transporter')->user();
+            $my_quotes = QuoteByTransporter::where('user_id', $user_data->id)->get();
 
-        $my_quote_ids = $my_quotes->pluck('user_quote_id');
+            $my_quote_ids = $my_quotes->pluck('user_quote_id');
 
-        $subQuery = UserQuote::query()
-            ->join('users', 'users.id', '=', 'user_quotes.user_id')
-            ->leftJoin('quote_by_transpoters', function ($join) {
-                $join->on('quote_by_transpoters.user_quote_id', '=', 'user_quotes.id')
-                    ->whereRaw('quote_by_transpoters.user_id = ?', [auth()->id()]); // Use DB::raw with a where condition
-            })
-            // ->whereNotIn('user_quotes.id', $my_quote_ids)
-            ->where(function ($query) {
-                $query->where('user_quotes.status', 'pending')
-                    ->orWhere('user_quotes.status', 'approved');
-            })
-            ->whereDate('user_quotes.created_at', '>=', now()->subDays(10));
-        if ($drop_off_latitude) {
-            // return "yessssssssss";
-            $subQuery->select(
-                'quote_by_transpoters.user_id as tranporterId',
-                'user_quotes.*',
-                'users.profile_image',
-                'users.username as name',
-                'users.address',
-                'users.town',
-                'users.county',
-                \DB::raw("( 6371 * acos( cos( radians($pick_up_latitude) ) * cos( radians( pickup_lat ) ) * cos( radians( pickup_lng ) - radians($pick_up_longitude) ) + sin( radians($pick_up_latitude) ) * sin( radians( pickup_lat ) ) ) ) AS distance_pickup"),
-                \DB::raw("( 6371 * acos( cos( radians($drop_off_latitude) ) * cos( radians( drop_lat ) ) * cos( radians( drop_lng ) - radians($drop_off_longitude) ) + sin( radians($drop_off_latitude) ) * sin( radians( drop_lat ) ) ) ) AS distance_drop_off"),
-                \DB::raw("COUNT(quote_by_transpoters.id) as quotes_count"), // Count the number of quotes by transporters
-                \DB::raw("MIN(quote_by_transpoters.transporter_payment) as lowest_bid"), // Get the lowest bid
-                DB::raw("(CASE 
+            $subQuery = UserQuote::query()
+                ->join('users', 'users.id', '=', 'user_quotes.user_id')
+                ->leftJoin('quote_by_transpoters', function ($join) {
+                    $join->on('quote_by_transpoters.user_quote_id', '=', 'user_quotes.id')
+                        ->whereRaw('quote_by_transpoters.user_id = ?', [auth()->id()]); // Use DB::raw with a where condition
+                })
+                // ->whereNotIn('user_quotes.id', $my_quote_ids)
+                ->where(function ($query) {
+                    $query->where('user_quotes.status', 'pending')
+                        ->orWhere('user_quotes.status', 'approved');
+                })
+                ->whereDate('user_quotes.created_at', '>=', now()->subDays(10));
+            if ($drop_off_latitude) {
+                // return "yessssssssss";
+                $subQuery->select(
+                    'quote_by_transpoters.user_id as tranporterId',
+                    'user_quotes.*',
+                    'users.profile_image',
+                    'users.username as name',
+                    'users.address',
+                    'users.town',
+                    'users.county',
+                    \DB::raw("( 6371 * acos( cos( radians($pick_up_latitude) ) * cos( radians( pickup_lat ) ) * cos( radians( pickup_lng ) - radians($pick_up_longitude) ) + sin( radians($pick_up_latitude) ) * sin( radians( pickup_lat ) ) ) ) AS distance_pickup"),
+                    \DB::raw("( 6371 * acos( cos( radians($drop_off_latitude) ) * cos( radians( drop_lat ) ) * cos( radians( drop_lng ) - radians($drop_off_longitude) ) + sin( radians($drop_off_latitude) ) * sin( radians( drop_lat ) ) ) ) AS distance_drop_off"),
+                    \DB::raw("COUNT(quote_by_transpoters.id) as quotes_count"), // Count the number of quotes by transporters
+                    \DB::raw("MIN(quote_by_transpoters.transporter_payment) as lowest_bid"), // Get the lowest bid
+                    DB::raw("(CASE 
                 WHEN (SELECT user_id FROM watchlists WHERE user_quote_id = user_quotes.id AND user_id = $user_data->id LIMIT 1) IS NOT NULL THEN 1 ELSE 0 END) AS watchlist_id")
-            )
-                ->having('distance_pickup', '<=', $maxDistance)
-                ->having('distance_drop_off', '<=', $maxDistance);
-        } else {
-            $subQuery->select(
-                'quote_by_transpoters.user_id as tranporterId',
-                'user_quotes.*',
-                'users.profile_image',
-                'users.username as name',
-                'users.address',
-                'users.town',
-                'users.county',
-                \DB::raw("( 6371 * acos( cos( radians($pick_up_latitude) ) * cos( radians( pickup_lat ) ) * cos( radians( pickup_lng ) - radians($pick_up_longitude) ) + sin( radians($pick_up_latitude) ) * sin( radians( pickup_lat ) ) ) ) AS distance_pickup"),
-                \DB::raw("COUNT(quote_by_transpoters.id) as quotes_count"), // Count the number of quotes by transporters
-                \DB::raw("MIN(quote_by_transpoters.transporter_payment) as lowest_bid"), // Get the lowest bid
-                DB::raw("(CASE 
+                )
+                    ->having('distance_pickup', '<=', $maxDistance)
+                    ->having('distance_drop_off', '<=', $maxDistance);
+            } else {
+                $subQuery->select(
+                    'quote_by_transpoters.user_id as tranporterId',
+                    'user_quotes.*',
+                    'users.profile_image',
+                    'users.username as name',
+                    'users.address',
+                    'users.town',
+                    'users.county',
+                    \DB::raw("( 6371 * acos( cos( radians($pick_up_latitude) ) * cos( radians( pickup_lat ) ) * cos( radians( pickup_lng ) - radians($pick_up_longitude) ) + sin( radians($pick_up_latitude) ) * sin( radians( pickup_lat ) ) ) ) AS distance_pickup"),
+                    \DB::raw("COUNT(quote_by_transpoters.id) as quotes_count"), // Count the number of quotes by transporters
+                    \DB::raw("MIN(quote_by_transpoters.transporter_payment) as lowest_bid"), // Get the lowest bid
+                    DB::raw("(CASE 
                 WHEN (SELECT user_id FROM watchlists WHERE user_quote_id = user_quotes.id AND user_id = $user_data->id LIMIT 1) IS NOT NULL THEN 1 ELSE 0 END) AS watchlist_id")
-            )
-                ->having('distance_pickup', '<=', $maxDistance);
+                )
+                    ->having('distance_pickup', '<=', $maxDistance);
+            }
+
+            $subQuery->groupBy('user_quotes.id')
+                ->latest();
+
+            $quotes = \DB::table(\DB::raw("({$subQuery->toSql()}) as sub"))
+                ->mergeBindings($subQuery->getQuery())
+                ->paginate(20);
+
+            $pickup = $request->pickup;
+            $dropoff = $request->dropoff;
+            // return $quotes;
+            return view('transporter.savedSearch.search_result', [
+                'quotes' => $quotes,
+                'pickup' => $pickup,
+                'dropoff' => $dropoff
+            ]);
+        } catch (\Exception $ex) {
+            return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
         }
-
-        $subQuery->groupBy('user_quotes.id')
-            ->latest();
-
-        $quotes = \DB::table(\DB::raw("({$subQuery->toSql()}) as sub"))
-            ->mergeBindings($subQuery->getQuery())
-            ->paginate(20);
-
-        $pickup = $request->pickup;
-        $dropoff = $request->dropoff;
-        // return $quotes;
-        return view('transporter.savedSearch.search_result', [
-            'quotes' => $quotes,
-            'pickup' => $pickup,
-            'dropoff' => $dropoff
-        ]);
     }
     public function manageNotification(Request $request)
     {
-        $user = Auth::guard('transporter')->user();
-        return view('transporter.dashboard.notifications.manageNotification', [
-            'data' => $user,
-        ]);
+        try {
+            $user = Auth::guard('transporter')->user();
+            return view('transporter.dashboard.notifications.manageNotification', [
+                'data' => $user,
+            ]);
+        } catch (\Exception $ex) {
+            return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
+        }
     }
     public function updateManageNotification(Request $request)
     {
-
-        $request->validate([
-            'summary_of_leads' => 'nullable|boolean',
-            'outbid_email_unsubscribe' => 'nullable|boolean',
-            'saved_search_alerts' => 'nullable|boolean',
-        ]);
-
-        // Update user preferences
         try {
-            $user = Auth::user();
-            $user->summary_of_leads = $request->input('summary_of_leads', 0);
-            $user->outbid_email_unsubscribe = $request->input('outbid_email_unsubscribe', 0);
-            $user->job_email_preference = $request->input('saved_search_alerts', 0);
-            $user->save();
+            $request->validate([
+                'summary_of_leads' => 'nullable|boolean',
+                'outbid_email_unsubscribe' => 'nullable|boolean',
+                'saved_search_alerts' => 'nullable|boolean',
+            ]);
 
-            return response()->json(['success' => true, 'message' => 'Preferences updated successfully.']);
-        } catch (\Exception $e) {
-            // Log the error for debugging
-            Log::error('Error updating preferences: ' . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Could not update preferences.'], 500);
+            // Update user preferences
+            try {
+                $user = Auth::user();
+                $user->summary_of_leads = $request->input('summary_of_leads', 0);
+                $user->outbid_email_unsubscribe = $request->input('outbid_email_unsubscribe', 0);
+                $user->job_email_preference = $request->input('saved_search_alerts', 0);
+                $user->save();
+
+                return response()->json(['success' => true, 'message' => 'Preferences updated successfully.']);
+            } catch (\Exception $e) {
+                // Log the error for debugging
+                Log::error('Error updating preferences: ' . $e->getMessage());
+                return response()->json(['success' => false, 'message' => 'Could not update preferences.'], 500);
+            }
+        } catch (\Exception $ex) {
+            return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
         }
     }
 }
