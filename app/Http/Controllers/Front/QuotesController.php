@@ -565,6 +565,7 @@ class QuotesController extends WebController
                         $subject = 'You have received a transport notification';
 
                         // Send the email
+                        
                         $this->emailService->sendEmail($email->email, $htmlContent, $subject);
 
                         // Update email_sent status

@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 namespace App\Console;
 
@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\Quote_email_send::class,
+        // \App\Console\Commands\Quote_email_send::class,
         \App\Console\Commands\SendDepositReminder::class,
         \App\Console\Commands\SendCollectionDeliveryReminder::class,
         \App\Console\Commands\SendQuotesSummaryEmail::class,
@@ -35,7 +35,7 @@ class Kernel extends ConsoleKernel
     
      protected function schedule(Schedule $schedule)
     {
-        $schedule->command('send:quote_email_sent')->everyMinute();
+        // $schedule->command('send:quote_email_sent')->everyMinute();
         $schedule->command('send:deposit-reminder')->hourly();
         $schedule->command('send:collection-delivery-reminder')->everyThirtyMinutes();
         $schedule->command('send:quotes-summary-email')->daily();
