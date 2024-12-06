@@ -1282,7 +1282,7 @@ class DashboardController extends WebController
 
             $subQuery->groupBy('user_quotes.id')
                 ->latest();
-
+            // return $subQuery;
             $quotes = \DB::table(\DB::raw("({$subQuery->toSql()}) as sub"))
                 ->mergeBindings($subQuery->getQuery())
                 ->paginate(20);

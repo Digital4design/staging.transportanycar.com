@@ -87,7 +87,8 @@ class SendTransporterEmail extends Command
     public function handle()
     {
         // Fetch new quotes from the last 24 hours
-        $newQuotes = UserQuote::whereDate("created_at", ">=", now()->subDay())
+        $newQuotes = UserQuote::where("created_at", ">=", now()->subHours(24))
+        ->where("created_at", "<", now())
         // ->whereIn("status", ["pending", "approved"])
         ->count();
 
