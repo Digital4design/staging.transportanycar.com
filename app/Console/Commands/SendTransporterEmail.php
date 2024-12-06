@@ -88,81 +88,82 @@ class SendTransporterEmail extends Command
     {
         // Fetch new quotes from the last 24 hours
         $newQuotes = UserQuote::whereDate("created_at", ">=", now()->subDay())
-        ->whereIn("status", ["pending", "approved"])
-        ->get();
+        // ->whereIn("status", ["pending", "approved"])
+        ->count();
 
         // Fetch active and approved transporters
         $transporters = DB::table("users")
         ->where("status", "active")
-        ->where("is_status", "approved")
+        // ->where("is_status", "approved")
         ->where("type", "car_transporter")
         ->get();
-
+        \Log::info('Email sent successfully for Quote : ' . $newQuotes);
+        // \Log::info('Email sent successfully for Quote ID: ' . $transporters);
         $maxDistance = config("constants.max_range_km");
 
         $systum = [];
 
         foreach ($transporters as $transporter) {
                 // Retrieve saved searches for this transporter
-                $savedSearches = SaveSearch::where('user_id', $transporter->id)->get();
+                // $savedSearches = SaveSearch::where('user_id', $transporter->id)->get();
 
-                foreach ($savedSearches as $search) {
-                    // Fetch pickup coordinates
-                    $pickUpResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
-                        'address' => $search->pick_area,
-                        'key' => config('constants.google_map_key'),
-                    ]);
+                // foreach ($savedSearches as $search) {
+                //     // Fetch pickup coordinates
+                //     $pickUpResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+                //         'address' => $search->pick_area,
+                //         'key' => config('constants.google_map_key'),
+                //     ]);
                 
-                    $pickUpData = $pickUpResponse->json();
-                    if ($pickUpData['status'] !== 'OK') {
-                        continue; // Skip if coordinates are not found
-                    }
-                    $pickUpLat = $pickUpData['results'][0]['geometry']['location']['lat'];
-                    $pickUpLng = $pickUpData['results'][0]['geometry']['location']['lng'];
+                //     $pickUpData = $pickUpResponse->json();
+                //     if ($pickUpData['status'] !== 'OK') {
+                //         continue; // Skip if coordinates are not found
+                //     }
+                //     $pickUpLat = $pickUpData['results'][0]['geometry']['location']['lat'];
+                //     $pickUpLng = $pickUpData['results'][0]['geometry']['location']['lng'];
                 
-                    // Fetch drop-off coordinates if provided
-                    $dropOffLat = $dropOffLng = null;
-                    if (!empty($search->drop_area) && $search->drop_area !== 'Anywhere') {
-                        $dropOffResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
-                            'address' => $search->drop_area,
-                            'key' => config('constants.google_map_key'),
-                        ]);
-                        $dropOffData = $dropOffResponse->json();
-                        if ($dropOffData['status'] === 'OK') {
-                            $dropOffLat = $dropOffData['results'][0]['geometry']['location']['lat'];
-                            $dropOffLng = $dropOffData['results'][0]['geometry']['location']['lng'];
-                        }
-                    }
+                //     // Fetch drop-off coordinates if provided
+                //     $dropOffLat = $dropOffLng = null;
+                //     if (!empty($search->drop_area) && $search->drop_area !== 'Anywhere') {
+                //         $dropOffResponse = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+                //             'address' => $search->drop_area,
+                //             'key' => config('constants.google_map_key'),
+                //         ]);
+                //         $dropOffData = $dropOffResponse->json();
+                //         if ($dropOffData['status'] === 'OK') {
+                //             $dropOffLat = $dropOffData['results'][0]['geometry']['location']['lat'];
+                //             $dropOffLng = $dropOffData['results'][0]['geometry']['location']['lng'];
+                //         }
+                //     }
                 
                     // Build the query to calculate the matching quotes
-                    $quoteQuery = UserQuote::query()
-                        ->whereIn('status', ['pending', 'approved'])
-                        ->whereDate('created_at', '>=', now()->subDay());
+                    // $quoteQuery = UserQuote::query()
+                    //     ->whereIn('status', ['pending', 'approved'])
+                    //     ->whereDate('created_at', '>=', now()->subDay());
                 
-                    if ($dropOffLat) {
-                        $quoteQuery->select(
-                            \DB::raw("(6371 * acos(cos(radians($pickUpLat)) * cos(radians(pickup_lat)) * cos(radians(pickup_lng) - radians($pickUpLng)) + sin(radians($pickUpLat)) * sin(radians(pickup_lat)))) AS distance_pickup"),
-                            \DB::raw("(6371 * acos(cos(radians($dropOffLat)) * cos(radians(drop_lat)) * cos(radians(drop_lng) - radians($dropOffLng)) + sin(radians($dropOffLat)) * sin(radians(drop_lat)))) AS distance_drop_off")
-                        )
-                            ->having('distance_pickup', '<=', $maxDistance)
-                            ->having('distance_drop_off', '<=', $maxDistance);
-                    } else {
-                        $quoteQuery->select(
-                            \DB::raw("(6371 * acos(cos(radians($pickUpLat)) * cos(radians(pickup_lat)) * cos(radians(pickup_lng) - radians($pickUpLng)) + sin(radians($pickUpLat)) * sin(radians(pickup_lat)))) AS distance_pickup")
-                        )
-                            ->having('distance_pickup', '<=', $maxDistance);
-                    }
+                    // if ($dropOffLat) {
+                    //     $quoteQuery->select(
+                    //         \DB::raw("(6371 * acos(cos(radians($pickUpLat)) * cos(radians(pickup_lat)) * cos(radians(pickup_lng) - radians($pickUpLng)) + sin(radians($pickUpLat)) * sin(radians(pickup_lat)))) AS distance_pickup"),
+                    //         \DB::raw("(6371 * acos(cos(radians($dropOffLat)) * cos(radians(drop_lat)) * cos(radians(drop_lng) - radians($dropOffLng)) + sin(radians($dropOffLat)) * sin(radians(drop_lat)))) AS distance_drop_off")
+                    //     )
+                    //         ->having('distance_pickup', '<=', $maxDistance)
+                    //         ->having('distance_drop_off', '<=', $maxDistance);
+                    // } else {
+                    //     $quoteQuery->select(
+                    //         \DB::raw("(6371 * acos(cos(radians($pickUpLat)) * cos(radians(pickup_lat)) * cos(radians(pickup_lng) - radians($pickUpLng)) + sin(radians($pickUpLat)) * sin(radians(pickup_lat)))) AS distance_pickup")
+                    //     )
+                    //         ->having('distance_pickup', '<=', $maxDistance);
+                    // }
                 
                     // Count matching quotes
-                    $quoteCount = $quoteQuery->count();
-                    $systum[] = ["$transporter->first_name" => "$quoteCount"];
+                    // $quoteCount = $newQuotes->count();
+                    $systum[] = ["$transporter->first_name" => "$newQuotes"];
                 
                     // Send email only if there are matching quotes
-                    if ($quoteCount > 0) {
+                    if ($newQuotes > 0) {
                         // Prepare email data
                         $mailData = [
                             'name' => $transporter->first_name,
-                            'last24HoursCount' => $quoteCount,
+                            'last24HoursCount' => $newQuotes,
                         ];
                     
                         // return view('mail.General.today-transporter-leads', ['quote' => $mailData])->render();
@@ -171,13 +172,13 @@ class SendTransporterEmail extends Command
                         $subject = 'Today’s Transporter Leads';
                     
                         try {
-                            if ($transporter->summary_of_leads == 1 && $transporter->email_notification == true) {
+                            if ($transporter->summary_of_leads == 1) {
                                 $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
                             }
                         } catch (\Exception $ex) {
                             \Log::error('Error sending email: ' . $ex->getMessage());
                         }
-                    }
+                    // }
                 }
             }
     }

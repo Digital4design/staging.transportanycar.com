@@ -68,7 +68,9 @@ return [
     */
 
     // 'timezone' => 'UTC',
-    'timezone' => 'Europe/London',
+    // 'timezone' => 'Europe/London',
+    'timezone' => 'Asia/Kolkata',
+
 
     /*
     |--------------------------------------------------------------------------
