@@ -563,7 +563,7 @@ class QuotesController extends WebController
                             'pickup_postcode' => formatAddress($quote['pickup_postcode']),
                             'drop_postcode' => formatAddress($quote['drop_postcode']),
                             'delivery_timeframe_from' => isset($quote['delivery_timeframe_from']) ? $quote['delivery_timeframe_from'] : null,
-                            'starts_drives' => isset($quote['starts_drives']) && $quote['starts_drives'] == 1 ? 'Yes' : 'No',
+                            'starts_drives' =>  $quote['starts_drives'] ,
                             'starts_drives_1' => $quote['starts_drives_1'],
                             'how_moved' => $quote['how_moved'],
                             'distance' => $quote['distance'],
