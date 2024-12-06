@@ -24,6 +24,7 @@ use Exception;
 use App\Services\SmsService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Http;
 
 
 class QuotesController extends WebController
@@ -501,85 +502,184 @@ class QuotesController extends WebController
 
     public function SaveSearchQuoteEmailSend($quote)
     {
-        $pickupWords = array_map('trim', preg_split('/[\s,]+/', strtolower($quote['pickup_postcode'])));
-        $dropWords = array_map('trim', preg_split('/[\s,]+/', strtolower($quote['drop_postcode'])));
-
-// dd($pickupWords);
-// dd($dropWords);
-// return;
-     
-        //    dd($pickupWords);
-        $transporter = DB::table('save_searches')
-            ->join('users', function ($join) {
-                $join->on('users.id', '=', 'save_searches.user_id')
-                    ->where('users.status', 'active')
-                    ->where('users.type', 'car_transporter')
-                    ->where('users.is_status', 'approved');
-                // ->where('users.job_email_preference', 1);
-            })
-            ->where(function ($query) use ($pickupWords) {
-                foreach ($pickupWords as $word) {
-                    $query->orWhere(DB::raw('LOWER(save_searches.pick_area)'), 'LIKE', '%' . $word . '%');
-                }
-            })
-            // Match if any of the words in the drop_postcode input match the drop_area
-            ->where(function ($query) use ($dropWords) {
-                $query->orWhere(function ($innerQuery) use ($dropWords) {
-                    foreach ($dropWords as $word) {
-                        $innerQuery->orWhere(DB::raw('LOWER(save_searches.drop_area)'), 'LIKE', '%' . $word . '%');
-                    }
-                })
-                    ->orWhereNull('save_searches.drop_area') // Match if drop_area is NULL
-                    ->orWhere('save_searches.drop_area', 'anywhere'); // Match if drop_area is 'anywhere'
-            })
-            ->where('save_searches.email_notification', 'true')
-            ->groupBy('users.id')
-            ->get();
+        // $pickupWords = array_map('trim', preg_split('/[\s,]+/', strtolower($quote['pickup_postcode'])));
+        // $dropWords = array_map('trim', preg_split('/[\s,]+/', strtolower($quote['drop_postcode'])));
+        // $transporter = DB::table('save_searches')
+        //     ->join('users', function ($join) {
+        //         $join->on('users.id', '=', 'save_searches.user_id')
+        //             ->where('users.status', 'active')
+        //             ->where('users.type', 'car_transporter')
+        //             ->where('users.is_status', 'approved');
+        //         // ->where('users.job_email_preference', 1);
+        //     })
+        //     ->where(function ($query) use ($pickupWords) {
+        //         foreach ($pickupWords as $word) {
+        //             $query->orWhere(DB::raw('LOWER(save_searches.pick_area)'), 'LIKE', '%' . $word . '%');
+        //         }
+        //     })
+        //     // Match if any of the words in the drop_postcode input match the drop_area
+        //     ->where(function ($query) use ($dropWords) {
+        //         $query->orWhere(function ($innerQuery) use ($dropWords) {
+        //             foreach ($dropWords as $word) {
+        //                 $innerQuery->orWhere(DB::raw('LOWER(save_searches.drop_area)'), 'LIKE', '%' . $word . '%');
+        //             }
+        //         })
+        //             ->orWhereNull('save_searches.drop_area') // Match if drop_area is NULL
+        //             ->orWhere('save_searches.drop_area', 'anywhere'); // Match if drop_area is 'anywhere'
+        //     })
+        //     ->where('save_searches.email_notification', 'true')
+        //     ->groupBy('users.id')
+        //     ->get();
        
-            foreach ($transporter as $email) {
-                if ($email->job_email_preference == 1) {
-                    $mailData = [
+        //     foreach ($transporter as $email) {
+        //         if ($email->job_email_preference == 1) {
+        //             $mailData = [
                       
-                            'id' => $quote['quotation_id'],
-                            'vehicle_make' => $quote['vehicle_make'],
-                            'vehicle_model' => $quote['vehicle_model'],
-                            'vehicle_make_1' => $quote['vehicle_make_1'],
-                            'vehicle_model_1' => $quote['vehicle_model_1'],
-                            'pickup_postcode' => formatAddress($quote['pickup_postcode']),
-                            'drop_postcode' => formatAddress($quote['drop_postcode']),
-                            'delivery_timeframe_from' => isset($quote['delivery_timeframe_from']) ? $quote['delivery_timeframe_from'] : null,
-                            'starts_drives' =>  $quote['starts_drives'] ,
-                            'starts_drives_1' => $quote['starts_drives_1'],
-                            'how_moved' => $quote['how_moved'],
-                            'distance' => $quote['distance'],
-                            'duration' => $quote['duration'],
-                            'map_image' => $quote['map_image'],
-                            'delivery_timeframe' => $quote['delivery_timeframe'],
+        //                     'id' => $quote['quotation_id'],
+        //                     'vehicle_make' => $quote['vehicle_make'],
+        //                     'vehicle_model' => $quote['vehicle_model'],
+        //                     'vehicle_make_1' => $quote['vehicle_make_1'],
+        //                     'vehicle_model_1' => $quote['vehicle_model_1'],
+        //                     'pickup_postcode' => formatAddress($quote['pickup_postcode']),
+        //                     'drop_postcode' => formatAddress($quote['drop_postcode']),
+        //                     'delivery_timeframe_from' => isset($quote['delivery_timeframe_from']) ? $quote['delivery_timeframe_from'] : null,
+        //                     'starts_drives' =>  $quote['starts_drives'] ,
+        //                     'starts_drives_1' => $quote['starts_drives_1'],
+        //                     'how_moved' => $quote['how_moved'],
+        //                     'distance' => $quote['distance'],
+        //                     'duration' => $quote['duration'],
+        //                     'map_image' => $quote['map_image'],
+        //                     'delivery_timeframe' => $quote['delivery_timeframe'],
                        
                         
-                    ];
+        //             ];
 
-                    try {
-                        // Generate email content
-                        $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
-                        $subject = 'You have received a transport notification';
+        //             try {
+        //                 // Generate email content
+        //                 $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
+        //                 $subject = 'You have received a transport notification';
 
-                        // Send the email
+        //                 // Send the email
                         
-                        $this->emailService->sendEmail($email->email, $htmlContent, $subject);
+        //                 $this->emailService->sendEmail($email->email, $htmlContent, $subject);
 
-                        // Update email_sent status
+        //                 // Update email_sent status
 
 
-                        \Log::info('Email sent successfully for Quote ID: ' .$quote['quotation_id']);
-                    } catch (\Exception $ex) {
-                        \Log::error('Error sending email to transporter: ' . $ex->getMessage());
-                    }
+        //                 \Log::info('Email sent successfully for Quote ID: ' .$quote['quotation_id']);
+        //             } catch (\Exception $ex) {
+        //                 \Log::error('Error sending email to transporter: ' . $ex->getMessage());
+        //             }
+        //         }
+        //     }
+        //     DB::table('user_quotes')
+        //         ->where('id', $quote['quotation_id'])
+        //         ->update(['email_sent' => 1]);
+        $pickupCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+            'address' => $quote['pickup_postcode'],
+            'key' => config('constants.google_map_key'),
+        ])->json();
+    
+        $dropCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+            'address' => $quote['drop_postcode'],
+            'key' => config('constants.google_map_key'),
+        ])->json();
+    
+        // Extract latitude and longitude for pickup and drop locations
+        $pickupLat = $pickupCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
+        $pickupLng = $pickupCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
+        $dropLat = $dropCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
+        $dropLng = $dropCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
+    
+        // Validate the fetched coordinates
+        if (!$pickupLat || !$pickupLng) {
+            \Log::error('Pickup postcode coordinates not found for Quote ID: ' . $quote['quotation_id']);
+            return;
+        }
+    
+        if (!$dropLat || !$dropLng) {
+            \Log::error('Drop postcode coordinates not found for Quote ID: ' . $quote['quotation_id']);
+            return;
+        }
+    
+        // Define the maximum allowed range in kilometers
+        $maxRangeKm = config('constants.max_range_km', 50);
+    
+        // Query saved searches using geolocation and additional conditions
+        // Query saved searches using geolocation and additional conditions
+        $savedSearches = DB::table('save_searches')
+        ->select(
+            'id',
+            'pick_area',
+            'drop_area',
+            'user_id',
+            DB::raw(" 
+                (6371 * acos(
+                    cos(radians($pickupLat)) 
+                    * cos(radians(pick_lat)) 
+                    * cos(radians(pick_lng) - radians($pickupLng)) 
+                    + sin(radians($pickupLat)) 
+                    * sin(radians(pick_lat))
+                )) AS distance_pickup,
+                CASE 
+                    WHEN LOWER(drop_area) = 'anywhere' THEN 0
+                    WHEN drop_area IS NULL THEN 0
+                    ELSE (6371 * acos(
+                        cos(radians($dropLat)) 
+                        * cos(radians(drop_lat)) 
+                        * cos(radians(drop_lng) - radians($dropLng)) 
+                        + sin(radians($dropLat)) 
+                        * sin(radians(drop_lat))
+                    ))
+                END AS distance_drop
+            ")
+        )
+        ->having('distance_pickup', '<=', $maxRangeKm) // Pickup location must match
+        ->havingRaw('distance_drop <= ? OR LOWER(drop_area) = ?', [$maxRangeKm, 'anywhere']) // Drop area must match or be "anywhere"
+        ->get();
+    
+        // If no saved searches match, exit the function
+        if ($savedSearches->isEmpty()) {
+            \Log::info('No matching saved searches found for Quote ID: ' . $quote['quotation_id']);
+        }
+    
+        // Iterate through the transporters and send email notifications
+        foreach ($savedSearches as $savedSearch) {
+            $transporter = DB::table('users')
+                ->where('id', $savedSearch->user_id)
+                ->where('status', 'active')
+                ->where('type', 'car_transporter')
+                ->where('is_status', 'approved')
+                ->first();
+            if ($transporter && $transporter->job_email_preference == 1) {
+                $mailData = [
+                    'id' => $quote['id'],
+                    'vehicle_make' => $quote['vehicle_make'],
+                    'vehicle_model' => $quote['vehicle_model'],
+                    'vehicle_make_1' => $quote['vehicle_make_1'],
+                    'vehicle_model_1' => $quote['vehicle_model_1'],
+                    'pickup_postcode' => $quote['pickup_postcode'],
+                    'drop_postcode' => $quote['drop_postcode'],
+                    'delivery_timeframe_from' => $quote['delivery_timeframe_from'] ?? null,
+                    'starts_drives' => $quote['starts_drives'],
+                    'starts_drives_1' => $quote['starts_drives_1'],
+                    'how_moved' => $quote['how_moved'],
+                    'distance' => $quote['distance'],
+                    'duration' => $quote['duration'],
+                    'map_image' => $quote['map_image'],
+                    'delivery_timeframe' => $quote['delivery_timeframe'],
+                ];
+                try {
+                    $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
+                    $subject = 'You have received a transport notification';
+                    $this->emailService->sendEmail("ravichaudhary.d4d@gmail.com", $htmlContent, $subject);
+                    \Log::error("Save Search EMail sended successfully",$transporter->email);
+                } catch (\Exception $ex) {
+                    \Log::error('Error sending email to transporter for Quote ID: ' . $quote['quotation_id'] . ': ' . $ex->getMessage());
+                    
                 }
             }
-            DB::table('user_quotes')
-                ->where('id', $quote['quotation_id'])
-                ->update(['email_sent' => 1]);
+        }
         
     }
 
