@@ -1030,24 +1030,84 @@ class DashboardController extends WebController
     {
         // return $request->all();
         try {
-            $data = [
-                "user_id" => auth()->user()->id,
-                "search_name" => $request->search_name,
-                "pick_area" => $request->pick_area,
-                "drop_area" => $request->drop_area,
-                "email_notification" => $request->emailNtf, // Convert to integer (1 or 0)
-            ];
+            // $data = [
+            //     "user_id" => auth()->user()->id,
+            //     "search_name" => $request->search_name,
+            //     "pick_area" => $request->pick_area,
+            //     "drop_area" => $request->drop_area,
+            //     "email_notification" => $request->emailNtf, // Convert to integer (1 or 0)
+            // ];
 
-            $saveSearch = SaveSearch::updateOrCreate(
-                [
-                    'user_id' => $data['user_id'],
-                    'pick_area' => $data['pick_area'],
-                    'drop_area' => $data['drop_area'],
-                    'email_notification' => '1'
-                ],
-                $data // The data to be updated or inserted
-            );
+            // $saveSearch = SaveSearch::updateOrCreate(
+            //     [
+            //         'user_id' => $data['user_id'],
+            //         'pick_area' => $data['pick_area'],
+            //         'drop_area' => $data['drop_area'],
+            //         'email_notification' => '1'
+            //     ],
+            //     $data // The data to be updated or inserted
+            // );
+            // Fetch coordinates for pickup and drop areas using Google Maps API
+     // Fetch coordinates for pickup area using Google Maps API
+     $pickupCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+        'address' => $request->pick_area,
+        'key' => config('constants.google_map_key'),
+    ])->json();
 
+    // Extract pickup coordinates
+    $pickupLat = $pickupCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
+    $pickupLng = $pickupCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
+
+    // Validate if coordinates were fetched successfully for pickup
+    if (!$pickupLat || !$pickupLng) {
+        return response()->json(['success' => false, 'message' => 'Failed to fetch pickup coordinates.']);
+    }
+
+    // If drop_area is "anywhere" or null, skip Google Maps API and set default coordinates
+    if (strtolower($request->drop_area) === 'anywhere' || $request->drop_area === null) {
+        $dropLat = null;  // You can set this to any default value like 0 if needed
+        $dropLng = null;  // You can set this to any default value like 0 if needed
+    } else {
+        // Fetch coordinates for drop area using Google Maps API
+        $dropCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+            'address' => $request->drop_area,
+            'key' => config('constants.google_map_key'),
+        ])->json();
+
+        // Extract drop coordinates
+        $dropLat = $dropCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
+        $dropLng = $dropCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
+
+        // Validate if coordinates were fetched successfully for drop
+        if (!$dropLat || !$dropLng) {
+            return response()->json(['success' => false, 'message' => 'Failed to fetch drop coordinates.']);
+        }
+    }
+
+    // Prepare data for saving
+    $data = [
+        "user_id" => auth()->user()->id,
+        "search_name" => $request->search_name,
+        "pick_area" => $request->pick_area,
+        "drop_area" => $request->drop_area ?? "Anywhere",
+        "pick_lat" => $pickupLat,    // Use coordinates from Google API
+        "pick_lng" => $pickupLng,    // Use coordinates from Google API
+        "drop_lat" => $dropLat,      // Use coordinates from Google API or default
+        "drop_lng" => $dropLng,      // Use coordinates from Google API or default
+        "email_notification" => $request->emailNtf, // Convert to integer (1 or 0)
+    ];
+
+
+    // Save or update the search record
+    $saveSearch = SaveSearch::updateOrCreate(
+        [
+            'user_id' => $data['user_id'],
+            'pick_area' => $data['pick_area'],
+            'drop_area' => $data['drop_area'],
+            'email_notification' => '1',
+        ],
+        $data
+    );
 
 
             return response(["success" => true, "message" => "Search saved successfully!", "data" => []]);

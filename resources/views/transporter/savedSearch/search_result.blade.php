@@ -2407,6 +2407,7 @@
             e.preventDefault();
             var pick_area = $("#search_pick_up_area").val();
             var drop_area = $("#search_drop_off_area").val();
+            
             var search_name = $("#srchName").val();
             var isChecked = $('#emailNtf').prop('checked');
             $("#srchName").next("span.error").remove();
