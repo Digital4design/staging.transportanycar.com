@@ -503,6 +503,11 @@ class QuotesController extends WebController
     {
         $pickupWords = array_map('trim', preg_split('/[\s,]+/', strtolower($quote['pickup_postcode'])));
         $dropWords = array_map('trim', preg_split('/[\s,]+/', strtolower($quote['drop_postcode'])));
+
+// dd($pickupWords);
+// dd($dropWords);
+// return;
+     
         //    dd($pickupWords);
         $transporter = DB::table('save_searches')
             ->join('users', function ($join) {
