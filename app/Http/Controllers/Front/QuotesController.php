@@ -603,7 +603,7 @@ class QuotesController extends WebController
         }
     
         // Define the maximum allowed range in kilometers
-        $maxDistance = config('constants.max_range_km');
+        $maxRangeKm = config('constants.max_range_km', 30);
     
         // Query saved searches using geolocation and additional conditions
         // Query saved searches using geolocation and additional conditions
