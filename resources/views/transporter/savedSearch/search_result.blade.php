@@ -2746,7 +2746,7 @@
                     <div class="jobsrch_box">
                         <div class="row">                           
                             <div class="col-lg-6">
-                                 <div class="jobsrch_top_box position-relative">
+                                  <div class="jobsrch_top_box position-relative">
                                     ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
                                                         <div>
                                                             <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
@@ -2760,8 +2760,7 @@
                                                 <div>
                                                     <img src="/${carData.image_1}" class="vehicle_image" alt="Vehicle Image" />
                                                 </div>
-                                            ` : 
-                                            `
+                                            ` : `
                                                 <div>
                                                     <img src="/uploads/no_car_image.png" class="vehicle_image" alt="No Image Available" />
                                                 </div>
