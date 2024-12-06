@@ -530,27 +530,7 @@ class QuotesController extends WebController
             ->where('save_searches.email_notification', 'true')
             ->groupBy('users.id')
             ->get();
-        // $last24HoursCount = UserQuote::where('created_at', '>=', Carbon::now()->subDay())->count();
-
-        //     foreach($transporter as $transport)
-        //     {
-        //     $mailData = [
-        //         'last24HoursCount' =>$last24HoursCount,
-        //        'name'=>$transport->first_name,
-        //     ]; 
-
-        //     $htmlContent = view('mail.General.today-transporter-leads', ['quote' => $mailData])->render();
-        //     $subject='Todays Transport Leads';
-
-
-
-        //       $this->emailService->sendEmail($transport->email, $htmlContent, $subject);
-        // //    }
-        // $quotes = DB::table('user_quotes')
-        //     ->where('email_sent', 0)
-        //     ->orderBy('id', 'asc')
-        //     ->get();
-    //   dd($quote['quotation_id']);
+       
             foreach ($transporter as $email) {
                 if ($email->job_email_preference == 1) {
                     $mailData = [
