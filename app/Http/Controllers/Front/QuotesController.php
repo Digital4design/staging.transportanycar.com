@@ -653,7 +653,7 @@ class QuotesController extends WebController
                 ->first();
             if ($transporter && $transporter->job_email_preference == 1) {
                 $mailData = [
-                    'id' => $quote['id'],
+                    'id' => $quote['quotation_id'],
                     'vehicle_make' => $quote['vehicle_make'],
                     'vehicle_model' => $quote['vehicle_model'],
                     'vehicle_make_1' => $quote['vehicle_make_1'],
@@ -672,8 +672,8 @@ class QuotesController extends WebController
                 try {
                     $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
                     $subject = 'You have received a transport notification';
-                    $this->emailService->sendEmail("ravichaudhary.d4d@gmail.com", $htmlContent, $subject);
-                    \Log::error("Save Search EMail sended successfully",$transporter->email);
+                    $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
+                    \Log::error("Save Search EMail sended successfully".$transporter->email);
                 } catch (\Exception $ex) {
                     \Log::error('Error sending email to transporter for Quote ID: ' . $quote['quotation_id'] . ': ' . $ex->getMessage());
                     
