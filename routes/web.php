@@ -148,7 +148,7 @@ Route::get("/new/template/check", function () {
 });
 
 Route::get("/check/postcode",function(){
-    $quote = UserQuote::where('id',756)->first()->toArray();
+    $quote = UserQuote::where('id',754)->first()->toArray();
 
     $pickupCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
         'address' => $quote['pickup_postcode'],
@@ -160,65 +160,62 @@ Route::get("/check/postcode",function(){
         'key' => config('constants.google_map_key'),
     ])->json();
 
-    // Extract latitude and longitude for pickup and drop locations
     $pickupLat = $pickupCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
     $pickupLng = $pickupCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
     $dropLat = $dropCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
     $dropLng = $dropCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
 
-    // Validate the fetched coordinates
     if (!$pickupLat || !$pickupLng) {
-        \Log::error('Pickup postcode coordinates not found for Quote ID: ' . $quote['id']);
+        \Log::error('Pickup postcode coordinates not found for Quote ID: ' . $quote['quotation_id']);
         return;
     }
 
     if (!$dropLat || !$dropLng) {
-        \Log::error('Drop postcode coordinates not found for Quote ID: ' . $quote['id']);
+        \Log::error('Drop postcode coordinates not found for Quote ID: ' . $quote['quotation_id']);
         return;
     }
 
-    // Define the maximum allowed range in kilometers
     $maxRangeKm = config('constants.max_range_km', 50);
 
-    // Query saved searches using geolocation and additional conditions
-    // Query saved searches using geolocation and additional conditions
     $savedSearches = DB::table('save_searches')
-    ->select(
-        'id',
-        'pick_area',
-        'drop_area',
-        'user_id',
-        DB::raw(" 
-            (6371 * acos(
-                cos(radians($pickupLat)) 
-                * cos(radians(pick_lat)) 
-                * cos(radians(pick_lng) - radians($pickupLng)) 
-                + sin(radians($pickupLat)) 
-                * sin(radians(pick_lat))
-            )) AS distance_pickup,
-            CASE 
-                WHEN LOWER(drop_area) = 'anywhere' THEN 0
-                WHEN drop_area IS NULL THEN 0
-                ELSE (6371 * acos(
-                    cos(radians($dropLat)) 
-                    * cos(radians(drop_lat)) 
-                    * cos(radians(drop_lng) - radians($dropLng)) 
-                    + sin(radians($dropLat)) 
-                    * sin(radians(drop_lat))
-                ))
-            END AS distance_drop
-        ")
-    )
-    ->having('distance_pickup', '<=', $maxRangeKm) // Pickup location must match
-    ->havingRaw('distance_drop <= ? OR LOWER(drop_area) = ?', [$maxRangeKm, 'anywhere']) // Drop area must match or be "anywhere"
-    ->get();
+        ->select(
+            'id',
+            'pick_area',
+            'drop_area',
+            'user_id',
+            DB::raw(" 
+                (6371 * acos(
+                    cos(radians($pickupLat)) 
+                    * cos(radians(pick_lat)) 
+                    * cos(radians(pick_lng) - radians($pickupLng)) 
+                    + sin(radians($pickupLat)) 
+                    * sin(radians(pick_lat))
+                )) AS distance_pickup,
+                CASE 
+                    WHEN LOWER(drop_area) = 'anywhere' THEN 0
+                    ELSE (6371 * acos(
+                        cos(radians($dropLat)) 
+                        * cos(radians(drop_lat)) 
+                        * cos(radians(drop_lng) - radians($dropLng)) 
+                        + sin(radians($dropLat)) 
+                        * sin(radians(drop_lat))
+                    ))
+                END AS distance_drop
+            ")
+        )
+        ->having('distance_pickup', '<=', $maxRangeKm)
+        ->where(function ($query) use ($maxRangeKm) {
+            $query->havingRaw('distance_drop <= ? OR LOWER(drop_area) = ?', [$maxRangeKm, 'anywhere']);
+        })
+        ->get();
 
-    // If no saved searches match, exit the function
+        // return $savedSearches;
+
     if ($savedSearches->isEmpty()) {
-        \Log::info('No matching saved searches found for Quote ID: ' . $quote['id']);
+        \Log::info('No matching saved searches found for Quote ID: ' . $quote['quotation_id']);
+        return;
     }
 
-    // Iterate through the transporters and send email notifications
     foreach ($savedSearches as $savedSearch) {
         $transporter = DB::table('users')
             ->where('id', $savedSearch->user_id)
@@ -226,7 +223,8 @@ Route::get("/check/postcode",function(){
             ->where('type', 'car_transporter')
             ->where('is_status', 'approved')
             ->first();
-        if ($transporter && $transporter->job_email_preference == 1) {
+
+        if ($transporter) {
             $mailData = [
                 'id' => $quote['id'],
                 'vehicle_make' => $quote['vehicle_make'],
@@ -247,11 +245,11 @@ Route::get("/check/postcode",function(){
             try {
                 $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
                 $subject = 'You have received a transport notification';
-                $this->emailService->sendEmail("ravichaudhary.d4d@gmail.com", $htmlContent, $subject);
-                \Log::error("Save Search EMail sended successfully",$transporter->email);
+                $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
+                \Log::info("Save Search Email sent successfully to {$transporter->email}");
             } catch (\Exception $ex) {
                 \Log::error('Error sending email to transporter for Quote ID: ' . $quote['id'] . ': ' . $ex->getMessage());
-                
+                // return $ex->getMessage();
             }
         }
     }
