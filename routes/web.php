@@ -149,109 +149,35 @@ Route::get("/new/template/check", function () {
 });
 
 Route::get("/check/postcode",function(){
-    $quote = UserQuote::where('id',754)->first()->toArray();
+    $id = 744;
+    $quote = UserQuote::where('id',$id)->first()->toArray();
+    $quoteData = [
+        'user_id' => $quote->user_id,
+        'pickup_postcode' => $quote->pickup_postcode,
+        'pickup_lat' => $quote->pickup_lat,
+        'pickup_lng' => $quote->pickup_lng,
+        'drop_postcode' => $quote->drop_postcode,
+        'drop_lat' => $quote->drop_lat,
+        'drop_lng' => $quote->drop_lng,
+        'distance' => $quote->distance,
+        'duration' => $quote->duration,
+        'vehicle_make' => $quote->vehicle_make ?? null,
+        'vehicle_model' => $quote->vehicle_model ?? null,
+        'starts_drives' => $quote->starts_drives ?? '0',
+        'image' => $quote->image  === 'http://localhost:8000/uploads/no_quote.png' ? null : $quote->image,
+        'vehicle_make_1' => $quote->vehicle_make_1 ?? null,
+        'vehicle_model_1' => $quote->vehicle_model_1 ?? null,
+        'starts_drives_1' => $quote->starts_drives_1 ?? null,
+        'image_1' => $quote->image_1  === 'http://localhost:8000/uploads/no_quote.png' ? null : $quote->image_1,
+        'map_image' => null,
+        'created_at' => $now = Carbon::now('Europe/London'),
+        'updated_at' => $now = Carbon::now('Europe/London'),
+        'how_moved' => $quote->how_moved ?? null,
+        'delivery_timeframe_from' => $quote->delivery_timeframe_date ? (\DateTime::createFromFormat('d/m/Y', $quote->delivery_timeframe_date) ? \DateTime::createFromFormat('d/m/Y', $quote->delivery_timeframe_date)->format('Y-m-d') : null) : null,
+        'delivery_timeframe' => $quote->delivery_timeframe ?? null,
+        'email' => $quote->email ?? null,
+    ];
+    $idNew = UserQuote::create($data);
 
-    $pickupCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
-        'address' => $quote['pickup_postcode'],
-        'key' => config('constants.google_map_key'),
-    ])->json();
-
-    $dropCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
-        'address' => $quote['drop_postcode'],
-        'key' => config('constants.google_map_key'),
-    ])->json();
-
-    $pickupLat = $pickupCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
-    $pickupLng = $pickupCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
-    $dropLat = $dropCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
-    $dropLng = $dropCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
-
-    if (!$pickupLat || !$pickupLng) {
-        \Log::error('Pickup postcode coordinates not found for Quote ID: ' . $quote['quotation_id']);
-        return;
-    }
-
-    if (!$dropLat || !$dropLng) {
-        \Log::error('Drop postcode coordinates not found for Quote ID: ' . $quote['quotation_id']);
-        return;
-    }
-
-    $maxRangeKm = config('constants.max_range_km', 50);
-
-    $savedSearches = DB::table('save_searches')
-        ->select(
-            'id',
-            'pick_area',
-            'drop_area',
-            'user_id',
-            DB::raw(" 
-                (6371 * acos(
-                    cos(radians($pickupLat)) 
-                    * cos(radians(pick_lat)) 
-                    * cos(radians(pick_lng) - radians($pickupLng)) 
-                    + sin(radians($pickupLat)) 
-                    * sin(radians(pick_lat))
-                )) AS distance_pickup,
-                CASE 
-                    WHEN LOWER(drop_area) = 'anywhere' THEN 0
-                    ELSE (6371 * acos(
-                        cos(radians($dropLat)) 
-                        * cos(radians(drop_lat)) 
-                        * cos(radians(drop_lng) - radians($dropLng)) 
-                        + sin(radians($dropLat)) 
-                        * sin(radians(drop_lat))
-                    ))
-                END AS distance_drop
-            ")
-        )
-        ->having('distance_pickup', '<=', $maxRangeKm)
-        ->where(function ($query) use ($maxRangeKm) {
-            $query->havingRaw('distance_drop <= ? OR LOWER(drop_area) = ?', [$maxRangeKm, 'anywhere']);
-        })
-        ->get();
-
-        // return $savedSearches;
-
-    if ($savedSearches->isEmpty()) {
-        \Log::info('No matching saved searches found for Quote ID: ' . $quote['quotation_id']);
-        return;
-    }
-
-    foreach ($savedSearches as $savedSearch) {
-        $transporter = DB::table('users')
-            ->where('id', $savedSearch->user_id)
-            ->where('status', 'active')
-            ->where('type', 'car_transporter')
-            ->where('is_status', 'approved')
-            ->first();
-
-        if ($transporter) {
-            $mailData = [
-                'id' => $quote['id'],
-                'vehicle_make' => $quote['vehicle_make'],
-                'vehicle_model' => $quote['vehicle_model'],
-                'vehicle_make_1' => $quote['vehicle_make_1'],
-                'vehicle_model_1' => $quote['vehicle_model_1'],
-                'pickup_postcode' => $quote['pickup_postcode'],
-                'drop_postcode' => $quote['drop_postcode'],
-                'delivery_timeframe_from' => $quote['delivery_timeframe_from'] ?? null,
-                'starts_drives' => $quote['starts_drives'],
-                'starts_drives_1' => $quote['starts_drives_1'],
-                'how_moved' => $quote['how_moved'],
-                'distance' => $quote['distance'],
-                'duration' => $quote['duration'],
-                'map_image' => $quote['map_image'],
-                'delivery_timeframe' => $quote['delivery_timeframe'],
-            ];
-            try {
-                $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
-                $subject = 'You have received a transport notification';
-                $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
-                \Log::info("Save Search Email sent successfully to {$transporter->email}");
-            } catch (\Exception $ex) {
-                \Log::error('Error sending email to transporter for Quote ID: ' . $quote['id'] . ': ' . $ex->getMessage());
-                // return $ex->getMessage();
-            }
-        }
-    }
+    return $idNew;
 });

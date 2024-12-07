@@ -148,13 +148,42 @@ class DashboardController extends WebController
     {
      
         $quote = UserQuote::find($id);
+  
+        $quoteData = [
+            'user_id' => $quote->user_id,
+            'pickup_postcode' => $quote->pickup_postcode,
+            'pickup_lat' => $quote->pickup_lat,
+            'pickup_lng' => $quote->pickup_lng,
+            'drop_postcode' => $quote->drop_postcode,
+            'drop_lat' => $quote->drop_lat,
+            'drop_lng' => $quote->drop_lng,
+            'distance' => $quote->distance,
+            'duration' => $quote->duration,
+            'vehicle_make' => $quote->vehicle_make ?? null,
+            'vehicle_model' => $quote->vehicle_model ?? null,
+            'starts_drives' => $quote->starts_drives ?? '0',
+            'image' => $quote->image  === 'http://localhost:8000/uploads/no_quote.png' ? null : $quote->image,
+            'vehicle_make_1' => $quote->vehicle_make_1 ?? null,
+            'vehicle_model_1' => $quote->vehicle_model_1 ?? null,
+            'starts_drives_1' => $quote->starts_drives_1 ?? null,
+            'image_1' => $quote->image_1  === 'http://localhost:8000/uploads/no_quote.png' ? null : $quote->image_1,
+            'map_image' => null,
+            'created_at' => $now = Carbon::now('Europe/London'),
+            'updated_at' => $now = Carbon::now('Europe/London'),
+            'how_moved' => $quote->how_moved ?? null,
+            'delivery_timeframe_from' => $quote->delivery_timeframe_from ? (\DateTime::createFromFormat('d/m/Y', $quote->delivery_timeframe_from) ? \DateTime::createFromFormat('d/m/Y', $quote->delivery_timeframe_from)->format('Y-m-d') : null) : null,
+            'delivery_timeframe' => $quote->delivery_timeframe ?? null,
+            'email' => $quote->email ?? null,
+        ];
+
+        
 // return $quote;
-    if ($quote) {
+       if ($quoteData) {
         // Update the record
-        $quote->update([
-            'status' => 'pending', // Example column and value
-            // Add other fields to update here
-        ]);
+        UserQuote::create($quoteData);
+    
+        // Update the record
+        UserQuote::destroy($id);
 
         // Redirect to the dashboard after a successful update
         return redirect()->route('front.dashboard')->with('success', 'Quote updated successfully!');
