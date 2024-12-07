@@ -42,6 +42,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('check:job-status')->daily();
         $schedule->command('send:save-search-mail')->dailyAt('07:00');
         $schedule->command('command:test')->everyMinute();
+        $schedule->command('send:feedback-reminder')->daily();
+
     }
 
     /**
