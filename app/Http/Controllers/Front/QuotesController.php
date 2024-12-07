@@ -671,7 +671,7 @@ class QuotesController extends WebController
                     $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
                     $subject = 'You have received a transport notification';
                     $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
-                    \Log::info("Save Search functionality Error sending email to transporter for Quote ID:  {$transporter->email}");
+                    \Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
                 } catch (\Exception $ex) {
                     \Log::error('Save Search functionality Error sending email to transporter for Quote ID: ' . $quote['quotation_id'] . ': ' . $ex->getMessage());
                     // return $ex->getMessage();
