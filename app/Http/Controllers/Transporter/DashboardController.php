@@ -1138,7 +1138,6 @@ class DashboardController extends WebController
         try {
             // Retrieve paginated saved search data
             $data = SaveSearch::where('user_id', auth()->user()->id)->paginate(50);
-
             // Transform each search item to include a correct quote count
             $data->getCollection()->transform(function ($search) {
                 // Define coordinates and distance range
