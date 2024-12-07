@@ -2741,7 +2741,7 @@
                                             onclick="share_give_quote(${carData.id});"
                                             class="make_offer_btn checkStatus">Place bid</a>`
                     }
-
+// console.log(carData.image);
                     // Dynamically update modal body content
                     var modalBodyContent = `
                     <div class="jobsrch_box">
@@ -2750,7 +2750,7 @@
                                  <div class="jobsrch_top_box position-relative">
                                     ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
                                                         <div>
-                                                            <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+                                                            <img src="/${carData.image ?? 'uploads/no_car_image.png'}" class="vehicle_image" alt="Vehicle Image" />
                                                         </div>
                                                         ` : `
                                                         <div class="job_se_sec slider">

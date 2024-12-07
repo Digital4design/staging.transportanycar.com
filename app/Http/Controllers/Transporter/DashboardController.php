@@ -1057,7 +1057,7 @@ class DashboardController extends WebController
     // Extract pickup coordinates
     $pickupLat = $pickupCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
     $pickupLng = $pickupCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
-
+    // \Log::info('lggggggg: ' . $pickupLng);
     // Validate if coordinates were fetched successfully for pickup
     if (!$pickupLat || !$pickupLng) {
         return response()->json(['success' => false, 'message' => 'Failed to fetch pickup coordinates.']);
@@ -1085,7 +1085,21 @@ class DashboardController extends WebController
     }
 
     // Prepare data for saving
-    $data = [
+    // $data = [
+    //     "user_id" => auth()->user()->id,
+    //     "search_name" => $request->search_name,
+    //     "pick_area" => $request->pick_area,
+    //     "drop_area" => $request->drop_area ?? "Anywhere",
+    //     "pick_lat" => $pickupLat,    // Use coordinates from Google API
+    //     "pick_lng" => $pickupLng,    // Use coordinates from Google API
+    //     "drop_lat" => $dropLat,      // Use coordinates from Google API or default
+    //     "drop_lng" => $dropLng,      // Use coordinates from Google API or default
+    //     "email_notification" => $request->emailNtf, // Convert to integer (1 or 0)
+    // ];
+
+
+    // Save or update the search record
+    $saveSearch = SaveSearch::Create( [
         "user_id" => auth()->user()->id,
         "search_name" => $request->search_name,
         "pick_area" => $request->pick_area,
@@ -1095,18 +1109,7 @@ class DashboardController extends WebController
         "drop_lat" => $dropLat,      // Use coordinates from Google API or default
         "drop_lng" => $dropLng,      // Use coordinates from Google API or default
         "email_notification" => $request->emailNtf, // Convert to integer (1 or 0)
-    ];
-
-
-    // Save or update the search record
-    $saveSearch = SaveSearch::updateOrCreate(
-        [
-            'user_id' => $data['user_id'],
-            'pick_area' => $data['pick_area'],
-            'drop_area' => $data['drop_area'],
-            'email_notification' => '1',
-        ],
-        $data
+    ]
     );
 
 

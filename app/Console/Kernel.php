@@ -40,7 +40,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('send:collection-delivery-reminder')->everyThirtyMinutes();
         $schedule->command('send:quotes-summary-email')->daily();
         $schedule->command('check:job-status')->daily();
-        $schedule->command('send:save-search-mail')->dailyAt('07:00');
+        $schedule->command('send:save-search-mail')->dailyAt('19:00');
         $schedule->command('command:test')->everyMinute();
         $schedule->command('send:feedback-reminder')->daily();
 

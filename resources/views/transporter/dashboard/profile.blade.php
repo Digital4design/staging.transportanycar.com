@@ -1081,6 +1081,32 @@
                                                 </div>
                                                 <div class="col-md-6 col-xl-6 requied_sec verify_email_sec mb-0 pl-md-3  mt-3 pt-2">
                                                     <h2 class="uploaded-documents p-0 m-0">Verify email:</h2>
+                                                    
+                                                     @if ($user->email_verify_status == '0')
+                                                        <p class="subtitle">You must verify your email address before you
+                                                            can start bidding.</p>
+                                                        <p class="subtitle text-danger message">Please verify your email
+                                                        </p>
+                                                        <div class="upload-section">
+                                                            <div class="requied_sec_row w-100">
+                                                                <div class="form-group">
+                                                                    <div class="document flex-row border-danger">
+                                                                        <label for="email_verify"
+                                                                            class="w-auto font-weight-light">
+                                                                            Verify your email address
+
+                                                                        </label>
+
+                                                                        <span class="send-link" id="sendLinkBtn" onclick="handleSendLink()"
+                                                                            style="cursor: pointer;">Send Link</span>
+
+                                                                        <div id="message" style="display: none;"></div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @else
                                                     <p class="subtitle text-success message">Email verified</p>
                                                     <div class="upload-section ">
                                                         <div class="requied_sec_row w-100">
@@ -1100,6 +1126,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         @endif

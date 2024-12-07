@@ -108,6 +108,7 @@ Route::group(['as' => 'front.'], function () {
         Route::get('/quotemessage/history/{id}', 'MessageController@getQuoteChatHistory')->name('message.quote_history');
         Route::get('manage_notification', 'DashboardController@manageNotification')->name('manage_notification');
         Route::post('update-manage-notification', 'DashboardController@updateManageNotification')->name('updateManageNotification');
+        Route::get('/quote/renew/{id}', 'DashboardController@quoteRenew')->name('quote_renew');
     });
     Route::group(['middleware' => 'auth:web'], function () {
         Route::get('/logout', 'General\GeneralController@logout')->name('logout');
