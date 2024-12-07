@@ -144,6 +144,23 @@ class DashboardController extends WebController
         $title = 'Account';
         return view('front.dashboard.account', ['title' => $title]);
     }
+    public function quoteRenew(Request $request, $id)
+    {
+     
+        $quote = UserQuote::find($id);
+// return $quote;
+    if ($quote) {
+        // Update the record
+        $quote->update([
+            'status' => 'pending', // Example column and value
+            // Add other fields to update here
+        ]);
+
+        // Redirect to the dashboard after a successful update
+        return redirect()->route('front.dashboard')->with('success', 'Quote updated successfully!');
+    }
+
+    }
 
     public function profile(Request $request)
     {

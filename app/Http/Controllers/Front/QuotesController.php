@@ -591,6 +591,7 @@ class QuotesController extends WebController
         $dropLat = $dropCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
         $dropLng = $dropCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
     
+        // dd($pickupLat);
         // Validate the fetched coordinates
         if (!$pickupLat || !$pickupLng) {
             \Log::error('Pickup postcode coordinates not found for Quote ID: ' . $quote['quotation_id']);
@@ -603,8 +604,8 @@ class QuotesController extends WebController
         }
     
         // Define the maximum allowed range in kilometers
-        $maxRangeKm = config('constants.max_range_km', 30);
-    
+        $maxRangeKm = config('constants.max_range_km', 50);
+        // $maxRangeKm = config('constants.max_range_km');
         // Query saved searches using geolocation and additional conditions
         // Query saved searches using geolocation and additional conditions
         $savedSearches = DB::table('save_searches')
@@ -613,6 +614,10 @@ class QuotesController extends WebController
             'pick_area',
             'drop_area',
             'user_id',
+            'pick_lat',
+            'pick_lng',
+            'drop_lat',
+            'drop_lng',
             DB::raw(" 
                 (6371 * acos(
                     cos(radians($pickupLat)) 
@@ -644,6 +649,7 @@ class QuotesController extends WebController
         }
     
         // Iterate through the transporters and send email notifications
+        // if ($savedSearches > 0){
         foreach ($savedSearches as $savedSearch) {
             $transporter = DB::table('users')
                 ->where('id', $savedSearch->user_id)
@@ -680,7 +686,7 @@ class QuotesController extends WebController
                 }
             }
         }
-        
+    // }
     }
 
     public function sendOtp(Request $request, SmsService $service)
