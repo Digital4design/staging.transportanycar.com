@@ -1220,11 +1220,12 @@ class DashboardController extends WebController
     public function saveSearchDlt(Request $request)
     {
         try {
-            if ($request->id){
+            if($request->id){
             $data = SaveSearch::find($request->id);
             $data->delete();
             return redirect()->back()->with('saveSearchSuccess', 'Item deleted successfully');
             }
+            return redirect()->back();
         } catch (\Exception $ex) {
             return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
         }
