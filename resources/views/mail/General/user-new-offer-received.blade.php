@@ -22,7 +22,7 @@
     </a>
     <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 25px; margin-bottom:25px;">You can message the transporter to make aranagements before accepting the quote.</p>
     <div style="background-color: #f1f1f1; padding: 20px; text-align: left;">
-        <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 20px; line-height: 24px; font-weight: 500; margin-bottom: 10px; text-align: left;">247transport sent you a message</p>
+        <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 20px; line-height: 24px; font-weight: 500; margin-bottom: 10px; text-align: left;">{{$user_name}} sent you a message</p>
         <p style="font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 20px; font-weight: 300; color: #000000; margin-bottom: 15px;">{{$data->message}}</p>
         <a  href="{{route('front.messages', ['thread_id' => $thread_id])}}" style="background: #52D017; color: #ffffff; text-decoration: none; font-size: 16px; line-height: 20px; font-weight: 400; border: none; display: inline-block;  cursor: pointer; padding-top: 6px; padding-bottom: 6px; padding-left: 30px; padding-right: 30px;">Reply</a>
     </div>
