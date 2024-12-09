@@ -862,10 +862,10 @@ in1.addEventListener('input', splitNumber);
                     uet_report_conversion();
                 }
                 if (!otpVerified) {
-                    // setTimeout(() => {
-                        // $('#popup').removeClass('show');
+                    setTimeout(() => {
+                        $('#popup').removeClass('show');
                         sendOTP();                        
-                    // }, 1000);
+                    }, 1000);
                 } else {
                       // If OTP is verified, submit the form directly
                         form.submit();
