@@ -38,11 +38,11 @@ class Kernel extends ConsoleKernel
         // $schedule->command('send:quote_email_sent')->everyMinute();
         $schedule->command('send:deposit-reminder')->hourly();
         $schedule->command('send:collection-delivery-reminder')->everyThirtyMinutes();
-        $schedule->command('send:quotes-summary-email')->daily();
-        $schedule->command('check:job-status')->daily();
+        $schedule->command('send:quotes-summary-email')->dailyAt('19:00');
+        $schedule->command('check:job-status')->dailyAt('19:00');
         $schedule->command('send:save-search-mail')->dailyAt('19:00');
         $schedule->command('command:test')->everyMinute();
-        $schedule->command('send:feedback-reminder')->daily();
+        $schedule->command('send:feedback-reminder')->dailyAt('19:00');
 
     }
 
