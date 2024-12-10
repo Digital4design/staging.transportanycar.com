@@ -113,7 +113,7 @@ class SendFeedbackReminder extends Command
             // Step 1: Fetch all QuoteByTransporter records that need a feedback reminder
             $quotesWithoutFeedback = QuoteByTransporter::where('status', 'accept')
                 ->whereNotIn('id', Feedback::pluck('quote_by_transporter_id')->toArray()) // Exclude records already in Feedback
-                ->whereRaw('DATEDIFF(NOW(), updated_at) >= 14') // Check if 2 weeks or more have passed
+                ->whereRaw('DATEDIFF(NOW(), updated_at)  IN (14, 28)') // Check if 2 weeks or more have passed
                 ->get(['user_quote_id', 'user_id', 'id as quote_by_transporter_id', 'updated_at']);
         
             if ($quotesWithoutFeedback->isEmpty()) {
@@ -171,7 +171,7 @@ class SendFeedbackReminder extends Command
                         // Step 5: Update the updated_at field for the current record
                         $quoteByTransporter->updated_at = now();
                         $quoteByTransporter->save();
-                        \Log::error('Feedback reminder to user to give feedback notification run and send successfully  '.$userQuote->id);
+                        Log::error('Feedback reminder to user to give feedback notification run and send successfully  '.$userQuote->id);
                         CronLog::create([
                             'cron_name' => 'send:feedback-reminder',
                             'status' => true,
@@ -179,7 +179,7 @@ class SendFeedbackReminder extends Command
                         ]);
                     }
                 } catch (\Exception $ex) {
-                    \Log::error('Feedback reminder to user to give feedback notification run Error'.$userQuote->id . '. Error: ' . $ex->getMessage());
+                    Log::error('Feedback reminder to user to give feedback notification run Error'.$userQuote->id . '. Error: ' . $ex->getMessage());
                     CronLog::create([
                         'cron_name' => 'send:feedback-reminder',
                         'status' => false,
@@ -188,9 +188,9 @@ class SendFeedbackReminder extends Command
                 }
             }
 
-            \Log::error('Feedback reminder to user to give feedback notification run  successfully');
+            Log::error('Feedback reminder to user to give feedback notification run  successfully');
         } catch (\Exception $e) {
-            \Log::error('Feedback reminder to user to give feedback notification run Error'. $e->getMessage());
+            Log::error('Feedback reminder to user to give feedback notification run Error'. $e->getMessage());
             CronLog::create([
                 'cron_name' => 'send:feedback-reminder',
                 'status' => false,
