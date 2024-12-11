@@ -326,7 +326,7 @@
                                                     </ul>
                                                 @endif
                                                 <div>Member since: <span
-                                                        class="font-weight-light user-feedback-member-from">{{ $user->created_at->format('m/d/Y') }}</span>
+                                                        class="font-weight-light user-feedback-member-from">{{ $user->created_at->format('d/m/Y') }}</span>
                                                 </div>
                                             </div>
                                         </div>
