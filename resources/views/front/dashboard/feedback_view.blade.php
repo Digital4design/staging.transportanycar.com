@@ -335,9 +335,7 @@ ul.pagination {
                                                         @endfor
 
                                                         <li class="user-feedback-rating-count">
-                                                            <span>({{ count($feedback) }})</span><span class="ml-1">{{ $rating_percentage}}%</span></li>
-                                                           
-                                                           
+                                                            <span>({{ count($feedback) }})</span><span class="ml-1">{{ $rating_percentage}}%</span></li>     
                                                     </ul>
                                                     @endif
                                                     <div>Member since: <span

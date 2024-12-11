@@ -44,7 +44,7 @@ class WatchlistController extends Controller
         ->whereDate('created_at', '>=', now()->subDays(10))
         ->latest()
         ->paginate(50);
-        // return $watchlist;
+        // dd($watchlist[0]->quoteByTransporterCheck);
         return view('transporter.watchlist.index', ['quotes' => $watchlist]);
 
     }

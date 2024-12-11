@@ -1809,7 +1809,7 @@
                                                                 </li>
                                                                 <li class="row mx-0 w-100 align-items-end mb-0">
                                                                     <div class="btnCol">
-                                                                        @if ($quote->quoteByTransporter)
+                                                                        @if ($quote->quoteByTransporterCheck)
                                                                             <a href="javascript:;"
                                                                                 onclick="share_edit_quote('{{ $quote->id }}');"
                                                                                 class="w-100 mt-0 make_offer_btn checkStatus">Edit
@@ -1844,8 +1844,8 @@
                                                                 </li>
                                                             </ul>
                                                         </div>
-
-                                                        @if ($quote->quoteByTransporter)
+                                                        @if ($quote->quoteByTransporterCheck)
+                                                            
                                                             <div class="actionDiv">
                                                                 <div class="rotated-banner">Bidding</div>
                                                                 {{-- <svg width="52" height="43" viewBox="0 0 52 43"
