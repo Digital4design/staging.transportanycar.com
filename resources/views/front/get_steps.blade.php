@@ -553,7 +553,7 @@
                                 </div>
                                 {{-- <small class="exm_text d-block">e.g. abc@gmail.com</small> --}}
                             </div>
-                            <div class="form-group" bis_skin_checked="1">
+                            {{-- <div class="form-group" bis_skin_checked="1">
                                 <div class="inputgrp position-relative" bis_skin_checked="1">
                                     <span class="wd_icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -562,7 +562,7 @@
                                     </span>
                                     <input type="tel" class="form-control wizard-required" placeholder="Enter your mobile" name="phone"  pattern="^0[0-9]{9}$"  title="Mobile number must start with 0 and have exactly 10 digits." value="{{ $user->mobile ?? '' }}" />
                                 </div>
-                            </div>
+                            </div> --}}
                            
                             <div class="form-group wizard_btngrp mb-3">
                                 {{--<a href="getsteps.html" class="wd_nextbtn form-wizard-submit">Get Instant Quotes <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -803,7 +803,7 @@ in1.addEventListener('input', splitNumber);
                     noPhoneOrEmail: true
                 },
                 email: {required: true},
-                phone: {required: true,digits: true,maxlength: 11,minlength: 11},
+                //phone: {required: true,digits: true,maxlength: 11,minlength: 11},
                 //starts_drives: {required: true},
                 vehicle_make_1: {required: true},
                 vehicle_model_1: {required: true},
@@ -830,7 +830,7 @@ in1.addEventListener('input', splitNumber);
                 vehicle_make_1: {required: "Please enter vehicle make."},
                 vehicle_model_1: {required: "Please enter vehicle model."},
                 email: {required: "Please enter email."},
-                phone : {required: "Please enter a valid mobile number.",digits: "Please enter a valid mobile number",maxlength: "Please enter a valid mobile number.",minlength: "Please enter a valid mobile number."},
+                //phone : {required: "Please enter a valid mobile number.",digits: "Please enter a valid mobile number",maxlength: "Please enter a valid mobile number.",minlength: "Please enter a valid mobile number."},
                 delivery_timeframe_date: { deliveryDateRequired: "Please enter a delivery date." },
                 // terms: {
                 //         required: "Please accept the terms & conditions." // Custom error message
@@ -861,15 +861,15 @@ in1.addEventListener('input', splitNumber);
                 if (typeof uetq !== 'undefined') {
                     uet_report_conversion();
                 }
-                if (!otpVerified) {
-                    setTimeout(() => {
-                        $('#popup').removeClass('show');
-                        sendOTP();                        
-                    }, 1000);
-                } else {
-                      // If OTP is verified, submit the form directly
-                        form.submit();
-                 }
+                form.submit();
+                //if (!otpVerified) {
+                //    setTimeout(() => {
+                //        $('#popup').removeClass('show');
+                //        sendOTP();                        
+                //    }, 1000);
+                //} else {
+                //        form.submit();
+                // }
                 
             }
         });
