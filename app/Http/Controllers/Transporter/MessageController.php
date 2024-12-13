@@ -39,6 +39,7 @@ class MessageController extends WebController
     {
         $thread = Thread::with(['user_qot', 'messages', 'messages.sender'])->where('id', '=', $id)->first();
         $quote_by_transporter = QuoteByTransporter::where(['user_quote_id' => $thread->user_quote_id, 'user_id'=> $thread->friend_id])->first();
+        $quote = UserQuote::find($quote_by_transporter->user_quote_id);
         $transaction = TransactionHistory::where('quote_by_transporter_id',$quote_by_transporter->id)->where('status','completed')->exists() ? "true":"false";
         if (!empty($thread)) {
             $firend_data = $this->user_obj->find($request->to);
@@ -49,7 +50,7 @@ class MessageController extends WebController
         } else {
             $messages = collect();
         }
-        return view('transporter.dashboard.partial.history_listing')->with(compact('messages', 'thread','transaction'));
+        return view('transporter.dashboard.partial.history_listing')->with(compact('messages', 'thread','transaction','quote'));
     }
 
     public function store(Request $request, $id)
