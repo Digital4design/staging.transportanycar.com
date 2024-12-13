@@ -138,7 +138,7 @@ Route::post('/verify-otp', [App\Http\Controllers\Front\QuotesController::class, 
 
 
 Route::get("/new/template/check", function () {
-    $data = hidePostcode('Warren Drive, Southwater, Horsham RH13 9GL, UK');
+    $data = get_last_two_parts('Warren Drive, Southwater, Horsham RH13 9GL, UK');
     return $data;
     return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
 });

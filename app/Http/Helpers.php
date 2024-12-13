@@ -122,11 +122,25 @@ if (!function_exists('hidePostcode')) {
      * @param string $address The full address string.
      * @return string The truncated address.
      */
-    function hidePostcode(string $address)
+    function hidePostcode(string $address): string
     {
-        $data = explode(',',$address);
-        $lastTwo = array_slice($data, -2);
-        return implode(', ', $lastTwo);
+        // Regular expression to match UK postcode patterns
+        $postcodePattern = '/\b([A-Z]{1,2}[0-9][A-Z0-9]?\s?[0-9][A-Z]{2})(,?\s?UK)?\b/i';
+
+        // Check if the postcode exists in the address
+        if (preg_match($postcodePattern, $address, $matches)) {
+        // Extract the full postcode
+        $fullPostcode = $matches[1];
+        
+        // Hide the last three characters of the postcode
+        $hiddenPostcode = substr($fullPostcode, 0, -3);
+        
+        // Replace the original postcode in the address with the hidden version
+        $address = str_replace($fullPostcode, $hiddenPostcode, $address);
+    }
+
+    // Return the updated address
+    return $address;
     }
 }
 
@@ -400,7 +414,7 @@ function breadcrumb($aBradcrumb = array())
             $i += 1;
             $link = (!empty($link)) ? $link : 'javascript:void(0)';
 
-            $content .= '<li class="breadcrumb-item"> <a href="' . $link . '">' . ucfirst($key) . '</a>';
+            $content .=  '<li class="breadcrumb-item"> <a href="' . $link . '">' . ucfirst($key) . '</a>';
 
 
             // $content .= "<a href='" . $link . "' class='kt-subheader__breadcrumbs-link'>" . ucfirst($key) . "</a>";
