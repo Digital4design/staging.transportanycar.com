@@ -535,7 +535,7 @@
                             </div>
                         </fieldset>
                         <fieldset class="wizard-fieldset wizard_laststep">
-                            <h5>Enter your details below to start receiving your quotes in minutes.</h5>
+                            <h5>Enter your email below to start receiving your quotes in minutes.</h5>
                             <p class="mb-3 d-block">Quotes are provided to you by our network of reputable car transporters.</p>
                             @if(Auth::guard('web')->user() && Auth::guard('web')->user()->type == 'user')
                                 @php
@@ -577,7 +577,7 @@
                             <div class="form-group text-left d-flex flex-wrap align-items-center" style="gap:5px;">
                                 {{-- <input type="checkbox" name="terms" id="terms" style="position: absolute; left: 0; top: 1px;" /> --}}
                                 <label for="terms">By proceeding you confirm you accept our <a target="_blank" href="{{route('front.term_condition')}}">T&Cs</a> and <a target="_blank" href="{{route('front.privacy_policy')}}">Privacy policy</a>.</label>
-                                <p>We will only use your contact details to send you competitive quotes in relation to this transport request. You can opt out of receiving quotes at any time.</p>
+                                <p>We will only use your email to send you competitive quotes in relation to this transport request. You can opt out of receiving quotes at any time.</p>
                             </div>
                             {{-- <div class="form-group">
                                 <a href="javascript:void(0)" class="form-wizard-previous-btn back-icon">

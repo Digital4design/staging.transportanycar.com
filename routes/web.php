@@ -138,13 +138,8 @@ Route::post('/verify-otp', [App\Http\Controllers\Front\QuotesController::class, 
 
 
 Route::get("/new/template/check", function () {
-    $maildata['user'] = User::where('id', "1104")->first();
-    $maildata['thread'] = Thread::where('id', '1707')->first();
-    $maildata['message'] = "hello how are you ahfkadfkj sdfhsdfhsod shsi gsf gsiof iosf g";
-    $maildata['from_page'] = 'quotes_admin';
-    $maildata['quotes'] =  UserQuote::where('id', 717)->first();
-    $maildata['quote_id'] = 21;
-    $maildata['type'] = 'user';
+    $data = hidePostcode('Warren Drive, Southwater, Horsham RH13 9GL, UK');
+    return $data;
     return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
 });
 
