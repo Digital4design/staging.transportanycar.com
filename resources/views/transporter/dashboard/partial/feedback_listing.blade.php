@@ -50,23 +50,49 @@
                 </svg>
             </li>
         </ul>
-    @else
+        @else
         @php
             $total_stars = 5; // Total number of stars
-            $yellow_stars = round($average_rating);
-            $ratings =round($ratings);// Full yellow stars
-           $half_star = $average_rating - $yellow_stars > 0 ? true : false; // Check for a half-star
-           $grey_stars = $total_stars - $yellow_stars - ($half_star ? 1 : 0); // Remaining grey stars
+            $yellow_stars = floor($average_rating); // Full yellow stars
+            $half_star = $average_rating - $yellow_stars >= 0.5; // Check for a half-star
+            $grey_stars = $total_stars - $yellow_stars - ($half_star ? 1 : 0); // Remaining grey stars
         @endphp
         <ul class="wd-star-lst user-feedback-stars">
-            {{-- Full yellow stars --}}
-            @for ($i = 1; $i <= $total_stars; $i++)
+            {{-- Render full yellow stars --}}
+            @for ($i = 1; $i <= $yellow_stars; $i++)
                 <li>
-                    <svg width="20" height="20" viewBox="0 0 12 12" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
+                    <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                            fill="{{ $i <= $yellow_stars ? '#FFA800' : '#ccc' }}" />
+                            fill="#FFA800" />
+                    </svg>
+                </li>
+            @endfor
+    
+            {{-- Render half-star if applicable --}}
+            @if ($half_star)
+                <li>
+                    <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="halfStarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="50%" stop-color="#FFA800" />
+                                <stop offset="50%" stop-color="#ccc" />
+                            </linearGradient>
+                        </defs>
+                        <path
+                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                            fill="url(#halfStarGradient)" />
+                    </svg>
+                </li>
+            @endif
+    
+            {{-- Render grey stars --}}
+            @for ($i = 1; $i <= $grey_stars; $i++)
+                <li>
+                    <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                            fill="#ccc" />
                     </svg>
                 </li>
             @endfor
