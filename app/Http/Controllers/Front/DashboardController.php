@@ -330,12 +330,14 @@ class DashboardController extends WebController
         $totalDistance = $total_distance >= 1000 ? round($total_distance / 1000, 1) . 'K' : round($total_distance, 1);
         $my_quotes = $quoteBytransporter->pluck('id');
         $quotes = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)->get();
-        $totalDistanceFormatted = number_format($totalDistance);
+        // $totalDistanceFormatted =  number_format((float)$totalDistance, 0);;
         $completedCount = $userQuote->where('status', 'completed')->count();
 
         $total_earning = $quoteBytransporter->where('status', 'accept')->whereIn('user_quote_id', $userQuote->where('status', 'completed')->pluck('id')->toArray())->sum('transporter_payment');
 
-        $totalDistanceFormatted = number_format($totalDistance);
+        $totalDistanceFormatted = $total_distance >= 1000 
+        ? round($total_distance / 1000, 1) . 'K' 
+        : number_format($total_distance, 1);
         // $completedCount = $quotes->filter(function ($transaction) {
         //     return $transaction->quote && $transaction->quote->status == 'completed';
         // })->count();
