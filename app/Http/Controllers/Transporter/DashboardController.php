@@ -263,48 +263,61 @@ class DashboardController extends WebController
     public function feedback()
     {
         $user_data = Auth::guard('transporter')->user();
-        // $my_quotes = QuoteByTransporter::where('user_id', $user_data->id)->pluck('id');
+    
         $quoteBytransporter = QuoteByTransporter::where('user_id', $user_data->id)->get();
         $userQuote = UserQuote::whereIn('id', $quoteBytransporter->pluck('user_quote_id'))->get();
+    
         $total_distance = UserQuote::whereIn('id', $quoteBytransporter->where('status', 'accept')->pluck('user_quote_id')->toArray())
             ->sum('distance');
-        $totalDistance = $total_distance >= 1000 ? round($total_distance / 1000, 1) . 'K' : round($total_distance, 1);
+    
+        $totalDistance = $total_distance >= 1000
+            ? round($total_distance / 1000, 1) . 'K'
+            : round($total_distance, 1);
+    
         $my_quotes = $quoteBytransporter->pluck('id');
         $quotes = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)->get();
-        $totalDistanceFormatted = number_format($totalDistance);
+    
+        $totalDistanceFormatted = is_numeric($totalDistance) ? number_format($totalDistance, 1) : $totalDistance; // Ensure valid formatting
+    
         $completedCount = $userQuote->where('status', 'completed')->count();
-
-        $total_earning = $quoteBytransporter->where('status', 'accept')->whereIn('user_quote_id', $userQuote->where('status', 'completed')->pluck('id')->toArray())->sum('transporter_payment');
+    
+        $total_earning = $quoteBytransporter
+            ->where('status', 'accept')
+            ->whereIn('user_quote_id', $userQuote->where('status', 'completed')->pluck('id')->toArray())
+            ->sum('transporter_payment');
+    
         $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
             ->whereNotNull('rating')
             ->avg('rating');
+    
         $percentage = 0;
         if ($rating_average !== null) {
             $percentage = ($rating_average / 5) * 100;
-            // echo "Average rating percentage: $percentage%";
         }
-        // return $percentage;
-
+    
         $company_details = CompanyDetail::where('user_id', $user_data->id)->first();
-
+    
         $params['user'] = $user_data;
-        $params['feedback'] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->with('quote_by_transporter.quote')->get();
-        $params['completed_job'] = $completedCount;
+        $params['feedback'] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+            ->with('quote_by_transporter.quote')
+            ->get();
+        $params['completed_job'] = number_format($completedCount); // Format here
         $params['distance'] = $totalDistanceFormatted;
         $params['total_earning'] = $total_earning;
         $params['company_detail'] = $company_details;
         $params['rating_percentage'] = $percentage;
         $params['rating_average'] = $rating_average;
-
+    
         $customRequest = new Request([
-            'type' => 'feedback'
+            'type' => 'feedback',
         ]);
-
+    
         // Call notificationStatus with the custom request
         $this->notificationStatus($customRequest);
-
+    
         return view('transporter.dashboard.feedback', $params);
     }
+    
 
     public function feedback_listing(Request $request)
     {
