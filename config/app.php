@@ -70,6 +70,9 @@ return [
     // 'timezone' => 'UTC',
     'timezone' => 'Europe/London',
 
+    // 'timezone' => 'Asia/Kolkata',
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

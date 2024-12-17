@@ -58,7 +58,11 @@
     .active_job_mobile .quote_grp_btns {
         padding: 30px 0 0;
     }
-
+    @media (max-width: 768px) {
+    .hide-on-mobile {
+        display: none !important;
+    }
+}
     @media(max-width: 580px) {
         .active_quotes .job-listing ul li {width: calc(50% - 5px)!important;}
         .active_quotes .job-listing ul li.view-quote a {white-space: normal;}
@@ -113,7 +117,7 @@
             position: absolute;
             right: 8px;
             top: 85px;
-            display: none;
+            /* display: none; */
         }
 
         .active-job-box.active_job_mobile ul li.job-access.completed_jobs {
@@ -288,7 +292,7 @@
                                         onclick="handleNotificationClick(event, this);">Message</a>
                                 </li>
 
-                                <li class=" job-access view-quote" style="margin:0;">
+                                <li class=" job-access view-quote hide-on-mobile" style="margin:0;">
                                     <a href="javascript:void(0)" style="margin-bottom:auto;"
                                         data-href="{{ route('front.messages', ['thread_id' => $item->notification_thread->id ??'']) }}"
                                         onclick="handleNotificationClick(event, this);">Message</a>

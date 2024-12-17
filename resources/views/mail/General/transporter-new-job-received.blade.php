@@ -137,36 +137,36 @@
                                             <tr>
                                                 <td class="column column-1" width="100%"
                                                     style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    {{-- <table class="image_block block-1" width="100%" border="0"
+                                                    <table class="image_block block-1" width="100%" border="0"
                                                         cellpadding="0" cellspacing="0" role="presentation"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
                                                         <tr>
                                                             <td class="pad" style="width:100%;">
                                                                 <div class="alignment" align="center"
                                                                     style="line-height:10px">
-                                                                    <p style="margin: 0;font-size: 14px;"><a
+                                                                    {{-- <p style="margin: 0;font-size: 14px;"><a
                                                                             href="{{ route('transporter.profile', ['unsub' => true]) }}"
                                                                             target="_blank"
                                                                             style="text-decoration: underline;color: #5f5f5f;"
                                                                             rel="noopener">Unsubscribe from
-                                                                            notifications</a></p> 
+                                                                            notifications</a></p>  --}}
                                                                     <a href="https://transportanycar.com/">
                                                                         <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg"
                                                                             style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;"
-                                                                            alt="transport notifiaction"
-                                                                            title="transport notifiaction"></a>
-                                                                    <h3 style="font-size: 22px;line-height: normal;">
+                                                                            alt="transport notification"
+                                                                            title="transport notification"></a>
+                                                                    {{-- <h3 style="font-size: 22px;line-height: normal;">
                                                                         Transport<br> <span
                                                                             style="color: #018dd4;">notification</span>
-                                                                    </h3>
+                                                                    </h3> --}}
 
-                                                                    <div style="max-width: 600px;">
-                                                        <img src="https://image.optimite.email/wp-content/uploads/2024/02/Email-2-copy.png" style="display: block; height: auto; border: 0; width: 100%;" width="600" alt="transport notifiaction" title="transport notifiaction">
-                                                    </div> 
+                                                                    {{-- <div style="max-width: 600px;">
+                                                        <img src="https://image.optimite.email/wp-content/uploads/2024/02/Email-2-copy.png" style="display: block; height: auto; border: 0; width: 100%;" width="600" alt="transport notification" title="transport notification">
+                                                    </div>  --}}
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                    </table> --}}
+                                                    </table>
                                                     <!-- <table class="paragraph_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
                                         <tr>
                                             <td class="pad" style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:30px;">
@@ -205,11 +205,11 @@
                                                                             </small>
                                                                         </div>
                                                                         <span style="width: 45%;">
-                                                                            {{ $quote['vehicle_make'] }}
-                                                                            {{ $quote['vehicle_model'] }}
+                                                                            {{ $quote['vehicle_make'] ?? " " }}
+                                                                            {{ $quote['vehicle_model'] ??" " }}
                                                                             @if (!is_null($quote['vehicle_make_1']) && !is_null($quote['vehicle_model_1']))
-                                                                                / {{ $quote['vehicle_make_1'] }}
-                                                                                {{ $quote['vehicle_model_1'] }}
+                                                                                / {{ $quote['vehicle_make_1'] ?? " " }}
+                                                                                {{ $quote['vehicle_model_1'] ?? " " }}
                                                                             @endif
                                                                         </span>
                                                                     </li>
@@ -266,9 +266,9 @@
                                                                         </div>
                                                                         <span style="width: 45%;">
                                                                             @if ($quote['delivery_timeframe_from'])
-                                                                                <span>{{ formatCustomDate($quote['delivery_timeframe_from']) }}</span>
+                                                                                <span>{{ formatCustomDate($quote['delivery_timeframe_from']) ?? " "}}</span>
                                                                             @else
-                                                                                <span>{{ $quote['delivery_timeframe'] }}</span>
+                                                                                <span>{{ $quote['delivery_timeframe'] ?? " "}}</span>
                                                                             @endif
                                                                         </span>
                                                                     </li>
@@ -328,7 +328,7 @@
                                                                             </small>
                                                                         </div>
                                                                         <span
-                                                                            style="width: 45%;">{{ $quote['how_moved'] }}</span>
+                                                                            style="width: 45%;">{{ $quote['how_moved'] ?? " " }}</span>
                                                                     </li>
                                                                 </ul>
                                                             </td>
@@ -345,12 +345,12 @@
                                                                     <h4 class="distance_text"
                                                                         style="font-size: 15px; font-weight: bold; font-family: 'Montserrat', sans-serif; margin-bottom: 20px;  text-align: center;";>
                                                                         Journey Distance:
-                                                                        <b>{{ $quote['distance'] }}les</b>
+                                                                        <b>{{ $quote['distance']??" " }}les</b>
                                                                         <strong
-                                                                            style="color: #898989;">({{ $quote['duration'] }})</strong>
+                                                                            style="color: #898989;">({{ $quote['duration'] ?? " " }})</strong>
                                                                     </h4>
-                                                                    <!-- <img src="{{ asset($quote['map_image']) }}" alt="image" style="width: 100%;" class="mapimg_jobsrch" /> -->
-                                                                    <a href="{{ route('transporter.new_jobs_new', ['share_quotation' => $quote['id']]) }}"
+                                                                    
+                                                                    <a href="{{ route('transporter.new_jobs_new', ['share_quotation' => $quote['id'] ?? " "]) }}"
                                                                         class="make_offer_btn"
                                                                         style="background: #52D017; width: 100%;padding: 14px 20px;border-radius: 33px; display: block;text-align: center;font-size: 125%;color: #fff;text-decoration: none;font-family: 'Montserrat', sans-serif; margin-top: 10px;">Place
                                                                         Bid</a>
@@ -456,13 +456,16 @@
                                                             <td class="pad"
                                                                 style="padding-bottom:40px;padding-left:10px;padding-right:10px;padding-top:10px;">
                                                                 <div
-                                                                    style="color:#ffffff;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:16.8px;">
+                                                                    style="color:#000000;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:16.8px;">
+                                                                    <p style="font-family: 'Outfit', sans-serif;margin-top:12px; margin-bottom: 12px; font-weight: 300; font-size: 16px;line-height: 22px;">Manage notification <a 
+                                                                        href="{{ url('transporter/manage_notification') }}"
+                                                                            style="font-family: 'Outfit', sans-serif;color:#0356D6; text-decoration: none;">preferences.</a></p>
                                                                     <p
                                                                         style="margin: 0; margin-bottom: 16px; color: #000; font-size: 16px; line-height: 22px;">
                                                                         © 2024 Transport Any Car. 128 City Road, London,
                                                                         EC1V 2NX.</p>
-                                                                        <p class="adjust-half-space">Manage notification <a href="{{ url('transporter/manage_notification') }}"
-                                                                            style="color:#0356D6; text-decoration: none;">preferences.</span></a></p>
+                                                                        {{-- <p class="adjust-half-space">Manage notification <a href="{{ url('transporter/manage_notification') }}"
+                                                                            style="color:#0356D6; text-decoration: none;">preferences.</span></a></p> --}}
                                                                 </div>
                                                             </td>
                                                         </tr>

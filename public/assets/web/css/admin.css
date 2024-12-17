@@ -4930,8 +4930,11 @@ a.wd-leave-btn {
   border-radius: 5px;
   display: inline-block;
 }
+.yes_btn:disabled {
+  opacity: 0.5;
+}
 
-.yes_btn:hover {
+.yes_btn:not(:disabled):hover {
   background: transparent;
   color: #52D017;
 }

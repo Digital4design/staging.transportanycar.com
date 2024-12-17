@@ -7,7 +7,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\General\NotificationController;
 use Illuminate\Support\Facades\Mail;
 use App\Services\EmailService;
-use App\{User, Thread, UserQuote};
+use App\{User, Thread, UserQuote,SaveSearch,Feedback};
 use App\QuoteByTransporter;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -25,7 +25,28 @@ use Carbon\Carbon;
 
 // URL Mapping to Home Page
 Route::get('/example', function () {
-    return view('mail.General.new-message-received'); // This will call the 'example.blade.php' file in the resources/views folder
+    $quote = DB::table('user_quotes')
+    ->where('email_sent', 0)
+    ->orderBy('id', 'asc')
+    ->first();
+    $mailData = [
+        'id' => $quote->id,
+        'vehicle_make' => $quote->vehicle_make,
+        'vehicle_model' => $quote->vehicle_model,
+        'vehicle_make_1' => $quote->vehicle_make_1,
+        'vehicle_model_1' => $quote->vehicle_model_1,
+        'pickup_postcode' => formatAddress($quote->pickup_postcode),
+        'drop_postcode' => formatAddress($quote->drop_postcode),
+        'delivery_timeframe_from' => isset($quote->delivery_timeframe_from) ? $quote->delivery_timeframe_from : null,
+        'starts_drives' => $quote->starts_drives == 1 ? 'Yes' : 'No',
+        'starts_drives_1' => $quote->starts_drives_1,
+        'how_moved' => $quote->how_moved,
+        'distance' => $quote->distance,
+        'duration' => $quote->duration,
+        'map_image' => $quote->map_image,
+        'delivery_timeframe' => $quote->delivery_timeframe
+    ]; 
+    return view('mail.General.transporter-new-job-received', ['quote' => $mailData]); // This will call the 'example.blade.php' file in the resources/views folder
 });
 Route::get('/car-delivery', 'Front\GuestController@index')->name('car_delivery');
 Route::get('/car-transport', 'Front\GuestController@index')->name('car_transport');
@@ -87,6 +108,7 @@ Route::group(['as' => 'front.'], function () {
         Route::get('/quotemessage/history/{id}', 'MessageController@getQuoteChatHistory')->name('message.quote_history');
         Route::get('manage_notification', 'DashboardController@manageNotification')->name('manage_notification');
         Route::post('update-manage-notification', 'DashboardController@updateManageNotification')->name('updateManageNotification');
+        Route::get('/quote/renew/{id}', 'DashboardController@quoteRenew')->name('quote_renew');
     });
     Route::group(['middleware' => 'auth:web'], function () {
         Route::get('/logout', 'General\GeneralController@logout')->name('logout');
@@ -116,29 +138,8 @@ Route::post('/verify-otp', [App\Http\Controllers\Front\QuotesController::class, 
 
 
 Route::get("/new/template/check", function () {
-    $maildata['user'] = User::where('id', "1104")->first();
-    $maildata['thread'] = Thread::where('id', '1707')->first();
-    $maildata['message'] = "hello how are you ahfkadfkj sdfhsdfhsod shsi gsf gsiof iosf g";
-    $maildata['from_page'] = 'quotes_admin';
-    $maildata['quotes'] =  UserQuote::where('id', 717)->first();
-    $maildata['quote_id'] = 21;
-    $maildata['type'] = 'user';
+    $data = get_last_two_parts('Warren Drive, Southwater, Horsham RH13 9GL, UK');
+    return $data;
     return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
 });
 
-Route::get("/check/postcode",function(){
-    $data = UserQuote::latest()->get();
-    $i = 0;
-    $arr = [];
-    foreach($data as $datas)
-    {
-        $i++;
-        $arr["original"][] = $datas->drop_postcode;
-       $arr["hide"][] =   hidePostcode($datas->drop_postcode);
-       if($i === 2)
-       {
-        break;
-       }
-    }
-    return $arr;
-});

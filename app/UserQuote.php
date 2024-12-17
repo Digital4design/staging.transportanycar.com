@@ -39,6 +39,11 @@ class UserQuote extends Model
         return $this->hasOne(QuoteByTransporter::class);
     }
 
+    public function quoteByTransporterCheck()
+    {
+        return $this->hasOne(QuoteByTransporter::class)->where('user_id', auth()->id());
+    }
+
     public function quotationDetail()
     {
         return $this->hasOne(QuotationDetail::class, 'user_quote_id');

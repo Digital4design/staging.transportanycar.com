@@ -153,7 +153,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control textarea save-search-textarea"
                             style="margin-bottom:0px" aria-describedby="emailHelp" placeholder="Name this search"
-                            id="srchName" name="srchName">
+                            id="srchName" name="srchName" required>
                         <p class="save-search-example">e.g. (London to Anywhere)</p>
                     </div>
                     <div class="form-group custom-checkbox">

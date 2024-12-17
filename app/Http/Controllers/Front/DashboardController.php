@@ -144,6 +144,52 @@ class DashboardController extends WebController
         $title = 'Account';
         return view('front.dashboard.account', ['title' => $title]);
     }
+    public function quoteRenew(Request $request, $id)
+    {
+     
+        $quote = UserQuote::find($id);
+//  return    $quote;
+        $quoteData = [
+            'user_id' => $quote->user_id,
+            'pickup_postcode' => $quote->pickup_postcode,
+            'pickup_lat' => $quote->pickup_lat,
+            'pickup_lng' => $quote->pickup_lng,
+            'drop_postcode' => $quote->drop_postcode,
+            'drop_lat' => $quote->drop_lat,
+            'drop_lng' => $quote->drop_lng,
+            'distance' => $quote->distance,
+            'duration' => $quote->duration,
+            'vehicle_make' => $quote->vehicle_make ?? null,
+            'vehicle_model' => $quote->vehicle_model ?? null,
+            'starts_drives' => $quote->starts_drives ?? '0',
+           'image' => $quote->image === url('uploads/no_quote.png') ? null : $quote->image,
+            'vehicle_make_1' => $quote->vehicle_make_1 ?? null,
+            'vehicle_model_1' => $quote->vehicle_model_1 ?? null,
+            'starts_drives_1' => $quote->starts_drives_1 ?? null,
+            'image_1' => $quote->image_1  === url('uploads/no_quote.png') ? null : $quote->image_1,
+            'map_image' => $quote->map_image,
+            'created_at' => $now = Carbon::now('Europe/London'),
+            'updated_at' => $now = Carbon::now('Europe/London'),
+            'how_moved' => $quote->how_moved ?? null,
+            'delivery_timeframe_from' => $quote->delivery_timeframe_from ? (\DateTime::createFromFormat('d/m/Y', $quote->delivery_timeframe_from) ? \DateTime::createFromFormat('d/m/Y', $quote->delivery_timeframe_from)->format('Y-m-d') : null) : null,
+            'delivery_timeframe' => $quote->delivery_timeframe ?? null,
+            'email' => $quote->email ?? null,
+        ];
+
+        
+// return $quote;
+       if ($quoteData) {
+        // Update the record
+        UserQuote::create($quoteData);
+        // return redirect()->route('front.dashboard')->with('success', 'Quote updated successfully!');
+        // Update the record
+        UserQuote::destroy($id);
+
+        // Redirect to the dashboard after a successful update
+        return redirect()->route('front.dashboard')->with('success', 'Quote updated successfully!');
+    }
+
+    }
 
     public function profile(Request $request)
     {
@@ -237,6 +283,7 @@ class DashboardController extends WebController
     {
         $quote = QuoteByTransporter::where('id', $quote_id)->first();
         $params = $this->get_transporter_feedback($quote->user_id);
+        // return $params;
         return view('front.dashboard.feedback_view', $params)->with('quote', $quote);
     }
 
@@ -264,24 +311,38 @@ class DashboardController extends WebController
     private function get_transporter_feedback ($transporter_id) {
         $user_data = user::find($transporter_id);
         // dd($user_data);
-        $my_quotes = QuoteByTransporter::where('user_id', $transporter_id)->pluck('id');
+        // $my_quotes = QuoteByTransporter::where('user_id', $transporter_id)->pluck('id');
+        // $quotes = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)->get();
+
+        // $totalDistance = $quotes->sum(function ($transaction) {
+        //     if ($transaction->quote) {
+        //         $distanceString = $transaction->quote->distance;
+        //         $cleanedDistance = str_replace(['mi', ',', ' '], '', $distanceString);
+        //         return is_numeric($cleanedDistance) ? (float)$cleanedDistance : 0;
+        //     }
+        //     return 0;
+        // });
+
+        $quoteBytransporter = QuoteByTransporter::where('user_id', $user_data->id)->get();
+        $userQuote = UserQuote::whereIn('id', $quoteBytransporter->pluck('user_quote_id'))->get();
+        $total_distance = UserQuote::whereIn('id', $quoteBytransporter->where('status', 'accept')->pluck('user_quote_id')->toArray())
+            ->sum('distance');
+        $totalDistance = $total_distance >= 1000 ? round($total_distance / 1000, 1) . 'K' : round($total_distance, 1);
+        $my_quotes = $quoteBytransporter->pluck('id');
         $quotes = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)->get();
+        // $totalDistanceFormatted =  number_format((float)$totalDistance, 0);;
+        $completedCount = $userQuote->where('status', 'completed')->count();
 
-        $totalDistance = $quotes->sum(function ($transaction) {
-            if ($transaction->quote) {
-                $distanceString = $transaction->quote->distance;
-                $cleanedDistance = str_replace(['mi', ',', ' '], '', $distanceString);
-                return is_numeric($cleanedDistance) ? (float)$cleanedDistance : 0;
-            }
-            return 0;
-        });
+        $total_earning = $quoteBytransporter->where('status', 'accept')->whereIn('user_quote_id', $userQuote->where('status', 'completed')->pluck('id')->toArray())->sum('transporter_payment');
 
-        $totalDistanceFormatted = number_format($totalDistance);
-        $completedCount = $quotes->filter(function ($transaction) {
-            return $transaction->quote && $transaction->quote->status == 'completed';
-        })->count();
+        $totalDistanceFormatted = $total_distance >= 1000 
+        ? round($total_distance / 1000, 1) . 'K' 
+        : number_format($total_distance, 1);
+        // $completedCount = $quotes->filter(function ($transaction) {
+        //     return $transaction->quote && $transaction->quote->status == 'completed';
+        // })->count();
 
-        $total_earning = $quotes->sum('amount');
+        // $total_earning = $quotes->sum('amount');
        
         $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
         ->whereNotNull('rating')

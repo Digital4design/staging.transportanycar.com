@@ -101,6 +101,19 @@ if (!function_exists('un_link_file')) {
         return $pass;
     }
 }
+if (!function_exists('get_last_two_parts')) {
+    function get_last_two_parts($location)
+    {
+        // Split the location by commas
+        $parts = explode(',', $location);
+
+        // Get the last two parts and trim any extra whitespace
+        $lastTwoParts = array_slice($parts, -2);
+
+        // Join them back with a comma
+        return implode(', ', array_map('trim', $lastTwoParts));
+    }
+}
 
 if (!function_exists('hidePostcode')) {
     /**

@@ -298,35 +298,61 @@
 
 
                                                     </ul>
-                                                @else
+                                                    @else
                                                     @php
                                                         $totalStars = 5; // Total number of stars
-                                                        $yellowStars = round($rating_average); // Full yellow stars
+                                                        $yellowStars = floor($rating_average); // Full yellow stars
+                                                        $hasHalfStar = $rating_average - $yellowStars >= 0.5; // Check if there's a half-star
+                                                        $greyStars = $totalStars - $yellowStars - ($hasHalfStar ? 1 : 0); // Calculate remaining grey stars
                                                     @endphp
                                                     <ul class="wd-star-lst user-feedback-stars">
-
-                                                        @for ($i = 1; $i <= $totalStars; $i++)
+                                                        {{-- Render full yellow stars --}}
+                                                        @for ($i = 1; $i <= $yellowStars; $i++)
                                                             <li>
-                                                                <svg width="12" height="12" viewBox="0 0 12 12"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path
                                                                         d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                                        fill="{{ $i <= $yellowStars ? '#FFA800' : '#ccc' }}" />
+                                                                        fill="#FFA800" />
                                                                 </svg>
                                                             </li>
                                                         @endfor
+                                                
+                                                        {{-- Render half-star if applicable --}}
+                                                        @if ($hasHalfStar)
+                                                            <li>
+                                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <defs>
+                                                                        <linearGradient id="halfStarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                                            <stop offset="50%" stop-color="#FFA800" />
+                                                                            <stop offset="50%" stop-color="#ccc" />
+                                                                        </linearGradient>
+                                                                    </defs>
+                                                                    <path
+                                                                        d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                        fill="url(#halfStarGradient)" />
+                                                                </svg>
+                                                            </li>
+                                                        @endif
+                                                
+                                                        {{-- Render grey stars --}}
+                                                        @for ($i = 1; $i <= $greyStars; $i++)
+                                                            <li>
+                                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                        fill="#ccc" />
+                                                                </svg>
+                                                            </li>
+                                                        @endfor
+                                                
+                                                        {{-- Display rating count and percentage --}}
                                                         <li class="user-feedback-rating-count">
-                                                            <span>({{ count($feedback) }})</span><span
-                                                                class="ml-1">{{ $rating_percentage }}%</span>
+                                                            <span>({{ count($feedback) }})</span><span class="ml-1">{{ $rating_percentage }}%</span>
                                                         </li>
-
-                                                        {{-- <li>({{ number_format($overall_percentage, 0) }}%)</li> --}}
-
-
                                                     </ul>
                                                 @endif
                                                 <div>Member since: <span
-                                                        class="font-weight-light user-feedback-member-from">{{ $user->created_at->format('m/d/Y') }}</span>
+                                                        class="font-weight-light user-feedback-member-from">{{ $user->created_at->format('d/m/Y') }}</span>
                                                 </div>
                                             </div>
                                         </div>

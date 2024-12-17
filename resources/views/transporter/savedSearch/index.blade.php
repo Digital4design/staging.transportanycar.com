@@ -1792,12 +1792,10 @@
                                             </div>
                                             <div class="modal-footer d-flex flex-wrap align-items-center p-0">
                                                 <a href="javascript:;" class="no_btn" data-dismiss="modal">No</a>
-                                                <form action="{{ route('transporter.delete.save.search') }}"
-                                                    method="POST" class="close-btn">
+                                                <form action="{{ route('transporter.delete.save.search') }}" method="POST" class="close-btn">
                                                     @csrf
-                                                    <button type="submit" class="yes_btn"
-                                                        value="{{ $savedSearch->id }}" name="id"
-                                                        aria-label="Close">Yes</button>
+                                                    <input type="hidden" name="id" value="{{ $savedSearch->id }}">
+                                                    <button type="submit" class="yes_btn" aria-label="Close">Yes</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -1828,6 +1826,9 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
         $(document).ready(function() {
+            $('.yes_btn').click(function() {
+    $(this).attr('disabled', true).closest('form').submit();
+});
             var globalSiteUrl = '<?php echo $path = url('/'); ?>';
 
             $('.saved_find_job').on('click', function(event) {

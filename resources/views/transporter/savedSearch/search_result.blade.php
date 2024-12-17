@@ -2022,16 +2022,16 @@
 
                                                 </ul>
                                                 <ul class="col-6 px-0">
-                                                    {{-- @php
+                                                    @php
                                                         $lowestBid = $quote->lowest_bid ?? 0;
                                                         $transporterQuotesCount = $quote->transporter_quotes_count ?? 0;
-                                                    @endphp --}}
+                                                    @endphp
 
-                                                    @if ($quote->quotes_count > 0)
+                                                    @if ($transporterQuotesCount > 0)
                                                         <li class="colorDivgreen car-row"
                                                             data-car-id="{{ $quote->id }}">
                                                             <span><b>Current lowest bid:</b></span>
-                                                            <span class="sub_color">£{{ $quote->lowest_bid }}</span>
+                                                            <span class="sub_color">£{{ $lowestBid }}</span>
                                                         </li>
                                                     @else
                                                         <li class="colorDivgreen car-row"
@@ -2043,8 +2043,8 @@
                                                     <li class="colorDivBlue  mb-2 car-row"
                                                         data-car-id="{{ $quote->id }}">
                                                         <b>Transporters bidding: </b>
-                                                        @if ($quote->quotes_count > 0)
-                                                            <span class="sub_color">{{ $quote->quotes_count }}</span>
+                                                        @if ($transporterQuotesCount > 0)
+                                                            <span class="sub_color">{{ $transporterQuotesCount }}</span>
                                                         @else
                                                             <span class="sub_color">0</span>
                                                         @endif
@@ -2407,6 +2407,7 @@
             e.preventDefault();
             var pick_area = $("#search_pick_up_area").val();
             var drop_area = $("#search_drop_off_area").val();
+            
             var search_name = $("#srchName").val();
             var isChecked = $('#emailNtf').prop('checked');
             $("#srchName").next("span.error").remove();
@@ -2740,7 +2741,7 @@
                                             onclick="share_give_quote(${carData.id});"
                                             class="make_offer_btn checkStatus">Place bid</a>`
                     }
-
+// console.log(carData.image);
                     // Dynamically update modal body content
                     var modalBodyContent = `
                     <div class="jobsrch_box">
@@ -2749,7 +2750,7 @@
                                  <div class="jobsrch_top_box position-relative">
                                     ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
                                                         <div>
-                                                            <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+                                                            <img src="/${carData.image ?? 'uploads/no_car_image.png'}" class="vehicle_image" alt="Vehicle Image" />
                                                         </div>
                                                         ` : `
                                                         <div class="job_se_sec slider">

@@ -236,7 +236,7 @@
                                 </div>
 
                                 <div class="wd-quote-rght">
-                                    <a href="javascript:;" class="wd-leave-btn">Relist</a>
+                                    <a href="{{route('front.quote_renew', ['id' => $item->id])}}" class="wd-leave-btn">Relist</a>
                                 </div>
                             </div>
                             @empty

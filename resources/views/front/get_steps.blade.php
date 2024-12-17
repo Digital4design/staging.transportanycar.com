@@ -5,6 +5,9 @@
         /* main {
             padding-top: 104px;
         } */    
+        .ui-datepicker {
+            z-index: 99!important;
+        }
         .error {
             color: red;
         }
@@ -532,7 +535,7 @@
                             </div>
                         </fieldset>
                         <fieldset class="wizard-fieldset wizard_laststep">
-                            <h5>Enter your details below to start receiving your quotes in minutes.</h5>
+                            <h5>Enter your email below to start receiving your quotes in minutes.</h5>
                             <p class="mb-3 d-block">Quotes are provided to you by our network of reputable car transporters.</p>
                             @if(Auth::guard('web')->user() && Auth::guard('web')->user()->type == 'user')
                                 @php
@@ -550,7 +553,7 @@
                                 </div>
                                 {{-- <small class="exm_text d-block">e.g. abc@gmail.com</small> --}}
                             </div>
-                            <div class="form-group" bis_skin_checked="1">
+                            {{-- <div class="form-group" bis_skin_checked="1">
                                 <div class="inputgrp position-relative" bis_skin_checked="1">
                                     <span class="wd_icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -559,7 +562,7 @@
                                     </span>
                                     <input type="tel" class="form-control wizard-required" placeholder="Enter your mobile" name="phone"  pattern="^0[0-9]{9}$"  title="Mobile number must start with 0 and have exactly 10 digits." value="{{ $user->mobile ?? '' }}" />
                                 </div>
-                            </div>
+                            </div> --}}
                            
                             <div class="form-group wizard_btngrp mb-3">
                                 {{--<a href="getsteps.html" class="wd_nextbtn form-wizard-submit">Get Instant Quotes <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -574,7 +577,7 @@
                             <div class="form-group text-left d-flex flex-wrap align-items-center" style="gap:5px;">
                                 {{-- <input type="checkbox" name="terms" id="terms" style="position: absolute; left: 0; top: 1px;" /> --}}
                                 <label for="terms">By proceeding you confirm you accept our <a target="_blank" href="{{route('front.term_condition')}}">T&Cs</a> and <a target="_blank" href="{{route('front.privacy_policy')}}">Privacy policy</a>.</label>
-                                <p>We will only use your contact details to send you competitive quotes in relation to this transport request. You can opt out of receiving quotes at any time.</p>
+                                <p>We will only use your email to send you competitive quotes in relation to this transport request. You can opt out of receiving quotes at any time.</p>
                             </div>
                             {{-- <div class="form-group">
                                 <a href="javascript:void(0)" class="form-wizard-previous-btn back-icon">
@@ -800,7 +803,7 @@ in1.addEventListener('input', splitNumber);
                     noPhoneOrEmail: true
                 },
                 email: {required: true},
-                phone: {required: true,digits: true,maxlength: 11,minlength: 11},
+                //phone: {required: true,digits: true,maxlength: 11,minlength: 11},
                 //starts_drives: {required: true},
                 vehicle_make_1: {required: true},
                 vehicle_model_1: {required: true},
@@ -827,7 +830,7 @@ in1.addEventListener('input', splitNumber);
                 vehicle_make_1: {required: "Please enter vehicle make."},
                 vehicle_model_1: {required: "Please enter vehicle model."},
                 email: {required: "Please enter email."},
-                phone : {required: "Please enter a valid mobile number.",digits: "Please enter a valid mobile number",maxlength: "Please enter a valid mobile number.",minlength: "Please enter a valid mobile number."},
+                //phone : {required: "Please enter a valid mobile number.",digits: "Please enter a valid mobile number",maxlength: "Please enter a valid mobile number.",minlength: "Please enter a valid mobile number."},
                 delivery_timeframe_date: { deliveryDateRequired: "Please enter a delivery date." },
                 // terms: {
                 //         required: "Please accept the terms & conditions." // Custom error message
@@ -844,7 +847,7 @@ in1.addEventListener('input', splitNumber);
             },
             submitHandler: function (form) {
                 addOverlay();
-                //$('#popup').addClass('show'); 
+                $('#popup').addClass('show'); 
                 // Show the popup
                 // Trigger the gtag event with additional parameters
                 gtag('event', 'conversion', {
@@ -858,13 +861,15 @@ in1.addEventListener('input', splitNumber);
                 if (typeof uetq !== 'undefined') {
                     uet_report_conversion();
                 }
-                if (!otpVerified) {
-                        
-                        sendOTP();
-                 } else {
-                      // If OTP is verified, submit the form directly
-                        form.submit();
-                 }
+                form.submit();
+                //if (!otpVerified) {
+                //    setTimeout(() => {
+                //        $('#popup').removeClass('show');
+                //        sendOTP();                        
+                //    }, 1000);
+                //} else {
+                //        form.submit();
+                // }
                 
             }
         });
