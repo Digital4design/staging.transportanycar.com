@@ -93,10 +93,10 @@
                                                     <!-- <div style="max-width: 600px;">
                                                         <img src="https://image.optimite.email/wp-content/uploads/2024/02/Email-6.png" style="display: block; height: auto; border: 0; width: 100%;" width="600" alt="New notification, it's great news!" title="New notification, it's great news!">
                                                     </div> -->
-                                                    <p style="margin: 0; font-size: 14px;"><a href="{{route('front.unsubscribe', ['unsub' => true]) }}" target="_blank" style="text-decoration: underline; color: #5f5f5f;" rel="noopener">Unsubscribe from all emails</a></p>
+                                                    {{-- <p style="margin: 0; font-size: 14px;"><a href="{{route('front.unsubscribe', ['unsub' => true]) }}" target="_blank" style="text-decoration: underline; color: #5f5f5f;" rel="noopener">Unsubscribe from all emails</a></p> --}}
                                                     <a href="https://transportanycar.com/">
                                                     <img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg" style="display: block; height: auto; border: 0; width: 100px; margin: 15px auto;" alt="accept quote deposit reminder" title="accept quote deposit reminder"></a>                                          
-                                                    <h3 style="font-size: 22px; line-height: normal;">Quotes <span style="color: #018dd4;">summary</span></h3>
+                                                    {{-- <h3 style="font-size: 22px; line-height: normal;">Quotes <span style="color: #018dd4;">summary</span></h3> --}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -153,7 +153,7 @@
                                         <tr>
                                             <td class="pad" style="padding-bottom:15px;padding-left:10px;padding-right:10px;padding-top:30px;width:100%;">
                                                 <div class="alignment" align="center" style="line-height:10px">
-                                                    <div style="max-width: 180px;"><a href="https://transportanycar.com/"><img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg" style="display: block; height: auto; border: 0; width: 100%;" width="180" alt="transport any car" title="transport any car"></a></div>
+                                                    {{-- <div style="max-width: 180px;"><a href="https://transportanycar.com/"><img src="https://mcusercontent.com/8992880337eb54b5df095f667/images/91d6d431-803b-d338-b1ae-4ab578715e2c.jpg" style="display: block; height: auto; border: 0; width: 100%;" width="180" alt="transport any car" title="transport any car"></a></div> --}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -163,7 +163,7 @@
                                             <td class="pad" style="padding-bottom:40px;padding-left:10px;padding-right:10px;padding-top:10px;">
                                                 <div style="color:#ffffff;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:16.8px;">
                                                     <p style="margin: 0; margin-bottom: 16px; color: #000;font-size: 16px; line-height: 22px;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
-                                                    <p style="margin: 0;"><a href="{{route('front.unsubscribe', ['unsub' => true]) }}" target="_blank" style="text-decoration: underline; color: #717171;" rel="noopener">Unsubscribe from all emails</a></p>
+                                                    {{-- <p style="margin: 0;"><a href="{{route('front.unsubscribe', ['unsub' => true]) }}" target="_blank" style="text-decoration: underline; color: #717171;" rel="noopener">Unsubscribe from all emails</a></p> --}}
                                                 </div>
                                             </td>
                                         </tr>

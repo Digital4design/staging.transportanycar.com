@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-
+use Exception;
 use App\Services\SmsService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -62,10 +62,15 @@ class QuotesController extends WebController
         $data['end_point'] = $request->end_point ?? '';
         $data['end_latitude'] = $request->end_latitude ?? '';
         $data['end_longitude'] = $request->end_longitude ?? '';
-        Cache::put('location_info', $data);
-
+        
+        // Store data in the cache
+         $isCached = Cache::put('location_info', $data);
+        if (!$isCached) {
+            throw new Exception('Failed to store data in cache');
+        }else{
         //$route = route('front.quote_steps');
         return redirect()->route('front.quote_steps');
+      }
         //return response()->json(['success' => true, 'route' => $route]);
         //$location = Cache::get('location_'.$user_data->id);
     }
@@ -260,7 +265,7 @@ class QuotesController extends WebController
         // Send mail to transporters
         //$this->sendMailToTransporters($quoteData);
         // this is commented because of client requirement
-        $command = '/usr/local/bin/php /home/pfltvaho/staging.transportanycar.com/artisan schedule:run';
+        $command = '/usr/local/bin/php /home/pfltvaho/public_html/artisan schedule:run';
         exec($command, $output, $returnVar);
         // comment end
     }
