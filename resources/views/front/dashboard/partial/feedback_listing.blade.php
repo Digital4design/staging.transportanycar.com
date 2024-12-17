@@ -169,7 +169,7 @@
                 <div class="review-active-bar" style="width:{{ $ratings['star_5'] }}%">
                 </div>
             </div>
-            <span class="review-percentage">{{ number_format($ratings['star_5'],2) }}%</span>
+            <span class="review-percentage">{{ number_format($ratings['star_5'],1) }}%</span>
         </li>
         <li>
             <span class="review-steps">4</span>
@@ -183,7 +183,7 @@
 
                 </div>
             </div>
-            <span class="review-percentage">{{number_format($ratings['star_4'],2) }}%</span>
+            <span class="review-percentage">{{number_format($ratings['star_4'],1) }}%</span>
         </li>
         <li>
             <span class="review-steps">3</span>
@@ -197,7 +197,7 @@
 
                 </div>
             </div>
-            <span class="review-percentage">{{ number_format($ratings['star_3'],2) }}%</span>
+            <span class="review-percentage">{{ number_format($ratings['star_3'],1) }}%</span>
         </li>
         <li>
             <span class="review-steps">2</span>
@@ -211,7 +211,7 @@
 
                 </div>
             </div>
-            <span class="review-percentage">{{number_format($ratings['star_2'],2) }}%</span>
+            <span class="review-percentage">{{number_format($ratings['star_2'],1) }}%</span>
         </li>
         <li>
             <span class="review-steps">1</span>
@@ -226,7 +226,7 @@
 
                 </div>
             </div>
-            <span class="review-percentage">{{ number_format($ratings['star_1'],2) }}%</span>
+            <span class="review-percentage">{{ number_format($ratings['star_1'],1) }}%</span>
         </li>
     </ul>
 </div>
