@@ -287,8 +287,8 @@ class DashboardController extends WebController
     $quotes = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)->get();
 
     // Count completed jobs
-    $completedCount = $userQuote->where('status', 'completed')->count();
-
+    $completedCount = $quoteBytransporter->where('status', 'completed')->count();
+// return$quoteBytransporter;
     // Calculate total earnings
     $total_earning = $quoteBytransporter->where('status', 'accept')
         ->whereIn(
