@@ -342,7 +342,7 @@
 
                                                     <li class="user-feedback-rating-count">
                                                         <span>({{ count($feedback) }})</span><span
-                                                            class="ml-1">{{ number_format( $rating_percentage,1) }}%</span>
+                                                            class="ml-1">{{ number_format( $rating_percentage,0) }}%</span>
                                                     </li>
 
                                                     {{-- <li>({{ number_format($overall_percentage, 0) }}%)</li> --}}
@@ -403,7 +403,7 @@
                                                     {{-- Display rating count and percentage --}}
                                                     <li class="user-feedback-rating-count">
                                                         <span>({{ count($feedback) }})</span><span
-                                                            class="ml-1">{{  number_format($rating_percentage,1) }}%</span>
+                                                            class="ml-1">{{  number_format($rating_percentage,0) }}%</span>
                                                     </li>
                                                 </ul>
                                             @endif
@@ -463,7 +463,7 @@
                                                 </li>
                                                 <li>
                                                     <p>Positive feedback:</p>
-                                                    <span>{{  number_format($rating_percentage,1) }}%</span>
+                                                    <span>{{  number_format($rating_percentage,0) }}%</span>
                                                 </li>
                                                 <li>
                                                     <p>Total reviews:</p>

@@ -7,7 +7,7 @@
 </style>
 <div class="overall-review py-3 py-md-5">
     <h2 class="total-review">Reviews (<?php echo count($feedbacks); ?>)</h2>
-    <span class="total-rating my-2 d-block">{{ number_format($average_rating, 1) }}/5</span>
+    <span class="total-rating my-2 d-block">{{ number_format($average_rating, 0) }}/5</span>
     @if (count($feedbacks) == 0)
         <ul class="wd-star-lst user-feedback-stars">
             <li>
@@ -112,7 +112,7 @@
 
                 </div>
             </div>
-            <span class="review-percentage">{{ number_format($ratings['star_5'],1) }}%</span>
+            <span class="review-percentage">{{ number_format($ratings['star_5'],0) }}%</span>
         </li>
         <li>
             <span class="review-steps">4</span>
@@ -126,7 +126,7 @@
 
                 </div>
             </div>
-            <span class="review-percentage">{{ number_format($ratings['star_4'],1) }}%</span>
+            <span class="review-percentage">{{ number_format($ratings['star_4'],0) }}%</span>
         </li>
         <li>
             <span class="review-steps">3</span>
@@ -140,7 +140,7 @@
 
                 </div>
             </div>
-            <span class="review-percentage">{{ number_format($ratings['star_3'],1) }}%</span>
+            <span class="review-percentage">{{ number_format($ratings['star_3'],0) }}%</span>
         </li>
         <li>
             <span class="review-steps">2</span>
@@ -154,7 +154,7 @@
 
                 </div>
             </div>
-            <span class="review-percentage">{{ number_format($ratings['star_2'],1) }}%</span>
+            <span class="review-percentage">{{ number_format($ratings['star_2'],0) }}%</span>
         </li>
         <li>
             <span class="review-steps">1</span>
@@ -169,7 +169,7 @@
 
                 </div>
             </div>
-            <span class="review-percentage">{{ number_format($ratings['star_1'],1) }}%</span>
+            <span class="review-percentage">{{ number_format($ratings['star_1'],0) }}%</span>
         </li>
     </ul>
 </div>
