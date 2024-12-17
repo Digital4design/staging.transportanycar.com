@@ -58,7 +58,9 @@
 </style>
 <div class="overall-review py-3 py-md-5">
     <h2 class="total-review">Reviews (<?php echo count($feedbacks); ?>)</h2>
-    <span class="total-rating my-2 d-block">{{ round($average_rating) }}/5</span>
+    {{-- <span class="total-rating my-2 d-block">{{ round($average_rating) }}/5</span> --}}
+    <span class="total-rating my-2 d-block">{{ number_format($average_rating, 1) }}/5</span>
+
     @if (count($feedbacks) == 0)
         <ul class="wd-star-lst user-feedback-stars">
             <li>
