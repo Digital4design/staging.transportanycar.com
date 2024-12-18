@@ -30,6 +30,7 @@
             @endif
             delivery.
         </p>
+        <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 25px; margin-bottom:25px;">If you need any help or have any questions please contact our team on <a href="tel:08081557979">0808 155 7979</a> or email us <a href="mailto:support@transportanycar.com">support@transportanycar.com</a>.</p>
         <div class="message-wrap" style="font-family: 'Outfit', sans-serif; background-color: #f1f1f1; padding-top: 40px; padding-bottom: 40px; padding-left: 40px; padding-right: 40px; text-align: center;">
             <p class="message-title" style="font-family: 'Outfit', sans-serif;font-size: 20px; line-height: 24px; font-weight: 500; margin-bottom: 10px; text-align: left;">
                 {{ $data['user']->username }} 
@@ -143,7 +144,7 @@
         <p style="font-family: 'Outfit', sans-serif;margin-top:12px; margin-bottom: 12px; font-weight: 300; font-size: 16px;line-height: 22px;">Manage notification <a 
             href="{{ $data['url'] }}"
                 style="font-family: 'Outfit', sans-serif;color:#0356D6; text-decoration: none;">preferences.</a></p>
-        <p style=" font-family: 'Outfit', sans-serif;font-size: 16px; line-height: 22px; font-weight: 300;">© 2024 Transport Any Car. 128 City Road, London, EC1V 2NX.</p>
+                <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 0; margin-bottom:0;">Transport Any Car ©️ All rights reserved. 2024. TransportAnyCar.com is a limited company registered in England and Wales. Registered address: 128 City Road, London, EC1V 2NX.</p>
     </div>
 </body>
 

@@ -2,10 +2,13 @@
 
 @section('head_css')
 <style>
-    .cehckout_formblog.main_cart_sec {
+.back-wrapper {
+  margin-bottom: 20px;
+}
+  .cehckout_formblog.main_cart_sec {
     padding: 0;
     box-shadow: none;
-}
+  }
 .cart_radio_btn {
     display: flex;
     justify-content: space-between;
@@ -168,6 +171,9 @@ div#spinner.loader {
 }
 }
 @media (max-width: 767px){
+  .back-wrapper {
+  margin-bottom: 15px;
+}
   .cart_radio_btn .custom_svg .form-group svg {
     width: 48px;
     height: 28px;
@@ -245,12 +251,22 @@ section.review_quote_blog.payment_cart {
                 <h3>Secure booking</h3>
                 <p>Enter your payment details below to pay the<br> deposit and secure your booking.</p>
             </div>
-            <a href="javascript:history.back()" class="form-wizard-previous-btn back-icon">
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+              <a href="javascript:history.back()" class="form-wizard-previous-btn back-icon">
                 <svg width="7" height="13" viewBox="0 0 7 13" fill="none" class="color-change" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
                 Back 
-            </a>
+              </a>
+              <span style="font-size:12px; line-height: 15px;" class="d-flex align-items-center back-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M18 8.521C18.125 15.366 14.042 18.278 11.727 18.965C11.5737 19.0106 11.4103 19.0106 11.257 18.965C8.98 18.29 5.014 15.464 5 8.862C5.01372 8.29149 5.33458 7.7729 5.839 7.506C9.363 5.516 11.058 5 11.489 5C11.92 5 13.749 5.549 17.507 7.7C17.8045 7.86767 17.9918 8.17958 18 8.521Z" fill="#52D017" stroke="#52D017" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.5 12.015L10.5 14.015L14.5 10.007" fill="#52D017"/>
+                <path d="M8.5 12.015L10.5 14.015L14.5 10.007" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Secure payments by</span> <span style="font-weight:500; font-size:20px; line-height: 22px; margin-left:3px;">stripe</span>
+            </span>
+          </div>
             <div class="cehckout_formblog main_cart_sec" >
                 <div class="row">
                   @if(isMobile())
@@ -312,6 +328,7 @@ section.review_quote_blog.payment_cart {
                               <span id="button-text">Submit payment (£{{$data->deposit}})</span>
                             </button>
                         </div>
+                        <img src="/assets/images/payment-type.png" alt="" class="img-fluid mb-4 mb-md-0" />
                         <div id="payment-message" class="hidden"></div>
                       </form>
                   </div>
