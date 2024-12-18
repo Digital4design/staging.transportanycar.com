@@ -2169,7 +2169,7 @@
                         <div class="form-group">
                             <span class="icon_includes">£</span>
                             <input type="tel" class="form-control" aria-describedby="emailHelp"
-                                placeholder="Enter your bid" id="amount" name="amount">
+                                placeholder="Enter your bid (inc vat)" id="amount" name="amount">
                             <!-- <p style="font-size:12px; margin-top: 10px;"><b> Note:</b> The amount you bid will be the total amount you get paid directly by the customer.</p> -->
                             <div class="modal_current">
                                 <p>Current lowest bid: <span class="lowAmount">£0</span></p>
@@ -2218,7 +2218,7 @@
                         <div class="form-group">
                             <span class="icon_includes">£</span>
                             <input type="tel" class="form-control" aria-describedby="emailHelp"
-                                placeholder="Enter your bid" id="editamount" name="amount">
+                                placeholder="Enter your bid (inc vat)" id="editamount" name="amount">
                             <!-- <p style="font-size:12px; margin-top: 10px;"><b> Note:</b> The amount you bid will be the total amount you get paid directly by the customer.</p> -->
                             <div class="modal_current">
                                 <p>Current lowest bid: <span class="lowAmount">£0</span></p>

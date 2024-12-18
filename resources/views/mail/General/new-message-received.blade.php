@@ -144,7 +144,7 @@
         <p style="font-family: 'Outfit', sans-serif;margin-top:12px; margin-bottom: 12px; font-weight: 300; font-size: 16px;line-height: 22px;">Manage notification <a 
             href="{{ $data['url'] }}"
                 style="font-family: 'Outfit', sans-serif;color:#0356D6; text-decoration: none;">preferences.</a></p>
-                <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 0; margin-bottom:0;">Transport Any Car ©️ All rights reserved. 2024. TransportAnyCar.com is a limited company registered in England and Wales. Registered address: 128 City Road, London, EC1V 2NX.</p>
+                <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 0; margin-bottom:0;">Transport Any Car &copy; All rights reserved. 2024. TransportAnyCar.com is a limited company registered in England and Wales. Registered address: 128 City Road, London, EC1V 2NX.</p>
     </div>
 </body>
 

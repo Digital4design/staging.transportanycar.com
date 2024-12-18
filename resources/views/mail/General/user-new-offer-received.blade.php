@@ -32,7 +32,7 @@
     <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 0; margin-bottom:0;">Best Regards,</p>
     <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 12px; margin-bottom: 60px;">Transport Any Car Team</p>
     <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 12px; margin-bottom:12px;">Manage notification <a href="{{ url('/manage_notification') }}" style="color:#0356D6; text-decoration: none;">preferences.</span></a>
-    <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 0; margin-bottom:0;">Transport Any Car ©️ All rights reserved. 2024. TransportAnyCar.com is a limited company registered in England and Wales. Registered address: 128 City Road, London, EC1V 2NX.</p>
+    <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 0; margin-bottom:0;">Transport Any Car &copy; All rights reserved. 2024. TransportAnyCar.com is a limited company registered in England and Wales. Registered address: 128 City Road, London, EC1V 2NX.</p>
 </div>
 </body>
 

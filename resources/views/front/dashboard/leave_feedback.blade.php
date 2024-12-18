@@ -340,7 +340,7 @@
                                             {{-- <!-- <span>({{ count($feedback) }})</span> --> --}}
                                         </h4>
                                         @if ($percentage == 0)
-                                            <ul class="wd-star-lst user-feedback-stars">
+                                            <ul class="wd-star-lst user-feedback-stars d-none">
                                                 <li>
                                                     <svg width="12" height="12" viewBox="0 0 12 12"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -396,7 +396,7 @@
                                                 $totalStars = 5; // Total number of stars
                                                 $yellowStars = round($rating_average); // Full yellow stars
                                             @endphp
-                                            <ul class="wd-star-lst user-feedback-stars">
+                                            <ul class="wd-star-lst user-feedback-stars d-none">
 
                                                 @for ($i = 1; $i <= $totalStars; $i++)
                                                     <li>
@@ -423,7 +423,7 @@
                                                 class="font-weight-light user-feedback-member-from">{{ $user->created_at->format('m/d/Y') }}</span>
                                         </div> --}}
                                     </div>
-                                    <a href="javascript:;" class="verified_btns">
+                                    <a href="javascript:;" class="verified_btns d-none">
                                         <svg width="10" height="10" viewBox="0 0 9 7" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path

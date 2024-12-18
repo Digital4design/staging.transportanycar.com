@@ -78,7 +78,7 @@
                 </ul>
             </div> -->
             <div class="col-12 btm_footer text-center text-md-left mt-3">
-                <p class="mb-0">Transport Any Car <span>©️ All rights reserved. {{date('Y')}}</span>. TransportAnyCar.com is a limited company registered in England and Wales. Registered address: 128 City Road, London, EC1V 2NX.</p>
+                <p class="mb-0">Transport Any Car <span>&copy; All rights reserved. {{date('Y')}}</span>. TransportAnyCar.com is a limited company registered in England and Wales. Registered address: 128 City Road, London, EC1V 2NX.</p>
                 {{-- <p class="mb-0">Transport Any Car. <span>© All rights reserved. {{date('Y')}}</span></p> --}}
                 <div class="foot_img">
                     <img src="{{asset('assets/web/images/footer_logo.png')}}" alt="brand_logo" class="footer_logo" />

@@ -427,7 +427,7 @@
                             </h3>
                         </a>
                         @if ($percentage == 0)
-                            <ul class="rating-star choose_quote_rating mb-3">
+                            <ul class="rating-star choose_quote_rating mb-3 d-none">
                                 <li>
                                     <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -489,7 +489,7 @@
                                 $hasHalfStar = $rating_average - $yellowStars >= 0.5; // Check if there is a half-star
                                 $greyStars = $totalStars - $yellowStars - ($hasHalfStar ? 1 : 0); // Remaining grey stars
                             @endphp
-                            <ul class="rating-star choose_quote_rating mb-3">
+                            <ul class="rating-star choose_quote_rating mb-3 d-none">
                                 {{-- Render full yellow stars --}}
                                 @for ($i = 1; $i <= $yellowStars; $i++)
                                     <li>
@@ -540,7 +540,7 @@
                             </ul>
                         @endif
 
-                        <a href="javascript:;" class="verify-btn d-flex  align-items-center">
+                        <a href="javascript:;" class="verify-btn d-none  align-items-center">
                             <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path

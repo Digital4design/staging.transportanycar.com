@@ -207,6 +207,12 @@ $auth_user = Auth::user();
 
 
     <div class="chat_conversation_footer">
+        <p class="font-weight-light d-flex flex-wrap align-items-center text-left pl-3 d-sm-none" style="font-size:12px;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="18" height="18" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+            </svg>
+            This message will be visible to other website users.
+        </p>
         <form id="chat__form" action="{{ route('transporter.message.store', $thread->user_quote_id) }}" method="post"
             enctype='multipart/form-data'>
             @csrf
@@ -232,9 +238,13 @@ $auth_user = Auth::user();
             </div>
             <input type="hidden" value="{{ $transaction }}" id="transactionValid">
         </form>
-        <p class="chat-note">
-            Note: Users are required to accept your quote online via this platform and then we will exchange your
-            contact details so that you can finalise the delivery.
+        <p class="chat-note text-left font-weight-normal" style="font-size:12px;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="18" height="18" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+            </svg>              
+            Do not share your contact details or personal information here.
+            {{-- Note: Users are required to accept your quote online via this platform and then we will exchange your
+            contact details so that you can finalise the delivery. --}}
         </p>
     </div>
 @endif
