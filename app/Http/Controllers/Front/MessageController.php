@@ -41,7 +41,7 @@ class MessageController extends WebController
         if($id != 0){
             $thread = Thread::with(['user_qot', 'messages', 'messages.sender'])->where('id', '=', $id)->first();
             $quote_by_transporter = QuoteByTransporter::where(['user_quote_id' => $thread->user_quote_id, 'user_id'=> $thread->friend_id])->first();
-            $transporter_username = User::where('id', $quote_by_transporter->user_id)->first()->username ?? null;
+            $transporter = User::where('id', $quote_by_transporter->user_id)->first();
             $transaction = TransactionHistory::where('quote_by_transporter_id',$quote_by_transporter->id)->where('status','completed')->exists() ? "true":"false";
             $quote_by_transporter_id = $quote_by_transporter ? $quote_by_transporter->id : null;
             $transporter_username = $quote_by_transporter ? $quote_by_transporter->getTransporters->username : null;
@@ -63,8 +63,10 @@ class MessageController extends WebController
                 });
             } 
         }
+        // dd($transporter->profile_image);
+        // return;
         // return ["transaction"=>$transaction];
-        return view('front.dashboard.partial.history_listing')->with(compact('messages', 'thread', 'quote_by_transporter_id', 'transporter_username','transaction',
+        return view('front.dashboard.partial.history_listing')->with(compact('messages', 'thread','transporter', 'quote_by_transporter_id', 'transporter_username','transaction',
         'percentage','rating_average'
     ));
     }

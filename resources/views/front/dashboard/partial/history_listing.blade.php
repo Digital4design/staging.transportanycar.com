@@ -49,10 +49,19 @@ $auth_user = Auth::user();
                 </svg>
             </a>
             <div class="conversation_user d-flex flex-wrap align-items-center">
-                <div class="wd-transport-img pt-0 user-chat-header-pic mr-2">
+               {{-- {{$transporter->profile_image}} --}}
+               @if ($transporter->profile_image == env('APP_URL'))
+                    <div class="wd-transport-img pt-0 user-chat-header-pic mr-2">
                     <img src="https://www.scrapcar.co/wp-content/uploads/2024/08/user.png" width="58" height="58"
                         alt="trasporter feedback" class="img-fluid">
+                    </div>
+                     @else
+                     <div class="wd-transport-img pt-0  mr-2">
+                    <img src="{{ $transporter->profile_image }}" alt="" width="80" height="50"
+                    style="max-width: 100%;" />
                 </div>
+                 @endif 
+                
                 <div>
 
                     <h3 class="mb-1 text-left">
