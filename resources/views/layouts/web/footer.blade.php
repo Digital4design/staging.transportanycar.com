@@ -7,8 +7,8 @@
         padding-right: 15px;
     }
     footer p {
-        font-size: 14px;
-        line-height: 20px;
+        font-size: 12px;
+        line-height: 18px;
     }
 }
 </style>

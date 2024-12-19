@@ -57,7 +57,7 @@ $auth_user = Auth::user();
                     </div>
                      @else
                      <div class="wd-transport-img pt-0  mr-2">
-                    <img src="{{ $transporter->profile_image }}" alt="" width="80" height="50"
+                    <img src="{{ $transporter->profile_image }}" alt="" width="58" height="58"
                     style="max-width: 100%;" />
                 </div>
                  @endif 
