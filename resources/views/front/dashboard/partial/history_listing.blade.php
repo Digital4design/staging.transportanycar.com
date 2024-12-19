@@ -72,7 +72,7 @@ $auth_user = Auth::user();
                     </h3>
 
 
-                    @php 
+                    {{-- @php 
                          $totalStars = 5; // Total number of stars
                          $yellowStars = round($rating_average); // Full yellow stars
                     @endphp
@@ -86,7 +86,7 @@ $auth_user = Auth::user();
                                          fill="{{ $i <= $yellowStars ? '#FFA800' : '#ccc' }}" />
                                  </svg>
                              </li>
-                         @endfor
+                         @endfor --}}
                         {{-- <li>
                             <svg width="16" height="16" viewBox="0 0 12 12" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -127,10 +127,10 @@ $auth_user = Auth::user();
                                     fill="#D9D9D9"></path>
                             </svg>
                         </li> --}}
-                        <li class="user-feedback-rating-count">
+                        {{-- <li class="user-feedback-rating-count">
                             <span>({{$percentage}})</span>
                         </li>
-                    </ul>
+                    </ul> --}}
                     <p class="verified">
                         <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M14 4.521C14.125 11.366 10.042 14.278 7.727 14.965C7.57366 15.0106 7.41034 15.0106 7.257 14.965C4.98 14.29 1.014 11.464 1 4.862C1.01372 4.29149 1.33458 3.7729 1.839 3.506C5.363 1.516 7.058 1 7.489 1C7.92 1 9.749 1.549 13.507 3.7C13.8045 3.86767 13.9918 4.17958 14 4.521Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
