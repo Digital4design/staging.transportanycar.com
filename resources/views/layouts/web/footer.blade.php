@@ -4,7 +4,11 @@
 }
 @media screen and (max-width: 767px) {
     .btm_footer {
-        padding-right: 0;
+        padding-right: 15px;
+    }
+    footer p {
+        font-size: 14px;
+        line-height: 20px;
     }
 }
 </style>

@@ -88,7 +88,7 @@ $auth_user = Auth::user();
         function getChatHistory(url,thisobj){
             var elems = document.querySelector(".active");
             var timezone = moment.tz.guess();
-            console.log(timezone);
+            // console.log(timezone);
             // if(elems !==null){
             //     elems.classList.remove("active");
             // }

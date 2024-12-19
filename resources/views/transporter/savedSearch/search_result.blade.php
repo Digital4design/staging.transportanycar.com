@@ -2183,8 +2183,17 @@
                     </div>
                     <div class="modal-footer" style="margin-top: 10px;">
                         <input type="hidden" name="quote_id" id="quote_id" value="">
-                        <p><b> Note:</b> Do not share any contact information or company names, we will provide you with the
-                            customers details after they have accepted your quote.</p>
+                        <p class="pl-4 position-relative" style="line-height:16px;">
+                            {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="20" height="20" style="left:0; top:0; bottom:0; margin: auto;" class="position-absolute" viewBox="0 0 24 24" strokewidth="{1.5}" stroke="currentColor" classname="size-6">
+                                <path strokelinecap="round" strokelinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"></path>
+                            </svg> --}}
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" style="left:0; top:0; bottom:0; margin: auto;" class="position-absolute">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.563 12.2653L10.9587 4.7856C10.655 4.27281 10.1032 3.95833 9.50717 3.95833C8.91117 3.95833 8.35939 4.27281 8.05565 4.7856L3.45053 12.2653C3.10231 12.8105 3.07237 13.5004 3.37204 14.0737C3.67172 14.6471 4.25521 15.0163 4.90165 15.0416H14.1119C14.7583 15.0163 15.3418 14.6471 15.6415 14.0737C15.9412 13.5004 15.9112 12.8105 15.563 12.2653Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9.50675 10.2916V6.33331" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M9.50675 12.6667V11.875" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>                                
+                            Do not share any contact details here. We will provide you with the users contact details after they have accepted your quote.
+                        </p>
                         <button type="submit" class="submit_btn">Place bid</button>
                     </div>
                 </form>

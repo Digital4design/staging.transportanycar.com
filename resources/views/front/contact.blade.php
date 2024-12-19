@@ -68,6 +68,8 @@ button.wd-login-btn {
     align-items: center;
     justify-content: center;
     padding: 15px;
+    border-radius: 50px;
+    max-width: 90%;
 }
 </style>
 @endsection
