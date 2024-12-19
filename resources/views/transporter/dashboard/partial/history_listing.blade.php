@@ -74,7 +74,7 @@ $auth_user = Auth::user();
                                 fill="#ed1c24"></path>
                         </svg>
                         <span class="ml-1">{{$quote->drop_postcode ? hidePostcode(get_last_two_parts($quote->drop_postcode)) : null}}</span>
-                    </li>Z
+                    </li>
                 </ul>
                 {{-- <p>
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
