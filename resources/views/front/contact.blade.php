@@ -216,11 +216,16 @@ button.wd-login-btn {
             rules: {
                 name: { required: true },
                 email: { required: true },
+                mobile: { required: true, digits: true, minlength: 11,
+                    maxlength: 11 },
                 message: { required: true },
             },
             messages: {
                 name: {required: 'Please enter name'},
                 email: {required: 'Please enter email'},
+                mobile: {required: "Please enter mobile number",
+                        maxlength: "Please enter a valid mobile number",
+                        minlength:"Please enter a valid mobile number"},
                 message: {required: 'Please enter message'},
             },
             submitHandler: function(form) {

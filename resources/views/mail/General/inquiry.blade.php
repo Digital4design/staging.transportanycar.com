@@ -149,6 +149,16 @@
                                                                 <tr>
                                                                     <td class="pad" style="padding-bottom:10px;padding-left:50px;padding-right:50px;padding-top:5px;">
                                                                         <div style="color:#000f26;direction:ltr;font-family:'Montserrat', sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
+                                                                            <p style="margin: 0;"><strong><b>Mobile Number:</b> <span>
+                                                                                {{$data->mobile}} </span></strong></p>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <table class="paragraph_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                                <tr>
+                                                                    <td class="pad" style="padding-bottom:10px;padding-left:50px;padding-right:50px;padding-top:5px;">
+                                                                        <div style="color:#000f26;direction:ltr;font-family:'Montserrat', sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
                                                                             <p style="margin: 0;"><strong><b>Email address:</b> <span><a data-link-card="true" href="mailto:{{ $data->email }}" target="_blank" style="text-decoration: underline; color: #025dd5;" rel="noopener">{{ $data->email }}</a></span></strong></p>
                                                                         </div>
                                                                     </td>
