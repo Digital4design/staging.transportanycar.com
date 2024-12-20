@@ -3,6 +3,7 @@
 @section('head_css')
 @endsection
 <style>
+    
     .info_sec_details {
         display: none;
         padding-top: 20px;
@@ -55,7 +56,7 @@
     /* .rating-star li svg path {
     fill: #ffa800;
 } */
- 
+
     .message-error {
         font-size: 14px;
         color: red;
@@ -207,61 +208,77 @@
                                 id="heading{{ $key }}">
                                 <div class="card_lft">
                                     @php
-                                            $totalStars = 5; // Total number of stars
-                                            $percentage = 0;
-                                            $rating = 0; // Default rating
+                                        $totalStars = 5; // Total number of stars
+                                        $percentage = 0;
+                                        $rating = 0; // Default rating
 
-                                            // Set percentage based on $key (example for different keys)
-                                            switch ($key) {
-                                                case 0:
-                                                    $percentage = 97.8;
-                                                    break;
-                                                case 1:
-                                                    $percentage = 95.9;
-                                                    break;
-                                                case 2:
-                                                    $percentage = 98.3;
-                                                    break;
-                                                case 3:
-                                                    $percentage = 97.9;
-                                                    break;
-                                                case 4:
-                                                    $percentage = 98.6;
-                                                    break;
-                                                case 5:
-                                                    $percentage = 99.2;
-                                                    break;
-                                                case 6:
-                                                    $percentage = 96.9;
-                                                    break;
-                                                case 7:
-                                                    $percentage = 97.9;
-                                                    break;
-                                                case 8:
-                                                    $percentage = 98.6;
-                                                    break;
-                                                case 9:
-                                                    $percentage = 99.2;
-                                                    break;
-                                                default:
-                                                    $percentage = 0;
-                                                    break;
-                                            }
+                                        // Set percentage based on $key (example for different keys)
+                                        switch ($key) {
+                                            case 0:
+                                                $percentage = 97.8;
+                                                break;
+                                            case 1:
+                                                $percentage = 95.9;
+                                                break;
+                                            case 2:
+                                                $percentage = 98.3;
+                                                break;
+                                            case 3:
+                                                $percentage = 97.9;
+                                                break;
+                                            case 4:
+                                                $percentage = 98.6;
+                                                break;
+                                            case 5:
+                                                $percentage = 99.2;
+                                                break;
+                                            case 6:
+                                                $percentage = 96.9;
+                                                break;
+                                            case 7:
+                                                $percentage = 97.9;
+                                                break;
+                                            case 8:
+                                                $percentage = 98.6;
+                                                break;
+                                            case 9:
+                                                $percentage = 99.2;
+                                                break;
+                                            default:
+                                                $percentage = 0;
+                                                break;
+                                        }
 
-                                            // Calculate rating based on percentage
-                                            $rating = ($percentage / 100) * 5;
+                                        // Calculate rating based on percentage
+                                        $rating = ($percentage / 100) * 5;
 
-                                            // Calculate number of full, half, and empty stars
-                                            $fullStars = floor($rating); // Full stars (whole number part of the rating)
-                                            $halfStar = $rating - $fullStars >= 0.5 ? 1 : 0; // Half star if the decimal part is >= 0.5
-                                            $emptyStars = $totalStars - $fullStars - $halfStar; // Empty stars are remaining
-                                        @endphp
+                                        // Calculate number of full, half, and empty stars
+                                        $fullStars = floor($rating); // Full stars (whole number part of the rating)
+                                        $halfStar = $rating - $fullStars >= 0.5 ? 1 : 0; // Half star if the decimal part is >= 0.5
+                                        $emptyStars = $totalStars - $fullStars - $halfStar; // Empty stars are remaining
+                                    @endphp
+                                     {{-- model --}}
+                            <div id="ratingModal" class="modal" style="display:none;">
+                                <div class="modal-content">
+                                    <span class="close" onclick="closeModal()">&times;</span>
+                                    <h4 id="modalUsername"></h4>
+                                    <ul id="modalStars" class="rating-star choose_quote_rating"
+                                        style="list-style: none; display: flex; gap: 5px;">
+                                        <!-- Stars will be dynamically populated -->
+                                    </ul>
+                                </div>
+                            </div>
                                     <div class="d-flex flex-wrap align-items-center" style="gap:5px;">
-                                        <a href="{{ route('front.feedback_view', $quote->id) }}">
+                                        {{-- <a href="{{ route('front.feedback_view', $quote->id) }}">
                                             <h4 style="width: 100%; line-height: 24px;">
                                                 {{ $quote->getTransporters->username ?? '' }}</h4>
+                                        </a> --}}
+                                        <a href="javascript:void(0);"
+                                            onclick="openModal({{ $quote->id }}, '{{ $quote->getTransporters->username ?? '' }}','{{ $quote->getTransporters->image ?? '' }}', {{ $fullStars }}, {{ $halfStar }}, {{ $emptyStars }})">
+                                            <h4 style="width: 100%; line-height: 24px;">
+                                                {{ $quote->getTransporters->username ?? '' }}
+                                            </h4>
                                         </a>
-                                        
 
                                         <ul class="rating-star choose_quote_rating">
                                             <!-- Full Stars -->
@@ -313,15 +330,21 @@
 
 
                                     </div>
-                                    <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14 4.521C14.125 11.366 10.042 14.278 7.727 14.965C7.57366 15.0106 7.41034 15.0106 7.257 14.965C4.98 14.29 1.014 11.464 1 4.862C1.01372 4.29149 1.33458 3.7729 1.839 3.506C5.363 1.516 7.058 1 7.489 1C7.92 1 9.749 1.549 13.507 3.7C13.8045 3.86767 13.9918 4.17958 14 4.521Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M4.5 8.01502L6.5 10.015L10.5 6.00702" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <svg width="15" height="16" viewBox="0 0 15 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M14 4.521C14.125 11.366 10.042 14.278 7.727 14.965C7.57366 15.0106 7.41034 15.0106 7.257 14.965C4.98 14.29 1.014 11.464 1 4.862C1.01372 4.29149 1.33458 3.7729 1.839 3.506C5.363 1.516 7.058 1 7.489 1C7.92 1 9.749 1.549 13.507 3.7C13.8045 3.86767 13.9918 4.17958 14 4.521Z"
+                                            stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M4.5 8.01502L6.5 10.015L10.5 6.00702" stroke="#5B5B5B" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                     <div class="icon_hover_sec">
                                         <div class="flex_blog "><span>Flexible</span>
                                             <a href="javascript:;" class="hover_anchor" data-toggle="modal"
                                                 data-target="#anchor"><img
-                                                    src="{{ asset('assets/web/images/question.png') }}" alt="question"></a>
+                                                    src="{{ asset('assets/web/images/question.png') }}"
+                                                    alt="question"></a>
                                         </div>
                                         <div class="info_sec_details" id="info-details">
                                             <div class="info_sec_details_contant">
@@ -333,10 +356,10 @@
                                     </div>
                                     <h5>£{{ $quote->price }}</h5>
                                     <!-- <a href="javascript:;" class="d-lg-none" data-toggle="modal" data-target="#delete_quote_{{ $quote->id }}">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM15.21 13.79C15.3037 13.883 15.3781 13.9936 15.4289 14.1154C15.4797 14.2373 15.5058 14.368 15.5058 14.5C15.5058 14.632 15.4797 14.7627 15.4289 14.8846C15.3781 15.0064 15.3037 15.117 15.21 15.21C15.117 15.3037 15.0064 15.3781 14.8846 15.4289C14.7627 15.4797 14.632 15.5058 14.5 15.5058C14.368 15.5058 14.2373 15.4797 14.1154 15.4289C13.9936 15.3781 13.883 15.3037 13.79 15.21L12 13.41L10.21 15.21C10.117 15.3037 10.0064 15.3781 9.88458 15.4289C9.76272 15.4797 9.63202 15.5058 9.5 15.5058C9.36799 15.5058 9.23729 15.4797 9.11543 15.4289C8.99357 15.3781 8.88297 15.3037 8.79 15.21C8.69628 15.117 8.62188 15.0064 8.57111 14.8846C8.52034 14.7627 8.49421 14.632 8.49421 14.5C8.49421 14.368 8.52034 14.2373 8.57111 14.1154C8.62188 13.9936 8.69628 13.883 8.79 13.79L10.59 12L8.79 10.21C8.6017 10.0217 8.49591 9.7663 8.49591 9.5C8.49591 9.2337 8.6017 8.9783 8.79 8.79C8.97831 8.6017 9.2337 8.49591 9.5 8.49591C9.76631 8.49591 10.0217 8.6017 10.21 8.79L12 10.59L13.79 8.79C13.9783 8.6017 14.2337 8.49591 14.5 8.49591C14.7663 8.49591 15.0217 8.6017 15.21 8.79C15.3983 8.9783 15.5041 9.2337 15.5041 9.5C15.5041 9.7663 15.3983 10.0217 15.21 10.21L13.41 12L15.21 13.79Z" fill="#ED1C24"/>
-                                    </svg>
-                                </a> -->
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM15.21 13.79C15.3037 13.883 15.3781 13.9936 15.4289 14.1154C15.4797 14.2373 15.5058 14.368 15.5058 14.5C15.5058 14.632 15.4797 14.7627 15.4289 14.8846C15.3781 15.0064 15.3037 15.117 15.21 15.21C15.117 15.3037 15.0064 15.3781 14.8846 15.4289C14.7627 15.4797 14.632 15.5058 14.5 15.5058C14.368 15.5058 14.2373 15.4797 14.1154 15.4289C13.9936 15.3781 13.883 15.3037 13.79 15.21L12 13.41L10.21 15.21C10.117 15.3037 10.0064 15.3781 9.88458 15.4289C9.76272 15.4797 9.63202 15.5058 9.5 15.5058C9.36799 15.5058 9.23729 15.4797 9.11543 15.4289C8.99357 15.3781 8.88297 15.3037 8.79 15.21C8.69628 15.117 8.62188 15.0064 8.57111 14.8846C8.52034 14.7627 8.49421 14.632 8.49421 14.5C8.49421 14.368 8.52034 14.2373 8.57111 14.1154C8.62188 13.9936 8.69628 13.883 8.79 13.79L10.59 12L8.79 10.21C8.6017 10.0217 8.49591 9.7663 8.49591 9.5C8.49591 9.2337 8.6017 8.9783 8.79 8.79C8.97831 8.6017 9.2337 8.49591 9.5 8.49591C9.76631 8.49591 10.0217 8.6017 10.21 8.79L12 10.59L13.79 8.79C13.9783 8.6017 14.2337 8.49591 14.5 8.49591C14.7663 8.49591 15.0217 8.6017 15.21 8.79C15.3983 8.9783 15.5041 9.2337 15.5041 9.5C15.5041 9.7663 15.3983 10.0217 15.21 10.21L13.41 12L15.21 13.79Z" fill="#ED1C24"/>
+                                        </svg>
+                                    </a> -->
                                 </div>
                                 <div class="wd-quote-btn">
                                     <a href="javascript:;" class="wd-view-btn messageShow"
@@ -378,7 +401,7 @@
                                     @endif
                                 </div>
                             </div>
-
+                           
                             <!-- delete quote Modal -->
                             <div class="modal fade mark_bx" id="delete_quote_{{ $quote->id }}" tabindex="-1"
                                 role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -468,8 +491,8 @@
                 @endforeach
             </div>
             <!-- <div>
-                    <p class="wd-view-txt">View declined, withdraw & expired quotes (5)</p>
-                </div> -->
+                        <p class="wd-view-txt">View declined, withdraw & expired quotes (5)</p>
+                    </div> -->
         </div>
     </section>
 @endsection
@@ -624,7 +647,7 @@
                 }).done(function(response) {
                     submitButton.prop("disabled", false).html(
                         "Send message <svg width='17' height='15' viewBox='0 0 17 15' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M16.7637 1.65906L14.2551 13.4895C14.0658 14.3245 13.5722 14.5323 12.8709 14.1389L9.04861 11.3223L7.20428 13.0962C7.00018 13.3003 6.82947 13.471 6.43611 13.471L6.71072 9.5782L13.7949 3.17683C14.1029 2.90222 13.7281 2.75007 13.3162 3.02468L4.55838 8.53913L0.788066 7.35906C-0.0320513 7.103 -0.0468951 6.53894 0.958769 6.14558L15.706 0.464134C16.3888 0.208079 16.9863 0.616282 16.7637 1.65906Z' fill='white'/></svg>"
-                        );
+                    );
                     if (response.status == "success") {
                         window.location.reload();
                     }
@@ -632,7 +655,7 @@
                     // Handle any unexpected errors
                     submitButton.prop("disabled", false).html(
                         "Send message <svg width='17' height='15' viewBox='0 0 17 15' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M16.7637 1.65906L14.2551 13.4895C14.0658 14.3245 13.5722 14.5323 12.8709 14.1389L9.04861 11.3223L7.20428 13.0962C7.00018 13.3003 6.82947 13.471 6.43611 13.471L6.71072 9.5782L13.7949 3.17683C14.1029 2.90222 13.7281 2.75007 13.3162 3.02468L4.55838 8.53913L0.788066 7.35906C-0.0320513 7.103 -0.0468951 6.53894 0.958769 6.14558L15.706 0.464134C16.3888 0.208079 16.9863 0.616282 16.7637 1.65906Z' fill='white'/></svg>"
-                        );
+                    );
                     form.find('.message-error').css('display', 'block').text(
                         "Do not share contact information or you will be banned.");
                 });
@@ -685,5 +708,63 @@
                 getChatHistory(url, id);
             }
         })
+
+        function openModal(quoteId, username, fullStars, halfStar, emptyStars) {
+            // Set username in modal
+            document.getElementById('modalUsername').innerText = username;
+
+            // Clear existing stars
+            const starContainer = document.getElementById('modalStars');
+            starContainer.innerHTML = '';
+
+            // Append full stars
+            for (let i = 0; i < fullStars; i++) {
+                starContainer.innerHTML += `
+            <li>
+                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                        fill="#FFA800" />
+                </svg>
+            </li>`;
+            }
+
+            // Append half star if applicable
+            if (halfStar) {
+                starContainer.innerHTML += `
+            <li>
+                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="halfStarGradient">
+                            <stop offset="50%" stop-color="#FFA800"/>
+                            <stop offset="50%" stop-color="#ccc"/>
+                        </linearGradient>
+                    </defs>
+                    <path
+                        d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                        fill="url(#halfStarGradient)" />
+                </svg>
+            </li>`;
+            }
+
+            // Append empty stars
+            for (let i = 0; i < emptyStars; i++) {
+                starContainer.innerHTML += `
+            <li>
+                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                        fill="#ccc" />
+                </svg>
+            </li>`;
+            }
+
+            // Show the modal
+            document.getElementById('ratingModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('ratingModal').style.display = 'none';
+        }
     </script>
 @endsection
