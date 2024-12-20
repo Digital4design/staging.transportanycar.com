@@ -542,17 +542,19 @@
         $(document).ready(function() {
             $('body').attr('id', 'transporter-feedback');
             $(document).on('click', '.read_more_show', function() {
-                var parentTr = $(this).closest('tr');
-                var readMoreContent = parentTr.find('.read_more_content');
+                var parentTr = $(this).siblings('.read_more_content');
+                // var readMoreContent = parentTr.find('.read_more_content');
                 $(this).addClass('d-none');
-                readMoreContent.removeClass('d-none');
+                parentTr.removeClass('d-none');
                 parentTr.find('.read_more_less').removeClass('d-none');
             });
             $(document).on('click', '.read_more_less', function() {
-                var parentTr = $(this).closest('tr');
-                var readMoreContent = parentTr.find('.read_more_content');
-                parentTr.find('.read_more_show').removeClass('d-none');
-                readMoreContent.addClass('d-none');
+                var parentTr = $(this).parent('.read_more_content');
+                var showMore = $(this).parent().parent().find('.read_more_show');
+                // var readMoreContent = parentTr.find('.read_more_content');
+                // parentTr.find('.read_more_show').removeClass('d-none');
+                showMore.removeClass('d-none');
+                parentTr.addClass('d-none');
                 $(this).addClass('d-none');
             });
         });
