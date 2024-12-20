@@ -2,6 +2,11 @@
 
 @section('head_css')
 <style>
+  @media only device {
+    .stripe-label {
+      margin-top: -4px;
+    }
+  }
 .back-wrapper {
   margin-bottom: 20px;
 }
@@ -264,7 +269,7 @@ section.review_quote_blog.payment_cart {
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M8.5 12.015L10.5 14.015L14.5 10.007" fill="#52D017"/>
                 <path d="M8.5 12.015L10.5 14.015L14.5 10.007" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>Secure payments by</span> <span style="font-weight:500; font-size:20px; line-height: 22px; margin-left:3px;">stripe</span>
+              <span>Secure payments by</span> <span class="stripe-label" style="font-weight:500; font-size:20px; line-height: 22px; margin-left:3px;">stripe</span>
             </span>
           </div>
             <div class="cehckout_formblog main_cart_sec" >

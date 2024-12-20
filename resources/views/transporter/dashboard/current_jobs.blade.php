@@ -127,6 +127,7 @@
 
         .admin_job_bx .tab-content .deshbord-job-listing .list_img img {
             width: 100px;
+            max-width: 100%;
             height: 67px;
             object-fit: cover;
             object-position: center;
@@ -540,7 +541,7 @@
                             <div class="edit_budding_sec">
                                 <span class="icon_includes">£</span>
                                 <input type="tel" class="form-control" id="quote_amount"
-                                    placeholder="Enter your bid (inc vat)" aria-describedby="emailHelp"
+                                    placeholder="Enter bid (inc vat)" aria-describedby="emailHelp"
                                     placeholder="Enter quote amount" name="amount" pattern="\d*">
                             </div>
                         </div>

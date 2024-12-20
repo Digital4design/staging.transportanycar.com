@@ -17,6 +17,12 @@
         font-weight: 500;
         margin-bottom: 5px;
     }
+    #user_help .modal-body li > span a {
+        color:#000000;
+    }
+    #user_help .modal-body li > span a:hover {
+        color:#007bff;
+    }
     </style>
 <header class="admin-header">
     <div class="container-admin">
@@ -355,7 +361,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         </svg>
                         <span>Call:</span>
                     </span>
-                    <span class="d-block">0808 155 7979</span>
+                    <span class="d-block"><a href="tel:08081557979">0808 155 7979</a></span>
                 </li>
                 <li>
                     <span class="d-block">
@@ -364,7 +370,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         </svg>
                         <span>Email:</span>
                     </span>
-                    <span class="d-block">support@transportanycar.com</span>
+                    <span class="d-block"><a href="mailto:support@transportanycar.com">support@transportanycar.com</a></span>
                 </li>
                 <li>
                     <span class="d-block">

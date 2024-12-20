@@ -1923,7 +1923,7 @@
                         <div class="form-group">
                             <span class="icon_includes">£</span>
                             <input type="tel" class="form-control" aria-describedby="emailHelp"
-                                placeholder="Enter your bid (inc vat)" id="amount" name="amount">
+                                placeholder="Enter bid (inc vat)" id="amount" name="amount">
                             <!-- <p style="font-size:12px; margin-top: 10px;"><b> Note:</b> The amount you bid will be the total amount you get paid directly by the customer.</p> -->
                             <div class="modal_current">
                                 <p>Current lowest bid: <span class="lowAmount">£0</span></p>
@@ -1938,7 +1938,7 @@
                     <div class="modal-footer" style="margin-top: 10px;">
                         <input type="hidden" name="quote_id" id="quote_id" value="">
                         <p class="pl-4 position-relative" style="line-height:16px;">
-                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" style="left:0; top:0; bottom:0; margin: auto;" class="position-absolute">
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" style="left:0; top:0;" class="position-absolute">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M15.563 12.2653L10.9587 4.7856C10.655 4.27281 10.1032 3.95833 9.50717 3.95833C8.91117 3.95833 8.35939 4.27281 8.05565 4.7856L3.45053 12.2653C3.10231 12.8105 3.07237 13.5004 3.37204 14.0737C3.67172 14.6471 4.25521 15.0163 4.90165 15.0416H14.1119C14.7583 15.0163 15.3418 14.6471 15.6415 14.0737C15.9412 13.5004 15.9112 12.8105 15.563 12.2653Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M9.50675 10.2916V6.33331" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"/>
                                 <path d="M9.50675 12.6667V11.875" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"/>
@@ -1978,7 +1978,7 @@
                         <div class="form-group">
                             <span class="icon_includes">£</span>
                             <input type="tel" class="form-control" aria-describedby="emailHelp"
-                                placeholder="Enter your bid (inc vat)" id="editamount" name="amount">
+                                placeholder="Enter bid (inc vat)" id="editamount" name="amount">
                             <!-- <p style="font-size:12px; margin-top: 10px;"><b> Note:</b> The amount you bid will be the total amount you get paid directly by the customer.</p> -->
                             <div class="modal_current">
                                 <p>Current lowest bid: <span class="lowAmount">£0</span></p>
