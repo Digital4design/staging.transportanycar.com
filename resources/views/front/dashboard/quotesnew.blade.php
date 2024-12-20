@@ -3,7 +3,46 @@
 @section('head_css')
 @endsection
 <style>
-    
+    .banner.pro_member {
+        background: #000000;
+    }
+    .banner {
+        font-size: 16px;
+        line-height: 20px;
+        color: #ffffff;
+        background: #52D017;
+        text-transform: capitalize;
+        position: absolute;
+        right: -60px;
+        top: 30px;
+        transform: rotate(40deg);
+        padding: 8px 70px;
+        display: inline-block;
+    }
+    .banner.new_member {
+        background: #52D017;
+    }
+
+    .banner.pro_member {
+        background: #000000;
+    }
+
+    .banner.vip_member {
+        background: linear-gradient(90deg, #C5B358 65.5%, #525225 100%);
+        color: #000000;
+    }
+
+    .need_help_wrap {
+        gap:5px!important;
+    }
+    .need_help {
+        color:#000000;
+    }
+    .need_help:hover {color:#007BFF;}
+    .user-feedback-header-wrap {
+        gap: 16px;
+    }
+
     .info_sec_details {
         display: none;
         padding-top: 20px;
@@ -52,7 +91,9 @@
     .wd-quote-data .accordion>.card {
         overflow: initial;
     }
-
+    .rating-star {
+        line-height: 14px;
+    }
     /* .rating-star li svg path {
     fill: #ffa800;
 } */
@@ -87,10 +128,13 @@
     .wd-quote-head p.quote-table-Verified {
         margin-left: -103px;
     }
+    p.verified {
+        color:#282828;
+    }
 
     .choose_quote_rating li svg {
-        width: 16px;
-        height: 16px;
+        width: 12px;
+        height: 12px;
     }
 
     @media(max-width: 580px) {
@@ -257,24 +301,188 @@
                                         $halfStar = $rating - $fullStars >= 0.5 ? 1 : 0; // Half star if the decimal part is >= 0.5
                                         $emptyStars = $totalStars - $fullStars - $halfStar; // Empty stars are remaining
                                     @endphp
-                                     {{-- model --}}
-                            <div id="ratingModal" class="modal" style="display:none;">
-                                <div class="modal-content">
-                                    <span class="close" onclick="closeModal()">&times;</span>
-                                    <h4 id="modalUsername"></h4>
-                                    <ul id="modalStars" class="rating-star choose_quote_rating"
-                                        style="list-style: none; display: flex; gap: 5px;">
-                                        <!-- Stars will be dynamically populated -->
-                                    </ul>
-                                </div>
-                            </div>
+                                    {{-- model --}}
+                                    <div class="modal fade get_quote" id="ratingModal_{{$key}}" tabindex="-1" aria-labelledby="ratingModal_{{ $key }}" aria-hidden="true" >
+                                        <div class="modal-dialog modal-dialog-centered wd-transport-dtls" role="document">
+                                            <div class="modal-content overflow-hidden border-0">
+                                                @if (in_array($key, [0,1, 2, 3]))
+                                                <div class="banner pro_member d-none d-lg-inline-block">Pro Member</div>
+                                                @endif
+                                                @if (in_array($key, [4,5]))
+                                                <div class="banner vip_member d-none d-lg-inline-block">ViP Member</div>
+                                                @endif
+                                               
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close" onclick="closeModal()">
+                                                        <span aria-hidden="true">
+                                                            <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M10.6584 0.166626L6.00008 4.82496L1.34175 0.166626L0.166748 1.34163L4.82508 5.99996L0.166748 10.6583L1.34175 11.8333L6.00008 7.17496L10.6584 11.8333L11.8334 10.6583L7.17508 5.99996L11.8334 1.34163L10.6584 0.166626Z"
+                                                                    fill="#000" />
+                                                            </svg>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                                <div class="row mx-0 align-items-center user-feedback-header-wrap mb-3">
+                                                    <div class=" rounded-circle wd-transport-img pt-0"
+                                                        style="width:58px; height:58px; overflow:hidden;">
+                                                        <img src="https://transportanycar.com/uploads/user/957214c41e514ea6925a310612f2c3ed.png"
+                                                            width="58" height="58" alt="trasporter feedback"
+                                                            class="img-fluid" style="object-fit: cover; height: 100%;">
+                                                    </div>
+                                                    <div class="">
+                                                        <h1 class="user-feedback-name mb-0" id="modalUsername">
+                                                            {{ $quote->getTransporters->username ?? '' }}
+                                                            <img src="https://transportanycar.com/assets/images/user-verified.png"
+                                                                alt="" width="20" height="20" class="ml-1">
+                                                        </h1>
+                                                        <ul class="rating-star choose_quote_rating">
+                                                            <!-- Full Stars -->
+                                                            @for ($i = 1; $i <= $fullStars; $i++)
+                                                                <li>
+                                                                    <svg width="20" height="20" viewBox="0 0 12 12"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                            fill="#FFA800" />
+                                                                    </svg>
+                                                                </li>
+                                                            @endfor
+                
+                                                            <!-- Half Star -->
+                                                            @if ($halfStar)
+                                                                <li>
+                                                                    <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <defs>
+                                                                            <linearGradient id="halfStarGradient" x1="0%"
+                                                                                y1="0%" x2="100%" y2="0%">
+                                                                                <stop offset="50%" stop-color="#FFA800" />
+                                                                                <stop offset="50%" stop-color="#ccc" />
+                                                                            </linearGradient>
+                                                                        </defs>
+                                                                        <path
+                                                                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                            fill="url(#halfStarGradient)" />
+                                                                    </svg>
+                                                                </li>
+                                                            @endif
+                
+                                                            <!-- Empty Stars -->
+                                                            @for ($i = 1; $i <= $emptyStars; $i++)
+                                                                <li>
+                                                                    <svg width="20" height="20" viewBox="0 0 12 12"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                            fill="#ccc" />
+                                                                    </svg>
+                                                                </li>
+                                                            @endfor
+                
+                                                            <li><span class="ml-1">({{ number_format($percentage, 1) }}%)</span></li>
+                                                        </ul>
+                                                        <p class="verified">
+                                                            <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M14 4.521C14.125 11.366 10.042 14.278 7.727 14.965C7.57366 15.0106 7.41034 15.0106 7.257 14.965C4.98 14.29 1.014 11.464 1 4.862C1.01372 4.29149 1.33458 3.7729 1.839 3.506C5.363 1.516 7.058 1 7.489 1C7.92 1 9.749 1.549 13.507 3.7C13.8045 3.86767 13.9918 4.17958 14 4.521Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                <path d="M4.5 8.01502L6.5 10.015L10.5 6.00702" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </svg>
+                                                            Verified
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="wd-transport-area pb-0">
+
+                                                    <div class="wd-transport-rght">
+                                                        <ul>
+                                                            <li>
+                                                                <p>Insurance:</p>
+                                                                <span>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="13"
+                                                                        height="13" viewBox="0 0 13 13" fill="none">
+                                                                        <path
+                                                                            d="M4.41537 11.1567L0.190373 6.93169C-0.0634575 6.67786 -0.0634575 6.2663 0.190373 6.01245L1.10959 5.0932C1.36342 4.83935 1.775 4.83935 2.02883 5.0932L4.87499 7.93934L10.9712 1.8432C11.225 1.58937 11.6366 1.58937 11.8904 1.8432L12.8096 2.76245C13.0634 3.01628 13.0634 3.42783 12.8096 3.68169L5.33462 11.1567C5.08076 11.4105 4.6692 11.4105 4.41537 11.1567Z"
+                                                                            fill="#52D017"></path>
+                                                                    </svg>
+                                                                    <div data-toggle="popover"
+                                                                        class="queston-mark d-inline-block p-0 cursor-pointer insurance_popover ml-2"
+                                                                        data-original-title="" title="">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            viewBox="0 0 24 24" fill="#D9D9D9"
+                                                                            width="18" height="18">
+                                                                            <path fill-rule="evenodd"
+                                                                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                                                                                clip-rule="evenodd"></path>
+                                                                        </svg>
+                                                                    </div>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <p>Photo ID:</p>
+                                                                <span>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="13"
+                                                                        height="13" viewBox="0 0 13 13"
+                                                                        fill="none">
+                                                                        <path
+                                                                            d="M4.41537 11.1567L0.190373 6.93169C-0.0634575 6.67786 -0.0634575 6.2663 0.190373 6.01245L1.10959 5.0932C1.36342 4.83935 1.775 4.83935 2.02883 5.0932L4.87499 7.93934L10.9712 1.8432C11.225 1.58937 11.6366 1.58937 11.8904 1.8432L12.8096 2.76245C13.0634 3.01628 13.0634 3.42783 12.8096 3.68169L5.33462 11.1567C5.08076 11.4105 4.6692 11.4105 4.41537 11.1567Z"
+                                                                            fill="#52D017"></path>
+                                                                    </svg>
+                                                                    <div data-toggle="popover"
+                                                                        class="queston-mark d-inline-block p-0 cursor-pointer photo_id_popover ml-2"
+                                                                        data-original-title="" title="">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            viewBox="0 0 24 24" fill="#D9D9D9"
+                                                                            width="18" height="18">
+                                                                            <path fill-rule="evenodd"
+                                                                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                                                                                clip-rule="evenodd"></path>
+                                                                        </svg>
+                                                                    </div>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <p>Positive feedback:</p>
+                                                                <span>{{ number_format($percentage, 1) }}%</span>
+                                                            </li>
+                                                            <li>
+                                                                <p>Jobs completed:</p>
+                                                                <span>11</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="w-50 mx-auto my-4">
+                                                    @if ($quote->status == 'pending' && !$hasAcceptedQuote)
+                                                        <a href="javascript:;"
+                                                            onclick="quoteChangeStatus({{ $quote->id }}, 'accept');"
+                                                            class="wd-accepted-btn font-weight-light">Accept Quote
+                                                        </a>
+                                                    @elseif($quote->status == 'accept')
+                                                        @if ($job_status != 'completed')
+                                                            <a
+                                                                href="{{ route('front.booking_confirm_page', $user_quote_id) }}"class="wd-accepted-btn">Go
+                                                                to booking</a>
+                                                        @else
+                                                            <a
+                                                                href="{{ route('front.user_deposit', ['id' => $quote->id]) }}"class="wd-accepted-btn">Go
+                                                                to booking</a>
+                                                        @endif
+                                                    @endif
+                                                </div>
+                                                <p class="justify-content-center font-weight-light need_help_wrap">
+                                                    Need help? Call our team on <a href="tel:08081557979" class="need_help">0808 155 7979</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="d-flex flex-wrap align-items-center" style="gap:5px;">
-                                        {{-- <a href="{{ route('front.feedback_view', $quote->id) }}">
-                                            <h4 style="width: 100%; line-height: 24px;">
-                                                {{ $quote->getTransporters->username ?? '' }}</h4>
-                                        </a> --}}
                                         <a href="javascript:void(0);"
-                                            onclick="openModal({{ $quote->id }}, '{{ $quote->getTransporters->username ?? '' }}','{{ $quote->getTransporters->image ?? '' }}', {{ $fullStars }}, {{ $halfStar }}, {{ $emptyStars }})">
+                                            data-toggle="modal" data-target="#ratingModal_{{ $key }}"
+                                            {{-- onclick="openModal({{ $quote->id }}, '{{ $quote->getTransporters->username ?? '' }}','{{ $quote->getTransporters->image ?? '' }}', {{ $fullStars }}, {{ $halfStar }}, {{ $emptyStars }})" --}}
+                                            >
                                             <h4 style="width: 100%; line-height: 24px;">
                                                 {{ $quote->getTransporters->username ?? '' }}
                                             </h4>
@@ -284,8 +492,8 @@
                                             <!-- Full Stars -->
                                             @for ($i = 1; $i <= $fullStars; $i++)
                                                 <li>
-                                                    <svg width="20" height="20" viewBox="0 0 12 12" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
+                                                    <svg width="20" height="20" viewBox="0 0 12 12"
+                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path
                                                             d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
                                                             fill="#FFA800" />
@@ -296,8 +504,8 @@
                                             <!-- Half Star -->
                                             @if ($halfStar)
                                                 <li>
-                                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
+                                                    <svg width="12" height="12" viewBox="0 0 12 12"
+                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <defs>
                                                             <linearGradient id="halfStarGradient" x1="0%"
                                                                 y1="0%" x2="100%" y2="0%">
@@ -315,8 +523,8 @@
                                             <!-- Empty Stars -->
                                             @for ($i = 1; $i <= $emptyStars; $i++)
                                                 <li>
-                                                    <svg width="20" height="20" viewBox="0 0 12 12" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
+                                                    <svg width="20" height="20" viewBox="0 0 12 12"
+                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path
                                                             d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
                                                             fill="#ccc" />
@@ -356,10 +564,10 @@
                                     </div>
                                     <h5>£{{ $quote->price }}</h5>
                                     <!-- <a href="javascript:;" class="d-lg-none" data-toggle="modal" data-target="#delete_quote_{{ $quote->id }}">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM15.21 13.79C15.3037 13.883 15.3781 13.9936 15.4289 14.1154C15.4797 14.2373 15.5058 14.368 15.5058 14.5C15.5058 14.632 15.4797 14.7627 15.4289 14.8846C15.3781 15.0064 15.3037 15.117 15.21 15.21C15.117 15.3037 15.0064 15.3781 14.8846 15.4289C14.7627 15.4797 14.632 15.5058 14.5 15.5058C14.368 15.5058 14.2373 15.4797 14.1154 15.4289C13.9936 15.3781 13.883 15.3037 13.79 15.21L12 13.41L10.21 15.21C10.117 15.3037 10.0064 15.3781 9.88458 15.4289C9.76272 15.4797 9.63202 15.5058 9.5 15.5058C9.36799 15.5058 9.23729 15.4797 9.11543 15.4289C8.99357 15.3781 8.88297 15.3037 8.79 15.21C8.69628 15.117 8.62188 15.0064 8.57111 14.8846C8.52034 14.7627 8.49421 14.632 8.49421 14.5C8.49421 14.368 8.52034 14.2373 8.57111 14.1154C8.62188 13.9936 8.69628 13.883 8.79 13.79L10.59 12L8.79 10.21C8.6017 10.0217 8.49591 9.7663 8.49591 9.5C8.49591 9.2337 8.6017 8.9783 8.79 8.79C8.97831 8.6017 9.2337 8.49591 9.5 8.49591C9.76631 8.49591 10.0217 8.6017 10.21 8.79L12 10.59L13.79 8.79C13.9783 8.6017 14.2337 8.49591 14.5 8.49591C14.7663 8.49591 15.0217 8.6017 15.21 8.79C15.3983 8.9783 15.5041 9.2337 15.5041 9.5C15.5041 9.7663 15.3983 10.0217 15.21 10.21L13.41 12L15.21 13.79Z" fill="#ED1C24"/>
-                                        </svg>
-                                    </a> -->
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM15.21 13.79C15.3037 13.883 15.3781 13.9936 15.4289 14.1154C15.4797 14.2373 15.5058 14.368 15.5058 14.5C15.5058 14.632 15.4797 14.7627 15.4289 14.8846C15.3781 15.0064 15.3037 15.117 15.21 15.21C15.117 15.3037 15.0064 15.3781 14.8846 15.4289C14.7627 15.4797 14.632 15.5058 14.5 15.5058C14.368 15.5058 14.2373 15.4797 14.1154 15.4289C13.9936 15.3781 13.883 15.3037 13.79 15.21L12 13.41L10.21 15.21C10.117 15.3037 10.0064 15.3781 9.88458 15.4289C9.76272 15.4797 9.63202 15.5058 9.5 15.5058C9.36799 15.5058 9.23729 15.4797 9.11543 15.4289C8.99357 15.3781 8.88297 15.3037 8.79 15.21C8.69628 15.117 8.62188 15.0064 8.57111 14.8846C8.52034 14.7627 8.49421 14.632 8.49421 14.5C8.49421 14.368 8.52034 14.2373 8.57111 14.1154C8.62188 13.9936 8.69628 13.883 8.79 13.79L10.59 12L8.79 10.21C8.6017 10.0217 8.49591 9.7663 8.49591 9.5C8.49591 9.2337 8.6017 8.9783 8.79 8.79C8.97831 8.6017 9.2337 8.49591 9.5 8.49591C9.76631 8.49591 10.0217 8.6017 10.21 8.79L12 10.59L13.79 8.79C13.9783 8.6017 14.2337 8.49591 14.5 8.49591C14.7663 8.49591 15.0217 8.6017 15.21 8.79C15.3983 8.9783 15.5041 9.2337 15.5041 9.5C15.5041 9.7663 15.3983 10.0217 15.21 10.21L13.41 12L15.21 13.79Z" fill="#ED1C24"/>
+                                            </svg>
+                                        </a> -->
                                 </div>
                                 <div class="wd-quote-btn">
                                     <a href="javascript:;" class="wd-view-btn messageShow"
@@ -401,7 +609,7 @@
                                     @endif
                                 </div>
                             </div>
-                           
+
                             <!-- delete quote Modal -->
                             <div class="modal fade mark_bx" id="delete_quote_{{ $quote->id }}" tabindex="-1"
                                 role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -491,8 +699,8 @@
                 @endforeach
             </div>
             <!-- <div>
-                        <p class="wd-view-txt">View declined, withdraw & expired quotes (5)</p>
-                    </div> -->
+                            <p class="wd-view-txt">View declined, withdraw & expired quotes (5)</p>
+                        </div> -->
         </div>
     </section>
 @endsection
@@ -709,7 +917,8 @@
             }
         })
 
-        function openModal(quoteId, username, fullStars, halfStar, emptyStars) {
+        function openModal(quoteId, username, image, fullStars, halfStar, emptyStars) {
+            console.log(quoteId, username, fullStars, halfStar, emptyStars, 'holadear');
             // Set username in modal
             document.getElementById('modalUsername').innerText = username;
 
@@ -721,7 +930,7 @@
             for (let i = 0; i < fullStars; i++) {
                 starContainer.innerHTML += `
             <li>
-                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
                         fill="#FFA800" />
@@ -733,7 +942,7 @@
             if (halfStar) {
                 starContainer.innerHTML += `
             <li>
-                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="halfStarGradient">
                             <stop offset="50%" stop-color="#FFA800"/>
@@ -766,5 +975,26 @@
         function closeModal() {
             document.getElementById('ratingModal').style.display = 'none';
         }
+    </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script>
+        $(function() {
+            $('.photo_id_popover').popover({
+                content: 'We have a copy of this transporters valid drivers license photo I.D to protect you and ensuring a safe market place for transporting your vehicle.',
+                container: 'body', 
+                trigger: 'hover',
+                html: true,
+                placement: 'bottom',
+                template: '<div class="popover" role="tooltip"><div class="arrow center"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+            })
+            $('.insurance_popover').popover({
+                content: 'We have verified this transport providers insurance to ensure they have the correct goods in transit (GIT) cover to protect you and transport vehicles safe and securely.',
+                container: 'body', 
+                trigger: 'hover',
+                html: true,
+                placement: 'bottom',
+                template: '<div class="popover" role="tooltip"><div class="arrow center"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+            })
+        })
     </script>
 @endsection

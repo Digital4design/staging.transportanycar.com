@@ -4,6 +4,7 @@
         max-width: 300px !important;
         word-wrap: break-word !important;
     }
+    .read_more_show {display: inline-block; margin-left: 5px;}
 </style>
 <div class="overall-review py-3 py-md-5">
     <h2 class="total-review">Reviews (<?php echo count($feedbacks); ?>)</h2>
