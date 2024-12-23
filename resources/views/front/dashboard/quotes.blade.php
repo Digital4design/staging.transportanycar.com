@@ -430,21 +430,9 @@
                 
                                                             <!-- Half Star -->
                                                             @if ($halfStar)
-                                                                <li>
-                                                                    <svg width="12" height="12" viewBox="0 0 12 12"
-                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <defs>
-                                                                            <linearGradient id="halfStarGradient" x1="0%"
-                                                                                y1="0%" x2="100%" y2="0%">
-                                                                                <stop offset="50%" stop-color="#FFA800" />
-                                                                                <stop offset="50%" stop-color="#ccc" />
-                                                                            </linearGradient>
-                                                                        </defs>
-                                                                        <path
-                                                                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                                            fill="url(#halfStarGradient)" />
-                                                                    </svg>
-                                                                </li>
+                                                            <li>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="eY4730ZrcPO1" viewBox="0 0 12 12" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" project-id="bd566e51b26b4c7582530bea3bccfc1f" export-id="0a7d211c1147405aaa0155ebff6e4366" cached="false"><path d="M4.068354,3.992715L0.1,4.56755L2.913924,7.298013L2.264557,11.25L5.8,9.381788L5.8,0.4L4.068354,3.992715Z" transform="translate(-.1-.45)" fill="#ffa800"/></svg>
+                                                            </li>
                                                             @endif
                 
                                                             <!-- Empty Stars -->
