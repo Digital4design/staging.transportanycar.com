@@ -7,6 +7,7 @@
         max-width: 393px;
     }
     .rating-modal .modal-dialog .modal-content {border-radius: 0;}
+    .wd-quote-data {background:#ffffff!important;}
     .wd-quote-data .accordion .card-header {
         padding: 5px 0!important;
     }
@@ -188,6 +189,9 @@
         .data-wrap.col-two {
             flex: 0 1 30%;
         }
+        .data-wrap.col-three {
+            flex: 0 1 18%;
+        }
         .data-wrap.col-five {
             flex: 0 1 10%;
         }
@@ -207,9 +211,13 @@
             grid-gap:0!important;
         }
         .wd-quote-table-head .wd-quote-head {padding: 0 20px;}
+        .wd-quote-btn {width:100%!important;}
     }
 
     @media(max-width: 580px) {
+        .wd-quote-txt p {
+            line-height: 10px;
+        }
         .info_sec_details {
             transform: translateX(-56%);
         }
@@ -242,6 +250,10 @@
 
         .card_lft .rating-star li:last-child svg {
             padding-top: 0.5px;
+        }
+        .need_help_wrap {
+            flex-direction: column;
+            align-items: center;            
         }
 
     }
@@ -284,7 +296,7 @@
                     <div class="d-flex flex-wrap table-head-wrap">
                         <p class="quote-table-transport data-wrap" style="text-align:center;">Transporter</p>
                         <p class="quote-table-Rating data-wrap col-two" style="text-align:center;">Rating</p>
-                        <p class="quote-table-Verified data-wrap" style="text-align:center;">Verified</p>
+                        <p class="quote-table-Verified data-wrap col-three" style="text-align:center;">Verified</p>
                         <p class="quote-table-Dates data-wrap" style="text-align:center;">Dates</p>
                         <p class="quote-table-Quote data-wrap col-five" style="text-align:center;">Quote</p>
                     </div>
@@ -295,7 +307,12 @@
             </div>
             <div class="wd-quote-txt">
                 <p>
-                    <svg width="19" height="25" viewBox="0 0 19 25" fill="none"
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.167 18.086C13.1891 18.5672 12.8181 18.9757 12.337 19H10.664C10.1829 18.9757 9.81191 18.5672 9.83399 18.086V16.311C7.47523 15.4454 6.13685 12.9522 6.71885 10.508C7.30086 8.06376 9.61925 6.44131 12.115 6.73167C14.6107 7.02203 16.4947 9.13341 16.5 11.646C16.4934 13.7513 15.1565 15.6224 13.167 16.311V18.086Z" stroke="#575757" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M13.167 16.811C13.4431 16.811 13.667 16.5871 13.667 16.311C13.667 16.0349 13.4431 15.811 13.167 15.811V16.811ZM9.833 15.811C9.55686 15.811 9.333 16.0349 9.333 16.311C9.333 16.5871 9.55686 16.811 9.833 16.811V15.811ZM21 12.146C21.2761 12.146 21.5 11.9221 21.5 11.646C21.5 11.3699 21.2761 11.146 21 11.146V12.146ZM19 11.146C18.7239 11.146 18.5 11.3699 18.5 11.646C18.5 11.9221 18.7239 12.146 19 12.146V11.146ZM4 12.146C4.27614 12.146 4.5 11.9221 4.5 11.646C4.5 11.3699 4.27614 11.146 4 11.146V12.146ZM2 11.146C1.72386 11.146 1.5 11.3699 1.5 11.646C1.5 11.9221 1.72386 12.146 2 12.146V11.146ZM18.5693 5.3558C18.7658 5.16179 18.7678 4.84522 18.5738 4.64871C18.3798 4.45221 18.0632 4.45018 17.8667 4.6442L18.5693 5.3558ZM16.4487 6.0442C16.2522 6.23821 16.2502 6.55478 16.4442 6.75129C16.6382 6.94779 16.9548 6.94982 17.1513 6.7558L16.4487 6.0442ZM6.55179 17.2483C6.74802 17.054 6.7496 16.7374 6.55531 16.5412C6.36102 16.345 6.04444 16.3434 5.84821 16.5377L6.55179 17.2483ZM4.43421 17.9377C4.23798 18.132 4.2364 18.4486 4.43069 18.6448C4.62498 18.841 4.94156 18.8426 5.13779 18.6483L4.43421 17.9377ZM17.8692 18.6483C18.0654 18.8426 18.382 18.841 18.5763 18.6448C18.7706 18.4486 18.769 18.132 18.5728 17.9377L17.8692 18.6483ZM17.1588 16.5377C16.9626 16.3434 16.646 16.345 16.4517 16.5412C16.2574 16.7374 16.259 17.054 16.4552 17.2483L17.1588 16.5377ZM5.84871 6.7558C6.04522 6.94982 6.36179 6.94779 6.5558 6.75129C6.74982 6.55478 6.74779 6.23821 6.55129 6.0442L5.84871 6.7558ZM5.13329 4.6442C4.93678 4.45018 4.62021 4.45221 4.4262 4.64871C4.23218 4.84522 4.23421 5.16179 4.43071 5.3558L5.13329 4.6442ZM13.167 15.811H9.833V16.811H13.167V15.811ZM21 11.146H19V12.146H21V11.146ZM4 11.146H2V12.146H4V11.146ZM17.8667 4.6442L16.4487 6.0442L17.1513 6.7558L18.5693 5.3558L17.8667 4.6442ZM5.84821 16.5377L4.43421 17.9377L5.13779 18.6483L6.55179 17.2483L5.84821 16.5377ZM18.5728 17.9377L17.1588 16.5377L16.4552 17.2483L17.8692 18.6483L18.5728 17.9377ZM6.55129 6.0442L5.13329 4.6442L4.43071 5.3558L5.84871 6.7558L6.55129 6.0442Z" fill="#575757"/>
+                    </svg>
+                        
+                    {{-- <svg width="19" height="25" viewBox="0 0 19 25" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <g filter="url(#filter0_d_580_2223)">
                             <path
@@ -317,8 +334,9 @@
                                     result="shape" />
                             </filter>
                         </defs>
-                    </svg>
-                    Transport providers get booked up and quotes are often withdrawn, book now to avoid missing out.
+                    </svg> --}}
+                    Transport providers to get booked up and quotes are often withdrawn, book now to avoid missing out.
+                    {{-- Transport providers get booked up and quotes are often withdrawn, book now to avoid missing out. --}}
                 </p>
             </div>
             <div class="accordion" id="accordionExample">
@@ -537,7 +555,7 @@
                                                     @endif
                                                 </div>
                                                 <p class="justify-content-center font-weight-light need_help_wrap">
-                                                    Need help? Call our team on <a href="tel:08081557979" class="need_help">0808 155 7979</a>
+                                                    <span>Need help?</span> <span>Call our team on <a href="tel:08081557979" class="need_help">0808 155 7979</a></span>
                                                 </p>
                                             </div>
                                         </div>
@@ -592,7 +610,7 @@
 
 
                                     </div>
-                                    <div class="data-wrap" style="text-align:center;">
+                                    <div class="data-wrap col-three" style="text-align:center;">
                                         <svg width="15" height="16" viewBox="0 0 15 16" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -719,8 +737,23 @@
                                             value="{{ $thread ? $thread->id : 0 }}">
                                         <div class="wd-quote-form">
                                             <div class="form-group">
+                                                <p class="mb-2 font-weight-light d-flex flex-wrap align-items-center text-left position-relative" style="font-size:10px; padding-left:20px; color:#444444;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none" class="position-absolute" style="left:0;">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.95833 8.70834V10.2917C3.95833 12.915 6.08498 15.0417 8.70833 15.0417H10.2917C12.915 15.0417 15.0417 12.915 15.0417 10.2917V8.70834C15.0417 6.08499 12.915 3.95834 10.2917 3.95834H8.70833C6.08498 3.95834 3.95833 6.08499 3.95833 8.70834Z" stroke="#444444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        <path d="M8.75 12.6667C8.75 13.0809 9.08579 13.4167 9.5 13.4167C9.91421 13.4167 10.25 13.0809 10.25 12.6667H8.75ZM9.5 8.70834H10.25C10.25 8.29413 9.91421 7.95834 9.5 7.95834V8.70834ZM8.70833 7.95834C8.29412 7.95834 7.95833 8.29413 7.95833 8.70834C7.95833 9.12256 8.29412 9.45834 8.70833 9.45834V7.95834ZM9.5 13.4167C9.91421 13.4167 10.25 13.0809 10.25 12.6667C10.25 12.2525 9.91421 11.9167 9.5 11.9167V13.4167ZM8.70833 11.9167C8.29412 11.9167 7.95833 12.2525 7.95833 12.6667C7.95833 13.0809 8.29412 13.4167 8.70833 13.4167V11.9167ZM9.5 11.9167C9.08579 11.9167 8.75 12.2525 8.75 12.6667C8.75 13.0809 9.08579 13.4167 9.5 13.4167V11.9167ZM10.2917 13.4167C10.7059 13.4167 11.0417 13.0809 11.0417 12.6667C11.0417 12.2525 10.7059 11.9167 10.2917 11.9167V13.4167ZM10.25 6.33334C10.25 5.91913 9.91421 5.58334 9.5 5.58334C9.08579 5.58334 8.75 5.91913 8.75 6.33334H10.25ZM8.75 7.12501C8.75 7.53922 9.08579 7.87501 9.5 7.87501C9.91421 7.87501 10.25 7.53922 10.25 7.12501H8.75ZM10.25 12.6667V8.70834H8.75V12.6667H10.25ZM9.5 7.95834H8.70833V9.45834H9.5V7.95834ZM9.5 11.9167H8.70833V13.4167H9.5V11.9167ZM9.5 13.4167H10.2917V11.9167H9.5V13.4167ZM8.75 6.33334V7.12501H10.25V6.33334H8.75Z" fill="#444444"></path>
+                                                        </svg>
+                                                    Accept a quote to receive the transport providers contact details. 
+                                                </p>
                                                 <textarea class="form-control textarea" id="message"
                                                     placeholder="Type any question you have about this quote here."></textarea>
+                                                <p class="mb-2 font-weight-light d-flex flex-wrap align-items-center text-left position-relative mt-2" style="font-size:10px; padding-left:20px; color:#444444;">
+                                                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="position-absolute" style="left:0; top:0;">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5631 12.2653L10.9587 4.78559C10.655 4.27279 10.1032 3.95831 9.50721 3.95831C8.91121 3.95831 8.35943 4.27279 8.05569 4.78559L3.45057 12.2653C3.10235 12.8105 3.07241 13.5003 3.37208 14.0737C3.67176 14.647 4.25525 15.0163 4.90169 15.0416H14.1119C14.7584 15.0163 15.3419 14.647 15.6416 14.0737C15.9412 13.5003 15.9113 12.8105 15.5631 12.2653Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        <path d="M9.50682 10.2916V6.33329" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"></path>
+                                                        <path d="M9.50682 12.6666V11.875" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    </svg>
+                                                    Do not share your contact details or personal information here.
+                                                </p>
                                             </div>
                                             <div class="message-error" style="display:none">Please enter your message.
                                             </div>
@@ -740,8 +773,8 @@
                                                             fill="white" />
                                                     </svg>
                                                 </a>
-                                                <p><span>Note:</span> Please do not share any contact information here,
-                                                    details are exchanged after you have accepted the quote.</p>
+                                                {{-- <p><span>Note:</span> Please do not share any contact information here,
+                                                    details are exchanged after you have accepted the quote.</p> --}}
                                             </div>
                                         </div>
                                     </form>
