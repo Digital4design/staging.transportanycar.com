@@ -55,6 +55,9 @@
         max-width: 300px !important;
         word-wrap: break-word !important;
     }
+    .user-feedback-stars li {
+        padding: 0;
+    }
 </style>
 <div class="overall-review py-3 py-md-5">
     <h2 class="total-review">Reviews (<?php echo count($feedbacks); ?>)</h2>
