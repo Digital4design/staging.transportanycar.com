@@ -105,6 +105,12 @@
                                         value="1" {{ $data->job_email_preference == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
                                     <label class="switch" for="saved_search_alerts"></label>
                                 </li>
+                                <li>
+                                    <span>Saved search alerts</span>
+                                    <input type="checkbox" id="new_job_alert" name="new_job_alert"
+                                        value="1" {{ $data->new_job_alert == 1 ? 'checked' : '' }} style="opacity: 0; z-index: -1;">
+                                    <label class="switch" for="new_job_alert"></label>
+                                </li>
                             </ul>
 
 
@@ -126,6 +132,7 @@
                 var summaryOfLeads = $('#summary_of_leads').is(':checked') ? 1 : 0;
                 var outbidEmailUnsubscribe = $('#outbid_email_unsubscribe').is(':checked') ? 1 : 0;
                 var savedSearchAlerts = $('#saved_search_alerts').is(':checked') ? 1 : 0;
+                var new_job_alert = $('#new_job_alert').is(':checked') ? 1 : 0;
 
                 // Send the AJAX request
                 $.ajax({
@@ -135,6 +142,7 @@
                         summary_of_leads: summaryOfLeads,
                         outbid_email_unsubscribe: outbidEmailUnsubscribe,
                         saved_search_alerts: savedSearchAlerts,
+                        new_job_alert:new_job_alert,
                         _token: '{{ csrf_token() }}' // Include CSRF token
                     },
                     success: function(response) {
