@@ -1,3 +1,5 @@
+
+
 @extends('layouts.web.dashboard.app')
 
 @section('head_css')
@@ -473,14 +475,14 @@
                                                     <p>Jobs completed:</p>
                                                     <span>{{ $completed_job }}</span>
                                                 </li>
-                                                <li>
-                                                    <p>Miles travelled:</p>
-                                                    <span>{{ $distance }} </span>
-                                                </li>
-                                                <li>
-                                                    <p>Total earnings:</p>
-                                                    <span>£{{ $total_earning }}</span>
-                                                </li>
+                                                <!--<li>-->
+                                                <!--    <p>Miles travelled:</p>-->
+                                                <!--    <span>{{ $distance }} </span>-->
+                                                <!--</li>-->
+                                                <!--<li>-->
+                                                <!--    <p>Total earnings:</p>-->
+                                                <!--    <span>£{{ $total_earning }}</span>-->
+                                                <!--</li>-->
                                                 <li>
                                                     <p>Payment method:</p>
                                                     <span>
@@ -506,12 +508,12 @@
 
                                         <div class="wd-transport-rght">
                                             <ul>
-                                                <li class="mt-0">
-                                                    <p>Insurance cover:</p>
-                                                    <span>
-                                                        £{{ $company_details->git_insurance_cover ?? '' }}
-                                                    </span>
-                                                </li>
+                                                <!--<li class="mt-0">-->
+                                                <!--    <p>Insurance cover:</p>-->
+                                                <!--    <span>-->
+                                                <!--        £{{ $company_details->git_insurance_cover ?? '' }}-->
+                                                <!--    </span>-->
+                                                <!--</li>-->
                                                 <li>
                                                     <p>Years established:</p>
                                                     <span>
@@ -603,5 +605,23 @@
             window.location.href = url;
             return;
         }
+        $(document).ready(function() {
+            $(document).on('click', '.read_more_show', function() {
+                var parentTr = $(this).siblings('.read_more_content');
+                // var readMoreContent = parentTr.find('.read_more_content');
+                $(this).addClass('d-none');
+                parentTr.removeClass('d-none');
+                parentTr.find('.read_more_less').removeClass('d-none');
+            });
+            $(document).on('click', '.read_more_less', function() {
+                var parentTr = $(this).parent('.read_more_content');
+                var showMore = $(this).parent().parent().find('.read_more_show');
+                // var readMoreContent = parentTr.find('.read_more_content');
+                // parentTr.find('.read_more_show').removeClass('d-none');
+                showMore.removeClass('d-none');
+                parentTr.addClass('d-none');
+                $(this).addClass('d-none');
+            });
+        });
     </script>
 @endsection

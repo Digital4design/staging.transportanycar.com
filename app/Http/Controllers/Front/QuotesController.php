@@ -77,6 +77,7 @@ class QuotesController extends WebController
     }
     public function quoteSave(Request $request)
     {
+       
         // Check if a user is authenticated with the 'web' guard
         $user_info = Auth::guard('web')->check();
         $current_user_data = $user_info ? Auth::guard('web')->user() : null;
@@ -104,11 +105,13 @@ class QuotesController extends WebController
             'email' => $request->email,
             'type' => 'user'
         ])->first();
+      
         if ($user_info && $current_user_data->email !== $request->email) {
             // If the email exists in the database, log out current user
             Auth::guard('web')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
+            
             if ($user) {
                 // If the email exists in the database, log out current user and redirect to login page
                 $this->saveQuoteAndNotifyTransporters($user->id, $request, $dis_dur);
@@ -124,6 +127,7 @@ class QuotesController extends WebController
                 $temp_password = genUniqueStr('', 6, 'users', 'password', true);
                 $user_data = $this->createNewUserAndNotify($request, $temp_password);
                 $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+             
                 // Set session variable to indicate user came from quote page
                 $request->session()->flash('came_from', 'quote_save');
                 $creds = ['email' => $request->email, 'password' => $temp_password ?? null, 'type' => 'user'];
@@ -151,12 +155,14 @@ class QuotesController extends WebController
                 $user_data = $this->createNewUserAndNotify($request, $temp_password);
             }
             $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+           
         } else {
             // If user is logged in and the email is the same, use current user data
             $user_data = $current_user_data;
             $user->mobile = $request->phone;
             $user->save();
             $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+           
         }
 
 
@@ -216,6 +222,7 @@ class QuotesController extends WebController
 
     private function saveQuoteAndNotifyTransporters($userId, $request, $dis_dur)
     {
+      
         // Process vehicle information
         $vehicle_make_1 = $request->vehicle_make_1 ?? null;
         $vehicle_model_1 = $request->vehicle_model_1 ?? null;
@@ -262,6 +269,45 @@ class QuotesController extends WebController
         Cache::forget('location_info');
         $this->SaveSearchQuoteEmailSend($quoteData);
 
+        $all_transport= user::where('type','car_transporter')->where('is_status','approved')->get();
+        
+        foreach ($all_transport as $transporter) {
+            if ($transporter) {
+                $mailData = [
+                    'id' => $quoteData['quotation_id'],
+                    'vehicle_make' => $quoteData['vehicle_make'],
+                    'vehicle_model' => $quoteData['vehicle_model'],
+                    'vehicle_make_1' => $quoteData['vehicle_make_1'],
+                    'vehicle_model_1' => $quoteData['vehicle_model_1'],
+                    'pickup_postcode' => $quoteData['pickup_postcode'],
+                    'drop_postcode' => $quoteData['drop_postcode'],
+                    'delivery_timeframe_from' => $quoteData['delivery_timeframe_from'] ?? null,
+                    'starts_drives' => $quoteData['starts_drives'],
+                    'starts_drives_1' => $quoteData['starts_drives_1'],
+                    'how_moved' => $quoteData['how_moved'],
+                    'distance' => $quoteData['distance'],
+                    'duration' => $quoteData['duration'],
+                    'map_image' => $quoteData['map_image'],
+                    'delivery_timeframe' => $quoteData['delivery_timeframe'],
+                ];
+                try {
+                    if($transporter->new_job_alert =="1"){
+                    $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
+                    $subject = 'You have received a transport notification';
+                    // $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
+                    $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
+
+                    \Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
+               }
+             } catch (\Exception $ex) {
+                    \Log::error('Save Search functionality Error sending email to transporter for Quote ID: ' . $quote['quotation_id'] . ': ' . $ex->getMessage());
+                    // return $ex->getMessage();
+                }
+            }
+        }
+
+
+        
         // Send mail to transporters
         //$this->sendMailToTransporters($quoteData);
         // this is commented because of client requirement
@@ -670,7 +716,9 @@ class QuotesController extends WebController
                 try {
                     $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
                     $subject = 'You have received a transport notification';
-                    $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
+                    // $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
+                    $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
+
                     \Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
                 } catch (\Exception $ex) {
                     \Log::error('Save Search functionality Error sending email to transporter for Quote ID: ' . $quote['quotation_id'] . ': ' . $ex->getMessage());
