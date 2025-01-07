@@ -1275,6 +1275,14 @@
                                                             <label for="check5"><span>Saved search alerts</span></label>
                                                         </div>
                                                     </li>
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <input type="checkbox" id="check6"
+                                                                data-email-type="new_job_alert"
+                                                                {{ $user->new_job_alert == 1 ? 'checked' : '' }}>
+                                                            <label for="check6"><span>New job alerts</span></label>
+                                                        </div>
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <div class="col-lg-6 pl-lg-3 order-1 order-lg-4">
@@ -1669,7 +1677,7 @@ function handleSendLink() {
                 });
             @endif
 
-            $('#check2, #check3, #check4, #check5').change(function() {
+            $('#check2, #check3, #check4, #check5,#check6').change(function() {
 
                 updateEmailPrefrence.call(this); // Use .call to set the correct context
             });
