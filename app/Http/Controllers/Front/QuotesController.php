@@ -294,8 +294,8 @@ class QuotesController extends WebController
                     if ($transporter->new_job_alert == "1") {
                         $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
                         $subject = 'You have received a transport notification';
-                        // $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
-                        $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
+                        $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
+                        // $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
 
                         \Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
                     }
@@ -655,8 +655,8 @@ class QuotesController extends WebController
                 try {
                     $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
                     $subject = 'You have received a transport notification';
-                    // $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
-                    $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
+                    $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
+                    // $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
 
                     \Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
                 } catch (\Exception $ex) {
