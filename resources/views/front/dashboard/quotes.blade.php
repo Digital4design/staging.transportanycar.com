@@ -3,70 +3,6 @@
 @section('head_css')
 @endsection
 <style>
-<<<<<<< HEAD
-=======
-    .rating-modal .modal-dialog {
-        max-width: 393px;
-    }
-    .rating-modal .modal-dialog .modal-content {border-radius: 0;}
-    .wd-quote-data {background:#ffffff!important;}
-    .wd-quote-data .accordion .card-header {
-        padding: 5px 0!important;
-    }
-    .table-head-wrap,
-    .card_lft {
-        width:calc(100% - 400px)!important;
-    }
-    .quote-wrap,
-    .wd-quote-btn {
-        width: 400px;
-    }
-    .data-wrap {
-        max-width:20%;
-        flex: 0 0 20%;
-    }
-    .banner.pro_member {
-        background: #000000;
-    }
-    .banner {
-        font-size: 16px;
-        line-height: 20px;
-        color: #ffffff;
-        background: #52D017;
-        text-transform: capitalize;
-        position: absolute;
-        right: -60px;
-        top: 30px;
-        transform: rotate(40deg);
-        padding: 8px 70px;
-        display: inline-block;
-    }
-    .banner.new_member {
-        background: #52D017;
-    }
-
-    .banner.pro_member {
-        background: #000000;
-    }
-
-    .banner.vip_member {
-        background: linear-gradient(90deg, #C5B358 65.5%, #525225 100%);
-        color: #000000;
-    }
-
-    .need_help_wrap {
-        gap:5px!important;
-    }
-    .need_help {
-        font-weight: 500;
-        color:#000000;
-    }
-    .need_help:hover {color:#007BFF;}
-    .user-feedback-header-wrap {
-        gap: 16px;
-    }
-
->>>>>>> 7512a0b7401768664afd66a4f93404ada0b2966d
     .info_sec_details {
         display: none;
         padding-top: 20px;
@@ -323,7 +259,7 @@
                         <p class="quote-table-Quote data-wrap col-five" style="text-align:center;">Quote</p>
                     </div>
                     <div class="d-flex flex-wrap quote-wrap">
-                        {{-- <p class="quote-table-Quote" style="max-width:100%; flex: 0 0 100%; text-align:center;"></p> --}}
+                    <p class="quote-table-Quote" style="max-width:100%; flex: 0 0 100%; text-align:center;"></p>
                     </div>
                 </div>
             </div> --}}
