@@ -45,7 +45,7 @@
         border: 1px solid #cfcfcfe0;
         border-bottom: 0;
         border-right: 0;
-        right: 71px;
+        right: 85px;
     }
 
     .wd-quote-data .accordion>.card {
@@ -87,19 +87,42 @@
     }
 
     .choose_quote_rating li svg {
-        width: 16px;
-        height: 16px;
+        width: 12px;
+        height: 12px;
     }
   
     .verified-icon {display: none;}
     @media(max-width: 580px) {
         /* New Code starts */
+        .no-due {
+            font-size: 12px;
+            line-height: 15px;
+            font-weight: 400;
+            color:#000000;
+        }
+        .wd-accepted-btn,
+        .wd-view-btn {
+            font-size: 16px!important;
+            line-height: 20px;
+            font-weight: 500!important;
+            color:#F3F8FF!important;
+        }
+        .wd-view-btn {background: #9c9c9c!important;}
+        .amount {
+            font-size: 20px!important;
+            line-height: 25px!important;
+            font-weight: 500!important;
+        }
+        .hover_anchor{padding-left: 5px;}
+        .wd-quote-msg {padding-top: 10px!important;}
+        .text-note {display: none;}
         .verified-icon {display: block;}
         .right_mark {display: none;}
         .verified-icon .info_sec_details {
             top: 127px;
-            transform: translateX(-64%)
+            transform: translateX(-50%)
         }
+        .verified-icon .info_sec_details:before {right:110px;}
         .info_sec_details {
             top: 167px;
         }
@@ -112,12 +135,17 @@
             border: 1px solid #CFCFCF;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0px 4px 7px 0px #8B8B8B40;
+            box-shadow: 0px 6px 3px 0px #8b8b8b54;
+            border-bottom: 1px solid #CFCFCF;
             margin-bottom: 25px;
         }
         .wd-quote-area .wd-quote-data .wd-quote-txt {background: #ffffff;}
-        .wd-quote-area .wd-quote-data .wd-quote-txt p {padding-left: 50px; position: relative; text-align: left;}
-        .wd-quote-area .wd-quote-data .wd-quote-txt p svg {position: absolute; left:20px; top:0; bottom:0; margin: auto;}
+        .wd-quote-area .wd-quote-data .wd-quote-txt p {padding-left: 45px; position: relative; text-align: left; line-height:14px; padding-top: 10px; padding-bottom: 10px;}
+        .wd-quote-area .wd-quote-data .wd-quote-txt p svg {position: absolute; left:15px; top:0; bottom:0; margin: auto;}
+        .wd-quote-data .accordion .card-header.active {
+            padding: 10px 15px 15px!important;
+        }
+        .wd-quote-data .accordion .card-body {padding: 10px 15px 15px!important;}
         .wd-quote-area .wd-quote-data .wd-quote-table-head {display: none;}
         .wd-quote-area .wd-quote-data .card_lft {
             flex-direction: column;
@@ -135,7 +163,7 @@
         .wd-quote-area .wd-quote-data .card_lft + .wd-quote-btn {
             flex-direction: column;
             gap:10px;
-            margin-top: 15px;
+            margin-top: 10px;
         }
         .wd-quote-area .wd-quote-data .card_lft + .wd-quote-btn a {width: 100%; justify-content: center;}
         .wd-quote-area .wd-quote-data .accordion .card-body {background: #ffffff;}
@@ -148,7 +176,7 @@
         /* New Code ends */
         
         .info_sec_details {
-            transform: translateX(-56%);
+            transform: translateX(-50%);
         }
 
         .wd-quote-data .card_lft h4 {
@@ -185,22 +213,23 @@
 
     @media(max-width: 430px) {
         .icon_hover_sec:hover .info_sec_details {
-            transform: translateX(-67%);
+            transform: translateX(-50%);
         }
 
-        .icon_hover_sec:hover .info_sec_details:before {
+        /* .icon_hover_sec:hover .info_sec_details:before {
             right: 35px;
-        }
+        } */
     }
 
     @media(max-width: 340px) {
         .icon_hover_sec .info_sec_details {
             width: 260px;
         }
-
+        
         .icon_hover_sec .info_sec_details:before {
-            right: 52px;
+            right: 70px;
         }
+        .verified-icon .info_sec_details:before {right: 90px;}
     }
     @media(min-width: 581px) {
         .mobile-label {display: none;}
@@ -231,29 +260,10 @@
             </div> --}}
             <div class="wd-quote-txt">
                 <p>
-                    <svg width="19" height="25" viewBox="0 0 19 25" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g filter="url(#filter0_d_580_2223)">
-                            <path
-                                d="M7.06648 18.4953C7.06679 18.6854 7.1234 18.8716 7.22963 19.03L7.74982 19.8065C7.83869 19.9393 7.95922 20.0481 8.10069 20.1234C8.24216 20.1987 8.40018 20.2382 8.5607 20.2382H10.439C10.5996 20.2382 10.7576 20.1987 10.8991 20.1234C11.0405 20.0481 11.1611 19.9393 11.2499 19.8065L11.7701 19.03C11.8763 18.8716 11.9331 18.6856 11.9333 18.4953L11.9345 17.3361H7.06496L7.06648 18.4953ZM4.14258 10.0818C4.14258 11.423 4.64329 12.6465 5.46847 13.5814C5.97131 14.1512 6.75784 15.3415 7.05766 16.3456C7.05887 16.3535 7.05979 16.3613 7.061 16.3692H11.9384C11.9397 16.3613 11.9406 16.3538 11.9418 16.3456C12.2416 15.3415 13.0281 14.1512 13.531 13.5814C14.3562 12.6465 14.8569 11.423 14.8569 10.0818C14.8569 7.13808 12.4495 4.75292 9.48298 4.76199C6.37797 4.77136 4.14258 7.26986 4.14258 10.0818ZM9.49972 7.66371C8.15709 7.66371 7.06466 8.74853 7.06466 10.0818C7.06466 10.349 6.84672 10.5654 6.57764 10.5654C6.30857 10.5654 6.09063 10.349 6.09063 10.0818C6.09063 8.21504 7.61985 6.69647 9.49972 6.69647C9.7688 6.69647 9.98673 6.91289 9.98673 7.18009C9.98673 7.44729 9.7688 7.66371 9.49972 7.66371Z"
-                                fill="#FFA800" />
-                        </g>
-                        <defs>
-                            <filter id="filter0_d_580_2223" x="0.142578" y="0.761963" width="18.7148" height="23.4761"
-                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                <feColorMatrix in="SourceAlpha" type="matrix"
-                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                <feOffset />
-                                <feGaussianBlur stdDeviation="2" />
-                                <feComposite in2="hardAlpha" operator="out" />
-                                <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0.66 0 0 0 0 0 0 0 0 1 0" />
-                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_580_2223" />
-                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_580_2223"
-                                    result="shape" />
-                            </filter>
-                        </defs>
-                    </svg>
+                    <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.97229 12.0716C9.99069 12.4726 9.68153 12.8131 9.28062 12.8333H7.88646C7.48555 12.8131 7.17639 12.4726 7.19479 12.0716V10.5925C5.22916 9.87115 4.11383 7.7935 4.59884 5.75664C5.08385 3.71979 7.01584 2.36775 9.09561 2.60972C11.1754 2.85169 12.7454 4.61116 12.7498 6.70496C12.7443 8.4594 11.6302 10.0186 9.97229 10.5925V12.0716Z" stroke="#575757" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9.97234 11.0925C10.2485 11.0925 10.4723 10.8686 10.4723 10.5925C10.4723 10.3163 10.2485 10.0925 9.97234 10.0925V11.0925ZM7.194 10.0925C6.91786 10.0925 6.694 10.3163 6.694 10.5925C6.694 10.8686 6.91786 11.0925 7.194 11.0925V10.0925ZM16.4998 7.20499C16.776 7.20499 16.9998 6.98113 16.9998 6.70499C16.9998 6.42885 16.776 6.20499 16.4998 6.20499V7.20499ZM14.8332 6.20499C14.557 6.20499 14.3332 6.42885 14.3332 6.70499C14.3332 6.98113 14.557 7.20499 14.8332 7.20499V6.20499ZM2.33317 7.20499C2.60931 7.20499 2.83317 6.98113 2.83317 6.70499C2.83317 6.42885 2.60931 6.20499 2.33317 6.20499V7.20499ZM0.666504 6.20499C0.390362 6.20499 0.166504 6.42885 0.166504 6.70499C0.166504 6.98113 0.390362 7.20499 0.666504 7.20499V6.20499ZM14.5328 1.52246C14.7293 1.32845 14.7313 1.01187 14.5373 0.815369C14.3433 0.618863 14.0267 0.616841 13.8302 0.810852L14.5328 1.52246ZM12.6485 1.97752C12.452 2.17153 12.45 2.48811 12.644 2.68461C12.838 2.88112 13.1546 2.88314 13.3511 2.68913L12.6485 1.97752ZM4.51829 11.4328C4.71453 11.2385 4.7161 10.9219 4.52181 10.7257C4.32752 10.5295 4.01094 10.5279 3.81471 10.7222L4.51829 11.4328ZM2.63638 11.8888C2.44015 12.0831 2.43857 12.3997 2.63286 12.5959C2.82715 12.7922 3.14373 12.7938 3.33996 12.5995L2.63638 11.8888ZM13.8322 12.5995C14.0284 12.7938 14.345 12.7922 14.5393 12.5959C14.7336 12.3997 14.732 12.0831 14.5358 11.8888L13.8322 12.5995ZM13.3575 10.7222C13.1612 10.5279 12.8447 10.5295 12.6504 10.7257C12.4561 10.9219 12.4576 11.2385 12.6539 11.4328L13.3575 10.7222ZM3.81522 2.68913C4.01172 2.88314 4.3283 2.88112 4.52231 2.68461C4.71632 2.48811 4.7143 2.17153 4.51779 1.97752L3.81522 2.68913ZM3.33613 0.810852C3.13962 0.616841 2.82304 0.618863 2.62903 0.815369C2.43502 1.01187 2.43704 1.32845 2.63355 1.52246L3.33613 0.810852ZM9.97234 10.0925H7.194V11.0925H9.97234V10.0925ZM16.4998 6.20499H14.8332V7.20499H16.4998V6.20499ZM2.33317 6.20499H0.666504V7.20499H2.33317V6.20499ZM13.8302 0.810852L12.6485 1.97752L13.3511 2.68913L14.5328 1.52246L13.8302 0.810852ZM3.81471 10.7222L2.63638 11.8888L3.33996 12.5995L4.51829 11.4328L3.81471 10.7222ZM14.5358 11.8888L13.3575 10.7222L12.6539 11.4328L13.8322 12.5995L14.5358 11.8888ZM4.51779 1.97752L3.33613 0.810852L2.63355 1.52246L3.81522 2.68913L4.51779 1.97752Z" fill="#575757"/>
+                    </svg>                        
                     Transport providers get booked up and quotes are often withdrawn, book now to avoid missing out.
                 </p>
             </div>
@@ -269,7 +279,7 @@
                                             Transport Provider
                                         </span>
                                         {{-- <a href="{{ route('front.feedback_view', $quote->id) }}"> --}}
-                                            <h4 style="width: 100%; line-height: 24px;">
+                                            <h4 style="line-height: 24px;">
                                                 {{ $quote->getTransporters->username ?? '' }}</h4>
                                         {{-- </a> --}}
                                         <div class="mobile-wrap rating-mobile-wrap">
@@ -408,7 +418,7 @@
                                     </div>
                                     <div class="mobile-wrap">
                                         <span class="mobile-label">Quote Amount</span>
-                                        <h5>£{{ $quote->price }}</h5>
+                                        <h5 class="amount">£{{ $quote->price }} <span class="no-due">(No fees)</span></h5>
                                     </div>
                                     <!-- <a href="javascript:;" class="d-lg-none" data-toggle="modal" data-target="#delete_quote_{{ $quote->id }}">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -430,7 +440,7 @@
                                         </a>
                                         <a href="javascript:;" data-toggle="modal"
                                             data-target="#delete_quote_{{ $quote->id }}" class="d-lg-block delete_cross">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM15.21 13.79C15.3037 13.883 15.3781 13.9936 15.4289 14.1154C15.4797 14.2373 15.5058 14.368 15.5058 14.5C15.5058 14.632 15.4797 14.7627 15.4289 14.8846C15.3781 15.0064 15.3037 15.117 15.21 15.21C15.117 15.3037 15.0064 15.3781 14.8846 15.4289C14.7627 15.4797 14.632 15.5058 14.5 15.5058C14.368 15.5058 14.2373 15.4797 14.1154 15.4289C13.9936 15.3781 13.883 15.3037 13.79 15.21L12 13.41L10.21 15.21C10.117 15.3037 10.0064 15.3781 9.88458 15.4289C9.76272 15.4797 9.63202 15.5058 9.5 15.5058C9.36799 15.5058 9.23729 15.4797 9.11543 15.4289C8.99357 15.3781 8.88297 15.3037 8.79 15.21C8.69628 15.117 8.62188 15.0064 8.57111 14.8846C8.52034 14.7627 8.49421 14.632 8.49421 14.5C8.49421 14.368 8.52034 14.2373 8.57111 14.1154C8.62188 13.9936 8.69628 13.883 8.79 13.79L10.59 12L8.79 10.21C8.6017 10.0217 8.49591 9.7663 8.49591 9.5C8.49591 9.2337 8.6017 8.9783 8.79 8.79C8.97831 8.6017 9.2337 8.49591 9.5 8.49591C9.76631 8.49591 10.0217 8.6017 10.21 8.79L12 10.59L13.79 8.79C13.9783 8.6017 14.2337 8.49591 14.5 8.49591C14.7663 8.49591 15.0217 8.6017 15.21 8.79C15.3983 8.9783 15.5041 9.2337 15.5041 9.5C15.5041 9.7663 15.3983 10.0217 15.21 10.21L13.41 12L15.21 13.79Z"
@@ -452,7 +462,7 @@
                                         data-msgkey="{{ $key }}" type="button" data-toggle="collapse"
                                         data-target="#collapse{{ $key }}" aria-expanded="true"
                                         aria-controls="collapseOne">View messages
-                                        <span class="msg_{{ $quote->thread_id ?? 0 }}">0</span>
+                                        {{-- <span class="msg_{{ $quote->thread_id ?? 0 }}">0</span> --}}
                                     </a>
                                 </div>
                             </div>
@@ -510,7 +520,7 @@
                                             value="{{ $thread ? $thread->id : 0 }}">
                                         <div class="wd-quote-form">
                                             <div class="form-group">
-                                                <p class="font-weight-light d-flex flex-wrap align-items-center text-left d-sm-none position-relative" style="font-size:12px; padding-left:25px;">
+                                                <p class="font-weight-light d-flex flex-wrap align-items-center text-left d-sm-none position-relative" style="font-size:12px; padding-left:20px; margin-bottom: 5px; color:#444444;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none" class="position-absolute" style="left:0;">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3.95833 8.70834V10.2917C3.95833 12.915 6.08498 15.0417 8.70833 15.0417H10.2917C12.915 15.0417 15.0417 12.915 15.0417 10.2917V8.70834C15.0417 6.08499 12.915 3.95834 10.2917 3.95834H8.70833C6.08498 3.95834 3.95833 6.08499 3.95833 8.70834Z" stroke="#444444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                         <path d="M8.75 12.6667C8.75 13.0809 9.08579 13.4167 9.5 13.4167C9.91421 13.4167 10.25 13.0809 10.25 12.6667H8.75ZM9.5 8.70834H10.25C10.25 8.29413 9.91421 7.95834 9.5 7.95834V8.70834ZM8.70833 7.95834C8.29412 7.95834 7.95833 8.29413 7.95833 8.70834C7.95833 9.12256 8.29412 9.45834 8.70833 9.45834V7.95834ZM9.5 13.4167C9.91421 13.4167 10.25 13.0809 10.25 12.6667C10.25 12.2525 9.91421 11.9167 9.5 11.9167V13.4167ZM8.70833 11.9167C8.29412 11.9167 7.95833 12.2525 7.95833 12.6667C7.95833 13.0809 8.29412 13.4167 8.70833 13.4167V11.9167ZM9.5 11.9167C9.08579 11.9167 8.75 12.2525 8.75 12.6667C8.75 13.0809 9.08579 13.4167 9.5 13.4167V11.9167ZM10.2917 13.4167C10.7059 13.4167 11.0417 13.0809 11.0417 12.6667C11.0417 12.2525 10.7059 11.9167 10.2917 11.9167V13.4167ZM10.25 6.33334C10.25 5.91913 9.91421 5.58334 9.5 5.58334C9.08579 5.58334 8.75 5.91913 8.75 6.33334H10.25ZM8.75 7.12501C8.75 7.53922 9.08579 7.87501 9.5 7.87501C9.91421 7.87501 10.25 7.53922 10.25 7.12501H8.75ZM10.25 12.6667V8.70834H8.75V12.6667H10.25ZM9.5 7.95834H8.70833V9.45834H9.5V7.95834ZM9.5 11.9167H8.70833V13.4167H9.5V11.9167ZM9.5 13.4167H10.2917V11.9167H9.5V13.4167ZM8.75 6.33334V7.12501H10.25V6.33334H8.75Z" fill="#444444"></path>
@@ -522,7 +532,7 @@
                                                 </div>                                                --}}
                                                 <textarea class="form-control textarea" id="message"
                                                     placeholder="Type any question you have about this quote here."></textarea>
-                                                    <p class="chat-note text-left d-sm-none font-weight-normal position-relative" style="font-size:12px; padding-left:25px; margin-top: 10px;">
+                                                    <p class="chat-note text-left d-sm-none font-weight-normal position-relative" style="font-size:12px; padding-left:20px; margin-top: 5px; color:#444444;">
                                                         <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="position-absolute" style="left:0; top:0;">
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5631 12.2653L10.9587 4.78559C10.655 4.27279 10.1032 3.95831 9.50721 3.95831C8.91121 3.95831 8.35943 4.27279 8.05569 4.78559L3.45057 12.2653C3.10235 12.8105 3.07241 13.5003 3.37208 14.0737C3.67176 14.647 4.25525 15.0163 4.90169 15.0416H14.1119C14.7584 15.0163 15.3419 14.647 15.6416 14.0737C15.9412 13.5003 15.9113 12.8105 15.5631 12.2653Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                             <path d="M9.50682 10.2916V6.33329" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"></path>
@@ -549,7 +559,7 @@
                                                             fill="white" />
                                                     </svg>
                                                 </a>
-                                                <p><span>Note:</span> Please do not share any contact information here,
+                                                <p class="text-note"><span>Note:</span> Please do not share any contact information here,
                                                     details are exchanged after you have accepted the quote.</p>
                                             </div>
                                         </div>
