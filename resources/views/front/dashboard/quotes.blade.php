@@ -226,13 +226,13 @@
             justify-content: space-between;
         }
 
-        .card_lft .rating-star li:last-child {
+        /* .card_lft .rating-star li:last-child {
             padding-top: 1px;
-        }
+        } */
 
-        .card_lft .rating-star li:last-child svg {
+        /* .card_lft .rating-star li:last-child svg {
             padding-top: 0.5px;
-        }
+        } */
 
     }
 
