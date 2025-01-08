@@ -90,8 +90,8 @@
         width: 12px;
         height: 12px;
     }
-  
-    .verified-icon {display: none;}
+    .wd-view-btn {background: #9c9c9c!important;}
+    .verified-icon .icon_hover_sec {display: none;}
     @media(max-width: 580px) {
         /* New Code starts */
         .help {
@@ -132,7 +132,7 @@
             font-weight: 500!important;
             color:#F3F8FF!important;
         }
-        .wd-view-btn {background: #9c9c9c!important;}
+        
         .amount {
             font-size: 20px!important;
             line-height: 25px!important;
@@ -141,7 +141,7 @@
         .hover_anchor{padding-left: 5px;}
         .wd-quote-msg {padding-top: 10px!important;}
         .text-note {display: none;}
-        .verified-icon {display: block;}
+        .verified-icon .icon_hover_sec {display: inline-block;}
         .right_mark {display: none;}
         .verified-icon .info_sec_details {
             top: 127px;
@@ -453,8 +453,8 @@
                                                 </div>
                                             </span>                                        
                                         </span>
-                                        <img src="{{ asset('assets/web/images/right-mark.png') }}" class="right_mark"
-                                        alt="right mark">
+                                        {{-- <img src="{{ asset('assets/web/images/right-mark.png') }}" class="right_mark"
+                                        alt="right mark"> --}}
                                     </div>
                                     <div class="mobile-wrap">
                                         <span class="mobile-label">Availability</span>
@@ -514,7 +514,7 @@
                                                 to booking</a>
                                         @endif
                                     @endif
-                                    <a href="javascript:;" class="wd-view-btn messageShow"
+                                    <a href="javascript:;" class="wd-view-btn messageShow justify-content-center"
                                         data-msgkey="{{ $key }}" type="button" data-toggle="collapse"
                                         data-target="#collapse{{ $key }}" aria-expanded="true"
                                         aria-controls="collapseOne">View messages
