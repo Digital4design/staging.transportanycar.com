@@ -861,7 +861,9 @@ in1.addEventListener('input', splitNumber);
                 if (typeof uetq !== 'undefined') {
                     uet_report_conversion();
                 }
-                form.submit();
+                setTimeout(()=>{
+                    form.submit();
+                },1000)
                 //if (!otpVerified) {
                 //    setTimeout(() => {
                 //        $('#popup').removeClass('show');
