@@ -10,20 +10,27 @@
         width: 300px;
         top: 37px;
         z-index: 1;
-        transform: translateX(-50%);
+        transform: translateX(-26%);
     }
     .no-due {display: none;}
     .icon_hover_sec:hover .info_sec_details {
         display: block;
     }
-
+.popover-body{padding: 0!important; color:#777777!important;  font-family: 'Outfit', sans-serif!important;
+        font-size: 14px!important;
+        font-weight: 200!important; }
+    .popover,
     .info_sec_details_contant {
         background: #fff;
-        border: 1px solid #cfcfcf;
-        padding: 20px;
-        text-align: center;
-        border-radius: 10px;
-        box-shadow: 0px 0px 3px 0px #cfcfcf;
+        border: 1px solid #cfcfcf!important;
+        padding: 20px!important;
+        text-align: center!important;
+        border-radius: 10px!important;
+        box-shadow: 0px 0px 3px 0px #cfcfcf!important;
+        color:#777777!important;
+        font-family: 'Outfit', sans-serif!important;
+        font-size: 14px!important;
+        font-weight: 200!important;
     }
 
     .info_sec_details p {
@@ -67,14 +74,17 @@
     }
 
     .card_lft .rating-star li:last-child span {
-        font-size: 14px;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 400;
+        color:#5f5f5f;
     }
 
     .wd-quote-data .card_lft h4 {
         width: 15%;
     }
 
-    .wd-quote-head p.quote-table-transport {
+    /* .wd-quote-head p.quote-table-transport {
         margin-left: -46px;
     }
 
@@ -84,16 +94,36 @@
 
     .wd-quote-head p.quote-table-Verified {
         margin-left: -103px;
-    }
+    } */
 
     .choose_quote_rating li svg {
         width: 12px;
         height: 12px;
     }
-    .wd-view-btn {background: #9c9c9c!important;}
+    .wd-quote-head {padding-left: 27px; padding-right: 29px;}
+    .wd-view-btn {background: #9c9c9c!important; order:1}
+    .wd-accepted-btn {order: 2;}
     .verified-icon .icon_hover_sec {display: none;}
+    .wd-quote-area .wd-quote-data .wd-quote-txt p {padding-left: 45px; padding-right: 45px;}
+    @media screen and (min-width: 581px) and (max-width: 1366px) {
+        .card_lft .rating-star li:last-child span { font-size: 12px;line-height: 16px;}
+        .wd-quote-data .accordion .card-header {flex-direction: column!important; padding-top: 19px!important; padding-bottom: 22px!important;}
+        .wd-quote-data .card_lft,
+        .wd-quote-btn,
+        .wd-quote-head > div:first-child {width:100%!important;}
+        .wd-quote-head > div:last-child {
+            display: none!important;
+        }
+        .wd-quote-btn {justify-content: center; margin-top: 15px;}
+        .delete_cross {
+            position: absolute;
+            right: 23px;
+            top: 23px;
+        } 
+    }
     @media(max-width: 580px) {
         /* New Code starts */
+        .card_lft .rating-star li:last-child span { font-size: 12px;line-height: 16px;}
         .help {
             font-size: 16px;
             line-height: 20px;
@@ -174,8 +204,9 @@
         .wd-quote-area .wd-quote-data .wd-quote-table-head {display: none;}
         .wd-quote-area .wd-quote-data .card_lft {
             flex-direction: column;
+            width: 100%!important;
         }
-        .wd-quote-area .wd-quote-data .card_lft .mobile-wrap {width:100%; display: flex; flex-wrap: wrap; margin-bottom: 10px;}
+        .wd-quote-area .wd-quote-data .card_lft .mobile-wrap {width:100%; text-align:left!important; max-width:100%!important; margin-top: 0!important; margin-bottom: 10px!important; align-items:center!important; display: flex; flex-wrap: wrap; margin-bottom: 10px;}
         .wd-quote-area .wd-quote-data .card_lft .mobile-wrap.rating-mobile-wrap {margin-bottom: 0; margin-top: 10px;}
         .wd-quote-area .wd-quote-data .card_lft .mobile-label {
             font-size: 16px;
@@ -189,6 +220,7 @@
             flex-direction: column;
             gap:10px;
             margin-top: 10px;
+            width: 100%!important;
         }
         .wd-quote-area .wd-quote-data .card_lft + .wd-quote-btn a {width: 100%; justify-content: center;}
         .wd-quote-area .wd-quote-data .accordion .card-body {background: #ffffff;}
@@ -257,39 +289,65 @@
         .verified-icon .info_sec_details:before {right: 90px;}
     }
     @media(min-width: 581px) {
-        .help {display: none;}
+        .wd-view-btn {order:1}
+        .wd-accepted-btn {order: 2;}
+        .delete_cross {order: 3;}
+        
+        /* .help {display: none;} */
         .first-mobile-wrap h4 {width: auto!important;}
         .mobile-label {display: none;}
         .first-mobile-wrap {gap:5px;}
+        .card-header h5,
+        .icon_hover_sec .flex_blog,
+        .rating-star.choose_quote_rating {justify-content: center; text-align:center!important;}
+    }
+    @media(min-width: 576px) {
+        .help {
+            background: transparent;
+            color:#000000;
+            text-align: left;
+        }
+        .help a:focus, .help a:hover, .help a {color:#000000;}
+    }
+    @media(min-width: 768px) {
+        .help {
+            text-align: right;
+        }
+    }
+    @media(min-width: 1281px) {
+        .help {
+            font-size: 24px;
+            line-height: 30px;
+        }
     }
 </style>
 @section('content')
     @include('layouts.web.dashboard.header')
     <section class="wd-quote-area bradius_10">
-        <div class="row">
-            <div class="col-lg-12">
+        <div class="row align-items-center align-items-md-end header-part">
+            <div class="col-12 col-md-6">
                 <div class="wd-quote-title">
                     <h1>Accept the best quote.</h1>
                     <p>You have received {{ count($quotes) }} quotes so far, choose the best one based on price and convenience and click accept to secure your booking.</p>
                 </div>
             </div>
-            <div class="help col-12 px-0 py-3">Need help? Call us <a href="tel:08081557979">0808 155 7979</a></div>
+            <div class="help col-12 col-md-6 px-0 px-sm-3 py-3 pb-sm-0 py-md-0">Need help? Call us <a href="tel:08081557979">0808 155 7979</a></div>
         </div>
         <div class="wd-quote-data">
-            {{-- <div class="wd-quote-table-head">
+            <div class="wd-quote-table-head">
                 <div class="wd-quote-head">
-                    <div class="d-flex flex-wrap table-head-wrap">
-                        <p class="quote-table-transport data-wrap" style="text-align:center;">Transporter</p>
-                        <p class="quote-table-Rating data-wrap col-two" style="text-align:center;">Rating</p>
-                        <p class="quote-table-Verified data-wrap col-three" style="text-align:center;">Verified</p>
-                        <p class="quote-table-Dates data-wrap" style="text-align:center;">Dates</p>
-                        <p class="quote-table-Quote data-wrap col-five" style="text-align:center;">Quote</p>
+                    <div class="d-flex flex-wrap" style="width:calc(100% - 400px);">
+                        <p class="quote-table-transport" style="max-width:20%; flex: 0 0 20%; text-align:center;">Transporter</p>
+                        <p class="quote-table-Rating" style="max-width:20%; flex: 0 0 20%; text-align:center;">Rating</p>
+                        <p class="quote-table-Verified" style="max-width:20%; flex: 0 0 20%; text-align:center;">Verified</p>
+                        <p class="quote-table-Dates" style="max-width:20%; flex: 0 0 20%; text-align:center;">Dates</p>
+                        <p class="quote-table-Quote" style="max-width:20%; flex: 0 0 20%; text-align:center;">Quote</p>
                     </div>
-                    <div class="d-flex flex-wrap quote-wrap">
-                    <p class="quote-table-Quote" style="max-width:100%; flex: 0 0 100%; text-align:center;"></p>
+                    <div class="d-flex flex-wrap" style="width: 400px;">
+                        <p class="quote-table-Quote" style="max-width:100%; flex: 0 0 100%; text-align:center;"></p>
                     </div>
                 </div>
-            </div> --}}
+            </div>
             <div class="wd-quote-txt">
                 <p>
                     <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -305,8 +363,8 @@
                         <div class="card">
                             <div class="card-header @if ($key == 0) active @endif"
                                 id="heading{{ $key }}">
-                                <div class="card_lft">
-                                    <div class="d-flex flex-wrap align-items-center mobile-wrap first-mobile-wrap">
+                                <div class="card_lft" style="width:calc(100% - 400px);">
+                                    <div class="d-flex flex-wrap align-items-center mobile-wrap first-mobile-wrap" style="max-width:20%; flex: 0 0 20%; justify-content:center">
                                         <span class="mobile-label">
                                             Transport Provider
                                         </span>
@@ -314,7 +372,8 @@
                                             <h4 style="line-height: 24px;">
                                                 {{ $quote->getTransporters->username ?? '' }}</h4>
                                         {{-- </a> --}}
-                                        <div class="mobile-wrap rating-mobile-wrap">
+                                    </div>
+                                        <div class="mobile-wrap rating-mobile-wrap" style="max-width:20%; flex: 0 0 20%; text-align:center;">
                                             <span class="mobile-label">Rating</span>
                                             {{-- @if ($quote->percentage == 0) --}}
                                                 {{-- <ul class="rating-star choose_quote_rating">
@@ -431,10 +490,11 @@
                                                         </svg>
                                                     </li>
                                                 @endfor 
+                                             <li><span class="ml-1 d-inline-block">(100%)</span></li>
                                         </ul>
                                         </div>
-                                    </div>
-                                    <div class="mobile-wrap">
+                                    {{-- </div> --}}
+                                    <div class="mobile-wrap" style="max-width:20%; flex: 0 0 20%; text-align:center;">
                                         <span class="mobile-label">Verified</span>
                                         <span class="verified-icon">
                                             <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -442,37 +502,36 @@
                                                 <path d="M5.30664 9.63198L7.76765 12.093L12.6897 7.16113" stroke="#52D017" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>   
                                             <span class="icon_hover_sec">
-                                                <a href="javascript:;" class="hover_anchor" data-toggle="modal"
-                                                data-target="#anchor"><img
-                                                src="{{ asset('assets/web/images/question.png') }}"
-                                                alt="question"></a> 
-                                                <div class="info_sec_details" id="infos-details">
+                                                <a class="hover_anchor" role="button" data-toggle="popover" data-placement="top" data-content="We have verified this transport providers insurance cover and drivers license to protect you and transport vehicles safe and securely.">
+                                                    <img src="{{ asset('assets/web/images/question.png') }}" alt="question" />
+                                                </a> 
+                                                {{-- <div class="info_sec_details" id="infos-details">
                                                     <div class="info_sec_details_contant">
                                                         <p>We have verified this transport providers insurance cover and drivers license to protect you and transport vehicles safe and securely.</p>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </span>                                        
                                         </span>
                                         {{-- <img src="{{ asset('assets/web/images/right-mark.png') }}" class="right_mark"
                                         alt="right mark"> --}}
                                     </div>
-                                    <div class="mobile-wrap">
+                                    <div class="mobile-wrap" style="max-width:20%; flex: 0 0 20%;">
                                         <span class="mobile-label">Availability</span>
                                         <div class="icon_hover_sec">
                                             <div class="flex_blog "><span>Flexible</span>
-                                                <a href="javascript:;" class="hover_anchor" data-toggle="modal"
-                                                    data-target="#anchor"><img
+                                                <a class="hover_anchor" 
+                                                    data-toggle="popover" data-placement="bottom" data-content="Accept the quote and the transporter will contact you to arrange a convenient time and date."><img
                                                         src="{{ asset('assets/web/images/question.png') }}"
                                                         alt="question"></a>
                                             </div>
-                                            <div class="info_sec_details" id="info-details">
+                                            {{-- <div class="info_sec_details" id="info-details">
                                                 <div class="info_sec_details_contant">
                                                     <p>Accept the quote and the transporter will contact you to arrange a convenient time and date.</p>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
-                                    <div class="mobile-wrap">
+                                    <div class="mobile-wrap" style="max-width:20%; flex: 0 0 20%; text-align:center;">
                                         <span class="mobile-label">Quote Amount</span>
                                         <h5 class="amount">£{{ $quote->price }} <span class="no-due">(No fees)</span></h5>
                                     </div>
@@ -482,7 +541,13 @@
                                     </svg>
                                 </a> -->
                                 </div>
-                                <div class="wd-quote-btn">
+                                <div class="wd-quote-btn" style="width: 400px;">
+                                    <a href="javascript:;" class="wd-view-btn messageShow justify-content-center"
+                                        data-msgkey="{{ $key }}" type="button" data-toggle="collapse"
+                                        data-target="#collapse{{ $key }}" aria-expanded="true"
+                                        aria-controls="collapseOne">View messages
+                                        {{-- <span class="msg_{{ $quote->thread_id ?? 0 }}">0</span> --}}
+                                    </a>
                                     @if ($quote->status == 'pending' && !$hasAcceptedQuote)
                                         <a href="javascript:;"
                                             onclick="quoteChangeStatus({{ $quote->id }}, 'accept');"
@@ -514,12 +579,7 @@
                                                 to booking</a>
                                         @endif
                                     @endif
-                                    <a href="javascript:;" class="wd-view-btn messageShow justify-content-center"
-                                        data-msgkey="{{ $key }}" type="button" data-toggle="collapse"
-                                        data-target="#collapse{{ $key }}" aria-expanded="true"
-                                        aria-controls="collapseOne">View messages
-                                        {{-- <span class="msg_{{ $quote->thread_id ?? 0 }}">0</span> --}}
-                                    </a>
+                                    
                                 </div>
                             </div>
 
@@ -576,7 +636,7 @@
                                             value="{{ $thread ? $thread->id : 0 }}">
                                         <div class="wd-quote-form">
                                             <div class="form-group">
-                                                <p class="font-weight-light d-flex flex-wrap align-items-center text-left d-sm-none position-relative" style="font-size:12px; padding-left:20px; margin-bottom: 5px; color:#444444;">
+                                                <p class="font-weight-light d-flex flex-wrap align-items-center text-left position-relative" style="font-size:12px; padding-left:20px; margin-bottom: 5px; color:#444444;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none" class="position-absolute" style="left:0;">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3.95833 8.70834V10.2917C3.95833 12.915 6.08498 15.0417 8.70833 15.0417H10.2917C12.915 15.0417 15.0417 12.915 15.0417 10.2917V8.70834C15.0417 6.08499 12.915 3.95834 10.2917 3.95834H8.70833C6.08498 3.95834 3.95833 6.08499 3.95833 8.70834Z" stroke="#444444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                         <path d="M8.75 12.6667C8.75 13.0809 9.08579 13.4167 9.5 13.4167C9.91421 13.4167 10.25 13.0809 10.25 12.6667H8.75ZM9.5 8.70834H10.25C10.25 8.29413 9.91421 7.95834 9.5 7.95834V8.70834ZM8.70833 7.95834C8.29412 7.95834 7.95833 8.29413 7.95833 8.70834C7.95833 9.12256 8.29412 9.45834 8.70833 9.45834V7.95834ZM9.5 13.4167C9.91421 13.4167 10.25 13.0809 10.25 12.6667C10.25 12.2525 9.91421 11.9167 9.5 11.9167V13.4167ZM8.70833 11.9167C8.29412 11.9167 7.95833 12.2525 7.95833 12.6667C7.95833 13.0809 8.29412 13.4167 8.70833 13.4167V11.9167ZM9.5 11.9167C9.08579 11.9167 8.75 12.2525 8.75 12.6667C8.75 13.0809 9.08579 13.4167 9.5 13.4167V11.9167ZM10.2917 13.4167C10.7059 13.4167 11.0417 13.0809 11.0417 12.6667C11.0417 12.2525 10.7059 11.9167 10.2917 11.9167V13.4167ZM10.25 6.33334C10.25 5.91913 9.91421 5.58334 9.5 5.58334C9.08579 5.58334 8.75 5.91913 8.75 6.33334H10.25ZM8.75 7.12501C8.75 7.53922 9.08579 7.87501 9.5 7.87501C9.91421 7.87501 10.25 7.53922 10.25 7.12501H8.75ZM10.25 12.6667V8.70834H8.75V12.6667H10.25ZM9.5 7.95834H8.70833V9.45834H9.5V7.95834ZM9.5 11.9167H8.70833V13.4167H9.5V11.9167ZM9.5 13.4167H10.2917V11.9167H9.5V13.4167ZM8.75 6.33334V7.12501H10.25V6.33334H8.75Z" fill="#444444"></path>
@@ -588,7 +648,7 @@
                                                 </div>                                                --}}
                                                 <textarea class="form-control textarea" id="message"
                                                     placeholder="Type any question you have about this quote here."></textarea>
-                                                    <p class="chat-note text-left d-sm-none font-weight-normal position-relative" style="font-size:12px; padding-left:20px; margin-top: 5px; color:#444444;">
+                                                    <p class="chat-note text-left font-weight-normal position-relative" style="font-size:12px; padding-left:20px; margin-top: 5px; color:#444444;">
                                                         <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="position-absolute" style="left:0; top:0;">
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5631 12.2653L10.9587 4.78559C10.655 4.27279 10.1032 3.95831 9.50721 3.95831C8.91121 3.95831 8.35943 4.27279 8.05569 4.78559L3.45057 12.2653C3.10235 12.8105 3.07241 13.5003 3.37208 14.0737C3.67176 14.647 4.25525 15.0163 4.90169 15.0416H14.1119C14.7584 15.0163 15.3419 14.647 15.6416 14.0737C15.9412 13.5003 15.9113 12.8105 15.5631 12.2653Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                             <path d="M9.50682 10.2916V6.33329" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"></path>
@@ -615,7 +675,7 @@
                                                             fill="white" />
                                                     </svg>
                                                 </a>
-                                                <p class="text-note"><span>Note:</span> Please do not share any contact information here,
+                                                <p class="text-note d-none"><span>Note:</span> Please do not share any contact information here,
                                                     details are exchanged after you have accepted the quote.</p>
                                             </div>
                                         </div>
@@ -644,6 +704,11 @@
         type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.6.2/tinymce.min.js"></script>
     <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover({
+                container: 'body'
+            });
+        });
         function quoteChangeStatus(quote_id, status) {
             var formData = new FormData();
             formData.append("_token", "{{ csrf_token() }}");
@@ -847,5 +912,6 @@
                 getChatHistory(url, id);
             }
         })
+      
     </script>
 @endsection
