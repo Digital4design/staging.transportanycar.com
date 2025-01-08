@@ -14,7 +14,7 @@ $auth_user = Auth::user();
                     <p>{{$message->message}}</p>
                     <br>
                 @else
-                    <h5><b><a href="{{ route('front.feedback_view', $quote_id)}}">{{$sender_user->username}}</a></b> sent on {{ \Carbon\Carbon::parse($message->created_at)->format('d/m') }} {{carbon\carbon::parse($message->created_at)->diffForHumans()}}</h5>
+                    <h5><b>{{$sender_user->username}}</b> sent on {{ \Carbon\Carbon::parse($message->created_at)->format('d/m') }} {{carbon\carbon::parse($message->created_at)->diffForHumans()}}</h5>
                     <p>{{$message->message}}</p>
                     <br>
                 @endif
