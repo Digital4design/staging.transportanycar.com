@@ -300,7 +300,7 @@ class QuotesController extends WebController
                         \Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
                     }
                 } catch (\Exception $ex) {
-                    \Log::error('Save Search functionality Error sending email to transporter for Quote ID: ' . $quote['quotation_id'] . ': ' . $ex->getMessage());
+                    \Log::error('Save Search functionality Error sending email to transporter for Quote ID: ' . $ex->getMessage());
                     // return $ex->getMessage();
                 }
             }
