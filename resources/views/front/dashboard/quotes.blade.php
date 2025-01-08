@@ -12,7 +12,7 @@
         z-index: 1;
         transform: translateX(-50%);
     }
-
+    .no-due {display: none;}
     .icon_hover_sec:hover .info_sec_details {
         display: block;
     }
@@ -95,6 +95,7 @@
     @media(max-width: 580px) {
         /* New Code starts */
         .no-due {
+            display: inline-block;
             font-size: 12px;
             line-height: 15px;
             font-weight: 400;
@@ -232,6 +233,7 @@
         .verified-icon .info_sec_details:before {right: 90px;}
     }
     @media(min-width: 581px) {
+        .first-mobile-wrap h4 {width: auto!important;}
         .mobile-label {display: none;}
         .first-mobile-wrap {gap:5px;}
     }
