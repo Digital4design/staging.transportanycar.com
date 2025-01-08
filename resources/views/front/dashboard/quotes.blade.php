@@ -351,9 +351,15 @@
                                                         </svg>
                                                     </li>
                                                     <li>
-                                                        <!-- <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
-                                                </svg> -->
+                                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z"
+                                                                fill="#D9D9D9" />
+                                                        </svg>
+                                                    </li>
+                                                    {{-- <li>
+                                                       
                                                         <svg width="22" height="20" viewBox="0 0 44 44" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -370,14 +376,15 @@
                                                                     fill="#D9D9D9" />
                                                             </g>
                                                         </svg>
-                                                    </li>
+                                                    </li> --}}
                                                     {{-- <li><span class="ml-1">({{ $quote->percentage }}%)</span></li> --}}
                                                     <li><span class="ml-1">({{ $quote->percentage }}%)</span></li>
                                                 </ul>
                                             @else
                                                 @php
                                                     $totalStars = 5; // Total number of stars
-                                                    $yellowStars = round($quote->rating_average); // Full yellow stars
+                                                    // $yellowStars = round($quote->rating_average); // Full yellow stars
+                                                    $yellowStars = 5;
                                                 @endphp
                                                 <ul class="rating-star choose_quote_rating">
 
