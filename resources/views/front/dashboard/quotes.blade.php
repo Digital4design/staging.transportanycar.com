@@ -94,6 +94,30 @@
     .verified-icon {display: none;}
     @media(max-width: 580px) {
         /* New Code starts */
+        .help {
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 500;
+            color:#F3F8FF;
+            background: #0356D6;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .help a:focus,
+        .help a:hover,
+        .help a {
+            color:#F3F8FF;
+        }
+        .wd-quote-title h1 {
+            font-size: 24px!important;
+            line-height: 30px;
+            margin-bottom: 20px!important;
+        }
+        .wd-quote-title p {
+            font-size: 14px!important;
+            line-height: 18px;
+            font-weight: 300;
+        }
         .no-due {
             display: inline-block;
             font-size: 12px;
@@ -233,6 +257,7 @@
         .verified-icon .info_sec_details:before {right: 90px;}
     }
     @media(min-width: 581px) {
+        .help {display: none;}
         .first-mobile-wrap h4 {width: auto!important;}
         .mobile-label {display: none;}
         .first-mobile-wrap {gap:5px;}
@@ -244,11 +269,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="wd-quote-title">
-                    <h1>Choose the best quote</h1>
-                    <p>You have received {{ count($quotes) }} quotes so far, feel free to check them all out below and
-                        choose the best one based on price and convenience.</p>
+                    <h1>Accept the best quote.</h1>
+                    <p>You have received {{ count($quotes) }} quotes so far, choose the best one based on price and convenience and click accept to secure your booking.</p>
                 </div>
             </div>
+            <div class="help col-12 px-0 py-3">Need help? Call us <a href="tel:08081557979">0808 155 7979</a></div>
         </div>
         <div class="wd-quote-data">
             {{-- <div class="wd-quote-table-head">
