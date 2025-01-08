@@ -643,6 +643,13 @@ class DashboardController extends WebController
                 } else {
                     return response()->json(['status' => false, 'message' => 'Failed to update preference.']);
                 }
+            } elseif ($request->email_type == 'new_job_alert') {
+                $status = $user->update(['new_job_alert' => $request->value]);
+                if ($status) {
+                    return response()->json(['status' => true, 'message' => 'Preference updated successfully.']);
+                } else {
+                    return response()->json(['status' => false, 'message' => 'Failed to update preference.']);
+                }
             } else {
                 return response()->json(['status' => false, 'message' => 'Invalid email type.']);
             }

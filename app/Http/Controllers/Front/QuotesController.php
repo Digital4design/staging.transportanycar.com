@@ -291,13 +291,13 @@ class QuotesController extends WebController
                     'delivery_timeframe' => $quoteData['delivery_timeframe'],
                 ];
                 try {
-                    if($transporter->new_job_alert =="1"){
+                    if($transporter->new_job_alert == 1){
                     $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
                     $subject = 'You have received a transport notification';
                     $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
                     // $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
 
-                    \Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
+                    \Log::info("new job alert:  {$transporter->email}");
                }
              } catch (\Exception $ex) {
                     \Log::error('Save Search functionality Error sending email to transporter for Quote ID: ' . $quote['quotation_id'] . ': ' . $ex->getMessage());
@@ -679,8 +679,8 @@ class QuotesController extends WebController
                 $query->havingRaw('distance_drop <= ? OR LOWER(drop_area) = ?', [$maxRangeKm, 'anywhere']);
             })
             ->get();
-    
-            // return $savedSearches;
+    // dd( $savedSearches);
+            return;
     
         if ($savedSearches->isEmpty()) {
             \Log::info('save search functionality No matching saved searches found for Quote ID: ' . $quote['quotation_id']);
@@ -714,12 +714,14 @@ class QuotesController extends WebController
                     'delivery_timeframe' => $quote['delivery_timeframe'],
                 ];
                 try {
+                      if($transporter->job_email_preference == 1){
                     $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
                     $subject = 'You have received a transport notification';
                     $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
                     // $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
 
                     \Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
+                      }
                 } catch (\Exception $ex) {
                     \Log::error('Save Search functionality Error sending email to transporter for Quote ID: ' . $quote['quotation_id'] . ': ' . $ex->getMessage());
                     // return $ex->getMessage();
