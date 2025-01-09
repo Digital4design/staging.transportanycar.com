@@ -975,17 +975,17 @@ if (!function_exists('calculateCustomerQuote')) {
         if ($offer <= 100) {
             $markup = max($offer * 0.15, 15); // Minimum £15 applies
         } elseif ($offer <= 200) {
-            $markup = $offer * 0.08;
+            $markup = max($offer * 0.08, 15); // Minimum £15 applies
         } elseif ($offer <= 250) {
-            $markup = $offer * 0.07;
+            $markup = max($offer * 0.07, 15); // Minimum £15 applies
         } elseif ($offer <= 300) {
-            $markup = $offer * 0.06;
+            $markup = max($offer * 0.06, 15); // Minimum £15 applies
         } elseif ($offer <= 400) {
-            $markup = $offer * 0.05;
+            $markup = max($offer * 0.05, 15); // Minimum £15 applies
         } elseif ($offer <= 500) {
-            $markup = $offer * 0.04;
+            $markup = max($offer * 0.04, 15); // Minimum £15 applies
         } else {
-            $markup = $offer * 0.03;
+            $markup = max($offer * 0.03, 15); // Minimum £15 applies
         }
 
         $customerQuote = $offer + $markup;
