@@ -47,9 +47,9 @@
         content: '';
         display: block;
         position: absolute;
-        top: 10px;
-        width: 20px;
-        height: 20px;
+        top: 15px;
+        width: 10px;
+        height: 10px;
         background: white;
         transform: rotate(45deg);
         border: 1px solid #cfcfcfe0;
@@ -104,12 +104,24 @@
         height: 12px;
     }
     .wd-quote-head {padding-left: 27px; padding-right: 29px;}
-    .wd-view-btn {background: #9c9c9c!important; order:2}
+    .card .card-header .wd-quote-btn .wd-accepted-btn,
+    .card .card-header .wd-quote-btn .wd-view-btn {color:#F3F8FF!important;}
+    .card .card-header .wd-quote-btn .wd-view-btn {background: #9c9c9c!important; order:2;}
     .wd-accepted-btn {order: 1;}
     .verified-icon .icon_hover_sec {display: none;}
     .wd-quote-area .wd-quote-data .wd-quote-txt p {padding-left: 45px; padding-right: 45px;}
+    .wd-quote-title h1 {
+        font-size: 24px!important;
+        line-height: 30px;
+        margin-bottom: 20px!important;
+    }
+    .amount {
+        font-size: 20px!important;
+        line-height: 25px!important;
+        font-weight: 500!important;
+    }
     @media screen and (min-width: 581px) and (max-width: 1366px) {
-        .card_lft .rating-star li:last-child span { font-size: 12px;line-height: 16px;}
+        .card_lft .rating-star li:last-child span { font-size: 12px!important;line-height: 16px!important;}
         .wd-quote-data .accordion .card-header {flex-direction: column!important; padding-top: 19px!important; padding-bottom: 22px!important;}
         .wd-quote-data .card_lft,
         .wd-quote-btn,
@@ -126,6 +138,9 @@
     }
     @media(max-width: 580px) {
         /* New Code starts */
+        .wd-quote-form p {
+            font-size: 10px!important;
+        }
         .card_lft .rating-star li:last-child span { font-size: 12px;line-height: 16px;}
         .help {
             font-size: 16px;
@@ -141,11 +156,7 @@
         .help a {
             color:#F3F8FF;
         }
-        .wd-quote-title h1 {
-            font-size: 24px!important;
-            line-height: 30px;
-            margin-bottom: 20px!important;
-        }
+      
         .wd-quote-title p {
             font-size: 14px!important;
             line-height: 18px;
@@ -166,11 +177,7 @@
             color:#F3F8FF!important;
         }
         
-        .amount {
-            font-size: 20px!important;
-            line-height: 25px!important;
-            font-weight: 500!important;
-        }
+        
         .hover_anchor{padding-left: 5px;}
         .wd-quote-msg {padding-top: 10px!important;}
         .text-note {display: none;}
@@ -178,7 +185,7 @@
         .right_mark {display: none;}
         .verified-icon .info_sec_details {
             top: 100px;
-            transform: translateX(-56%)
+            transform: translateX(-58%)
         }
         .verified-icon .info_sec_details:before {right:110px;}
         .info_sec_details {
@@ -343,7 +350,7 @@
             <div class="wd-quote-table-head">
                 <div class="wd-quote-head">
                     <div class="d-flex flex-wrap" style="width:calc(100% - 400px);">
-                        <p class="quote-table-transport" style="max-width:20%; flex: 0 0 20%; text-align:center;">Transporter</p>
+                        <p class="quote-table-transport" style="max-width:20%; flex: 0 0 20%; text-align:left;">Transporter</p>
                         <p class="quote-table-Rating" style="max-width:20%; flex: 0 0 20%; text-align:center;">Rating</p>
                         <p class="quote-table-Verified" style="max-width:20%; flex: 0 0 20%; text-align:center;">Verified</p>
                         <p class="quote-table-Dates" style="max-width:20%; flex: 0 0 20%; text-align:center;">Dates</p>
@@ -370,7 +377,7 @@
                             <div class="card-header @if ($key == 0) active @endif"
                                 id="heading{{ $key }}">
                                 <div class="card_lft" style="width:calc(100% - 400px);">
-                                    <div class="d-flex flex-wrap align-items-center mobile-wrap first-mobile-wrap" style="max-width:20%; flex: 0 0 20%; justify-content:center">
+                                    <div class="d-flex flex-wrap align-items-center mobile-wrap first-mobile-wrap" style="max-width:20%; flex: 0 0 20%;">
                                         <span class="mobile-label">
                                             Transport Provider
                                         </span>
@@ -642,7 +649,7 @@
                                             value="{{ $thread ? $thread->id : 0 }}">
                                         <div class="wd-quote-form">
                                             <div class="form-group">
-                                                <p class="font-weight-light d-flex flex-wrap align-items-center text-left position-relative" style="font-size:12px; padding-left:20px; margin-bottom: 5px; color:#444444;">
+                                                <p class="font-weight-light d-flex flex-wrap align-items-center text-left position-relative" style="font-size:14px; padding-left:20px; margin-bottom: 5px; color:#444444;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none" class="position-absolute" style="left:0;">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3.95833 8.70834V10.2917C3.95833 12.915 6.08498 15.0417 8.70833 15.0417H10.2917C12.915 15.0417 15.0417 12.915 15.0417 10.2917V8.70834C15.0417 6.08499 12.915 3.95834 10.2917 3.95834H8.70833C6.08498 3.95834 3.95833 6.08499 3.95833 8.70834Z" stroke="#444444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                         <path d="M8.75 12.6667C8.75 13.0809 9.08579 13.4167 9.5 13.4167C9.91421 13.4167 10.25 13.0809 10.25 12.6667H8.75ZM9.5 8.70834H10.25C10.25 8.29413 9.91421 7.95834 9.5 7.95834V8.70834ZM8.70833 7.95834C8.29412 7.95834 7.95833 8.29413 7.95833 8.70834C7.95833 9.12256 8.29412 9.45834 8.70833 9.45834V7.95834ZM9.5 13.4167C9.91421 13.4167 10.25 13.0809 10.25 12.6667C10.25 12.2525 9.91421 11.9167 9.5 11.9167V13.4167ZM8.70833 11.9167C8.29412 11.9167 7.95833 12.2525 7.95833 12.6667C7.95833 13.0809 8.29412 13.4167 8.70833 13.4167V11.9167ZM9.5 11.9167C9.08579 11.9167 8.75 12.2525 8.75 12.6667C8.75 13.0809 9.08579 13.4167 9.5 13.4167V11.9167ZM10.2917 13.4167C10.7059 13.4167 11.0417 13.0809 11.0417 12.6667C11.0417 12.2525 10.7059 11.9167 10.2917 11.9167V13.4167ZM10.25 6.33334C10.25 5.91913 9.91421 5.58334 9.5 5.58334C9.08579 5.58334 8.75 5.91913 8.75 6.33334H10.25ZM8.75 7.12501C8.75 7.53922 9.08579 7.87501 9.5 7.87501C9.91421 7.87501 10.25 7.53922 10.25 7.12501H8.75ZM10.25 12.6667V8.70834H8.75V12.6667H10.25ZM9.5 7.95834H8.70833V9.45834H9.5V7.95834ZM9.5 11.9167H8.70833V13.4167H9.5V11.9167ZM9.5 13.4167H10.2917V11.9167H9.5V13.4167ZM8.75 6.33334V7.12501H10.25V6.33334H8.75Z" fill="#444444"></path>
@@ -654,7 +661,7 @@
                                                 </div>                                                --}}
                                                 <textarea class="form-control textarea" id="message"
                                                     placeholder="Type any question you have about this quote here."></textarea>
-                                                    <p class="chat-note text-left font-weight-normal position-relative" style="font-size:12px; padding-left:20px; margin-top: 5px; color:#444444;">
+                                                    <p class="chat-note text-left font-weight-normal position-relative" style="font-size:14px; padding-left:20px; margin-top: 5px; color:#444444;">
                                                         <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="position-absolute" style="left:0; top:0;">
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5631 12.2653L10.9587 4.78559C10.655 4.27279 10.1032 3.95831 9.50721 3.95831C8.91121 3.95831 8.35943 4.27279 8.05569 4.78559L3.45057 12.2653C3.10235 12.8105 3.07241 13.5003 3.37208 14.0737C3.67176 14.647 4.25525 15.0163 4.90169 15.0416H14.1119C14.7584 15.0163 15.3419 14.647 15.6416 14.0737C15.9412 13.5003 15.9113 12.8105 15.5631 12.2653Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                             <path d="M9.50682 10.2916V6.33329" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"></path>
@@ -711,7 +718,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.6.2/tinymce.min.js"></script>
     <script>
         $(document).ready(()=>{
-            $('[data-toggle="popover"]').popover();
+            $('[data-toggle="popover"]').popover({trigger:'hover'});
         });
         function quoteChangeStatus(quote_id, status) {
             var formData = new FormData();
