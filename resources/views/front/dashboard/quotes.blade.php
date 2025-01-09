@@ -7,7 +7,7 @@
         display: none;
         padding-top: 20px;
         position: absolute;
-        width: 300px;
+        width: 375px;
         top: 37px;
         z-index: 1;
         transform: translateX(-26%);
@@ -18,12 +18,14 @@
     }
     .popover-body{
         padding: 0!important;
-        color:#777777!important;
+        color:rgba(0,0,0,0.5)!important;
          font-family: 'Outfit', sans-serif!important;
         font-size: 14px!important;
-        font-weight: 200!important; }
+        line-height: 20px;
+        font-weight: 300!important; }
     .popover,
     .info_sec_details_contant {
+        max-width: 375px!important;
         background: #fff;
         border: 1px solid #cfcfcf!important;
         padding: 20px!important;
@@ -120,6 +122,8 @@
         line-height: 25px!important;
         font-weight: 500!important;
     }
+    .wd-quote-msg {padding-top: 15px!important;}
+    .wd-quote-msg b{font-weight: 500;}
     @media screen and (min-width: 581px) and (max-width: 1366px) {
         .card_lft .rating-star li:last-child span { font-size: 12px!important;line-height: 16px!important;}
         .wd-quote-data .accordion .card-header {flex-direction: column!important; padding-top: 19px!important; padding-bottom: 22px!important;}
@@ -138,6 +142,7 @@
     }
     @media(max-width: 580px) {
         /* New Code starts */
+        .card .card-header .wd-quote-btn .wd-view-btn span {display: none;}
         .wd-quote-form p {
             font-size: 10px!important;
         }
@@ -204,7 +209,7 @@
             border-bottom: 1px solid #CFCFCF;
             margin-bottom: 25px;
         }
-        .wd-quote-area .wd-quote-data .wd-quote-txt {background: #ffffff;}
+        .wd-quote-area .wd-quote-data .wd-quote-txt {background: #ffffff; border-bottom: 1px solid #CFCFCF;}
         .wd-quote-area .wd-quote-data .wd-quote-txt p {padding-left: 45px; position: relative; text-align: left; line-height:14px; padding-top: 10px; padding-bottom: 10px;}
         .wd-quote-area .wd-quote-data .wd-quote-txt p svg {position: absolute; left:15px; top:0; bottom:0; margin: auto;}
         .wd-quote-data .accordion .card-header.active {
@@ -349,14 +354,14 @@
         <div class="wd-quote-data">
             <div class="wd-quote-table-head">
                 <div class="wd-quote-head">
-                    <div class="d-flex flex-wrap" style="width:calc(100% - 400px);">
+                    <div class="d-flex flex-wrap" style="width:calc(100% - 350px);">
                         <p class="quote-table-transport" style="max-width:20%; flex: 0 0 20%; text-align:left;">Transporter</p>
                         <p class="quote-table-Rating" style="max-width:20%; flex: 0 0 20%; text-align:center;">Rating</p>
                         <p class="quote-table-Verified" style="max-width:20%; flex: 0 0 20%; text-align:center;">Verified</p>
                         <p class="quote-table-Dates" style="max-width:20%; flex: 0 0 20%; text-align:center;">Dates</p>
                         <p class="quote-table-Quote" style="max-width:20%; flex: 0 0 20%; text-align:center;">Quote</p>
                     </div>
-                    <div class="d-flex flex-wrap" style="width: 400px;">
+                    <div class="d-flex flex-wrap" style="width: 350px;">
                         <p class="quote-table-Quote" style="max-width:100%; flex: 0 0 100%; text-align:center;"></p>
                     </div>
                 </div>
@@ -376,7 +381,7 @@
                         <div class="card">
                             <div class="card-header @if ($key == 0) active @endif"
                                 id="heading{{ $key }}">
-                                <div class="card_lft" style="width:calc(100% - 400px);">
+                                <div class="card_lft" style="width:calc(100% - 350px);">
                                     <div class="d-flex flex-wrap align-items-center mobile-wrap first-mobile-wrap" style="max-width:20%; flex: 0 0 20%;">
                                         <span class="mobile-label">
                                             Transport Provider
@@ -510,7 +515,7 @@
                                     <div class="mobile-wrap" style="max-width:20%; flex: 0 0 20%; text-align:center;">
                                         <span class="mobile-label">Verified</span>
                                         <span class="verified-icon">
-                                            <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg width="27" height="27" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M16.9965 5.3326C17.1504 13.7554 12.1262 17.3386 9.2776 18.184C9.08891 18.2401 8.88795 18.2401 8.69926 18.184C5.89741 17.3534 1.01723 13.876 1 5.75221C1.01688 5.05019 1.41171 4.41206 2.03239 4.08364C6.36869 1.63494 8.45439 1 8.98474 1C9.51509 1 11.7657 1.67555 16.3899 4.32236C16.756 4.52867 16.9865 4.91248 16.9965 5.3326Z" stroke="#52D017" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                 <path d="M5.30664 9.63198L7.76765 12.093L12.6897 7.16113" stroke="#52D017" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>   
@@ -554,12 +559,12 @@
                                     </svg>
                                 </a> -->
                                 </div>
-                                <div class="wd-quote-btn" style="width: 400px;">
+                                <div class="wd-quote-btn" style="width: 350px;">
                                     <a href="javascript:;" class="wd-view-btn messageShow justify-content-center"
                                         data-msgkey="{{ $key }}" type="button" data-toggle="collapse"
                                         data-target="#collapse{{ $key }}" aria-expanded="true"
                                         aria-controls="collapseOne">View messages
-                                        {{-- <span class="msg_{{ $quote->thread_id ?? 0 }}">0</span> --}}
+                                        <span class="msg_{{ $quote->thread_id ?? 0 }}">0</span>
                                     </a>
                                     @if ($quote->status == 'pending' && !$hasAcceptedQuote)
                                         <a href="javascript:;"
@@ -661,8 +666,8 @@
                                                 </div>                                                --}}
                                                 <textarea class="form-control textarea" id="message"
                                                     placeholder="Type any question you have about this quote here."></textarea>
-                                                    <p class="chat-note text-left font-weight-normal position-relative" style="font-size:14px; padding-left:20px; margin-top: 5px; color:#444444;">
-                                                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="position-absolute" style="left:0; top:0;">
+                                                    <p class="chat-note text-left font-weight-light position-relative" style="font-size:14px; padding-left:20px; margin-top: 5px; color:#444444;">
+                                                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="position-absolute" style="left:0; top:-2px;">
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5631 12.2653L10.9587 4.78559C10.655 4.27279 10.1032 3.95831 9.50721 3.95831C8.91121 3.95831 8.35943 4.27279 8.05569 4.78559L3.45057 12.2653C3.10235 12.8105 3.07241 13.5003 3.37208 14.0737C3.67176 14.647 4.25525 15.0163 4.90169 15.0416H14.1119C14.7584 15.0163 15.3419 14.647 15.6416 14.0737C15.9412 13.5003 15.9113 12.8105 15.5631 12.2653Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                             <path d="M9.50682 10.2916V6.33329" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"></path>
                                                             <path d="M9.50682 12.6666V11.875" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"></path>
@@ -718,7 +723,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.6.2/tinymce.min.js"></script>
     <script>
         $(document).ready(()=>{
-            $('[data-toggle="popover"]').popover({trigger:'hover'});
+            $('[data-toggle="popover"]').popover({trigger:'click'});
         });
         function quoteChangeStatus(quote_id, status) {
             var formData = new FormData();
