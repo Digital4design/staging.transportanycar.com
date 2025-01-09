@@ -7,7 +7,7 @@
         display: none;
         padding-top: 20px;
         position: absolute;
-        width: 375px;
+        width: 300px;
         top: 37px;
         z-index: 1;
         transform: translateX(-26%);
@@ -25,7 +25,7 @@
         font-weight: 300!important; }
     .popover,
     .info_sec_details_contant {
-        max-width: 375px!important;
+        max-width: 300px!important;
         background: #fff;
         border: 1px solid #cfcfcf!important;
         padding: 20px!important;
@@ -307,6 +307,11 @@
         .verified-icon .info_sec_details:before {right: 90px;}
     }
     @media(min-width: 581px) {
+        .popover,
+    .info_sec_details_contant {max-width: 375px!important;}
+        .info_sec_details {
+            width: 375px;
+        }
         .wd-view-btn {order:1}
         .wd-accepted-btn {order: 2;}
         .delete_cross {order: 3;}
@@ -707,9 +712,9 @@
                     @endif
                 @endforeach
             </div>
-            <!-- <div>
-                    <p class="wd-view-txt">View declined, withdraw & expired quotes (5)</p>
-                </div> -->
+            <div>
+                <p class="wd-view-txt">View declined, withdraw & expired quotes (5)</p>
+            </div>
         </div>
     </section>
 @endsection
@@ -723,7 +728,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.6.2/tinymce.min.js"></script>
     <script>
         $(document).ready(()=>{
-            $('[data-toggle="popover"]').popover({trigger:'click'});
+            $('[data-toggle="popover"]').popover({trigger:'hover'});
         });
         function quoteChangeStatus(quote_id, status) {
             var formData = new FormData();
