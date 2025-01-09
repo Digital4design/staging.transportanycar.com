@@ -16,7 +16,10 @@
     .icon_hover_sec:hover .info_sec_details {
         display: block;
     }
-.popover-body{padding: 0!important; color:#777777!important;  font-family: 'Outfit', sans-serif!important;
+    .popover-body{
+        padding: 0!important;
+        color:#777777!important;
+         font-family: 'Outfit', sans-serif!important;
         font-size: 14px!important;
         font-weight: 200!important; }
     .popover,
@@ -174,8 +177,8 @@
         .verified-icon .icon_hover_sec {display: inline-block;}
         .right_mark {display: none;}
         .verified-icon .info_sec_details {
-            top: 127px;
-            transform: translateX(-50%)
+            top: 100px;
+            transform: translateX(-56%)
         }
         .verified-icon .info_sec_details:before {right:110px;}
         .info_sec_details {
@@ -269,9 +272,9 @@
     }
 
     @media(max-width: 430px) {
-        .icon_hover_sec:hover .info_sec_details {
+        /* .icon_hover_sec:hover .info_sec_details {
             transform: translateX(-50%);
-        }
+        } */
 
         /* .icon_hover_sec:hover .info_sec_details:before {
             right: 35px;
@@ -279,10 +282,13 @@
     }
 
     @media(max-width: 340px) {
-        .icon_hover_sec .info_sec_details {
+        /* .icon_hover_sec .info_sec_details {
             width: 260px;
-        }
-        
+        } */
+        .verified-icon .info_sec_details {
+        top: 120px;
+        transform: translateX(-56%);
+    }
         .icon_hover_sec .info_sec_details:before {
             right: 70px;
         }
@@ -501,16 +507,16 @@
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M16.9965 5.3326C17.1504 13.7554 12.1262 17.3386 9.2776 18.184C9.08891 18.2401 8.88795 18.2401 8.69926 18.184C5.89741 17.3534 1.01723 13.876 1 5.75221C1.01688 5.05019 1.41171 4.41206 2.03239 4.08364C6.36869 1.63494 8.45439 1 8.98474 1C9.51509 1 11.7657 1.67555 16.3899 4.32236C16.756 4.52867 16.9865 4.91248 16.9965 5.3326Z" stroke="#52D017" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                 <path d="M5.30664 9.63198L7.76765 12.093L12.6897 7.16113" stroke="#52D017" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>   
-                                            <span class="icon_hover_sec">
-                                                <a class="hover_anchor" role="button" data-toggle="popover" data-placement="top" data-content="We have verified this transport providers insurance cover and drivers license to protect you and transport vehicles safe and securely.">
+                                            <div class="icon_hover_sec">
+                                                <a class="hover_anchor">
                                                     <img src="{{ asset('assets/web/images/question.png') }}" alt="question" />
-                                                </a> 
-                                                {{-- <div class="info_sec_details" id="infos-details">
+                                                </a>
+                                                <div class="info_sec_details" id="infos-details">
                                                     <div class="info_sec_details_contant">
                                                         <p>We have verified this transport providers insurance cover and drivers license to protect you and transport vehicles safe and securely.</p>
                                                     </div>
-                                                </div> --}}
-                                            </span>                                        
+                                                </div>
+                                            </div>                                        
                                         </span>
                                         {{-- <img src="{{ asset('assets/web/images/right-mark.png') }}" class="right_mark"
                                         alt="right mark"> --}}
@@ -704,10 +710,8 @@
         type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.6.2/tinymce.min.js"></script>
     <script>
-        $(function () {
-            $('[data-toggle="popover"]').popover({
-                container: 'body'
-            });
+        $(document).ready(()=>{
+            $('[data-toggle="popover"]').popover();
         });
         function quoteChangeStatus(quote_id, status) {
             var formData = new FormData();
