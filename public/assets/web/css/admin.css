@@ -4042,7 +4042,7 @@ a.wd-leave-btn {
 .wd-quote-data .accordion .card {
   background: transparent;
   margin-bottom: 4px;
-  border: none;
+  /* border: none; */
 }
 
 .wd-quote-data .accordion .card-header {
