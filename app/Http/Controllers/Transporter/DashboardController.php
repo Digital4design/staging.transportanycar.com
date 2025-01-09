@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\App;
 use App\SaveSearch;
 use App\CompanyDetail;
 use App\Services\SmsService;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class DashboardController extends WebController
 {
@@ -643,6 +645,13 @@ class DashboardController extends WebController
                 } else {
                     return response()->json(['status' => false, 'message' => 'Failed to update preference.']);
                 }
+            } elseif ($request->email_type == 'new_job_alert') {
+                $status = $user->update(['new_job_alert' => $request->value]);
+                if ($status) {
+                    return response()->json(['status' => true, 'message' => 'Preference updated successfully.']);
+                } else {
+                    return response()->json(['status' => false, 'message' => 'Failed to update preference.']);
+                }
             } else {
                 return response()->json(['status' => false, 'message' => 'Invalid email type.']);
             }
@@ -1041,27 +1050,23 @@ class DashboardController extends WebController
     //d4dDeveloper-r 07/10/2024
     public function saveSearch(Request $request)
     {
-        // return $request->all();
         try {
-            // $data = [
-            //     "user_id" => auth()->user()->id,
-            //     "search_name" => $request->search_name,
-            //     "pick_area" => $request->pick_area,
-            //     "drop_area" => $request->drop_area,
-            //     "email_notification" => $request->emailNtf, // Convert to integer (1 or 0)
-            // ];
-
-            // $saveSearch = SaveSearch::updateOrCreate(
-            //     [
-            //         'user_id' => $data['user_id'],
-            //         'pick_area' => $data['pick_area'],
-            //         'drop_area' => $data['drop_area'],
-            //         'email_notification' => '1'
-            //     ],
-            //     $data // The data to be updated or inserted
-            // );
-            // Fetch coordinates for pickup and drop areas using Google Maps API
-            // Fetch coordinates for pickup area using Google Maps API
+            $validator = Validator::make($request->all(), [
+                'pick_area' => [
+                    'required',
+                    Rule::unique('save_searches')->where(function ($query) use ($request) {
+                        $query->where('drop_area', $request->drop_area)
+                              ->where('user_id', Auth::id());
+                    }),
+                ],
+                'drop_area' => 'required',
+            ], [
+                'pick_area.unique' => 'The combination of pick area and drop area already exists for your account.',
+            ]);
+            
+            if ($validator->fails()) {
+                return response(["success" => false, "message" => "The combination of pick area and drop area already exists for your account.", "data" => $validator->errors()]);
+            }
             $pickupCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
                 'address' => $request->pick_area,
                 'key' => config('constants.google_map_key'),
@@ -1070,8 +1075,7 @@ class DashboardController extends WebController
             // Extract pickup coordinates
             $pickupLat = $pickupCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
             $pickupLng = $pickupCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
-            // \Log::info('lggggggg: ' . $pickupLng);
-            // Validate if coordinates were fetched successfully for pickup
+            
             if (!$pickupLat || !$pickupLng) {
                 return response()->json(['success' => false, 'message' => 'Failed to fetch pickup coordinates.']);
             }
@@ -1096,22 +1100,7 @@ class DashboardController extends WebController
                     return response()->json(['success' => false, 'message' => 'Failed to fetch drop coordinates.']);
                 }
             }
-
-            // Prepare data for saving
-            // $data = [
-            //     "user_id" => auth()->user()->id,
-            //     "search_name" => $request->search_name,
-            //     "pick_area" => $request->pick_area,
-            //     "drop_area" => $request->drop_area ?? "Anywhere",
-            //     "pick_lat" => $pickupLat,    // Use coordinates from Google API
-            //     "pick_lng" => $pickupLng,    // Use coordinates from Google API
-            //     "drop_lat" => $dropLat,      // Use coordinates from Google API or default
-            //     "drop_lng" => $dropLng,      // Use coordinates from Google API or default
-            //     "email_notification" => $request->emailNtf, // Convert to integer (1 or 0)
-            // ];
-
-
-            // Save or update the search record
+            
             $saveSearch = SaveSearch::Create(
                 [
                     "user_id" => auth()->user()->id,
@@ -1125,7 +1114,6 @@ class DashboardController extends WebController
                     "email_notification" => $request->emailNtf, // Convert to integer (1 or 0)
                 ]
             );
-
 
             return response(["success" => true, "message" => "Search saved successfully!", "data" => []]);
         } catch (\Exception $ex) {
@@ -1406,6 +1394,7 @@ class DashboardController extends WebController
                 'summary_of_leads' => 'nullable|boolean',
                 'outbid_email_unsubscribe' => 'nullable|boolean',
                 'saved_search_alerts' => 'nullable|boolean',
+                'new_job_alert' => 'nullable|boolean',
             ]);
 
             // Update user preferences
@@ -1414,6 +1403,8 @@ class DashboardController extends WebController
                 $user->summary_of_leads = $request->input('summary_of_leads', 0);
                 $user->outbid_email_unsubscribe = $request->input('outbid_email_unsubscribe', 0);
                 $user->job_email_preference = $request->input('saved_search_alerts', 0);
+                $user->new_job_alert = $request->input('new_job_alert', 0);
+
                 $user->save();
 
                 return response()->json(['success' => true, 'message' => 'Preferences updated successfully.']);

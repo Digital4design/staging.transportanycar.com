@@ -4009,7 +4009,7 @@ a.wd-leave-btn {
 
 .wd-quote-data {
   border-radius: 10px;
-  border: 1px solid #BABABA;
+  /* border: 1px solid #BABABA; */
   background: #f9f9f9;
   margin: 24px 0 0;
 }
@@ -4042,7 +4042,7 @@ a.wd-leave-btn {
 .wd-quote-data .accordion .card {
   background: transparent;
   margin-bottom: 4px;
-  border: none;
+  /* border: none; */
 }
 
 .wd-quote-data .accordion .card-header {
@@ -4069,7 +4069,7 @@ a.wd-leave-btn {
 }
 
 .wd-quote-data .accordion .card-body {
-  padding: 49px 28px 30px 30px;
+  padding: 20px 28px 30px 30px;
 }
 
 .wd-quote-form .form-group {
@@ -4313,7 +4313,7 @@ a.wd-leave-btn {
 }
 
 .wd-accepted-btn svg {
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 .wd-accepted-btn:hover {
@@ -4324,8 +4324,12 @@ a.wd-leave-btn {
   font-size: 16px;
   font-weight: 400;
   color: #0356D6;
-  padding: 16px 29px 15px 16px;
+  padding: 15px 29px 16px 30px;
   margin: 0;
+  line-height: 21px;
+  border-radius: 0 0 10px 10px;
+  background-color: #ffffff;
+  margin-bottom: 3px;
 }
 
 .wd-quote-photo {
@@ -6902,7 +6906,7 @@ div#spam-banner button.btn {
 
   .wd-quote-txt p {
     padding: 14px 28px;
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .wd-quote-data .card_lft {

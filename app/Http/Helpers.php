@@ -957,20 +957,35 @@ if (!function_exists('calculateCustomerQuote')) {
         // } else {
         //     $markup = $offer * 0.25;
         // }
+        // if ($offer <= 100) {
+        //     $markup = max($offer * 0.30, 15);
+        // } elseif ($offer <= 200) {
+        //     $markup = $offer * 0.25;
+        // } elseif ($offer <= 250) {
+        //     $markup = $offer * 0.20;
+        // } elseif ($offer <= 300) {
+        //     $markup = $offer * 0.18;
+        // } elseif ($offer <= 400) {
+        //     $markup = $offer * 0.15;
+        // } elseif ($offer <= 500) {
+        //     $markup = $offer * 0.12;
+        // } else {
+        //     $markup = $offer * 0.10;
+        // }
         if ($offer <= 100) {
-            $markup = max($offer * 0.30, 15);
+            $markup = max($offer * 0.15, 15); // Minimum £15 applies
         } elseif ($offer <= 200) {
-            $markup = $offer * 0.25;
+            $markup = max($offer * 0.08, 15); // Minimum £15 applies
         } elseif ($offer <= 250) {
-            $markup = $offer * 0.20;
+            $markup = max($offer * 0.07, 15); // Minimum £15 applies
         } elseif ($offer <= 300) {
-            $markup = $offer * 0.18;
+            $markup = max($offer * 0.06, 15); // Minimum £15 applies
         } elseif ($offer <= 400) {
-            $markup = $offer * 0.15;
+            $markup = max($offer * 0.05, 15); // Minimum £15 applies
         } elseif ($offer <= 500) {
-            $markup = $offer * 0.12;
+            $markup = max($offer * 0.04, 15); // Minimum £15 applies
         } else {
-            $markup = $offer * 0.10;
+            $markup = max($offer * 0.03, 15); // Minimum £15 applies
         }
 
         $customerQuote = $offer + $markup;
