@@ -216,7 +216,6 @@
             margin-bottom: 25px;
         }
         .accordion .card:not(:last-child) {margin-bottom: 24px!important;}
-        .wd-quote-data .accordion .card:first-child {border-radius: 0px 0 10px 10px !important;}           
         .wd-quote-data .accordion .card {            
             margin-bottom: 0!important;
             box-shadow: 0px 6px 3px 0px #8b8b8b54;
@@ -224,6 +223,7 @@
             border-radius: 10px !important;
             overflow: hidden !important;
         }
+        .wd-quote-data .accordion .card:first-child {border-radius: 0px 0 10px 10px !important; margin-bottom: 25px!important;}           
         .wd-quote-area .wd-quote-data .wd-quote-txt {background: #ffffff; border: 1px solid #CFCFCF; border-radius: 10px 10px 0 0; border-bottom:none;}
         .wd-quote-area .wd-quote-data .wd-quote-txt p {padding-left: 45px; position: relative; text-align: left; line-height:14px; padding-top: 10px; padding-bottom: 10px;}
         .wd-quote-area .wd-quote-data .wd-quote-txt p svg {position: absolute; left:15px; top:0; bottom:0; margin: auto;}
