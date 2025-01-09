@@ -125,6 +125,7 @@
     .wd-quote-msg {padding-top: 15px!important;}
     .wd-quote-msg b{font-weight: 500;}
     @media screen and (min-width: 581px) and (max-width: 1366px) {
+        .wd-quote-data .accordion .card {border: none!important;}
         .card_lft .rating-star li:last-child span { font-size: 12px!important;line-height: 16px!important;}
         .wd-quote-data .accordion .card-header {flex-direction: column!important; padding-top: 19px!important; padding-bottom: 22px!important;}
         .wd-quote-data .card_lft,
@@ -219,7 +220,7 @@
         .wd-quote-data .accordion .card {            
             margin-bottom: 0!important;
             box-shadow: 0px 6px 3px 0px #8b8b8b54;
-            border-bottom: 1px solid #CFCFCF!important;
+            border: 1px solid #CFCFCF!important;
             border-radius: 10px !important;
             overflow: hidden !important;
         }
