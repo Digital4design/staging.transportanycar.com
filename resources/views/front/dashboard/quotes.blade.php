@@ -142,6 +142,11 @@
     }
     @media(max-width: 580px) {
         /* New Code starts */
+        .below-content {
+            display: none;
+            padding: 15px 15px 16px!important;
+            font-size: 14px!important;
+        }
         .card .card-header .wd-quote-btn .wd-view-btn span {display: none;}
         .wd-quote-form p {
             font-size: 10px!important;
@@ -205,9 +210,17 @@
             border: 1px solid #CFCFCF;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0px 6px 3px 0px #8b8b8b54;
-            border-bottom: 1px solid #CFCFCF;
+            /* box-shadow: 0px 6px 3px 0px #8b8b8b54;
+            border-bottom: 1px solid #CFCFCF; */
             margin-bottom: 25px;
+        }
+        .accordion .card:not(:last-child) {margin-bottom: 24px!important;}
+        .accordion .card {            
+            margin-bottom: 0!important;
+            box-shadow: 0px 6px 3px 0px #8b8b8b54;
+            border-bottom: 1px solid #CFCFCF!important;
+            border-radius: 10px !important;
+            overflow: hidden !important;
         }
         .wd-quote-area .wd-quote-data .wd-quote-txt {background: #ffffff; border-bottom: 1px solid #CFCFCF;}
         .wd-quote-area .wd-quote-data .wd-quote-txt p {padding-left: 45px; position: relative; text-align: left; line-height:14px; padding-top: 10px; padding-bottom: 10px;}
@@ -713,7 +726,7 @@
                 @endforeach
             </div>
             <div>
-                <p class="wd-view-txt">View declined, withdraw & expired quotes (5)</p>
+                <p class="wd-view-txt below-content">View declined, withdraw & expired quotes (5)</p>
             </div>
         </div>
     </section>
