@@ -101,8 +101,8 @@
         height: 12px;
     }
     .wd-quote-head {padding-left: 27px; padding-right: 29px;}
-    .wd-view-btn {background: #9c9c9c!important; order:1}
-    .wd-accepted-btn {order: 2;}
+    .wd-view-btn {background: #9c9c9c!important; order:2}
+    .wd-accepted-btn {order: 1;}
     .verified-icon .icon_hover_sec {display: none;}
     .wd-quote-area .wd-quote-data .wd-quote-txt p {padding-left: 45px; padding-right: 45px;}
     @media screen and (min-width: 581px) and (max-width: 1366px) {
