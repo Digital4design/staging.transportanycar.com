@@ -524,6 +524,8 @@ class DashboardController extends WebController
                 echo "Failed to create thread.";
             }
         }
+        // dd($quote);
+        // return;
         try {
             if ($quote->quote->user->job_email_preference) {
                 $maildata['email'] = $quote->quote->user->email;

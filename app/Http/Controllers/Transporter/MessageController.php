@@ -55,6 +55,8 @@ class MessageController extends WebController
 
     public function store(Request $request, $id)
     {
+        // dd("yesssssssssssssssss");
+        // return ;
         $request->validate([
             'message' => [
                 'required',
@@ -124,7 +126,7 @@ class MessageController extends WebController
                     $maildata['type'] = 'user';
                     $maildata['url'] =  route('front.manage_notification');
                     
-                    $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
+                    $htmlContent = view('mail.General.new-message-received', ['data' => $maildata,'quotes_id' => $from_quote_id, 'thread_id' => $thread_id])->render();
                     $this->emailService->sendEmail($email_to, $htmlContent,  $subject);
 
                     // Call create_notification to notify the user
