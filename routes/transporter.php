@@ -95,3 +95,6 @@ Route::group(['namespace' => 'Api\V1'], function () {
 // Route::get('/email-template', function () {
 //     return view('mail.General.transporterEmailVerify');
 // })->name('mail.General.transporterEmailVerify');
+Route::get('/job_infromation', function () {
+    return view('transporter.dashboard.job_infromation');
+});
