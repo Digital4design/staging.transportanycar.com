@@ -2,7 +2,155 @@
 .btm_footer {
     padding-right: 200px;
 }
+/********** */
+/*----- HEADER -----*/
+.hidden {
+	display: none;
+}
+
+.menu-item img{
+	display: none;
+}
+/*----- FOOTER -----*/
+footer{
+	background: #000F26;
+	color: #FFFFFF;
+	display: block;
+	position: relative;
+	padding: 50px 0 30px;
+}
+footer p{
+	font-size: 16px;
+    font-weight: 500;
+    line-height: 1.8;
+}
+footer h6{
+	font-size: 16px;
+	font-weight: 500;
+	color: #008ED4;
+	display: block;
+	margin-bottom: 1rem;
+}
+.footer_logo {    
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 200px;
+}
+.ftmenu_list li a {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.ftmenu_list li a svg {
+    margin-right: 10px;
+    width: 22px;
+    height: 22px;
+}
+.ftmenu_list li a p {
+    width: 100%;
+    margin-bottom: 0;
+}
+.social_list li a {
+    background: #008ED4;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.social_list li a:hover{border: 1px solid #008ED4;}
+.social_list {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+.social_list li {
+    margin-right: 10px;
+}
+.social_list li:last-child {
+    margin-right: 0;
+}
+#res_logo{display: none;}
+
+@media only screen and (max-width: 991px)
+{
+    .menu-item.active a{background: #008DD4 !important;color: #fff !important;font-weight: 400 !important;border-color: #008DD4 !important;}
+	
+	.menu-item img{display: inline-block;margin-right: 10px;margin-top: -5px;}
+	
+	#res_logo img {
+        max-width: 190px;
+        width: 100%;
+    }
+	#res_logo img{padding-left: 15px;}
+    footer{padding: 30px 0;}
+    .headitemshow .brand {
+        position: relative;
+        z-index: 1111;
+    }    
+    #footer .row .col-lg-4.col-md-4 {
+        margin-top: 1rem;
+    }
+}
+/* new scope 24-1-2024 */
+.teleph_text {
+    background: var(--Blue-linear, linear-gradient(273deg, #018ED5 1.21%, #0356D6 98.03%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 21px !important;
+    font-weight: 400 !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 !important;
+}
+.last_menuitem {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+
+
+.menu_transport_company {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    align-items: center;
+    padding: 20px;
+    display: none;
+}
+.menu_transport_company a.getqt_btnincld {
+    border-radius: 5px;
+    font-size: 16px !important;
+    padding: 8px 17px !IMPORTANT;
+    max-width: max-content !important;
+    margin-right: 0 !important;
+}
+.menu_transport_company p {
+    margin-bottom: 0;
+    font-size: 18px;
+    color: #000;
+}
+
+@media only screen and (max-width: 575px){
+    .menu_transport_company {
+        display: flex;
+        width: 370px;
+        padding: 20px 15px;
+    }
+}
+/********** */
 @media screen and (max-width: 767px) {
+    .footer_logo {    
+        position: relative;
+        margin-top: 25px;
+    }
     .btm_footer {
         padding-right: 15px;
     }

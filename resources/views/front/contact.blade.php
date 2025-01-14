@@ -206,6 +206,7 @@ button.wd-login-btn {
             </div>
         </section>
     </main>
+    @include('layouts.web.footer')
 @endsection
 
 @section('script')
