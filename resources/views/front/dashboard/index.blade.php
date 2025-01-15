@@ -552,6 +552,7 @@
             </div>
         </div>
     </section>
+    @include('layouts.web.footer')
 
     <!-- modal -->
     <div class="modal mark_bx fade" id="mark_complete" tabindex="-1" role="dialog"

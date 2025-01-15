@@ -248,6 +248,7 @@
             </div>
         </div>
     </section>
+    @include('layouts.web.footer')
 @endsection
 
 @section('script')
