@@ -39,6 +39,7 @@ Route::group(['as' => 'transporter.'], function () {
         Route::get('feedback', 'DashboardController@feedback')->name('feedback');
         // Route::get('current-jobs', 'DashboardController@currentJobs')->name('current_jobs');
         Route::get('current-jobs/{id?}', 'DashboardController@currentJobs')->name('current_jobs');
+        Route::get('job-info/{id?}', 'DashboardController@jobInformation')->name('job_information');
         Route::get('new-jobs', 'DashboardController@newJobs')->name('new_jobs');
         Route::get('new-jobs-new', 'DashboardController@newJobsNew')->name('new_jobs_new');
         Route::post('submit-offer', 'DashboardController@submitOffer')->name('submit_offer');
@@ -92,6 +93,6 @@ Route::group(['namespace' => 'Api\V1'], function () {
     Route::post('verify-email', 'MailController@transporterEmailVerify')->name('sendVerifyEmail');
     Route::get('verify-email/{token}', 'MailController@verifyEmail')->name('verify.email');
 });
-// Route::get('/email-template', function () {
-//     return view('mail.General.transporterEmailVerify');
-// })->name('mail.General.transporterEmailVerify');
+Route::get('/job_infromation', function () {
+    return view('transporter.dashboard.job_infromation');
+});

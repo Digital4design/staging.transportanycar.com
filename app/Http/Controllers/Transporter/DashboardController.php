@@ -404,7 +404,6 @@ class DashboardController extends WebController
         return view('transporter.dashboard.new_jobs', ['quotes' => $quotes]);
     }
 
-    //  d4d developer - k
     public function newJobsNew()
     {
         $user_data = \Auth::guard('transporter')->user();
@@ -435,6 +434,7 @@ class DashboardController extends WebController
         return view('transporter.dashboard.new_jobs_new', ['quotes' => $quotes, 'documentStatus' => $document_status]);
     }
     // end d4d developer - k
+
 
     // d4d developer - k
     public function submitOffer(Request $request)
@@ -1415,6 +1415,68 @@ class DashboardController extends WebController
                 Log::error('Error updating preferences: ' . $e->getMessage());
                 return response()->json(['success' => false, 'message' => 'Could not update preferences.'], 500);
             }
+        } catch (\Exception $ex) {
+            return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
+        }
+    }
+    public function jobInformation(Request $request,$id)
+    {
+        try {
+            // return $id;+
+            $user_data = \Auth::guard('transporter')->user();
+            $quote = UserQuote::with([
+                'watchlist',
+                'quoteByTransporter' => function ($query) use ($user_data) {
+                    $query->where('user_id', $user_data->id); // Assuming 'transporter_id' is the field
+                }
+            ])->where(function ($query) {
+                    $query->where('status', 'pending')
+                        ->orWhere('status', 'approved');
+                })
+                ->whereDate('created_at', '>=', now()->subDays(10))
+                ->addSelect([
+                    'transporter_quotes_count' => QuoteByTransporter::selectRaw('COUNT(*)')
+                        ->whereColumn('user_quote_id', 'user_quotes.id'),
+                    'lowest_bid' => QuoteByTransporter::selectRaw('MIN(CAST(transporter_payment AS UNSIGNED))')
+                        ->whereColumn('user_quote_id', 'user_quotes.id')
+                ])
+                ->find($id);
+                // return $quote;
+            
+                $quotes = QuoteByTransporter::with ('getTransporters')->where('user_quote_id', $id)
+                ->orderByRaw('CAST(price AS UNSIGNED) ASC')
+                ->get();
+                // return $quote;
+        
+                $quotes = $quotes->map(function ($quote) {
+                    $my_quotes = QuoteByTransporter::where('user_id', $quote->user_id)->pluck('id');
+                    $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+                        ->whereNotNull('rating')
+                        ->avg('rating');
+                    $percentage = $rating_average !== null ? ($rating_average / 5) * 100 : 0;
+                    $quote->rating_average = $rating_average;
+                    $quote->percentage = $percentage;
+                    return $quote;
+                });
+        // return $quotes;
+             
+               
+                // Update quotes with thread_id if the thread exists
+                $threads = Thread::with('messages')->where(['user_id' => $quote->user_id, 'user_quote_id' => $id])->get();
+                // return $threads;
+                $threadMap = $threads->pluck('id', 'friend_id');
+                $quotes->map(function ($quote) use ($threadMap) {
+                    // Add thread_id only if a matching thread exists
+                    if (isset($threadMap[$quote->user_id])) {
+                        $quote->thread_id = $threadMap[$quote->user_id];
+                    } else {
+                        $quote->thread_id = null; // Set to null or handle as needed if no thread matches
+                    }
+                }); 
+                return $quotes;
+                // return $threadMap;
+                return view('transporter.dashboard.job_infromation', ['quotes'=>$quotes]);
+            return $quotes;
         } catch (\Exception $ex) {
             return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
         }

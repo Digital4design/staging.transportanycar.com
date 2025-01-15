@@ -921,8 +921,8 @@
                     getChatHistory(url, id);
                 }
 
-                {{-- var url = "{{route('transporter.message.history',($latest_chat->id) ?? 0)}}" --}}
-                {{-- getChatHistory(url,$(".get-chat-history")[0]); --}}
+                // {{-- var url = "{{route('transporter.message.history',($latest_chat->id) ?? 0)}}" --}}
+                // {{-- getChatHistory(url,$(".get-chat-history")[0]); --}}
             }
 
             $('#message').on('keydown paste input', function(event) {
@@ -942,6 +942,7 @@
             });
         });
         $('.messageShow').on('click', function() {
+            alart('yesssssssssss');
             var id = $(this).attr('data-msgkey');
             var selected_chat_id = $("#user_current_chat_id_" + id).val();
             if (selected_chat_id) {

@@ -2503,7 +2503,6 @@
             });
         }
 
-
         // Listen for the quote modal to be hidden
         $('#quote').on('hidden.bs.modal', function(e) {
             // Clear the z-index
@@ -2525,6 +2524,18 @@
             myFunction(x);
         });
 
+        var jobInfoUrl = "{{ route('transporter.job_information', ':id') }}";
+
+        $(document).on('click', '.car-row', function() {
+               
+               var carId = $(this).data('car-id');
+               if (carId) {
+           var url = jobInfoUrl.replace(':id', carId); // Replace placeholder with actual ID
+           window.location.href = url; // Redirect to the URL
+       } else {
+           console.log('Job ID is missing');
+       }
+    });
 
         $(document).ready(function() {
             $("#jobsrch_form_blog").validate({
@@ -2554,156 +2565,159 @@
                     $(element).closest('.form-group').removeClass('error-margin');
                 }
             });
-            $(document).on('click', '.car-row', function() {
+
+
+            // $(document).on('click', '.car-row', function() {
                
-                var carId = $(this).data('car-id');
-                var carData = carDetails.data.find(function(car) {
-                    return car.id == carId;
-                });
-                if (carData) {
-                    let makeAndModel = `${carData.vehicle_make} ${carData.vehicle_model}`;
-                    if (carData.vehicle_make_1 && carData.vehicle_model_1) {
-                        makeAndModel += ` / ${carData.vehicle_make_1} ${carData.vehicle_model_1}`;
-                    }
-                    let startsDrives = carData.starts_drives == 0 ? 'No' : 'Yes';
-                    if (carData.starts_drives_1 !== null) {
-                        startsDrives += ` / ${carData.starts_drives_1 == 0 ? 'No' : 'Yes'}`;
-                    }
-                    var createdAt = new Date(carData.created_at);
+            //     var carId = $(this).data('car-id');
+            //     var carData = carDetails.data.find(function(car) {
+            //         return car.id == carId;
+            //     });
+            //     if (carData) {
+            //         let makeAndModel = `${carData.vehicle_make} ${carData.vehicle_model}`;
+            //         if (carData.vehicle_make_1 && carData.vehicle_model_1) {
+            //             makeAndModel += ` / ${carData.vehicle_make_1} ${carData.vehicle_model_1}`;
+            //         }
+            //         let startsDrives = carData.starts_drives == 0 ? 'No' : 'Yes';
+            //         if (carData.starts_drives_1 !== null) {
+            //             startsDrives += ` / ${carData.starts_drives_1 == 0 ? 'No' : 'Yes'}`;
+            //         }
+            //         var createdAt = new Date(carData.created_at);
 
-                    // Add 10 days to the created_at date
-                    createdAt.setDate(createdAt.getDate() + 10);
+            //         // Add 10 days to the created_at date
+            //         createdAt.setDate(createdAt.getDate() + 10);
 
-                    // Extract the day, month, and last two digits of the year
-                    var dd = String(createdAt.getDate()).padStart(2, '0'); // Day with leading zero
-                    var mm = String(createdAt.getMonth() + 1).padStart(2, '0'); // Month with leading zero
-                    var yy = String(createdAt.getFullYear()).slice(-2); // Last two digits of the year
+            //         // Extract the day, month, and last two digits of the year
+            //         var dd = String(createdAt.getDate()).padStart(2, '0'); // Day with leading zero
+            //         var mm = String(createdAt.getMonth() + 1).padStart(2, '0'); // Month with leading zero
+            //         var yy = String(createdAt.getFullYear()).slice(-2); // Last two digits of the year
 
-                    // Format the date as dd//mm/yy
-                    var formattedDate = `${dd}//${mm}//${yy}`;
+            //         // Format the date as dd//mm/yy
+            //         var formattedDate = `${dd}//${mm}//${yy}`;
 
-                    var switch_custom = '';
-                    if (carData?.quote_by_transporter) {
-                        switch_custom = `<a href="javascript:;" onclick="share_edit_quote('${carData.id}');" class="make_offer_btn checkStatus">Edit bid</a>`
-                    } else {
-                        switch_custom = ` <a href="javascript:;" onclick="share_give_quote(${carData.id});" class="make_offer_btn checkStatus">Place bid</a>`
-                    }
+            //         var switch_custom = '';
+            //         if (carData?.quote_by_transporter) {
+            //             switch_custom = `<a href="javascript:;" onclick="share_edit_quote('${carData.id}');" class="make_offer_btn checkStatus">Edit bid</a>`
+            //         } else {
+            //             switch_custom = ` <a href="javascript:;" onclick="share_give_quote(${carData.id});" class="make_offer_btn checkStatus">Place bid</a>`
+            //         }
 
-                    // Dynamically update modal body content
-                    var modalBodyContent = `                    
-                    <div class="jobsrch_box">
-                        <div class="row">                           
-                            <div class="col-lg-6">
-                                <div class="jobsrch_top_box position-relative ddd">
-                                    ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
-                                        <div>
-                                            <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
-                                        </div>
-                                        ` : `
-                                            <div class="job_se_sec slider">
-                                                <div>
-                                                    <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
-                                                </div>
-                                                ${carData.image_1 ? `
-                                                    <div>
-                                                        <img src="/${carData.image_1}" class="vehicle_image" alt="Vehicle Image" />
-                                                    </div>
-                                                ` : `
-                                                    <div>
-                                                        <img src="/uploads/no_car_image.png" class="vehicle_image" alt="No Image Available" />
-                                                    </div>
-                                                `}
-                                            </div>
-                                            <div class="custom-navigation">
-                                                <span class="current-slide">1</span> of <span class="total-slides">2</span>
-                                            </div>
-                                    `}                                   
-                                </div>
+            //         // Dynamically update modal body content
+            //         var modalBodyContent = `                    
+            //         <div class="jobsrch_box">
+            //             <div class="row">                           
+            //                 <div class="col-lg-6">
+            //                     <div class="jobsrch_top_box position-relative ddd">
+            //                         ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
+            //                             <div>
+            //                                 <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+            //                             </div>
+            //                             ` : `
+            //                                 <div class="job_se_sec slider">
+            //                                     <div>
+            //                                         <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+            //                                     </div>
+            //                                     ${carData.image_1 ? `
+            //                                         <div>
+            //                                             <img src="/${carData.image_1}" class="vehicle_image" alt="Vehicle Image" />
+            //                                         </div>
+            //                                     ` : `
+            //                                         <div>
+            //                                             <img src="/uploads/no_car_image.png" class="vehicle_image" alt="No Image Available" />
+            //                                         </div>
+            //                                     `}
+            //                                 </div>
+            //                                 <div class="custom-navigation">
+            //                                     <span class="current-slide">1</span> of <span class="total-slides">2</span>
+            //                                 </div>
+            //                         `}                                   
+            //                     </div>
                                 
-                                <div class="btnCustom">${switch_custom}</div>
-                                <div class="wishList-bidInfo">
-                                    <div class="wishListBtn">
-                                         <a href="javascript:;" class="btn"
-                                            onclick="addToWatchlist('${carData.id}');"
-                                            style="margin-left: auto;">
-                                                Add to watchlist
-                                        </a>
-                                    </div>
-                                    <div class="bidTnfo">
-                                        <p class="info">Current lowest bid: <span class="green">£${carData.lowest_bid  ?? 0}</span></p>
-                                        <p class="info">Transporters bidding: <span class="blue">${carData.transporter_quotes_count}</span></p>
-                                    </div>
-                                </div>
+            //                     <div class="btnCustom">${switch_custom}</div>
+            //                     <div class="wishList-bidInfo">
+            //                         <div class="wishListBtn">
+            //                              <a href="javascript:;" class="btn"
+            //                                 onclick="addToWatchlist('${carData.id}');"
+            //                                 style="margin-left: auto;">
+            //                                     Add to watchlist
+            //                             </a>
+            //                         </div>
+            //                         <div class="bidTnfo">
+            //                             <p class="info">Current lowest bid: <span class="green">£${carData.lowest_bid  ?? 0}</span></p>
+            //                             <p class="info">Transporters bidding: <span class="blue">${carData.transporter_quotes_count}</span></p>
+            //                         </div>
+            //                     </div>
                            
-                                <ul class="jobsrch_info_list">
-                                    <li>
-                                        <div class="jpbsrch_inner">
-                                            <small>Make & model:</small>
-                                        </div>
-                                        <span>${makeAndModel}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                           
-                                            <small>Pick-up area:</small>
-                                        </div>
-                                        <span>${carData.pickup_postcode ? formatAddress(carData.pickup_postcode) : '-'}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                            
-                                            <small>Drop-off area:</small>
-                                        </div>
-                                        <span>${carData.drop_postcode ? formatAddress(carData.drop_postcode) : '-'}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                           
-                                            <small>Delivery date:</small>
-                                        </div>
-                                        <span>${carData.delivery_timeframe_from ? formatCustomDate(carData.delivery_timeframe_from) : carData.delivery_timeframe}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                            
-                                            <small>Starts & drives:</small>
-                                        </div>
-                                        <span>${startsDrives}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                            
-                                            <small>Delivery type:</small>
-                                        </div>
-                                        <span>${carData.how_moved}</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="jobsrch_right_box">
-                                    <h4 class="distance_text">Journey Distance: <b>${carData.distance} miles</b> <strong>(${carData.duration})</strong></h4> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-                    $('#carDetailsModalBody').html(modalBodyContent);
-                }
-                $('#expiry_date').html(`<p>Expiry date: ${formattedDate}</p>`);
-                $('#carDetailsModal').modal('show');
+            //                     <ul class="jobsrch_info_list">
+            //                         <li>
+            //                             <div class="jpbsrch_inner">
+            //                                 <small>Make & model:</small>
+            //                             </div>
+            //                             <span>${makeAndModel}</span>
+            //                         </li>
+            //                         <li>
+            //                             <div class="jpbsrch_inner">                                           
+            //                                 <small>Pick-up area:</small>
+            //                             </div>
+            //                             <span>${carData.pickup_postcode ? formatAddress(carData.pickup_postcode) : '-'}</span>
+            //                         </li>
+            //                         <li>
+            //                             <div class="jpbsrch_inner">                                            
+            //                                 <small>Drop-off area:</small>
+            //                             </div>
+            //                             <span>${carData.drop_postcode ? formatAddress(carData.drop_postcode) : '-'}</span>
+            //                         </li>
+            //                         <li>
+            //                             <div class="jpbsrch_inner">                                           
+            //                                 <small>Delivery date:</small>
+            //                             </div>
+            //                             <span>${carData.delivery_timeframe_from ? formatCustomDate(carData.delivery_timeframe_from) : carData.delivery_timeframe}</span>
+            //                         </li>
+            //                         <li>
+            //                             <div class="jpbsrch_inner">                                            
+            //                                 <small>Starts & drives:</small>
+            //                             </div>
+            //                             <span>${startsDrives}</span>
+            //                         </li>
+            //                         <li>
+            //                             <div class="jpbsrch_inner">                                            
+            //                                 <small>Delivery type:</small>
+            //                             </div>
+            //                             <span>${carData.how_moved}</span>
+            //                         </li>
+            //                     </ul>
+            //                 </div>
+            //                 <div class="col-lg-6">
+            //                     <div class="jobsrch_right_box">
+            //                         <h4 class="distance_text">Journey Distance: <b>${carData.distance} miles</b> <strong>(${carData.duration})</strong></h4> 
+            //                     </div>
+            //                 </div>
+            //             </div>
+            //         </div>`;
+            //         $('#carDetailsModalBody').html(modalBodyContent);
+            //     }
+            //     $('#expiry_date').html(`<p>Expiry date: ${formattedDate}</p>`);
+            //     $('#carDetailsModal').modal('show');
                 
                 
-                setTimeout(function() {
-                var $slider = $('.slider');
-                $slider.slick({
-                    infinite: false,
-                    speed: 300, 
-                    slidesToShow: 1,
-                    adaptiveHeight: true,
-                    prevArrow: '<div class="slick-prev"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.0756 16.5115L1.85822 10.7965C1.31976 10.4441 1 9.87387 1 9.26607C1 8.65827 1.31976 8.08803 1.85822 7.73561L10.0756 1.48823C10.7708 0.976677 11.7151 0.857068 12.5347 1.17696C13.3543 1.49685 13.917 2.20438 14 3.01972V14.984L14 14.984C13.9156 15.7986 13.3523 16.5049 12.533 16.8238C11.7136 17.1427 10.7702 17.0228 10.0756 16.5115Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>',
-                    nextArrow: '<div class="slick-next"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.9244 1.48852L13.1418 7.20349C13.6802 7.5559 14 8.12613 14 8.73393C14 9.34173 13.6802 9.91197 13.1418 10.2644L4.9244 16.5118C4.22923 17.0233 3.28491 17.1429 2.46532 16.823C1.64573 16.5032 1.08303 15.7956 1 14.9803L1 3.01597C1.08445 2.20143 1.6477 1.49505 2.46703 1.17615C3.28636 0.857255 4.22984 0.977185 4.9244 1.48852Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
-                });
-                $slider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide) {
-                    var i = (currentSlide ? currentSlide : 0) + 1;
-                    $('.current-slide').text(i);
-                    $('.total-slides').text(slick.slideCount);
-                });
-            },250)
-            });
+            //     setTimeout(function() {
+            //     var $slider = $('.slider');
+            //     $slider.slick({
+            //         infinite: false,
+            //         speed: 300, 
+            //         slidesToShow: 1,
+            //         adaptiveHeight: true,
+            //         prevArrow: '<div class="slick-prev"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.0756 16.5115L1.85822 10.7965C1.31976 10.4441 1 9.87387 1 9.26607C1 8.65827 1.31976 8.08803 1.85822 7.73561L10.0756 1.48823C10.7708 0.976677 11.7151 0.857068 12.5347 1.17696C13.3543 1.49685 13.917 2.20438 14 3.01972V14.984L14 14.984C13.9156 15.7986 13.3523 16.5049 12.533 16.8238C11.7136 17.1427 10.7702 17.0228 10.0756 16.5115Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>',
+            //         nextArrow: '<div class="slick-next"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.9244 1.48852L13.1418 7.20349C13.6802 7.5559 14 8.12613 14 8.73393C14 9.34173 13.6802 9.91197 13.1418 10.2644L4.9244 16.5118C4.22923 17.0233 3.28491 17.1429 2.46532 16.823C1.64573 16.5032 1.08303 15.7956 1 14.9803L1 3.01597C1.08445 2.20143 1.6477 1.49505 2.46703 1.17615C3.28636 0.857255 4.22984 0.977185 4.9244 1.48852Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+            //     });
+            //     $slider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide) {
+            //         var i = (currentSlide ? currentSlide : 0) + 1;
+            //         $('.current-slide').text(i);
+            //         $('.total-slides').text(slick.slideCount);
+            //     });
+            // },250)
+            // });
+
             $('#backButton').on('click', function() {
                 $('#carDetailsModal').modal('hide');
             });
