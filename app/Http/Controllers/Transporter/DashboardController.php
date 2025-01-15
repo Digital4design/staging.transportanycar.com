@@ -1442,6 +1442,7 @@ class DashboardController extends WebController
                 ])
                 ->find($id);
                 // return $quote;
+
             
                 $quotes = QuoteByTransporter::with ('getTransporters')->where('user_quote_id', $id)
                 ->orderByRaw('CAST(price AS UNSIGNED) ASC')
@@ -1473,9 +1474,9 @@ class DashboardController extends WebController
                         $quote->thread_id = null; // Set to null or handle as needed if no thread matches
                     }
                 }); 
-                return $quotes;
+                // return $quotes;
                 // return $threadMap;
-                return view('transporter.dashboard.job_infromation', ['quotes'=>$quotes]);
+                return view('transporter.dashboard.job_infromation', ['quote'=>$quote]);
             return $quotes;
         } catch (\Exception $ex) {
             return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);

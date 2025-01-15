@@ -2062,6 +2062,7 @@
         $.validator.addMethod("greaterThanZero", function(value, element) {
             return this.optional(element) || parseFloat(value) > 0;
         }, "You must enter an amount greater than zero");
+     
         $("#main_form").validate({
             rules: {
                 amount: {
