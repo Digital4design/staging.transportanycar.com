@@ -747,6 +747,9 @@
     <script>
         $(document).ready(()=>{
             $('[data-toggle="popover"]').popover({trigger:'hover'});
+            $('html, body').animate({
+            scrollTop: $('#accordionExample').offset().top
+        }, 1000);
         });
         function quoteChangeStatus(quote_id, status) {
             var formData = new FormData();
