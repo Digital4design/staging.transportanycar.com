@@ -6779,6 +6779,7 @@ div#spam-banner button.btn {
 }
 
 @media (max-width: 575px) {
+  .message-color footer#footer {margin-top: 25px;}
   .tabs_bx .nav-pills li .nav-link {
     font-size: 15px;
     line-height: normal;
