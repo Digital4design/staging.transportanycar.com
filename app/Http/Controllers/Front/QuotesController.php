@@ -77,6 +77,7 @@ class QuotesController extends WebController
     }
     public function quoteSave(Request $request)
     {
+
         // Check if a user is authenticated with the 'web' guard
         $user_info = Auth::guard('web')->check();
         $current_user_data = $user_info ? Auth::guard('web')->user() : null;
@@ -104,11 +105,13 @@ class QuotesController extends WebController
             'email' => $request->email,
             'type' => 'user'
         ])->first();
+
         if ($user_info && $current_user_data->email !== $request->email) {
             // If the email exists in the database, log out current user
             Auth::guard('web')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
+
             if ($user) {
                 // If the email exists in the database, log out current user and redirect to login page
                 $this->saveQuoteAndNotifyTransporters($user->id, $request, $dis_dur);
@@ -124,6 +127,7 @@ class QuotesController extends WebController
                 $temp_password = genUniqueStr('', 6, 'users', 'password', true);
                 $user_data = $this->createNewUserAndNotify($request, $temp_password);
                 $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+
                 // Set session variable to indicate user came from quote page
                 $request->session()->flash('came_from', 'quote_save');
                 $creds = ['email' => $request->email, 'password' => $temp_password ?? null, 'type' => 'user'];
@@ -151,12 +155,14 @@ class QuotesController extends WebController
                 $user_data = $this->createNewUserAndNotify($request, $temp_password);
             }
             $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+
         } else {
             // If user is logged in and the email is the same, use current user data
             $user_data = $current_user_data;
             $user->mobile = $request->phone;
             $user->save();
             $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+
         }
 
 
@@ -197,7 +203,7 @@ class QuotesController extends WebController
             'email' => $request->email,
             'name' => $request->name ?? null,
             'country_code' => $request->country_code ?? null,
-            'mobile' =>  $request->mobile ?? $request->phone ?? null,
+            'mobile' => $request->mobile ?? $request->phone ?? null,
             'profile_image' => config('constants.default.user_image'),
         ]);
 
@@ -216,6 +222,7 @@ class QuotesController extends WebController
 
     private function saveQuoteAndNotifyTransporters($userId, $request, $dis_dur)
     {
+
         // Process vehicle information
         $vehicle_make_1 = $request->vehicle_make_1 ?? null;
         $vehicle_model_1 = $request->vehicle_model_1 ?? null;
@@ -261,6 +268,45 @@ class QuotesController extends WebController
         $quoteData['quotation_id'] = $userQuote->id;
         Cache::forget('location_info');
         $this->SaveSearchQuoteEmailSend($quoteData);
+
+        $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->get();
+
+        foreach ($all_transport as $transporter) {
+            if ($transporter) {
+                $mailData = [
+                    'id' => $quoteData['quotation_id'],
+                    'vehicle_make' => $quoteData['vehicle_make'],
+                    'vehicle_model' => $quoteData['vehicle_model'],
+                    'vehicle_make_1' => $quoteData['vehicle_make_1'],
+                    'vehicle_model_1' => $quoteData['vehicle_model_1'],
+                    'pickup_postcode' => $quoteData['pickup_postcode'],
+                    'drop_postcode' => $quoteData['drop_postcode'],
+                    'delivery_timeframe_from' => $quoteData['delivery_timeframe_from'] ?? null,
+                    'starts_drives' => $quoteData['starts_drives'],
+                    'starts_drives_1' => $quoteData['starts_drives_1'],
+                    'how_moved' => $quoteData['how_moved'],
+                    'distance' => $quoteData['distance'],
+                    'duration' => $quoteData['duration'],
+                    'map_image' => $quoteData['map_image'],
+                    'delivery_timeframe' => $quoteData['delivery_timeframe'],
+                ];
+                try {
+                    if ($transporter->new_job_alert == "1") {
+                        $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
+                        $subject = 'You have received a transport notification';
+                        $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
+                        // $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
+
+                        \Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
+                    }
+                } catch (\Exception $ex) {
+                    \Log::error('Save Search functionality Error sending email to transporter for Quote ID: ' . $ex->getMessage());
+                    // return $ex->getMessage();
+                }
+            }
+        }
+
+
 
         // Send mail to transporters
         //$this->sendMailToTransporters($quoteData);
@@ -477,7 +523,7 @@ class QuotesController extends WebController
             $mailData = $this->getMailData($user_quote);
             $mailData['transporter_payment'] = $quote->transporter_payment;
             $mailData['username'] = $username;
-            $mailData['quote_by_transporter_id'] =  $request['quote_by_transporter_id'];
+            $mailData['quote_by_transporter_id'] = $request['quote_by_transporter_id'];
             $mailData['quotation_detail'] = $details->toArray();
             try {
                 $htmlContent = view('mail.General.quote-accepted', ['quote' => $mailData])->render();
@@ -502,106 +548,31 @@ class QuotesController extends WebController
 
     public function SaveSearchQuoteEmailSend($quote)
     {
-        // $pickupWords = array_map('trim', preg_split('/[\s,]+/', strtolower($quote['pickup_postcode'])));
-        // $dropWords = array_map('trim', preg_split('/[\s,]+/', strtolower($quote['drop_postcode'])));
-        // $transporter = DB::table('save_searches')
-        //     ->join('users', function ($join) {
-        //         $join->on('users.id', '=', 'save_searches.user_id')
-        //             ->where('users.status', 'active')
-        //             ->where('users.type', 'car_transporter')
-        //             ->where('users.is_status', 'approved');
-        //         // ->where('users.job_email_preference', 1);
-        //     })
-        //     ->where(function ($query) use ($pickupWords) {
-        //         foreach ($pickupWords as $word) {
-        //             $query->orWhere(DB::raw('LOWER(save_searches.pick_area)'), 'LIKE', '%' . $word . '%');
-        //         }
-        //     })
-        //     // Match if any of the words in the drop_postcode input match the drop_area
-        //     ->where(function ($query) use ($dropWords) {
-        //         $query->orWhere(function ($innerQuery) use ($dropWords) {
-        //             foreach ($dropWords as $word) {
-        //                 $innerQuery->orWhere(DB::raw('LOWER(save_searches.drop_area)'), 'LIKE', '%' . $word . '%');
-        //             }
-        //         })
-        //             ->orWhereNull('save_searches.drop_area') // Match if drop_area is NULL
-        //             ->orWhere('save_searches.drop_area', 'anywhere'); // Match if drop_area is 'anywhere'
-        //     })
-        //     ->where('save_searches.email_notification', 'true')
-        //     ->groupBy('users.id')
-        //     ->get();
-       
-        //     foreach ($transporter as $email) {
-        //         if ($email->job_email_preference == 1) {
-        //             $mailData = [
-                      
-        //                     'id' => $quote['quotation_id'],
-        //                     'vehicle_make' => $quote['vehicle_make'],
-        //                     'vehicle_model' => $quote['vehicle_model'],
-        //                     'vehicle_make_1' => $quote['vehicle_make_1'],
-        //                     'vehicle_model_1' => $quote['vehicle_model_1'],
-        //                     'pickup_postcode' => formatAddress($quote['pickup_postcode']),
-        //                     'drop_postcode' => formatAddress($quote['drop_postcode']),
-        //                     'delivery_timeframe_from' => isset($quote['delivery_timeframe_from']) ? $quote['delivery_timeframe_from'] : null,
-        //                     'starts_drives' =>  $quote['starts_drives'] ,
-        //                     'starts_drives_1' => $quote['starts_drives_1'],
-        //                     'how_moved' => $quote['how_moved'],
-        //                     'distance' => $quote['distance'],
-        //                     'duration' => $quote['duration'],
-        //                     'map_image' => $quote['map_image'],
-        //                     'delivery_timeframe' => $quote['delivery_timeframe'],
-                       
-                        
-        //             ];
-
-        //             try {
-        //                 // Generate email content
-        //                 $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
-        //                 $subject = 'You have received a transport notification';
-
-        //                 // Send the email
-                        
-        //                 $this->emailService->sendEmail($email->email, $htmlContent, $subject);
-
-        //                 // Update email_sent status
-
-
-        //                 \Log::info('Email sent successfully for Quote ID: ' .$quote['quotation_id']);
-        //             } catch (\Exception $ex) {
-        //                 \Log::error('Error sending email to transporter: ' . $ex->getMessage());
-        //             }
-        //         }
-        //     }
-        //     DB::table('user_quotes')
-        //         ->where('id', $quote['quotation_id'])
-        //         ->update(['email_sent' => 1]);
         $pickupCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
             'address' => $quote['pickup_postcode'],
             'key' => config('constants.google_map_key'),
         ])->json();
-    
         $dropCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
             'address' => $quote['drop_postcode'],
             'key' => config('constants.google_map_key'),
         ])->json();
-    
         $pickupLat = $pickupCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
         $pickupLng = $pickupCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
         $dropLat = $dropCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
         $dropLng = $dropCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
-    
+
         if (!$pickupLat || !$pickupLng) {
             \Log::error('Pickup postcode coordinates not found for Quote ID: ' . $quote['quotation_id']);
             return;
         }
-    
+
         if (!$dropLat || !$dropLng) {
             \Log::error('Drop postcode coordinates not found for Quote ID: ' . $quote['quotation_id']);
             return;
         }
-    
+
         $maxRangeKm = config('constants.max_range_km', 50);
-    
+
         $savedSearches = DB::table('save_searches')
             ->select(
                 'id',
@@ -609,38 +580,52 @@ class QuotesController extends WebController
                 'drop_area',
                 'user_id',
                 DB::raw(" 
-                    (6371 * acos(
-                        cos(radians($pickupLat)) 
-                        * cos(radians(pick_lat)) 
-                        * cos(radians(pick_lng) - radians($pickupLng)) 
-                        + sin(radians($pickupLat)) 
-                        * sin(radians(pick_lat))
-                    )) AS distance_pickup,
-                    CASE 
-                        WHEN LOWER(drop_area) = 'anywhere' THEN 0
-                        ELSE (6371 * acos(
-                            cos(radians($dropLat)) 
-                            * cos(radians(drop_lat)) 
-                            * cos(radians(drop_lng) - radians($dropLng)) 
-                            + sin(radians($dropLat)) 
-                            * sin(radians(drop_lat))
-                        ))
-                    END AS distance_drop
-                ")
+            (6371 * acos(
+                cos(radians($pickupLat)) 
+                * cos(radians(pick_lat)) 
+                * cos(radians(pick_lng) - radians($pickupLng)) 
+                + sin(radians($pickupLat)) 
+                * sin(radians(pick_lat))
+            )) AS distance_pickup,
+            CASE 
+                WHEN LOWER(drop_area) = 'anywhere' THEN 0
+                ELSE (6371 * acos(
+                    cos(radians($dropLat)) 
+                    * cos(radians(drop_lat)) 
+                    * cos(radians(drop_lng) - radians($dropLng)) 
+                    + sin(radians($dropLat)) 
+                    * sin(radians(drop_lat))
+                ))
+            END AS distance_drop
+        ")
             )
-            ->having('distance_pickup', '<=', $maxRangeKm)
-            ->where(function ($query) use ($maxRangeKm) {
-                $query->havingRaw('distance_drop <= ? OR LOWER(drop_area) = ?', [$maxRangeKm, 'anywhere']);
+            ->whereRaw("
+        (6371 * acos(
+            cos(radians($pickupLat)) 
+            * cos(radians(pick_lat)) 
+            * cos(radians(pick_lng) - radians($pickupLng)) 
+            + sin(radians($pickupLat)) 
+            * sin(radians(pick_lat))
+        )) <= ?", [$maxRangeKm]) // Filter by pickup distance
+            ->where(function ($query) use ($dropLat, $dropLng, $maxRangeKm) {
+                $query->whereRaw("
+            LOWER(drop_area) = 'anywhere'
+        ")->orWhereRaw("
+            (6371 * acos(
+                cos(radians($dropLat)) 
+                * cos(radians(drop_lat)) 
+                * cos(radians(drop_lng) - radians($dropLng)) 
+                + sin(radians($dropLat)) 
+                * sin(radians(drop_lat))
+            )) <= ?", [$maxRangeKm]);
             })
             ->get();
-    
-            // return $savedSearches;
-    
+
         if ($savedSearches->isEmpty()) {
             \Log::info('save search functionality No matching saved searches found for Quote ID: ' . $quote['quotation_id']);
             return;
         }
-    
+
         foreach ($savedSearches as $savedSearch) {
             $transporter = DB::table('users')
                 ->where('id', $savedSearch->user_id)
@@ -648,7 +633,7 @@ class QuotesController extends WebController
                 ->where('type', 'car_transporter')
                 ->where('is_status', 'approved')
                 ->first();
-    
+
             if ($transporter) {
                 $mailData = [
                     'id' => $quote['quotation_id'],
@@ -668,17 +653,20 @@ class QuotesController extends WebController
                     'delivery_timeframe' => $quote['delivery_timeframe'],
                 ];
                 try {
+                    if ($transporter->job_email_preference){
                     $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
                     $subject = 'You have received a transport notification';
                     $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
+                    // $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
+
                     \Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
+                    }
                 } catch (\Exception $ex) {
                     \Log::error('Save Search functionality Error sending email to transporter for Quote ID: ' . $quote['quotation_id'] . ': ' . $ex->getMessage());
                     // return $ex->getMessage();
                 }
             }
         }
-    // }
     }
 
     public function sendOtp(Request $request, SmsService $service)
@@ -776,5 +764,11 @@ class QuotesController extends WebController
             'success' => true,
             'message' => 'OTP verified successfully.',
         ]);
+    }
+    public function checkSaveSearchFunctionality()
+    {
+        $quote = UserQuote::where('id', 769)->first()->toArray();
+
+        return $this->SaveSearchQuoteEmailSend($quote);
     }
 }

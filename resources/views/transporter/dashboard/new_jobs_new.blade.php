@@ -2503,7 +2503,6 @@
             });
         }
 
-
         // Listen for the quote modal to be hidden
         $('#quote').on('hidden.bs.modal', function(e) {
             // Clear the z-index
@@ -2525,6 +2524,18 @@
             myFunction(x);
         });
 
+        var jobInfoUrl = "{{ route('transporter.job_information', ':id') }}";
+
+    //     $(document).on('click', '.car-row', function() {
+               
+    //            var carId = $(this).data('car-id');
+    //            if (carId) {
+    //        var url = jobInfoUrl.replace(':id', carId); // Replace placeholder with actual ID
+    //        window.location.href = url; // Redirect to the URL
+    //    } else {
+    //        console.log('Job ID is missing');
+    //    }
+    // });
 
         $(document).ready(function() {
             $("#jobsrch_form_blog").validate({
@@ -2554,6 +2565,8 @@
                     $(element).closest('.form-group').removeClass('error-margin');
                 }
             });
+
+
             $(document).on('click', '.car-row', function() {
                
                 var carId = $(this).data('car-id');
@@ -2704,6 +2717,7 @@
                 });
             },250)
             });
+
             $('#backButton').on('click', function() {
                 $('#carDetailsModal').modal('hide');
             });

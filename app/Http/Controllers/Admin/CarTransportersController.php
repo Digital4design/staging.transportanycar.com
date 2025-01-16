@@ -88,6 +88,7 @@ class CarTransportersController extends WebController
     public function destroy($id)
     {
         $data = User::where('id', $id)->first();
+        // return $data;
         if ($data) {
             $data->delete();
             success_session('Car Transporter Deleted successfully');

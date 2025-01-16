@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\App;
 use App\SaveSearch;
 use App\CompanyDetail;
 use App\Services\SmsService;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class DashboardController extends WebController
 {
@@ -402,7 +404,6 @@ class DashboardController extends WebController
         return view('transporter.dashboard.new_jobs', ['quotes' => $quotes]);
     }
 
-    //  d4d developer - k
     public function newJobsNew()
     {
         $user_data = \Auth::guard('transporter')->user();
@@ -433,6 +434,7 @@ class DashboardController extends WebController
         return view('transporter.dashboard.new_jobs_new', ['quotes' => $quotes, 'documentStatus' => $document_status]);
     }
     // end d4d developer - k
+
 
     // d4d developer - k
     public function submitOffer(Request $request)
@@ -522,6 +524,8 @@ class DashboardController extends WebController
                 echo "Failed to create thread.";
             }
         }
+        // dd($quote);
+        // return;
         try {
             if ($quote->quote->user->job_email_preference) {
                 $maildata['email'] = $quote->quote->user->email;
@@ -638,6 +642,13 @@ class DashboardController extends WebController
                 }
             } elseif ($request->email_type == 'saved_search_alerts') {
                 $status = $user->update(['job_email_preference' => $request->value]);
+                if ($status) {
+                    return response()->json(['status' => true, 'message' => 'Preference updated successfully.']);
+                } else {
+                    return response()->json(['status' => false, 'message' => 'Failed to update preference.']);
+                }
+            } elseif ($request->email_type == 'new_job_alert') {
+                $status = $user->update(['new_job_alert' => $request->value]);
                 if ($status) {
                     return response()->json(['status' => true, 'message' => 'Preference updated successfully.']);
                 } else {
@@ -1041,27 +1052,23 @@ class DashboardController extends WebController
     //d4dDeveloper-r 07/10/2024
     public function saveSearch(Request $request)
     {
-        // return $request->all();
         try {
-            // $data = [
-            //     "user_id" => auth()->user()->id,
-            //     "search_name" => $request->search_name,
-            //     "pick_area" => $request->pick_area,
-            //     "drop_area" => $request->drop_area,
-            //     "email_notification" => $request->emailNtf, // Convert to integer (1 or 0)
-            // ];
-
-            // $saveSearch = SaveSearch::updateOrCreate(
-            //     [
-            //         'user_id' => $data['user_id'],
-            //         'pick_area' => $data['pick_area'],
-            //         'drop_area' => $data['drop_area'],
-            //         'email_notification' => '1'
-            //     ],
-            //     $data // The data to be updated or inserted
-            // );
-            // Fetch coordinates for pickup and drop areas using Google Maps API
-            // Fetch coordinates for pickup area using Google Maps API
+            $validator = Validator::make($request->all(), [
+                'pick_area' => [
+                    'required',
+                    Rule::unique('save_searches')->where(function ($query) use ($request) {
+                        $query->where('drop_area', $request->drop_area)
+                              ->where('user_id', Auth::id());
+                    }),
+                ],
+                'drop_area' => 'required',
+            ], [
+                'pick_area.unique' => 'The combination of pick area and drop area already exists for your account.',
+            ]);
+            
+            if ($validator->fails()) {
+                return response(["success" => false, "message" => "The combination of pick area and drop area already exists for your account.", "data" => $validator->errors()]);
+            }
             $pickupCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
                 'address' => $request->pick_area,
                 'key' => config('constants.google_map_key'),
@@ -1070,8 +1077,7 @@ class DashboardController extends WebController
             // Extract pickup coordinates
             $pickupLat = $pickupCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
             $pickupLng = $pickupCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
-            // \Log::info('lggggggg: ' . $pickupLng);
-            // Validate if coordinates were fetched successfully for pickup
+            
             if (!$pickupLat || !$pickupLng) {
                 return response()->json(['success' => false, 'message' => 'Failed to fetch pickup coordinates.']);
             }
@@ -1096,22 +1102,7 @@ class DashboardController extends WebController
                     return response()->json(['success' => false, 'message' => 'Failed to fetch drop coordinates.']);
                 }
             }
-
-            // Prepare data for saving
-            // $data = [
-            //     "user_id" => auth()->user()->id,
-            //     "search_name" => $request->search_name,
-            //     "pick_area" => $request->pick_area,
-            //     "drop_area" => $request->drop_area ?? "Anywhere",
-            //     "pick_lat" => $pickupLat,    // Use coordinates from Google API
-            //     "pick_lng" => $pickupLng,    // Use coordinates from Google API
-            //     "drop_lat" => $dropLat,      // Use coordinates from Google API or default
-            //     "drop_lng" => $dropLng,      // Use coordinates from Google API or default
-            //     "email_notification" => $request->emailNtf, // Convert to integer (1 or 0)
-            // ];
-
-
-            // Save or update the search record
+            
             $saveSearch = SaveSearch::Create(
                 [
                     "user_id" => auth()->user()->id,
@@ -1125,7 +1116,6 @@ class DashboardController extends WebController
                     "email_notification" => $request->emailNtf, // Convert to integer (1 or 0)
                 ]
             );
-
 
             return response(["success" => true, "message" => "Search saved successfully!", "data" => []]);
         } catch (\Exception $ex) {
@@ -1406,6 +1396,7 @@ class DashboardController extends WebController
                 'summary_of_leads' => 'nullable|boolean',
                 'outbid_email_unsubscribe' => 'nullable|boolean',
                 'saved_search_alerts' => 'nullable|boolean',
+                'new_job_alert' => 'nullable|boolean',
             ]);
 
             // Update user preferences
@@ -1414,6 +1405,8 @@ class DashboardController extends WebController
                 $user->summary_of_leads = $request->input('summary_of_leads', 0);
                 $user->outbid_email_unsubscribe = $request->input('outbid_email_unsubscribe', 0);
                 $user->job_email_preference = $request->input('saved_search_alerts', 0);
+                $user->new_job_alert = $request->input('new_job_alert', 0);
+
                 $user->save();
 
                 return response()->json(['success' => true, 'message' => 'Preferences updated successfully.']);
@@ -1422,6 +1415,68 @@ class DashboardController extends WebController
                 Log::error('Error updating preferences: ' . $e->getMessage());
                 return response()->json(['success' => false, 'message' => 'Could not update preferences.'], 500);
             }
+        } catch (\Exception $ex) {
+            return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
+        }
+    }
+    public function jobInformation(Request $request,$id)
+    {
+        try {
+            // return $id;+
+            $user_data = \Auth::guard('transporter')->user();
+            $quote = UserQuote::with([
+                'watchlist',
+                'quoteByTransporter' => function ($query) use ($user_data) {
+                    $query->where('user_id', $user_data->id); // Assuming 'transporter_id' is the field
+                }
+            ])->where(function ($query) {
+                    $query->where('status', 'pending')
+                        ->orWhere('status', 'approved');
+                })
+                ->whereDate('created_at', '>=', now()->subDays(10))
+                ->addSelect([
+                    'transporter_quotes_count' => QuoteByTransporter::selectRaw('COUNT(*)')
+                        ->whereColumn('user_quote_id', 'user_quotes.id'),
+                    'lowest_bid' => QuoteByTransporter::selectRaw('MIN(CAST(transporter_payment AS UNSIGNED))')
+                        ->whereColumn('user_quote_id', 'user_quotes.id')
+                ])
+                ->find($id);
+                // return $quote;
+            
+                $quotes = QuoteByTransporter::with ('getTransporters')->where('user_quote_id', $id)
+                ->orderByRaw('CAST(price AS UNSIGNED) ASC')
+                ->get();
+                // return $quote;
+        
+                $quotes = $quotes->map(function ($quote) {
+                    $my_quotes = QuoteByTransporter::where('user_id', $quote->user_id)->pluck('id');
+                    $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+                        ->whereNotNull('rating')
+                        ->avg('rating');
+                    $percentage = $rating_average !== null ? ($rating_average / 5) * 100 : 0;
+                    $quote->rating_average = $rating_average;
+                    $quote->percentage = $percentage;
+                    return $quote;
+                });
+        // return $quotes;
+             
+               
+                // Update quotes with thread_id if the thread exists
+                $threads = Thread::with('messages')->where(['user_id' => $quote->user_id, 'user_quote_id' => $id])->get();
+                // return $threads;
+                $threadMap = $threads->pluck('id', 'friend_id');
+                $quotes->map(function ($quote) use ($threadMap) {
+                    // Add thread_id only if a matching thread exists
+                    if (isset($threadMap[$quote->user_id])) {
+                        $quote->thread_id = $threadMap[$quote->user_id];
+                    } else {
+                        $quote->thread_id = null; // Set to null or handle as needed if no thread matches
+                    }
+                }); 
+                return $quotes;
+                // return $threadMap;
+                return view('transporter.dashboard.job_infromation', ['quotes'=>$quotes]);
+            return $quotes;
         } catch (\Exception $ex) {
             return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
         }

@@ -25,7 +25,7 @@
     <div style="background-color: #f1f1f1; padding: 20px; text-align: left;">
         <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 20px; line-height: 24px; font-weight: 500; margin-bottom: 10px; text-align: left;">{{$user_name}} sent you a message</p>
         <p style="font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 20px; font-weight: 300; color: #000000; margin-bottom: 15px;">{{$data->message}}</p>
-        <a  href="{{route('front.messages', ['thread_id' => $thread_id])}}" style="background: #52D017; color: #ffffff; text-decoration: none; font-size: 16px; line-height: 20px; font-weight: 400; border: none; display: inline-block;  cursor: pointer; padding-top: 6px; padding-bottom: 6px; padding-left: 30px; padding-right: 30px;">Reply</a>
+        <a  href="{{route('front.quotes', $data->user_quote_id )}}" style="background: #52D017; color: #ffffff; text-decoration: none; font-size: 16px; line-height: 20px; font-weight: 400; border: none; display: inline-block;  cursor: pointer; padding-top: 6px; padding-bottom: 6px; padding-left: 30px; padding-right: 30px;">Reply</a>
     </div>
     <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 25px; margin-bottom:25px;">Note: The quote shown is the total amount.  If you are happy with the quote then simply accept it and secure your booking.</p>
     <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 25px; margin-bottom:25px;">You may receive more quotes from our network of transporters so keep an eye out and you can accept your preferred quote at any time.</p>
