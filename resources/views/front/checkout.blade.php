@@ -257,7 +257,7 @@ section.review_quote_blog.payment_cart {
                 <p>Enter your payment details below to pay the<br> deposit and secure your booking.</p>
             </div>
             <div class="d-flex flex-wrap align-items-center justify-content-between">
-              <a href="javascript:history.back()" class="form-wizard-previous-btn back-icon">
+              <a href="{{route('front.quotes', $data->user_quote_id)}}" class="form-wizard-previous-btn back-icon">
                 <svg width="7" height="13" viewBox="0 0 7 13" fill="none" class="color-change" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
