@@ -514,16 +514,7 @@ class DashboardController extends WebController
                 $quote->thread_id = null; // Set to null or handle as needed if no thread matches
             }
         });
-        // $overall_percentage = 100;
-        // $overall_percentage += ($rating_average->overall_avg / 5) * 100;
-       
-        // $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
-        // ->whereNotNull('rating')
-        // ->avg('rating');
-        // $percentage = 0;
-        // if ($rating_average !== null) { $my_quotes = QuoteByTransporter::where('user_id', $quotes[0]->user_id)->pluck('id');
-        //     $percentage = ($rating_average / 5) * 100;
-        // }
+        
 
         $hasAcceptedQuote = $quotes->contains(function ($quote) {
             return strtolower($quote->status) === 'accept';
