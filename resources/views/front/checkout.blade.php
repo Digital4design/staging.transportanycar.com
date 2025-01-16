@@ -261,7 +261,7 @@ section.review_quote_blog.payment_cart {
                 <svg width="7" height="13" viewBox="0 0 7 13" fill="none" class="color-change" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
-                Back 
+                Back to quotes 
               </a>
               <span style="font-size:12px; line-height: 15px;" class="d-flex align-items-center back-wrapper">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
