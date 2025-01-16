@@ -17,7 +17,7 @@
     <h2 style="font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Hi,</h2>
     <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 25px; margin-bottom:25px;">You have received a quote for <span style="display: block; font-size: 24px; line-height: 30px; font-weight: 500; color:#222222; margin-top: 20px;">£{{$data->price}}</span></p>
     <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 25px; margin-bottom:25px;"> from {{$data->getTransporters->username}} to deliver your {{$data->quote->vehicle_make}} {{$data->quote->vehicle_model}}</p>
-    <a href="{{route('front.quotes', $data->quote->id)}}" style="border-radius: 50px; background: #52D017; color: #ffffff; text-decoration: none; font-size: 16px; line-height: 20px; font-weight: 400; border: none; display: inline-block; padding-top: 10px; padding-bottom: 10px; padding-left: 40px; padding-right: 40px; cursor: pointer;">
+    <a href="{{route('front.checkout', $data->id)}}" style="border-radius: 50px; background: #52D017; color: #ffffff; text-decoration: none; font-size: 16px; line-height: 20px; font-weight: 400; border: none; display: inline-block; padding-top: 10px; padding-bottom: 10px; padding-left: 40px; padding-right: 40px; cursor: pointer;">
         Accept quote
     </a>
     <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 25px; margin-bottom:25px;">You can message the transporter to make arrangements before accepting the quote.</p>
