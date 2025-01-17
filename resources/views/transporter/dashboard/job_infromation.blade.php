@@ -410,7 +410,8 @@
                             </div>
                         </div>
                         <div class="wrapper row">
-                            <div class="left-content row mx-0 align-items-start justify-content-between col-xl-4 mb-3 mb-xl-0">
+                            <div
+                                class="left-content row mx-0 align-items-start justify-content-between col-xl-4 mb-3 mb-xl-0">
                                 <div class="img_wrap">
                                     <img src="{{ $quote->image }}" alt="image" width="92" height="57"
                                         class="img-fluid" />
@@ -583,71 +584,125 @@
                         <div class="bid_wrapper">
                             <h2 class="heading mb-0 mt-4 pt-md-5 pb-4">Quotes & Questions</h2>
                             <div class="accordion" id="accordionBids">
-                          @foreach( $quotebytransporters as $key=> $transporter) 
-                                <div class="card bg-transparent border-0 rounded-0">
-                                    <div class="card-header bg-white border-0 justify-content-between" id="bid{{$key}}">
-                                       @if($key == 1 )
-                                        <span class="bid_lowest">Lowest</span>
-                                        @endif
-                                        <div class="d-flex flex-wrap align-items-center">
-                                            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                                                <path d="M17 0.375C13.7119 0.375 10.4976 1.35004 7.76365 3.17682C5.02968 5.0036 2.89882 7.60007 1.64051 10.6379C0.382203 13.6757 0.0529729 17.0184 0.694452 20.2434C1.33593 23.4683 2.91931 26.4306 5.24436 28.7556C7.5694 31.0807 10.5317 32.6641 13.7566 33.3056C16.9816 33.947 20.3243 33.6178 23.3621 32.3595C26.3999 31.1012 28.9964 28.9703 30.8232 26.2364C32.65 23.5024 33.625 20.2881 33.625 17C33.625 12.5908 31.8734 8.36214 28.7557 5.24435C25.6379 2.12656 21.4092 0.375 17 0.375ZM9.87501 29.3381C10.0514 27.5805 10.8745 25.9511 12.1845 24.766C13.4944 23.5809 15.1979 22.9247 16.9644 22.9247C18.7309 22.9247 20.4343 23.5809 21.7443 24.766C23.0543 25.9511 23.8773 27.5805 24.0538 29.3381C21.9011 30.5908 19.455 31.2507 16.9644 31.2507C14.4738 31.2507 12.0277 30.5908 9.87501 29.3381ZM26.1913 27.8419C25.6851 25.7769 24.5009 23.9413 22.828 22.629C21.1552 21.3167 19.0905 20.6035 16.9644 20.6035C14.8382 20.6035 12.7735 21.3167 11.1007 22.629C9.42791 23.9413 8.24366 25.7769 7.73751 27.8419C5.51465 25.9532 3.92493 23.4279 3.18303 20.6069C2.44112 17.7859 2.58278 14.8053 3.58886 12.0674C4.59494 9.3295 6.41698 6.96631 8.80893 5.29694C11.2009 3.62757 14.0475 2.73244 16.9644 2.73244C19.8813 2.73244 22.7279 3.62757 25.1198 5.29694C27.5118 6.96631 29.3338 9.3295 30.3399 12.0674C31.346 14.8053 31.4876 17.7859 30.7457 20.6069C30.0038 23.4279 28.4141 25.9532 26.1913 27.8419ZM17 7.5C15.8257 7.5 14.6777 7.84823 13.7013 8.50065C12.7249 9.15307 11.9639 10.0804 11.5145 11.1653C11.0651 12.2503 10.9475 13.4441 11.1766 14.5958C11.4057 15.7476 11.9712 16.8056 12.8016 17.6359C13.6319 18.4663 14.6899 19.0318 15.8417 19.2609C16.9934 19.49 18.1873 19.3724 19.2722 18.923C20.3571 18.4736 21.2844 17.7126 21.9369 16.7362C22.5893 15.7598 22.9375 14.6118 22.9375 13.4375C22.9375 11.8628 22.312 10.3526 21.1985 9.23905C20.085 8.12556 18.5747 7.5 17 7.5ZM17 17C16.2954 17 15.6066 16.7911 15.0208 16.3996C14.4349 16.0082 13.9783 15.4518 13.7087 14.8008C13.439 14.1498 13.3685 13.4335 13.506 12.7425C13.6434 12.0514 13.9827 11.4167 14.4809 10.9184C14.9792 10.4202 15.6139 10.0809 16.305 9.94345C16.9961 9.80599 17.7124 9.87654 18.3633 10.1462C19.0143 10.4158 19.5707 10.8724 19.9621 11.4583C20.3536 12.0441 20.5625 12.7329 20.5625 13.4375C20.5625 14.3823 20.1872 15.2885 19.5191 15.9566C18.851 16.6247 17.9448 17 17 17Z" fill="#5B5B5B" />
-                                            </svg>
-                                            <div>
-                                                <div class="bidder_name mb-1">@if($key== "0")(You)@endif <span>{{$transporter->getTransporters->username}}</span></div>
-                                                <div class="bidder_verified d-flex flex-wrap align-items-center">
-                                                    <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-1">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14 4.521C14.125 11.366 10.042 14.278 7.727 14.965C7.57366 15.0106 7.41034 15.0106 7.257 14.965C4.98 14.29 1.014 11.464 1 4.862C1.01372 4.29149 1.33458 3.7729 1.839 3.506C5.363 1.516 7.058 1 7.489 1C7.92 1 9.749 1.549 13.507 3.7C13.8045 3.86767 13.9918 4.17958 14 4.521Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M4.5 8.01502L6.5 10.015L10.5 6.00702" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
-                                                    <span>Verified</span>
+                                @foreach ($quotebytransporters as $key => $transporter)
+                                    <div class="card bg-transparent border-0 rounded-0">
+                                        <div class="card-header bg-white border-0 justify-content-between"
+                                            id="bid{{ $key }}">
+                                            @if ($key == 1)
+                                                <span class="bid_lowest">Lowest</span>
+                                            @endif
+                                            <div class="d-flex flex-wrap align-items-center">
+                                                <svg width="34" height="34" viewBox="0 0 34 34" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                                    <path
+                                                        d="M17 0.375C13.7119 0.375 10.4976 1.35004 7.76365 3.17682C5.02968 5.0036 2.89882 7.60007 1.64051 10.6379C0.382203 13.6757 0.0529729 17.0184 0.694452 20.2434C1.33593 23.4683 2.91931 26.4306 5.24436 28.7556C7.5694 31.0807 10.5317 32.6641 13.7566 33.3056C16.9816 33.947 20.3243 33.6178 23.3621 32.3595C26.3999 31.1012 28.9964 28.9703 30.8232 26.2364C32.65 23.5024 33.625 20.2881 33.625 17C33.625 12.5908 31.8734 8.36214 28.7557 5.24435C25.6379 2.12656 21.4092 0.375 17 0.375ZM9.87501 29.3381C10.0514 27.5805 10.8745 25.9511 12.1845 24.766C13.4944 23.5809 15.1979 22.9247 16.9644 22.9247C18.7309 22.9247 20.4343 23.5809 21.7443 24.766C23.0543 25.9511 23.8773 27.5805 24.0538 29.3381C21.9011 30.5908 19.455 31.2507 16.9644 31.2507C14.4738 31.2507 12.0277 30.5908 9.87501 29.3381ZM26.1913 27.8419C25.6851 25.7769 24.5009 23.9413 22.828 22.629C21.1552 21.3167 19.0905 20.6035 16.9644 20.6035C14.8382 20.6035 12.7735 21.3167 11.1007 22.629C9.42791 23.9413 8.24366 25.7769 7.73751 27.8419C5.51465 25.9532 3.92493 23.4279 3.18303 20.6069C2.44112 17.7859 2.58278 14.8053 3.58886 12.0674C4.59494 9.3295 6.41698 6.96631 8.80893 5.29694C11.2009 3.62757 14.0475 2.73244 16.9644 2.73244C19.8813 2.73244 22.7279 3.62757 25.1198 5.29694C27.5118 6.96631 29.3338 9.3295 30.3399 12.0674C31.346 14.8053 31.4876 17.7859 30.7457 20.6069C30.0038 23.4279 28.4141 25.9532 26.1913 27.8419ZM17 7.5C15.8257 7.5 14.6777 7.84823 13.7013 8.50065C12.7249 9.15307 11.9639 10.0804 11.5145 11.1653C11.0651 12.2503 10.9475 13.4441 11.1766 14.5958C11.4057 15.7476 11.9712 16.8056 12.8016 17.6359C13.6319 18.4663 14.6899 19.0318 15.8417 19.2609C16.9934 19.49 18.1873 19.3724 19.2722 18.923C20.3571 18.4736 21.2844 17.7126 21.9369 16.7362C22.5893 15.7598 22.9375 14.6118 22.9375 13.4375C22.9375 11.8628 22.312 10.3526 21.1985 9.23905C20.085 8.12556 18.5747 7.5 17 7.5ZM17 17C16.2954 17 15.6066 16.7911 15.0208 16.3996C14.4349 16.0082 13.9783 15.4518 13.7087 14.8008C13.439 14.1498 13.3685 13.4335 13.506 12.7425C13.6434 12.0514 13.9827 11.4167 14.4809 10.9184C14.9792 10.4202 15.6139 10.0809 16.305 9.94345C16.9961 9.80599 17.7124 9.87654 18.3633 10.1462C19.0143 10.4158 19.5707 10.8724 19.9621 11.4583C20.3536 12.0441 20.5625 12.7329 20.5625 13.4375C20.5625 14.3823 20.1872 15.2885 19.5191 15.9566C18.851 16.6247 17.9448 17 17 17Z"
+                                                        fill="#5B5B5B" />
+                                                </svg>
+                                                <div>
+                                                    <div class="bidder_name mb-1">
+                                                        @if ($key == '0')
+                                                            (You)
+                                                        @endif
+                                                        <span>{{ $transporter->getTransporters->username }}</span>
+                                                    </div>
+                                                    <div class="bidder_verified d-flex flex-wrap align-items-center">
+                                                        <svg width="15" height="16" viewBox="0 0 15 16"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg"
+                                                            class="mr-1">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                d="M14 4.521C14.125 11.366 10.042 14.278 7.727 14.965C7.57366 15.0106 7.41034 15.0106 7.257 14.965C4.98 14.29 1.014 11.464 1 4.862C1.01372 4.29149 1.33458 3.7729 1.839 3.506C5.363 1.516 7.058 1 7.489 1C7.92 1 9.749 1.549 13.507 3.7C13.8045 3.86767 13.9918 4.17958 14 4.521Z"
+                                                                stroke="#5B5B5B" stroke-width="1.5"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M4.5 8.01502L6.5 10.015L10.5 6.00702" stroke="#5B5B5B"
+                                                                stroke-width="1.5" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg>
+                                                        <span>Verified</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-wrap align-items-center">
+                                                <div>
+                                                    <div class="bidder_bid">Your bid:
+                                                        <span>£{{ $transporter->transporter_payment }}</span>
+                                                    </div>
+                                                    <button class="btn view_message" type="button"
+                                                        data-toggle="collapse"
+                                                        data-target="#bidCollapse{{ $key }}"
+                                                        aria-expanded="true"
+                                                        aria-controls="bidCollapse{{ $key }}">
+                                                        Your messages <span class="message_count">0</span>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="d-flex flex-wrap align-items-center">
-                                            <div>
-                                                <div class="bidder_bid">Your bid: <span>£{{$transporter->transporter_payment}}</span></div>
-                                                <button class="btn view_message" type="button" data-toggle="collapse" data-target="#bidCollapse{{$key}}" aria-expanded="true" aria-controls="bidCollapse{{$key}}">
-                                                    Your messages <span class="message_count">0</span>
-                                                </button>
+
+                                        <div id="bidCollapse{{ $key }}"
+                                            class="collapse {{ $key == 0 ? 'show' : '' }}"
+                                            aria-labelledby="bid{{ $key }}" data-parent="#accordionBids">
+                                            <div class="card-body">
+                                                @foreach ($transporter->messages as $message)
+                                                    <div class="message-info">
+                                                        <p> <span>{{ $message->sender->username }}</span> sent on
+                                                            {{ $message->created_at->format('d/m') }} at
+                                                            {{ $message->created_at->format('H:i') }}</p>
+                                                        <p>{{ $message->message }}</p>
+                                                    </div>
+                                                @endforeach
+                                                @if ($key == 0)
+                                                    <form id="chat__form_{{$key}}" action="{{route('transporter.message.quote_send_message')}}" method="POST">
+                                                        @csrf
+                                                        <?php
+                                                        $thread = App\Thread::where('user_id', $quote->user_id)
+                                                            ->where('friend_id', Auth::user()->id)
+                                                            ->where('user_quote_id', $quote->quoteByTransporter->user_quote_id)
+                                                            ->first();
+                                                        ?>
+                                                        <input type="hidden" name="form_page" value="quote">
+                                                        <input type="hidden" name="user_id"
+                                                            value="{{ $quote->user_id }}">
+                                                        <input type="hidden" name="user_quote_id"
+                                                            value="{{ $quote->quoteByTransporter->user_quote_id}}">
+                                                        <input type="hidden" name="user_current_chat_id"
+                                                            id="user_current_chat_id_{{ $key }}"
+                                                            value="{{ $thread ? $thread->id : 0 }}">
+                                                        <textarea id="message" class="textarea" name="message" placeholder="Ask a question about this job."></textarea>
+                                                        <div class="position-relative note">
+                                                            <svg width="15" height="13" viewBox="0 0 15 13"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M13.5634 9.26532L8.95906 1.78565C8.65532 1.27285 8.10354 0.958374 7.50754 0.958374C6.91154 0.958374 6.35976 1.27285 6.05602 1.78565L1.45089 9.26532C1.10268 9.81055 1.07274 10.5004 1.37241 11.0738C1.67208 11.6471 2.25557 12.0163 2.90202 12.0417H12.1123C12.7587 12.0163 13.3422 11.6471 13.6419 11.0738C13.9415 10.5004 13.9116 9.81055 13.5634 9.26532Z"
+                                                                    stroke="#5B5B5B" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M7.50749 7.29175L7.50749 3.33341" stroke="#5B5B5B"
+                                                                    stroke-width="1.5" stroke-linecap="round" />
+                                                                <path d="M7.50749 9.66675V8.87508" stroke="#5B5B5B"
+                                                                    stroke-width="1.5" stroke-linecap="round" />
+                                                            </svg>
+                                                            <span>
+                                                                Do not share any contact details here. We will provide you
+                                                                with the users contact details after they have accepted your
+                                                                quote.
+                                                            </span>
+                                                        </div>
+                                                        <div class="message-error" style="display:none">Please enter your
+                                                            message.
+                                                        </div>
+                                                        <button type="button" id="formId" onclick="sendMessage({{$key}});"
+                                                            class="btn send_message">
+                                                            Send message
+                                                            <svg width="19" height="19" viewBox="0 0 19 19"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M17.7637 3.65881L15.2551 15.4893C15.0658 16.3242 14.5722 16.5321 13.8709 16.1387L10.0486 13.3221L8.20428 15.0959C8.00018 15.3 7.82947 15.4707 7.43611 15.4707L7.71072 11.578L14.7949 5.17658C15.1029 4.90198 14.7281 4.74983 14.3162 5.02444L5.55838 10.5389L1.78807 9.35881C0.967949 9.10276 0.953105 8.53869 1.95877 8.14533L16.706 2.46389C17.3888 2.20783 17.9863 2.61604 17.7637 3.65881Z"
+                                                                    fill="white" />
+                                                            </svg>
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
-    
-                                    <div id="bidCollapse{{$key}}" class="collapse {{$key == 0 ? 'show' : ''}}" aria-labelledby="bid{{$key}}" data-parent="#accordionBids">
-                                        <div class="card-body">
-                                           @foreach($transporter->messages as $message) 
-                                            <div class="message-info">
-                                                <p> <span>{{$message->sender->username }}</span>  sent on {{ $message->created_at->format('d/m') }} at {{ $message->created_at->format('H:i') }}</p>
-                                                <p>{{$message->message   }}</p> </div>
-                                           
-                                           @endforeach
-                                        @if ( $key == 0)
-                                        <form action="" method="POST">
-                                            @csrf
-                                        <textarea name="" id="" placeholder="Ask a question about this job."></textarea>
-                                        <div class="position-relative note">
-                                            <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.5634 9.26532L8.95906 1.78565C8.65532 1.27285 8.10354 0.958374 7.50754 0.958374C6.91154 0.958374 6.35976 1.27285 6.05602 1.78565L1.45089 9.26532C1.10268 9.81055 1.07274 10.5004 1.37241 11.0738C1.67208 11.6471 2.25557 12.0163 2.90202 12.0417H12.1123C12.7587 12.0163 13.3422 11.6471 13.6419 11.0738C13.9415 10.5004 13.9116 9.81055 13.5634 9.26532Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M7.50749 7.29175L7.50749 3.33341" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"/>
-                                                <path d="M7.50749 9.66675V8.87508" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"/>
-                                            </svg>
-                                            <span>
-                                                Do not share any contact details here. We will provide you with the users contact details after they have accepted your quote.
-                                            </span>
-                                        </div>
-                                        <button class="btn send_message">
-                                            Send message
-                                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M17.7637 3.65881L15.2551 15.4893C15.0658 16.3242 14.5722 16.5321 13.8709 16.1387L10.0486 13.3221L8.20428 15.0959C8.00018 15.3 7.82947 15.4707 7.43611 15.4707L7.71072 11.578L14.7949 5.17658C15.1029 4.90198 14.7281 4.74983 14.3162 5.02444L5.55838 10.5389L1.78807 9.35881C0.967949 9.10276 0.953105 8.53869 1.95877 8.14533L16.706 2.46389C17.3888 2.20783 17.9863 2.61604 17.7637 3.65881Z" fill="white"/>
-                                            </svg>
-                                        </button>
-                                        </form>
-                                        @endif
-                                    </div>
-                                    </div>
-                                </div>
-                               
                                 @endforeach
                             </div>
                         </div>
@@ -771,8 +826,78 @@
     {{--    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('constants.google_map_key') }}&loading=async&libraries=places&callback=initMap" async defer></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.40/moment-timezone-with-data.js"
+        type="text/javascript"></script>
 
     <script>
+        function sendMessage(id) {
+            var form = $('#chat__form_' + id);
+            var message = form.find('.textarea').val();
+            var contains_email = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i.test(message);
+            var contains_digit = /\d/.test(message);
+            if (!message.trim()) {
+                form.find('.message-error').css('display', 'block').text("Please enter your message.");
+                return;
+            }
+            if (contains_email || contains_digit) {
+                form.find('.message-error').css('display', 'block').text(
+                    "Do not share contact information or you will be banned.");
+                return;
+            }
+
+            var send_message = false;
+
+            if (!isEmptyOrSpaces(message)) {
+                send_message = true;
+            }
+
+            if (send_message == true) {
+                var submitButton = form.find(".send-msg");
+                submitButton.prop("disabled", true).text("Please Wait...");
+                var file_type = form.find('#file_type').val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                    }
+                });
+                
+                var timezone = moment.tz.guess();
+                var data = new FormData(form[0]); // Form data needs to be from the specific form
+                data.append('message', message);
+                data.append('file_type', file_type);
+                data.append('timezone', timezone);
+
+                $.ajax({
+                    url: form.attr('action'),
+                    method: "POST",
+                    data: data,
+                    dataType: 'json',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                }).done(function(response) {
+                    submitButton.prop("disabled", false).html(
+                        "Send message <svg width='17' height='15' viewBox='0 0 17 15' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M16.7637 1.65906L14.2551 13.4895C14.0658 14.3245 13.5722 14.5323 12.8709 14.1389L9.04861 11.3223L7.20428 13.0962C7.00018 13.3003 6.82947 13.471 6.43611 13.471L6.71072 9.5782L13.7949 3.17683C14.1029 2.90222 13.7281 2.75007 13.3162 3.02468L4.55838 8.53913L0.788066 7.35906C-0.0320513 7.103 -0.0468951 6.53894 0.958769 6.14558L15.706 0.464134C16.3888 0.208079 16.9863 0.616282 16.7637 1.65906Z' fill='white'/></svg>"
+                    );
+                    if (response.status == "success") {
+                        window.location.reload();
+                    }
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    // Handle any unexpected errors
+                    submitButton.prop("disabled", false).html(
+                        "Send message <svg width='17' height='15' viewBox='0 0 17 15' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M16.7637 1.65906L14.2551 13.4895C14.0658 14.3245 13.5722 14.5323 12.8709 14.1389L9.04861 11.3223L7.20428 13.0962C7.00018 13.3003 6.82947 13.471 6.43611 13.471L6.71072 9.5782L13.7949 3.17683C14.1029 2.90222 13.7281 2.75007 13.3162 3.02468L4.55838 8.53913L0.788066 7.35906C-0.0320513 7.103 -0.0468951 6.53894 0.958769 6.14558L15.706 0.464134C16.3888 0.208079 16.9863 0.616282 16.7637 1.65906Z' fill='white'/></svg>"
+                    );
+                    form.find('.message-error').css('display', 'block').text(
+                        "Do not share contact information or you will be banned.");
+                });
+            }
+        }
+
+        function isEmptyOrSpaces(str) {
+            return str === null || str.match(/^ *$/) !== null;
+        }
+
         $(function() {
             $('.photo_id_popover').popover({
                 content: 'We have a copy of this transporters valid drivers license photo I.D to protect you and ensuring a safe market place for transporting your vehicle.',

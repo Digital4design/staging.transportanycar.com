@@ -1447,6 +1447,7 @@ class DashboardController extends WebController
                 ->orderByRaw('CAST(price AS UNSIGNED) ASC') // Then sort the rest by price
                 ->get();
             // return $quotes;
+            
 
             $quotes = $quotes->map(function ($quote) {
                 $my_quotes = QuoteByTransporter::where('user_id', $quote->user_id)->pluck('id');
@@ -1474,7 +1475,8 @@ class DashboardController extends WebController
 
                 return $quote;
             });
-           
+            // dd($quote->quoteByTransporter);
+            // return ['quote' => $quote, 'quotebytransporters' => $quotes];
             return view('transporter.dashboard.job_infromation', ['quote' => $quote, 'quotebytransporters' => $quotes]);
            
         } catch (\Exception $ex) {
