@@ -2,6 +2,9 @@
 
 @section('head_css')
     <style>
+        #read-more {
+            display: inline-block;
+        }
         .add_to_wishlist {
             background: #999999;
             color: #F3F8FF;
@@ -631,7 +634,8 @@
                                                         data-target="#bidCollapse{{ $key }}"
                                                         aria-expanded="true"
                                                         aria-controls="bidCollapse{{ $key }}">
-                                                        Your messages <span class="message_count">{{$transporter->count_messages}}</span>
+                                                        Your messages <span
+                                                            class="message_count">{{ $transporter->count_messages }}</span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -641,16 +645,24 @@
                                             class="collapse {{ $key == 0 ? 'show' : '' }}"
                                             aria-labelledby="bid{{ $key }}" data-parent="#accordionBids">
                                             <div class="card-body">
-                                                @foreach ($transporter->messages as $message)
-                                                    <div class="message-info">
+                                                @foreach ($transporter->messages as $set => $message)
+                                                    <div class="message-info @if ($set >= 2) hidden-message @endif"
+                                                        @if ($set >= 2) style="display: none;" @endif>
                                                         <p> <span>{{ $message->sender->username }}</span> sent on
                                                             {{ $message->created_at->format('d/m') }} at
                                                             {{ $message->created_at->format('H:i') }}</p>
                                                         <p>{{ $message->message }}</p>
                                                     </div>
                                                 @endforeach
+                                                @if ($transporter->messages->count() > 2)
+                                                    <a href="#" id="read-more" class="mb-2">Read More</a>
+                                                    {{-- <div id="show-less" class="mb-3"
+                                                        style="display: none;">Show Less</div> --}}
+                                                @endif
                                                 @if ($key == 0)
-                                                    <form id="chat__form_{{$key}}" action="{{route('transporter.message.quote_send_message')}}" method="POST">
+                                                    <form id="chat__form_{{ $key }}"
+                                                        action="{{ route('transporter.message.quote_send_message') }}"
+                                                        method="POST">
                                                         @csrf
                                                         <?php
                                                         $thread = App\Thread::where('user_id', $quote->user_id)
@@ -662,7 +674,7 @@
                                                         <input type="hidden" name="user_id"
                                                             value="{{ $quote->user_id }}">
                                                         <input type="hidden" name="user_quote_id"
-                                                            value="{{ $quote->quoteByTransporter->user_quote_id}}">
+                                                            value="{{ $quote->quoteByTransporter->user_quote_id }}">
                                                         <input type="hidden" name="user_current_chat_id"
                                                             id="user_current_chat_id_{{ $key }}"
                                                             value="{{ $thread ? $thread->id : 0 }}">
@@ -688,7 +700,8 @@
                                                         <div class="message-error" style="display:none">Please enter your
                                                             message.
                                                         </div>
-                                                        <button type="button" id="formId" onclick="sendMessage({{$key}});"
+                                                        <button type="button" id="formId"
+                                                            onclick="sendMessage({{ $key }});"
                                                             class="btn send_message">
                                                             Send message
                                                             <svg width="19" height="19" viewBox="0 0 19 19"
@@ -700,6 +713,7 @@
                                                         </button>
                                                     </form>
                                                 @endif
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -861,7 +875,7 @@
                         'X-CSRF-TOKEN': $('input[name="_token"]').val()
                     }
                 });
-                
+
                 var timezone = moment.tz.guess();
                 var data = new FormData(form[0]); // Form data needs to be from the specific form
                 data.append('message', message);
@@ -1267,6 +1281,35 @@
                     });
                 }
             });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            const messagesToShow = 2; // Number of messages to toggle per action
+            const hiddenMessages = $('.hidden-message'); // Select all hidden messages
+
+            // On clicking "Read More"
+            $('#read-more').on('click', function(e) {
+                e.preventDefault();
+                // Show the next batch of hidden messages
+                hiddenMessages.filter(':hidden').slice(0, messagesToShow).slideDown();
+
+                // If all messages are shown, hide "Read More" and show "Show Less"
+                if (hiddenMessages.filter(':hidden').length === 0) {
+                    $(this).hide();
+                    // $('#show-less').show();
+                }
+            });
+
+            // On clicking "Show Less"
+            // $('#show-less').on('click', function() {
+            //     // Hide all messages except the first batch
+            //     hiddenMessages.slice(messagesToShow).slideUp();
+
+            //     // Show "Read More" and hide "Show Less"
+            //     $('#read-more').show();
+            //     $(this).hide();
+            // });
         });
     </script>
 @endsection
