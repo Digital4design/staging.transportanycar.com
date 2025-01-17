@@ -631,7 +631,7 @@
                                                         data-target="#bidCollapse{{ $key }}"
                                                         aria-expanded="true"
                                                         aria-controls="bidCollapse{{ $key }}">
-                                                        Your messages <span class="message_count">0</span>
+                                                        Your messages <span class="message_count">{{$transporter->count_messages}}</span>
                                                     </button>
                                                 </div>
                                             </div>

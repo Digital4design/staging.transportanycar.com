@@ -1469,13 +1469,14 @@ class DashboardController extends WebController
                 $matchingThread = $threads->firstWhere('friend_id', $quote->user_id);
                 if ($matchingThread) {
                     $quote->messages = $matchingThread->messages;
+                    $quote->count_messages = count($matchingThread->messages);
                 } else {
                     $quote->messages = null;
                 }
 
                 return $quote;
             });
-            // dd($quote->quoteByTransporter);
+            // dd($quotes);
             // return ['quote' => $quote, 'quotebytransporters' => $quotes];
             return view('transporter.dashboard.job_infromation', ['quote' => $quote, 'quotebytransporters' => $quotes]);
            
