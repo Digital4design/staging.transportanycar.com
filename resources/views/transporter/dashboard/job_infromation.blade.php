@@ -228,7 +228,7 @@
             max-width: calc(100% - 100px);
         }
 
-        .back_btn {
+        .back_btn a {
             font-size: 18px;
             line-height: 24px;
             color: rgba(0, 0, 0, 0.5);
@@ -472,7 +472,7 @@
                         <div class="row align-items-center">
                             <div class="col-7 mb-3">
                                 <div class="back_btn row mx-0 align-items-center">
-                                    <a href="{{ url('transporter/new-jobs-new') }}">
+                                    <a href="{{ url('transporter/new-jobs-new') }}" class="d-flex flex-wrap align-items-center">
                                         <svg width="7" height="13" viewBox="0 0 7 13" fill="none"
                                             xmlns="http://www.w3.org/2000/svg" class="mr-2">
                                             <g opacity="0.5">
@@ -480,8 +480,8 @@
                                                     stroke-linejoin="round" />
                                             </g>
                                         </svg>
+                                        Back to find jobs
                                     </a>
-                                    Back to find jobs
                                 </div>
                             </div>
                             <div class="col-5 date mb-3 text-right">
@@ -699,15 +699,16 @@
                                             </div>
                                             <div class="d-flex flex-wrap align-items-center">
                                                 <div>
-                                                    <div class="bidder_bid">Your bid:
-                                                        <span>£{{ $transporter->transporter_payment }}</span>
+                                                    <div class="bidder_bid">{{ $key == 0 ? 'Your bid' : 'Current bid' }}:
+                                                        <span>£{{ round($transporter->transporter_payment) }}</span>
                                                     </div>
                                                     <button class="btn view_message" type="button"
                                                         data-toggle="collapse"
                                                         data-target="#bidCollapse{{ $key }}"
-                                                        aria-expanded="true"
+                                                        aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
                                                         aria-controls="bidCollapse{{ $key }}">
-                                                        Your messages <span
+                                                        {{ $key == 0 ? 'Your messages' : 'View messages' }}
+                                                         <span
                                                             class="message_count">{{ $transporter->count_messages }}</span>
                                                     </button>
                                                 </div>
