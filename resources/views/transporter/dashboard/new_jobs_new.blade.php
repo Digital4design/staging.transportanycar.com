@@ -2609,23 +2609,23 @@
             //         }
             //         var createdAt = new Date(carData.created_at);
 
-            //         // Add 10 days to the created_at date
-            //         createdAt.setDate(createdAt.getDate() + 10);
+                    // Add 10 days to the created_at date
+                    createdAt.setDate(createdAt.getDate() + 10);
 
-            //         // Extract the day, month, and last two digits of the year
-            //         var dd = String(createdAt.getDate()).padStart(2, '0'); // Day with leading zero
-            //         var mm = String(createdAt.getMonth() + 1).padStart(2, '0'); // Month with leading zero
-            //         var yy = String(createdAt.getFullYear()).slice(-2); // Last two digits of the year
+                    // Extract the day, month, and last two digits of the year
+                    var dd = String(createdAt.getDate()).padStart(2, '0'); // Day with leading zero
+                    var mm = String(createdAt.getMonth() + 1).padStart(2, '0'); // Month with leading zero
+                    var yy = String(createdAt.getFullYear()).slice(-2); // Last two digits of the year
 
-            //         // Format the date as dd//mm/yy
-            //         var formattedDate = `${dd}//${mm}//${yy}`;
+                    // Format the date as dd//mm/yy
+                    var formattedDate = `${dd}//${mm}//${yy}`;
 
-            //         var switch_custom = '';
-            //         if (carData?.quote_by_transporter) {
-            //             switch_custom = `<a href="javascript:;" onclick="share_edit_quote('${carData.id}');" class="make_offer_btn checkStatus">Edit bid</a>`
-            //         } else {
-            //             switch_custom = ` <a href="javascript:;" onclick="share_give_quote(${carData.id});" class="make_offer_btn checkStatus">Place bid</a>`
-            //         }
+                    var switch_custom = '';
+                    if (carData?.quote_by_transporter) {
+                        switch_custom = `<a href="javascript:;" onclick="share_edit_quote('${carData.id}');" class="make_offer_btn checkStatus">Edit bid</a>`
+                    } else {
+                        switch_custom = ` <a href="javascript:;" onclick="share_give_quote(${carData.id});" class="make_offer_btn checkStatus">Place bid</a>`
+                    }
 
             //         // Dynamically update modal body content
             //         var modalBodyContent = `                    

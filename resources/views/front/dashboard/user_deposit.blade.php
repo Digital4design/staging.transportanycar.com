@@ -775,6 +775,7 @@
             </div>
         </div>
     </section>
+    @include('layouts.web.footer')
     <!-- Modal -->
     <div class="modal resolve_bx fade" id="resolve" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
