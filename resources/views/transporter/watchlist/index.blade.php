@@ -57,8 +57,8 @@
 
 
         /* .jobsrch_form_blog .form-control {
-                                                color: #000000;
-                                            } */
+                                                    color: #000000;
+                                                } */
         .jobsrch_form_blog .error-message {
             position: absolute;
             bottom: -34px;
@@ -133,9 +133,9 @@
         }
 
         /* .get_quote .modal-header .close {
-                            position: absolute;
-                            right: 15px;
-                        } */
+                                position: absolute;
+                                right: 15px;
+                            } */
 
         /* Add your CSS styling here */
         #popup {
@@ -1845,7 +1845,6 @@
                                                             </ul>
                                                         </div>
                                                         @if ($quote->quoteByTransporterCheck)
-                                                            
                                                             <div class="actionDiv">
                                                                 <div class="rotated-banner">Bidding</div>
                                                                 {{-- <svg width="52" height="43" viewBox="0 0 52 43"
@@ -1938,12 +1937,19 @@
                     <div class="modal-footer" style="margin-top: 10px;">
                         <input type="hidden" name="quote_id" id="quote_id" value="">
                         <p class="pl-4 position-relative" style="line-height:16px;">
-                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" style="left:0; top:0;" class="position-absolute">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.563 12.2653L10.9587 4.7856C10.655 4.27281 10.1032 3.95833 9.50717 3.95833C8.91117 3.95833 8.35939 4.27281 8.05565 4.7856L3.45053 12.2653C3.10231 12.8105 3.07237 13.5004 3.37204 14.0737C3.67172 14.6471 4.25521 15.0163 4.90165 15.0416H14.1119C14.7583 15.0163 15.3418 14.6471 15.6415 14.0737C15.9412 13.5004 15.9112 12.8105 15.563 12.2653Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M9.50675 10.2916V6.33331" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M9.50675 12.6667V11.875" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>                                
-                            Do not share any contact details here. We will provide you with the users contact details after they have accepted your quote.
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" style="left:0; top:0;" class="position-absolute">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M15.563 12.2653L10.9587 4.7856C10.655 4.27281 10.1032 3.95833 9.50717 3.95833C8.91117 3.95833 8.35939 4.27281 8.05565 4.7856L3.45053 12.2653C3.10231 12.8105 3.07237 13.5004 3.37204 14.0737C3.67172 14.6471 4.25521 15.0163 4.90165 15.0416H14.1119C14.7583 15.0163 15.3418 14.6471 15.6415 14.0737C15.9412 13.5004 15.9112 12.8105 15.563 12.2653Z"
+                                    stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M9.50675 10.2916V6.33331" stroke="#5B5B5B" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <path d="M9.50675 12.6667V11.875" stroke="#5B5B5B" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                            </svg>
+                            Do not share any contact details here. We will provide you with the users contact details after
+                            they have accepted your quote.
                         </p>
                         <button type="submit" class="submit_btn">Place bid</button>
                     </div>
@@ -2033,9 +2039,9 @@
                     <!-- Modal content will be dynamically updated here -->
                 </div>
                 <!-- Modal Footer
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success">Place bid</button>
-                                                            </div> -->
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-success">Place bid</button>
+                                                                </div> -->
             </div>
         </div>
     </div>
@@ -2062,6 +2068,7 @@
         $.validator.addMethod("greaterThanZero", function(value, element) {
             return this.optional(element) || parseFloat(value) > 0;
         }, "You must enter an amount greater than zero");
+
         $("#main_form").validate({
             rules: {
                 amount: {
@@ -2263,7 +2270,7 @@
         }
 
         function share_edit_quote(id) {
-      
+
             $('#quote_edit_id').val(id);
             var quotes = @json($quotes);
             var selectedQuote = quotes.data.find(quote => quote.id == id);
@@ -2369,7 +2376,16 @@
             myFunction(x);
         });
 
+        $(document).on('click', '.car-row', function() {
 
+            var carId = $(this).data('car-id');
+            if (carId) {
+                var url = jobInfoUrl.replace(':id', carId); // Replace placeholder with actual ID
+                window.location.href = url; // Redirect to the URL
+            } else {
+                console.log('Job ID is missing');
+            }
+        });
         $(document).ready(function() {
             $("#jobsrch_form_blog").validate({
                 rules: {
@@ -2398,159 +2414,159 @@
                     $(element).closest('.form-group').removeClass('error-margin');
                 }
             });
-            $(document).on('click', '.car-row', function() {
-                var carId = $(this).data('car-id');
-                var carData = carDetails.data.find(function(car) {
-                    return car.id == carId;
-                });
-                if (carData) {
-                    let makeAndModel = `${carData.vehicle_make} ${carData.vehicle_model}`;
-                    if (carData.vehicle_make_1 && carData.vehicle_model_1) {
-                        makeAndModel += ` / ${carData.vehicle_make_1} ${carData.vehicle_model_1}`;
-                    }
-                    let startsDrives = carData.starts_drives == 0 ? 'No' : 'Yes';
-                    if (carData.starts_drives_1 !== null) {
-                        startsDrives += ` / ${carData.starts_drives_1 == 0 ? 'No' : 'Yes'}`;
-                    }
-                    var createdAt = new Date(carData.created_at);
+            // $(document).on('click', '.car-row', function() {
+            //     var carId = $(this).data('car-id');
+            //     var carData = carDetails.data.find(function(car) {
+            //         return car.id == carId;
+            //     });
+            //     if (carData) {
+            //         let makeAndModel = `${carData.vehicle_make} ${carData.vehicle_model}`;
+            //         if (carData.vehicle_make_1 && carData.vehicle_model_1) {
+            //             makeAndModel += ` / ${carData.vehicle_make_1} ${carData.vehicle_model_1}`;
+            //         }
+            //         let startsDrives = carData.starts_drives == 0 ? 'No' : 'Yes';
+            //         if (carData.starts_drives_1 !== null) {
+            //             startsDrives += ` / ${carData.starts_drives_1 == 0 ? 'No' : 'Yes'}`;
+            //         }
+            //         var createdAt = new Date(carData.created_at);
 
-                    // Add 10 days to the created_at date
-                    createdAt.setDate(createdAt.getDate() + 10);
+            //         // Add 10 days to the created_at date
+            //         createdAt.setDate(createdAt.getDate() + 10);
 
-                    // Extract the day, month, and last two digits of the year
-                    var dd = String(createdAt.getDate()).padStart(2, '0'); // Day with leading zero
-                    var mm = String(createdAt.getMonth() + 1).padStart(2, '0'); // Month with leading zero
-                    var yy = String(createdAt.getFullYear()).slice(-2); // Last two digits of the year
+            //         // Extract the day, month, and last two digits of the year
+            //         var dd = String(createdAt.getDate()).padStart(2, '0'); // Day with leading zero
+            //         var mm = String(createdAt.getMonth() + 1).padStart(2, '0'); // Month with leading zero
+            //         var yy = String(createdAt.getFullYear()).slice(-2); // Last two digits of the year
 
-                    // Format the date as dd//mm/yy
-                    var formattedDate = `${dd}//${mm}//${yy}`;
+            //         // Format the date as dd//mm/yy
+            //         var formattedDate = `${dd}//${mm}//${yy}`;
 
-                    var switch_custom = '';
-                    if (carData?.quote_by_transporter) {
-                        // switch_custom =
-                        switch_custom = `<a href="javascript:;"
-                                            onclick="share_edit_quote('${carData.id}');"
-                                            class="make_offer_btn checkStatus">Edit bid</a>`
-                    } else {
-                        switch_custom = ` <a href="javascript:;"
-                                            onclick="share_give_quote(${carData.id});"
-                                            class="make_offer_btn checkStatus">Place bid</a>`
-                    }
+            //         var switch_custom = '';
+            //         if (carData?.quote_by_transporter) {
+            //             // switch_custom =
+            //             switch_custom = `<a href="javascript:;"
+        //                                 onclick="share_edit_quote('${carData.id}');"
+        //                                 class="make_offer_btn checkStatus">Edit bid</a>`
+            //         } else {
+            //             switch_custom = ` <a href="javascript:;"
+        //                                 onclick="share_give_quote(${carData.id});"
+        //                                 class="make_offer_btn checkStatus">Place bid</a>`
+            //         }
 
-                    // Dynamically update modal body content
-                    var modalBodyContent = `
-                    <div class="jobsrch_box">
-                        <div class="row">                           
-                            <div class="col-lg-6">
-                                <div class="jobsrch_top_box position-relative">
-                                    ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
-                                                        <div>
-                                                            <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
-                                                        </div>
-                                                        ` : `
-                                                        <div class="job_se_sec slider">
-                                                            <div>
-                                                                <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
-                                                            </div>
-                                                            ${carData.image_1 ? `
-                                                <div>
-                                                    <img src="/${carData.image_1}" class="vehicle_image" alt="Vehicle Image" />
-                                                </div>
-                                            ` : `
-                                                <div>
-                                                    <img src="/uploads/no_car_image.png" class="vehicle_image" alt="No Image Available" />
-                                                </div>
-                                            `}
-                                                        </div>
-                                                        <div class="custom-navigation">
-                                                            <span class="current-slide">1</span> of <span class="total-slides">2</span>
-                                                        </div>
-                                                    `}                                   
-                                </div>
-                                
-                                <div class="btnCustom">${switch_custom}</div>
-                                <div class="wishList-bidInfo">
-                                    <div class="wishListBtn">
-                                         <a href="javascript:;" class="btn"
-                                            onclick="addToWatchlist('${carData.id}');"
-                                            style="margin-left: auto;">
-                                                Add to watchlist
-                                        </a>
-                                    </div>
-                                    <div class="bidTnfo">
-                                        <p class="info">Current lowest bid: <span class="green">£${carData.lowest_bid}</span></p>
-                                        <p class="info">Transporters bidding: <span class="blue">${carData.transporter_quotes_count}</span></p>
-                                    </div>
-                                </div>
-                           
-                                <ul class="jobsrch_info_list">
-                                    <li>
-                                        <div class="jpbsrch_inner">
-                                            <small>Make & model:</small>
-                                        </div>
-                                        <span>${makeAndModel}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                           
-                                            <small>Pick-up area:</small>
-                                        </div>
-                                        <span>${carData.pickup_postcode ? hidePostcode(carData.pickup_postcode) : '-'}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                            
-                                            <small>Drop-off area:</small>
-                                        </div>
-                                        <span>
-                                            ${carData.drop_postcode ? hidePostcode(carData.drop_postcode) : '-'}
-                                            </span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                           
-                                            <small>Delivery date:</small>
-                                        </div>
-                                        <span>${carData.delivery_timeframe_from ? formatCustomDate(carData.delivery_timeframe_from) : carData.delivery_timeframe}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                            
-                                            <small>Starts & drives:</small>
-                                        </div>
-                                        <span>${startsDrives}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                            
-                                            <small>Delivery type:</small>
-                                        </div>
-                                        <span>${carData.how_moved}</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="jobsrch_right_box">
-                                    <h4 class="distance_text">Journey Distance: <b>${carData.distance} miles</b> <strong>(${carData.duration})</strong></h4> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-                    $('#carDetailsModalBody').html(modalBodyContent);
-                }
-                $('#expiry_date').html(`<p>Expiry date: ${formattedDate}</p>`);
-                $('#carDetailsModal').modal('show');
-                var $slider = $('.slider');
-                $slider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide) {
-                    var i = (currentSlide ? currentSlide : 0) + 1;
-                    $('.current-slide').text(i);
-                    $('.total-slides').text(slick.slideCount);
-                });
+            //         // Dynamically update modal body content
+            //         var modalBodyContent = `
+        //         <div class="jobsrch_box">
+        //             <div class="row">                           
+        //                 <div class="col-lg-6">
+        //                     <div class="jobsrch_top_box position-relative">
+        //                         ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
+            //                                             <div>
+            //                                                 <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+            //                                             </div>
+            //                                             ` : `
+            //                                             <div class="job_se_sec slider">
+            //                                                 <div>
+            //                                                     <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+            //                                                 </div>
+            //                                                 ${carData.image_1 ? `
+        //                                     <div>
+        //                                         <img src="/${carData.image_1}" class="vehicle_image" alt="Vehicle Image" />
+        //                                     </div>
+        //                                 ` : `
+        //                                     <div>
+        //                                         <img src="/uploads/no_car_image.png" class="vehicle_image" alt="No Image Available" />
+        //                                     </div>
+        //                                 `}
+            //                                             </div>
+            //                                             <div class="custom-navigation">
+            //                                                 <span class="current-slide">1</span> of <span class="total-slides">2</span>
+            //                                             </div>
+            //                                         `}                                   
+        //                     </div>
 
-                $slider.slick({
-                    infinite: false,
-                    speed: 300,
-                    slidesToShow: 1,
-                    adaptiveHeight: true,
-                    prevArrow: '<div class="slick-prev"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.0756 16.5115L1.85822 10.7965C1.31976 10.4441 1 9.87387 1 9.26607C1 8.65827 1.31976 8.08803 1.85822 7.73561L10.0756 1.48823C10.7708 0.976677 11.7151 0.857068 12.5347 1.17696C13.3543 1.49685 13.917 2.20438 14 3.01972V14.984L14 14.984C13.9156 15.7986 13.3523 16.5049 12.533 16.8238C11.7136 17.1427 10.7702 17.0228 10.0756 16.5115Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>',
-                    nextArrow: '<div class="slick-next"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.9244 1.48852L13.1418 7.20349C13.6802 7.5559 14 8.12613 14 8.73393C14 9.34173 13.6802 9.91197 13.1418 10.2644L4.9244 16.5118C4.22923 17.0233 3.28491 17.1429 2.46532 16.823C1.64573 16.5032 1.08303 15.7956 1 14.9803L1 3.01597C1.08445 2.20143 1.6477 1.49505 2.46703 1.17615C3.28636 0.857255 4.22984 0.977185 4.9244 1.48852Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
-                });
-            });
+        //                     <div class="btnCustom">${switch_custom}</div>
+        //                     <div class="wishList-bidInfo">
+        //                         <div class="wishListBtn">
+        //                              <a href="javascript:;" class="btn"
+        //                                 onclick="addToWatchlist('${carData.id}');"
+        //                                 style="margin-left: auto;">
+        //                                     Add to watchlist
+        //                             </a>
+        //                         </div>
+        //                         <div class="bidTnfo">
+        //                             <p class="info">Current lowest bid: <span class="green">£${carData.lowest_bid}</span></p>
+        //                             <p class="info">Transporters bidding: <span class="blue">${carData.transporter_quotes_count}</span></p>
+        //                         </div>
+        //                     </div>
+
+        //                     <ul class="jobsrch_info_list">
+        //                         <li>
+        //                             <div class="jpbsrch_inner">
+        //                                 <small>Make & model:</small>
+        //                             </div>
+        //                             <span>${makeAndModel}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                           
+        //                                 <small>Pick-up area:</small>
+        //                             </div>
+        //                             <span>${carData.pickup_postcode ? hidePostcode(carData.pickup_postcode) : '-'}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                            
+        //                                 <small>Drop-off area:</small>
+        //                             </div>
+        //                             <span>
+        //                                 ${carData.drop_postcode ? hidePostcode(carData.drop_postcode) : '-'}
+        //                                 </span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                           
+        //                                 <small>Delivery date:</small>
+        //                             </div>
+        //                             <span>${carData.delivery_timeframe_from ? formatCustomDate(carData.delivery_timeframe_from) : carData.delivery_timeframe}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                            
+        //                                 <small>Starts & drives:</small>
+        //                             </div>
+        //                             <span>${startsDrives}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                            
+        //                                 <small>Delivery type:</small>
+        //                             </div>
+        //                             <span>${carData.how_moved}</span>
+        //                         </li>
+        //                     </ul>
+        //                 </div>
+        //                 <div class="col-lg-6">
+        //                     <div class="jobsrch_right_box">
+        //                         <h4 class="distance_text">Journey Distance: <b>${carData.distance} miles</b> <strong>(${carData.duration})</strong></h4> 
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </div>`;
+            //         $('#carDetailsModalBody').html(modalBodyContent);
+            //     }
+            //     $('#expiry_date').html(`<p>Expiry date: ${formattedDate}</p>`);
+            //     $('#carDetailsModal').modal('show');
+            //     var $slider = $('.slider');
+            //     $slider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide) {
+            //         var i = (currentSlide ? currentSlide : 0) + 1;
+            //         $('.current-slide').text(i);
+            //         $('.total-slides').text(slick.slideCount);
+            //     });
+
+            //     $slider.slick({
+            //         infinite: false,
+            //         speed: 300,
+            //         slidesToShow: 1,
+            //         adaptiveHeight: true,
+            //         prevArrow: '<div class="slick-prev"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.0756 16.5115L1.85822 10.7965C1.31976 10.4441 1 9.87387 1 9.26607C1 8.65827 1.31976 8.08803 1.85822 7.73561L10.0756 1.48823C10.7708 0.976677 11.7151 0.857068 12.5347 1.17696C13.3543 1.49685 13.917 2.20438 14 3.01972V14.984L14 14.984C13.9156 15.7986 13.3523 16.5049 12.533 16.8238C11.7136 17.1427 10.7702 17.0228 10.0756 16.5115Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>',
+            //         nextArrow: '<div class="slick-next"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.9244 1.48852L13.1418 7.20349C13.6802 7.5559 14 8.12613 14 8.73393C14 9.34173 13.6802 9.91197 13.1418 10.2644L4.9244 16.5118C4.22923 17.0233 3.28491 17.1429 2.46532 16.823C1.64573 16.5032 1.08303 15.7956 1 14.9803L1 3.01597C1.08445 2.20143 1.6477 1.49505 2.46703 1.17615C3.28636 0.857255 4.22984 0.977185 4.9244 1.48852Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+            //     });
+            // });
             $('#backButton').on('click', function() {
                 $('#carDetailsModal').modal('hide');
             });

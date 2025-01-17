@@ -3,8 +3,9 @@
 @section('head_css')
     <style>
         .adjust-space-without-btn {
-            margin-bottom: 40px!important;
+            margin-bottom: 40px !important;
         }
+
         .jobsrch_info_list h6 {
             width: 10% !important;
         }
@@ -60,8 +61,8 @@
 
 
         /* .jobsrch_form_blog .form-control {
-                            color: #000000;
-                        } */
+                                color: #000000;
+                            } */
         .jobsrch_form_blog .error-message {
             position: absolute;
             bottom: -34px;
@@ -136,9 +137,9 @@
         }
 
         /* .get_quote .modal-header .close {
-                    position: absolute;
-                    right: 15px;
-                } */
+                        position: absolute;
+                        right: 15px;
+                    } */
 
         /* Add your CSS styling here */
         #popup {
@@ -233,10 +234,10 @@
         }
 
         /* #carDetailsModal .modal-header button.btn-close {
-                    position: absolute;
-                    top: 11px;
-                    right: 15px;
-                } */
+                        position: absolute;
+                        top: 11px;
+                        right: 15px;
+                    } */
 
         #carDetailsModal .modal-header span {
             display: flex;
@@ -359,29 +360,43 @@
             padding-bottom: 20px;
         }
 
-        .get_quote.avoid-user-to-place-bid .modal-header {margin-bottom: 0;}
-        .get_quote.avoid-user-to-place-bid .modal-content {border-radius: 8px; box-shadow: 0 4px 4px 0rgba(0,0,0,0.25); padding: 35px;}
+        .get_quote.avoid-user-to-place-bid .modal-header {
+            margin-bottom: 0;
+        }
+
+        .get_quote.avoid-user-to-place-bid .modal-content {
+            border-radius: 8px;
+            box-shadow: 0 4px 4px 0rgba(0, 0, 0, 0.25);
+            padding: 35px;
+        }
+
         .get_quote.avoid-user-to-place-bid .modal-title {
             font-size: 20px;
             line-height: 25px;
             font-weight: 400;
         }
+
         .get_quote.avoid-user-to-place-bid .modal-body {
             font-size: 12px;
             line-height: 15px;
             font-weight: 300;
-            color:#444444;
+            color: #444444;
             text-align: center;
             margin: 25px 0;
         }
+
         .get_quote.avoid-user-to-place-bid .modal-dialog {
             max-width: 285px;
         }
-        .get_quote.avoid-user-to-place-bid .modal-footer {margin-top: 0;}
+
+        .get_quote.avoid-user-to-place-bid .modal-footer {
+            margin-top: 0;
+        }
+
         .get_quote.avoid-user-to-place-bid .modal-footer button {
             font-size: 14px;
             line-height: 18px;
-            font-weight: 400!important;
+            font-weight: 400 !important;
             margin-bottom: 0;
             border-radius: 5px;
         }
@@ -1407,9 +1422,9 @@
 
 
             /* .job_se_sec.slick-initialized .slick-slide {
-                display: block;
-                width: 380px !important;
-            } */
+                    display: block;
+                    width: 380px !important;
+                } */
 
             .job_se_sec .slick-track {
                 width: 760px !important;
@@ -1420,10 +1435,10 @@
             }
 
             /* .modal-header button.btn-close {
-                        position: absolute;
-                        top: 11px;
-                        right: 15px;
-                    } */
+                            position: absolute;
+                            top: 11px;
+                            right: 15px;
+                        } */
 
             .jobserch_mob .jobsrch_box {
                 padding: 20px 20px 10px;
@@ -1743,8 +1758,8 @@
                                         <label>Sheffield</label>
                                         <label>Devon</label>
                                     </div>
-                                    
-                                   
+
+
                                     <div class="form-group">
                                         <a href="javascript:;" class="srchjob_byn" id="search_job">
                                             <svg class="d-md-inline-block d-none" xmlns="http://www.w3.org/2000/svg"
@@ -1922,7 +1937,7 @@
                                                                         <a href="javascript:;" style="margin-left: auto;"
                                                                             class=""
                                                                             onclick="removeToWatchlist('{{ $quote->id }}');">
-                                                                           
+
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                                 width="16" height="16"
                                                                                 fill="#9C9C9C" class="bi bi-eye-slash"
@@ -1940,9 +1955,14 @@
                                                                             class=""
                                                                             onclick="addToWatchlist('{{ $quote->id }}');"
                                                                             style="margin-left: auto;">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="#9C9C9C" class="bi bi-eye" viewBox="0 0 16 16">
-                                                                                <path d="M8 2.5C4.5 2.5 1.73 5.11.64 8c1.09 2.89 3.86 5.5 7.36 5.5s6.27-2.61 7.36-5.5C14.27 5.11 11.5 2.5 8 2.5z" />
-                                                                                <circle cx="8" cy="8" r="3" />
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="16" height="16"
+                                                                                fill="none" stroke="#9C9C9C"
+                                                                                class="bi bi-eye" viewBox="0 0 16 16">
+                                                                                <path
+                                                                                    d="M8 2.5C4.5 2.5 1.73 5.11.64 8c1.09 2.89 3.86 5.5 7.36 5.5s6.27-2.61 7.36-5.5C14.27 5.11 11.5 2.5 8 2.5z" />
+                                                                                <circle cx="8" cy="8"
+                                                                                    r="3" />
                                                                             </svg>
                                                                         </a>
                                                                     @endif
@@ -1994,7 +2014,7 @@
     <div class="pagination before_search">
         {{ $quotes->links() }}
     </div>
-    
+
 
     <div class="modal get_quote fade" id="quote" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -2034,10 +2054,14 @@
                     <div class="modal-footer" style="margin-top: 10px;">
                         <input type="hidden" name="quote_id" id="quote_id" value="">
                         <p class="position-relative pl-4" style="line-height:16px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="20" height="20" style="left:0; top:0;" class="position-absolute" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-                            </svg>                              
-                            Do not share any contact details here. We will provide you with the users contact details after they have accepted your quote.
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="20" height="20"
+                                style="left:0; top:0;" class="position-absolute" viewBox="0 0 24 24" strokeWidth={1.5}
+                                stroke="currentColor" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                            </svg>
+                            Do not share any contact details here. We will provide you with the users contact details after
+                            they have accepted your quote.
                         </p>
                         <button type="submit" class="submit_btn">Place bid</button>
                     </div>
@@ -2251,7 +2275,7 @@
             }
         });
         // D4dDeveloper-R 04-10-2024
-        $(document).on('click','#saveSrch',function() {
+        $(document).on('click', '#saveSrch', function() {
             // alert("clicked");
             $("#srchName").val('');
             $('#emailNtf').prop('checked', false);
@@ -2391,6 +2415,7 @@
                 });
             }
         });
+
         function share_give_quote(id) {
             $('#quote_id').val(id);
             var quotes = @json($quotes);
@@ -2526,16 +2551,16 @@
 
         var jobInfoUrl = "{{ route('transporter.job_information', ':id') }}";
 
-    //     $(document).on('click', '.car-row', function() {
-               
-    //            var carId = $(this).data('car-id');
-    //            if (carId) {
-    //        var url = jobInfoUrl.replace(':id', carId); // Replace placeholder with actual ID
-    //        window.location.href = url; // Redirect to the URL
-    //    } else {
-    //        console.log('Job ID is missing');
-    //    }
-    // });
+        $(document).on('click', '.car-row', function() {
+
+            var carId = $(this).data('car-id');
+            if (carId) {
+                var url = jobInfoUrl.replace(':id', carId); // Replace placeholder with actual ID
+                window.location.href = url; // Redirect to the URL
+            } else {
+                console.log('Job ID is missing');
+            }
+        });
 
         $(document).ready(function() {
             $("#jobsrch_form_blog").validate({
@@ -2567,22 +2592,22 @@
             });
 
 
-            $(document).on('click', '.car-row', function() {
-               
-                var carId = $(this).data('car-id');
-                var carData = carDetails.data.find(function(car) {
-                    return car.id == carId;
-                });
-                if (carData) {
-                    let makeAndModel = `${carData.vehicle_make} ${carData.vehicle_model}`;
-                    if (carData.vehicle_make_1 && carData.vehicle_model_1) {
-                        makeAndModel += ` / ${carData.vehicle_make_1} ${carData.vehicle_model_1}`;
-                    }
-                    let startsDrives = carData.starts_drives == 0 ? 'No' : 'Yes';
-                    if (carData.starts_drives_1 !== null) {
-                        startsDrives += ` / ${carData.starts_drives_1 == 0 ? 'No' : 'Yes'}`;
-                    }
-                    var createdAt = new Date(carData.created_at);
+            // $(document).on('click', '.car-row', function() {
+
+            //     var carId = $(this).data('car-id');
+            //     var carData = carDetails.data.find(function(car) {
+            //         return car.id == carId;
+            //     });
+            //     if (carData) {
+            //         let makeAndModel = `${carData.vehicle_make} ${carData.vehicle_model}`;
+            //         if (carData.vehicle_make_1 && carData.vehicle_model_1) {
+            //             makeAndModel += ` / ${carData.vehicle_make_1} ${carData.vehicle_model_1}`;
+            //         }
+            //         let startsDrives = carData.starts_drives == 0 ? 'No' : 'Yes';
+            //         if (carData.starts_drives_1 !== null) {
+            //             startsDrives += ` / ${carData.starts_drives_1 == 0 ? 'No' : 'Yes'}`;
+            //         }
+            //         var createdAt = new Date(carData.created_at);
 
                     // Add 10 days to the created_at date
                     createdAt.setDate(createdAt.getDate() + 10);
@@ -2602,121 +2627,121 @@
                         switch_custom = ` <a href="javascript:;" onclick="share_give_quote(${carData.id});" class="make_offer_btn checkStatus">Place bid</a>`
                     }
 
-                    // Dynamically update modal body content
-                    var modalBodyContent = `                    
-                    <div class="jobsrch_box">
-                        <div class="row">                           
-                            <div class="col-lg-6">
-                                <div class="jobsrch_top_box position-relative ddd">
-                                    ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
-                                        <div>
-                                            <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
-                                        </div>
-                                        ` : `
-                                            <div class="job_se_sec slider">
-                                                <div>
-                                                    <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
-                                                </div>
-                                                ${carData.image_1 ? `
-                                                    <div>
-                                                        <img src="/${carData.image_1}" class="vehicle_image" alt="Vehicle Image" />
-                                                    </div>
-                                                ` : `
-                                                    <div>
-                                                        <img src="/uploads/no_car_image.png" class="vehicle_image" alt="No Image Available" />
-                                                    </div>
-                                                `}
-                                            </div>
-                                            <div class="custom-navigation">
-                                                <span class="current-slide">1</span> of <span class="total-slides">2</span>
-                                            </div>
-                                    `}                                   
-                                </div>
-                                
-                                <div class="btnCustom">${switch_custom}</div>
-                                <div class="wishList-bidInfo">
-                                    <div class="wishListBtn">
-                                         <a href="javascript:;" class="btn"
-                                            onclick="addToWatchlist('${carData.id}');"
-                                            style="margin-left: auto;">
-                                                Add to watchlist
-                                        </a>
-                                    </div>
-                                    <div class="bidTnfo">
-                                        <p class="info">Current lowest bid: <span class="green">£${carData.lowest_bid  ?? 0}</span></p>
-                                        <p class="info">Transporters bidding: <span class="blue">${carData.transporter_quotes_count}</span></p>
-                                    </div>
-                                </div>
-                           
-                                <ul class="jobsrch_info_list">
-                                    <li>
-                                        <div class="jpbsrch_inner">
-                                            <small>Make & model:</small>
-                                        </div>
-                                        <span>${makeAndModel}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                           
-                                            <small>Pick-up area:</small>
-                                        </div>
-                                        <span>${carData.pickup_postcode ? formatAddress(carData.pickup_postcode) : '-'}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                            
-                                            <small>Drop-off area:</small>
-                                        </div>
-                                        <span>${carData.drop_postcode ? formatAddress(carData.drop_postcode) : '-'}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                           
-                                            <small>Delivery date:</small>
-                                        </div>
-                                        <span>${carData.delivery_timeframe_from ? formatCustomDate(carData.delivery_timeframe_from) : carData.delivery_timeframe}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                            
-                                            <small>Starts & drives:</small>
-                                        </div>
-                                        <span>${startsDrives}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                            
-                                            <small>Delivery type:</small>
-                                        </div>
-                                        <span>${carData.how_moved}</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="jobsrch_right_box">
-                                    <h4 class="distance_text">Journey Distance: <b>${carData.distance} miles</b> <strong>(${carData.duration})</strong></h4> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-                    $('#carDetailsModalBody').html(modalBodyContent);
-                }
-                $('#expiry_date').html(`<p>Expiry date: ${formattedDate}</p>`);
-                $('#carDetailsModal').modal('show');
-                
-                
-                setTimeout(function() {
-                var $slider = $('.slider');
-                $slider.slick({
-                    infinite: false,
-                    speed: 300, 
-                    slidesToShow: 1,
-                    adaptiveHeight: true,
-                    prevArrow: '<div class="slick-prev"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.0756 16.5115L1.85822 10.7965C1.31976 10.4441 1 9.87387 1 9.26607C1 8.65827 1.31976 8.08803 1.85822 7.73561L10.0756 1.48823C10.7708 0.976677 11.7151 0.857068 12.5347 1.17696C13.3543 1.49685 13.917 2.20438 14 3.01972V14.984L14 14.984C13.9156 15.7986 13.3523 16.5049 12.533 16.8238C11.7136 17.1427 10.7702 17.0228 10.0756 16.5115Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>',
-                    nextArrow: '<div class="slick-next"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.9244 1.48852L13.1418 7.20349C13.6802 7.5559 14 8.12613 14 8.73393C14 9.34173 13.6802 9.91197 13.1418 10.2644L4.9244 16.5118C4.22923 17.0233 3.28491 17.1429 2.46532 16.823C1.64573 16.5032 1.08303 15.7956 1 14.9803L1 3.01597C1.08445 2.20143 1.6477 1.49505 2.46703 1.17615C3.28636 0.857255 4.22984 0.977185 4.9244 1.48852Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
-                });
-                $slider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide) {
-                    var i = (currentSlide ? currentSlide : 0) + 1;
-                    $('.current-slide').text(i);
-                    $('.total-slides').text(slick.slideCount);
-                });
-            },250)
-            });
+            //         // Dynamically update modal body content
+            //         var modalBodyContent = `                    
+        //         <div class="jobsrch_box">
+        //             <div class="row">                           
+        //                 <div class="col-lg-6">
+        //                     <div class="jobsrch_top_box position-relative ddd">
+        //                         ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
+            //                             <div>
+            //                                 <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+            //                             </div>
+            //                             ` : `
+            //                                 <div class="job_se_sec slider">
+            //                                     <div>
+            //                                         <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+            //                                     </div>
+            //                                     ${carData.image_1 ? `
+        //                                         <div>
+        //                                             <img src="/${carData.image_1}" class="vehicle_image" alt="Vehicle Image" />
+        //                                         </div>
+        //                                     ` : `
+        //                                         <div>
+        //                                             <img src="/uploads/no_car_image.png" class="vehicle_image" alt="No Image Available" />
+        //                                         </div>
+        //                                     `}
+            //                                 </div>
+            //                                 <div class="custom-navigation">
+            //                                     <span class="current-slide">1</span> of <span class="total-slides">2</span>
+            //                                 </div>
+            //                         `}                                   
+        //                     </div>
+
+        //                     <div class="btnCustom">${switch_custom}</div>
+        //                     <div class="wishList-bidInfo">
+        //                         <div class="wishListBtn">
+        //                              <a href="javascript:;" class="btn"
+        //                                 onclick="addToWatchlist('${carData.id}');"
+        //                                 style="margin-left: auto;">
+        //                                     Add to watchlist
+        //                             </a>
+        //                         </div>
+        //                         <div class="bidTnfo">
+        //                             <p class="info">Current lowest bid: <span class="green">£${carData.lowest_bid  ?? 0}</span></p>
+        //                             <p class="info">Transporters bidding: <span class="blue">${carData.transporter_quotes_count}</span></p>
+        //                         </div>
+        //                     </div>
+
+        //                     <ul class="jobsrch_info_list">
+        //                         <li>
+        //                             <div class="jpbsrch_inner">
+        //                                 <small>Make & model:</small>
+        //                             </div>
+        //                             <span>${makeAndModel}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                           
+        //                                 <small>Pick-up area:</small>
+        //                             </div>
+        //                             <span>${carData.pickup_postcode ? formatAddress(carData.pickup_postcode) : '-'}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                            
+        //                                 <small>Drop-off area:</small>
+        //                             </div>
+        //                             <span>${carData.drop_postcode ? formatAddress(carData.drop_postcode) : '-'}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                           
+        //                                 <small>Delivery date:</small>
+        //                             </div>
+        //                             <span>${carData.delivery_timeframe_from ? formatCustomDate(carData.delivery_timeframe_from) : carData.delivery_timeframe}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                            
+        //                                 <small>Starts & drives:</small>
+        //                             </div>
+        //                             <span>${startsDrives}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                            
+        //                                 <small>Delivery type:</small>
+        //                             </div>
+        //                             <span>${carData.how_moved}</span>
+        //                         </li>
+        //                     </ul>
+        //                 </div>
+        //                 <div class="col-lg-6">
+        //                     <div class="jobsrch_right_box">
+        //                         <h4 class="distance_text">Journey Distance: <b>${carData.distance} miles</b> <strong>(${carData.duration})</strong></h4> 
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </div>`;
+            //         $('#carDetailsModalBody').html(modalBodyContent);
+            //     }
+            //     $('#expiry_date').html(`<p>Expiry date: ${formattedDate}</p>`);
+            //     $('#carDetailsModal').modal('show');
+
+
+            //     setTimeout(function() {
+            //     var $slider = $('.slider');
+            //     $slider.slick({
+            //         infinite: false,
+            //         speed: 300, 
+            //         slidesToShow: 1,
+            //         adaptiveHeight: true,
+            //         prevArrow: '<div class="slick-prev"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.0756 16.5115L1.85822 10.7965C1.31976 10.4441 1 9.87387 1 9.26607C1 8.65827 1.31976 8.08803 1.85822 7.73561L10.0756 1.48823C10.7708 0.976677 11.7151 0.857068 12.5347 1.17696C13.3543 1.49685 13.917 2.20438 14 3.01972V14.984L14 14.984C13.9156 15.7986 13.3523 16.5049 12.533 16.8238C11.7136 17.1427 10.7702 17.0228 10.0756 16.5115Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>',
+            //         nextArrow: '<div class="slick-next"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.9244 1.48852L13.1418 7.20349C13.6802 7.5559 14 8.12613 14 8.73393C14 9.34173 13.6802 9.91197 13.1418 10.2644L4.9244 16.5118C4.22923 17.0233 3.28491 17.1429 2.46532 16.823C1.64573 16.5032 1.08303 15.7956 1 14.9803L1 3.01597C1.08445 2.20143 1.6477 1.49505 2.46703 1.17615C3.28636 0.857255 4.22984 0.977185 4.9244 1.48852Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+            //     });
+            //     $slider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide) {
+            //         var i = (currentSlide ? currentSlide : 0) + 1;
+            //         $('.current-slide').text(i);
+            //         $('.total-slides').text(slick.slideCount);
+            //     });
+            // },250)
+            // });
 
             $('#backButton').on('click', function() {
                 $('#carDetailsModal').modal('hide');
@@ -2896,7 +2921,7 @@
         }
 
         function fetch_data(page, str = '') {
-           
+
             if (str == '') {
                 $('#popup').addClass('show'); // Show the popup
             }
@@ -2905,7 +2930,7 @@
             $.ajax({
                 url: globalSiteUrl + "/transporter/find_job?page=" + page,
                 data: {
-                    
+
                     search_pick_up_area: search_pick_up_area,
                     search_drop_off_area: search_drop_off_area,
                 },
