@@ -166,7 +166,7 @@
         .note svg {
             position: absolute;
             left: 0;
-            top: 5px;
+            top: 0;
         }
 
         .content_wrap .label,
@@ -282,6 +282,75 @@
             color: #ffffff;
         }
 
+        #myImg {
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #myImg:hover {
+            opacity: 0.7;
+        }
+
+        #myModal .close {
+            cursor: pointer;
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            background: rgba(255, 255, 255, 1) !important;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            border-radius: 100%;
+            font-size: 20px;
+            line-height: 24px;
+            z-index: 999;
+            opacity: 1;
+        }
+
+        /* #myModal .close:hover {
+            background-color: #0356d6!important;
+            color:#ffffff;
+        } */
+
+        .modal {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        #caption {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .modal-content,
+        #caption {
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @-webkit-keyframes zoom {
+            from {
+                -webkit-transform: scale(0)
+            }
+
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(0)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
         @media screen and (min-width: 1680px) {
             .upper-left {
                 flex: 0 0 41.666667%;
@@ -369,6 +438,10 @@
         }
 
         @media screen and (max-width: 575px) {
+            .note svg {
+                top: 5px;
+            }
+
             .bid_wrapper {
                 margin-left: -30px;
                 margin-right: -30px;
@@ -414,7 +487,7 @@
                                 class="left-content row mx-0 align-items-start justify-content-between col-xl-4 mb-3 mb-xl-0">
                                 <div class="img_wrap">
                                     <img src="{{ $quote->image }}" alt="image" width="92" height="57"
-                                        class="img-fluid" />
+                                        class="img-fluid" id="myImg" />
                                     <svg class="position-absolute zoom-icon" width="10" height="10"
                                         viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -631,7 +704,8 @@
                                                         data-target="#bidCollapse{{ $key }}"
                                                         aria-expanded="true"
                                                         aria-controls="bidCollapse{{ $key }}">
-                                                        Your messages <span class="message_count">{{$transporter->count_messages}}</span>
+                                                        Your messages <span
+                                                            class="message_count">{{ $transporter->count_messages }}</span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -641,16 +715,24 @@
                                             class="collapse {{ $key == 0 ? 'show' : '' }}"
                                             aria-labelledby="bid{{ $key }}" data-parent="#accordionBids">
                                             <div class="card-body">
-                                                @foreach ($transporter->messages as $message)
-                                                    <div class="message-info">
+                                                @foreach ($transporter->messages as $set => $message)
+                                                    <div class="message-info @if ($set >= 2) hidden-message @endif"
+                                                        @if ($set >= 2) style="display: none;" @endif>
                                                         <p> <span>{{ $message->sender->username }}</span> sent on
                                                             {{ $message->created_at->format('d/m') }} at
                                                             {{ $message->created_at->format('H:i') }}</p>
                                                         <p>{{ $message->message }}</p>
                                                     </div>
                                                 @endforeach
+                                                @if ($transporter->messages->count() > 2)
+                                                    <a id="read-more" class=" mb-3">Read More</a>
+                                                    {{-- <div id="show-less" class="mb-3"
+                                                        style="display: none;">Show Less</div> --}}
+                                                @endif
                                                 @if ($key == 0)
-                                                    <form id="chat__form_{{$key}}" action="{{route('transporter.message.quote_send_message')}}" method="POST">
+                                                    <form id="chat__form_{{ $key }}"
+                                                        action="{{ route('transporter.message.quote_send_message') }}"
+                                                        method="POST">
                                                         @csrf
                                                         <?php
                                                         $thread = App\Thread::where('user_id', $quote->user_id)
@@ -662,7 +744,7 @@
                                                         <input type="hidden" name="user_id"
                                                             value="{{ $quote->user_id }}">
                                                         <input type="hidden" name="user_quote_id"
-                                                            value="{{ $quote->quoteByTransporter->user_quote_id}}">
+                                                            value="{{ $quote->quoteByTransporter->user_quote_id }}">
                                                         <input type="hidden" name="user_current_chat_id"
                                                             id="user_current_chat_id_{{ $key }}"
                                                             value="{{ $thread ? $thread->id : 0 }}">
@@ -688,7 +770,8 @@
                                                         <div class="message-error" style="display:none">Please enter your
                                                             message.
                                                         </div>
-                                                        <button type="button" id="formId" onclick="sendMessage({{$key}});"
+                                                        <button type="button" id="formId"
+                                                            onclick="sendMessage({{ $key }});"
                                                             class="btn send_message">
                                                             Send message
                                                             <svg width="19" height="19" viewBox="0 0 19 19"
@@ -764,7 +847,18 @@
             </div>
         </div>
     </div>
-
+    <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <span class="close">&times;</span>
+                    <img id="img01" class="img-fluid" />
+                    <!-- <div id="caption"></div> -->
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- EDIT  --}}
     <div class="modal get_quote fade" id="quoteEdit" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -831,6 +925,21 @@
         type="text/javascript"></script>
 
     <script>
+        var modal = document.getElementById('myModal');
+        var img = document.getElementById('myImg');
+        var modalImg = document.getElementById("img01");
+        if (img.src) {
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            }
+        }
+
+        var span = document.querySelector("#myModal .close");
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
         function sendMessage(id) {
             var form = $('#chat__form_' + id);
             var message = form.find('.textarea').val();
@@ -861,7 +970,7 @@
                         'X-CSRF-TOKEN': $('input[name="_token"]').val()
                     }
                 });
-                
+
                 var timezone = moment.tz.guess();
                 var data = new FormData(form[0]); // Form data needs to be from the specific form
                 data.append('message', message);
@@ -1267,6 +1376,34 @@
                     });
                 }
             });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            const messagesToShow = 2; // Number of messages to toggle per action
+            const hiddenMessages = $('.hidden-message'); // Select all hidden messages
+
+            // On clicking "Read More"
+            $('#read-more').on('click', function() {
+                // Show the next batch of hidden messages
+                hiddenMessages.filter(':hidden').slice(0, messagesToShow).slideDown();
+
+                // If all messages are shown, hide "Read More" and show "Show Less"
+                if (hiddenMessages.filter(':hidden').length === 0) {
+                    $(this).hide();
+                    // $('#show-less').show();
+                }
+            });
+
+            // On clicking "Show Less"
+            // $('#show-less').on('click', function() {
+            //     // Hide all messages except the first batch
+            //     hiddenMessages.slice(messagesToShow).slideUp();
+
+            //     // Show "Read More" and hide "Show Less"
+            //     $('#read-more').show();
+            //     $(this).hide();
+            // });
         });
     </script>
 @endsection
