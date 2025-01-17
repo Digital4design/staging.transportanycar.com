@@ -620,14 +620,14 @@
                                     <div class="col-12 d-flex flex-wrap align-items-end upper-right px-0 px-md-3">
                                         <div class="row w-100 mx-0">
                                             @if ($quote->watchlist)
-                                                <a href="javascript:;" style="margin-left: auto;"
+                                                <a href="javascript:;"
                                                     class="add_to_wishlist d-none d-md-inline-block"
                                                     onclick="removeToWatchlist('{{ $quote->id }}');">
 
                                                     Add to watchlist
                                                 </a>
                                             @else
-                                                <a href="javascript:;" style="margin-left: auto;"
+                                                <a href="javascript:;"
                                                     class="add_to_wishlist d-none d-md-inline-block"
                                                     onclick="addToWatchlist('{{ $quote->id }}');">
                                                     Add to watchlist
