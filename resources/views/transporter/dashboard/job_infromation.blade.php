@@ -468,7 +468,8 @@
                 <div class="inner_content set_banner_position">
 
                     <div class="wd-white-box">
-                        {{-- <div class="back_btn mb-3 row mx-0 align-items-center">
+                        <div class="back_btn mb-3 row mx-0 align-items-center">
+                            <a href="{{ url('transporter/new-jobs-new') }}">
                             <svg width="7" height="13" viewBox="0 0 7 13" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" class="mr-2">
                                 <g opacity="0.5">
@@ -476,8 +477,9 @@
                                         stroke-linejoin="round" />
                                 </g>
                             </svg>
+                        </a>
                             Back to find jobs
-                        </div> --}}
+                        </div>
                         <div class="row">
                             <div class="col-12 date mb-3">Posted {{ getTimeAgo($quote->created_at->toDateTimeString()) }}
                             </div>
@@ -596,12 +598,9 @@
                                                 @if ($transporterQuotesCount > 0)
                                                     <span class="label">Current lowest bid:</span>
                                                     <span class="value price ml-1">£{{ $lowestBid }}</span>
-                                                    </li>
                                                 @else
-                                                    <li class="colorDivgreen car-row" data-car-id="{{ $quote->id }}">
-                                                        <span><b>Current lowest bid:</b></span>
-                                                        <span class="value price ml-1">£0</span>
-                                                    </li>
+                                                     <span class="label">Current lowest bid:</span>
+                                                     <span class="value price ml-1">£0</span>
                                                 @endif
                                             </div>
                                             <div
