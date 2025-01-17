@@ -468,20 +468,24 @@
                 <div class="inner_content set_banner_position">
 
                     <div class="wd-white-box">
-                        <div class="back_btn mb-3 row mx-0 align-items-center">
-                            <a href="{{ url('transporter/new-jobs-new') }}">
-                            <svg width="7" height="13" viewBox="0 0 7 13" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                                <g opacity="0.5">
-                                    <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </g>
-                            </svg>
-                        </a>
-                            Back to find jobs
-                        </div>
-                        <div class="row">
-                            <div class="col-12 date mb-3">Posted {{ getTimeAgo($quote->created_at->toDateTimeString()) }}
+                        
+                        <div class="row align-items-center">
+                            <div class="col-7 mb-3">
+                                <div class="back_btn row mx-0 align-items-center">
+                                    <a href="{{ url('transporter/new-jobs-new') }}">
+                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                            <g opacity="0.5">
+                                                <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </g>
+                                        </svg>
+                                    </a>
+                                    Back to find jobs
+                                </div>
+                            </div>
+                            <div class="col-5 date mb-3 text-right">
+                                Posted {{ getTimeAgo($quote->created_at->toDateTimeString()) }}
                             </div>
                         </div>
                         <div class="wrapper row">
