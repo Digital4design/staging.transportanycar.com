@@ -434,10 +434,14 @@
 
             .lower-left {
                 margin: 0;
+                max-width: 140px;
             }
         }
 
         @media screen and (max-width: 575px) {
+            .job_details {
+                padding-top: 70px!important;
+            }
             .note svg {
                 top: 5px;
             }
@@ -464,7 +468,7 @@
         <div id="page-content-wrapper">
             @include('layouts.transporter.dashboard.top_head')
 
-            <div class="content_container adjust_spacing">
+            <div class="content_container adjust_spacing job_details">
                 <div class="inner_content set_banner_position">
 
                     <div class="wd-white-box">
@@ -590,10 +594,10 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="col-6 col-md-12 d-flex flex-wrap align-items-center upper-left mb-3 px-0 px-md-3">
+                                        class="col-6 col-md-12 d-flex flex-wrap align-items-center upper-left mb-3 px-0 px-md-3 justify-content-end justify-content-md-start">
                                         <div class="row w-100 lower-left">
                                             <div
-                                                class="wrap d-flex flex-wrap align-items-center col-12 col-md-4 px-0 px-md-3 expiry justify-content-end justify-content-md-start">
+                                                class="wrap d-flex flex-wrap align-items-center col-12 col-md-4 px-0 px-md-3 expiry justify-content-md-start">
                                                 @php
                                                     $lowestBid = $quote->lowest_bid ?? 0;
                                                     $transporterQuotesCount = $quote->transporter_quotes_count ?? 0;
@@ -608,7 +612,7 @@
                                                 @endif
                                             </div>
                                             <div
-                                                class="wrap d-flex flex-wrap align-items-center col-12 col-md-4 px-0 px-md-3 delivery justify-content-end justify-content-md-start">
+                                                class="wrap d-flex flex-wrap align-items-center col-12 col-md-4 px-0 px-md-3 delivery justify-content-md-start">
                                                 <span class="label">Transporters bidding:</span>
                                                 @if ($transporterQuotesCount > 0)
                                                     <span
