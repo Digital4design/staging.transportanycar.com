@@ -729,7 +729,7 @@
                                                     </div>
                                                 @endforeach
                                                 @if ($transporter->messages->count() > 2)
-                                                    <a id="read-more" class=" mb-3">Read More</a>
+                                                    <a id="read-more" class=" mb-3">View More</a>
                                                     {{-- <div id="show-less" class="mb-3"
                                                         style="display: none;">Show Less</div> --}}
                                                 @endif
