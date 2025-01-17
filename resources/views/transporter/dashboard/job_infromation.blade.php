@@ -177,7 +177,7 @@
 
         .zoom-icon {
             left: 20px;
-            top: 0;
+            top: 5px;
         }
 
         .car-title {
@@ -494,7 +494,7 @@
                                 <div class="img_wrap">
                                     <img src="{{ $quote->image }}" alt="image" width="92" height="57"
                                         class="img-fluid" id="myImg" />
-                                    <svg class="position-absolute zoom-icon" width="10" height="10"
+                                    <svg class="position-absolute zoom-icon" width="15" height="15"
                                         viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd"
                                             d="M1 4.46454C1.00208 2.81004 2.25546 1.38727 3.99372 1.06625C5.73198 0.745234 7.47105 1.61536 8.1475 3.14456C8.82395 4.67375 8.24941 6.43617 6.77521 7.35411C5.301 8.27205 3.33766 8.08988 2.08575 6.919C1.38943 6.26774 0.998849 5.38479 1 4.46454Z"
