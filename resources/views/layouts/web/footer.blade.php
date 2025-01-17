@@ -79,7 +79,7 @@ footer h6{
 
 @media only screen and (max-width: 991px)
 {
-    .menu-item.active a{background: #008DD4 !important;color: #fff !important;font-weight: 400 !important;border-color: #008DD4 !important;}
+    .menu-item.active a{background: #0356d6 !important;color: #fff !important;font-weight: 400 !important;border-color: #0356d6 !important;}
 	
 	.menu-item img{display: inline-block;margin-right: 10px;margin-top: -5px;}
 	

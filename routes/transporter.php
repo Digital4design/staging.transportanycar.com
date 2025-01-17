@@ -93,9 +93,9 @@ Route::group(['namespace' => 'Api\V1'], function () {
     Route::post('verify-email', 'MailController@transporterEmailVerify')->name('sendVerifyEmail');
     Route::get('verify-email/{token}', 'MailController@verifyEmail')->name('verify.email');
 });
-Route::get('/job_infromation', function () {
-    return view('transporter.dashboard.job_infromation');
-});
+// Route::get('/job_infromation', function () {
+//     return view('transporter.dashboard.job_infromation');
+// });
 // Route::get('/email-template', function () {
 //     return view('mail.General.transporterEmailVerify');
 // })->name('mail.General.transporterEmailVerify');
