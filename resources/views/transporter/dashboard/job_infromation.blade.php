@@ -166,7 +166,7 @@
         .note svg {
             position: absolute;
             left: 0;
-            top: 5px;
+            top: 0;
         }
 
         .content_wrap .label,
@@ -282,6 +282,75 @@
             color: #ffffff;
         }
 
+        #myImg {
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #myImg:hover {
+            opacity: 0.7;
+        }
+
+        #myModal .close {
+            cursor: pointer;
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            background: rgba(255, 255, 255, 1) !important;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            border-radius: 100%;
+            font-size: 20px;
+            line-height: 24px;
+            z-index: 999;
+            opacity: 1;
+        }
+
+        /* #myModal .close:hover {
+            background-color: #0356d6!important;
+            color:#ffffff;
+        } */
+
+        .modal {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        #caption {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .modal-content,
+        #caption {
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @-webkit-keyframes zoom {
+            from {
+                -webkit-transform: scale(0)
+            }
+
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(0)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
         @media screen and (min-width: 1680px) {
             .upper-left {
                 flex: 0 0 41.666667%;
@@ -369,6 +438,10 @@
         }
 
         @media screen and (max-width: 575px) {
+            .note svg {
+                top: 5px;
+            }
+
             .bid_wrapper {
                 margin-left: -30px;
                 margin-right: -30px;
@@ -414,7 +487,7 @@
                                 class="left-content row mx-0 align-items-start justify-content-between col-xl-4 mb-3 mb-xl-0">
                                 <div class="img_wrap">
                                     <img src="{{ $quote->image }}" alt="image" width="92" height="57"
-                                        class="img-fluid" />
+                                        class="img-fluid" id="myImg" />
                                     <svg class="position-absolute zoom-icon" width="10" height="10"
                                         viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -710,7 +783,6 @@
                                                         </button>
                                                     </form>
                                                 @endif
-                                               
                                             </div>
                                         </div>
                                     </div>
@@ -775,7 +847,18 @@
             </div>
         </div>
     </div>
-
+    <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <span class="close">&times;</span>
+                    <img id="img01" class="img-fluid" />
+                    <!-- <div id="caption"></div> -->
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- EDIT  --}}
     <div class="modal get_quote fade" id="quoteEdit" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -842,6 +925,21 @@
         type="text/javascript"></script>
 
     <script>
+        var modal = document.getElementById('myModal');
+        var img = document.getElementById('myImg');
+        var modalImg = document.getElementById("img01");
+        if (img.src) {
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            }
+        }
+
+        var span = document.querySelector("#myModal .close");
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
         function sendMessage(id) {
             var form = $('#chat__form_' + id);
             var message = form.find('.textarea').val();
