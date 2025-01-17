@@ -265,40 +265,40 @@ class DashboardController extends WebController
     public function feedback()
     {
         $user_data = Auth::guard('transporter')->user();
-    
+
         $quoteBytransporter = QuoteByTransporter::where('user_id', $user_data->id)->get();
         $userQuote = UserQuote::whereIn('id', $quoteBytransporter->pluck('user_quote_id'))->get();
-    
+
         $total_distance = UserQuote::whereIn('id', $quoteBytransporter->where('status', 'accept')->pluck('user_quote_id')->toArray())
             ->sum('distance');
-    
+
         $totalDistance = $total_distance >= 1000
             ? round($total_distance / 1000, 1) . 'K'
             : round($total_distance, 1);
-    
+
         $my_quotes = $quoteBytransporter->pluck('id');
         $quotes = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)->get();
-    
+
         $totalDistanceFormatted = is_numeric($totalDistance) ? number_format($totalDistance, 1) : $totalDistance; // Ensure valid formatting
-    
+
         $completedCount = $userQuote->where('status', 'completed')->count();
-    
+
         $total_earning = $quoteBytransporter
             ->where('status', 'accept')
             ->whereIn('user_quote_id', $userQuote->where('status', 'completed')->pluck('id')->toArray())
             ->sum('transporter_payment');
-    
+
         $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
             ->whereNotNull('rating')
             ->avg('rating');
-    
+
         $percentage = 0;
         if ($rating_average !== null) {
             $percentage = ($rating_average / 5) * 100;
         }
-    
+
         $company_details = CompanyDetail::where('user_id', $user_data->id)->first();
-    
+
         $params['user'] = $user_data;
         $params['feedback'] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
             ->with('quote_by_transporter.quote')
@@ -309,17 +309,17 @@ class DashboardController extends WebController
         $params['company_detail'] = $company_details;
         $params['rating_percentage'] = $percentage;
         $params['rating_average'] = $rating_average;
-    
+
         $customRequest = new Request([
             'type' => 'feedback',
         ]);
-    
+
         // Call notificationStatus with the custom request
         $this->notificationStatus($customRequest);
-    
+
         return view('transporter.dashboard.feedback', $params);
     }
-    
+
 
     public function feedback_listing(Request $request)
     {
@@ -851,8 +851,7 @@ class DashboardController extends WebController
             $pickup = $request->input('search_pick_up_area');
             $dropoff = $request->input('search_drop_off_area') ?? 'Anywhere';
             // return $quotes;
-            $html = view('transporter.dashboard.partial.search_job_result', compact('quotes', 'pickup', 'dropoff'))->render();
-            ;
+            $html = view('transporter.dashboard.partial.search_job_result', compact('quotes', 'pickup', 'dropoff'))->render();;
 
             return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $html, 'quotes' => $quotes]);
         }
@@ -1058,14 +1057,14 @@ class DashboardController extends WebController
                     'required',
                     Rule::unique('save_searches')->where(function ($query) use ($request) {
                         $query->where('drop_area', $request->drop_area)
-                              ->where('user_id', Auth::id());
+                            ->where('user_id', Auth::id());
                     }),
                 ],
                 'drop_area' => 'required',
             ], [
                 'pick_area.unique' => 'The combination of pick area and drop area already exists for your account.',
             ]);
-            
+
             if ($validator->fails()) {
                 return response(["success" => false, "message" => "The combination of pick area and drop area already exists for your account.", "data" => $validator->errors()]);
             }
@@ -1077,7 +1076,7 @@ class DashboardController extends WebController
             // Extract pickup coordinates
             $pickupLat = $pickupCoordinates['results'][0]['geometry']['location']['lat'] ?? null;
             $pickupLng = $pickupCoordinates['results'][0]['geometry']['location']['lng'] ?? null;
-            
+
             if (!$pickupLat || !$pickupLng) {
                 return response()->json(['success' => false, 'message' => 'Failed to fetch pickup coordinates.']);
             }
@@ -1102,7 +1101,7 @@ class DashboardController extends WebController
                     return response()->json(['success' => false, 'message' => 'Failed to fetch drop coordinates.']);
                 }
             }
-            
+
             $saveSearch = SaveSearch::Create(
                 [
                     "user_id" => auth()->user()->id,
@@ -1351,20 +1350,20 @@ class DashboardController extends WebController
             // $subQuery->groupBy('user_quotes.id')
             //     ->latest();
             $subQuery
-            ->addSelect([
-                'transporter_quotes_count' => QuoteByTransporter::selectRaw('COUNT(*)')
-                    ->whereColumn('user_quote_id', 'user_quotes.id'),
-                'lowest_bid' => QuoteByTransporter::selectRaw('MIN(CAST(transporter_payment AS UNSIGNED))')
-                    ->whereColumn('user_quote_id', 'user_quotes.id')
-            ])
-            ->groupBy('user_quotes.id')
-            ->latest();
+                ->addSelect([
+                    'transporter_quotes_count' => QuoteByTransporter::selectRaw('COUNT(*)')
+                        ->whereColumn('user_quote_id', 'user_quotes.id'),
+                    'lowest_bid' => QuoteByTransporter::selectRaw('MIN(CAST(transporter_payment AS UNSIGNED))')
+                        ->whereColumn('user_quote_id', 'user_quotes.id')
+                ])
+                ->groupBy('user_quotes.id')
+                ->latest();
 
             $quotes = \DB::table(\DB::raw("({$subQuery->toSql()}) as sub"))
                 ->mergeBindings($subQuery->getQuery())
                 ->paginate(20);
 
-                // return $quotes;
+            // return $quotes;
 
 
             $pickup = $request->pickup;
@@ -1419,7 +1418,7 @@ class DashboardController extends WebController
             return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
         }
     }
-    public function jobInformation(Request $request,$id)
+    public function jobInformation(Request $request, $id)
     {
         try {
             // return $id;+
@@ -1430,9 +1429,9 @@ class DashboardController extends WebController
                     $query->where('user_id', $user_data->id); // Assuming 'transporter_id' is the field
                 }
             ])->where(function ($query) {
-                    $query->where('status', 'pending')
-                        ->orWhere('status', 'approved');
-                })
+                $query->where('status', 'pending')
+                    ->orWhere('status', 'approved');
+            })
                 ->whereDate('created_at', '>=', now()->subDays(10))
                 ->addSelect([
                     'transporter_quotes_count' => QuoteByTransporter::selectRaw('COUNT(*)')
@@ -1441,43 +1440,43 @@ class DashboardController extends WebController
                         ->whereColumn('user_quote_id', 'user_quotes.id')
                 ])
                 ->find($id);
-                // return $quote;
+            // return $quote;
 
-            
-                $quotes = QuoteByTransporter::with ('getTransporters')->where('user_quote_id', $id)
-                ->orderByRaw('CAST(price AS UNSIGNED) ASC')
+            $quotes = QuoteByTransporter::where('user_quote_id', $id)
+                ->orderByRaw('(user_id = ?) DESC', [auth()->id()]) // Place matching user_id records at the top
+                ->orderByRaw('CAST(price AS UNSIGNED) ASC') // Then sort the rest by price
                 ->get();
-                // return $quote;
-        
-                $quotes = $quotes->map(function ($quote) {
-                    $my_quotes = QuoteByTransporter::where('user_id', $quote->user_id)->pluck('id');
-                    $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
-                        ->whereNotNull('rating')
-                        ->avg('rating');
-                    $percentage = $rating_average !== null ? ($rating_average / 5) * 100 : 0;
-                    $quote->rating_average = $rating_average;
-                    $quote->percentage = $percentage;
-                    return $quote;
-                });
-        // return $quotes;
-             
-               
-                // Update quotes with thread_id if the thread exists
-                $threads = Thread::with('messages')->where(['user_id' => $quote->user_id, 'user_quote_id' => $id])->get();
-                // return $threads;
-                $threadMap = $threads->pluck('id', 'friend_id');
-                $quotes->map(function ($quote) use ($threadMap) {
-                    // Add thread_id only if a matching thread exists
-                    if (isset($threadMap[$quote->user_id])) {
-                        $quote->thread_id = $threadMap[$quote->user_id];
-                    } else {
-                        $quote->thread_id = null; // Set to null or handle as needed if no thread matches
-                    }
-                }); 
-                // return $quotes;
-                // return $threadMap;
-                return view('transporter.dashboard.job_infromation', ['quote'=>$quote]);
-            return $quotes;
+            // return $quotes;
+
+            $quotes = $quotes->map(function ($quote) {
+                $my_quotes = QuoteByTransporter::where('user_id', $quote->user_id)->pluck('id');
+                $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+                    ->whereNotNull('rating')
+                    ->avg('rating');
+                $percentage = $rating_average !== null ? ($rating_average / 5) * 100 : 0;
+                $quote->rating_average = $rating_average;
+                $quote->percentage = $percentage;
+                return $quote;
+            });
+            // return $quotes;
+
+
+            // Update quotes with thread_id if the thread exists
+            $threads = Thread::with('messages')->where(['user_id' => $quote->user_id, 'user_quote_id' => $id])->get();
+           
+            $quotes->map(function ($quote) use ($threads) {
+                $matchingThread = $threads->firstWhere('friend_id', $quote->user_id);
+                if ($matchingThread) {
+                    $quote->messages = $matchingThread->messages;
+                } else {
+                    $quote->messages = null;
+                }
+
+                return $quote;
+            });
+           
+            return view('transporter.dashboard.job_infromation', ['quote' => $quote, 'quotebytransporters' => $quotes]);
+           
         } catch (\Exception $ex) {
             return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
         }
