@@ -752,7 +752,7 @@
                                                         <input type="hidden" name="user_id"
                                                             value="{{ $quote->user_id }}">
                                                         <input type="hidden" name="user_quote_id"
-                                                            value="{{ $quote->quoteByTransporter->user_quote_id ?? "0"}}">
+                                                            value="{{ $quote->quoteByTransporter->user_quote_id}}">
                                                         <input type="hidden" name="user_current_chat_id"
                                                             id="user_current_chat_id_{{ $key }}"
                                                             value="{{ $thread ? $thread->id : 0 }}">

@@ -1440,7 +1440,7 @@ class DashboardController extends WebController
                         ->whereColumn('user_quote_id', 'user_quotes.id')
                 ])
                 ->find($id);
-            // return $quote;
+            return $quote;
 
             $quotes = QuoteByTransporter::where('user_quote_id', $id)
                 ->orderByRaw('(user_id = ?) DESC', [auth()->id()]) // Place matching user_id records at the top
