@@ -580,8 +580,11 @@
                                             <div class="wrap d-flex flex-wrap flex-md-column col-12 col-md-4 mb-2 mb-md-0">
                                                 <span class="label">Starts & drives:</span>
                                                 @if ($quote->starts_drives == '1' || $quote->starts_drives == null)
-                                                    <span class="value">Yes/No</span>
+                                                    <span class="value">Yes</span>
                                                 @elseif($quote->starts_drives == '1' && $quote->starts_drives == '1')
+                                                <span class="value">Yes</span>
+                                                @else
+                                                <span class="value">No</span>
                                                 @endif
                                             </div>
                                             <div class="wrap d-flex flex-wrap flex-md-column col-12 col-md-4 mb-2 mb-md-0">
