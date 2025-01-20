@@ -1481,7 +1481,7 @@ class DashboardController extends WebController
 
                 return $quote;
             });
-            // dd($quotes);
+            // return $quotes;
             // return ['quote' => $quote, 'quotebytransporters' => $quotes];
             return view('transporter.dashboard.job_infromation', ['quote' => $quote, 'quotebytransporters' => $quotes]);
            
