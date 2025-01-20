@@ -729,7 +729,7 @@
                                                         <p> <span>{{ $message->sender->username }}</span> sent on
                                                             {{ $message->created_at->format('d/m') }} at
                                                             {{ $message->created_at->format('H:i') }}</p>
-                                                        <p>{{ $message->message }}</p>
+                                                        <p>"{{ $message->message }}"</p>
                                                     </div>
                                                 @endforeach
                                                 @if ($transporter->messages->count() > 2)
@@ -752,7 +752,7 @@
                                                         <input type="hidden" name="user_id"
                                                             value="{{ $quote->user_id }}">
                                                         <input type="hidden" name="user_quote_id"
-                                                            value="{{ $quote->quoteByTransporter->user_quote_id }}">
+                                                            value="{{ $quote->quoteByTransporter->user_quote_id ?? "0"}}">
                                                         <input type="hidden" name="user_current_chat_id"
                                                             id="user_current_chat_id_{{ $key }}"
                                                             value="{{ $thread ? $thread->id : 0 }}">
