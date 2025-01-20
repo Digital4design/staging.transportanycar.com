@@ -739,7 +739,7 @@
                                                 @endif
                                                 @if ($key == 0)
                                                 @if ($quote->user_id)
-                                                @if ( $quote->quoteByTransporter->user_quote_id == null)
+                                                @if ( $transporter->user_quote_id == null)
                                                     <form id="chat__form_{{ $key }}"
                                                         action="{{ route('transporter.message.quote_send_message') }}"
                                                         method="POST">
@@ -747,14 +747,14 @@
                                                         <?php
                                                         $thread = App\Thread::where('user_id', $quote->user_id)
                                                             ->where('friend_id', Auth::user()->id)
-                                                            ->where('user_quote_id', $quote->quoteByTransporter->user_quote_id)
+                                                            ->where('user_quote_id', $transporter->user_quote_id)
                                                             ->first();
                                                         ?>
                                                         <input type="hidden" name="form_page" value="quote">
                                                         <input type="hidden" name="user_id"
                                                             value="{{ $quote->user_id }}">
                                                         <input type="hidden" name="user_quote_id"
-                                                            value="{{ $quote->quoteByTransporter->user_quote_id}}">
+                                                            value="{{ $transporter->user_quote_id}}">
                                                         <input type="hidden" name="user_current_chat_id"
                                                             id="user_current_chat_id_{{ $key }}"
                                                             value="{{ $thread ? $thread->id : 0 }}">
