@@ -317,9 +317,9 @@
             color: #ffffff;
         }
 
-        .modal {
+        .modal#myModal {
             display: none;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
         #caption {
@@ -836,7 +836,7 @@
                                
                             </div>
                             @else
-                            <p> - No quotes or questions to show yet -</p>
+                            <p class="mt-4 mb-0 text-center"> - No quotes or questions to show yet -</p>
                            @endif
                         </div>
                     </div>
