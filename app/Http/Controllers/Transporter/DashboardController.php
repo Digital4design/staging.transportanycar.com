@@ -1441,7 +1441,8 @@ class DashboardController extends WebController
                 ])
                 ->find($id);
             // return $quote;
-
+            // $transporter_message=Thread::with('messages')->where('friend_id',Auth::user()->id)->where('user_quote_id',$id)->first();
+// return $thread;
             $quotes = QuoteByTransporter::where('user_quote_id', $id)
                 ->orderByRaw('(user_id = ?) DESC', [auth()->id()]) // Place matching user_id records at the top
                 ->orderByRaw('CAST(price AS UNSIGNED) ASC') // Then sort the rest by price
