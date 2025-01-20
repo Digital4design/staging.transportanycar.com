@@ -739,6 +739,7 @@
                                                 @endif
                                                 @if ($key == 0)
                                                 @if ($quote->user_id)
+                                                @if ( $quote->quoteByTransporter->user_quote_id)
                                                     <form id="chat__form_{{ $key }}"
                                                         action="{{ route('transporter.message.quote_send_message') }}"
                                                         method="POST">
@@ -791,6 +792,8 @@
                                                             </svg>
                                                         </button>
                                                     </form>
+                                                    @endif
+
                                                     @endif
                                                 @endif
                                             </div>
