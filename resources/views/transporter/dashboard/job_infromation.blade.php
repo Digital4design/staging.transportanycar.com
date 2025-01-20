@@ -615,9 +615,18 @@
                                     <div
                                         class="col-6 col-md-12 mb-3 mb-md-0 d-flex d-md-none flex-wrap align-items-end upper-right px-0 px-md-3">
                                         <div class="row w-100 mx-0">
-                                            <a href="#" class="add_to_wishlist">
+                                            @if ($quote->watchlist)
+                                            <a href="javascript:;" class="add_to_wishlist d-none d-md-inline-block"
+                                                onclick="removeToWatchlist('{{ $quote->id }}');">
+
                                                 Add to watchlist
                                             </a>
+                                        @else
+                                            <a href="javascript:;" class="add_to_wishlist d-none d-md-inline-block"
+                                                onclick="addToWatchlist('{{ $quote->id }}');">
+                                                Add to watchlist
+                                            </a>
+                                        @endif
                                         </div>
                                     </div>
                                     <div
