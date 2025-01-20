@@ -2,14 +2,6 @@
 
 @section('head_css')
     <style>
-        #read-more {
-            font-size: 14px;
-            line-height: 18px;
-            font-weight: 300;
-            color:#5b5b5b;
-            cursor: pointer;
-        }
-        #read-more:hover {color:#006DF0;}
         .add_to_wishlist {
             background: #999999;
             color: #F3F8FF;
@@ -615,14 +607,15 @@
                                     <div
                                         class="col-6 col-md-12 mb-3 mb-md-0 d-flex d-md-none flex-wrap align-items-end upper-right px-0 px-md-3">
                                         <div class="row w-100 mx-0">
+                                           
                                             @if ($quote->watchlist)
-                                            <a href="javascript:;" class="add_to_wishlist d-none d-md-inline-block"
+                                            <a href="javascript:;" class="add_to_wishlist"
                                                 onclick="removeToWatchlist('{{ $quote->id }}');">
 
                                                 Add to watchlist
                                             </a>
                                         @else
-                                            <a href="javascript:;" class="add_to_wishlist d-none d-md-inline-block"
+                                            <a href="javascript:;" class="add_to_wishlist"
                                                 onclick="addToWatchlist('{{ $quote->id }}');">
                                                 Add to watchlist
                                             </a>
@@ -780,9 +773,7 @@
                                                         </div>
                                                     @endforeach
                                                     @if ($transporter->messages->count() > 2)
-                                                    <div class="text-right mb-1">
-                                                        <a id="read-more" class=" mb-3">View more messages</a>
-                                                    </div>
+                                                        <a id="read-more" class=" mb-3">View More</a>
                                                         {{-- <div id="show-less" class="mb-3"
                                                         style="display: none;">Show Less</div> --}}
                                                     @endif
@@ -1455,7 +1446,7 @@
             // On clicking "Read More"
             $('#read-more').on('click', function() {
                 // Show the next batch of hidden messages
-                hiddenMessages.filter(':hidden').slice().slideDown();
+                hiddenMessages.filter(':hidden').slice(0, messagesToShow).slideDown();
 
                 // If all messages are shown, hide "Read More" and show "Show Less"
                 if (hiddenMessages.filter(':hidden').length === 0) {
