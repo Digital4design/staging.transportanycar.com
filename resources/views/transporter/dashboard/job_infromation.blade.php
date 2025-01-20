@@ -2,6 +2,14 @@
 
 @section('head_css')
     <style>
+        #read-more {
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: 300;
+            color:#5b5b5b;
+            cursor: pointer;
+        }
+        #read-more:hover {color:#006DF0;}
         .add_to_wishlist {
             background: #999999;
             color: #F3F8FF;
@@ -763,7 +771,9 @@
                                                         </div>
                                                     @endforeach
                                                     @if ($transporter->messages->count() > 2)
-                                                        <a id="read-more" class=" mb-3">View More</a>
+                                                    <div class="text-right mb-1">
+                                                        <a id="read-more" class=" mb-3">View more messages</a>
+                                                    </div>
                                                         {{-- <div id="show-less" class="mb-3"
                                                         style="display: none;">Show Less</div> --}}
                                                     @endif
@@ -1436,7 +1446,7 @@
             // On clicking "Read More"
             $('#read-more').on('click', function() {
                 // Show the next batch of hidden messages
-                hiddenMessages.filter(':hidden').slice(0, messagesToShow).slideDown();
+                hiddenMessages.filter(':hidden').slice().slideDown();
 
                 // If all messages are shown, hide "Read More" and show "Show Less"
                 if (hiddenMessages.filter(':hidden').length === 0) {
