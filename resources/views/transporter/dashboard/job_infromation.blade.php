@@ -2,6 +2,14 @@
 
 @section('head_css')
 <style>
+    #read-more {
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 300;
+        color:#5b5b5b;
+        cursor: pointer;
+    }
+    #read-more:hover {color:#006DF0;}
     .add_to_wishlist {
         background: #999999;
         color: #F3F8FF;
@@ -489,6 +497,25 @@
         .wishlist_wrap .label,
         .content_wrap .label {
             min-width: 40%;
+        }
+    }
+    @media screen and (max-width: 375px) {
+        #accordionBids .card-body,
+        #accordionBids .card-header {
+            padding: 10px;
+        }
+        #accordionBids .card-header svg {
+            height: 24px;
+            width: 24px;
+        }
+        #accordionBids .view_message {font-size: 12px;}
+        .bidder_verified,
+        .bidder_name {font-size: 14px;}
+        .message_count {
+            height:16px;
+            width:16px;
+            font-size: 12px;
+            line-height: 16px;
         }
     }
 </style>
