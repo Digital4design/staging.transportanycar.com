@@ -800,7 +800,7 @@
                                                 {{ $message->created_at->format('d/m') }} at
                                                 {{ $message->created_at->format('H:i') }}
                                             </p>
-                                            <p>"{{ $message->message }}"</p>
+                                            <p>{{ $message->message }}</p>
                                         </div>
                                         @endforeach
                                         @if ($transporter->messages->count() > 2)
