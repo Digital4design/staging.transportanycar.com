@@ -626,8 +626,6 @@
                                                 @if ($quote->starts_drives_1)
                                                     @if ($quote->starts_drives == '1' || $quote->starts_drives_1 == '1')
                                                         <span class="value">Yes</span>
-                                                    @elseif ($quote->starts_drives == '1' || $quote->starts_drives_1 == null)
-                                                        <span class="value">Yes/No</span>
                                                     @elseif ($quote->starts_drives == '1' || $quote->starts_drives_1 == '0')
                                                         <span class="value">Yes/No</span>
                                                     @elseif ($quote->starts_drives == '0' || $quote->starts_drives_1 == '1')
