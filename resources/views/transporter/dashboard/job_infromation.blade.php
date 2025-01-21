@@ -544,8 +544,7 @@
                             </div>
                         </div>
                         <div class="wrapper row">
-                            <div
-                                class="left-content row mx-0 align-items-start justify-content-between col-xl-4 mb-3 mb-xl-0 px-0 px-md-3">
+                            <div class="left-content row mx-0 align-items-start justify-content-between col-xl-4 mb-3 mb-xl-0 px-0 px-md-3">
                                 <div class="img_wrap">
 
                                     <img src="{{ $quote->image }}" alt="image" width="92" height="57"
