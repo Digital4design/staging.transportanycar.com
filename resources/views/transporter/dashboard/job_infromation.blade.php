@@ -217,10 +217,15 @@
         .left-content .img_wrap {
             max-width: 92px;
             width: 92px;
+            height: 57px;
             flex: 0 0 92px;
             border-radius: 5px;
             overflow: hidden;
-            display: inline-block;
+            display: flex;
+            height: 57px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
         }
 
         .left-content .img_wrap+.car-content {
@@ -286,6 +291,10 @@
             border-radius: 5px;
             cursor: pointer;
             transition: 0.3s;
+            object-fit: cover;
+            object-position: center;
+            width: 100%;
+            height: 100%;
         }
 
         #myImg:hover {
