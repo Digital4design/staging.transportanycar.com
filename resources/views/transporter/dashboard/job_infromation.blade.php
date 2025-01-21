@@ -803,10 +803,13 @@
                                                 aria-labelledby="bid{{ $key }}" data-parent="#accordionBids">
                                                 <div class="card-body">
                                                     @foreach ($transporter->messages as $set => $message)
-                                                        {{-- <div class="message-info @if ($index < $transporter->messages->count() - 2) hidden-message @endif" --}}
+                                                        
 
-                                                        <div class="message-info @if ($set >= 2) hidden-message @endif"
-                                                            @if ($set >= 2) style="display: none;" @endif>
+                                                        {{-- <div class="message-info @if ($set >= 2) hidden-message @endif"
+                                                            @if ($set >= 2) style="display: none;" @endif> --}}
+                                                            <div class="message-info @if ($set < $transporter->messages->count() - 2) hidden-message @endif"
+                                                                @if ($set < $transporter->messages->count() - 2) style="display: none;" @endif>
+                                                               
                                                             <p>
                                                                 @if ($message->sender->type == 'car_transporter')
                                                                     @if ($message->sender->id === Auth::user()->id)
