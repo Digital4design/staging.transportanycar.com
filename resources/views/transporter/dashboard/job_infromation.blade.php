@@ -1,513 +1,629 @@
 @extends('layouts.transporter.dashboard.app')
 
 @section('head_css')
-    <style>
-        #read-more {
-            font-size: 14px;
-            line-height: 18px;
-            font-weight: 300;
-            color: #5b5b5b;
-            cursor: pointer;
-        }
-
-        #read-more:hover {
-            color: #006DF0;
-        }
-
-        .add_to_wishlist {
-            background: #999999;
-            color: #F3F8FF;
-            border-radius: 7px;
-            font-size: 12px;
-            line-height: 16px;
-            font-weight: 500;
-            padding: 8px 18px;
-            display: inline-block;
-        }
-
-        .add_to_wishlist:hover {
-            background-color: #6c6969;
-            color: #F3F8FF;
-        }
-
-        .view_message {
-            font-size: 14px;
-            line-height: 19px;
-            font-weight: 500;
-            color: #F3F8FF;
-            background-color: #9C9C9C;
-            border-radius: 7px;
-            padding: 10px 14px;
-        }
-
-        .view_message:focus {
-            box-shadow: none;
-        }
-
-        .view_message[data-target="#bidCollapse0"] {
-            background-color: #0356D6;
-        }
-
-        .view_message:hover {
-            color: #F3F8FF;
-        }
-
-        .card {
-            padding-bottom: 5px;
-        }
-
-        .message_count {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border-radius: 100%;
-            background-color: #F3F8FF;
-            color: #000000;
-            font-size: 14px;
-            line-height: 18px;
-            font-weight: 300;
-            margin-left: 5px;
-        }
-
-        .bidder_bid {
-            font-size: 14px;
-            line-height: 18px;
-            font-weight: 500;
-            color: #000000;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .bidder_bid span {
-            color: #52D017;
-        }
-
-        .bidder_verified {
-            font-size: 16px;
-            line-height: 20px;
-            font-weight: 400;
-            color: #5B5B5B;
-        }
-
-        .bidder_name {
-            font-size: 16px;
-            line-height: 20px;
-            font-weight: 400;
-        }
-
-        .bidder_name span {
-            color: #0356D6;
-        }
-
-        .card-header {
-            padding: 20px;
-        }
-
-        .card-body {
-            font-size: 14px;
-            line-height: 20px;
-            font-weight: 400;
-            color: #444444;
-        }
-
-        .message-info {
-            font-size: 14px;
-            line-height: 18px;
-            font-weight: 400;
-            color: #313131;
-        }
-
-        .message-info p:first-child {
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .message-info span {
-            color: #006DF0
-        }
-
-        .accordion {
-            background-color: #F3F3F3;
-        }
-
-        textarea {
-            border: 2px solid #CFCFCF;
-            border-radius: 5px;
-            background-color: #ffffff;
-            width: 100%;
-            padding: 8px 10px;
-        }
-
-        textarea::-webkit-input-placeholder {
-            font-size: 12px;
-            line-height: 16px;
-            font-weight: 300;
-            color: #C3C3C3;
-        }
-
-        textarea::-moz-placeholder {
-            font-size: 12px;
-            line-height: 16px;
-            font-weight: 300;
-            color: #C3C3C3;
-        }
-
-        textarea:-ms-input-placeholder {
-            font-size: 12px;
-            line-height: 16px;
-            font-weight: 300;
-            color: #C3C3C3;
-        }
-
-        textarea:-moz-placeholder {
-            font-size: 12px;
-            line-height: 16px;
-            font-weight: 300;
-            color: #C3C3C3;
-        }
-
-        .note {
-            font-size: 10px;
-            line-height: 13px;
-            font-weight: 300;
-            color: #444444;
-            padding-left: 20px;
-            margin-top: 5px;
-        }
-
-        .note svg {
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        .content_wrap .label,
-        .content_wrap .value {
-            font-size: 15px;
-            line-height: 20px;
-        }
-
-        .zoom-icon {
-            left: 20px;
-            top: 5px;
-        }
-
-        .car-title {
-            font-weight: 500;
-        }
-
-        .wishlist_wrap .label,
-        .content_wrap .label {
-            font-weight: 300;
-        }
-
-        .wishlist_wrap .value,
-        .content_wrap .value {
-            font-weight: 400;
-        }
-
-        .wishlist_wrap .value,
-        .wishlist_wrap .label {
-            font-size: 12px;
-            line-height: 16px;
-        }
-
-        .wishlist_wrap .value.price {
-            color: #52D017;
-        }
-
-        .wishlist_wrap .value.bid_count {
-            color: #0356D6;
-        }
-
-        .car-content {
-            font-size: 15px;
-            line-height: 20px;
-            font-weight: 400;
-        }
-
-        .left-content .img_wrap {
-            max-width: 92px;
-            width: 92px;
-            height: 57px;
-            flex: 0 0 92px;
-            border-radius: 5px;
-            overflow: hidden;
-            display: flex;
-            height: 57px;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .left-content .img_wrap+.car-content {
-            flex: 0 0 calc(100% - 100px);
-            max-width: calc(100% - 100px);
-        }
-
-        .back_btn a {
-            font-size: 18px;
-            line-height: 24px;
-            color: rgba(0, 0, 0, 0.5);
-        }
-
-        .date {
-            font-size: 12px;
-            line-height: 16px;
-            font-weight: 400;
-            color: #5F5F5F;
-        }
-
-        .heading {
-            font-size: 25px;
-            line-height: 32px;
-            text-align: center;
-            color: #000000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-        }
-
-        .wd-white-box {
-            overflow: visible;
-        }
-
-        .send_message {
-            font-size: 14px;
-            line-height: 18px;
-            font-weight: 400;
-            color: #FFFFFF;
-            border-radius: 5px;
-            border: 1px solid #52D017;
-            background-color: #52D017;
-            padding: 6px 20px;
-            margin-top: 15px;
-        }
-
-        .bid_lowest {
-            font-size: 12px;
-            line-height: 16px;
-            color: #ffffff;
-            font-weight: 400;
-            background-color: #52D017;
-            position: absolute;
-            left: 0;
-            top: 0;
-            padding: 2px 15px;
-            border-radius: 0 0 15px 0;
-        }
-
-        .send_message:hover {
-            color: #ffffff;
-        }
-
-        #myImg {
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-            object-fit: cover;
-            object-position: center;
-            width: 100%;
-            height: 100%;
-        }
-
-        #myImg:hover {
-            opacity: 0.7;
-        }
-
-        #myModal .carousel-control-prev,
-        #myModal .carousel-control-next {
-            margin: auto;
-            height: 25px;
-            width: auto;
-            background: transparent;
-            border: none;
-        }
-
-        #myModal .close {
-            cursor: pointer;
-            position: absolute;
-            right: 0;
-            top: 0;
-            background: rgba(255, 255, 255, 1) !important;
-            width: 25px;
-            height: 25px;
-            text-align: center;
-            border-radius: 100%;
-            font-size: 20px;
-            line-height: 24px;
-            z-index: 999;
-            opacity: 1;
-            padding: 0;
-        }
-
-        #myModal .modal-header {
-            border: none;
-            padding: 0;
-        }
-
-        /* #myModal .close:hover {
-                                    background-color: #0356d6!important;
-                                    color:#ffffff;
-                                } */
-        .view-quote .place_bid_btn:hover {
-            background-color: #52D017;
-            color: #ffffff;
-        }
-
-        .modal#myModal {
-            display: none;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        #caption {
-            text-align: center;
-            padding: 10px 0;
-        }
-
-        .modal-content,
-        #caption {
-            -webkit-animation-name: zoom;
-            -webkit-animation-duration: 0.6s;
-            animation-name: zoom;
-            animation-duration: 0.6s;
-        }
-
-        @-webkit-keyframes zoom {
-            from {
-                -webkit-transform: scale(0)
-            }
-
-            to {
-                -webkit-transform: scale(1)
-            }
-        }
-
-        @keyframes zoom {
-            from {
-                transform: scale(0)
-            }
-
-            to {
-                transform: scale(1)
-            }
-        }
-
-        @media screen and (min-width: 1680px) {
-            .upper-left {
-                flex: 0 0 41.666667%;
-                max-width: 41.666667%;
-                margin-bottom: 0 !important;
-            }
-
-            .upper-right {
-                flex: 0 0 58.333333%;
-                max-width: 58.333333%;
-                margin-top: 0 !important;
-            }
-
-            .expiry,
-            .delivery {
-                flex: 0 0 50%;
-                max-width: 50%;
-            }
-
-            .left-content {
-                flex: 0 0 25%;
-                max-width: 25%;
-            }
-
-            .right-content {
-                flex: 0 0 75%;
-                max-width: 75%;
-            }
-        }
-
-        @media screen and (min-width: 1024px) {
-            .add_to_wishlist {
-                font-size: 16px;
-                padding: 9px 18px;
-            }
-        }
-
-        @media screen and (min-width: 768px) {
-            .content_wrap {
-                margin-left: -15px;
-                margin-right: -15px;
-            }
-
-            .place_bid_wrap {
-                width: auto;
-            }
-
-            .add_to_wishlist {
-                font-size: 14px;
-                line-height: 24px;
-                padding: 6px 18px;
-            }
-
-            .wishlist_wrap .value,
-            .wishlist_wrap .label {
-                font-size: 14px;
-            }
-        }
-
-        @media screen and (max-width: 767px) {
-            #myModal .close {
-                top: 16px;
-                right: 16px;
-            }
-
-            .zoom-icon {
-                left: 5px;
-            }
-
-            .place_bid_wrap {
-                width: 100%;
-            }
-
-            .place_bid_btn {
-                width: 100%;
-                font-size: 20px !important;
-                line-height: 37px !important;
-            }
-
-            .content_wrap {
-                bordeR: 1px solid #DADADA;
-                border-radius: 8px;
-                padding: 20px 5px;
-            }
-
-            .wishlist_wrap .label,
-            .content_wrap .label {
-                min-width: 30%;
-            }
-
-            .lower-left {
-                margin: 0;
-                max-width: 140px;
-            }
-        }
-
-        @media screen and (max-width: 575px) {
-            .job_details {
-                padding-top: 70px !important;
-            }
-
-            .note svg {
-                top: 5px;
-            }
-
-            .bid_wrapper {
-                margin-left: -30px;
-                margin-right: -30px;
-            }
-
-            .wishlist_wrap .label,
-            .content_wrap .label {
-                min-width: 40%;
-            }
-        }
-    </style>
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/globle.css') }}" />
+<style>
+#read-more {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 300;
+    color: #5b5b5b;
+    cursor: pointer;
+}
+
+#read-more:hover {
+    color: #006DF0;
+}
+
+.add_to_wishlist {
+    background: #999999;
+    color: #F3F8FF;
+    border-radius: 7px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    padding: 8px 18px;
+    display: inline-block;
+}
+
+.add_to_wishlist:hover {
+    background-color: #6c6969;
+    color: #F3F8FF;
+}
+
+.view_message {
+    font-size: 14px;
+    line-height: 19px;
+    font-weight: 500;
+    color: #F3F8FF;
+    background-color: #9C9C9C;
+    border-radius: 7px;
+    padding: 10px 14px;
+}
+
+.view_message:focus {
+    box-shadow: none;
+}
+
+.view_message[data-target="#bidCollapse0"] {
+    background-color: #0356D6;
+}
+
+.view_message:hover {
+    color: #F3F8FF;
+}
+
+.card {
+    padding-bottom: 5px;
+}
+
+.message_count {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    background-color: #F3F8FF;
+    color: #000000;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 300;
+    margin-left: 5px;
+}
+
+.bidder_bid {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.bidder_bid span {
+    color: #52D017;
+}
+
+.bidder_verified {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #5B5B5B;
+}
+
+.bidder_name {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.bidder_name span {
+    color: #0356D6;
+}
+
+.card-header {
+    padding: 20px;
+}
+
+.card-body {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #444444;
+}
+
+.message-info {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #313131;
+}
+
+.message-info p:first-child {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.message-info span {
+    color: #006DF0
+}
+
+.accordion {
+    background-color: #F3F3F3;
+}
+
+textarea {
+    border: 2px solid #CFCFCF;
+    border-radius: 5px;
+    background-color: #ffffff;
+    width: 100%;
+    padding: 8px 10px;
+}
+
+textarea::-webkit-input-placeholder {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 300;
+    color: #C3C3C3;
+}
+
+textarea::-moz-placeholder {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 300;
+    color: #C3C3C3;
+}
+
+textarea:-ms-input-placeholder {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 300;
+    color: #C3C3C3;
+}
+
+textarea:-moz-placeholder {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 300;
+    color: #C3C3C3;
+}
+
+.note {
+    font-size: 10px;
+    line-height: 13px;
+    font-weight: 300;
+    color: #444444;
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.note svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.content_wrap .label,
+.content_wrap .value {
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.zoom-icon {
+    left: 20px;
+    top: 5px;
+}
+
+.car-title {
+    font-weight: 500;
+}
+
+.wishlist_wrap .label,
+.content_wrap .label {
+    font-weight: 300;
+}
+
+.wishlist_wrap .value,
+.content_wrap .value {
+    font-weight: 400;
+}
+
+.wishlist_wrap .value,
+.wishlist_wrap .label {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.wishlist_wrap .value.price {
+    color: #52D017;
+}
+
+.wishlist_wrap .value.bid_count {
+    color: #0356D6;
+}
+
+.car-content {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.left-content .img_wrap {
+    max-width: 92px;
+    width: 92px;
+    height: 57px;
+    flex: 0 0 92px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    height: 57px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-content .img_wrap+.car-content {
+    flex: 0 0 calc(100% - 100px);
+    max-width: calc(100% - 100px);
+}
+
+.back_btn a {
+    font-size: 18px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.date {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    color: #5F5F5F;
+}
+
+.heading {
+    font-size: 25px;
+    line-height: 32px;
+    text-align: center;
+    color: #000000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.wd-white-box {
+    overflow: visible;
+}
+
+.send_message {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border: 1px solid #52D017;
+    background-color: #52D017;
+    padding: 6px 20px;
+    margin-top: 15px;
+}
+
+.bid_lowest {
+    font-size: 12px;
+    line-height: 16px;
+    color: #ffffff;
+    font-weight: 400;
+    background-color: #52D017;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 2px 15px;
+    border-radius: 0 0 15px 0;
+}
+
+.send_message:hover {
+    color: #ffffff;
+}
+
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+#myImg:hover {
+    opacity: 0.7;
+}
+
+#myModal .carousel-control-prev,
+#myModal .carousel-control-next {
+    margin: auto;
+    height: 25px;
+    width: auto;
+    background: transparent;
+    border: none;
+}
+
+#myModal .close {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: rgba(255, 255, 255, 1) !important;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border-radius: 100%;
+    font-size: 20px;
+    line-height: 24px;
+    z-index: 999;
+    opacity: 1;
+    padding: 0;
+}
+
+#myModal .modal-header {
+    border: none;
+    padding: 0;
+}
+
+.view-quote .place_bid_btn:hover {
+    background-color: #52D017;
+    color: #ffffff;
+}
+
+.modal#myModal {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#caption {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.modal-content,
+#caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+    
+    to {
+        transform: scale(1)
+    }
+}
+
+.bid_form input.form-control {
+    height: auto;
+    font-size: 20px;
+}
+
+.bid_form span.icon_includes {
+    height: 62px;
+}
+
+.bid_form span#amount-error,
+.bid_form span#message-error {
+    padding: 0;
+}
+
+.bid_form .form-group {
+    position: relative;
+}
+
+.bid_form textarea.form-control.textarea {
+    height: 107px;
+}
+
+.get_quote .modal-content {
+    padding: 20px 30px;
+    /* margin:0px 10px; */
+}
+
+.get_quote .modal-header span svg {
+    margin-right: 0px;
+    width: 17px;
+    height: 17px;
+}
+
+.modal_current {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 7px;
+}
+
+.modal_current p {
+    margin: 0;
+    font-weight: normal;
+    font-size: 13px;
+    color: #000000d6;
+}
+
+.modal_current p span {
+    color: #52D017;
+}
+
+.modal_current p span.red {
+    color: #0356D6;
+}
+.modal-footer button.submit_btn {
+    text-transform: none;
+}
+
+.submit_btn {
+    font-size: 20px;
+    font-weight: 400;
+    color: #ffffff;
+    padding: 10px 50px !important;
+}
+.get_quote .modal-footer p {
+    font-size: 14px !important;
+    font-weight: 300;
+    color: #000000;
+    margin: 0 0 28px !important;
+}
+.content_container {
+    padding: 95px 0 0px;
+}
+
+#page-content-wrapper {
+    padding-bottom: 20px;
+}
+
+@media screen and (min-width: 1680px) {
+    .upper-left {
+        flex: 0 0 41.666667%;
+        max-width: 41.666667%;
+        margin-bottom: 0 !important;
+    }
+    
+    .upper-right {
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%;
+        margin-top: 0 !important;
+    }
+    
+    .expiry,
+    .delivery {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    
+    .left-content {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+    
+    .right-content {
+        flex: 0 0 75%;
+        max-width: 75%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .add_to_wishlist {
+        font-size: 16px;
+        padding: 9px 18px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .content_wrap {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    
+    .place_bid_wrap {
+        width: auto;
+    }
+    
+    .add_to_wishlist {
+        font-size: 14px;
+        line-height: 24px;
+        padding: 6px 18px;
+    }
+    
+    .wishlist_wrap .value,
+    .wishlist_wrap .label {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #myModal .close {
+        top: 16px;
+        right: 16px;
+    }
+    
+    .zoom-icon {
+        left: 5px;
+    }
+    
+    .place_bid_wrap {
+        width: 100%;
+    }
+    
+    .place_bid_btn {
+        width: 100%;
+        font-size: 20px !important;
+        line-height: 37px !important;
+    }
+    
+    .content_wrap {
+        bordeR: 1px solid #DADADA;
+        border-radius: 8px;
+        padding: 20px 5px;
+    }
+    
+    .wishlist_wrap .label,
+    .content_wrap .label {
+        min-width: 30%;
+    }
+    
+    .lower-left {
+        margin: 0;
+        max-width: 140px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .get_quote .modal-footer p {
+        font-size: 12px !important;
+    }
+    .modal-header span {
+        display: flex;
+        align-items: center;
+        color: #9C9C9C;
+        font-size: 18px;
+    }
+
+    .modal-header span svg {
+        margin-right: 7px;
+    }
+    .job_details {
+        padding-top: 70px !important;
+    }
+    
+    .note svg {
+        top: 5px;
+    }
+    
+    .bid_wrapper {
+        margin-left: -30px;
+        margin-right: -30px;
+    }
+    
+    .wishlist_wrap .label,
+    .content_wrap .label {
+        min-width: 40%;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    
+    #accordionBids .card-body,
+    #accordionBids .card-header {
+        padding: 10px;
+    }
+    
+    #accordionBids .card-header svg {
+        height: 24px;
+        width: 24px;
+    }
+    
+    #accordionBids .view_message {
+        font-size: 12px;
+    }
+    
+    .bidder_verified,
+    .bidder_name {
+        font-size: 14px;
+    }
+    
+    .message_count {
+        height: 16px;
+        width: 16px;
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
+</style>
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/globle.css') }}" />
 @endsection
 
 
@@ -745,7 +861,7 @@
                                         <div class="card bg-transparent border-0 rounded-0">
                                             <div class="card-header bg-white border-0 justify-content-between"
                                                 id="bid{{ $key }}">
-                                                @if ($key == 1)
+                                                @if ($lowestBid == round($transporter->transporter_payment))
                                                     <span class="bid_lowest">Lowest</span>
                                                 @endif
                                                 <div class="d-flex flex-wrap align-items-center">
