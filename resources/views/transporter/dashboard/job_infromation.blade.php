@@ -947,22 +947,25 @@
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        @if($quote->image_1)
                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        @endif
                         {{-- <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> --}}
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img src="{{ $quote->image }}" class="d-block w-100" alt="..." />
                         </div>
+                        @if($quote->image_1)
                         <div class="carousel-item">
                             <img src="{{ asset($quote->image_1) }}" class="d-block w-100" alt="..." />
-
-                            {{-- <img src="{{ $quote->image_1 }}" class="d-block w-100" alt="..." /> --}}
                         </div>
+                        @endif
                         {{-- <div class="carousel-item">
                             <img src="https://images.pexels.com/photos/919073/pexels-photo-919073.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="..." />
                         </div> --}}
                     </div>
+                    @if($quote->image_1)
                     <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
@@ -971,6 +974,7 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </button>
+                    @endif
                 </div>
             </div>
 
