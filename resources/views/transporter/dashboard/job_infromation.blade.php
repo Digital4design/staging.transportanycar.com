@@ -438,8 +438,8 @@
 
     @media screen and (max-width: 767px) {
         #myModal .close {
-            top:24px;
-            right: 24px;
+            top:16px;
+            right: 16px;
         }
         .zoom-icon {
             left: 5px;
