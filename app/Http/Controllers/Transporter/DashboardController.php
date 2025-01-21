@@ -1465,7 +1465,7 @@ class DashboardController extends WebController
 
             // Update quotes with thread_id if the thread exists
             $threads = Thread:: with(['messages' => function ($query) {
-                $query->orderBy('created_at', 'desc');  // Order messages by 'created_at' in descending order
+                $query->orderBy('created_at', 'asc');  // Order messages by 'created_at' in descending order
             }])
             ->where(['user_id' => $quote->user_id, 'user_quote_id' => $id])
             ->get();
