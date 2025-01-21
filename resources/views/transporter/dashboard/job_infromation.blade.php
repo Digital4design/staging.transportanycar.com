@@ -634,6 +634,8 @@
                                                         <span class="value">No/Yes</span>
                                                     @elseif ($quote->starts_drives == '0' || $quote->starts_drives_1 == null)
                                                         <span class="value">No</span>
+                                                        @elseif ($quote->starts_drives == '0' || $quote->starts_drives_1 == '0')
+                                                        <span class="value">No</span>
                                                     @endif   
                                                  @else
                                                     @if ($quote->starts_drives == '1')
