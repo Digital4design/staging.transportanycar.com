@@ -546,7 +546,9 @@
                             </div>
                             <div class="car-content">
                                 @if (!is_null($quote->vehicle_make_1) && !is_null($quote->vehicle_model_1))
-                                <div class="car-title">2x Vehicles</div>
+                                <div class="car-title"> {{ $quote->vehicle_make }}
+                                    {{ $quote->vehicle_model }} /{{ $quote->vehicle_make_1 }}
+                                    {{ $quote->vehicle_model_1 }}</div>
                                 @else
                                 <div class="car-title">
                                     {{ $quote->vehicle_make }}
