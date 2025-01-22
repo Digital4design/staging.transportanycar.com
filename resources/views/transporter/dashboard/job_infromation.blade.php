@@ -328,15 +328,18 @@ textarea:-moz-placeholder {
     right: 0;
     top: 0;
     background: rgba(255, 255, 255, 1) !important;
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
     text-align: center;
-    border-radius: 100%;
+    border-radius: 0 0 0 30px;
     font-size: 20px;
-    line-height: 24px;
+    line-height: 34px;
     z-index: 999;
     opacity: 1;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #myModal .modal-header {
@@ -410,40 +413,39 @@ textarea:-moz-placeholder {
 }
 
 .bid_form textarea.form-control.textarea::-webkit-input-placeholder {
-                color: #A0A0A0;
-                font-family: 'Outfit', sans-serif;
-                font-size: 16px;
-                line-height: 1.5;
-                font-weight: 400;
-            }
+    color: #A0A0A0;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+}
 
-            .bid_form textarea.form-control.textarea::-moz-placeholder {
-                color: #A0A0A0;
-                font-family: 'Outfit', sans-serif;
-                font-size: 16px;
-                line-height: 1.5;
-                font-weight: 400;
-            }
+.bid_form textarea.form-control.textarea::-moz-placeholder {
+    color: #A0A0A0;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+}
 
-            .bid_form textarea.form-control.textarea:-ms-input-placeholder {
-                color: #A0A0A0;
-                font-family: 'Outfit', sans-serif;
-                font-size: 16px;
-                line-height: 1.5;
-                font-weight: 400;
-            }
+.bid_form textarea.form-control.textarea:-ms-input-placeholder {
+    color: #A0A0A0;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+}
 
-            .bid_form textarea.form-control.textarea:-moz-placeholder {
-                color: #A0A0A0;
-                font-family: 'Outfit', sans-serif;
-                font-size: 16px;
-                line-height: 1.5;
-                font-weight: 400;
-            }
+.bid_form textarea.form-control.textarea:-moz-placeholder {
+    color: #A0A0A0;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+}
 
 .get_quote .modal-content {
     padding: 20px 30px;
-    /* margin:0px 10px; */
 }
 
 .get_quote .modal-header span svg {
@@ -633,7 +635,7 @@ textarea:-moz-placeholder {
         padding: 10px;
     }
     
-    #accordionBids .card-header svg {
+    #accordionBids .card-header svg.mr-2 {
         height: 24px;
         width: 24px;
     }
