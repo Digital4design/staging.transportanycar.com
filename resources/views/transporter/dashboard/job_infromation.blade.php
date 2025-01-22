@@ -409,6 +409,38 @@ textarea:-moz-placeholder {
     height: 107px;
 }
 
+.bid_form textarea.form-control.textarea::-webkit-input-placeholder {
+                color: #A0A0A0;
+                font-family: 'Outfit', sans-serif;
+                font-size: 16px;
+                line-height: 1.5;
+                font-weight: 400;
+            }
+
+            .bid_form textarea.form-control.textarea::-moz-placeholder {
+                color: #A0A0A0;
+                font-family: 'Outfit', sans-serif;
+                font-size: 16px;
+                line-height: 1.5;
+                font-weight: 400;
+            }
+
+            .bid_form textarea.form-control.textarea:-ms-input-placeholder {
+                color: #A0A0A0;
+                font-family: 'Outfit', sans-serif;
+                font-size: 16px;
+                line-height: 1.5;
+                font-weight: 400;
+            }
+
+            .bid_form textarea.form-control.textarea:-moz-placeholder {
+                color: #A0A0A0;
+                font-family: 'Outfit', sans-serif;
+                font-size: 16px;
+                line-height: 1.5;
+                font-weight: 400;
+            }
+
 .get_quote .modal-content {
     padding: 20px 30px;
     /* margin:0px 10px; */
