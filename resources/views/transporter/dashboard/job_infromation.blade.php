@@ -676,13 +676,10 @@ textarea:-moz-placeholder {
                         <div class="row align-items-center">
                             <div class="col-7 mb-3 pl-0 pl-md-3">
                                 <div class="back_btn row mx-0 align-items-center">
-                                    <a href="{{ url('transporter/new-jobs-new') }}"
-                                        class="d-flex flex-wrap align-items-center">
-                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                    <a href="javascript:history.back()" class="d-flex flex-wrap align-items-center">
+                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
                                             <g opacity="0.5">
-                                                <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             </g>
                                         </svg>
                                         Back to find jobs
