@@ -578,5 +578,12 @@ public function status(Request $request){
     return $data;
 
 }
+public function view(Request $request){
+   
+    $data = User::where('type','car_transporter')->get();
+    
+    return view('admin.category.index', [
+        'data' => $data,]);
+}
 
 }
