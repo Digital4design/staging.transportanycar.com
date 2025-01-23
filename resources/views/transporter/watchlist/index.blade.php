@@ -2374,6 +2374,7 @@
             myFunction(x);
         });
 
+        var jobInfoUrl = "{{ route('transporter.job_information', ':id') }}";
         $(document).on('click', '.car-row', function() {
 
             var carId = $(this).data('car-id');
