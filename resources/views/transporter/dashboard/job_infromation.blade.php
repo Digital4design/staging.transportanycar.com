@@ -691,9 +691,11 @@
                                         </svg>
                                         Back to  @php
                                             $previousUrl = url()->previous(); // Get the previous URL
+
                                         @endphp
 
-                                        @if ($previousUrl == route('transporter.savedFindJobResults'))
+
+                                        @if (Str::contains(parse_url($previousUrl, PHP_URL_PATH), route('transporter.savedFindJobResults', [], false)))
                                             Saved Find Job
                                         @elseif($previousUrl == route('transporter.new_jobs_new'))
                                             Find Jobs
