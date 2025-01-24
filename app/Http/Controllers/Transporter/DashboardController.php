@@ -1441,7 +1441,8 @@ class DashboardController extends WebController
                 ])
                 ->find($id);
             // return $quote;
-
+            // $transporter_message=Thread::with('messages')->where('friend_id',Auth::user()->id)->where('user_quote_id',$id)->first();
+// return $thread;
             $quotes = QuoteByTransporter::where('user_quote_id', $id)
                 ->orderByRaw('(user_id = ?) DESC', [auth()->id()]) // Place matching user_id records at the top
                 ->orderByRaw('CAST(price AS UNSIGNED) ASC') // Then sort the rest by price
@@ -1463,19 +1464,24 @@ class DashboardController extends WebController
 
 
             // Update quotes with thread_id if the thread exists
-            $threads = Thread::with('messages')->where(['user_id' => $quote->user_id, 'user_quote_id' => $id])->get();
+            $threads = Thread:: with(['messages' => function ($query) {
+                $query->orderBy('created_at', 'asc');  // Order messages by 'created_at' in descending order
+            }])
+            ->where(['user_id' => $quote->user_id, 'user_quote_id' => $id])
+            ->get();
            
             $quotes->map(function ($quote) use ($threads) {
                 $matchingThread = $threads->firstWhere('friend_id', $quote->user_id);
                 if ($matchingThread) {
                     $quote->messages = $matchingThread->messages;
+                    $quote->count_messages = count($matchingThread->messages);
                 } else {
                     $quote->messages = null;
                 }
 
                 return $quote;
             });
-            // dd($quote->quoteByTransporter);
+            // return $quotes;
             // return ['quote' => $quote, 'quotebytransporters' => $quotes];
             return view('transporter.dashboard.job_infromation', ['quote' => $quote, 'quotebytransporters' => $quotes]);
            

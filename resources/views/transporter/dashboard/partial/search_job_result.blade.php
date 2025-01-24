@@ -378,10 +378,11 @@
                             <div class="btnCol">
 
                                 @if ($quote->tranporterId == auth()->user()->id)
-                                    <a href="javascript:;" onclick="share_edit_quote('{{ $quote->id }}');"
+                                
+                                    <a  href="{{ route('transporter.job_information', $quote->id) }}"
                                         class="w-100 mt-0 make_offer_btn checkStatus">Edit bid</a>
                                 @else
-                                    <a href="javascript:;" onclick="share_give_quote('{{ $quote->id }}');"
+                                    <a  href="{{ route('transporter.job_information', $quote->id) }}"
                                         class="w-100 mt-0 make_offer_btn checkStatus">
                                         Place bid</a>
                                 @endif
