@@ -696,7 +696,7 @@
 
 
                                         @if (Str::contains(parse_url($previousUrl, PHP_URL_PATH), route('transporter.savedFindJobResults', [], false)))
-                                            Saved Find Job
+                                            Saved Jobs
                                         @elseif($previousUrl == route('transporter.new_jobs_new'))
                                             Find Jobs
                                         @elseif($previousUrl == route('transporter.watchlist.index'))
