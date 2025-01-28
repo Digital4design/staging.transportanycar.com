@@ -1967,7 +1967,7 @@
                                                         </i>
                                                         <span>
                                                             {{-- {{ $quote->pickup_postcode ? $quote->pickup_postcode : '-' }} --}}
-                                                            {{ $quote->pickup_postcode ? hidePostcode($quote->pickup_postcode) : '-' }}
+                                                            {{ $quote->pickup_postcode ? hidePostcode(get_last_two_parts($quote->pickup_postcode)) : '-' }}
                                                         </span>
                                                     </li>
 
@@ -1980,7 +1980,7 @@
                                                                     fill="#ED1C24"></path>
                                                             </svg>
                                                         </i>
-                                                        <span>{{ $quote->drop_postcode ? hidePostcode($quote->drop_postcode) : '-' }}</span>
+                                                        <span>{{ $quote->drop_postcode ? hidePostcode(get_last_two_parts($quote->drop_postcode)) : '-' }}</span>
                                                     </li>
                                                 </ul>
                                             </div>
