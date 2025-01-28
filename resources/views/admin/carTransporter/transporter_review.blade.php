@@ -6,7 +6,19 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css" />
 @endsection
 @section('content')
-@include('components.breadcum')
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">  Review</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                  
+                 </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-12">
         {!! success_error_view_generator() !!}
@@ -24,11 +36,8 @@
                             <th>Profile Image</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <!-- <th>Number</th> -->
-                            <th>Type</th>
-                            <th>Approval Status</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>Review</th>
+                            <th>Job completed</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -95,16 +104,9 @@
         });
         $(document).on("change", ".status", function(e) {
             e.preventDefault();
-            var is_status = $(this).val();
-             var id= $(this).data('id');
-          
             $.ajax({
-                url: "{{ route('admin.carTransporter.status') }}",
-                type: "POST",
-                data: {
-                    'is_status':is_status,
-                    'id':id,
-                },
+                url: "{{ route('admin.carTransporter.review_data') }}",
+                type: "GET",
                 dataType: 'json',
                 success: function(data) {
                     let msg = data.message;
@@ -114,18 +116,20 @@
                     } else {
                         show_toastr_notification(msg,412)
                     }
-                    oTable.draw();
+                    // oTable.draw();
                 },
             });
 
         })
+      
         oTable = $('#listResults').DataTable({
+            alert('yesssssssssssss');
             "processing": true,
             "serverSide": true,
             "order": [
                 [0, "DESC"]
             ],
-            "ajax": "{{route('admin.carTransporter.pendinglisting')}}",
+            "ajax": "{{route('admin.carTransporter.review_data')}}",
             "columns": [{
                     "data": "id",
                     searchable: false,

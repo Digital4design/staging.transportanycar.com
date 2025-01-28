@@ -578,12 +578,26 @@ public function status(Request $request){
     return $data;
 
 }
-public function view(Request $request){
+public function review(Request $request){
    
     $data = User::where('type','car_transporter')->get();
     
-    return view('admin.category.index', [
+    return view('admin.carTransporter.transporter_review', [
         'data' => $data,]);
+}
+public function review_data(Request $request){
+    $datatable_filter = datatable_filters();
+    $offset = $datatable_filter['offset'];
+    $search = $datatable_filter['search'];
+    dd('here');
+    $return_data = [
+        'data' => [],
+        'recordsTotal' => 0,
+        'recordsFiltered' => 0
+    ]; 
+    $data = User::where('type','car_transporter')->get();
+    
+    return $data;
 }
 
 }

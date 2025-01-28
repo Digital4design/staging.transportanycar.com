@@ -55,6 +55,9 @@ Route::group(['middleware' => 'auth:admin'], function () {
             Route::get('carTransporter/approvedlisting', 'CarTransportersController@approvedListing')->name('carTransporter.approvedlisting');
             Route::post('carTransporter/status', 'CarTransportersController@status')->name('carTransporter.status');
             Route::get('carTransporter/view', 'CarTransportersController@view')->name('carTransporter.view');
+            Route::get('carTransporter/review', 'CarTransportersController@review')->name('carTransporter.review');
+            Route::get('carTransporter/review_data', 'CarTransportersController@review_data')->name('carTransporter.review_data');
+
 
             Route::resource('carTransporter', 'CarTransportersController');
 
