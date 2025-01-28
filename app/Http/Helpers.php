@@ -266,6 +266,13 @@ function admin_modules()
                     'approved_counter' => true,
                     'all_routes' => [],
                 ],
+                [
+                    'route' => route('admin.carTransporter.review'),
+                    'name' => 'Edit Review',
+                    'icon' => 'badge badge-custom',
+                    'approved_counter' => true,
+                    'all_routes' => [],
+                ],
             ]
         ],
         [
