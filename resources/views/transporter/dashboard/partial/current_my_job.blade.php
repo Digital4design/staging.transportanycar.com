@@ -66,7 +66,11 @@
                     </span>
                     <p>Pick-up area:</p>
                     <p><b>
+                        @if($type == 'bidding')
+                        {{ $quote->pickup_postcode ? hidePostcode(get_last_two_parts($quote->pickup_postcode)) : '-' }}
+                        @else
                         {{ $quote->pickup_postcode ? hidePostcode($quote->pickup_postcode) : '-' }}
+                        @endif
                         {{-- {{ $quote->pickup_postcode ? formatAddress($quote->pickup_postcode) : '-' }} --}}
                     </b></p>
                 </div>
@@ -77,7 +81,11 @@
                     <p>Drop-off area:</p>
                     <p><b>
                         {{-- {{ $quote->drop_postcode ? formatAddress($quote->drop_postcode) : '-' }} --}}
+                        @if($type == 'bidding')
+                        {{ $quote->drop_postcode ? hidePostcode(get_last_two_parts($quote->drop_postcode)) : '-' }}
+                        @else
                         {{ $quote->drop_postcode ? hidePostcode($quote->drop_postcode) : '-' }}
+                        @endif
                     </b></p>
                 </div>
                 <div class="list_detail">
