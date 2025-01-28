@@ -227,7 +227,7 @@
                                                                             </small>
                                                                         </div>
                                                                         {{-- <span style="width: 45%;">{{ $quote['pickup_postcode'] ?? '-' }}</span> --}}
-                                                                        <span style="width: 45%;">{{ $quote['pickup_postcode'] ? hidePostcode($quote['pickup_postcode']) : '-' }}</span>
+                                                                        <span style="width: 45%;">{{ $quote['pickup_postcode'] ? hidePostcode(get_last_two_parts($quote['pickup_postcode'])) : '-' }}</span>
 
                                                                     </li>
                                                                     <li>
@@ -243,7 +243,7 @@
                                                                                 Drop-off area:
                                                                             </small>
                                                                         </div>
-                                                                        <span style="width: 45%;">{{$quote['drop_postcode'] ? hidePostcode($quote['drop_postcode']) : '-' }}</span>
+                                                                        <span style="width: 45%;">{{$quote['drop_postcode'] ? hidePostcode(get_last_two_parts($quote['drop_postcode'])) : '-' }}</span>
 
                                                                         {{-- <span style="width: 45%;">{{ $quote['drop_postcode'] ?? '-' }}</span> --}}
                                                                     </li>
