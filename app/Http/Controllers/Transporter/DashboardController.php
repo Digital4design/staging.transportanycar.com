@@ -1422,6 +1422,7 @@ class DashboardController extends WebController
     {
         try {
             // return $id;+
+            // return url()->previous();
             $user_data = \Auth::guard('transporter')->user();
             $quote = UserQuote::with([
                 'watchlist',
