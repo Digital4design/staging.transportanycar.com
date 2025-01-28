@@ -3,7 +3,7 @@
 @section('css')
 <!-- DataTables -->
 <link href="{{ URL::asset('/assets/admin/vendors/general/datatable/jquery.dataTables.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"/>
 @endsection
 @section('content')
 <div class="row">
@@ -38,54 +38,12 @@
                             <th>Email</th>
                             <th>Review</th>
                             <th>Job completed</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
             </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="approveUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Recharge</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="kt-form kt-form--label-right" id="frmContent" name="frmContent" action="javascript:void(0)" method="post">
-                    @csrf
-                    <!-- <input type="hidden" name="id" id="id" value="{{$data['id'] ?? 0}}"> -->
-                    <input type="hidden" name="id" class="id" value="">
-                    <div class="kt-portlet__body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Card status</label>
-                                    <div class="kt-radio-list">
-                                        <label class="kt-radio kt-radio--bold kt-radio--success">
-                                            <input type="radio" name="status" class="approved" value="approved" checked> Approved
-                                            <span></span>
-                                        </label>
-                                        <label class="kt-radio kt-radio--bold kt-radio--danger">
-                                            <input type="radio" name="status" class="rejected" value="rejected"> Rejected
-                                            <span></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="submit btn btn-success">Save</button>
-            </div>
-            </form>
         </div>
     </div>
 </div>
@@ -102,28 +60,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $(document).on("change", ".status", function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: "{{ route('admin.carTransporter.review_data') }}",
-                type: "GET",
-                dataType: 'json',
-                success: function(data) {
-                    let msg = data.message;
-                    if (data.status) {
-                        show_toastr_notification(msg)
-                       
-                    } else {
-                        show_toastr_notification(msg,412)
-                    }
-                    // oTable.draw();
-                },
-            });
-
-        })
-      
         oTable = $('#listResults').DataTable({
-            alert('yesssssssssssss');
             "processing": true,
             "serverSide": true,
             "order": [
@@ -149,20 +86,16 @@
                     "data": "email",
                     sortable: true
                 },
-
+                
                 {
-                    "data": "type",
+                    "data": "review",
                     sortable: true
                 },
                 {
-                    "data": "is_status",
+                    "data": "completed_job",
                     sortable: true
                 },
-                {
-                    "data": "status",
-                    searchable: false,
-                    sortable: false
-                },
+                
                 {
                     "data": "action",
                     searchable: false,

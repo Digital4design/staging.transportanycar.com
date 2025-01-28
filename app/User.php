@@ -228,4 +228,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(CompanyDetail::class); // Assuming one-to-one relationship
     }
+    public function user_feedback()
+    {
+        return $this->hasMany(Feedback::class, 'transporter_id');
+    }
 }

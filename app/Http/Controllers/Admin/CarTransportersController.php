@@ -589,15 +589,50 @@ public function review_data(Request $request){
     $datatable_filter = datatable_filters();
     $offset = $datatable_filter['offset'];
     $search = $datatable_filter['search'];
-    dd('here');
+    // dd('here');
     $return_data = [
         'data' => [],
         'recordsTotal' => 0,
         'recordsFiltered' => 0
     ]; 
-    $data = User::where('type','car_transporter')->get();
-    
-    return $data;
+    $data = User::with('user_feedback')->where('type','car_transporter')->where('is_status','approved');
+    $return_data['recordsTotal'] = $data->count();
+    if (!empty($search)) {
+        $data->where(function ($query) use ($search) {
+            $query->AdminSearch($search);
+        });
+    }
+    $return_data['recordsFiltered'] = $data->count();
+    $all_data = $data->orderBy($datatable_filter['sort'], $datatable_filter['order'])
+    ->offset($offset)
+    ->limit($datatable_filter['limit'])
+    ->get();
+    if (!empty($all_data)) {
+        foreach ($all_data as $key => $value) {
+            $param = [
+                'id' => $value->id,
+                'url' => [
+                    'status' => route('admin.carTransporter.status_update', $value->id),
+                    //'edit' => route('admin.carTransporter.edit', $value->id),
+                    'login' => route('admin.loginAsTransporter', $value->id),
+                    'delete' => route('admin.carTransporter.destroy', $value->id),
+                    'view' => route('admin.carTransporter.show', $value->id),
+                ],
+                'checked' => ($value->status == 'active') ? 'checked' : ''
+            ];
+            $return_data['data'][] = array(
+                'id' => $offset + $key + 1,
+                'profile_image' => get_fancy_box_html($value['profile_image']),
+                'name' => $value->name,
+                'email' => $value->email,
+                'mobile_number' => $value->country_code . ' ' . $value->mobile,
+                'review' =>count($value->user_feedback),
+                'completed_job' =>$value->completed_job,
+                'action' => $this->generate_actions_buttons($param),
+            );
+        }
+    }
+    return $return_data;
 }
 
 }
