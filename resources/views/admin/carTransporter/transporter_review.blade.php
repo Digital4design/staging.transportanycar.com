@@ -8,6 +8,7 @@
         rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css" />
     <style>
+        #listResults_filter {display: none;}
         .lve_feed_btn {
             border: 1px solid #52D017;
             color: #fff;
@@ -349,7 +350,7 @@
                         @csrf
                         <input type="hidden" name="user_id" id="user_job_id">
                         <div class="form-group">
-                            <input type="text" class="mb-2" placeholder="Job completed no" name="job_completed" id ="job_completed" required/>
+                            <input type="number" class="mb-2" placeholder="Job completed no" name="job_completed" id ="job_completed" required/>
                             <button class="jobCompleted_form mt-4">Submit</button>
                         </div>
                     </form>
@@ -412,13 +413,13 @@
                         "sortable": false,
                         "render": function(data, type, row) {
                             return `
-                     <button class="btn btn-primary btn-sm showModelOne" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${row.id}" data-user-id="${row.user_id}" data-name="${row.name}"" data-content="${row.model_one_data}">
-                    Show Model 1
+                <div class="wd-sl-modalbtn mb-0 text-start">     <button class="btn btn-orange waves-effect waves-light showModelOne" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${row.id}" data-user-id="${row.user_id}" data-name="${row.name}"" data-content="${row.model_one_data}">
+                    Add Review
                 </button>
-
-                <button class="btn btn-warning btn-sm showModelTwo" data-bs-toggle="modal" data-bs-target="#jobCompleted" data-id="${row.id}" data-user-id="${row.user_id}" data-content="${row.model_two_data}">
-                    Show Model 2
+                <button class="btn btn-orange waves-effect waves-light showModelTwo" data-bs-toggle="modal" data-bs-target="#jobCompleted" data-id="${row.id}" data-user-id="${row.user_id}" data-content="${row.model_two_data}">
+                    Add Jobs Completed
                 </button>
+                </div>
                 `;
                         }
                     }
@@ -454,6 +455,7 @@
                 // Clear previous error messages
                 $('#ratingError').text('');
                 $('#commentError').text('');
+                
 
                 // Prepare the data to send in the AJAX request
                 let formData = {
@@ -471,6 +473,7 @@
                         if (response.success) {
                             $('#exampleModal').modal('hide'); // Close the modal
                             $('#pos_comment').val(''); // Clear the comment field
+                            $('#first_name').val('');
                             $('input[name="rating"]').prop('checked',
                             false); // Deselect the rating
                         } else {
@@ -494,13 +497,13 @@
                 e.preventDefault(); 
                 let userId = $('#user_job_id').val();
                 let jobCompleted = $('#job_completed').val();
-                let firstName = $('#first_name').val();
+                // let firstName = $('#first_name').val();
 
                 // Prepare the data to send in the AJAX request
                 let formData = {
                     user_id: userId,
                     job_Completed: jobCompleted,
-                    first_name:firstName
+                    // first_name:firstName
                 };
 
                 $.ajax({
@@ -511,7 +514,7 @@
                         if (response.success) {
                             $('#jobCompleted').modal('hide'); 
                             oTable.ajax.reload();
-                            $('#pos_comment').val(''); // Clear the comment field
+                            $('#job_completed').val('');
                             $('input[name="rating"]').prop('checked',
                             false); // Deselect the rating
                         } else {
