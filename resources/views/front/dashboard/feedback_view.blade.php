@@ -475,14 +475,14 @@
                                                     <p>Jobs completed:</p>
                                                     <span>{{ $user->completed_job }}</span>
                                                 </li>
-                                                <!--<li>-->
+                                                {{-- <!--<li>-->
                                                 <!--    <p>Miles travelled:</p>-->
                                                 <!--    <span>{{ $distance }} </span>-->
                                                 <!--</li>-->
                                                 <!--<li>-->
                                                 <!--    <p>Total earnings:</p>-->
                                                 <!--    <span>£{{ $total_earning }}</span>-->
-                                                <!--</li>-->
+                                                <!--</li>--> --}}
                                                 <li>
                                                     <p>Payment method:</p>
                                                     <span>
