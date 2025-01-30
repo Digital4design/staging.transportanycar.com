@@ -15,6 +15,8 @@ class AddFirstNameToFeedbackTable extends Migration
     {
         Schema::table('feedback', function (Blueprint $table) {
             $table->string('first_name')->nullable()->default(null);
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
