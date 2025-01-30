@@ -194,7 +194,7 @@
                         {{ $feedback->quote_by_transporter->quote->user->username ?? '' }}
                     @endif
                 @else
-                    "-"
+                    {{$feedback->first_name}}
                 @endif
             </div>
             <ul class="wd-star-lst user-feedback-stars other-reviews">
