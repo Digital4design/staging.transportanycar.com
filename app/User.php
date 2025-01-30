@@ -232,4 +232,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Feedback::class, 'transporter_id');
     }
+    public function user_QuoteByTransporter()
+    {
+        return $this->hasMany(QuoteByTransporter::class, 'user_id')->where('status', 'accept');
+    }
 }

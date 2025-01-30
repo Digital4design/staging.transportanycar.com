@@ -57,6 +57,9 @@ Route::group(['middleware' => 'auth:admin'], function () {
             Route::get('carTransporter/view', 'CarTransportersController@view')->name('carTransporter.view');
             Route::get('carTransporter/review', 'CarTransportersController@review')->name('carTransporter.review');
             Route::get('carTransporter/review_data', 'CarTransportersController@review_data')->name('carTransporter.review_data');
+            Route::post('carTransporter/review_data', 'CarTransportersController@review_data_save')->name('carTransporter.review_data_save');
+            Route::post('carTransporter/custom_jobCompleted', 'CarTransportersController@custom_jobCompleted')->name('carTransporter.custom_jobCompleted');
+
 
 
             Route::resource('carTransporter', 'CarTransportersController');

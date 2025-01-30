@@ -621,10 +621,10 @@
                                         <span class="mobile-label">
                                             Transport Provider
                                         </span>
-                                        {{-- <a href="{{ route('front.feedback_view', $quote->id) }}"> --}}
+                                        <a href="{{ route('front.feedback_view', $quote->id) }}">
                                         <h4 style="line-height: 24px;">
                                             {{ $quote->getTransporters->username ?? '' }}</h4>
-                                        {{-- </a> --}}
+                                        </a>
                                     </div>
                                     <div class="mobile-wrap rating-mobile-wrap"
                                         style="max-width:20%; flex: 0 0 20%; text-align:center;">
