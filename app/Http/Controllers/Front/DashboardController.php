@@ -292,9 +292,9 @@ class DashboardController extends WebController
         // $all_feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->get();
         // $feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->paginate(10);
         // return"yesssssssssssss";
-        $all_feedbacks = Feedback::where('transporter_id',  $transporter_id)->get();
+        $all_feedbacks = Feedback::where('transporter_id',  $transporter_id)->where('quote_by_transporter_id', null)->get();
         //  return  $all_feedbacks;
-        $feedbacks = Feedback::where('transporter_id', $transporter_id)->paginate(10);
+        $feedbacks = Feedback::where('transporter_id', $transporter_id)->where('quote_by_transporter_id', null)->paginate(10);
         $total_feedbacks = $all_feedbacks->count();
 
         $total_feedbacks = $feedbacks->count();
