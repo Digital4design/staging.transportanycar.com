@@ -251,6 +251,8 @@
                     @csrf
                     <input type="hidden" id="quote_by_transporter_id" name="quote_by_transporter_id"
                         value="{{ $data->id }}">
+                        <input type="hidden" id="transporter_id" name="transporter_id"
+                        value="{{ $transporter_detail->id }}">
                     <h2>Leave feedback</h2>
                     <div class="leave_body">
                         <h3>{{ $quote_info->vehicle_make }} {{ $quote_info->vehicle_model }}
@@ -285,54 +287,6 @@
                                     @endif
                                 </div>
                                 <div class="leave_txt">
-                                    {{-- <h4>{{ $transporter_detail->username }} <img
-                                            src="{{ asset('/assets/images/user-verified.png') }}" width="18"
-                                            height="18" alt="" class="ml-1" /></h4> --}}
-                                    {{-- <div class="leave_rating">
-                                        <span>
-                                            <svg width="13" height="13" viewBox="0 0 10 9" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M4.92593 0L6.03186 3.40373H9.61076L6.71537 5.50735L7.82131 8.91108L4.92593 6.80746L2.03054 8.91108L3.13648 5.50735L0.241092 3.40373H3.81999L4.92593 0Z"
-                                                    fill="#FFA800" />
-                                            </svg>
-                                        </span>
-                                        <span>
-                                            <svg width="13" height="13" viewBox="0 0 10 9" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M4.92593 0L6.03186 3.40373H9.61076L6.71537 5.50735L7.82131 8.91108L4.92593 6.80746L2.03054 8.91108L3.13648 5.50735L0.241092 3.40373H3.81999L4.92593 0Z"
-                                                    fill="#FFA800" />
-                                            </svg>
-                                        </span>
-                                        <span>
-                                            <svg width="13" height="13" viewBox="0 0 10 9" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M4.92593 0L6.03186 3.40373H9.61076L6.71537 5.50735L7.82131 8.91108L4.92593 6.80746L2.03054 8.91108L3.13648 5.50735L0.241092 3.40373H3.81999L4.92593 0Z"
-                                                    fill="#FFA800" />
-                                            </svg>
-                                        </span>
-                                        <span>
-                                            <svg width="13" height="13" viewBox="0 0 10 9" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M4.92593 0L6.03186 3.40373H9.61076L6.71537 5.50735L7.82131 8.91108L4.92593 6.80746L2.03054 8.91108L3.13648 5.50735L0.241092 3.40373H3.81999L4.92593 0Z"
-                                                    fill="#FFA800" />
-                                            </svg>
-                                        </span>
-                                        <span>
-                                            <svg width="13" height="13" viewBox="0 0 10 9" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M4.92593 0L6.03186 3.40373H9.61076L6.71537 5.50735L7.82131 8.91108L4.92593 6.80746L2.03054 8.91108L3.13648 5.50735L0.241092 3.40373H3.81999L4.92593 0Z"
-                                                    fill="#FFA800" />
-                                            </svg>
-                                        </span>
-                                      ({{$feedback_count}})
-                                       
-                                    </div> --}}
-
                                     <div class="">
                                         <h4 class="user-feedback-name mb-0">{{ $transporter_detail->username ?? '-' }} <img
                                                 src="{{ asset('/assets/images/user-verified.png') }}" alt=""
@@ -382,14 +336,8 @@
                                                     </svg>
                                                 </li>
                                                 <li class="user-feedback-rating-count">
-                                                    {{-- <span>({{ count($feedback) }})</span> --}}
-                                                    <span
-                                                        class="ml-1">{{ $percentage }}%</span>
+                                                    <span class="ml-1">{{ $percentage }}%</span>
                                                 </li>
-
-                                                {{-- <li>({{ number_format($overall_percentage, 0) }}%)</li> --}}
-
-
                                             </ul>
                                         @else
                                             @php
@@ -409,19 +357,10 @@
                                                     </li>
                                                 @endfor
                                                 <li class="user-feedback-rating-count">
-                                                    {{-- <span>({{ count($feedback) }})</span> --}}
-                                                    <span
-                                                        class="ml-1">{{ $percentage }}%</span>
+                                                    <span class="ml-1">{{ $percentage }}%</span>
                                                 </li>
-
-                                                {{-- <li>({{ number_format($overall_percentage, 0) }}%)</li> --}}
-
-
                                             </ul>
                                         @endif
-                                        {{-- <div>Member since: <span
-                                                class="font-weight-light user-feedback-member-from">{{ $user->created_at->format('m/d/Y') }}</span>
-                                        </div> --}}
                                     </div>
                                     <a href="javascript:;" class="verified_btns d-none">
                                         <svg width="10" height="10" viewBox="0 0 9 7" fill="none"
@@ -501,8 +440,6 @@
                                     </div>
                                     <!-- <button class="lve_feed_btn">Leave feedback</button> -->
                                 </div>
-
-
                                 <span class="feedback-error d-none"></span>
                                 <button class="lve_feed_btn">Leave feedback</button>
                             </div>
@@ -552,7 +489,8 @@
                         _token: "{{ csrf_token() }}",
                         rating: $('input[name="rating"]:checked').val(),
                         feedback: feedback,
-                        quote_by_transporter_id: $('#quote_by_transporter_id').val()
+                        quote_by_transporter_id: $('#quote_by_transporter_id').val(),
+                        transporter_id:$('#transporter_id').val()
                     },
                     success: function(response) {
                         if (response.status) {

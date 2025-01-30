@@ -473,7 +473,7 @@
                                                 </li>
                                                 <li>
                                                     <p>Jobs completed:</p>
-                                                    <span>{{ $completed_job }}</span>
+                                                    <span>{{ $user->completed_job }}</span>
                                                 </li>
                                                 <!--<li>-->
                                                 <!--    <p>Miles travelled:</p>-->
