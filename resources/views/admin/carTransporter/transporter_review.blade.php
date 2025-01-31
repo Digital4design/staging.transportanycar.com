@@ -76,6 +76,7 @@
             display: block;
         }
 
+        .leave_inner .form-group input[type="number"],
         .leave_inner .form-group input[type="text"],
         .leave_inner .form-group textarea {
             border: 2px solid #D9D9D9 !important;
@@ -350,8 +351,8 @@
                         @csrf
                         <input type="hidden" name="user_id" id="user_job_id">
                         <div class="form-group">
-                            <input type="number" class="mb-2" placeholder="Job completed no" name="job_completed" id ="job_completed" required/>
-                            <button class="jobCompleted_form mt-4">Submit</button>
+                            <input type="number" class="mb-2" placeholder="Job completed no" name="job_completed" id ="job_completed" required />
+                            <button class="jobCompleted_form lve_feed_btn mt-4">Submit</button>
                         </div>
                     </form>
                 </div>
