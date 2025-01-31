@@ -256,7 +256,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -328,6 +327,8 @@
                         <div class="form-group">
                             <input type="text" class="mb-2" placeholder="Name" id="first_name" name="first_name" />
                             <div class="text-danger" id="firstName"></div>
+                            <input type="text" class="mb-2" placeholder="Vehical Name" id="vehical_name" name="vehical_name" />
+                            <div class="text-danger" id="vehicalName"></div>
                             <textarea id="pos_comment" name="pos_comment" placeholder="Review"></textarea>
                             <div class="text-danger" id="commentError"></div>
                             <button class="lve_feed_btn mt-4">Submit</button>
@@ -352,6 +353,7 @@
                         <input type="hidden" name="user_id" id="user_job_id">
                         <div class="form-group">
                             <input type="number" class="mb-2" placeholder="Job completed no" name="job_completed" id ="job_completed" required />
+                            <div class="text-danger" id="jobComplete"></div>
                             <button class="jobCompleted_form lve_feed_btn mt-4">Submit</button>
                         </div>
                     </form>
@@ -439,9 +441,6 @@
                     $('#jobCompleted #user_job_id').val(userId); // Store user_id in the modal
 
                 }
-
-                // Show the modal
-                // $(this).data('bs.modal').show();
             });
 
             $(document).on('click', '.lve_feed_btn', function(e) {
@@ -452,6 +451,7 @@
                 let rating = $('input[name="rating"]:checked').val(); // Get the selected rating
                 let comment = $('#pos_comment').val();
                 let firstName = $('#first_name').val(); // Get the first name
+                let vehicalName = $('#vehical_name').val();
 
                 // Clear previous error messages
                 $('#ratingError').text('');
@@ -463,9 +463,10 @@
                     user_id: userId,
                     rating: rating,
                     pos_comment: comment,
-                    first_name: firstName
+                    first_name: firstName,
+                    vehical_name: vehicalName,
                 };
-
+                
                 $.ajax({
                     url: '{{ route('admin.carTransporter.review_data_save') }}',
                     method: 'POST',
@@ -475,6 +476,7 @@
                             $('#exampleModal').modal('hide'); // Close the modal
                             $('#pos_comment').val(''); // Clear the comment field
                             $('#first_name').val('');
+                            $('#vehical_name').val('');
                             $('input[name="rating"]').prop('checked',
                             false); // Deselect the rating
                         } else {
@@ -519,14 +521,8 @@
                             $('input[name="rating"]').prop('checked',
                             false); // Deselect the rating
                         } else {
-                             if (response.errors.rating) {
-                                $('#ratingError').text(response.errors.rating[0]);
-                            }
                             if (response.errors.pos_comment) {
-                                $('#firstName').text(response.errors.pos_comment[0]);
-                            }
-                            if (response.errors.first_name) {
-                                $('#firstName').text(response.errors.first_name[0]);
+                                $('#jobComplete').text(response.errors.job_completed[0]);
                             }
                         }
                     },

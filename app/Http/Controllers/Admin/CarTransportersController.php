@@ -654,6 +654,7 @@ class CarTransportersController extends WebController
             'rating' => 'required|integer|min:1|max:5',
             'pos_comment' => 'required|string',
             'first_name' => 'required|string',
+            'vehical_name' => 'required|string',
         ]);
     
         try {
@@ -662,6 +663,7 @@ class CarTransportersController extends WebController
                 'rating' => $validated['rating'],
                 'comment' => $validated['pos_comment'],
                 'first_name'=> $validated['first_name'],
+                'vehical_name'=> $validated['vehical_name'],
             ]);
             return response()->json(['success' => true]);
         } catch (\Exception $e) {

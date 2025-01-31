@@ -219,7 +219,7 @@
                 </div>
             </ul>
             <div class="font-weight-light">{{ general_date($feedback->created_at) }}</div>
-            {{-- <div class="feedback-item">{{ $feedback->first_name }} </div>  --}}
+            <div class="feedback-item">{{ $feedback->vehical_name }} </div> 
             {{-- <div class="feedback-item">{{ $feedback->quote_by_transporter->quote->vehicle_make }}
                 {{ $feedback->quote_by_transporter->quote->vehicle_model }}
             </div>  --}}
