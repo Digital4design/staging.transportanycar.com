@@ -695,5 +695,70 @@ class CarTransportersController extends WebController
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
+
+    public function review_show(Request $request)
+    {
+
+        $data = User::where('type', 'car_transporter')->get();
+
+        return view('admin.carTransporter.transporter_review', [
+            'data' => $data,
+        ]);
+    }
+    public function review_show_data(Request $request)
+    {
+        $datatable_filter = datatable_filters();
+        $offset = $datatable_filter['offset'];
+        $search = $datatable_filter['search'];
+        // dd('here');
+        $return_data = [
+            'data' => [],
+            'recordsTotal' => 0,
+            'recordsFiltered' => 0
+        ];
+        $data = User::leftJoin('quote_by_transpoters', function ($join) {
+            $join->on('users.id', '=', 'quote_by_transpoters.user_id')
+                ->where('quote_by_transpoters.status', '=', 'accept');
+        })
+            ->leftJoin('user_quotes', function ($join) {
+                $join->on('quote_by_transpoters.user_quote_id', '=', 'user_quotes.id')
+                    ->where('user_quotes.status', 'completed');
+            })
+            ->where('users.type', 'car_transporter')
+            ->where('users.is_status', 'approved')
+            ->select('users.*', DB::raw('COUNT(user_quotes.id) as actual_completed_job'))
+            ->groupBy('users.id'); // Group by user to properly count completed jobs
+
+        $return_data['recordsTotal'] = $data->count();
+        if (!empty($search)) {
+            $data->where(function ($query) use ($search) {
+                $query->AdminSearch($search);
+            });
+        }
+        $return_data['recordsFiltered'] = $data->count();
+        $all_data = $data->orderBy($datatable_filter['sort'], $datatable_filter['order'])
+            ->offset($offset)
+            ->limit($datatable_filter['limit'])
+            ->get();
+       
+        if (!empty($all_data)) {
+            foreach ($all_data as $key => $value) {
+                $return_data['data'][] = array(
+                    'id' => $offset + $key + 1,
+                    'profile_image' => get_fancy_box_html($value['profile_image']),
+                    'name' => $value->first_name,
+                    'email' => $value->email,
+                    'mobile_number' => $value->country_code . ' ' . $value->mobile,
+                    // 'review' =>count($value->user_feedback),
+                    'actual_completed_job' => $value->actual_completed_job,
+                    'fake_completed_job' => $value->completed_job,
+                    'user_id' => $value->id,
+
+                    // 'action' => $this->generate_actions_buttons($param),
+                );
+            }
+        }
+        return $return_data;
+    }
     
 }
