@@ -611,6 +611,7 @@
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            // let userId = "{{ $data->id }}";
             // console.log( {{ $data->id }});
             $.ajaxSetup({
                 headers: {
@@ -619,72 +620,7 @@
             });
             let userId = "{{ $data->id }}"; // Get user ID from Blade
             let baseUrl = "{{ url('/') }}";
-            // oTable = $('#listResults').DataTable({
-            //     "processing": true,
-            //     "serverSide": true,
-            //     "order": [
-            //         [0, "DESC"]
-            //     ],
-            //     "ajax": "{{ route('admin.carTransporter.review_show_data', ':id') }}".replace(':id',
-            //         userId), // Dynamic ID
-            //     "columns": [{
-            //             "data": "id",
-            //             searchable: false,
-            //             sortable: false
-            //         },
-            //         {
-            //             "data": "first_name",
-            //             searchable: false,
-            //             sortable: false
-            //         },
-            //         {
-            //             "data": "vehical_name",
-            //             sortable: true
-            //         },
-
-            //         {
-            //             "data": "rating",
-            //             sortable: true
-            //         },
-
-            //         {
-            //             "data": "comment",
-            //             sortable: true
-            //         },
-            //         {
-            //             "data": "date",
-            //             sortable: true
-            //         },
-
-            //         {
-            //             "data": "action",
-            //             "searchable": false,
-            //             "sortable": false,
-            //             "render": function(data, type, row) {
-            //                 return `
-            //             <div class="wd-sl-modalbtn mb-0 text-start">     
-            //                 <button class="btn btn-orange waves-effect waves-light showModelOne"
-            //                     data-bs-toggle="modal"
-            //                     data-bs-target="#exampleModal"
-            //                     data-id="${row.feedback_id}"
-            //                     data-name="${row.first_name}"
-            //                     data-vehical="${row.vehical_name}"
-            //                     data-date="${row.date}"
-            //                     data-comment="${row.comment}"
-            //                     data-rating="${row.rating}">
-            //                     Edit Review
-            //                 </button>
-            //                 <button class="btn btn-orange waves-effect waves-light showModelTwo" data-bs-toggle="modal" data-bs-target="#jobCompleted"   data-id="${row.transporter_id}"
-            //                     data-job-completed="${row.completed_job}" data-content="${row.model_two_data}">
-            //                 edit Jobs Completed
-            //                 </button>
-            //              </div>
-            //                `;
-            //             }
-            //         }
-            //     ]
-            // });
-
+           
             $(document).ready(function() {
     let userId = "{{ $data->id }}"; // Assuming the user ID is available in Blade
     loadReviews(userId);
@@ -834,7 +770,7 @@ function generateStars(rating) {
                             $('#date').val('');
                             $('input[name="rating"]').prop('checked',
                                 false); // Deselect the rating
-                            oTable.ajax.reload();
+                                loadReviews(userId);
                         } else {
                             if (response.errors.rating) {
                                 $('#ratingError').text(response.errors.rating[0]);
@@ -864,45 +800,42 @@ function generateStars(rating) {
                 $('#jobCompleted').modal('show');
             });
           
-            $(document).on('click', '.jobCompleted_form', function(e) {
-                e.preventDefault(); // Prevent default form submission
+            // $(document).on('click', '.jobCompleted_form', function(e) {
+            //     e.preventDefault(); // Prevent default form submission
 
-                let formData = {
-                    user_id: $('#feedbackid').val(),
-                    job_Completed: $('#job_completed').val(),
-                    _token: "{{ csrf_token() }}" // Include CSRF token
-                };
+            //     let formData = {
+            //         user_id: $('#feedbackid').val(),
+            //         job_Completed: $('#job_completed').val(),
+            //         _token: "{{ csrf_token() }}" // Include CSRF token
+            //     };
 
-                // Clear previous error messages
-                $('#jobComplete').text('');
+            //     // Clear previous error messages
+            //     $('#jobComplete').text('');
 
-                $.ajax({
-                    url: "{{ route('admin.carTransporter.update_job_completed') }}", // Update this route
-                    method: 'POST',
-                    data: formData,
-                    success: function(response) {
-                        if (response.success) {
-                            alert('Jobs Completed updated successfully!');
-                            $('#jobCompleted').modal('hide'); // Close modal
-                            $('#listResults').DataTable().ajax.reload(); // Reload DataTable
-                        } else {
-                            $('#jobComplete').text(response.message || 'Failed to update.');
-                        }
-                    },
-                    error: function(xhr) {
-                        let errors = xhr.responseJSON.errors;
-                        if (errors && errors.job_Completed) {
-                            $('#jobComplete').text(errors.job_Completed[
-                            0]); // Show validation error
-                        } else {
-                            $('#jobComplete').text('An error occurred.');
-                        }
-                    }
-                });
-            });
-
-
-
+            //     $.ajax({
+            //         url: "{{ route('admin.carTransporter.update_job_completed') }}", // Update this route
+            //         method: 'POST',
+            //         data: formData,
+            //         success: function(response) {
+            //             if (response.success) {
+            //                 alert('Jobs Completed updated successfully!');
+            //                 $('#jobCompleted').modal('hide'); // Close modal
+            //                 $('#listResults').DataTable().ajax.reload(); // Reload DataTable
+            //             } else {
+            //                 $('#jobComplete').text(response.message || 'Failed to update.');
+            //             }
+            //         },
+            //         error: function(xhr) {
+            //             let errors = xhr.responseJSON.errors;
+            //             if (errors && errors.job_Completed) {
+            //                 $('#jobComplete').text(errors.job_Completed[
+            //                 0]); // Show validation error
+            //             } else {
+            //                 $('#jobComplete').text('An error occurred.');
+            //             }
+            //         }
+            //     });
+            // });
 
         });
     </script>
