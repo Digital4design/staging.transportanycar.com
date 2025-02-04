@@ -341,7 +341,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0 font-size-18"> Show Review</h4>
+                <h4 class="mb-sm-0 font-size-18"> ShReview</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
 
@@ -360,102 +360,54 @@
                 <div class="mb-2 text-right">
                 </div>
                 <div class="table-responsive">
-                    {{-- <div class="overall-review py-3 py-md-5">
-                        <h2 class="total-review">Reviews (2)</h2>
-                        <span class="total-rating my-2 d-block">0/5</span>
-                        <ul class="wd-star-lst user-feedback-stars list-inline">
-                            <li>
-                                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#ccc"></path>
-                                </svg>
-                            </li>
-                                        <li>
-                                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#ccc"></path>
-                                </svg>
-                            </li>
-                                        <li>
-                                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#ccc"></path>
-                                </svg>
-                            </li>
-                                        <li>
-                                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#ccc"></path>
-                                </svg>
-                            </li>
-                                        <li>
-                                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#ccc"></path>
-                                </svg>
-                            </li>
+                    <div class="overall-review py-3 py-md-5">
+                        <h2 class="total-review">Reviews (<span id="reviewCount">0</span>)</h2>
+                        <span class="total-rating my-2 d-block" id="averageRating">0/5</span>
+                        <ul class="wd-star-lst user-feedback-stars list-inline" id="starRatingContainer">
+                            <!-- Dynamic stars will be injected here -->
                         </ul>
-                        <div class="total-review-count my-3"> 2 customer reviews</div>
-                        <ul class="review-count-bar list-inline">
-                            <li>
-                                <span class="review-steps">5</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 19" fill="none">
-                                    <path d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z" fill="#595959"></path>
-                                </svg>
-                                <div class="review-base-bar">
-                                    <div class="review-active-bar" style="width:0%">
-                    
-                                    </div>
-                                </div>
-                                <span class="review-percentage">0%</span>
-                            </li>
-                            <li>
-                                <span class="review-steps">4</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 19" fill="none">
-                                    <path d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z" fill="#595959"></path>
-                                </svg>
-                                <div class="review-base-bar">
-                                    <div class="review-active-bar" style="width:0%">
-                    
-                                    </div>
-                                </div>
-                                <span class="review-percentage">0%</span>
-                            </li>
-                            <li>
-                                <span class="review-steps">3</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 19" fill="none">
-                                    <path d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z" fill="#595959"></path>
-                                </svg>
-                                <div class="review-base-bar">
-                                    <div class="review-active-bar" style="width:0%">
-                    
-                                    </div>
-                                </div>
-                                <span class="review-percentage">0%</span>
-                            </li>
-                            <li>
-                                <span class="review-steps">2</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 19" fill="none">
-                                    <path d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z" fill="#595959"></path>
-                                </svg>
-                                <div class="review-base-bar">
-                                    <div class="review-active-bar" style="width:0%">
-                    
-                                    </div>
-                                </div>
-                                <span class="review-percentage">0%</span>
-                            </li>
-                            <li>
-                                <span class="review-steps">1</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 19" fill="none">
-                                    <path d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z" fill="#595959"></path>
-                                </svg>
-                                <div class="review-base-bar">
-                                    <div class="review-active-bar" style="width:0%">
-                    
-                                    </div>
-                                </div>
-                                <span class="review-percentage">0%</span>
-                            </li>
-                        </ul>
-                    </div> --}}
+                    </div>
+
+                    <ul class="review-count-bar list-inline">
+                        <li>
+                            <span class="review-steps">5</span>
+                            <div class="review-base-bar">
+                                <div id="rating-5-bar" class="review-active-bar"></div>
+                            </div>
+                            <span class="review-percentage" id="rating-5-percentage">0%</span>
+                        </li>
+                        <li>
+                            <span class="review-steps">4</span>
+                            <div class="review-base-bar">
+                                <div id="rating-4-bar" class="review-active-bar"></div>
+                            </div>
+                            <span class="review-percentage" id="rating-4-percentage">0%</span>
+                        </li>
+                        <li>
+                            <span class="review-steps">3</span>
+                            <div class="review-base-bar">
+                                <div id="rating-3-bar" class="review-active-bar"></div>
+                            </div>
+                            <span class="review-percentage" id="rating-3-percentage">0%</span>
+                        </li>
+                        <li>
+                            <span class="review-steps">2</span>
+                            <div class="review-base-bar">
+                                <div id="rating-2-bar" class="review-active-bar"></div>
+                            </div>
+                            <span class="review-percentage" id="rating-2-percentage">0%</span>
+                        </li>
+                        <li>
+                            <span class="review-steps">1</span>
+                            <div class="review-base-bar">
+                                <div id="rating-1-bar" class="review-active-bar"></div>
+                            </div>
+                            <span class="review-percentage" id="rating-1-percentage">0%</span>
+                        </li>
+                    </ul>
+
                     <div id="reviewsContainer"></div>
-                    
+
                 </div>
             </div>
         </div>
@@ -599,53 +551,60 @@
                         userId), // Dynamic ID
                     method: "GET",
                     success: function(response) {
-                        let reviews = response.data; // Assuming the response contains a 'data' array
+                        let reviews = response.data;
                         let html = "";
 
                         if (reviews.length > 0) {
                             reviews.forEach(function(review) {
                                 let stars = generateStars(review
-                                .rating); // Function to generate star ratings
+                                    .rating); // Function to generate star ratings
 
                                 html += `
-                    <div class="review-outer-wrap d-flex flex-wrap align-items-center justify-content-between w-100">
-                        <div class="review-wrap">
-                            <div class="feedback-user-name">${review.first_name}</div>
-                            <ul class="wd-star-lst user-feedback-stars other-reviews list-inline">
-                                ${stars}
-                                <div class="feedback-user-verified">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9" viewBox="0 0 11 9" fill="none">
-                                        <path d="M3.73608 8.04173L0.161084 4.46672C-0.0536948 4.25195 -0.0536948 3.90371 0.161084 3.6889L0.938883 2.91108C1.15366 2.69628 1.50192 2.69628 1.7167 2.91108L4.125 5.31935L9.28329 0.161084C9.49807 -0.0536948 9.84633 -0.0536948 10.0611 0.161084L10.8389 0.938905C11.0537 1.15368 11.0537 1.50192 10.8389 1.71672L4.51391 8.04175C4.2991 8.25653 3.95086 8.25653 3.73608 8.04173Z" fill="#52D017"></path>
-                                    </svg>
-                                    <span>Verified</span>
-                                </div>
-                            </ul>
-                            <div class="font-weight-light" style="font-size:13px;">${review.date}</div>
-                            <div class="feedback-item" style="font-size:14px;">${review.vehical_name}</div>
-                            <div class="font-weight-light">${review.comment}</div>
-                        </div>
-                        <div class="wd-sl-modalbtn mb-0 text-start">
-                            <button class="btn btn-orange waves-effect waves-light showModelOne"
-                                data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"
-                                data-id="${review.feedback_id}"
-                                data-user-id="${review.transporter_id}"
-                                data-name="${review.first_name}"
-                                data-vehical="${review.vehical_name}"
-                                data-date="${review.date}"
-                                data-comment="${review.comment}"
-                                data-rating="${review.rating}">
-                                Edit Review
-                            </button>
-                           
-                        </div>
-                    </div>`;
+                        <div class="review-outer-wrap d-flex flex-wrap align-items-center justify-content-between w-100">
+                            <div class="review-wrap">
+                                <div class="feedback-user-name">${review.first_name}</div>
+                                <ul class="wd-star-lst user-feedback-stars other-reviews list-inline">
+                                    ${stars}
+                                    <div class="feedback-user-verified">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9" viewBox="0 0 11 9" fill="none">
+                                            <path d="M3.73608 8.04173L0.161084 4.46672C-0.0536948 4.25195 -0.0536948 3.90371 0.161084 3.6889L0.938883 2.91108C1.15366 2.69628 1.50192 2.69628 1.7167 2.91108L4.125 5.31935L9.28329 0.161084C9.49807 -0.0536948 9.84633 -0.0536948 10.0611 0.161084L10.8389 0.938905C11.0537 1.15368 11.0537 1.50192 10.8389 1.71672L4.51391 8.04175C4.2991 8.25653 3.95086 8.25653 3.73608 8.04173Z" fill="#52D017"></path>
+                                        </svg>
+                                        <span>Verified</span>
+                                    </div>
+                                </ul>
+                                <div class="font-weight-light" style="font-size:13px;">${review.date}</div>
+                                <div class="feedback-item" style="font-size:14px;">${review.vehical_name}</div>
+                                <div class="font-weight-light">${review.comment}</div>
+                            </div>
+                            <div class="wd-sl-modalbtn mb-0 text-start">
+                                <button class="btn btn-orange waves-effect waves-light showModelOne"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"
+                                    data-id="${review.feedback_id}"
+                                    data-user-id="${review.transporter_id}"
+                                    data-name="${review.first_name}"
+                                    data-vehical="${review.vehical_name}"
+                                    data-date="${review.date}"
+                                    data-comment="${review.comment}"
+                                    data-rating="${review.rating}">
+                                    Edit Review
+                                </button>
+                            </div>
+                        </div>`;
                             });
+
+                            // Insert reviews into the container
+                            $("#reviewsContainer").html(html);
+
+                            // Display ratings breakdown
+                            $('#reviewCount').text(response.recordsTotal);
+                            displayRatingBreakdown(response.ratings);
+                            displayAverageRating(response.average_rating);
                         } else {
                             html = `<p>No reviews found.</p>`;
+                            $("#reviewsContainer").html(html);
                         }
-
-                        $("#reviewsContainer").html(html); // Append data to the container
+                        displayStarsInContainer(response.average_rating);
                     },
                     error: function(error) {
                         console.error("Error fetching reviews:", error);
@@ -653,7 +612,6 @@
                 });
             }
 
-            // ✅ Function to generate star rating icons dynamically
             function generateStars(rating) {
                 let starsHtml = "";
                 for (let i = 1; i <= 5; i++) {
@@ -675,6 +633,28 @@
                 }
                 return starsHtml;
             }
+
+            function displayRatingBreakdown(ratings) {
+                ['5', '4', '3', '2', '1'].forEach(function(rating) {
+                    let percentage = ratings['star_' + rating] || 0;
+                    $(`#rating-${rating}-bar`).css('width', percentage + '%');
+                    $(`#rating-${rating}-percentage`).text(percentage.toFixed(0) + '%');
+                });
+            }
+
+            function displayAverageRating(averageRating) {
+                $("#averageRating").text(averageRating + "/5");
+            }
+
+            function displayStarsInContainer(rating) {
+                let stars = generateStars(rating);
+                $("#starRatingContainer").html(`
+                    <ul class="wd-star-lst user-feedback-stars list-inline">
+                        ${stars}
+                    </ul>
+                `);
+            }
+
 
             $(document).on('click', '.showModelOne', function() {
                 let id = $(this).data('id');

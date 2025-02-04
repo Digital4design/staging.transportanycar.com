@@ -627,7 +627,7 @@ class CarTransportersController extends WebController
             ->offset($offset)
             ->limit($datatable_filter['limit'])
             ->get();
-       
+
         if (!empty($all_data)) {
             foreach ($all_data as $key => $value) {
                 $return_data['data'][] = array(
@@ -657,26 +657,25 @@ class CarTransportersController extends WebController
             'vehical_name' => 'required|string',
             'date' => 'required|string',
         ]);
-    
+
         try {
             Feedback::create([
                 'transporter_id' => $validated['user_id'],
                 'rating' => $validated['rating'],
                 'comment' => $validated['pos_comment'],
-                'first_name'=> $validated['first_name'],
-                'vehical_name'=> $validated['vehical_name'],
-                'date'=> $validated['date'],
+                'first_name' => $validated['first_name'],
+                'vehical_name' => $validated['vehical_name'],
+                'date' => $validated['date'],
             ]);
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
-    
+
         return response()->json([
             'success' => false,
             'errors' => $validated->errors()
         ]);
-        
     }
 
     public function custom_jobCompleted(Request $request)
@@ -686,13 +685,13 @@ class CarTransportersController extends WebController
             'user_id' => 'required|integer|exists:users,id', // Ensuring the user exists in the database
             'job_Completed' => 'required|integer', // Ensure 'job_Completed' is a boolean
         ]);
-    
+
         try {
             // Update the completed_job field for the user
             User::find($validated['user_id'])->update([
                 'completed_job' => $validated['job_Completed'],
             ]);
-            
+
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             // In case of an error during the update
@@ -700,7 +699,7 @@ class CarTransportersController extends WebController
         }
     }
 
-    public function review_show(Request $request,$id)
+    public function review_show(Request $request, $id)
     {
 
         $data = User::find($id);
@@ -708,54 +707,119 @@ class CarTransportersController extends WebController
             'data' => $data,
         ]);
     }
-    public function review_show_data(Request $request,$id)
-    {
-        $datatable_filter = datatable_filters();
-        $offset = $datatable_filter['offset'];
-        $search = $datatable_filter['search'];
-        // dd('here');
-        $return_data = [
-            'data' => [],
-            'recordsTotal' => 0,
-            'recordsFiltered' => 0
-        ];
-        $user=User::find($id);
-        // return $user->completed_job;
-        $data = Feedback::where('transporter_id',$id);
+    // public function review_show_data(Request $request, $id)
+    // {
+    //     $datatable_filter = datatable_filters();
+    //     $offset = $datatable_filter['offset'];
+    //     $search = $datatable_filter['search'];
+    //     // dd('here');
+    //     $return_data = [
+    //         'data' => [],
+    //         'recordsTotal' => 0,
+    //         'recordsFiltered' => 0
+    //     ];
+    //     $user = User::find($id);
+    //     // return $user->completed_job;
+    //     $data = Feedback::where('transporter_id', $id);
 
-        $return_data['recordsTotal'] = $data->count();
-        if (!empty($search)) {
-            $data->where(function ($query) use ($search) {
-                $query->AdminSearch($search);
-            });
-        }
-        $return_data['recordsFiltered'] = $data->count();
-        $all_data = $data->orderBy($datatable_filter['sort'], $datatable_filter['order'])
-            ->offset($offset)
-            ->limit($datatable_filter['limit'])
-            ->get();
-        //  $return_data['recordsFiltered']=$all_data;
-        if (!empty($all_data)) {
-            foreach ($all_data as $key => $value) {
-                $return_data['data'][] = array(
-                    'id' => $offset + $key + 1,
-                    'feedback_id'=>$value->id,
-                    'first_name' => $value->first_name,
-                    'vehical_name' => $value->vehical_name,
-                    'rating' => $value->rating,
-                    'comment' => $value->comment,
-                    'date' => $value->date,
-                    'transporter_id'=>$value->transporter_id,
-                    'completed_job' =>$user->completed_job,
+    //     $return_data['recordsTotal'] = $data->count();
+    //     if (!empty($search)) {
+    //         $data->where(function ($query) use ($search) {
+    //             $query->AdminSearch($search);
+    //         });
+    //     }
+    //     $return_data['recordsFiltered'] = $data->count();
+    //     $all_data = $data->orderBy($datatable_filter['sort'], $datatable_filter['order'])
+    //         ->offset($offset)
+    //         ->limit($datatable_filter['limit'])
+    //         ->get();
+    //     $total_feedbacks = $all_data->count();
 
-                );
-            }
-        }
-        return $return_data;
+    //     if (!empty($all_data)) {
+    //         foreach ($all_data as $key => $value) {
+    //             $return_data['data'][] = array(
+    //                 'id' => $offset + $key + 1,
+    //                 'feedback_id' => $value->id,
+    //                 'first_name' => $value->first_name,
+    //                 'vehical_name' => $value->vehical_name,
+    //                 'rating' => $value->rating,
+    //                 'comment' => $value->comment,
+    //                 'date' => $value->date,
+    //                 'transporter_id' => $value->transporter_id,
+    //                 'completed_job' => $user->completed_job,
+
+    //             );
+    //         }
+    //     }
+    //     return $return_data;
+    // }
+
+    public function review_show_data(Request $request, $id)
+{
+    $datatable_filter = datatable_filters();
+    $offset = $datatable_filter['offset'];
+    $search = $datatable_filter['search'];
+
+    $user = User::find($id);
+    $completed_job = $user ? $user->completed_job : 0;
+
+    $query = Feedback::where('transporter_id', $id)->where('quote_by_transporter_id', null);
+
+    if (!empty($search)) {
+        $query->where(function ($q) use ($search) {
+            $q->where('first_name', 'like', "%$search%")
+              ->orWhere('vehical_name', 'like', "%$search%")
+              ->orWhere('comment', 'like', "%$search%");
+        });
     }
+
+    // Get count before pagination
+    $return_data['recordsTotal'] = Feedback::where('transporter_id', $id)->count();
+    $return_data['recordsFiltered'] = $query->count();
+
+    $all_data = $query->orderBy($datatable_filter['sort'] ?? 'created_at', $datatable_filter['order'] ?? 'desc')
+        ->offset($offset)
+        ->limit($datatable_filter['limit'])
+        ->get();
+
+    $ratings = Feedback::where('transporter_id', $id)
+        ->selectRaw('rating, COUNT(*) as count')
+        ->groupBy('rating')
+        ->pluck('count', 'rating')
+        ->toArray();
+
+    $total_feedbacks = array_sum($ratings);
+    $ratings = collect([5, 4, 3, 2, 1])->mapWithKeys(function ($rating) use ($ratings, $total_feedbacks) {
+        $count = $ratings[$rating] ?? 0;
+        $percentage = $total_feedbacks > 0 ? ($count / $total_feedbacks) * 100 : 0;
+        return ['star_' . $rating => $percentage];
+    });
+
+    $average_rating = $total_feedbacks > 0 ? round($all_data->avg('rating'), 1) : 0;
+    $return_data['average_rating'] =  $average_rating;
+    $return_data['ratings'] =  $ratings;
+    // Prepare response
+    $return_data['data'] = $all_data->map(function ($value, $key) use ($offset, $completed_job) {
+        return [
+            'id' => $offset + $key + 1,
+            'feedback_id' => $value->id,
+            'first_name' => $value->first_name,
+            'vehical_name' => $value->vehical_name,
+            'rating' => $value->rating,
+            'comment' => $value->comment,
+            'date' => $value->date,
+            'transporter_id' => $value->transporter_id,
+            'completed_job' => $completed_job,
+        ];
+    })->toArray();
+
+    return response()->json($return_data);
+}
+
+
     public function review_data_update(Request $request)
     {
-        
+
         $validated = $request->validate([
             'id' => 'required|integer',
             'rating' => 'required|integer|min:1|max:5',
@@ -764,7 +828,7 @@ class CarTransportersController extends WebController
             'vehical_name' => 'required|string',
             'date' => 'required|string',
         ]);
-    
+
         try {
             // Find the existing review by user_id
             $feedback = Feedback::find($validated['id']);
@@ -772,7 +836,7 @@ class CarTransportersController extends WebController
             if (!$feedback) {
                 return response()->json(['success' => false, 'message' => 'Review not found'], 404);
             }
-    
+
             // Update the existing review
             $feedback->update([
                 'rating' => $validated['rating'],
@@ -781,37 +845,34 @@ class CarTransportersController extends WebController
                 'vehical_name' => $validated['vehical_name'],
                 'date' => $validated['date'],
             ]);
-    
+
             return response()->json(['success' => true, 'message' => 'Review updated successfully']);
-    
-        }  catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
-        }  
+        }
     }
 
     public function update_job_completed(Request $request)
-{
-    $validated = $request->validate([
-        'user_id' => 'required|integer',
-        'job_Completed' => 'required|integer|min:0',
-    ]);
-
-    try {
-        $user = User::find($validated['user_id']);
-        if (!$user) {
-            return response()->json(['success' => false, 'message' => 'User not found'], 404);
-        }
-
-        // Update the completed job count
-        $user->update([
-            'completed_job' => $validated['job_Completed'],
+    {
+        $validated = $request->validate([
+            'user_id' => 'required|integer',
+            'job_Completed' => 'required|integer|min:0',
         ]);
 
-        return response()->json(['success' => true, 'message' => 'Jobs Completed updated successfully']);
-    } catch (\Exception $e) {
-        return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        try {
+            $user = User::find($validated['user_id']);
+            if (!$user) {
+                return response()->json(['success' => false, 'message' => 'User not found'], 404);
+            }
+
+            // Update the completed job count
+            $user->update([
+                'completed_job' => $validated['job_Completed'],
+            ]);
+
+            return response()->json(['success' => true, 'message' => 'Jobs Completed updated successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
-}
-   
-    
 }
