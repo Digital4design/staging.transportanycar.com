@@ -11,15 +11,19 @@
         .overall-review {
             border-top: 1px solid #D9D9D9;
         }
+
         .overall-review .total-review {
             font-size: 20px;
             font-weight: 500;
             margin-bottom: 0;
         }
-        .total-review-count, .overall-review .total-rating {
+
+        .total-review-count,
+        .overall-review .total-rating {
             font-size: 16px;
             font-weight: 500;
         }
+
         .review-count-bar li {
             display: flex;
             flex-wrap: wrap;
@@ -27,17 +31,21 @@
             padding-left: 10px;
             border-left: 1px solid #D9D9D9;
         }
+
         .review-count-bar li span {
             font-size: 16px;
             font-weight: 400;
             color: #000000;
         }
+
         .review-count-bar span {
             margin-right: 10px;
         }
+
         .review-steps {
             width: 10px;
         }
+
         .review-base-bar {
             background-color: #D9D9D9;
             width: 90px;
@@ -48,6 +56,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .review-active-bar {
             background-color: #FFA800;
             height: 100%;
@@ -58,32 +67,40 @@
             transition: width 0.25s ease-in-out 0.25s;
             border-radius: 0 10px 10px 0;
         }
+
         .review-count-bar li span {
             font-size: 16px;
             font-weight: 400;
             color: #000000;
         }
+
         .review-count-bar span {
             margin-right: 10px;
         }
-        .total-review-count, .overall-review .total-rating {
+
+        .total-review-count,
+        .overall-review .total-rating {
             font-size: 16px;
             font-weight: 500;
         }
+
         .review-outer-wrap {
             padding: 30px 0;
             border-bottom: 1px solid #D9D9D9;
         }
+
         .feedback-user-name {
             font-size: 16px;
             font-weight: 500;
             color: #000000;
         }
+
         .wd-star-lst {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
         }
+
         .wd-star-lst li {
             color: #4A4A4A;
             font-size: 14px;
@@ -91,20 +108,25 @@
             padding: 0 1px;
             line-height: 18px;
         }
+
         .feedback-user-verified {
             font-size: 12px;
             font-weight: 500;
             color: #52D017;
             margin-left: 14px;
         }
+
         .feedback-item {
             color: #000000;
             font-weight: 500;
         }
-        .feedback-item, .other-reviews.user-feedback-stars {
+
+        .feedback-item,
+        .other-reviews.user-feedback-stars {
             margin-top: 14px;
             margin-bottom: 14px;
         }
+
         #listResults_filter {
             display: none;
         }
@@ -319,7 +341,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0 font-size-18"> Review</h4>
+                <h4 class="mb-sm-0 font-size-18"> Show Review</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
 
@@ -433,63 +455,7 @@
                         </ul>
                     </div> --}}
                     <div id="reviewsContainer"></div>
-                    {{-- <table id="listResults" class="table dt-responsive mb-4  nowrap w-100 mb-"> --}}
-                        {{-- <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Name</th>
-                                <th>Vehical Name</th>
-                                <th> Rating</th>
-                                <th>Comment </th>
-                                <th>Date </th>
-                                <th>Action</th>
-                            </tr>
-                        </thead> --}}
-                        {{-- <tbody id="reviewsContainer"> --}}
-                            {{-- <div class="review-outer-wrap">
-                                <div class="review-wrap">
-                                    <div class="feedback-user-name">kartik.14.04.1997</div>
-                                        <ul class="wd-star-lst user-feedback-stars other-reviews list-inline">
-                                            <li>
-                                                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#FFA800"></path>
-                                                </svg>
-                                            </li>
-                                            <li>
-                                                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#FFA800"></path>
-                                                </svg>
-                                            </li>
-                                            <li>
-                                                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#FFA800"></path>
-                                                </svg>
-                                            </li>
-                                            <li>
-                                                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#FFA800"></path>
-                                                </svg>
-                                            </li>
-                                            <li>
-                                                <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#ccc"></path>
-                                                </svg>
-                                            </li>
-                                            <div class="feedback-user-verified">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9" viewBox="0 0 11 9" fill="none">
-                                                    <path d="M3.73608 8.04173L0.161084 4.46672C-0.0536948 4.25195 -0.0536948 3.90371 0.161084 3.6889L0.938883 2.91108C1.15366 2.69628 1.50192 2.69628 1.7167 2.91108L4.125 5.31935L9.28329 0.161084C9.49807 -0.0536948 9.84633 -0.0536948 10.0611 0.161084L10.8389 0.938905C11.0537 1.15368 11.0537 1.50192 10.8389 1.71672L4.51391 8.04175C4.2991 8.25653 3.95086 8.25653 3.73608 8.04173Z" fill="#52D017"></path>
-                                                </svg>
-                                                <span>Verified</span>
-                                            </div>
-                                        </ul>
-                                        <div class="font-weight-light" style="font-size:13px;">30/01/2025</div>
-                                        <div class="feedback-item" style="font-size:14px;">Skoda NO/NO</div>
-                                        <div class="font-weight-light">yessssssssss</div>
-                                    </div>
-                                </div>
-                            </div> --}}
-                        {{-- </tbody>
-                    </table> --}}
+                    
                 </div>
             </div>
         </div>
@@ -502,7 +468,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body fake-review">
-                    <h5 class="modal-title" style="padding: 20px 0; font-size: 22px;" id="exampleModalLabel">Edit review</h5>
+                    <h5 class="modal-title" style="padding: 20px 0; font-size: 22px;" id="exampleModalLabel">Edit review
+                    </h5>
                     <form class="leave_inner">
                         @csrf
                         <input type="hidden" name="id" id="id">
@@ -620,24 +587,27 @@
             });
             let userId = "{{ $data->id }}"; // Get user ID from Blade
             let baseUrl = "{{ url('/') }}";
-           
+
             $(document).ready(function() {
-    let userId = "{{ $data->id }}"; // Assuming the user ID is available in Blade
-    loadReviews(userId);
-});
-function loadReviews(userId) {
-    $.ajax({
-        url: "{{ route('admin.carTransporter.review_show_data', ':id') }}".replace(':id', userId), // Dynamic ID
-        method: "GET",
-        success: function(response) {
-            let reviews = response.data; // Assuming the response contains a 'data' array
-            let html = "";
+                let userId = "{{ $data->id }}"; // Assuming the user ID is available in Blade
+                loadReviews(userId);
+            });
 
-            if (reviews.length > 0) {
-                reviews.forEach(function(review) {
-                    let stars = generateStars(review.rating); // Function to generate star ratings
+            function loadReviews(userId) {
+                $.ajax({
+                    url: "{{ route('admin.carTransporter.review_show_data', ':id') }}".replace(':id',
+                        userId), // Dynamic ID
+                    method: "GET",
+                    success: function(response) {
+                        let reviews = response.data; // Assuming the response contains a 'data' array
+                        let html = "";
 
-                    html += `
+                        if (reviews.length > 0) {
+                            reviews.forEach(function(review) {
+                                let stars = generateStars(review
+                                .rating); // Function to generate star ratings
+
+                                html += `
                     <div class="review-outer-wrap d-flex flex-wrap align-items-center justify-content-between w-100">
                         <div class="review-wrap">
                             <div class="feedback-user-name">${review.first_name}</div>
@@ -670,41 +640,41 @@ function loadReviews(userId) {
                            
                         </div>
                     </div>`;
+                            });
+                        } else {
+                            html = `<p>No reviews found.</p>`;
+                        }
+
+                        $("#reviewsContainer").html(html); // Append data to the container
+                    },
+                    error: function(error) {
+                        console.error("Error fetching reviews:", error);
+                    }
                 });
-            } else {
-                html = `<p>No reviews found.</p>`;
             }
 
-            $("#reviewsContainer").html(html); // Append data to the container
-        },
-        error: function(error) {
-            console.error("Error fetching reviews:", error);
-        }
-    });
-}
-
-// ✅ Function to generate star rating icons dynamically
-function generateStars(rating) {
-    let starsHtml = "";
-    for (let i = 1; i <= 5; i++) {
-        if (i <= rating) {
-            starsHtml += `
+            // ✅ Function to generate star rating icons dynamically
+            function generateStars(rating) {
+                let starsHtml = "";
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= rating) {
+                        starsHtml += `
                 <li>
                     <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#FFA800"></path>
                     </svg>
                 </li>`;
-        } else {
-            starsHtml += `
+                    } else {
+                        starsHtml += `
                 <li>
                     <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#ccc"></path>
                     </svg>
                 </li>`;
-        }
-    }
-    return starsHtml;
-}
+                    }
+                }
+                return starsHtml;
+            }
 
             $(document).on('click', '.showModelOne', function() {
                 let id = $(this).data('id');
@@ -770,7 +740,7 @@ function generateStars(rating) {
                             $('#date').val('');
                             $('input[name="rating"]').prop('checked',
                                 false); // Deselect the rating
-                                loadReviews(userId);
+                            loadReviews(userId);
                         } else {
                             if (response.errors.rating) {
                                 $('#ratingError').text(response.errors.rating[0]);
@@ -799,7 +769,7 @@ function generateStars(rating) {
                 // Show modal
                 $('#jobCompleted').modal('show');
             });
-          
+
             // $(document).on('click', '.jobCompleted_form', function(e) {
             //     e.preventDefault(); // Prevent default form submission
 
