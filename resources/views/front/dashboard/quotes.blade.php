@@ -623,7 +623,7 @@
                                         </span>
                                         <a href="{{ route('front.feedback_view', $quote->id) }}">
                                         <h4 style="line-height: 24px;">
-                                            {{ $quote->getTransporters->username ?? '' }}</h4>
+                                            {{ $quote->getTransporters->username ?? '' }} ({{ $quote->getTransporters->completed_job ?? '' }})</h4>
                                         </a>
                                     </div>
                                     <div class="mobile-wrap rating-mobile-wrap"

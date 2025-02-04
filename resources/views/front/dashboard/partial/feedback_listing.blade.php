@@ -9,7 +9,7 @@
         padding: 0;
     }
 </style>
-<div class="overall-review py-3 py-md-5">
+<div class="overall-review py-1 py-md-1">
     {{-- <h2 class="total-review">Reviews (<?php echo count($feedbacks); ?>)</h2>
     <span class="total-rating my-2 d-block">{{ number_format($average_rating, 0) }}/5</span> --}}
     @php
