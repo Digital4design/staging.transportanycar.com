@@ -622,130 +622,98 @@
                                             Transport Provider
                                         </span>
                                         <a href="{{ route('front.feedback_view', $quote->id) }}">
-                                        <h4 style="line-height: 24px;">
-                                            {{ $quote->getTransporters->username ?? '' }} ({{ $quote->getTransporters->completed_job ?? '' }})</h4>
+                                            <h4 style="line-height: 24px;">
+                                                {{ $quote->getTransporters->username ?? '' }}
+                                                ({{ $quote->getTransporters->completed_job ?? '' }})</h4>
                                         </a>
                                     </div>
                                     <div class="mobile-wrap rating-mobile-wrap"
                                         style="max-width:20%; flex: 0 0 20%; text-align:center;">
                                         <span class="mobile-label">Rating</span>
-                                        {{-- @if ($quote->percentage == 0) --}}
-                                        {{-- <ul class="rating-star choose_quote_rating">
-                                                    <li>
-                                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z"
-                                                                fill="#D9D9D9" />
-                                                        </svg>
-                                                    </li>
-                                                    <li>
-                                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z"
-                                                                fill="#D9D9D9" />
-                                                        </svg>
-                                                    </li>
-                                                    <li>
-                                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z"
-                                                                fill="#D9D9D9" />
-                                                        </svg>
-                                                    </li>
-                                                    <li>
-                                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z"
-                                                                fill="#D9D9D9" />
-                                                        </svg>
-                                                    </li>
-                                                    <li>
-                                                        <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z"
-                                                                fill="#D9D9D9" />
-                                                        </svg>
-                                                    </li> --}}
-                                        {{-- <li>
-                                                       
-                                                        <svg width="22" height="20" viewBox="0 0 44 44" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z"
-                                                                fill="#DCDCDE" />
-                                                            <mask id="mask0_5_1268" style="mask-type:alpha"
-                                                                maskUnits="userSpaceOnUse" x="0" y="0" width="23"
-                                                                height="44">
-                                                                <rect width="23" height="44" fill="#D9D9D9" />
-                                                            </mask>
-                                                            <g mask="url(#mask0_5_1268)">
-                                                                <path
-                                                                    d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z"
-                                                                    fill="#D9D9D9" />
-                                                            </g>
-                                                        </svg>
-                                                    </li> --}}
-                                        {{-- <li><span class="ml-1">({{ $quote->percentage }}%)</span></li> --}}
-                                        {{-- <li><span class="ml-1">({{ $quote->percentage }}%)</span></li>
-                                                </ul> --}}
-                                        {{-- @else
-                                                @php
-                                                    $totalStars = 5; // Total number of stars
-                                                    $yellowStars = round($quote->rating_average); // Full yellow stars
-                                                @endphp
-                                                <ul class="rating-star choose_quote_rating">
-
-                                                    @for ($i = 1; $i <= $totalStars; $i++)
-                                                        <li>
-                                                            <svg width="20" height="20" viewBox="0 0 12 12"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                                    fill="{{ $i <= $yellowStars ? '#FFA800' : '#ccc' }}" />
-                                                            </svg>
-                                                        </li>
-                                                    @endfor --}}
-                                        {{-- <li>
-                                            <!-- <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z" fill="#FFA800"/>
-                                            </svg> -->
-                                            <svg width="22" height="20" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z" fill="#DCDCDE"/>
-                                                <mask id="mask0_5_1268" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="23" height="44">
-                                                <rect width="23" height="44" fill="#D9D9D9"/>
-                                                </mask>
-                                                <g mask="url(#mask0_5_1268)">
-                                                <path d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z" fill="#FFB902"/>
-                                                </g>
-                                            </svg>
-                                        </li> --}}
-                                        {{-- <li><span class="ml-1">100%</span></li>
-                                                </ul>
-                                            @endif --}}
-
-                                        @php
-                                            $totalStars = 5; // Total number of stars
-                                            $yellowStars = 5; // Full yellow stars
-                                        @endphp
-                                        <ul class="rating-star choose_quote_rating">
-
-                                            @for ($i = 1; $i <= $totalStars; $i++)
+                                        @if ($quote->percentage == 0)
+                                            <ul class="rating-star choose_quote_rating">
                                                 <li>
-                                                    <svg width="20" height="20" viewBox="0 0 12 12" fill="none"
+                                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
-                                                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                            fill="{{ $i <= $yellowStars ? '#FFA800' : '#ccc' }}" />
+                                                            d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z"
+                                                            fill="#D9D9D9" />
                                                     </svg>
                                                 </li>
-                                            @endfor
-                                            <li><span class="ml-1 d-inline-block">(100%)</span></li>
-                                        </ul>
+                                                <li>
+                                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z"
+                                                            fill="#D9D9D9" />
+                                                    </svg>
+                                                </li>
+                                                <li>
+                                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z"
+                                                            fill="#D9D9D9" />
+                                                    </svg>
+                                                </li>
+                                                <li>
+                                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z"
+                                                            fill="#D9D9D9" />
+                                                    </svg>
+                                                </li>
+                                                <li>
+                                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M10.8 0L13.2248 7.46262L21.0714 7.46262L14.7233 12.0748L17.1481 19.5374L10.8 14.9252L4.45192 19.5374L6.87667 12.0748L0.528589 7.46262L8.37525 7.46262L10.8 0Z"
+                                                            fill="#D9D9D9" />
+                                                    </svg>
+                                                </li>
+                                                <li>
+
+                                                    <svg width="22" height="20" viewBox="0 0 44 44" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z"
+                                                            fill="#DCDCDE" />
+                                                        <mask id="mask0_5_1268" style="mask-type:alpha"
+                                                            maskUnits="userSpaceOnUse" x="0" y="0" width="23"
+                                                            height="44">
+                                                            <rect width="23" height="44" fill="#D9D9D9" />
+                                                        </mask>
+                                                        <g mask="url(#mask0_5_1268)">
+                                                            <path
+                                                                d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z"
+                                                                fill="#D9D9D9" />
+                                                        </g>
+                                                    </svg>
+                                                </li>
+                                                <li><span class="ml-1">({{ $quote->percentage }}%)</span></li>
+                                            </ul>
+                                        @else
+                                            @php
+                                                $totalStars = 5; // Total number of stars
+                                                $yellowStars = round($quote->rating_average); // Full yellow stars
+                                            @endphp
+                                            <ul class="rating-star choose_quote_rating">
+
+                                                @for ($i = 1; $i <= $totalStars; $i++)
+                                                    <li>
+                                                        <svg width="20" height="20" viewBox="0 0 12 12"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                                fill="{{ $i <= $yellowStars ? '#FFA800' : '#ccc' }}" />
+                                                        </svg>
+                                                    </li>
+                                                @endfor
+                                                
+                                                <li><span class="ml-1">({{ $quote->percentage }}%)</span></li>
+                                            </ul>
+                                        @endif
                                     </div>
                                     {{-- </div> --}}
                                     <div class="mobile-wrap" style="max-width:20%; flex: 0 0 20%; text-align:center;">
@@ -795,13 +763,14 @@
                                     </div>
                                     <div class="mobile-wrap" style="max-width:20%; flex: 0 0 20%; text-align:center;">
                                         <span class="mobile-label">Quote Amount</span>
-                                        <h5 class="amount">£{{ $quote->price }} <span class="no-due">(No fees)</span></h5>
+                                        <h5 class="amount">£{{ $quote->price }} <span class="no-due">(No fees)</span>
+                                        </h5>
                                     </div>
                                     <!-- <a href="javascript:;" class="d-lg-none" data-toggle="modal" data-target="#delete_quote_{{ $quote->id }}">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM15.21 13.79C15.3037 13.883 15.3781 13.9936 15.4289 14.1154C15.4797 14.2373 15.5058 14.368 15.5058 14.5C15.5058 14.632 15.4797 14.7627 15.4289 14.8846C15.3781 15.0064 15.3037 15.117 15.21 15.21C15.117 15.3037 15.0064 15.3781 14.8846 15.4289C14.7627 15.4797 14.632 15.5058 14.5 15.5058C14.368 15.5058 14.2373 15.4797 14.1154 15.4289C13.9936 15.3781 13.883 15.3037 13.79 15.21L12 13.41L10.21 15.21C10.117 15.3037 10.0064 15.3781 9.88458 15.4289C9.76272 15.4797 9.63202 15.5058 9.5 15.5058C9.36799 15.5058 9.23729 15.4797 9.11543 15.4289C8.99357 15.3781 8.88297 15.3037 8.79 15.21C8.69628 15.117 8.62188 15.0064 8.57111 14.8846C8.52034 14.7627 8.49421 14.632 8.49421 14.5C8.49421 14.368 8.52034 14.2373 8.57111 14.1154C8.62188 13.9936 8.69628 13.883 8.79 13.79L10.59 12L8.79 10.21C8.6017 10.0217 8.49591 9.7663 8.49591 9.5C8.49591 9.2337 8.6017 8.9783 8.79 8.79C8.97831 8.6017 9.2337 8.49591 9.5 8.49591C9.76631 8.49591 10.0217 8.6017 10.21 8.79L12 10.59L13.79 8.79C13.9783 8.6017 14.2337 8.49591 14.5 8.49591C14.7663 8.49591 15.0217 8.6017 15.21 8.79C15.3983 8.9783 15.5041 9.2337 15.5041 9.5C15.5041 9.7663 15.3983 10.0217 15.21 10.21L13.41 12L15.21 13.79Z" fill="#ED1C24"/>
-                                        </svg>
-                                    </a> -->
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM15.21 13.79C15.3037 13.883 15.3781 13.9936 15.4289 14.1154C15.4797 14.2373 15.5058 14.368 15.5058 14.5C15.5058 14.632 15.4797 14.7627 15.4289 14.8846C15.3781 15.0064 15.3037 15.117 15.21 15.21C15.117 15.3037 15.0064 15.3781 14.8846 15.4289C14.7627 15.4797 14.632 15.5058 14.5 15.5058C14.368 15.5058 14.2373 15.4797 14.1154 15.4289C13.9936 15.3781 13.883 15.3037 13.79 15.21L12 13.41L10.21 15.21C10.117 15.3037 10.0064 15.3781 9.88458 15.4289C9.76272 15.4797 9.63202 15.5058 9.5 15.5058C9.36799 15.5058 9.23729 15.4797 9.11543 15.4289C8.99357 15.3781 8.88297 15.3037 8.79 15.21C8.69628 15.117 8.62188 15.0064 8.57111 14.8846C8.52034 14.7627 8.49421 14.632 8.49421 14.5C8.49421 14.368 8.52034 14.2373 8.57111 14.1154C8.62188 13.9936 8.69628 13.883 8.79 13.79L10.59 12L8.79 10.21C8.6017 10.0217 8.49591 9.7663 8.49591 9.5C8.49591 9.2337 8.6017 8.9783 8.79 8.79C8.97831 8.6017 9.2337 8.49591 9.5 8.49591C9.76631 8.49591 10.0217 8.6017 10.21 8.79L12 10.59L13.79 8.79C13.9783 8.6017 14.2337 8.49591 14.5 8.49591C14.7663 8.49591 15.0217 8.6017 15.21 8.79C15.3983 8.9783 15.5041 9.2337 15.5041 9.5C15.5041 9.7663 15.3983 10.0217 15.21 10.21L13.41 12L15.21 13.79Z" fill="#ED1C24"/>
+                                            </svg>
+                                        </a> -->
                                 </div>
                                 <div class="wd-quote-btn" style="width: 350px;">
                                     <a href="javascript:;" class="wd-view-btn messageShow justify-content-center"
@@ -1065,12 +1034,8 @@
         function getChatHistory(url, id) {
             var elems = document.querySelector(".active");
             var timezone = moment.tz.guess();
-            console.log(timezone);
+            // console.log(timezone);
 
-            // if(elems !==null){
-            //     elems.classList.remove("active");
-            // }
-            //$(thisobj).find("li").addClass('active');
             $.ajax({
                 url: url,
                 data: {
@@ -1088,10 +1053,7 @@
                         }
                     }
                 }
-                // $(thisobj).find(".kt-widget__item").find('.kt-widget__action').html('');
-                // KTAppChat.init();
-                // scrollToBottom();
-                // getTotalUnreadMessage();
+                
             });
         }
         var send_message = false;
@@ -1196,7 +1158,7 @@
             });
         });
         $('.messageShow').on('click', function() {
-            alart('yesssssssssss');
+            // alart('yesssssssssss');
             var id = $(this).attr('data-msgkey');
             var selected_chat_id = $("#user_current_chat_id_" + id).val();
             if (selected_chat_id) {

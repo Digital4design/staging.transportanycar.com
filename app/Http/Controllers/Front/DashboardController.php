@@ -521,8 +521,8 @@ class DashboardController extends WebController
         // return $quotes;
 
         $quotes = $quotes->map(function ($quote) {
-            $my_quotes = QuoteByTransporter::where('user_id', $quote->user_id)->pluck('id');
-            $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+            // $my_quotes = QuoteByTransporter::where('user_id', $quote->user_id)->pluck('id');
+            $rating_average = Feedback::where('quote_by_transporter_id',null)->where('transporter_id',$quote->user_id)
                 ->whereNotNull('rating')
                 ->avg('rating');
             $percentage = $rating_average !== null ? ($rating_average / 5) * 100 : 0;
