@@ -10,11 +10,15 @@
     }
 </style>
 <div class="overall-review py-3 py-md-5">
-    <h2 class="total-review">Reviews (<?php echo count($feedbacks); ?>)</h2>
-    {{-- <span class="total-rating my-2 d-block">{{ round($average_rating) }}/5</span> --}}
-    <span class="total-rating my-2 d-block">{{ number_format($average_rating, 0) }}/5</span>
-
-    @if (count($feedbacks) == 0)
+    {{-- <h2 class="total-review">Reviews (<?php echo count($feedbacks); ?>)</h2>
+    <span class="total-rating my-2 d-block">{{ number_format($average_rating, 0) }}/5</span> --}}
+    @php
+    $total_stars = 5; // Total number of stars
+    $yellow_stars = floor($average_rating); // Full yellow stars
+    $half_star = $average_rating - $yellow_stars >= 0.5; // Check for a half-star
+    $grey_stars = $total_stars - $yellow_stars - ($half_star ? 1 : 0); // Remaining grey stars
+@endphp
+    {{-- @if (count($feedbacks) == 0)
         <ul class="wd-star-lst user-feedback-stars">
             <li>
                 <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,14 +61,8 @@
             </li>
         </ul>
     @else
-        @php
-            $total_stars = 5; // Total number of stars
-            $yellow_stars = floor($average_rating); // Full yellow stars
-            $half_star = $average_rating - $yellow_stars >= 0.5; // Check for a half-star
-            $grey_stars = $total_stars - $yellow_stars - ($half_star ? 1 : 0); // Remaining grey stars
-        @endphp
+       
         <ul class="wd-star-lst user-feedback-stars">
-            {{-- Full yellow stars --}}
             @for ($i = 1; $i <= $yellow_stars; $i++)
                 <li>
                     <svg width="20" height="20" viewBox="0 0 12 12" fill="none"
@@ -76,7 +74,6 @@
                 </li>
             @endfor
 
-            {{-- Half star if applicable --}}
             @if ($half_star)
                 <li>
                     <svg width="20" height="20" viewBox="0 0 12 12" fill="none"
@@ -95,7 +92,6 @@
                 </li>
             @endif
 
-            {{-- Grey stars --}}
             @for ($i = 1; $i <= $grey_stars; $i++)
                 <li>
                     <svg width="20" height="20" viewBox="0 0 12 12" fill="none"
@@ -107,9 +103,9 @@
                 </li>
             @endfor
         </ul>
-    @endif
+    @endif --}}
 
-    <div class="total-review-count my-3"> <?php echo count($feedbacks); ?> customer reviews</div>
+    {{-- <div class="total-review-count my-3"> <?php echo count($feedbacks); ?> customer reviews</div> --}}
     <ul class="review-count-bar">
         <li>
             <span class="review-steps">5</span>
@@ -223,7 +219,7 @@
             {{-- <div class="feedback-item">{{ $feedback->quote_by_transporter->quote->vehicle_make }}
                 {{ $feedback->quote_by_transporter->quote->vehicle_model }}
             </div>  --}}
-            <div class="font-weight-light">{!! $feedback->comment ? readMoreHelper($feedback->comment, 50) : '-' !!}</div>
+            <div class="font-weight-light">{!! $feedback->comment ? readMoreHelper($feedback->comment, 100) : '-' !!}</div>
         </div>
     @endforeach
 </div>

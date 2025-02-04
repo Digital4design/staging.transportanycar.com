@@ -111,7 +111,8 @@
     }
 
     .banner.vip_member {
-        background: #fff000;
+        /* background: #fff000; */
+        background: linear-gradient(90deg, #C5B358 65.5%, #525225 100%);
         color: #000000;
     }
 
