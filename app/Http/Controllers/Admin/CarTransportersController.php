@@ -774,7 +774,7 @@ class CarTransportersController extends WebController
     }
 
     // Get count before pagination
-    $return_data['recordsTotal'] = Feedback::where('transporter_id', $id)->count();
+    // $return_data['recordsTotal'] = Feedback::where('transporter_id', $id)->count();
     $return_data['recordsFiltered'] = $query->count();
 
     $all_data = $query->orderBy($datatable_filter['sort'] ?? 'created_at', $datatable_filter['order'] ?? 'desc')
@@ -782,7 +782,7 @@ class CarTransportersController extends WebController
         ->limit($datatable_filter['limit'])
         ->get();
 
-    $ratings = Feedback::where('transporter_id', $id)
+    $ratings = Feedback::where('transporter_id', $id)->where('quote_by_transporter_id', null)
         ->selectRaw('rating, COUNT(*) as count')
         ->groupBy('rating')
         ->pluck('count', 'rating')

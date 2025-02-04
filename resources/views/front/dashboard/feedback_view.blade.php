@@ -501,7 +501,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row wd-pb py-3 py-md-5 mx-0" style="border-top: 1px solid #D9D9D9;">
+                        {{-- <div class="row wd-pb py-3 py-md-5 mx-0" style="border-top: 1px solid #D9D9D9;">
                             <div class="col-lg-12">
                                 <div class="wd-transport-dtls adjust-space-in-mobile">
                                     <div class="wd-transport-area pb-0">
@@ -533,7 +533,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row mx-0">
                             <div class="col-lg-12">
                                 <div class="feedback-tbl border-none bg-white border-0 rounded-0" id="feedback_listing">
