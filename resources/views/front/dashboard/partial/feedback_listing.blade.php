@@ -105,7 +105,7 @@
         </ul>
     @endif --}}
 
-    {{-- <div class="total-review-count my-3"> <?php echo count($feedbacks); ?> customer reviews</div> --}}
+    <div class="total-review-count my-3"> <?php echo count($feedbacks); ?> Customer reviews</div>
     <ul class="review-count-bar">
         <li>
             <span class="review-steps">5</span>
