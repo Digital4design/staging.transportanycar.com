@@ -597,7 +597,7 @@
                             $("#reviewsContainer").html(html);
 
                             // Display ratings breakdown
-                            $('#reviewCount').text(response.recordsTotal);
+                            $('#reviewCount').text(response.recordsFiltered);
                             displayRatingBreakdown(response.ratings);
                             displayAverageRating(response.average_rating);
                         } else {
