@@ -219,7 +219,7 @@
             {{-- <div class="feedback-item">{{ $feedback->quote_by_transporter->quote->vehicle_make }}
                 {{ $feedback->quote_by_transporter->quote->vehicle_model }}
             </div>  --}}
-            <div class="font-weight-light">{!! $feedback->comment ? readMoreHelper($feedback->comment, 100) : '-' !!}</div>
+            <div class="font-weight-light">{!! $feedback->comment ? readMoreHelper($feedback->comment, 200) : '-' !!}</div>
         </div>
     @endforeach
 </div>
