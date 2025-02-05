@@ -672,25 +672,7 @@
                                                             fill="#D9D9D9" />
                                                     </svg>
                                                 </li>
-                                                <li>
-
-                                                    <svg width="22" height="20" viewBox="0 0 44 44" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z"
-                                                            fill="#DCDCDE" />
-                                                        <mask id="mask0_5_1268" style="mask-type:alpha"
-                                                            maskUnits="userSpaceOnUse" x="0" y="0" width="23"
-                                                            height="44">
-                                                            <rect width="23" height="44" fill="#D9D9D9" />
-                                                        </mask>
-                                                        <g mask="url(#mask0_5_1268)">
-                                                            <path
-                                                                d="M22 0L26.9393 15.2016H42.9232L29.992 24.5967L34.9313 39.7984L22 30.4033L9.06872 39.7984L14.008 24.5967L1.07676 15.2016H17.0607L22 0Z"
-                                                                fill="#D9D9D9" />
-                                                        </g>
-                                                    </svg>
-                                                </li>
+                                               
                                                 <li><span class="ml-1">({{ $quote->percentage }}%)</span></li>
                                             </ul>
                                         @else
