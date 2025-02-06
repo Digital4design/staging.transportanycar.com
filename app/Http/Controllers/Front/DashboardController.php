@@ -285,7 +285,7 @@ class DashboardController extends WebController
         // return $params;
         return view('front.dashboard.feedback_view', $params)->with('quote', $quote);
     }
-    
+
 
     public function feedback_listing($transporter_id)
     {
@@ -300,14 +300,25 @@ class DashboardController extends WebController
 
         $total_feedbacks = $feedbacks->count();
 
-
+        // Calculate rating percentages
         $ratings = collect([5, 4, 3, 2, 1])->mapWithKeys(function ($rating) use ($all_feedbacks, $total_feedbacks) {
             $count = $all_feedbacks->where('rating', $rating)->count();
-            $percentage = $total_feedbacks > 0 ? ($count / $total_feedbacks) * 100 : 0;
+            $percentage = $total_feedbacks > 0 ? round(($count / $total_feedbacks) * 100, 1) : 0;
             return ['star_' . $rating  =>  $percentage];
         });
 
+        // Adjust the total percentage to exactly 100%
+        $totalPercentage = array_sum($ratings->toArray());
+
+        if ($totalPercentage !== 100) {
+            $highestKey = collect($ratings)->sortDesc()->keys()->first();
+            $ratings[$highestKey] += (100 - $totalPercentage);
+        }
+
+        // Calculate the average rating
         $average_rating = $total_feedbacks > 0 ? round($all_feedbacks->avg('rating'), 1) : 0;
+
+        // Render the feedback listing view
         $params['html'] = view('front.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings', 'average_rating'))->render();
         return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $params]);
     }
@@ -330,12 +341,12 @@ class DashboardController extends WebController
         // $totalDistanceFormatted = $total_distance >= 1000
         //     ? round($total_distance / 1000, 1) . 'K'
         //     : number_format($total_distance, 1);
-       
+
 
         $rating_average = Feedback::where('transporter_id', $transporter_id)->where('quote_by_transporter_id', null)
             // ->whereNotNull('rating')
             ->avg('rating');
-            // return $rating_average;
+        // return $rating_average;
         $percentage = 0;
         if ($rating_average !== null) {
             $percentage = ($rating_average / 5) * 100;
@@ -380,7 +391,7 @@ class DashboardController extends WebController
     //     $totalDistanceFormatted = $total_distance >= 1000
     //         ? round($total_distance / 1000, 1) . 'K'
     //         : number_format($total_distance, 1);
-       
+
 
     //     $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
     //         ->whereNotNull('rating')
@@ -522,7 +533,7 @@ class DashboardController extends WebController
 
         $quotes = $quotes->map(function ($quote) {
             // $my_quotes = QuoteByTransporter::where('user_id', $quote->user_id)->pluck('id');
-            $rating_average = Feedback::where('quote_by_transporter_id',null)->where('transporter_id',$quote->user_id)
+            $rating_average = Feedback::where('quote_by_transporter_id', null)->where('transporter_id', $quote->user_id)
                 ->whereNotNull('rating')
                 ->avg('rating');
             $percentage = $rating_average !== null ? ($rating_average / 5) * 100 : 0;
