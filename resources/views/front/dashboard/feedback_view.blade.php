@@ -484,7 +484,8 @@
                                                 </li>
                                                 <li>
                                                     <p>Positive feedback:</p>
-                                                    <span>{{  number_format($rating_percentage,1) }}%</span>
+                                                    <span class="ml-1">({{ fmod($rating_percentage, 1) == 0 ? round($rating_percentage) : number_format($rating_percentage, 1) }}%)</span>
+                                                    {{-- <span>{{  number_format($rating_percentage,1) }}%</span> --}}
                                                 </li>
                                                 {{-- <li>
                                                     <p>Total reviews:</p>
