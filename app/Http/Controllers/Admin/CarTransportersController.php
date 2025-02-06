@@ -755,66 +755,66 @@ class CarTransportersController extends WebController
     // }
 
     public function review_show_data(Request $request, $id)
-{
-    $datatable_filter = datatable_filters();
-    $offset = $datatable_filter['offset'];
-    $search = $datatable_filter['search'];
+    {
+        $datatable_filter = datatable_filters();
+        $offset = $datatable_filter['offset'];
+        $search = $datatable_filter['search'];
 
-    $user = User::find($id);
-    $completed_job = $user ? $user->completed_job : 0;
+        $user = User::find($id);
+        $completed_job = $user ? $user->completed_job : 0;
 
-    $query = Feedback::where('transporter_id', $id)->where('quote_by_transporter_id', null);
+        $query = Feedback::where('transporter_id', $id)->where('quote_by_transporter_id', null);
 
-    if (!empty($search)) {
-        $query->where(function ($q) use ($search) {
-            $q->where('first_name', 'like', "%$search%")
-              ->orWhere('vehical_name', 'like', "%$search%")
-              ->orWhere('comment', 'like', "%$search%");
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('first_name', 'like', "%$search%")
+                    ->orWhere('vehical_name', 'like', "%$search%")
+                    ->orWhere('comment', 'like', "%$search%");
+            });
+        }
+
+        // Get count before pagination
+        // $return_data['recordsTotal'] = Feedback::where('transporter_id', $id)->count();
+        $return_data['recordsFiltered'] = $query->count();
+
+        $all_data = $query->orderBy($datatable_filter['sort'] ?? 'created_at', $datatable_filter['order'] ?? 'desc')
+            ->offset($offset)
+            ->limit($datatable_filter['limit'])
+            ->get();
+
+        $ratings = Feedback::where('transporter_id', $id)->where('quote_by_transporter_id', null)
+            ->selectRaw('rating, COUNT(*) as count')
+            ->groupBy('rating')
+            ->pluck('count', 'rating')
+            ->toArray();
+
+        $total_feedbacks = array_sum($ratings);
+        $ratings = collect([5, 4, 3, 2, 1])->mapWithKeys(function ($rating) use ($ratings, $total_feedbacks) {
+            $count = $ratings[$rating] ?? 0;
+            $percentage = $total_feedbacks > 0 ? ($count / $total_feedbacks) * 100 : 0;
+            return ['star_' . $rating => $percentage];
         });
+
+        $average_rating = $total_feedbacks > 0 ? round($all_data->avg('rating'), 1) : 0;
+        $return_data['average_rating'] =  $average_rating;
+        $return_data['ratings'] =  $ratings;
+        // Prepare response
+        $return_data['data'] = $all_data->map(function ($value, $key) use ($offset, $completed_job) {
+            return [
+                'id' => $offset + $key + 1,
+                'feedback_id' => $value->id,
+                'first_name' => $value->first_name,
+                'vehical_name' => $value->vehical_name,
+                'rating' => $value->rating,
+                'comment' => $value->comment,
+                'date' => $value->date,
+                'transporter_id' => $value->transporter_id,
+                'completed_job' => $completed_job,
+            ];
+        })->toArray();
+
+        return response()->json($return_data);
     }
-
-    // Get count before pagination
-    // $return_data['recordsTotal'] = Feedback::where('transporter_id', $id)->count();
-    $return_data['recordsFiltered'] = $query->count();
-
-    $all_data = $query->orderBy($datatable_filter['sort'] ?? 'created_at', $datatable_filter['order'] ?? 'desc')
-        ->offset($offset)
-        ->limit($datatable_filter['limit'])
-        ->get();
-
-    $ratings = Feedback::where('transporter_id', $id)->where('quote_by_transporter_id', null)
-        ->selectRaw('rating, COUNT(*) as count')
-        ->groupBy('rating')
-        ->pluck('count', 'rating')
-        ->toArray();
-
-    $total_feedbacks = array_sum($ratings);
-    $ratings = collect([5, 4, 3, 2, 1])->mapWithKeys(function ($rating) use ($ratings, $total_feedbacks) {
-        $count = $ratings[$rating] ?? 0;
-        $percentage = $total_feedbacks > 0 ? ($count / $total_feedbacks) * 100 : 0;
-        return ['star_' . $rating => $percentage];
-    });
-
-    $average_rating = $total_feedbacks > 0 ? round($all_data->avg('rating'), 1) : 0;
-    $return_data['average_rating'] =  $average_rating;
-    $return_data['ratings'] =  $ratings;
-    // Prepare response
-    $return_data['data'] = $all_data->map(function ($value, $key) use ($offset, $completed_job) {
-        return [
-            'id' => $offset + $key + 1,
-            'feedback_id' => $value->id,
-            'first_name' => $value->first_name,
-            'vehical_name' => $value->vehical_name,
-            'rating' => $value->rating,
-            'comment' => $value->comment,
-            'date' => $value->date,
-            'transporter_id' => $value->transporter_id,
-            'completed_job' => $completed_job,
-        ];
-    })->toArray();
-
-    return response()->json($return_data);
-}
 
 
     public function review_data_update(Request $request)
