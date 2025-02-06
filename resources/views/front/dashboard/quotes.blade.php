@@ -748,7 +748,12 @@
                                                     </li>
                                                 @endfor
                                                 <li>
-                                                    <span class="ml-1">({{ fmod($quote->percentage, 1) == 0 ? round($quote->percentage) : number_format($quote->percentage, 1) }}%)</span>
+                                                    <span class="ml-1">
+                                                        ({{ $quote->percentage == floor($quote->percentage) 
+                                                            ? round($quote->percentage) 
+                                                            : number_format($quote->percentage, 1) }}%)
+                                                    </span>
+                                                    {{-- <span class="ml-1">({{ fmod($quote->percentage, 1) == 0 ? round($quote->percentage) : number_format($quote->percentage, 1) }}%)</span> --}}
                                                 </li>
                                             </ul>
                                         @endif
