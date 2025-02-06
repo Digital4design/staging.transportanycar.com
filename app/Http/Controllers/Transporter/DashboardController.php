@@ -335,10 +335,21 @@ class DashboardController extends WebController
         $ratings = collect([5, 4, 3, 2, 1])->mapWithKeys(function ($rating) use ($all_feedbacks, $total_feedbacks) {
             $count = $all_feedbacks->where('rating', $rating)->count();
             $percentage = $total_feedbacks > 0 ? ($count / $total_feedbacks) * 100 : 0;
-            return ['star_' . $rating => $percentage];
+            return ['star_' . $rating => round($percentage, 1)]; // Round to 1 decimal place
         });
-
+        
+        // Ensure the total is exactly 100%
+        $totalPercentage = $ratings->sum();
+        
+        if ($totalPercentage !== 100) {
+            $difference = 100 - $totalPercentage;
+            $highestKey = $ratings->keys()->first(); // Adjust the largest percentage
+            $ratings[$highestKey] += $difference;
+        }
+        
+        // Calculate the average rating
         $average_rating = $total_feedbacks > 0 ? round($all_feedbacks->avg('rating'), 1) : 0;
+        
 
 
         $params['html'] = view('transporter.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings', 'average_rating'))->render();
