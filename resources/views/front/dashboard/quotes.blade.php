@@ -747,7 +747,7 @@
                                                         </svg>
                                                     </li>
                                                 @endfor
-                                                <li><span class="ml-1">({{  round($quote->percentage) }}%)</span></li>
+                                                <li><span class="ml-1">({{  number_format($quote->percentage,1) }}%)</span></li>
                                             </ul>
                                         @endif
                                     </div>
