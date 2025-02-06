@@ -484,7 +484,7 @@
                                                 </li>
                                                 <li>
                                                     <p>Positive feedback:</p>
-                                                    <span>{{  number_format($rating_percentage,0) }}%</span>
+                                                    <span>{{  number_format($rating_percentage,1) }}%</span>
                                                 </li>
                                                 {{-- <li>
                                                     <p>Total reviews:</p>
