@@ -391,13 +391,13 @@
             padding: 10px 0;
         }
 
-        .modal-content,
-        #caption {
+        /* .modal-content, */
+        /* #caption {
             -webkit-animation-name: zoom;
             -webkit-animation-duration: 0.6s;
-            animation-name: zoom;
+         animation-name: zoom; 
             animation-duration: 0.6s;
-        }
+        } */
 
         @-webkit-keyframes zoom {
             from {
