@@ -4,7 +4,7 @@
     <style>
           @keyframes slideDown {
             from {
-                transform: translateY(-100%);
+                transform: translateY(-10%);
                 opacity: 0;
             }
             to {
