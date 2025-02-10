@@ -958,7 +958,7 @@
                                                             data-target="#bidCollapse{{ $key }}"
                                                             aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
                                                             aria-controls="bidCollapse{{ $key }}">
-                                                            {{ $key == 0 ? 'Your messages' : 'View messages' }}
+                                                            {{ $transporter->getTransporters->id === Auth::user()->id ? 'Your messages' : 'View messages' }}
                                                             <span
                                                                 class="message_count">{{ $transporter->count_messages }}</span>
                                                         </button>
