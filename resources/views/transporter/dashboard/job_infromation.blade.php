@@ -73,7 +73,10 @@
             box-shadow: none;
         }
 
-        .view_message[data-target="#bidCollapse0"] {
+        /* .view_message[data-target="#bidCollapse0"] {
+            background-color: #0356D6;
+        } */
+        .view_message.login-user-button {
             background-color: #0356D6;
         }
 
@@ -982,27 +985,16 @@
                                                             {{ $transporter->getTransporters->id === Auth::user()->id ? 'Your bid' : 'Current bid' }}:
                                                             <span>£{{ round($transporter->transporter_payment) }}</span>
                                                         </div>
-                                                        @if ($transporter->getTransporters->id === Auth::user()->id)
-                                                        <button class="btn view_message" type="button"
-                                                        data-toggle="collapse"
-                                                        data-target="#bidCollapse0"
-                                                        aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
-                                                        aria-controls="bidCollapse{{ $key }}">
-                                                        {{ $transporter->getTransporters->id === Auth::user()->id ? 'Your messages' : 'View messages' }}
-                                                        <span
-                                                            class="message_count">{{ $transporter->count_messages }}</span>
-                                                    </button>
-                                                    @else
-                                                        <button class="btn view_message" type="button"
+                                                        
+                                                        <button class="btn view_message {{ $transporter->getTransporters->id === Auth::user()->id ? 'login-user-button' : '' }}" type="button"
                                                             data-toggle="collapse"
-                                                            data-target=""
+                                                            data-target="#bidCollapse{{ $key }}"
                                                             aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
                                                             aria-controls="bidCollapse{{ $key }}">
                                                             {{ $transporter->getTransporters->id === Auth::user()->id ? 'Your messages' : 'View messages' }}
                                                             <span
                                                                 class="message_count">{{ $transporter->count_messages }}</span>
                                                         </button>
-                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
