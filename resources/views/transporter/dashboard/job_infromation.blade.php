@@ -982,15 +982,27 @@
                                                             {{ $transporter->getTransporters->id === Auth::user()->id ? 'Your bid' : 'Current bid' }}:
                                                             <span>£{{ round($transporter->transporter_payment) }}</span>
                                                         </div>
+                                                        @if ($transporter->getTransporters->id === Auth::user()->id)
+                                                        <button class="btn view_message" type="button"
+                                                        data-toggle="collapse"
+                                                        data-target="#bidCollapse0"
+                                                        aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
+                                                        aria-controls="bidCollapse{{ $key }}">
+                                                        {{ $transporter->getTransporters->id === Auth::user()->id ? 'Your messages' : 'View messages' }}
+                                                        <span
+                                                            class="message_count">{{ $transporter->count_messages }}</span>
+                                                    </button>
+                                                    @else
                                                         <button class="btn view_message" type="button"
                                                             data-toggle="collapse"
-                                                            data-target="#bidCollapse{{ $key }}"
+                                                            data-target=""
                                                             aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
                                                             aria-controls="bidCollapse{{ $key }}">
                                                             {{ $transporter->getTransporters->id === Auth::user()->id ? 'Your messages' : 'View messages' }}
                                                             <span
                                                                 class="message_count">{{ $transporter->count_messages }}</span>
                                                         </button>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
