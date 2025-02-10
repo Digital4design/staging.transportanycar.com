@@ -2,6 +2,35 @@
 
 @section('head_css')
     <style>
+          @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+        }
+
+        .modal.custom-slide .modal-dialog {
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .modal.custom-slide.hide .modal-dialog {
+            animation: slideUp 0.5s ease-in;
+        }
         #read-more {
             font-size: 14px;
             line-height: 18px;
@@ -1077,9 +1106,9 @@
             </div>
         </div>
     </div>
-    <div class="modal get_quote fade" id="quote" tabindex="-1" role="dialog"
+    <div class="modal get_quote fade custom-slide" id="quote" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle"> Place your bid</h5>
@@ -1194,9 +1223,9 @@
             </div>
         </div> -->
     {{-- EDIT  --}}
-    <div class="modal get_quote fade" id="quoteEdit" tabindex="-1" role="dialog"
+    <div class="modal get_quote fade custom-slide" id="quoteEdit" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog " role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle"> Edit bid</h5>
