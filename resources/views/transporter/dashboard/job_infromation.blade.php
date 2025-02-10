@@ -950,7 +950,7 @@
                                                 <div class="d-flex flex-wrap align-items-center">
                                                     <div>
                                                         <div class="bidder_bid">
-                                                            {{ $key == 0 ? 'Your bid' : 'Current bid' }}:
+                                                            {{ $transporter->getTransporters->id === Auth::user()->id ? 'Your bid' : 'Current bid' }}:
                                                             <span>£{{ round($transporter->transporter_payment) }}</span>
                                                         </div>
                                                         <button class="btn view_message" type="button"
