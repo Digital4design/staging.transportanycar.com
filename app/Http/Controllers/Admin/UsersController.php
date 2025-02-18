@@ -12,6 +12,8 @@ use App\UserQuote;
 use App\UserReferral;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UsersExport;
 
 class UsersController extends WebController
 {
@@ -470,6 +472,10 @@ class UsersController extends WebController
         return $return_data;
     }    
 
+    public function export() 
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
 
 
 
