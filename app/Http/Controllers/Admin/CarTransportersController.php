@@ -531,7 +531,7 @@ class CarTransportersController extends WebController
             'recordsTotal' => 0,
             'recordsFiltered' => 0
         );
-        $main = User::where('type', 'car_transporter')->where('is_status', 'approved');
+        $main = User::with('user_QuoteByTransporter','userbid_QuoteByTransporter')->where('type', 'car_transporter')->where('is_status', 'approved');
         $return_data['recordsTotal'] = $main->count();
         if (!empty($search)) {
             $main->where(function ($query) use ($search) {
@@ -546,6 +546,12 @@ class CarTransportersController extends WebController
 
         if (!empty($all_data)) {
             foreach ($all_data as $key => $value) {
+
+                $company_name = $value->name ?? ''; // Adjust based on actual field name in the database
+                $username = $value->username ?? ''; // Assuming 'username' field exists
+                $total_bids = count($value->userbid_QuoteByTransporter) ?? 0; // If it's calculated, adjust accordingly
+                $total_jobs_won = count($value->user_QuoteByTransporter )?? 0; // Adjust based on actual field
+                $member_since = $value->created_at->format('d-m-Y'); 
                 $param = [
                     'id' => $value->id,
                     'url' => [
@@ -560,9 +566,14 @@ class CarTransportersController extends WebController
                 $return_data['data'][] = array(
                     'id' => $offset + $key + 1,
                     'profile_image' => get_fancy_box_html($value['profile_image']),
-                    'name' => $value->name,
+                    'name' => $value->first_name .' '.$value->last_name,
+                    'company_name' => $company_name,
+                    'username' => $username,
+                    'mobile_number' => $value->mobile,
                     'email' => $value->email,
-                    'mobile_number' => $value->country_code . ' ' . $value->mobile,
+                    'total_bids' => $total_bids,
+                    'total_jobs_won' => $total_jobs_won,
+                    'member_since' => $member_since,
                     'type' => get_label(strtoupper($value->type)),
                     'status' => $this->generate_switch($param),
                     'action' => $this->generate_actions_buttons($param),

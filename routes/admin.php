@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
             Route::post('carTransporter/review_show', 'CarTransportersController@review_data_update')->name('carTransporter.review_data_update');
             Route::post('carTransporter/update_job_completed', 'CarTransportersController@update_job_completed')
             ->name('carTransporter.update_job_completed');
-
+            Route::get('transport-export', 'UsersController@export')->name('carTransporter.export');
 
 
             Route::resource('carTransporter', 'CarTransportersController');
