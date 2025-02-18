@@ -16,8 +16,8 @@
             <div class="mb-2 text-right">
                 <!-- <a href="{{route('admin.carTransporter.create')}}" class="btn btn-orange">Add</a> -->
             </div>
-            <div class="mb-2 text-right">
-                <button id="exportButton" class="btn btn-success">Export to Excel</button>
+            <div class="mb-2 text-right wd-sl-modalbtn">
+                <button id="exportButton" class="btn btn-orange waves-effect waves-light">Export Transporters</button>
             </div>
             <div class="table-responsive ">
                 <table id="listResults" class="table dt-responsive mb-4  nowrap w-100 mb-">
