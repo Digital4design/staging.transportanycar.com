@@ -357,7 +357,11 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <div class="mb-2 text-right">
+                <div class="mb-2 text-right wd-sl-modalbtn">
+                    <button class="btn btn-orange waves-effect waves-light showModel2" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal1" data-user-id="" data-content="${row.model_one_data}">
+                        Add Review
+                    </button>
                 </div>
                 <div class="table-responsive">
                     <div class="overall-review py-3 py-md-5">
@@ -413,6 +417,89 @@
         </div>
     </div>
 
+    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header fake-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body fake-review">
+                    <h5 class="modal-title" style="padding: 20px 0; font-size: 22px;" id="exampleModalLabel">New review</h5>
+                    <form class="leave_inner">
+                        @csrf
+                        <input type="hidden" name="user_id" id="user_Id" value="">
+                        <ul class="lve_rate mb-0">
+                            <li>
+                                <h5>Click to rate:</h5>
+                                <div class="starrating">
+                                    <input type="radio" id="star5_comm_pos" name="rating" value="5"><label
+                                        for="star5_comm_pos" title="5 star">
+                                        <svg width="36" height="33" viewBox="0 0 36 33" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M18 0L22.7822 11.4178L35.119 12.4377L25.7378 20.5142L28.5801 32.5623L18 26.136L7.41987 32.5623L10.2622 20.5142L0.880983 12.4377L13.2178 11.4178L18 0Z"
+                                                fill="#D9D9D9"></path>
+                                        </svg>
+
+                                    </label>
+                                    <input type="radio" id="star4_comm_pos" name="rating" value="4"><label
+                                        for="star4_comm_pos" title="4 star">
+                                        <svg width="36" height="33" viewBox="0 0 36 33" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M18 0L22.7822 11.4178L35.119 12.4377L25.7378 20.5142L28.5801 32.5623L18 26.136L7.41987 32.5623L10.2622 20.5142L0.880983 12.4377L13.2178 11.4178L18 0Z"
+                                                fill="#D9D9D9"></path>
+                                        </svg>
+                                    </label>
+                                    <input type="radio" id="star3_comm_pos" name="rating" value="3"><label
+                                        for="star3_comm_pos" title="3 star">
+                                        <svg width="36" height="33" viewBox="0 0 36 33" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M18 0L22.7822 11.4178L35.119 12.4377L25.7378 20.5142L28.5801 32.5623L18 26.136L7.41987 32.5623L10.2622 20.5142L0.880983 12.4377L13.2178 11.4178L18 0Z"
+                                                fill="#D9D9D9"></path>
+                                        </svg>
+                                    </label>
+                                    <input type="radio" id="star2_comm_pos" name="rating" value="2"><label
+                                        for="star2_comm_pos" title="2 star">
+                                        <svg width="36" height="33" viewBox="0 0 36 33" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M18 0L22.7822 11.4178L35.119 12.4377L25.7378 20.5142L28.5801 32.5623L18 26.136L7.41987 32.5623L10.2622 20.5142L0.880983 12.4377L13.2178 11.4178L18 0Z"
+                                                fill="#D9D9D9"></path>
+                                        </svg>
+                                    </label>
+                                    <input type="radio" id="star1_comm_pos" name="rating" value="1"><label
+                                        for="star1_comm_pos" title="1 star">
+                                        <svg width="36" height="33" viewBox="0 0 36 33" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M18 0L22.7822 11.4178L35.119 12.4377L25.7378 20.5142L28.5801 32.5623L18 26.136L7.41987 32.5623L10.2622 20.5142L0.880983 12.4377L13.2178 11.4178L18 0Z"
+                                                fill="#D9D9D9"></path>
+                                        </svg>
+                                    </label>
+
+                                </div>
+                                <div class="text-danger" id="ratingError"></div>
+                            </li>
+                        </ul>
+                        <div class="form-group">
+                            <input type="text" class="mb-2" placeholder="Name" id="name" name="first_name" />
+                            <div class="text-danger" id="firstName"></div>
+                            <input type="text" class="mb-2" placeholder="Vehical Name" id="vehicalName"
+                                name="vehical_name" />
+                            <div class="text-danger" id="vehicalName"></div>
+                            <input type="date" class="mb-2" placeholder="Date" id="Date" name="date" />
+                            <div class="text-danger" id="vehicalName"></div>
+                            <textarea id="posComment" name="pos_comment" placeholder="Review"></textarea>
+                            <div class="text-danger" id="commentError"></div>
+                            <button class="create_lve_feed_btn mt-4 lve_feed_btn mt-4">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -531,7 +618,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             // let userId = "{{ $data->id }}";
-            // console.log( {{ $data->id }});
+            console.log({{ $data->id }});
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -646,41 +733,34 @@
                 $("#averageRating").text(averageRating + "/5");
             }
 
-            // function displayStarsInContainer(rating) {
-            //     let stars = generateStars(rating);
-            //     $("#starRatingContainer").html(`
-            //         <ul class="wd-star-lst user-feedback-stars list-inline">
-            //             ${stars}
-            //         </ul>
-            //     `);
-            // }
+
             function displayStarsInContainer(rating) {
-        let stars = generateStarsData(rating);
-        $("#starRatingContainer").html(`
+                let stars = generateStarsData(rating);
+                $("#starRatingContainer").html(`
             <ul class="wd-star-lst user-feedback-stars list-inline">
                 ${stars}
             </ul>
-        `);
-    }
+               `);
+            }
 
             function generateStarsData(rating) {
-        let totalStars = 5;
-        let fullStars = Math.floor(rating); // Number of full yellow stars
-        let halfStar = rating - fullStars >= 0.5; // Check if there's a half-star
-        let greyStars = totalStars - fullStars - (halfStar ? 1 : 0); // Remaining grey stars
+                let totalStars = 5;
+                let fullStars = Math.floor(rating); // Number of full yellow stars
+                let halfStar = rating - fullStars >= 0.5; // Check if there's a half-star
+                let greyStars = totalStars - fullStars - (halfStar ? 1 : 0); // Remaining grey stars
 
-        let starsHtml = "";
+                let starsHtml = "";
 
-        // Full stars
-        for (let i = 0; i < fullStars; i++) {
-            starsHtml += `<li><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                // Full stars
+                for (let i = 0; i < fullStars; i++) {
+                    starsHtml += `<li><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
                 fill="#FFA800"/></svg></li>`;
-        }
+                }
 
-        // Half star
-        if (halfStar) {
-            starsHtml += `<li><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                // Half star
+                if (halfStar) {
+                    starsHtml += `<li><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="halfStarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="50%" stop-color="#FFA800" />
@@ -689,19 +769,17 @@
                 </defs>
                 <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
                 fill="url(#halfStarGradient)"/></svg></li>`;
-        }
+                }
 
-        // Grey stars
-        for (let i = 0; i < greyStars; i++) {
-            starsHtml += `<li><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                // Grey stars
+                for (let i = 0; i < greyStars; i++) {
+                    starsHtml += `<li><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
                 fill="#ccc"/></svg></li>`;
-        }
+                }
 
-        return starsHtml;
-    }
-
-
+                return starsHtml;
+            }
 
             $(document).on('click', '.showModelOne', function() {
                 let id = $(this).data('id');
@@ -760,7 +838,7 @@
                     data: formData,
                     success: function(response) {
                         if (response.success) {
-                            $('#exampleModal').modal('hide'); // Close the modal
+                            $('#exampleModal3').modal('hide'); // Close the modal
                             $('#pos_comment').val(''); // Clear the comment field
                             $('#first_name').val('');
                             $('#vehical_name').val('');
@@ -797,43 +875,75 @@
                 $('#jobCompleted').modal('show');
             });
 
-            // $(document).on('click', '.jobCompleted_form', function(e) {
-            //     e.preventDefault(); // Prevent default form submission
+            $(document).on('click', '.create_lve_feed_btn', function(e) {
+                e.preventDefault(); // Prevent the default form submission
 
-            //     let formData = {
-            //         user_id: $('#feedbackid').val(),
-            //         job_Completed: $('#job_completed').val(),
-            //         _token: "{{ csrf_token() }}" // Include CSRF token
-            //     };
+                // Get the form data
+                let userId = $('#user_Id').val();
+                let rating = $('input[name="rating"]:checked').val(); // Get the selected rating
+                let comment = $('#posComment').val();
+                let Date = $('#Date').val();
+                let firstName = $('#name').val(); // Get the first name
+                let vehicalName = $('#vehicalName').val();
 
-            //     // Clear previous error messages
-            //     $('#jobComplete').text('');
+                // Clear previous error messages
+                $('#ratingError').text('');
+                $('#commentError').text('');
 
-            //     $.ajax({
-            //         url: "{{ route('admin.carTransporter.update_job_completed') }}", // Update this route
-            //         method: 'POST',
-            //         data: formData,
-            //         success: function(response) {
-            //             if (response.success) {
-            //                 alert('Jobs Completed updated successfully!');
-            //                 $('#jobCompleted').modal('hide'); // Close modal
-            //                 $('#listResults').DataTable().ajax.reload(); // Reload DataTable
-            //             } else {
-            //                 $('#jobComplete').text(response.message || 'Failed to update.');
-            //             }
-            //         },
-            //         error: function(xhr) {
-            //             let errors = xhr.responseJSON.errors;
-            //             if (errors && errors.job_Completed) {
-            //                 $('#jobComplete').text(errors.job_Completed[
-            //                 0]); // Show validation error
-            //             } else {
-            //                 $('#jobComplete').text('An error occurred.');
-            //             }
-            //         }
-            //     });
-            // });
+
+                // Prepare the data to send in the AJAX request
+                let formData = {
+                    user_id: userId,
+                    rating: rating,
+                    pos_comment: comment,
+                    first_name: firstName,
+                    vehical_name: vehicalName,
+                    date: Date,
+                };
+
+                $.ajax({
+                    url: '{{ route('admin.carTransporter.review_data_save') }}',
+                    method: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        if (response.success) {
+                            $('#exampleModal3').modal('hide'); // Close the modal
+                            $('#posComment').val(''); // Clear the comment field
+                            $('#name').val('');
+                            $('#vehicalName').val('');
+                            $('#Date').val('');
+                            $('input[name="rating"]').prop('checked',
+                                false); // Deselect the rating
+                                loadReviews(userId)
+                        } else {
+                            if (response.errors.rating) {
+                                $('#ratingError').text(response.errors.rating[0]);
+                            }
+                            if (response.errors.pos_comment) {
+                                $('#commentError').text(response.errors.pos_comment[0]);
+                            }
+
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr
+                            .responseText);
+                    }
+                });
+            });
+            $(document).on('click', '.showModel2', function() {
+                $('#exampleModal3').modal('show');
+                $('#user_Id').val(userId);
+            });
 
         });
+        document.getElementById("dateInput").addEventListener("input", function (e) {
+    this.value = this.value.replace(/\D/g, ""); // Remove non-numeric characters
+
+    if (this.value.length > 8) {
+        this.value = this.value.slice(0, 8); // Limit to 8 digits
+    }
+});
     </script>
+    
 @endsection
