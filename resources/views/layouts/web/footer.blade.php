@@ -282,20 +282,19 @@
             <div class="col-12 text-center text-md-left mt-3 text-decoration-none">
                 <div class="row">
 
-                    <div class="col-12 col-md-7 col-xl-9 mb-3 mb-md-0">
+                    <div class="col-12 col-md-7 col-xl-8 mb-3 mb-md-0">
                         <p class="mb-0">Transport Any Car <span>&copy; All rights reserved. {{date('Y')}}</span>. TransportAnyCar.com is a limited company registered in England and Wales. Registered address: 128 City Road, London, EC1V 2NX.</p>
                     </div>
-                    <div class="col-12 col-md-5 col-xl-3">
+                    <div class="col-12 col-md-5 col-xl-4">
                         <div class="foot_img row mx-0 align-items-center justify-content-center justify-content-md-end">
                             <img src="{{asset('assets/web/images/footer_logo.png')}}" alt="brand_logo" class="footer_logos" width="200" />
                             <ul class="list-inline social-icons ml-3">
                                 <li>
-                                    <a href="https://www.facebook.com/share/16A3vJKiYH/?mibextid=wwXIfr" target="_blank">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff" height="25px" width="25px" version="1.1" id="Capa_1" viewBox="0 0 23.101 23.101" xml:space="preserve">
-                                            <g>
-                                                <path d="M8.258,4.458c0-0.144,0.02-0.455,0.06-0.931c0.043-0.477,0.223-0.976,0.546-1.5c0.32-0.522,0.839-0.991,1.561-1.406   C11.144,0.208,12.183,0,13.539,0h3.82v4.163h-2.797c-0.277,0-0.535,0.104-0.768,0.309c-0.231,0.205-0.35,0.4-0.35,0.581v2.59h3.914   c-0.041,0.507-0.086,1-0.138,1.476l-0.155,1.258c-0.062,0.425-0.125,0.819-0.187,1.182h-3.462v11.542H8.258V11.558H5.742V7.643   h2.516V4.458z" />
-                                            </g>
-                                        </svg>
+                                    <a href="https://www.facebook.com/share/16A3vJKiYH/?mibextid=wwXIfr" target="_blank" class="text-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="25px" height="25px" fill="#ffffff" class="mx-auto d-block">    
+                                        <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M37,19h-2c-2.14,0-3,0.5-3,2 v3h5l-1,5h-4v15h-5V29h-4v-5h4v-3c0-4,2-7,6-7c2.9,0,4,1,4,1V19z" />
+                                    </svg>
+                                    <span class="d-block text-white">Follow us</span>
                                     </a>
                                 </li>
                             </ul>
