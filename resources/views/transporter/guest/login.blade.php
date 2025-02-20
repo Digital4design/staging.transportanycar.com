@@ -57,6 +57,7 @@
             <img src="{{asset('assets/web/images/home/trans_account_img.png')}}" alt="image" class="bgright_img" />
         </section>
     </main>
+    @include('layouts.web.footer')
 @endsection
 @section('script')
 <script src="{{asset('assets/web/js/login.js')}}"></script>
