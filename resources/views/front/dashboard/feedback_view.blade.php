@@ -485,9 +485,9 @@
                                                 <li>
                                                     <p>Positive feedback:</p>
                                                     <span class="ml-1">
-                                                        ({{ $rating_percentage == floor($rating_percentage) 
+                                                        {{ $rating_percentage == floor($rating_percentage) 
                                                             ? round($rating_percentage) 
-                                                            : number_format($rating_percentage, 1) }}%)
+                                                            : number_format($rating_percentage, 1) }}%
                                                     </span>
                                                     {{-- <span>{{  number_format($rating_percentage,1) }}%</span> --}}
                                                 </li>
