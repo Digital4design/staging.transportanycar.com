@@ -34,6 +34,7 @@
             animation: slideUp 0.5s ease-in;
         }
 
+        #show-less,
         #read-more {
             font-size: 14px;
             line-height: 18px;
@@ -41,7 +42,8 @@
             color: #5b5b5b;
             cursor: pointer;
         }
-
+        
+        #show-less:hover,
         #read-more:hover {
             color: #006DF0;
         }
@@ -1036,8 +1038,9 @@
                                                         <div class="text-right mb-1">
                                                             <a id="read-more" class=" mb-3">View more messages</a>
                                                         </div>
-                                                        {{-- <div id="show-less" class="mb-3"
-                                                        style="display: none;">Show Less</div> --}}
+                                                        <div class="text-right mb-1">
+                                                            <div id="show-less" class="mb-3 hidden">Show Less</div> 
+                                                        </div>
                                                     @endif
                                                     @if ($key == '0')
                                                         @if (Auth::user() && Auth::user()->id == $transporter->getTransporters->id)
@@ -1763,19 +1766,19 @@
                 // If all messages are shown, hide "Read More" and show "Show Less"
                 if (hiddenMessages.filter(':hidden').length === 0) {
                     $(this).hide();
-                    // $('#show-less').show();
+                    $('#show-less').show();
                 }
             });
 
             // On clicking "Show Less"
-            // $('#show-less').on('click', function() {
-            //     // Hide all messages except the first batch
-            //     hiddenMessages.slice(messagesToShow).slideUp();
+            $('#show-less').on('click', function() {
+                // Hide all messages except the first batch
+                hiddenMessages.slice(messagesToShow).slideUp();
 
-            //     // Show "Read More" and hide "Show Less"
-            //     $('#read-more').show();
-            //     $(this).hide();
-            // });
+                // Show "Read More" and hide "Show Less"
+                $('#read-more').show();
+                $(this).hide();
+            });
         });
     </script>
 @endsection
