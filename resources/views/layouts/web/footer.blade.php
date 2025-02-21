@@ -286,7 +286,7 @@
                         <p class="mb-0">Transport Any Car <span>&copy; All rights reserved. {{date('Y')}}</span>. TransportAnyCar.com is a limited company registered in England and Wales. Registered address: 128 City Road, London, EC1V 2NX.</p>
                     </div>
                     <div class="col-12 col-md-6 col-xl-4 order-1 order-md-2">
-                        <div class="foot_img row mx-0 align-items-center justify-content-center justify-content-md-end">
+                        <div class="foot_img row mx-0 align-items-center justify-content-between justify-content-md-center justify-content-md-end">
                             <img src="{{asset('assets/web/images/footer_logo.png')}}" alt="brand_logo" class="footer_logos" width="200" />
                             <ul class="list-inline social-icons ml-3">
                                 <li>
