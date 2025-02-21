@@ -2,11 +2,12 @@
 
 @section('head_css')
     <style>
-          @keyframes slideDown {
+        @keyframes slideDown {
             from {
                 transform: translateY(-10%);
                 opacity: 0;
             }
+
             to {
                 transform: translateY(0);
                 opacity: 1;
@@ -18,6 +19,7 @@
                 transform: translateY(0);
                 opacity: 1;
             }
+
             to {
                 transform: translateY(-100%);
                 opacity: 0;
@@ -31,6 +33,7 @@
         .modal.custom-slide.hide .modal-dialog {
             animation: slideUp 0.5s ease-in;
         }
+
         #read-more {
             font-size: 14px;
             line-height: 18px;
@@ -74,8 +77,8 @@
         }
 
         /* .view_message[data-target="#bidCollapse0"] {
-            background-color: #0356D6;
-        } */
+                background-color: #0356D6;
+            } */
         .view_message.login-user-button {
             background-color: #0356D6;
         }
@@ -396,11 +399,11 @@
 
         /* .modal-content, */
         /* #caption {
-            -webkit-animation-name: zoom;
-            -webkit-animation-duration: 0.6s;
-         animation-name: zoom; 
-            animation-duration: 0.6s;
-        } */
+                -webkit-animation-name: zoom;
+                -webkit-animation-duration: 0.6s;
+             animation-name: zoom;
+                animation-duration: 0.6s;
+            } */
 
         @-webkit-keyframes zoom {
             from {
@@ -713,30 +716,32 @@
                         <div class="row align-items-center">
                             <div class="col-7 mb-3 pl-0 pl-md-3">
                                 <div class="back_btn row mx-0 align-items-center">
-                                    <a href="javascript:history.back()" class="d-flex flex-wrap align-items-center">
-                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                                            <g opacity="0.5">
-                                                <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </g>
-                                        </svg>
-                                        Back to  @php
-                                            $previousUrl = url()->previous(); // Get the previous URL
-
-                                        @endphp
-
-
-                                        @if (Str::contains(parse_url($previousUrl, PHP_URL_PATH), route('transporter.savedFindJobResults', [], false)))
-                                            Saved Jobs
-                                        @elseif($previousUrl == route('transporter.new_jobs_new'))
-                                            Find Jobs
-                                        @elseif($previousUrl == route('transporter.watchlist.index'))
-                                            Watchlist
-                                        @else
-                                           find jobs
-                                        @endif 
-                                    </a>
+                                    @php
+                                    $previousUrl = url()->previous();
+                                
+                                    // If there's no previous URL (like when coming from an email), set default
+                                    if (!$previousUrl || $previousUrl == url()->current()) {
+                                        $previousUrl = route('transporter.new_jobs_new');
+                                    }
+                                @endphp
+                                
+                                <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
+                                    <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                        <g opacity="0.5">
+                                            <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </g>
+                                    </svg>
+                                    Back to 
+                                    @if (Str::contains(parse_url($previousUrl, PHP_URL_PATH), route('transporter.savedFindJobResults', [], false)))
+                                        Saved Jobs
+                                    @elseif($previousUrl == route('transporter.new_jobs_new'))
+                                        Find Jobs
+                                    @elseif($previousUrl == route('transporter.watchlist.index'))
+                                        Watchlist
+                                    @else
+                                        Find Jobs
+                                    @endif
+                                </a>
                                 </div>
                             </div>
                             <div class="col-5 date mb-3 pr-0 pr-md-3 text-right">
@@ -985,9 +990,10 @@
                                                             {{ $transporter->getTransporters->id === Auth::user()->id ? 'Your bid' : 'Current bid' }}:
                                                             <span>£{{ round($transporter->transporter_payment) }}</span>
                                                         </div>
-                                                        
-                                                        <button class="btn view_message {{ $transporter->getTransporters->id === Auth::user()->id ? 'login-user-button' : '' }}" type="button"
-                                                            data-toggle="collapse"
+
+                                                        <button
+                                                            class="btn view_message {{ $transporter->getTransporters->id === Auth::user()->id ? 'login-user-button' : '' }}"
+                                                            type="button" data-toggle="collapse"
                                                             data-target="#bidCollapse{{ $key }}"
                                                             aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
                                                             aria-controls="bidCollapse{{ $key }}">
@@ -1214,18 +1220,18 @@
     </div>
 
     <!-- <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <span class="close">&times;</span>
-                        <img id="img01" class="img-fluid" />
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <span class="close">&times;</span>
+                            <img id="img01" class="img-fluid" />
 
-                        <div id="caption"></div>
+                            <div id="caption"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div> -->
+            </div> -->
     {{-- EDIT  --}}
     <div class="modal get_quote fade custom-slide" id="quoteEdit" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

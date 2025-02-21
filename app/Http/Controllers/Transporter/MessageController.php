@@ -55,8 +55,6 @@ class MessageController extends WebController
 
     public function store(Request $request, $id)
     {
-        // dd("yesssssssssssssssss");
-        // return ;
         $request->validate([
             'message' => [
                 'required',
@@ -79,10 +77,7 @@ class MessageController extends WebController
             $isThreadExist->user_status = 'y'; // Update the thread's status
             $isThreadExist->save(); // Save the changes
         }
-        // else {
-        //     $threads = Thread::createOrUpdate(['user_id' => $from_user_id]);
-        //     $thread_id = $threads->id;
-        // }
+      
         $message_type = "message";
         if ($request->hasFile('file')) {
             $message_type = "file";
@@ -125,7 +120,7 @@ class MessageController extends WebController
                     $maildata['quote_id'] = $from_quote_id;
                     $maildata['type'] = 'user';
                     $maildata['url'] = route('front.manage_notification');
-
+                    // $maildata['main_url'] = 'front.quotes';
                     $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'quotes_id' => $from_quote_id, 'thread_id' => $thread_id])->render();
                     $this->emailService->sendEmail($email_to, $htmlContent, $subject);
 
@@ -278,6 +273,7 @@ class MessageController extends WebController
                     $maildata['quotes'] = $quotes;
                     $maildata['type'] = 'user';
                     $maildata['url'] = route('front.manage_notification');
+                    $maildata['main_url'] = 'front.quotes';
                     $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
                     $this->emailService->sendEmail($email_to, $htmlContent, 'You have a new message');
 
