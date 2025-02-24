@@ -1441,9 +1441,7 @@ class DashboardController extends WebController
                         ->whereColumn('user_quote_id', 'user_quotes.id')
                 ])
                 ->find($id);
-            // return $quote;
-            // $transporter_message=Thread::with('messages')->where('friend_id',Auth::user()->id)->where('user_quote_id',$id)->first();
-// return $thread;
+           
             $quotes = QuoteByTransporter::where('user_quote_id', $id)
                 ->orderByRaw('(user_id = ?) DESC', [auth()->id()]) // Place matching user_id records at the top
                 ->orderByRaw('CAST(price AS UNSIGNED) ASC') // Then sort the rest by price
@@ -1482,9 +1480,13 @@ class DashboardController extends WebController
 
                 return $quote;
             });
-            // return $quotes;
-            // return ['quote' => $quote, 'quotebytransporters' => $quotes];
-            return view('transporter.dashboard.job_infromation', ['quote' => $quote, 'quotebytransporters' => $quotes]);
+            $scroll = $request->query('scroll');
+
+        return view('transporter.dashboard.job_infromation', [
+            'quote' => $quote,
+            'quotebytransporters' => $quotes,
+            'scroll' => $scroll // Pass scroll parameter to view
+        ]);
            
         } catch (\Exception $ex) {
             return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);

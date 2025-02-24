@@ -947,7 +947,7 @@ if (!$previousUrl || $previousUrl == url()->current()) {
                             </div>
                         </div>
 
-                        <div class="bid_wrapper">
+                        <div class="bid_wrapper" >
                             <h2 class="heading mb-0 mt-4 pt-md-5 pb-4">Quotes & Questions</h2>
                             @if ($quotebytransporters->isNotEmpty())
                                 <div class="accordion" id="accordionBids">
@@ -1791,4 +1791,20 @@ if (!$previousUrl || $previousUrl == url()->current()) {
             });
         });
     </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let scrollToElement = "{{ $scroll ?? '' }}"; // Get 'scroll' parameter from the backend
+
+        if (scrollToElement) {
+            let targetElement = document.querySelector("." + scrollToElement);
+            if (targetElement) {
+                setTimeout(() => {
+                    targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+                }, 500);
+            }
+        }
+    });
+</script>
+
+    
 @endsection
