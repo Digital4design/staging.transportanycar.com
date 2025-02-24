@@ -1040,12 +1040,12 @@ if (!$previousUrl || $previousUrl == url()->current()) {
                                                             <!--<button class="read-more">View More</button>-->
                                                             <!--<button class="show-less" style="display: none;">Show Less</button>-->
                                                             <div class="text-right mb-1">
-                                                                <a id="read-more" class="read-more mb-3">View more
+                                                                <a id="read-more" class="read-more">View more
                                                                     messages</a>
                                                             </div>
                                                             <div class="text-right mb-1 show-less" id="show-less"
                                                                 style="display: none;">
-                                                                <div class="mb-3">Show less</div>
+                                                                <div class="">Show less</div>
                                                             </div>
                                                         @endif
                                                     </div>
