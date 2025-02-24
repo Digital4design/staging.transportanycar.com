@@ -1045,7 +1045,7 @@ if (!$previousUrl || $previousUrl == url()->current()) {
                                                             </div>
                                                             <div class="text-right mb-1 show-less" id="show-less"
                                                                 style="display: none;">
-                                                                <div class="mb-3">Show Less</div>
+                                                                <div class="mb-3">Show less</div>
                                                             </div>
                                                         @endif
                                                     </div>
