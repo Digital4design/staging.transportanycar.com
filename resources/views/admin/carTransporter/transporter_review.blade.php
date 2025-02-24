@@ -8,6 +8,10 @@
         rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css" />
     <style>
+        #listResults_filter {
+            display: none;
+        }
+
         .lve_feed_btn {
             border: 1px solid #52D017;
             color: #fff;
@@ -75,6 +79,8 @@
             display: block;
         }
 
+        .leave_inner .form-group input[type="date"],
+        .leave_inner .form-group input[type="number"],
         .leave_inner .form-group input[type="text"],
         .leave_inner .form-group textarea {
             border: 2px solid #D9D9D9 !important;
@@ -91,21 +97,25 @@
             height: 111px;
         }
 
+        .leave_inner .form-group input[type="date"]::-webkit-input-placeholder,
         .leave_inner .form-group input[type="text"]::-webkit-input-placeholder,
         .leave_inner .form-group textarea::-webkit-input-placeholder {
             color: #C3C3C3;
         }
 
+        .leave_inner .form-group input[type="date"]::-moz-placeholder,
         .leave_inner .form-group input[type="text"]::-moz-placeholder,
         .leave_inner .form-group textarea::-moz-placeholder {
             color: #C3C3C3;
         }
 
+        .leave_inner .form-group input[type="date"]:-ms-input-placeholder,
         .leave_inner .form-group input[type="text"]:-ms-input-placeholder,
         .leave_inner .form-group textarea:-ms-input-placeholder {
             color: #C3C3C3;
         }
 
+        .leave_inner .form-group input[type="date"]:-moz-placeholder,
         .leave_inner .form-group input[type="text"]:-moz-placeholder,
         .leave_inner .form-group textarea:-moz-placeholder {
             color: #C3C3C3;
@@ -254,7 +264,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -324,8 +333,14 @@
                             </li>
                         </ul>
                         <div class="form-group">
-                            <input type="text" class="mb-2" placeholder="Name" id="first_name" name="first_name" />
+                            <input type="text" class="mb-2" placeholder="Name" id="first_name"
+                                name="first_name" />
                             <div class="text-danger" id="firstName"></div>
+                            <input type="text" class="mb-2" placeholder="Vehical Name" id="vehical_name"
+                                name="vehical_name" />
+                            <div class="text-danger" id="vehicalName"></div>
+                            <input type="date" class="mb-2" placeholder="Date" id="date" name="date" />
+                            <div class="text-danger" id="vehicalName"></div>
                             <textarea id="pos_comment" name="pos_comment" placeholder="Review"></textarea>
                             <div class="text-danger" id="commentError"></div>
                             <button class="lve_feed_btn mt-4">Submit</button>
@@ -349,8 +364,10 @@
                         @csrf
                         <input type="hidden" name="user_id" id="user_job_id">
                         <div class="form-group">
-                            <input type="text" class="mb-2" placeholder="Job completed no" name="job_completed" id ="job_completed" required/>
-                            <button class="jobCompleted_form mt-4">Submit</button>
+                            <input type="number" class="mb-2" placeholder="Job completed no" name="job_completed"
+                                id ="job_completed" required />
+                            <div class="text-danger" id="jobComplete"></div>
+                            <button class="jobCompleted_form lve_feed_btn mt-4">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -370,6 +387,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+            let baseUrl = "{{ url('/') }}"; // Define Laravel base URL in JavaScript
+
             oTable = $('#listResults').DataTable({
                 "processing": true,
                 "serverSide": true,
@@ -412,14 +431,19 @@
                         "sortable": false,
                         "render": function(data, type, row) {
                             return `
-                     <button class="btn btn-primary btn-sm showModelOne" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${row.id}" data-user-id="${row.user_id}" data-name="${row.name}"" data-content="${row.model_one_data}">
-                    Show Model 1
-                </button>
-
-                <button class="btn btn-warning btn-sm showModelTwo" data-bs-toggle="modal" data-bs-target="#jobCompleted" data-id="${row.id}" data-user-id="${row.user_id}" data-content="${row.model_two_data}">
-                    Show Model 2
-                </button>
-                `;
+                        <div class="wd-sl-modalbtn mb-0 text-start">  
+                            <a href="${baseUrl}/admin/carTransporter/review_show/${row.user_id}" 
+                                    class="btn btn-orange waves-effect waves-light">
+                                    View
+                            </a>
+                            <button class="btn btn-orange waves-effect waves-light showModelOne" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${row.id}" data-user-id="${row.user_id}" data-name="${row.name}"" data-content="${row.model_one_data}">
+                                Add Review
+                            </button>
+                            <button class="btn btn-orange waves-effect waves-light showModelTwo" data-bs-toggle="modal" data-bs-target="#jobCompleted" data-id="${row.id}" data-user-id="${row.user_id}" data-content="${row.model_two_data}">
+                                Add Jobs Completed
+                            </button>
+                        </div>
+                        `;
                         }
                     }
                 ]
@@ -437,9 +461,6 @@
                     $('#jobCompleted #user_job_id').val(userId); // Store user_id in the modal
 
                 }
-
-                // Show the modal
-                // $(this).data('bs.modal').show();
             });
 
             $(document).on('click', '.lve_feed_btn', function(e) {
@@ -449,18 +470,23 @@
                 let userId = $('#userId').val();
                 let rating = $('input[name="rating"]:checked').val(); // Get the selected rating
                 let comment = $('#pos_comment').val();
+                let Date = $('#date').val();
                 let firstName = $('#first_name').val(); // Get the first name
+                let vehicalName = $('#vehical_name').val();
 
                 // Clear previous error messages
                 $('#ratingError').text('');
                 $('#commentError').text('');
+
 
                 // Prepare the data to send in the AJAX request
                 let formData = {
                     user_id: userId,
                     rating: rating,
                     pos_comment: comment,
-                    first_name: firstName
+                    first_name: firstName,
+                    vehical_name: vehicalName,
+                    date: Date,
                 };
 
                 $.ajax({
@@ -471,36 +497,39 @@
                         if (response.success) {
                             $('#exampleModal').modal('hide'); // Close the modal
                             $('#pos_comment').val(''); // Clear the comment field
+                            $('#first_name').val('');
+                            $('#vehical_name').val('');
+                            $('#date').val('');
                             $('input[name="rating"]').prop('checked',
-                            false); // Deselect the rating
+                                false); // Deselect the rating
                         } else {
-                             if (response.errors.rating) {
+                            if (response.errors.rating) {
                                 $('#ratingError').text(response.errors.rating[0]);
                             }
                             if (response.errors.pos_comment) {
                                 $('#commentError').text(response.errors.pos_comment[0]);
                             }
-                            
+
                         }
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr
-                        .responseText); 
-                     }
+                            .responseText);
+                    }
                 });
             });
 
             $(document).on('click', '.jobCompleted_form', function(e) {
-                e.preventDefault(); 
+                e.preventDefault();
                 let userId = $('#user_job_id').val();
                 let jobCompleted = $('#job_completed').val();
-                let firstName = $('#first_name').val();
+                // let firstName = $('#first_name').val();
 
                 // Prepare the data to send in the AJAX request
                 let formData = {
                     user_id: userId,
                     job_Completed: jobCompleted,
-                    first_name:firstName
+                    // first_name:firstName
                 };
 
                 $.ajax({
@@ -509,27 +538,21 @@
                     data: formData,
                     success: function(response) {
                         if (response.success) {
-                            $('#jobCompleted').modal('hide'); 
+                            $('#jobCompleted').modal('hide');
                             oTable.ajax.reload();
-                            $('#pos_comment').val(''); // Clear the comment field
+                            $('#job_completed').val('');
                             $('input[name="rating"]').prop('checked',
-                            false); // Deselect the rating
+                                false); // Deselect the rating
                         } else {
-                             if (response.errors.rating) {
-                                $('#ratingError').text(response.errors.rating[0]);
-                            }
                             if (response.errors.pos_comment) {
-                                $('#firstName').text(response.errors.pos_comment[0]);
-                            }
-                            if (response.errors.first_name) {
-                                $('#firstName').text(response.errors.first_name[0]);
+                                $('#jobComplete').text(response.errors.job_completed[0]);
                             }
                         }
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr
-                        .responseText); 
-                     }
+                            .responseText);
+                    }
                 });
             });
         });

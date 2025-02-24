@@ -325,7 +325,7 @@ class DashboardController extends WebController
     {
         $user_data = Auth::guard('transporter')->user();
         $my_quotes = QuoteByTransporter::where('user_id', $user_data->id)->pluck('id');
-        $all_feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->get();
+        $all_feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->where('transporter_id',$user_data->id)->get();
         $feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->paginate(10);
         $total_feedbacks = $all_feedbacks->count();
 

@@ -1,20 +1,24 @@
-
 <style>
     .read-more {
         white-space: normal !important;
         max-width: 300px !important;
         word-wrap: break-word !important;
     }
+
     .user-feedback-stars li {
         padding: 0;
     }
 </style>
-<div class="overall-review py-3 py-md-5">
-    <h2 class="total-review">Reviews (<?php echo count($feedbacks); ?>)</h2>
-    {{-- <span class="total-rating my-2 d-block">{{ round($average_rating) }}/5</span> --}}
-    <span class="total-rating my-2 d-block">{{ number_format($average_rating, 0) }}/5</span>
-
-    @if (count($feedbacks) == 0)
+<div class="overall-review py-1 py-md-1 mb-3">
+    {{-- <h2 class="total-review">Reviews (<?php echo count($feedbacks); ?>)</h2>
+    <span class="total-rating my-2 d-block">{{ number_format($average_rating, 0) }}/5</span> --}}
+    @php
+        $total_stars = 5; // Total number of stars
+        $yellow_stars = floor($average_rating); // Full yellow stars
+        $half_star = $average_rating - $yellow_stars >= 0.5; // Check for a half-star
+        $grey_stars = $total_stars - $yellow_stars - ($half_star ? 1 : 0); // Remaining grey stars
+    @endphp
+    {{-- @if (count($feedbacks) == 0)
         <ul class="wd-star-lst user-feedback-stars">
             <li>
                 <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,14 +61,8 @@
             </li>
         </ul>
     @else
-        @php
-            $total_stars = 5; // Total number of stars
-            $yellow_stars = floor($average_rating); // Full yellow stars
-            $half_star = $average_rating - $yellow_stars >= 0.5; // Check for a half-star
-            $grey_stars = $total_stars - $yellow_stars - ($half_star ? 1 : 0); // Remaining grey stars
-        @endphp
+       
         <ul class="wd-star-lst user-feedback-stars">
-            {{-- Full yellow stars --}}
             @for ($i = 1; $i <= $yellow_stars; $i++)
                 <li>
                     <svg width="20" height="20" viewBox="0 0 12 12" fill="none"
@@ -76,7 +74,6 @@
                 </li>
             @endfor
 
-            {{-- Half star if applicable --}}
             @if ($half_star)
                 <li>
                     <svg width="20" height="20" viewBox="0 0 12 12" fill="none"
@@ -95,7 +92,6 @@
                 </li>
             @endif
 
-            {{-- Grey stars --}}
             @for ($i = 1; $i <= $grey_stars; $i++)
                 <li>
                     <svg width="20" height="20" viewBox="0 0 12 12" fill="none"
@@ -107,83 +103,30 @@
                 </li>
             @endfor
         </ul>
-    @endif
+    @endif --}}
+    {{-- <div class="total-review-count my-3"> <?php echo count($feedbacks); ?> Customer reviews</div> --}}
 
-    <div class="total-review-count my-3"> <?php echo count($feedbacks); ?> customer reviews</div>
+    <div class="total-review-count my-3"> Customer reviews</div>
     <ul class="review-count-bar">
-        <li>
-            <span class="review-steps">5</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 19" fill="none">
-                <path
-                    d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
-                    fill="#595959" />
-            </svg>
-            <div class="review-base-bar">
-                <div class="review-active-bar" style="width:{{ $ratings['star_5'] }}%">
+        @foreach([5, 4, 3, 2, 1] as $rating)
+            @php
+                $percentage = max(0, $ratings['star_'.$rating] ?? 0); // Prevent negative values
+            @endphp
+            <li>
+                <span class="review-steps">{{ $rating }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 19" fill="none">
+                    <path d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z" fill="#595959"/>
+                </svg>
+                <div class="review-base-bar">
+                    <div class="review-active-bar" style="width:{{ min(100, $percentage) }}%"></div>
                 </div>
-            </div>
-            <span class="review-percentage">{{ number_format($ratings['star_5'],0) }}%</span>
-        </li>
-        <li>
-            <span class="review-steps">4</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 19" fill="none">
-                <path
-                    d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
-                    fill="#595959" />
-            </svg>
-            <div class="review-base-bar">
-                <div class="review-active-bar" style="width:{{ $ratings['star_4'] }}%">
-
-                </div>
-            </div>
-            <span class="review-percentage">{{number_format($ratings['star_4'],0) }}%</span>
-        </li>
-        <li>
-            <span class="review-steps">3</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 19" fill="none">
-                <path
-                    d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
-                    fill="#595959" />
-            </svg>
-            <div class="review-base-bar">
-                <div class="review-active-bar" style="width:{{ $ratings['star_3'] }}%">
-
-                </div>
-            </div>
-            <span class="review-percentage">{{ number_format($ratings['star_3'],0) }}%</span>
-        </li>
-        <li>
-            <span class="review-steps">2</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 19" fill="none">
-                <path
-                    d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
-                    fill="#595959" />
-            </svg>
-            <div class="review-base-bar">
-                <div class="review-active-bar" style="width:{{ $ratings['star_2'] }}%">
-
-                </div>
-            </div>
-            <span class="review-percentage">{{number_format($ratings['star_2'],0) }}%</span>
-        </li>
-        <li>
-            <span class="review-steps">1</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 19"
-                fill="none">
-                <path
-                    d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
-                    fill="#595959" />
-            </svg>
-            <div class="review-base-bar">
-                <div class="review-active-bar" style="width:{{ $ratings['star_1'] }}%">
-
-                </div>
-            </div>
-            <span class="review-percentage">{{ number_format($ratings['star_1'],0) }}%</span>
-        </li>
+                <span class="review-percentage">{{ number_format($percentage, 0) }}%</span>
+            </li>
+        @endforeach
     </ul>
+    
 </div>
-<div class="review-outer-wrap">
+<div class="review-outer-wrap " >
     @foreach ($feedbacks as $feedback)
         <div class="review-wrap">
             <div class="feedback-user-name">
@@ -194,7 +137,7 @@
                         {{ $feedback->quote_by_transporter->quote->user->username ?? '' }}
                     @endif
                 @else
-                    {{$feedback->first_name}}
+                    {{ $feedback->first_name }}
                 @endif
             </div>
             <ul class="wd-star-lst user-feedback-stars other-reviews">
@@ -218,12 +161,12 @@
                     <span>Verified</span>
                 </div>
             </ul>
-            <div class="font-weight-light">{{ general_date($feedback->created_at) }}</div>
-            {{-- <div class="feedback-item">{{ $feedback->first_name }} </div>  --}}
+            <div class="font-weight-light">{{ general_date($feedback->date) }}</div>
+            <div class="feedback-item">{{ $feedback->vehical_name }} </div>
             {{-- <div class="feedback-item">{{ $feedback->quote_by_transporter->quote->vehicle_make }}
                 {{ $feedback->quote_by_transporter->quote->vehicle_model }}
             </div>  --}}
-            <div class="font-weight-light">{!! $feedback->comment ? readMoreHelper($feedback->comment, 50) : '-' !!}</div>
+            <div class="font-weight-light">{!! $feedback->comment ? readMoreHelper($feedback->comment, 200) : '-' !!}</div>
         </div>
     @endforeach
 </div>
@@ -244,8 +187,8 @@
             {{-- Pagination Elements --}}
             @for ($i = 1; $i <= $feedbacks->lastPage(); $i++)
                 @if ($i == $feedbacks->currentPage())
-                    <li class="page-item active" aria-current="page"><span
-                            class="page-link">{{ $i }}</span></li>
+                    <li class="page-item active" aria-current="page"><span class="page-link">{{ $i }}</span>
+                    </li>
                 @elseif ($i >= $feedbacks->currentPage() - 2 && $i <= $feedbacks->currentPage() + 2)
                     <li class="page-item"><a class="page-link"
                             href="{{ $feedbacks->url($i) }}">{{ $i }}</a></li>

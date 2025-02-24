@@ -2,6 +2,39 @@
 
 @section('head_css')
     <style>
+        @keyframes slideDown {
+            from {
+                transform: translateY(-10%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+        }
+
+        .modal.custom-slide .modal-dialog {
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .modal.custom-slide.hide .modal-dialog {
+            animation: slideUp 0.5s ease-in;
+        }
+
+        #show-less,
         #read-more {
             font-size: 14px;
             line-height: 18px;
@@ -9,7 +42,8 @@
             color: #5b5b5b;
             cursor: pointer;
         }
-
+        
+        #show-less:hover,
         #read-more:hover {
             color: #006DF0;
         }
@@ -44,7 +78,10 @@
             box-shadow: none;
         }
 
-        .view_message[data-target="#bidCollapse0"] {
+        /* .view_message[data-target="#bidCollapse0"] {
+                background-color: #0356D6;
+            } */
+        .view_message.login-user-button {
             background-color: #0356D6;
         }
 
@@ -362,13 +399,13 @@
             padding: 10px 0;
         }
 
-        .modal-content,
-        #caption {
-            -webkit-animation-name: zoom;
-            -webkit-animation-duration: 0.6s;
-            animation-name: zoom;
-            animation-duration: 0.6s;
-        }
+        /* .modal-content, */
+        /* #caption {
+                -webkit-animation-name: zoom;
+                -webkit-animation-duration: 0.6s;
+             animation-name: zoom;
+                animation-duration: 0.6s;
+            } */
 
         @-webkit-keyframes zoom {
             from {
@@ -681,30 +718,32 @@
                         <div class="row align-items-center">
                             <div class="col-7 mb-3 pl-0 pl-md-3">
                                 <div class="back_btn row mx-0 align-items-center">
-                                    <a href="javascript:history.back()" class="d-flex flex-wrap align-items-center">
-                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                                            <g opacity="0.5">
-                                                <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </g>
-                                        </svg>
-                                        Back to  @php
-                                            $previousUrl = url()->previous(); // Get the previous URL
-
-                                        @endphp
-
-
-                                        @if (Str::contains(parse_url($previousUrl, PHP_URL_PATH), route('transporter.savedFindJobResults', [], false)))
-                                            Saved Jobs
-                                        @elseif($previousUrl == route('transporter.new_jobs_new'))
-                                            Find Jobs
-                                        @elseif($previousUrl == route('transporter.watchlist.index'))
-                                            Watchlist
-                                        @else
-                                           find jobs
-                                        @endif 
-                                    </a>
+                                    @php
+                                    $previousUrl = url()->previous();
+                                
+                                    // If there's no previous URL (like when coming from an email), set default
+                                    if (!$previousUrl || $previousUrl == url()->current()) {
+                                        $previousUrl = route('transporter.new_jobs_new');
+                                    }
+                                @endphp
+                                
+                                <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
+                                    <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                        <g opacity="0.5">
+                                            <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </g>
+                                    </svg>
+                                    Back to 
+                                    @if (Str::contains(parse_url($previousUrl, PHP_URL_PATH), route('transporter.savedFindJobResults', [], false)))
+                                        Saved Jobs
+                                    @elseif($previousUrl == route('transporter.new_jobs_new'))
+                                        Find Jobs
+                                    @elseif($previousUrl == route('transporter.watchlist.index'))
+                                        Watchlist
+                                    @else
+                                        Find Jobs
+                                    @endif
+                                </a>
                                 </div>
                             </div>
                             <div class="col-5 date mb-3 pr-0 pr-md-3 text-right">
@@ -950,15 +989,17 @@
                                                 <div class="d-flex flex-wrap align-items-center">
                                                     <div>
                                                         <div class="bidder_bid">
-                                                            {{ $key == 0 ? 'Your bid' : 'Current bid' }}:
+                                                            {{ $transporter->getTransporters->id === Auth::user()->id ? 'Your bid' : 'Current bid' }}:
                                                             <span>£{{ round($transporter->transporter_payment) }}</span>
                                                         </div>
-                                                        <button class="btn view_message" type="button"
-                                                            data-toggle="collapse"
+
+                                                        <button
+                                                            class="btn view_message {{ $transporter->getTransporters->id === Auth::user()->id ? 'login-user-button' : '' }}"
+                                                            type="button" data-toggle="collapse"
                                                             data-target="#bidCollapse{{ $key }}"
                                                             aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
                                                             aria-controls="bidCollapse{{ $key }}">
-                                                            {{ $key == 0 ? 'Your messages' : 'View messages' }}
+                                                            {{ $transporter->getTransporters->id === Auth::user()->id ? 'Your messages' : 'View messages' }}
                                                             <span
                                                                 class="message_count">{{ $transporter->count_messages }}</span>
                                                         </button>
@@ -997,8 +1038,9 @@
                                                         <div class="text-right mb-1">
                                                             <a id="read-more" class=" mb-3">View more messages</a>
                                                         </div>
-                                                        {{-- <div id="show-less" class="mb-3"
-                                                        style="display: none;">Show Less</div> --}}
+                                                        <div class="text-right mb-1">
+                                                            <div id="show-less" class="mb-3 hidden">Show Less</div> 
+                                                        </div>
                                                     @endif
                                                     @if ($key == '0')
                                                         @if (Auth::user() && Auth::user()->id == $transporter->getTransporters->id)
@@ -1077,9 +1119,9 @@
             </div>
         </div>
     </div>
-    <div class="modal get_quote fade" id="quote" tabindex="-1" role="dialog"
+    <div class="modal get_quote fade custom-slide" id="quote" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog  modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle"> Place your bid</h5>
@@ -1181,22 +1223,22 @@
     </div>
 
     <!-- <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <span class="close">&times;</span>
-                        <img id="img01" class="img-fluid" />
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <span class="close">&times;</span>
+                            <img id="img01" class="img-fluid" />
 
-                        <div id="caption"></div>
+                            <div id="caption"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div> -->
+            </div> -->
     {{-- EDIT  --}}
-    <div class="modal get_quote fade" id="quoteEdit" tabindex="-1" role="dialog"
+    <div class="modal get_quote fade custom-slide" id="quoteEdit" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog  modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle"> Edit bid</h5>
@@ -1724,19 +1766,19 @@
                 // If all messages are shown, hide "Read More" and show "Show Less"
                 if (hiddenMessages.filter(':hidden').length === 0) {
                     $(this).hide();
-                    // $('#show-less').show();
+                    $('#show-less').show();
                 }
             });
 
             // On clicking "Show Less"
-            // $('#show-less').on('click', function() {
-            //     // Hide all messages except the first batch
-            //     hiddenMessages.slice(messagesToShow).slideUp();
+            $('#show-less').on('click', function() {
+                // Hide all messages except the first batch
+                hiddenMessages.slice(messagesToShow).slideUp();
 
-            //     // Show "Read More" and hide "Show Less"
-            //     $('#read-more').show();
-            //     $(this).hide();
-            // });
+                // Show "Read More" and hide "Show Less"
+                $('#read-more').show();
+                $(this).hide();
+            });
         });
     </script>
 @endsection

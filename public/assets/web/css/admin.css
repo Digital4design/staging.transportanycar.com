@@ -3184,7 +3184,7 @@ a.chat_cross {
   border-radius: 5px;
   background: #fff;
   /* height: calc(100vh - 172px); */
-  height: calc(100vh - 80px);
+  /* height: calc(100vh - 80px); */
 }
 
 .wd-deliver-lft {

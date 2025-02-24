@@ -1835,7 +1835,7 @@
                                                                             fill="#52D017"></path>
                                                                     </svg>
                                                                 </i>
-                                                                <span>{{ $quote->pickup_postcode ? hidePostcode(get_last_two_parts($quote->pickup_postcode)) : '-' }}</span>
+                                                                <span class="text-decoration-none">{{ $quote->pickup_postcode ? hidePostcode(get_last_two_parts($quote->pickup_postcode)) : '-' }}</span>
                                                             </li>
 
                                                             <li>
@@ -1848,7 +1848,7 @@
                                                                             fill="#ED1C24"></path>
                                                                     </svg>
                                                                 </i>
-                                                                <span>{{ $quote->drop_postcode ? hidePostcode(get_last_two_parts($quote->drop_postcode)) : '-' }}</span>
+                                                                <span class="text-decoration-none">{{ $quote->drop_postcode ? hidePostcode(get_last_two_parts($quote->drop_postcode)) : '-' }}</span>
                                                             </li>
                                                         </ul>
                                                     </div>

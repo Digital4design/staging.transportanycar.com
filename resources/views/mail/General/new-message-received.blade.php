@@ -30,7 +30,7 @@
             @endif
             delivery.
         </p>
-        <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 25px; margin-bottom:25px;">If you need any help or have any questions please contact our team on <a href="tel:08081557979">0808 155 7979</a> or email us <a href="mailto:support@transportanycar.com">support@transportanycar.com</a>.</p>
+        {{-- <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 25px; margin-bottom:25px;">If you need any help or have any questions please contact our team on <a href="tel:08081557979">0808 155 7979</a> or email us <a href="mailto:support@transportanycar.com">support@transportanycar.com</a>.</p> --}}
         <div class="message-wrap" style="font-family: 'Outfit', sans-serif; background-color: #f1f1f1; padding-top: 40px; padding-bottom: 40px; padding-left: 40px; padding-right: 40px; text-align: center;">
             <p class="message-title" style="font-family: 'Outfit', sans-serif;font-size: 20px; line-height: 24px; font-weight: 500; margin-bottom: 10px; text-align: left;">
                 {{ $data['user']->username }} 
@@ -116,7 +116,7 @@
                 </a>
             @else
                 <a 
-                href="{{ route('transporter.job_information', $data['quotes']->id) }}" 
+                href="{{ route($data['main_url'], $data['quotes']->id) }}" 
                 target="_blank"
                     style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#52d017;border-radius:2px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:5px;padding-bottom:5px;font-family:'Montserrat', sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;">
                     <span

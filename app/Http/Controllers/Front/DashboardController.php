@@ -286,71 +286,78 @@ class DashboardController extends WebController
         return view('front.dashboard.feedback_view', $params)->with('quote', $quote);
     }
 
+
     public function feedback_listing($transporter_id)
     {
         // $my_quotes = QuoteByTransporter::where('user_id', $transporter_id)->pluck('id');
         // $all_feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->get();
         // $feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->paginate(10);
         // return"yesssssssssssss";
-        $all_feedbacks = Feedback::where('transporter_id',  $transporter_id)->get();
-        //  return  $all_feedbacks;
-        $feedbacks = Feedback::where('transporter_id', $transporter_id)->paginate(10);
-        $total_feedbacks = $all_feedbacks->count();
-
-        $total_feedbacks = $feedbacks->count();
-
-
-        $ratings = collect([5, 4, 3, 2, 1])->mapWithKeys(function ($rating) use ($all_feedbacks, $total_feedbacks) {
-            $count = $all_feedbacks->where('rating', $rating)->count();
-            $percentage = $total_feedbacks > 0 ? ($count / $total_feedbacks) * 100 : 0;
-            return ['star_' . $rating  =>  $percentage];
-        });
-
-        $average_rating = $total_feedbacks > 0 ? round($all_feedbacks->avg('rating'), 1) : 0;
-        $params['html'] = view('front.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings', 'average_rating'))->render();
+        $all_feedbacks = Feedback::where('transporter_id', $transporter_id)
+        ->where('quote_by_transporter_id', null)
+        ->get();
+    
+    $feedbacks = Feedback::where('transporter_id', $transporter_id)
+        ->where('quote_by_transporter_id', null)
+        ->paginate(10);
+    
+    $total_feedbacks = $all_feedbacks->count(); // Correct total count
+    
+    // Calculate rating percentages
+    $ratings = collect([5, 4, 3, 2, 1])->mapWithKeys(function ($rating) use ($all_feedbacks, $total_feedbacks) {
+        $count = $all_feedbacks->where('rating', $rating)->count();
+        $percentage = $total_feedbacks > 0 ? round(($count / $total_feedbacks) * 100, 1) : 0;
+        return ['star_' . $rating  =>  $percentage];
+    });
+    
+    // Ensure total percentage sums exactly to 100%
+    $totalPercentage = array_sum($ratings->toArray());
+    
+    if ($totalPercentage !== 100) {
+        $difference = 100 - $totalPercentage; // Calculate how much to adjust
+    
+        // Find the largest rating percentage to adjust it
+        $highestKey = collect($ratings)->sortDesc()->keys()->first();
+    
+        // Apply adjustment while preventing negative values
+        if (isset($ratings[$highestKey])) {
+            $ratings[$highestKey] = max(0, $ratings[$highestKey] + $difference);
+        }
+    }
+    
+    // Calculate the average rating
+    $average_rating = $total_feedbacks > 0 ? round($all_feedbacks->avg('rating'), 1) : 0;
+    
+    // Render the feedback listing view
+    $params['html'] = view('front.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings', 'average_rating'))->render();
+    
         return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $params]);
     }
 
     private function get_transporter_feedback($transporter_id)
     {
         $user_data = user::find($transporter_id);
-        // dd($user_data);
-        // $my_quotes = QuoteByTransporter::where('user_id', $transporter_id)->pluck('id');
+        // $quoteBytransporter = QuoteByTransporter::where('user_id', $user_data->id)->get();
+        // $userQuote = UserQuote::whereIn('id', $quoteBytransporter->pluck('user_quote_id'))->get();
+        // $total_distance = UserQuote::whereIn('id', $quoteBytransporter->where('status', 'accept')->pluck('user_quote_id')->toArray())
+        //     ->sum('distance');
+        // $totalDistance = $total_distance >= 1000 ? round($total_distance / 1000, 1) . 'K' : round($total_distance, 1);
+        // $my_quotes = $quoteBytransporter->pluck('id');
         // $quotes = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)->get();
-
-        // $totalDistance = $quotes->sum(function ($transaction) {
-        //     if ($transaction->quote) {
-        //         $distanceString = $transaction->quote->distance;
-        //         $cleanedDistance = str_replace(['mi', ',', ' '], '', $distanceString);
-        //         return is_numeric($cleanedDistance) ? (float)$cleanedDistance : 0;
-        //     }
-        //     return 0;
-        // });
-
-        $quoteBytransporter = QuoteByTransporter::where('user_id', $user_data->id)->get();
-        $userQuote = UserQuote::whereIn('id', $quoteBytransporter->pluck('user_quote_id'))->get();
-        $total_distance = UserQuote::whereIn('id', $quoteBytransporter->where('status', 'accept')->pluck('user_quote_id')->toArray())
-            ->sum('distance');
-        $totalDistance = $total_distance >= 1000 ? round($total_distance / 1000, 1) . 'K' : round($total_distance, 1);
-        $my_quotes = $quoteBytransporter->pluck('id');
-        $quotes = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)->get();
         // $totalDistanceFormatted =  number_format((float)$totalDistance, 0);;
-        $completedCount = $userQuote->where('status', 'completed')->count();
+        // $completedCount = $userQuote->where('status', 'completed')->count();
 
-        $total_earning = $quoteBytransporter->where('status', 'accept')->whereIn('user_quote_id', $userQuote->where('status', 'completed')->pluck('id')->toArray())->sum('transporter_payment');
+        // $total_earning = $quoteBytransporter->where('status', 'accept')->whereIn('user_quote_id', $userQuote->where('status', 'completed')->pluck('id')->toArray())->sum('transporter_payment');
 
-        $totalDistanceFormatted = $total_distance >= 1000
-            ? round($total_distance / 1000, 1) . 'K'
-            : number_format($total_distance, 1);
-        // $completedCount = $quotes->filter(function ($transaction) {
-        //     return $transaction->quote && $transaction->quote->status == 'completed';
-        // })->count();
+        // $totalDistanceFormatted = $total_distance >= 1000
+        //     ? round($total_distance / 1000, 1) . 'K'
+        //     : number_format($total_distance, 1);
 
-        // $total_earning = $quotes->sum('amount');
 
-        $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
-            ->whereNotNull('rating')
+        $rating_average = Feedback::where('transporter_id', $transporter_id)->where('quote_by_transporter_id', null)
+            // ->whereNotNull('rating')
             ->avg('rating');
+        // return $rating_average;
         $percentage = 0;
         if ($rating_average !== null) {
             $percentage = ($rating_average / 5) * 100;
@@ -359,23 +366,72 @@ class DashboardController extends WebController
         $company_details = CompanyDetail::where('user_id', $transporter_id)->first();
 
         $params['user'] = $user_data;
-        $params['feedback'] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->with('quote_by_transporter.quote')->get();
-        $params['completed_job'] =  $completedCount;
-        $params['distance'] = $totalDistanceFormatted;
-        $params['total_earning'] = $total_earning;
+        $params['feedback'] = Feedback::where('transporter_id', $transporter_id)->where('quote_by_transporter_id', null)->get();
+        $params['completed_job'] =  $user_data->completed_job;
+        // $params['distance'] = $totalDistanceFormatted;
         $params['company_details'] = $company_details;
         $params['rating_percentage'] = $percentage;
         $params['rating_average']  = $rating_average;
 
 
-        $customRequest = new Request([
-            'type' => 'feedback'
-        ]);
+        // $customRequest = new Request([
+        //     'type' => 'feedback'
+        // ]);
 
         // Call notificationStatus with the custom request
-        $this->notificationStatus($customRequest);
+        // $this->notificationStatus($customRequest);
         return $params;
     }
+
+
+    // private function get_transporter_feedback($transporter_id)
+    // {
+    //     $user_data = user::find($transporter_id);
+    //     $quoteBytransporter = QuoteByTransporter::where('user_id', $user_data->id)->get();
+    //     $userQuote = UserQuote::whereIn('id', $quoteBytransporter->pluck('user_quote_id'))->get();
+    //     $total_distance = UserQuote::whereIn('id', $quoteBytransporter->where('status', 'accept')->pluck('user_quote_id')->toArray())
+    //         ->sum('distance');
+    //     $totalDistance = $total_distance >= 1000 ? round($total_distance / 1000, 1) . 'K' : round($total_distance, 1);
+    //     $my_quotes = $quoteBytransporter->pluck('id');
+    //     $quotes = TransactionHistory::whereIn('quote_by_transporter_id', $my_quotes)->get();
+    //     // $totalDistanceFormatted =  number_format((float)$totalDistance, 0);;
+    //     $completedCount = $userQuote->where('status', 'completed')->count();
+
+    //     $total_earning = $quoteBytransporter->where('status', 'accept')->whereIn('user_quote_id', $userQuote->where('status', 'completed')->pluck('id')->toArray())->sum('transporter_payment');
+
+    //     $totalDistanceFormatted = $total_distance >= 1000
+    //         ? round($total_distance / 1000, 1) . 'K'
+    //         : number_format($total_distance, 1);
+
+
+    //     $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+    //         ->whereNotNull('rating')
+    //         ->avg('rating');
+    //     $percentage = 0;
+    //     if ($rating_average !== null) {
+    //         $percentage = ($rating_average / 5) * 100;
+    //     }
+
+    //     $company_details = CompanyDetail::where('user_id', $transporter_id)->first();
+
+    //     $params['user'] = $user_data;
+    //     $params['feedback'] = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->with('quote_by_transporter.quote')->get();
+    //     $params['completed_job'] =  $completedCount;
+    //     $params['distance'] = $totalDistanceFormatted;
+    //     $params['total_earning'] = $total_earning;
+    //     $params['company_details'] = $company_details;
+    //     $params['rating_percentage'] = $percentage;
+    //     $params['rating_average']  = $rating_average;
+
+
+    //     $customRequest = new Request([
+    //         'type' => 'feedback'
+    //     ]);
+
+    //     // Call notificationStatus with the custom request
+    //     $this->notificationStatus($customRequest);
+    //     return $params;
+    // }
 
     public function userDeposit($id)
     {
@@ -487,8 +543,8 @@ class DashboardController extends WebController
         // return $quotes;
 
         $quotes = $quotes->map(function ($quote) {
-            $my_quotes = QuoteByTransporter::where('user_id', $quote->user_id)->pluck('id');
-            $rating_average = Feedback::whereIn('quote_by_transporter_id', $my_quotes)
+            // $my_quotes = QuoteByTransporter::where('user_id', $quote->user_id)->pluck('id');
+            $rating_average = Feedback::where('quote_by_transporter_id', null)->where('transporter_id', $quote->user_id)
                 ->whereNotNull('rating')
                 ->avg('rating');
             $percentage = $rating_average !== null ? ($rating_average / 5) * 100 : 0;
