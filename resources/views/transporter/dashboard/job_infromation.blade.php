@@ -42,7 +42,7 @@
             color: #5b5b5b;
             cursor: pointer;
         }
-        
+
         #show-less:hover,
         #read-more:hover {
             color: #006DF0;
@@ -79,8 +79,8 @@
         }
 
         /* .view_message[data-target="#bidCollapse0"] {
-                background-color: #0356D6;
-            } */
+                    background-color: #0356D6;
+                } */
         .view_message.login-user-button {
             background-color: #0356D6;
         }
@@ -401,11 +401,11 @@
 
         /* .modal-content, */
         /* #caption {
-                -webkit-animation-name: zoom;
-                -webkit-animation-duration: 0.6s;
-             animation-name: zoom;
-                animation-duration: 0.6s;
-            } */
+                    -webkit-animation-name: zoom;
+                    -webkit-animation-duration: 0.6s;
+                 animation-name: zoom;
+                    animation-duration: 0.6s;
+                } */
 
         @-webkit-keyframes zoom {
             from {
@@ -719,31 +719,33 @@
                             <div class="col-7 mb-3 pl-0 pl-md-3">
                                 <div class="back_btn row mx-0 align-items-center">
                                     @php
-                                    $previousUrl = url()->previous();
-                                
-                                    // If there's no previous URL (like when coming from an email), set default
-                                    if (!$previousUrl || $previousUrl == url()->current()) {
-                                        $previousUrl = route('transporter.new_jobs_new');
-                                    }
-                                @endphp
-                                
-                                <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
-                                    <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                                        <g opacity="0.5">
-                                            <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </g>
-                                    </svg>
-                                    Back to 
-                                    @if (Str::contains(parse_url($previousUrl, PHP_URL_PATH), route('transporter.savedFindJobResults', [], false)))
-                                        Saved Jobs
-                                    @elseif($previousUrl == route('transporter.new_jobs_new'))
-                                        Find Jobs
-                                    @elseif($previousUrl == route('transporter.watchlist.index'))
-                                        Watchlist
-                                    @else
-                                        Find Jobs
-                                    @endif
-                                </a>
+                                        $previousUrl = url()->previous();
+
+                                        // If there's no previous URL (like when coming from an email), set default
+if (!$previousUrl || $previousUrl == url()->current()) {
+    $previousUrl = route('transporter.new_jobs_new');
+                                        }
+                                    @endphp
+
+                                    <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
+                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                            <g opacity="0.5">
+                                                <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </g>
+                                        </svg>
+                                        Back to
+                                        @if (Str::contains(parse_url($previousUrl, PHP_URL_PATH), route('transporter.savedFindJobResults', [], false)))
+                                            Saved Jobs
+                                        @elseif($previousUrl == route('transporter.new_jobs_new'))
+                                            Find Jobs
+                                        @elseif($previousUrl == route('transporter.watchlist.index'))
+                                            Watchlist
+                                        @else
+                                            Find Jobs
+                                        @endif
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-5 date mb-3 pr-0 pr-md-3 text-right">
@@ -1011,37 +1013,43 @@
                                                 class="collapse {{ $key == 0 ? 'show' : '' }}"
                                                 aria-labelledby="bid{{ $key }}" data-parent="#accordionBids">
                                                 <div class="card-body">
-                                                    @foreach ($transporter->messages as $set => $message)
-                                                        {{-- <div class="message-info @if ($set >= 2) hidden-message @endif"
-                                                            @if ($set >= 2) style="display: none;" @endif> --}}
-                                                        <div class="message-info @if ($set < $transporter->messages->count() - 2) hidden-message @endif"
-                                                            @if ($set < $transporter->messages->count() - 2) style="display: none;" @endif>
 
-                                                            <p>
-                                                                @if ($message->sender->type == 'car_transporter')
-                                                                    @if ($message->sender->id === Auth::user()->id)
-                                                                        <span>You</span>
+                                                    <div class="message-container">
+                                                        @foreach ($transporter->messages as $set => $message)
+                                                            <div class="message-info @if ($set < $transporter->messages->count() - 2) hidden-message @endif"
+                                                                @if ($set < $transporter->messages->count() - 2) style="display: none;" @endif>
+                                                                <p>
+                                                                    @if ($message->sender->type == 'car_transporter')
+                                                                        @if ($message->sender->id === Auth::user()->id)
+                                                                            <span>You</span>
+                                                                        @else
+                                                                            <span>{{ $message->sender->username }}</span>
+                                                                        @endif
                                                                     @else
-                                                                        <span>{{ $message->sender->username }}</span>
+                                                                        <span>User</span>
                                                                     @endif
-                                                                @else
-                                                                    <span>User</span>
-                                                                @endif
-                                                                sent on
-                                                                {{ $message->created_at->format('d/m') }} at
-                                                                {{ $message->created_at->format('H:i') }}
-                                                            </p>
-                                                            <p>{{ $message->message }}</p>
-                                                        </div>
-                                                    @endforeach
-                                                    @if ($transporter->messages->count() > 2)
-                                                        <div class="text-right mb-1">
-                                                            <a id="read-more" class=" mb-3">View more messages</a>
-                                                        </div>
-                                                        <div class="text-right mb-1">
-                                                            <div id="show-less" class="mb-3 hidden">Show Less</div> 
-                                                        </div>
-                                                    @endif
+                                                                    sent on {{ $message->created_at->format('d/m') }} at
+                                                                    {{ $message->created_at->format('H:i') }}
+                                                                </p>
+                                                                <p>{{ $message->message }}</p>
+                                                            </div>
+                                                        @endforeach
+
+                                                        {{-- Buttons for each message-container --}}
+                                                        @if ($transporter->messages->count() > 2)
+                                                            <!--<button class="read-more">View More</button>-->
+                                                            <!--<button class="show-less" style="display: none;">Show Less</button>-->
+                                                            <div class="text-right mb-1">
+                                                                <a id="read-more" class="read-more mb-3">View more
+                                                                    messages</a>
+                                                            </div>
+                                                            <div class="text-right mb-1 show-less" id="show-less"
+                                                                style="display: none;">
+                                                                <div class="mb-3">Show Less</div>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+
                                                     @if ($key == '0')
                                                         @if (Auth::user() && Auth::user()->id == $transporter->getTransporters->id)
                                                             <form id="chat__form_{{ $key }}"
@@ -1223,18 +1231,18 @@
     </div>
 
     <!-- <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <span class="close">&times;</span>
-                            <img id="img01" class="img-fluid" />
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <span class="close">&times;</span>
+                                <img id="img01" class="img-fluid" />
 
-                            <div id="caption"></div>
+                                <div id="caption"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div> -->
+                </div> -->
     {{-- EDIT  --}}
     <div class="modal get_quote fade custom-slide" id="quoteEdit" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -1421,14 +1429,14 @@
         }
 
         $(document).ready(function() {
-            fetch_data(1);
+            // fetch_data(1);
         });
 
         $(document).on('click', '.pagination a', function(event) {
             event.preventDefault();
             var page = $(this).attr('href').split('page=')[1];
             $('#page').val(page);
-            fetch_data(page);
+            // fetch_data(page);
         });
 
         $(document).ready(function() {
@@ -1756,28 +1764,30 @@
     </script>
     <script>
         $(document).ready(function() {
-            const messagesToShow = 2; // Number of messages to toggle per action
-            const hiddenMessages = $('.hidden-message'); // Select all hidden messages
+            const messagesToShow = 2; // Number of messages to keep visible when hiding
 
-            // On clicking "Read More"
-            $('#read-more').on('click', function() {
-                // Show the next batch of hidden messages
-                hiddenMessages.filter(':hidden').slice().slideDown();
-                // If all messages are shown, hide "Read More" and show "Show Less"
-                if (hiddenMessages.filter(':hidden').length === 0) {
-                    $(this).hide();
-                    $('#show-less').show();
-                }
-            });
+            $('.message-container').each(function() {
+                let messageContainer = $(this);
+                let hiddenMessages = messageContainer.find(
+                '.hidden-message'); // Find hidden messages in this row
+                let readMoreBtn = messageContainer.find('.read-more'); // "View More" button
+                let showLessBtn = messageContainer.find('.show-less'); // "Show Less" button
 
-            // On clicking "Show Less"
-            $('#show-less').on('click', function() {
-                // Hide all messages except the first batch
-                hiddenMessages.slice(messagesToShow).slideUp();
+                // On clicking "Read More"
+                readMoreBtn.on('click', function() {
+                    hiddenMessages.slideDown(); // Show all hidden messages in this row
+                    $(this).hide(); // Hide "View More" button
+                    showLessBtn.show(); // Show "Show Less" button
+                });
 
-                // Show "Read More" and hide "Show Less"
-                $('#read-more').show();
-                $(this).hide();
+                // On clicking "Show Less"
+                showLessBtn.on('click', function() {
+                    // Hide all messages except the last two
+                    messageContainer.find('.message-info').slice(0, -messagesToShow).slideUp();
+
+                    readMoreBtn.show(); // Show "Read More" button
+                    $(this).hide(); // Hide "Show Less" button
+                });
             });
         });
     </script>
