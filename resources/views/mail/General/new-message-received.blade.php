@@ -116,13 +116,13 @@
                 </a>
             @else
                 <a 
-                href="{{ route($data['main_url'], $data['quotes']->id) }}?scroll_to=bid_wrapper"
+href="{{ url('transporter/job-info/'.$data['quotes']->id.'?scroll=bid_wrapper') }}"
                 target="_blank"
                     style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#52d017;border-radius:2px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:5px;padding-bottom:5px;font-family:'Montserrat', sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;">
                     <span
                         style="padding-left:25px;padding-right:25px;font-size:16px;display:inline-block;letter-spacing:normal;">
                         <span style="word-break: break-word; line-height: 32px;">
-                            <strong>Reply
+                            <strong>Reply22
                                 <svg width="22" height="18" viewBox="0 0 22 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path

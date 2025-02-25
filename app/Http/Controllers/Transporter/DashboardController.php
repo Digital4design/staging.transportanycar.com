@@ -1480,7 +1480,7 @@ class DashboardController extends WebController
 
                 return $quote;
             });
-            $scroll = $request->query('scroll');
+            $scroll = $request->has('scroll') ? $request->query('scroll') : null;
 
         return view('transporter.dashboard.job_infromation', [
             'quote' => $quote,

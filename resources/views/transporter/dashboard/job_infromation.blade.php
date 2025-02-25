@@ -1792,9 +1792,10 @@ if (!$previousUrl || $previousUrl == url()->current()) {
         });
     </script>
   <script>
+   <script>
     document.addEventListener("DOMContentLoaded", function () {
-        let scrollToElement = "{{ $scroll ?? '' }}"; // Get 'scroll' parameter from the backend
-
+        let scrollToElement = "{{ $scroll ?? '' }}"; // Get scroll parameter
+      alert('scrollToElement',scrollToElement);
         if (scrollToElement) {
             let targetElement = document.querySelector("." + scrollToElement);
             if (targetElement) {
@@ -1805,6 +1806,5 @@ if (!$previousUrl || $previousUrl == url()->current()) {
         }
     });
 </script>
-
     
 @endsection
