@@ -79,8 +79,8 @@
         }
 
         /* .view_message[data-target="#bidCollapse0"] {
-                    background-color: #0356D6;
-                } */
+                        background-color: #0356D6;
+                    } */
         .view_message.login-user-button {
             background-color: #0356D6;
         }
@@ -401,11 +401,11 @@
 
         /* .modal-content, */
         /* #caption {
-                    -webkit-animation-name: zoom;
-                    -webkit-animation-duration: 0.6s;
-                 animation-name: zoom;
-                    animation-duration: 0.6s;
-                } */
+                        -webkit-animation-name: zoom;
+                        -webkit-animation-duration: 0.6s;
+                     animation-name: zoom;
+                        animation-duration: 0.6s;
+                    } */
 
         @-webkit-keyframes zoom {
             from {
@@ -716,37 +716,42 @@
                     <div class="wd-white-box">
 
                         <div class="row align-items-center">
-                            <div class="col-7 mb-3 pl-0 pl-md-3">
-                                <div class="back_btn row mx-0 align-items-center">
-                                    @php
-                                        $previousUrl = url()->previous();
-
-                                        // If there's no previous URL (like when coming from an email), set default
-if (!$previousUrl || $previousUrl == url()->current()) {
-    $previousUrl = route('transporter.new_jobs_new');
-                                        }
-                                    @endphp
-
-                                    <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
-                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                                            <g opacity="0.5">
-                                                <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </g>
-                                        </svg>
-                                        Back to
-                                        @if (Str::contains(parse_url($previousUrl, PHP_URL_PATH), route('transporter.savedFindJobResults', [], false)))
-                                            Saved Jobs
-                                        @elseif($previousUrl == route('transporter.new_jobs_new'))
-                                            Find Jobs
-                                        @elseif($previousUrl == route('transporter.watchlist.index'))
-                                            Watchlist
-                                        @else
-                                            Find Jobs
-                                        @endif
-                                    </a>
-                                </div>
+                            <div class="back_btn row mx-0 align-items-center">
+                                @php
+                                    $previousUrl = url()->previous();
+                                    $currentUrl = url()->current();
+                                    $defaultRoute = route('transporter.new_jobs_new');
+                            
+                                    // Ensure previous URL is valid and not the same as current
+                                    if (!$previousUrl || $previousUrl == $currentUrl) {
+                                        $previousUrl = $defaultRoute;
+                                    }
+                            
+                                    // Get only the path (without domain)
+                                    $previousPath = parse_url($previousUrl, PHP_URL_PATH);
+                                    $savedJobsPath = parse_url(route('transporter.savedFindJobResults', [], false), PHP_URL_PATH);
+                                    $watchlistPath = parse_url(route('transporter.watchlist.index', [], false), PHP_URL_PATH);
+                                @endphp
+                            
+                                <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
+                                    <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                        <g opacity="0.5">
+                                            <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </g>
+                                    </svg>
+                                    Back to
+                                    @if ($previousPath === $savedJobsPath)
+                                        Saved Jobs
+                                    @elseif ($previousPath === parse_url($defaultRoute, PHP_URL_PATH))
+                                        Find Jobs
+                                    @elseif ($previousPath === $watchlistPath)
+                                        Watchlist
+                                    @else
+                                        Find Jobs
+                                    @endif
+                                </a>
+                           
                             </div>
                             <div class="col-5 date mb-3 pr-0 pr-md-3 text-right">
                                 Posted {{ getTimeAgo($quote->created_at->toDateTimeString()) }}
@@ -947,7 +952,7 @@ if (!$previousUrl || $previousUrl == url()->current()) {
                             </div>
                         </div>
 
-                        <div class="bid_wrapper" >
+                        <div class="bid_wrapper">
                             <h2 class="heading mb-0 mt-4 pt-md-5 pb-4">Quotes & Questions</h2>
                             @if ($quotebytransporters->isNotEmpty())
                                 <div class="accordion" id="accordionBids">
@@ -1231,18 +1236,18 @@ if (!$previousUrl || $previousUrl == url()->current()) {
     </div>
 
     <!-- <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <span class="close">&times;</span>
-                                <img id="img01" class="img-fluid" />
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <span class="close">&times;</span>
+                                    <img id="img01" class="img-fluid" />
 
-                                <div id="caption"></div>
+                                    <div id="caption"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div> -->
+                    </div> -->
     {{-- EDIT  --}}
     <div class="modal get_quote fade custom-slide" id="quoteEdit" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -1769,7 +1774,7 @@ if (!$previousUrl || $previousUrl == url()->current()) {
             $('.message-container').each(function() {
                 let messageContainer = $(this);
                 let hiddenMessages = messageContainer.find(
-                '.hidden-message'); // Find hidden messages in this row
+                    '.hidden-message'); // Find hidden messages in this row
                 let readMoreBtn = messageContainer.find('.read-more'); // "View More" button
                 let showLessBtn = messageContainer.find('.show-less'); // "Show Less" button
 
@@ -1791,19 +1796,21 @@ if (!$previousUrl || $previousUrl == url()->current()) {
             });
         });
     </script>
- <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let scrollToElement = "{{ $scroll ?? '' }}"; // Get scroll parameter
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let scrollToElement = "{{ $scroll ?? '' }}"; // Get scroll parameter
 
-        if (scrollToElement) {
-            let targetElement = document.querySelector("." + scrollToElement);
-            if (targetElement) {
-                setTimeout(() => {
-                    targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-                }, 500);
+            if (scrollToElement) {
+                let targetElement = document.querySelector("." + scrollToElement);
+                if (targetElement) {
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+                    }, 500);
+                }
             }
-        }
-    });
-</script>
-    
+        });
+    </script>
 @endsection
