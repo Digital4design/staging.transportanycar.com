@@ -1485,8 +1485,11 @@ class DashboardController extends WebController
         return view('transporter.dashboard.job_infromation', [
             'quote' => $quote,
             'quotebytransporters' => $quotes,
-            'scroll' => $scroll // Pass scroll parameter to view
-        ]);
+            'scroll' => $scroll ,// Pass scroll parameter to view
+            'previousUrl' => ($scroll) 
+        ? request()->query('prev', route('transporter.new_jobs_new')) 
+        : url()->previous(), 
+    ]);
            
         } catch (\Exception $ex) {
             return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);

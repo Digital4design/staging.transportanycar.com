@@ -79,8 +79,8 @@
         }
 
         /* .view_message[data-target="#bidCollapse0"] {
-                        background-color: #0356D6;
-                    } */
+                            background-color: #0356D6;
+                        } */
         .view_message.login-user-button {
             background-color: #0356D6;
         }
@@ -401,11 +401,11 @@
 
         /* .modal-content, */
         /* #caption {
-                        -webkit-animation-name: zoom;
-                        -webkit-animation-duration: 0.6s;
-                     animation-name: zoom;
-                        animation-duration: 0.6s;
-                    } */
+                            -webkit-animation-name: zoom;
+                            -webkit-animation-duration: 0.6s;
+                         animation-name: zoom;
+                            animation-duration: 0.6s;
+                        } */
 
         @-webkit-keyframes zoom {
             from {
@@ -716,44 +716,41 @@
                     <div class="wd-white-box">
 
                         <div class="row align-items-center">
-                            <div class="back_btn row mx-0 align-items-center">
+                            <div class="col-7 mb-3 pl-0 pl-md-3">
+
                                 @php
-                                    // Get the previous URL from session or default to new_jobs_new
-                                    $previousUrl = session()->get('_previous')['url'] ?? url()->previous();
-                                    $currentUrl = url()->current();
-                                    $defaultRoute = route('transporter.new_jobs_new');
-                            
-                                    // Ensure previous URL is valid and not the same as current
-                                    if (!$previousUrl || $previousUrl == $currentUrl) {
-                                        $previousUrl = $defaultRoute;
-                                    }
-                            
-                                    // Get only the path (without domain)
-                                    $previousPath = parse_url($previousUrl, PHP_URL_PATH);
-                                    $savedJobsPath = parse_url(route('transporter.savedFindJobResults', [], false), PHP_URL_PATH);
-                                    $watchlistPath = parse_url(route('transporter.watchlist.index', [], false), PHP_URL_PATH);
-                                @endphp
-                            
-                                <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
-                                    <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                                        <g opacity="0.5">
-                                            <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5"
-                                                stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </g>
-                                    </svg>
-                                    Back to
-                                    @if ($previousPath === $savedJobsPath)
-                                        Saved Jobs
-                                    @elseif ($previousPath === parse_url($defaultRoute, PHP_URL_PATH))
-                                        Find Jobs
-                                    @elseif ($previousPath === $watchlistPath)
-                                        Watchlist
-                                    @else
-                                        Find Jobs
-                                    @endif
-                                </a>
+    // Get the previous URL from the request query
+    $previousUrl = request()->query('prev', route('transporter.new_jobs_new'));
+
+    // Extract only the path (without domain) for comparison
+    $previousPath = parse_url($previousUrl, PHP_URL_PATH);
+    $savedJobsPath = parse_url(route('transporter.savedFindJobResults', [], false), PHP_URL_PATH);
+    $watchlistPath = parse_url(route('transporter.watchlist.index', [], false), PHP_URL_PATH);
+@endphp
+
+                                {{-- Back Button Section --}}
+                                <div class="back_btn row mx-0 align-items-center">
+                                    <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
+                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                            <g opacity="0.5">
+                                                <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5"
+                                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </g>
+                                        </svg>
+                                        Back to
+                                        @if ($previousPath === $savedJobsPath)
+                                            Saved Jobs
+                                        @elseif ($previousPath === parse_url(route('transporter.new_jobs_new'), PHP_URL_PATH))
+                                            Find Jobs
+                                        @elseif ($previousPath === $watchlistPath)
+                                            Watchlist
+                                        @else
+                                            Find Jobs
+                                        @endif
+                                    </a>
+                                </div>
+
                             </div>
-                            
                             <div class="col-5 date mb-3 pr-0 pr-md-3 text-right">
                                 Posted {{ getTimeAgo($quote->created_at->toDateTimeString()) }}
                             </div>
@@ -1237,18 +1234,18 @@
     </div>
 
     <!-- <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <span class="close">&times;</span>
-                                    <img id="img01" class="img-fluid" />
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <span class="close">&times;</span>
+                                        <img id="img01" class="img-fluid" />
 
-                                    <div id="caption"></div>
+                                        <div id="caption"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div> -->
+                        </div> -->
     {{-- EDIT  --}}
     <div class="modal get_quote fade custom-slide" id="quoteEdit" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
