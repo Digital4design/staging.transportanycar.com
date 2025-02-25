@@ -716,29 +716,44 @@
                     <div class="wd-white-box">
 
                         <div class="row align-items-center">
-                            avedJobsPath = parse_url(route('transporter.savedFindJobResults', [], false), PHP_URL_PATH);
-        $watchlistPath = parse_url(route('transporter.watchlist.index', [], false), PHP_URL_PATH);
-    @endphp
-
-    <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
-        <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-            <g opacity="0.5">
-                <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5"
-                    stroke-linecap="round" stroke-linejoin="round"></path>
-            </g>
-        </svg>
-        Back to
-        @if ($previousPath === $savedJobsPath)
-            Saved Jobs
-        @elseif ($previousPath === parse_url($defaultRoute, PHP_URL_PATH))
-            Find Jobs
-        @elseif ($previousPath === $watchlistPath)
-            Watchlist
-        @else
-            Find Jobs
-        @endif
-    </a>
-</div>
+                            <div class="back_btn row mx-0 align-items-center">
+                                @php
+                                    // Get the previous URL from session or default to new_jobs_new
+                                    $previousUrl = session()->get('_previous')['url'] ?? url()->previous();
+                                    $currentUrl = url()->current();
+                                    $defaultRoute = route('transporter.new_jobs_new');
+                            
+                                    // Ensure previous URL is valid and not the same as current
+                                    if (!$previousUrl || $previousUrl == $currentUrl) {
+                                        $previousUrl = $defaultRoute;
+                                    }
+                            
+                                    // Get only the path (without domain)
+                                    $previousPath = parse_url($previousUrl, PHP_URL_PATH);
+                                    $savedJobsPath = parse_url(route('transporter.savedFindJobResults', [], false), PHP_URL_PATH);
+                                    $watchlistPath = parse_url(route('transporter.watchlist.index', [], false), PHP_URL_PATH);
+                                @endphp
+                            
+                                <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
+                                    <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                        <g opacity="0.5">
+                                            <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </g>
+                                    </svg>
+                                    Back to
+                                    @if ($previousPath === $savedJobsPath)
+                                        Saved Jobs
+                                    @elseif ($previousPath === parse_url($defaultRoute, PHP_URL_PATH))
+                                        Find Jobs
+                                    @elseif ($previousPath === $watchlistPath)
+                                        Watchlist
+                                    @else
+                                        Find Jobs
+                                    @endif
+                                </a>
+                            </div>
+                            
                             <div class="col-5 date mb-3 pr-0 pr-md-3 text-right">
                                 Posted {{ getTimeAgo($quote->created_at->toDateTimeString()) }}
                             </div>
