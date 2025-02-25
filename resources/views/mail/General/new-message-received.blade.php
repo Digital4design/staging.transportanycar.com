@@ -122,7 +122,7 @@ href="{{ url('transporter/job-info/'.$data['quotes']->id.'?scroll=bid_wrapper') 
                     <span
                         style="padding-left:25px;padding-right:25px;font-size:16px;display:inline-block;letter-spacing:normal;">
                         <span style="word-break: break-word; line-height: 32px;">
-                            <strong>Reply22
+                            <strong>Reply
                                 <svg width="22" height="18" viewBox="0 0 22 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
