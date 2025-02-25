@@ -718,12 +718,13 @@
                         <div class="row align-items-center">
                             <div class="back_btn row mx-0 align-items-center">
                                 @php
-                                    $previousUrl = url()->previous();
+                                    // Use session to get the previous URL instead of url()->previous()
+                                    $previousUrl = session()->get('_previous')['url'] ?? null;
                                     $currentUrl = url()->current();
                                     $defaultRoute = route('transporter.new_jobs_new');
                             
                                     // Ensure previous URL is valid and not the same as current
-                                    if (!$previousUrl || $previousUrl == $currentUrl) {
+                                    if (!$previousUrl || $previousUrl === $currentUrl) {
                                         $previousUrl = $defaultRoute;
                                     }
                             
@@ -751,8 +752,8 @@
                                         Find Jobs
                                     @endif
                                 </a>
-                           
                             </div>
+                            
                             <div class="col-5 date mb-3 pr-0 pr-md-3 text-right">
                                 Posted {{ getTimeAgo($quote->created_at->toDateTimeString()) }}
                             </div>
