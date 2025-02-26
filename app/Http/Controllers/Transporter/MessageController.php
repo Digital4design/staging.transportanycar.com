@@ -120,7 +120,7 @@ class MessageController extends WebController
                     $maildata['quote_id'] = $from_quote_id;
                     $maildata['type'] = 'user';
                     $maildata['url'] = route('front.manage_notification');
-                    // $maildata['main_url'] = 'front.quotes';
+                    $maildata['main_url'] = 'front.quotes';
                     $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'quotes_id' => $from_quote_id, 'thread_id' => $thread_id])->render();
                     $this->emailService->sendEmail($email_to, $htmlContent, $subject);
 
