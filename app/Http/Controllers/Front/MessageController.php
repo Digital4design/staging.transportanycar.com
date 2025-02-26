@@ -262,7 +262,7 @@ class MessageController extends WebController
                 $maildata['quotes'] = $quotes;
                 $maildata['quote_by_transporter_id'] = $my_quote->id;
                 $maildata['url'] =  route('transporter.manage_notification');
-                $maildata['main_url'] = 'transporter.job_information';
+                $maildata['main_url'] =  route('transporter.job_information');
                 $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
                 $this->emailService->sendEmail(
                     $email_to,
