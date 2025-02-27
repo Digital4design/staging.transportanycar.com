@@ -7966,7 +7966,7 @@ g.highcharts-input-group {
   .msg_active_container .chat_box .scrollbar {
     /* height: auto;
     max-height: calc(100vh - 280px); */
-    height: calc(100vh - 265px);
+    height: calc(100% - 222px);
     /* max-height: calc(100% - 213px);
     padding-bottom: 0; */
   }
