@@ -886,7 +886,7 @@
                                             <input type="hidden" name="user_current_chat_id"
                                                 id="user_current_chat_id_{{ $key }}"
                                                 value="{{ $thread ? $thread->id : 0 }}">
-                                            <div class="wd-quote-form">
+                                            <div class="wd-quote-form bid_wrapper">
                                                 <div class="form-group">
                                                     <p class="font-weight-light d-flex flex-wrap align-items-center text-left position-relative"
                                                         style="font-size:14px; padding-left:20px; margin-bottom: 5px; color:#444444;">
@@ -1194,5 +1194,22 @@
                 getChatHistory(url, id);
             }
         })
+    </script>
+     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let scrollToElement = "{{ $scroll ?? '' }}"; // Get scroll parameter
+
+            if (scrollToElement) {
+                let targetElement = document.querySelector("." + scrollToElement);
+                if (targetElement) {
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+                    }, 500);
+                }
+            }
+        });
     </script>
 @endsection

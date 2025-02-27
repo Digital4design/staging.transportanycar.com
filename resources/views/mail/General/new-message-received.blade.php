@@ -119,7 +119,7 @@
                 @else
                     <a @if ($data['main_url'] == route('transporter.job_information')) href="{{ $data['main_url'] . '/' . $data['quotes']->id . '?scroll=bid_wrapper' }}"
 @else
- href="{{ url('quotes/' . $data['quotes']->id) }}" @endif
+ href="{{ url('quotes/' . $data['quotes']->id). '?scroll=bid_wrapper' }}" @endif
                         target="_blank"
                         style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#52d017;border-radius:2px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:5px;padding-bottom:5px;font-family:'Montserrat', sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;">
                         <span

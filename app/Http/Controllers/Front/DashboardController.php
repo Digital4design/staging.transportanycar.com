@@ -529,7 +529,7 @@ class DashboardController extends WebController
         return view('front.dashboard.messages')->with(compact('title', 'chats', 'latest_chat'));
     }
 
-    public function quotes($id)
+    public function quotes(Request $request ,$id)
     {
         // return $id;
         $user_data = Auth::guard('web')->user();
@@ -553,14 +553,7 @@ class DashboardController extends WebController
             return $quote;
         });
 
-        // return $quotes;
-        // $my_quotes = QuoteByTransporter::where('user_id', $quotes[0]->user_id ?? 0)->pluck('id');
-
-        // $rating_average = Feedback::whereIn('quote_by_transporter_id', $quotes->pluck('id'))
-        //     ->selectRaw('(AVG(communication) + AVG(punctuality) + AVG(care_of_good) + AVG(professionalism)) / 4 as overall_avg')
-        //     ->first();
-
-        // Update quotes with thread_id if the thread exists
+        
         $threads = Thread::where(['user_id' => $user_data->id, 'user_quote_id' => $id])->get();
         $threadMap = $threads->pluck('id', 'friend_id');
         $quotes->map(function ($quote) use ($threadMap) {
@@ -576,7 +569,7 @@ class DashboardController extends WebController
         $hasAcceptedQuote = $quotes->contains(function ($quote) {
             return strtolower($quote->status) === 'accept';
         });
-
+        $scroll = $request->has('scroll') ? $request->query('scroll') : null;
         // Pass the flag to the view
         // return $quotes;
         $params['hasAcceptedQuote'] = $hasAcceptedQuote;
@@ -584,6 +577,8 @@ class DashboardController extends WebController
         $params['quotes'] = $quotes;
         $params['user_quote_id'] = $id;
         $params['job_status'] = $job_status;
+        $params['scroll'] = $scroll;
+        
         // $params['rating_average'] = $rating_average;
         return view('front.dashboard.quotes', $params);
     }
