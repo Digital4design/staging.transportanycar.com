@@ -6755,6 +6755,7 @@ div#spam-banner button.btn {
     padding-right: 0;
     left: 0; */
     padding: 0;
+    z-index:9;
     background: #f3f3f3;
     border: none;
     width: 100%;
@@ -7315,7 +7316,7 @@ button.swal2-confirm.swal2-styled:focus {
 
 
 @media(max-width: 580px) {
-  .chat_conversation_header {position:sticky; top:65px;}
+  .chat_conversation_header {position:sticky; top:0px;}
   /* .join_network_main .trans_login_blog {padding: 0px 20px; max-width: 100%;} */
   .chat_accept_btn {padding: 7px 10px;}
   .chat_box,
