@@ -368,10 +368,6 @@
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:25.5px;color:#666666;font-size:17px">
                                                                         Password: <strong>{{ $data['password'] }}</strong></p>
 
-
-
-                                                                        <p style="font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Email: <a data-link-card="true" href="mailto:{{ $data['email'] }}" target="_blank" style="text-decoration: underline; color: #025dd5;" rel="noopener">{{ $data['email'] }}</a></p>
-                                                                        <p class="font-weight: 300; font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px;">Pass:{{ $data['password'] }}</p>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -444,8 +440,9 @@
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:25.5px;color:#666666;font-size:17px">
                                                                         You can compare your quotes and ask questions
                                                                         via message before accepting to make sure you
-                                                                        choose the right one for you, check out your
-                                                                        quotes here.</p>
+                                                                        choose the right one for you, check out
+                                                                        <a href="{{ url('/dashboard') }}">
+                                                                            your quotes here.</a> </p>
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:25.5px;color:#666666;font-size:17px">
                                                                         <br></p>
