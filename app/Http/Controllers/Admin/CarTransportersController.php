@@ -757,52 +757,7 @@ class CarTransportersController extends WebController
             'data' => $data,
         ]);
     }
-    // public function review_show_data(Request $request, $id)
-    // {
-    //     $datatable_filter = datatable_filters();
-    //     $offset = $datatable_filter['offset'];
-    //     $search = $datatable_filter['search'];
-    //     // dd('here');
-    //     $return_data = [
-    //         'data' => [],
-    //         'recordsTotal' => 0,
-    //         'recordsFiltered' => 0
-    //     ];
-    //     $user = User::find($id);
-    //     // return $user->completed_job;
-    //     $data = Feedback::where('transporter_id', $id);
-
-    //     $return_data['recordsTotal'] = $data->count();
-    //     if (!empty($search)) {
-    //         $data->where(function ($query) use ($search) {
-    //             $query->AdminSearch($search);
-    //         });
-    //     }
-    //     $return_data['recordsFiltered'] = $data->count();
-    //     $all_data = $data->orderBy($datatable_filter['sort'], $datatable_filter['order'])
-    //         ->offset($offset)
-    //         ->limit($datatable_filter['limit'])
-    //         ->get();
-    //     $total_feedbacks = $all_data->count();
-
-    //     if (!empty($all_data)) {
-    //         foreach ($all_data as $key => $value) {
-    //             $return_data['data'][] = array(
-    //                 'id' => $offset + $key + 1,
-    //                 'feedback_id' => $value->id,
-    //                 'first_name' => $value->first_name,
-    //                 'vehical_name' => $value->vehical_name,
-    //                 'rating' => $value->rating,
-    //                 'comment' => $value->comment,
-    //                 'date' => $value->date,
-    //                 'transporter_id' => $value->transporter_id,
-    //                 'completed_job' => $user->completed_job,
-
-    //             );
-    //         }
-    //     }
-    //     return $return_data;
-    // }
+    
 
     public function review_show_data(Request $request, $id)
     {
