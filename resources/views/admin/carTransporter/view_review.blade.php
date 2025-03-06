@@ -347,7 +347,10 @@
 
                     </ol>
                 </div>
-
+            </div>
+            <div class="alert alert-success alert-dismissible d-none" id="alert-dismissible" role="alert">
+                <div class="alert-text"></div>
+                <div class="alert-close"><i class="flaticon2-cross kt-icon-sm" data-dismiss="alert"></i></div>
             </div>
         </div>
     </div>
@@ -733,7 +736,6 @@
                 $("#averageRating").text(averageRating + "/5");
             }
 
-
             function displayStarsInContainer(rating) {
                 let stars = generateStarsData(rating);
                 $("#starRatingContainer").html(`
@@ -838,13 +840,14 @@
                     data: formData,
                     success: function(response) {
                         if (response.success) {
-                            $('#exampleModal3').modal('hide'); // Close the modal
+                            $('#exampleModal').modal('hide'); // Close the modal
                             $('#pos_comment').val(''); // Clear the comment field
                             $('#first_name').val('');
                             $('#vehical_name').val('');
                             $('#date').val('');
                             $('input[name="rating"]').prop('checked',
                                 false); // Deselect the rating
+                            $("#alert-dismissible").removeClass("d-none").find(".alert-text").text(response.message)
                             loadReviews(userId);
                         } else {
                             if (response.errors.rating) {
@@ -914,7 +917,8 @@
                             $('#Date').val('');
                             $('input[name="rating"]').prop('checked',
                                 false); // Deselect the rating
-                                loadReviews(userId)
+                            $("#alert-dismissible").removeClass("d-none").find(".alert-text").text(response.message)
+                            loadReviews(userId)
                         } else {
                             if (response.errors.rating) {
                                 $('#ratingError').text(response.errors.rating[0]);
@@ -931,19 +935,19 @@
                     }
                 });
             });
+
             $(document).on('click', '.showModel2', function() {
                 $('#exampleModal3').modal('show');
                 $('#user_Id').val(userId);
             });
 
         });
-        document.getElementById("dateInput").addEventListener("input", function (e) {
-    this.value = this.value.replace(/\D/g, ""); // Remove non-numeric characters
+        document.getElementById("dateInput").addEventListener("input", function(e) {
+            this.value = this.value.replace(/\D/g, ""); // Remove non-numeric characters
 
-    if (this.value.length > 8) {
-        this.value = this.value.slice(0, 8); // Limit to 8 digits
-    }
-});
+            if (this.value.length > 8) {
+                this.value = this.value.slice(0, 8); // Limit to 8 digits
+            }
+        });
     </script>
-    
 @endsection
