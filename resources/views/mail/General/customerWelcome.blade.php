@@ -289,7 +289,7 @@
                     </table>
                     <table cellpadding="0" cellspacing="0" class="cb" align="center" role="none" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%"><tbody><tr>
                         <td align="center" style="padding:0;Margin:0"><table bgcolor="#ffffff" class="co" align="center" cellpadding="0" cellspacing="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#ffffff;width:600px" role="none"><tbody><tr><td align="left" style="padding:0;Margin:0"><table cellpadding="0" cellspacing="0" width="100%" role="none" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tbody><tr><td align="center" valign="top" style="padding:0;Margin:0;width:600px"><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tbody><tr>
-                        <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://transportanycar.com/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px"><img class="adapt-img" src="https://dccld.stripocdn.email/content/guids/CABINET_442896928102a5f7b795ef4cb6adbf4e747b26d63196f24dabf25f061e3ec01f/images/banner_9tf.jpg" alt="Main Image" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="600" title="Main Image" height="263"></a> </td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
+                        <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://transportanycar.com/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px"><img class="adapt-img" src="https://dccld.stripocdn.email/content/guids/CABINET_442896928102a5f7b795ef4cb6adbf4e747b26d63196f24dabf25f061e3ec01f/images/banner_9tf.jpg" alt="Main Image" style="max-width:600px;width:100%;display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" title="Main Image" height="263"></a> </td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
                     <table cellpadding="0" cellspacing="0" class="cb" align="center" role="none"
                         style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
                         <tr>
@@ -556,7 +556,7 @@
                                     <tr>
                                         <td align="left"
                                             background="https://dccld.stripocdn.email/content/guids/CABINET_442896928102a5f7b795ef4cb6adbf4e747b26d63196f24dabf25f061e3ec01f/images/background_footer.jpg"
-                                            style="padding:0;Margin:0;padding-bottom:20px;padding-left:20px;padding-right:20px;background-image:url(https://dccld.stripocdn.email/content/guids/CABINET_442896928102a5f7b795ef4cb6adbf4e747b26d63196f24dabf25f061e3ec01f/images/background_footer.jpg);background-repeat:no-repeat;background-position:left top">
+                                            style="width:100%;padding:0;Margin:0;padding-bottom:20px;padding-left:20px;padding-right:20px;background-image:url(https://dccld.stripocdn.email/content/guids/CABINET_442896928102a5f7b795ef4cb6adbf4e747b26d63196f24dabf25f061e3ec01f/images/background_footer.jpg);background-repeat:no-repeat;background-position:left top">
                                             <table cellpadding="0" cellspacing="0" width="100%" role="none"
                                                 style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                 <tr>
@@ -654,8 +654,7 @@
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:19.5px;color:#333333;font-size:13px">
                                                                         <a style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#333333;font-size:13px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif"
-                                                                        href="{{ url('/manage_notification') }}">Manage notification preferences</a>
-                                                                            
+                                                                        href="{{ url('/manage_notification') }}">Manage notification preferences</a>  
                                                                     </p>
                                                                 </td>
                                                             </tr>
