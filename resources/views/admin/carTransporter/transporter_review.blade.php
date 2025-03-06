@@ -466,7 +466,7 @@
                     }
                 ]
             });
-            
+
             $(document).on('click', '.showModelOne, .showModelTwo', function() {
                 let userId = $(this).data('user-id'); // Get user_id from the button
                 let first_name = $(this).data('name');
@@ -563,6 +563,8 @@
                             $('#job_completed').val('');
                             $('input[name="rating"]').prop('checked',
                                 false); // Deselect the rating
+                           $("#alert-dismissible").removeClass("d-none").find(".alert-text").text(response.message)
+
                         } else {
                             if (response.errors.pos_comment) {
                                 $('#jobComplete').text(response.errors.job_completed[0]);
