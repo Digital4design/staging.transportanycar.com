@@ -654,7 +654,8 @@
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:19.5px;color:#333333;font-size:13px">
                                                                         <a style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#333333;font-size:13px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif"
-                                                                            href="#">Manage notification preferences</a>
+                                                                        href="{{ url('/manage_notification') }}">Manage notification preferences</a>
+                                                                            
                                                                     </p>
                                                                 </td>
                                                             </tr>
