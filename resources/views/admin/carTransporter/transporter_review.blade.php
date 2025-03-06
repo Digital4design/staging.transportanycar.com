@@ -8,9 +8,9 @@
         rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css" />
     <style>
-        #listResults_filter {
-            display: none;
-        }
+        /* #listResults_filter {
+                display: none;
+            } */
 
         .lve_feed_btn {
             border: 1px solid #52D017;
@@ -392,10 +392,18 @@
             oTable = $('#listResults').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "order": [
-                    [0, "DESC"]
-                ],
-                "ajax": "{{ route('admin.carTransporter.review_data') }}",
+                "draw": 1,
+                "pageLength": 10,
+                "order": [[0, "DESC"]],
+                "lengthMenu": [[10, 25, 50], [10, 25, 50]], 
+                "ajax": {
+                    "url": "{{ route('admin.carTransporter.review_data') }}",
+                    "type": "GET",
+                    "data": function(d) {
+                        d.start = d.start || 0;
+                        d.length = d.length || 10;
+                    }
+                },
                 "columns": [{
                         "data": "id",
                         searchable: false,
@@ -413,6 +421,7 @@
 
                     {
                         "data": "email",
+                        searchable: true,
                         sortable: true
                     },
 
