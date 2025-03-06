@@ -17,6 +17,7 @@ class AddFirstNameToFeedbackTable extends Migration
             $table->string('first_name')->nullable()->default(null);
             $table->string('vehical_name')->nullable()->default(null);
             $table->unsignedBigInteger('transporter_id')->nullable();
+            $table->date('date')->nullable(); 
             $table->foreign('transporter_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
