@@ -54,6 +54,19 @@ Route::group(['middleware' => 'auth:admin'], function () {
             Route::get('carTransporter/approvedview', 'CarTransportersController@approvedView')->name('carTransporter.approvedview');
             Route::get('carTransporter/approvedlisting', 'CarTransportersController@approvedListing')->name('carTransporter.approvedlisting');
             Route::post('carTransporter/status', 'CarTransportersController@status')->name('carTransporter.status');
+            Route::get('carTransporter/view', 'CarTransportersController@view')->name('carTransporter.view');
+            Route::get('carTransporter/review', 'CarTransportersController@review')->name('carTransporter.review');
+            Route::get('carTransporter/review_data', 'CarTransportersController@review_data')->name('carTransporter.review_data');
+            Route::post('carTransporter/review_data', 'CarTransportersController@review_data_save')->name('carTransporter.review_data_save');
+            Route::post('carTransporter/custom_jobCompleted', 'CarTransportersController@custom_jobCompleted')->name('carTransporter.custom_jobCompleted');
+            Route::get('carTransporter/review_show/{id}', 'CarTransportersController@review_show')->name('carTransporter.review_show');
+            Route::get('carTransporter/review_show_data/{id}', 'CarTransportersController@review_show_data')->name('carTransporter.review_show_data');
+            Route::post('carTransporter/review_show', 'CarTransportersController@review_data_update')->name('carTransporter.review_data_update');
+            Route::post('carTransporter/update_job_completed', 'CarTransportersController@update_job_completed')
+            ->name('carTransporter.update_job_completed');
+            Route::get('transport-export', 'UsersController@export')->name('carTransporter.export');
+
+
             Route::resource('carTransporter', 'CarTransportersController');
 
             Route::post('carTransporter/t_status', 'CarTransportersController@t_status')->name('carTransporter.t_status');

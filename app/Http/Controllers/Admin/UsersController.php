@@ -13,6 +13,7 @@ use App\UserReferral;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
+
 class UsersController extends WebController
 {
     public $user_obj;
@@ -469,8 +470,5 @@ class UsersController extends WebController
         }
         return $return_data;
     }    
-
-
-
 
 }

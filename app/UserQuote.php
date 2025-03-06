@@ -62,4 +62,8 @@ class UserQuote extends Model
     {
         return $this->hasOne(Thread::class, 'user_quote_id');
     }
+    public function thread_jobinfo()
+    {
+        return $this->hasOne(Thread::class, 'user_quote_id')->where('user_id', auth()->id());
+    }
 }

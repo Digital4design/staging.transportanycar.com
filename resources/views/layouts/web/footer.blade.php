@@ -1,16 +1,205 @@
 <style>
-.btm_footer {
-    padding-right: 200px;
-}
-@media screen and (max-width: 767px) {
     .btm_footer {
-        padding-right: 15px;
+        padding-right: 200px;
     }
+
+    /********** */
+    /*----- HEADER -----*/
+    .hidden {
+        display: none;
+    }
+
+    .menu-item img {
+        display: none;
+    }
+
+    /*----- FOOTER -----*/
+    footer {
+        background: #000F26;
+        color: #FFFFFF;
+        display: block;
+        position: relative;
+        padding: 50px 0 30px;
+    }
+
     footer p {
-        font-size: 12px;
-        line-height: 18px;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.8;
     }
-}
+
+    footer h6 {
+        font-size: 16px;
+        font-weight: 500;
+        color: #008ED4;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .footer_logo {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 200px;
+    }
+
+    .ftmenu_list li a {
+        font-size: 16px;
+        font-weight: 500;
+        color: #fff;
+        display: flex;
+        margin-bottom: 10px;
+        align-items: center;
+    }
+
+    .ftmenu_list li a svg {
+        margin-right: 10px;
+        width: 22px;
+        height: 22px;
+    }
+
+    .ftmenu_list li a p {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .social_list li a {
+        background: #008ED4;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .social_list li a:hover {
+        border: 1px solid #008ED4;
+    }
+
+    .social_list {
+        display: flex;
+        align-items: center;
+        margin: 1.5rem 0;
+    }
+
+    .social_list li {
+        margin-right: 10px;
+    }
+
+    .social_list li:last-child {
+        margin-right: 0;
+    }
+
+    #res_logo {
+        display: none;
+    }
+
+    @media only screen and (max-width: 991px) {
+        .menu-item.active a {
+            background: #0356d6 !important;
+            color: #fff !important;
+            font-weight: 400 !important;
+            border-color: #0356d6 !important;
+        }
+
+        .menu-item img {
+            display: inline-block;
+            margin-right: 10px;
+            margin-top: -5px;
+        }
+
+        #res_logo img {
+            max-width: 190px;
+            width: 100%;
+        }
+
+        #res_logo img {
+            padding-left: 15px;
+        }
+
+        footer {
+            padding: 30px 0;
+        }
+
+        .headitemshow .brand {
+            position: relative;
+            z-index: 1111;
+        }
+
+        #footer .row .col-lg-4.col-md-4 {
+            margin-top: 1rem;
+        }
+    }
+
+    /* new scope 24-1-2024 */
+    .teleph_text {
+        background: var(--Blue-linear, linear-gradient(273deg, #018ED5 1.21%, #0356D6 98.03%));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 21px !important;
+        font-weight: 400 !important;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 !important;
+    }
+
+    .last_menuitem {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+
+
+    .menu_transport_company {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        align-items: center;
+        padding: 20px;
+        display: none;
+    }
+
+    .menu_transport_company a.getqt_btnincld {
+        border-radius: 5px;
+        font-size: 16px !important;
+        padding: 8px 17px !IMPORTANT;
+        max-width: max-content !important;
+        margin-right: 0 !important;
+    }
+
+    .menu_transport_company p {
+        margin-bottom: 0;
+        font-size: 18px;
+        color: #000;
+    }
+
+    @media only screen and (max-width: 575px) {
+        .menu_transport_company {
+            display: flex;
+            width: 370px;
+            padding: 20px 15px;
+        }
+    }
+
+    /********** */
+    @media screen and (max-width: 767px) {
+        .footer_logo {
+            position: relative;
+            margin-top: 25px;
+        }
+
+        .btm_footer {
+            padding-right: 15px;
+        }
+
+        footer p {
+            font-size: 12px;
+            line-height: 18px;
+        }
+    }
 </style>
 <footer id="footer">
     <div class="container">
@@ -32,10 +221,10 @@
                     </li>
                     <li>
                         @if(Auth::guard('transporter')->user())
-                            <a href="{{route('front.dashboard')}}">
-                                Account</a>
+                        <a href="{{route('front.dashboard')}}">
+                            Account</a>
                         @else
-                            <a href="{{route('front.login')}}">Account</a>
+                        <a href="{{route('front.login')}}">Account</a>
                         @endif
                     </li>
                 </ul>
@@ -81,15 +270,39 @@
                     </li>
                 </ul>
             </div> -->
-            <div class="col-12 btm_footer text-center text-md-left mt-3">
+            <!-- <div class="col-12 btm_footer text-center text-md-left mt-3 text-decoration-none">
                 <p class="mb-0">Transport Any Car <span>&copy; All rights reserved. {{date('Y')}}</span>. TransportAnyCar.com is a limited company registered in England and Wales. Registered address: 128 City Road, London, EC1V 2NX.</p>
                 {{-- <p class="mb-0">Transport Any Car. <span>© All rights reserved. {{date('Y')}}</span></p> --}}
                 <div class="foot_img">
                     <img src="{{asset('assets/web/images/footer_logo.png')}}" alt="brand_logo" class="footer_logo" />
                 </div>
-                
+
+                <img src="{{asset('assets/web/images/facebook.png')}}" alt="brand_logo" class="facebook_icon" width="25" />
+            </div> -->
+            <div class="col-12 text-center text-md-left mt-3 text-decoration-none">
+                <div class="row">
+
+                    <div class="col-12 col-md-6 col-xl-8 mb-3 mb-md-0 order-2 order-md-1">
+                        <p class="mb-0">Transport Any Car <span>&copy; All rights reserved. {{date('Y')}}</span>. TransportAnyCar.com is a limited company registered in England and Wales. Registered address: 128 City Road, London, EC1V 2NX.</p>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4 order-1 order-md-2">
+                        <div class="foot_img row mx-0 align-items-center justify-content-between justify-content-md-center justify-content-md-end">
+                            <img src="{{asset('assets/web/images/footer_logo.png')}}" alt="brand_logo" class="footer_logos" width="200" />
+                            <ul class="list-inline social-icons ml-3">
+                                <li>
+                                    <a href="https://www.facebook.com/share/16A3vJKiYH/?mibextid=wwXIfr" target="_blank" class="text-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="25px" height="25px" fill="#ffffff" class="mx-auto d-block">    
+                                        <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M37,19h-2c-2.14,0-3,0.5-3,2 v3h5l-1,5h-4v15h-5V29h-4v-5h4v-3c0-4,2-7,6-7c2.9,0,4,1,4,1V19z" />
+                                    </svg>
+                                    <span class="d-block text-white">Follow us</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
+
     </div>
 </footer>

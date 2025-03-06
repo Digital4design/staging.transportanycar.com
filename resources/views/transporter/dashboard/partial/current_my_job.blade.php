@@ -66,7 +66,11 @@
                     </span>
                     <p>Pick-up area:</p>
                     <p><b>
+                        @if($type == 'bidding')
+                        {{ $quote->pickup_postcode ? hidePostcode(get_last_two_parts($quote->pickup_postcode)) : '-' }}
+                        @else
                         {{ $quote->pickup_postcode ? hidePostcode($quote->pickup_postcode) : '-' }}
+                        @endif
                         {{-- {{ $quote->pickup_postcode ? formatAddress($quote->pickup_postcode) : '-' }} --}}
                     </b></p>
                 </div>
@@ -77,7 +81,11 @@
                     <p>Drop-off area:</p>
                     <p><b>
                         {{-- {{ $quote->drop_postcode ? formatAddress($quote->drop_postcode) : '-' }} --}}
+                        @if($type == 'bidding')
+                        {{ $quote->drop_postcode ? hidePostcode(get_last_two_parts($quote->drop_postcode)) : '-' }}
+                        @else
                         {{ $quote->drop_postcode ? hidePostcode($quote->drop_postcode) : '-' }}
+                        @endif
                     </b></p>
                 </div>
                 <div class="list_detail">
@@ -114,8 +122,7 @@
                     @endif
                     @if ($quote->qbt_status == 'pending')
                         <div class="won_details">
-                            <a href="javascript:;" id="edit_quote_{{ $quote->id }}"
-                                onclick="edit_quote_amount(this, '{{ $quote->id }}');"
+                            <a href="{{ route('transporter.job_information', $quote->id) }}"
                                 data-amount="{{ roundBasedOnDecimal($quote->transporter_payment) }}"
                                 data-lowbid="{{ $lowestBid }}" data-bidcount="{{ $transporterQuotesCount }}"
                                 class="view_btn edit_quote_btn won_details">Edit bid</a>
@@ -147,8 +154,7 @@
                     @endif
                 @elseif($type == 'bidding')
                     <div class="won_details">
-                        <a href="javascript:;" id="edit_quote_{{ $quote->id }}"
-                            onclick="edit_quote_amount(this, '{{ $quote->id }}');"
+                        <a href="{{ route('transporter.job_information', $quote->id) }}"
                             data-amount="{{ roundBasedOnDecimal($quote->transporter_payment) }}"
                             data-lowbid="{{ $lowestBid }}" data-bidcount="{{ $transporterQuotesCount }}"
                             class="view_btn edit_quote_btn won_details">Edit bid</a>
@@ -170,8 +176,7 @@
                     @endif
                 @elseif($type == 'cancel')
                         <div class="list_detail" style="order:2;">
-                            <a style="width: 130px;text-align: center;justify-content: center;" href="javascript:;" id="edit_quote_{{ $quote->id }}"
-                                onclick="edit_quote_amount(this, '{{ $quote->id }}');"
+                            <a style="width: 130px;text-align: center;justify-content: center;" href="{{ route('transporter.job_information', $quote->id) }}"
                                 data-amount="{{ roundBasedOnDecimal($quote->transporter_payment) }}"
                                 data-lowbid="{{ $lowestBid }}" data-bidcount="{{ $transporterQuotesCount }}"
                                 class="view_btn edit_quote_btn won_details">Edit bid</a>

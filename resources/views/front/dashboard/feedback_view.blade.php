@@ -8,6 +8,27 @@
     /* .wd-transport-img img {
         width: 20%;
     } */
+    .wd-transport-img {
+        overflow: hidden;
+        width: 58px;
+        height: 58px;
+        border-radius: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 0!important;
+    }
+    .wd-transport-img img {
+        border-radius: 100%;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        object-position: center;
+        display: block;
+        aspect-ratio: 1 / 1;
+    }
+
     .feedback-view {
         padding: 20px 0 70px !important;
     }
@@ -111,7 +132,8 @@
     }
 
     .banner.vip_member {
-        background: #fff000;
+        /* background: #fff000; */
+        background: linear-gradient(90deg, #C5B358 65.5%, #525225 100%);
         color: #000000;
     }
 
@@ -286,7 +308,7 @@
                             <div class="col-lg-12">
                                 <div class="wd-transport-dtls adjust-space-in-mobile">
                                     <div class="row mx-0 align-items-center user-feedback-header-wrap mb-3">
-                                        <div class="w-auto wd-transport-img pt-0">
+                                        <div class="wd-transport-img pt-0">
                                             <img src="{{ $user->profile_image }}" width="58" height="58"
                                                 alt="trasporter feedback" class="img-fluid">
                                         </div>
@@ -339,12 +361,9 @@
                                                                 fill="#D9D9D9" />
                                                         </svg>
                                                     </li>
-
-
-
                                                     <li class="user-feedback-rating-count">
-                                                        <span>({{ count($feedback) }})</span><span
-                                                            class="ml-1">{{ number_format( $rating_percentage,0) }}%</span>
+                                                        <span>({{ $user->completed_job }})</span>
+                                                        {{-- <span class="ml-1">{{ number_format( $rating_percentage,0) }}%</span> --}}
                                                     </li>
 
                                                     {{-- <li>({{ number_format($overall_percentage, 0) }}%)</li> --}}
@@ -404,8 +423,8 @@
 
                                                     {{-- Display rating count and percentage --}}
                                                     <li class="user-feedback-rating-count">
-                                                        <span>({{ count($feedback) }})</span><span
-                                                            class="ml-1">{{  number_format($rating_percentage,0) }}%</span>
+                                                        <span>({{ $user->completed_job }})</span>
+                                                        {{-- <span class="ml-1">{{  number_format($rating_percentage,0) }}%</span> --}}
                                                     </li>
                                                 </ul>
                                             @endif
@@ -428,7 +447,7 @@
                                                                     d="M4.41537 11.1567L0.190373 6.93169C-0.0634575 6.67786 -0.0634575 6.2663 0.190373 6.01245L1.10959 5.0932C1.36342 4.83935 1.775 4.83935 2.02883 5.0932L4.87499 7.93934L10.9712 1.8432C11.225 1.58937 11.6366 1.58937 11.8904 1.8432L12.8096 2.76245C13.0634 3.01628 13.0634 3.42783 12.8096 3.68169L5.33462 11.1567C5.08076 11.4105 4.6692 11.4105 4.41537 11.1567Z"
                                                                     fill="#52D017" />
                                                             </svg>
-                                                            <div data-toggle="popover"
+                                                            {{-- <div data-toggle="popover"
                                                                 class="queston-mark d-inline-block p-0 cursor-pointer insurance_popover ml-2">
                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                     viewBox="0 0 24 24" fill="#D9D9D9" width="18"
@@ -437,7 +456,7 @@
                                                                         d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
                                                                         clip-rule="evenodd" />
                                                                 </svg>
-                                                            </div>
+                                                            </div> --}}
                                                         @endif
                                                     </span>
                                                 </li>
@@ -451,7 +470,7 @@
                                                                     d="M4.41537 11.1567L0.190373 6.93169C-0.0634575 6.67786 -0.0634575 6.2663 0.190373 6.01245L1.10959 5.0932C1.36342 4.83935 1.775 4.83935 2.02883 5.0932L4.87499 7.93934L10.9712 1.8432C11.225 1.58937 11.6366 1.58937 11.8904 1.8432L12.8096 2.76245C13.0634 3.01628 13.0634 3.42783 12.8096 3.68169L5.33462 11.1567C5.08076 11.4105 4.6692 11.4105 4.41537 11.1567Z"
                                                                     fill="#52D017" />
                                                             </svg>
-                                                            <div data-toggle="popover"
+                                                            {{-- <div data-toggle="popover"
                                                                 class="queston-mark d-inline-block p-0 cursor-pointer photo_id_popover ml-2">
                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                     viewBox="0 0 24 24" fill="#D9D9D9" width="18"
@@ -460,29 +479,34 @@
                                                                         d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
                                                                         clip-rule="evenodd" />
                                                                 </svg>
-                                                            </div>
+                                                            </div> --}}
                                                         @endif
                                                 </li>
                                                 <li>
                                                     <p>Positive feedback:</p>
-                                                    <span>{{  number_format($rating_percentage,0) }}%</span>
+                                                    <span>
+                                                        {{ $rating_percentage == floor($rating_percentage) 
+                                                            ? round($rating_percentage) 
+                                                            : number_format($rating_percentage, 1) }}%
+                                                    </span>
+                                                    {{-- <span>{{  number_format($rating_percentage,1) }}%</span> --}}
                                                 </li>
-                                                <li>
+                                                {{-- <li>
                                                     <p>Total reviews:</p>
                                                     <span>{{ count($feedback) }}</span>
-                                                </li>
+                                                </li> --}}
                                                 <li>
                                                     <p>Jobs completed:</p>
-                                                    <span>{{ $completed_job }}</span>
+                                                    <span>{{ $user->completed_job }}</span>
                                                 </li>
-                                                <!--<li>-->
+                                                {{-- <!--<li>-->
                                                 <!--    <p>Miles travelled:</p>-->
                                                 <!--    <span>{{ $distance }} </span>-->
                                                 <!--</li>-->
                                                 <!--<li>-->
                                                 <!--    <p>Total earnings:</p>-->
                                                 <!--    <span>£{{ $total_earning }}</span>-->
-                                                <!--</li>-->
+                                                <!--</li>--> --}}
                                                 <li>
                                                     <p>Payment method:</p>
                                                     <span>
@@ -501,7 +525,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row wd-pb py-3 py-md-5 mx-0" style="border-top: 1px solid #D9D9D9;">
+                        {{-- <div class="row wd-pb py-3 py-md-5 mx-0" style="border-top: 1px solid #D9D9D9;">
                             <div class="col-lg-12">
                                 <div class="wd-transport-dtls adjust-space-in-mobile">
                                     <div class="wd-transport-area pb-0">
@@ -533,7 +557,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row mx-0">
                             <div class="col-lg-12">
                                 <div class="feedback-tbl border-none bg-white border-0 rounded-0" id="feedback_listing">

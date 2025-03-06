@@ -226,8 +226,9 @@
                                                                                 Pick-up area:
                                                                             </small>
                                                                         </div>
-                                                                        <span
-                                                                            style="width: 45%;">{{ $quote['pickup_postcode'] ?? '-' }}</span>
+                                                                        {{-- <span style="width: 45%;">{{ $quote['pickup_postcode'] ?? '-' }}</span> --}}
+                                                                        <span style="width: 45%;">{{ $quote['pickup_postcode'] ? hidePostcode(get_last_two_parts($quote['pickup_postcode'])) : '-' }}</span>
+
                                                                     </li>
                                                                     <li>
                                                                         <div class="jpbsrch_inner">
@@ -242,8 +243,9 @@
                                                                                 Drop-off area:
                                                                             </small>
                                                                         </div>
-                                                                        <span
-                                                                            style="width: 45%;">{{ $quote['drop_postcode'] ?? '-' }}</span>
+                                                                        <span style="width: 45%;">{{$quote['drop_postcode'] ? hidePostcode(get_last_two_parts($quote['drop_postcode'])) : '-' }}</span>
+
+                                                                        {{-- <span style="width: 45%;">{{ $quote['drop_postcode'] ?? '-' }}</span> --}}
                                                                     </li>
                                                                     <li>
                                                                         <div class="jpbsrch_inner">
@@ -350,7 +352,7 @@
                                                                             style="color: #898989;">({{ $quote['duration'] ?? " " }})</strong>
                                                                     </h4>
                                                                     
-                                                                    <a href="{{ route('transporter.new_jobs_new', ['share_quotation' => $quote['id'] ?? " "]) }}"
+                                                                    <a href="{{ route('transporter.job_information',$quote['id'])}}"
                                                                         class="make_offer_btn"
                                                                         style="background: #52D017; width: 100%;padding: 14px 20px;border-radius: 33px; display: block;text-align: center;font-size: 125%;color: #fff;text-decoration: none;font-family: 'Montserrat', sans-serif; margin-top: 10px;">Place
                                                                         Bid</a>

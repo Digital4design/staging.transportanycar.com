@@ -228,4 +228,16 @@ class User extends Authenticatable
     {
         return $this->hasOne(CompanyDetail::class); // Assuming one-to-one relationship
     }
+    public function user_feedback()
+    {
+        return $this->hasMany(Feedback::class, 'transporter_id');
+    }
+    public function user_QuoteByTransporter()
+    {
+        return $this->hasMany(QuoteByTransporter::class, 'user_id')->where('status', 'accept');
+    }
+    public function userbid_QuoteByTransporter()
+    {
+        return $this->hasMany(QuoteByTransporter::class, 'user_id')->where('status', 'pending');
+    }
 }

@@ -16,6 +16,7 @@
     <!-- owl slider -->
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/web/vendors/owl.carousel/css/owl.carousel.min.css') }}" />
+
     <!-- Custome CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/web/css/header_footer.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/web/css/style.css') }}" />
@@ -68,6 +69,8 @@
 </head>
 
 <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-572LPM3G"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     @yield('content')
 </body>
 <!-- Bootstrap JS & Jquery -->

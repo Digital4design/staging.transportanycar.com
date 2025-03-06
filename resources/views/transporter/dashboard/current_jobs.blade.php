@@ -392,121 +392,19 @@
                         <div class="tab-content new_job_list_mobile">
                             <div class="tab-pane fade show active" id="won" role="tabpanel" aria-labelledby="won-tab">
                                 <ul id="idWonLoadData">
-                                    {{--                                    <li> --}}
-                                    {{--                                        <div class="list_img"> --}}
-                                    {{--                                            <img src="{{asset('assets/web/images/dashboard/1.png')}}"> --}}
-                                    {{--                                            <p>£267</p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <div class="list_detail"> --}}
-                                    {{--                      <span> --}}
-                                    {{--                        <img src="{{asset('assets/web/images/dashboard/car-icon.svg')}}" alt="Car Icon"> --}}
-                                    {{--                      </span> --}}
-                                    {{--                                            <p>Make & model:</p> --}}
-                                    {{--                                            <p><b>BMW 1 Series</b></p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <div class="list_detail"> --}}
-                                    {{--                      <span> --}}
-                                    {{--                        <img src="{{asset('assets/web/images/dashboard/map-icon.svg')}}" alt="Map Icon"> --}}
-                                    {{--                      </span> --}}
-                                    {{--                                            <p>Pick-up postcode:</p> --}}
-                                    {{--                                            <p><b>CM13 4UP</b></p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <div class="list_detail"> --}}
-                                    {{--                      <span> --}}
-                                    {{--                        <img src="{{asset('assets/web/images/dashboard/red-map-icon.svg')}}" alt="Map Icon"> --}}
-                                    {{--                      </span> --}}
-                                    {{--                                            <p>Drop-off postcode:</p> --}}
-                                    {{--                                            <p><b>NW1 5TU</b></p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <div class="list_detail"> --}}
-                                    {{--                      <span> --}}
-                                    {{--                        <img src="{{asset('assets/web/images/dashboard/calendar.svg')}}" alt="calendar Icon"> --}}
-                                    {{--                      </span> --}}
-                                    {{--                                            <p>Delivery date:</p> --}}
-                                    {{--                                            <p><b>8th Jan 2024</b></p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <a href="javascript:;" class="view_btn"> View details </a> --}}
-                                    {{--                                    </li> --}}
+                                  
                                 </ul>
                             </div>
                             <!-- bidding -->
                             <div class="tab-pane fade" id="bidding" role="tabpanel" aria-labelledby="bidding-tab">
                                 <ul id="idBidingLoadData">
-                                    {{--                                    <li> --}}
-                                    {{--                                        <div class="list_img"> --}}
-                                    {{--                                            <img src="{{asset('assets/web/images/dashboard/1.png')}}"> --}}
-                                    {{--                                            <p>£267</p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <div class="list_detail"> --}}
-                                    {{--                                          <span> --}}
-                                    {{--                                            <img src="{{asset('assets/web/images/dashboard/car-icon.svg')}}" alt="Car Icon"> --}}
-                                    {{--                                          </span> --}}
-                                    {{--                                            <p>Make & model:</p> --}}
-                                    {{--                                            <p><b>BMW 1 Series</b></p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <div class="list_detail"> --}}
-                                    {{--                                              <span> --}}
-                                    {{--                                                <img src="{{asset('assets/web/images/dashboard/map-icon.svg')}}" alt="Map Icon"> --}}
-                                    {{--                                              </span> --}}
-                                    {{--                                            <p>Pick-up postcode:</p> --}}
-                                    {{--                                            <p><b>CM13 4UP</b></p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <div class="list_detail"> --}}
-                                    {{--                                          <span> --}}
-                                    {{--                                            <img src="{{asset('assets/web/images/dashboard/red-map-icon.svg')}}" alt="Map Icon"> --}}
-                                    {{--                                          </span> --}}
-                                    {{--                                            <p>Drop-off postcode:</p> --}}
-                                    {{--                                            <p><b>NW1 5TU</b></p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <div class="list_detail"> --}}
-                                    {{--                                          <span> --}}
-                                    {{--                                            <img src="{{asset('assets/web/images/dashboard/calendar.svg')}}" alt="calendar Icon"> --}}
-                                    {{--                                          </span> --}}
-                                    {{--                                            <p>Delivery date:</p> --}}
-                                    {{--                                            <p><b>8th Jan 2024</b></p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <a href="javascript:;" class="view_btn"> Edit Quote </a> --}}
-                                    {{--                                    </li> --}}
+                                    
                                 </ul>
                             </div>
                             <!-- cancel -->
                             <div class="tab-pane fade" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
                                 <ul id="idCancelLoadData">
-                                    {{--                                    <li> --}}
-                                    {{--                                        <div class="list_img"> --}}
-                                    {{--                                            <img src="{{asset('assets/web/images/dashboard/1.png')}}"> --}}
-                                    {{--                                            <p>£267</p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <div class="list_detail"> --}}
-                                    {{--                                              <span> --}}
-                                    {{--                                                <img src="{{asset('assets/web/images/dashboard/car-icon.svg')}}" alt="Car Icon"> --}}
-                                    {{--                                              </span> --}}
-                                    {{--                                            <p>Make & model:</p> --}}
-                                    {{--                                            <p><b>BMW 1 Series</b></p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <div class="list_detail"> --}}
-                                    {{--                                              <span> --}}
-                                    {{--                                                <img src="{{asset('assets/web/images/dashboard/map-icon.svg')}}" alt="Map Icon"> --}}
-                                    {{--                                              </span> --}}
-                                    {{--                                            <p>Pick-up postcode:</p> --}}
-                                    {{--                                            <p><b>CM13 4UP</b></p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <div class="list_detail"> --}}
-                                    {{--                                              <span> --}}
-                                    {{--                                                <img src="{{asset('assets/web/images/dashboard/red-map-icon.svg')}}" alt="Map Icon"> --}}
-                                    {{--                                              </span> --}}
-                                    {{--                                            <p>Drop-off postcode:</p> --}}
-                                    {{--                                            <p><b>NW1 5TU</b></p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <div class="list_detail"> --}}
-                                    {{--                                              <span> --}}
-                                    {{--                                                <img src="{{asset('assets/web/images/dashboard/calendar.svg')}}" alt="calendar Icon"> --}}
-                                    {{--                                              </span> --}}
-                                    {{--                                            <p>Delivery date:</p> --}}
-                                    {{--                                            <p><b>8th Jan 2024</b></p> --}}
-                                    {{--                                        </div> --}}
-                                    {{--                                        <a href="javascript:;" class="view_btn"> View details </a> --}}
-                                    {{--                                    </li> --}}
+                                   
                                 </ul>
                             </div>
                         </div>

@@ -38,9 +38,9 @@ class MessageController extends WebController
     public function getChatHistory(Request $request, $id)
     {
         $thread = Thread::with(['user_qot', 'messages', 'messages.sender'])->where('id', '=', $id)->first();
-        $quote_by_transporter = QuoteByTransporter::where(['user_quote_id' => $thread->user_quote_id, 'user_id'=> $thread->friend_id])->first();
+        $quote_by_transporter = QuoteByTransporter::where(['user_quote_id' => $thread->user_quote_id, 'user_id' => $thread->friend_id])->first();
         $quote = UserQuote::find($quote_by_transporter->user_quote_id);
-        $transaction = TransactionHistory::where('quote_by_transporter_id',$quote_by_transporter->id)->where('status','completed')->exists() ? "true":"false";
+        $transaction = TransactionHistory::where('quote_by_transporter_id', $quote_by_transporter->id)->where('status', 'completed')->exists() ? "true" : "false";
         if (!empty($thread)) {
             $firend_data = $this->user_obj->find($request->to);
             $thread->messages()->update(['status' => "read"]);
@@ -50,7 +50,7 @@ class MessageController extends WebController
         } else {
             $messages = collect();
         }
-        return view('transporter.dashboard.partial.history_listing')->with(compact('messages', 'thread','transaction','quote'));
+        return view('transporter.dashboard.partial.history_listing')->with(compact('messages', 'thread', 'transaction', 'quote'));
     }
 
     public function store(Request $request, $id)
@@ -65,10 +65,10 @@ class MessageController extends WebController
         $auth_user = Auth::user();
         $from_quote_id = $id;
         $current_chat_id = $request->current_chat_id;
-        
+
         $isThreadExist = Thread::where(function ($q) use ($from_quote_id, $current_chat_id) {
             $q->where('user_quote_id', '=', $from_quote_id)
-              ->where('id', '=', $current_chat_id);
+                ->where('id', '=', $current_chat_id);
         })->first();
         $thread_id = 0;
         if ($isThreadExist) {
@@ -76,17 +76,14 @@ class MessageController extends WebController
             $thread_id = $isThreadExist->id;
             $isThreadExist->user_status = 'y'; // Update the thread's status
             $isThreadExist->save(); // Save the changes
-        }  
-        // else {
-        //     $threads = Thread::createOrUpdate(['user_id' => $from_user_id]);
-        //     $thread_id = $threads->id;
-        // }
+        }
+      
         $message_type = "message";
         if ($request->hasFile('file')) {
             $message_type = "file";
         }
         $isThread = Thread::where('id', $thread_id)->first();
-        
+
         $userQuote = UserQuote::where('id', $from_quote_id)->first();
         $customer_user = $userQuote->user;
         $message = Message::create([
@@ -103,51 +100,49 @@ class MessageController extends WebController
         }
         if ($message) {
             try {
-                $subject= 'You Have a Message from ' . ($auth_user->username ?? 'User') . ' Regarding ' . ($userQuote->vehicle_make ?? '') . ' ' . ($userQuote->vehicle_model ?? '') . ' Delivery.';
+                $subject = 'You Have a Message from ' . ($auth_user->username ?? 'User') . ' Regarding ' . ($userQuote->vehicle_make ?? '') . ' ' . ($userQuote->vehicle_model ?? '') . ' Delivery.';
 
-                if($customer_user->job_email_preference) {
+                if ($customer_user->job_email_preference) {
                     $email_to = $customer_user->email;
                     $maildata['user'] = $auth_user;
                     $maildata['thread'] = $isThread;
                     $maildata['message'] = $request->message;
-                    if($userQuote->status == 'pending'){
+                    if ($userQuote->status == 'pending') {
                         $maildata['from_page'] = 'quotes_admin';
-                        
-                    } else if($userQuote->status == 'completed') {
+
+                    } else if ($userQuote->status == 'completed') {
                         $maildata['from_page'] = 'delivery_admin';
                     } else {
                         $maildata['from_page'] = 'message_admin';
                     }
-                  
+
                     $maildata['quotes'] = $userQuote;
                     $maildata['quote_id'] = $from_quote_id;
                     $maildata['type'] = 'user';
-                    $maildata['url'] =  route('front.manage_notification');
-                    
-                    $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
-                    $this->emailService->sendEmail($email_to, $htmlContent,  $subject);
+                    $maildata['url'] = route('front.manage_notification');
+                    // $maildata['main_url'] = route('front.quotes');
+                    $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'quotes_id' => $from_quote_id, 'thread_id' => $thread_id])->render();
+                    $this->emailService->sendEmail($email_to, $htmlContent, $subject);
 
                     // Call create_notification to notify the user
                     create_notification(
-                        $customer_user->id, 
+                        $customer_user->id,
                         $auth_user->id,
-                        $from_quote_id,       
+                        $from_quote_id,
                         'New message',
-                        'You have received a message from '.$auth_user->username,  // Message of the notification
+                        'You have received a message from ' . $auth_user->username,  // Message of the notification
                         'message',
                         $thread_id
                     );
                 } else {
                     Log::info('User with email ' . $customer_user->email . ' has opted out of receiving emails. Message email not sent.');
                 }
-                if($customer_user->mobile && $customer_user->user_sms_alert > 0)
-                {
-                    $smS = "Transport Any Car: New message from $auth_user->username to deliver your $userQuote->vehicle_make $userQuote->vehicle_model. \n\n".request()->getSchemeAndHttpHost()."/messages \n\n"." ".request()->getSchemeAndHttpHost()."/manage_notification";
-                    $this->sendSMS->sendSms($customer_user->mobile,$smS);
+                if ($customer_user->mobile && $customer_user->user_sms_alert > 0) {
+                    $smS = "Transport Any Car: New message from $auth_user->username to deliver your $userQuote->vehicle_make $userQuote->vehicle_model. \n\n" . request()->getSchemeAndHttpHost() . "/messages \n\n" . " " . request()->getSchemeAndHttpHost() . "/manage_notification";
+                    $this->sendSMS->sendSms($customer_user->mobile, $smS);
                 }
-            } 
-            catch (\Exception $ex) {
-                    Log::error('Error sending email: ' . $ex->getMessage());
+            } catch (\Exception $ex) {
+                Log::error('Error sending email: ' . $ex->getMessage());
             }
             return response()->json(['status' => "success", "data" => $message]);
         } else {
@@ -169,7 +164,7 @@ class MessageController extends WebController
         $search = ($request->search) ?? "";
         $user = Auth::user();
         $user_id = $user->id;
-        $front_user=array();
+        $front_user = array();
         $my_quotes = QuoteByTransporter::where('user_id', $user_id)->get();
         $quotes = UserQuote::whereIn('id', $my_quotes->pluck('user_quote_id'))->where('created_at', '>=', Carbon::now()->subDays(10))->get();
         foreach ($quotes as $quote) {
@@ -181,13 +176,13 @@ class MessageController extends WebController
             $existingThread = Thread::where(function ($q) use ($quote, $user_id) {
                 $q->where(function ($q1) use ($quote, $user_id) {
                     $q1->where('user_id', '=', $user_id)
-                    ->where('friend_id', '=', $quote->user_id);
+                        ->where('friend_id', '=', $quote->user_id);
                 })->orWhere(function ($q2) use ($quote, $user_id) {
                     $q2->where('user_id', '=', $quote->user_id)
-                    ->where('friend_id', '=', $user_id);
+                        ->where('friend_id', '=', $user_id);
                 });
             })->where('user_quote_id', '=', $quote->id)
-            ->first();
+                ->first();
             if (!$existingThread) {
                 $thread = new Thread();
                 $thread->user_id = $user_id;
@@ -196,7 +191,7 @@ class MessageController extends WebController
                 $thread->last_msg_update_time = now();
                 $thread->save();
             }
-            $front_user[$quote->user_id] = User::where('id',$quote->user_id)->first();
+            $front_user[$quote->user_id] = User::where('id', $quote->user_id)->first();
         }
 
         $c_insatnce = $this->thread_obj->with(['message_latest'])->select("threads.*", 'u.name as user_name', 'u.profile_image', 'u.type as user_type')->TotalUnreadMessageCount(0)
@@ -228,23 +223,23 @@ class MessageController extends WebController
         //     ->groupBy('from_user_id')
         //     ->get();
         $latest_chat = $chats->first();
-        return view('transporter.dashboard.partial.chat_listing')->with(compact('chats', 'user', 'latest_chat', 'quotes', 'selected_chat_id','front_user'));
+        return view('transporter.dashboard.partial.chat_listing')->with(compact('chats', 'user', 'latest_chat', 'quotes', 'selected_chat_id', 'front_user'));
     }
 
     public function QuoteSendMessage(Request $request)
     {
-       
+
         $user = Auth::user();
         $friend_id = $request->user_id ?? 0;
         $quoteId = $request->user_quote_id;
         $thread = Thread::where(function ($q) use ($friend_id) {
             $q->where('user_id', '=', $friend_id)
-            ->orWhere('friend_id', '=', $friend_id);
+                ->orWhere('friend_id', '=', $friend_id);
         })->where(function ($q) use ($user) {
             $q->where('user_id', '=', $user->id)
-            ->orWhere('friend_id', '=', $user->id);
+                ->orWhere('friend_id', '=', $user->id);
         })->where('user_quote_id', '=', $quoteId)
-        ->first();
+            ->first();
         if (!$thread) {
             $thread = Thread::create([
                 'user_id' => $friend_id,
@@ -264,10 +259,10 @@ class MessageController extends WebController
         ]);
         if ($message) {
             try {
-               
+
                 $customer_user = User::where('id', $friend_id)->first();
-                $quote_id= QuoteByTransporter::where('user_quote_id',$request->user_quote_id)->where('user_id',$user->id)->first();
-                if($customer_user->job_email_preference) {
+                $quote_id = QuoteByTransporter::where('user_quote_id', $request->user_quote_id)->where('user_id', $user->id)->first();
+                if ($customer_user->job_email_preference) {
                     $email_to = $customer_user->email;
                     $maildata['user'] = $user;
                     $maildata['thread'] = $thread;
@@ -277,31 +272,30 @@ class MessageController extends WebController
                     $quotes = UserQuote::where('id', $request->user_quote_id)->first();
                     $maildata['quotes'] = $quotes;
                     $maildata['type'] = 'user';
-                    $maildata['url'] =  route('front.manage_notification');
+                    $maildata['url'] = route('front.manage_notification');
+                    $maildata['main_url'] = 'front.quotes';
                     $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
                     $this->emailService->sendEmail($email_to, $htmlContent, 'You have a new message');
 
                     // Call create_notification to notify the user
                     create_notification(
-                        $customer_user->id, 
+                        $customer_user->id,
                         $user->id,
-                        $request->user_quote_id,       
+                        $request->user_quote_id,
                         'New message',
-                        'You have received a message from '.$user->username.' for '.$quotes->vehicle_make.' '.$quotes->vehicle_model.' delivery. ',  // Message of the notification
+                        'You have received a message from ' . $user->username . ' for ' . $quotes->vehicle_make . ' ' . $quotes->vehicle_model . ' delivery. ',  // Message of the notification
                         'message',
                         $thread_id
                     );
                 } else {
                     Log::info('User with email ' . $customer_user->email . ' has opted out of receiving emails. Message email not sent.');
                 }
-                if($customer_user->mobile && $customer_user->user_sms_alert > 0)
-                {
-                    $smS = "Transport Any Car: New message from $user->username to deliver your $quotes->vehicle_make $quotes->vehicle_model. \n\n".request()->getSchemeAndHttpHost()."/messages \n\n"." ".request()->getSchemeAndHttpHost()."/manage_notification";
-                    $this->sendSMS->sendSms($customer_user->mobile,$smS);
+                if ($customer_user->mobile && $customer_user->user_sms_alert > 0) {
+                    $smS = "Transport Any Car: New message from $user->username to deliver your $quotes->vehicle_make $quotes->vehicle_model. \n\n" . request()->getSchemeAndHttpHost() . "/messages \n\n" . " " . request()->getSchemeAndHttpHost() . "/manage_notification";
+                    $this->sendSMS->sendSms($customer_user->mobile, $smS);
                 }
-            } 
-            catch (\Exception $ex) {
-                    Log::error('Error sending email: ' . $ex->getMessage());
+            } catch (\Exception $ex) {
+                Log::error('Error sending email: ' . $ex->getMessage());
             }
             return response()->json(['status' => "success", "data" => $message, "thread" => $thread]);
         } else {
@@ -325,10 +319,93 @@ class MessageController extends WebController
             $messages = collect();
             $totalMessageCount = 0;
         }
-        $view = view('transporter.dashboard.partial.delivery_chat_history', compact('messages', 'thread', 'user','totalMessageCount'))->render();
+        $view = view('transporter.dashboard.partial.delivery_chat_history', compact('messages', 'thread', 'user', 'totalMessageCount'))->render();
         return response()->json([
             'html' => $view,
             'totalmessagecount' => $totalMessageCount,
         ]);
+    }
+    public function jobInfoMessage(Request $request)
+    {
+        if(isset($request->form_page) && $request->form_page == 'quote') {
+            $request->validate([
+                'message' => [
+                    'required',
+                    'regex:/^[^\d]*$/', // Ensure no digits are present
+                ],
+            ]);
+        }
+
+        $user = Auth::user();
+        $friend_id = $request->user_id ?? 0;
+        $quoteId = $request->user_quote_id;        
+        $thread = Thread::where(function ($q) use ($friend_id) {
+            $q->where('user_id', '=', $friend_id)
+                ->orWhere('friend_id', '=', $friend_id);
+        })->where(function ($q) use ($user) {
+            $q->where('user_id', '=', $user->id)
+                ->orWhere('friend_id', '=', $user->id);
+        })->where('user_quote_id', '=', $quoteId)
+            ->first();
+        if (!$thread) {
+            $thread = Thread::create([
+                'user_id' => $friend_id,
+                'friend_id' => $user->id,
+                'user_quote_id' => $request->user_quote_id,
+                'last_msg_update_time' => date('Y-m-d H:i:s'),
+            ]);
+        }
+
+        $thread_id = $thread->id ?? 0;
+        $message = Message::create([
+            'threads_id' => $thread->id,
+            'sender_id' => $user->id,
+            'receiver_id' => $friend_id,
+            'message' => $request->message ?? null,
+            'type' => "message",
+        ]);
+        if ($message) {
+            try {
+
+                $customer_user = User::where('id', $friend_id)->first();
+                $quote_id = QuoteByTransporter::where('user_quote_id', $request->user_quote_id)->where('user_id', $user->id)->first();
+                if ($customer_user->job_email_preference) {
+                    $email_to = $customer_user->email;
+                    $maildata['user'] = $user;
+                    $maildata['thread'] = $thread;
+                    $maildata['message'] = $request->message;
+                    $maildata['from_page'] = $request->form_page;
+                    $maildata['quote_id'] = $quote_id->id;
+                    $quotes = UserQuote::where('id', $request->user_quote_id)->first();
+                    $maildata['quotes'] = $quotes;
+                    $maildata['type'] = 'user';
+                    $maildata['url'] = route('front.manage_notification');
+                    $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
+                    $this->emailService->sendEmail($email_to, $htmlContent, 'You have a new message');
+
+                    // Call create_notification to notify the user
+                    create_notification(
+                        $customer_user->id,
+                        $user->id,
+                        $request->user_quote_id,
+                        'New message',
+                        'You have received a message from ' . $user->username . ' for ' . $quotes->vehicle_make . ' ' . $quotes->vehicle_model . ' delivery. ',  // Message of the notification
+                        'message',
+                        $thread_id
+                    );
+                } else {
+                    Log::info('User with email ' . $customer_user->email . ' has opted out of receiving emails. Message email not sent.');
+                }
+                if ($customer_user->mobile && $customer_user->user_sms_alert > 0) {
+                    $smS = "Transport Any Car: New message from $user->username to deliver your $quotes->vehicle_make $quotes->vehicle_model. \n\n" . request()->getSchemeAndHttpHost() . "/messages \n\n" . " " . request()->getSchemeAndHttpHost() . "/manage_notification";
+                    $this->sendSMS->sendSms($customer_user->mobile, $smS);
+                }
+            } catch (\Exception $ex) {
+                Log::error('Error sending email: ' . $ex->getMessage());
+            }
+            return response()->json(['status' => "success", "data" => $message, "thread" => $thread]);
+        } else {
+            return response()->json(['status' => "error", "data" => []]);
+        }
     }
 }

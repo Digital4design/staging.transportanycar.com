@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Feedback extends Model
 {
     protected $guarded = [];
+    protected $fillable = ['transporter_id', 'rating', 'comment', 'quote_by_transporter_id','first_name','vehical_name','user_id','date'];
+
 
     public function quote_by_transporter()
     {

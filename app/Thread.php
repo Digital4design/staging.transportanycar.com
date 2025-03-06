@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,6 +44,10 @@ class Thread extends Model
     {
         return $this->hasMany(Message::class, 'threads_id');
     }
+    // public function jobInfo_messages()
+    // {
+    //     return $this->hasMany(Message::class, 'threads_id')->where('friend_id', auth()->id());
+    // }
 
     public static function get_thread_id($user_id_1 = 0, $user_id_2 = 0)
     {

@@ -266,6 +266,13 @@ function admin_modules()
                     'approved_counter' => true,
                     'all_routes' => [],
                 ],
+                [
+                    'route' => route('admin.carTransporter.review'),
+                    'name' => 'Edit Review',
+                    'icon' => 'badge badge-custom',
+                    'approved_counter' => true,
+                    'all_routes' => [],
+                ],
             ]
         ],
         [
@@ -883,7 +890,7 @@ function readMoreHelper($story_desc, $chars)
     if (strlen($story_desc) > $chars) {
         $short_desc = substr($story_desc, 0, $chars);
         $long_desc = substr($story_desc, $chars);
-        $story_desc = $short_desc . '<a href="javascript:;" class="read_more_show"> Read More</a>';
+        $story_desc = $short_desc . '<a href="javascript:;" class="read_more_show"> Read more</a>';
         $story_desc .= '<span class="read_more_content d-none">' . $long_desc . '<a href="javascript:;" class="read_more_less d-none"> Read Less</a></span>';
     }
 

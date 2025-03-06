@@ -296,7 +296,7 @@
                                         fill="#52D017"></path>
                                 </svg>
                             </i>
-                            <span>{{ $quote->pickup_postcode ? hidePostcode($quote->pickup_postcode) : '-' }}</span>
+                            <span>{{ $quote->pickup_postcode ? hidePostcode(get_last_two_parts($quote->pickup_postcode)) : '-' }}</span>
                         </li>
 
                         <li>
@@ -308,7 +308,7 @@
                                         fill="#ED1C24"></path>
                                 </svg>
                             </i>
-                            <span>{{ $quote->drop_postcode ? hidePostcode($quote->drop_postcode) : '-' }}</span>
+                            <span>{{ $quote->drop_postcode ? hidePostcode(get_last_two_parts($quote->drop_postcode)) : '-' }}</span>
                         </li>
                     </ul>
                 </div>
@@ -378,10 +378,11 @@
                             <div class="btnCol">
 
                                 @if ($quote->tranporterId == auth()->user()->id)
-                                    <a href="javascript:;" onclick="share_edit_quote('{{ $quote->id }}');"
+                                
+                                    <a  href="{{ route('transporter.job_information', $quote->id) }}"
                                         class="w-100 mt-0 make_offer_btn checkStatus">Edit bid</a>
                                 @else
-                                    <a href="javascript:;" onclick="share_give_quote('{{ $quote->id }}');"
+                                    <a  href="{{ route('transporter.job_information', $quote->id) }}"
                                         class="w-100 mt-0 make_offer_btn checkStatus">
                                         Place bid</a>
                                 @endif

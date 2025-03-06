@@ -3,8 +3,9 @@
 @section('head_css')
     <style>
         .adjust-space-without-btn {
-            margin-bottom: 40px!important;
+            margin-bottom: 40px !important;
         }
+
         .jobsrch_info_list h6 {
             width: 10% !important;
         }
@@ -60,8 +61,8 @@
 
 
         /* .jobsrch_form_blog .form-control {
-                            color: #000000;
-                        } */
+                                color: #000000;
+                            } */
         .jobsrch_form_blog .error-message {
             position: absolute;
             bottom: -34px;
@@ -136,9 +137,9 @@
         }
 
         /* .get_quote .modal-header .close {
-                    position: absolute;
-                    right: 15px;
-                } */
+                        position: absolute;
+                        right: 15px;
+                    } */
 
         /* Add your CSS styling here */
         #popup {
@@ -233,10 +234,10 @@
         }
 
         /* #carDetailsModal .modal-header button.btn-close {
-                    position: absolute;
-                    top: 11px;
-                    right: 15px;
-                } */
+                        position: absolute;
+                        top: 11px;
+                        right: 15px;
+                    } */
 
         #carDetailsModal .modal-header span {
             display: flex;
@@ -359,29 +360,43 @@
             padding-bottom: 20px;
         }
 
-        .get_quote.avoid-user-to-place-bid .modal-header {margin-bottom: 0;}
-        .get_quote.avoid-user-to-place-bid .modal-content {border-radius: 8px; box-shadow: 0 4px 4px 0rgba(0,0,0,0.25); padding: 35px;}
+        .get_quote.avoid-user-to-place-bid .modal-header {
+            margin-bottom: 0;
+        }
+
+        .get_quote.avoid-user-to-place-bid .modal-content {
+            border-radius: 8px;
+            box-shadow: 0 4px 4px 0rgba(0, 0, 0, 0.25);
+            padding: 35px;
+        }
+
         .get_quote.avoid-user-to-place-bid .modal-title {
             font-size: 20px;
             line-height: 25px;
             font-weight: 400;
         }
+
         .get_quote.avoid-user-to-place-bid .modal-body {
             font-size: 12px;
             line-height: 15px;
             font-weight: 300;
-            color:#444444;
+            color: #444444;
             text-align: center;
             margin: 25px 0;
         }
+
         .get_quote.avoid-user-to-place-bid .modal-dialog {
             max-width: 285px;
         }
-        .get_quote.avoid-user-to-place-bid .modal-footer {margin-top: 0;}
+
+        .get_quote.avoid-user-to-place-bid .modal-footer {
+            margin-top: 0;
+        }
+
         .get_quote.avoid-user-to-place-bid .modal-footer button {
             font-size: 14px;
             line-height: 18px;
-            font-weight: 400!important;
+            font-weight: 400 !important;
             margin-bottom: 0;
             border-radius: 5px;
         }
@@ -1407,9 +1422,9 @@
 
 
             /* .job_se_sec.slick-initialized .slick-slide {
-                display: block;
-                width: 380px !important;
-            } */
+                    display: block;
+                    width: 380px !important;
+                } */
 
             .job_se_sec .slick-track {
                 width: 760px !important;
@@ -1420,10 +1435,10 @@
             }
 
             /* .modal-header button.btn-close {
-                        position: absolute;
-                        top: 11px;
-                        right: 15px;
-                    } */
+                            position: absolute;
+                            top: 11px;
+                            right: 15px;
+                        } */
 
             .jobserch_mob .jobsrch_box {
                 padding: 20px 20px 10px;
@@ -1743,8 +1758,8 @@
                                         <label>Sheffield</label>
                                         <label>Devon</label>
                                     </div>
-                                    
-                                   
+
+
                                     <div class="form-group">
                                         <a href="javascript:;" class="srchjob_byn" id="search_job">
                                             <svg class="d-md-inline-block d-none" xmlns="http://www.w3.org/2000/svg"
@@ -1820,7 +1835,7 @@
                                                                             fill="#52D017"></path>
                                                                     </svg>
                                                                 </i>
-                                                                <span>{{ $quote->pickup_postcode ? hidePostcode($quote->pickup_postcode) : '-' }}</span>
+                                                                <span class="text-decoration-none">{{ $quote->pickup_postcode ? hidePostcode(get_last_two_parts($quote->pickup_postcode)) : '-' }}</span>
                                                             </li>
 
                                                             <li>
@@ -1833,7 +1848,7 @@
                                                                             fill="#ED1C24"></path>
                                                                     </svg>
                                                                 </i>
-                                                                <span>{{ $quote->drop_postcode ? hidePostcode($quote->drop_postcode) : '-' }}</span>
+                                                                <span class="text-decoration-none">{{ $quote->drop_postcode ? hidePostcode(get_last_two_parts($quote->drop_postcode)) : '-' }}</span>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -1906,13 +1921,17 @@
                                                             <li class="row mx-0 w-100 align-items-end mb-0">
                                                                 <div class="btnCol">
                                                                     @if ($quote->quoteByTransporter)
-                                                                        <a href="javascript:;"
+                                                                        {{-- <a href="javascript:;"
                                                                             onclick="share_edit_quote('{{ $quote->id }}');"
                                                                             class="w-100 mt-0 make_offer_btn checkStatus">Edit
-                                                                            bid</a>
+                                                                            bid</a> --}}
+                                                                            <a href="{{ route('transporter.job_information', $quote->id) }}"
+                                                                                class="w-100 mt-0 make_offer_btn checkStatus">
+                                                                                Edit bid
+                                                                             </a>
                                                                     @else
-                                                                        <a href="javascript:;"
-                                                                            onclick="share_give_quote('{{ $quote->id }}');"
+                                                                        <a href="{{ route('transporter.job_information', $quote->id) }}"
+                                                                            {{-- onclick="share_give_quote('{{ $quote->id }}');" --}}
                                                                             class="w-100 mt-0 make_offer_btn checkStatus">Place
                                                                             bid</a>
                                                                     @endif
@@ -1922,7 +1941,7 @@
                                                                         <a href="javascript:;" style="margin-left: auto;"
                                                                             class=""
                                                                             onclick="removeToWatchlist('{{ $quote->id }}');">
-                                                                           
+
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                                 width="16" height="16"
                                                                                 fill="#9C9C9C" class="bi bi-eye-slash"
@@ -1940,9 +1959,14 @@
                                                                             class=""
                                                                             onclick="addToWatchlist('{{ $quote->id }}');"
                                                                             style="margin-left: auto;">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="#9C9C9C" class="bi bi-eye" viewBox="0 0 16 16">
-                                                                                <path d="M8 2.5C4.5 2.5 1.73 5.11.64 8c1.09 2.89 3.86 5.5 7.36 5.5s6.27-2.61 7.36-5.5C14.27 5.11 11.5 2.5 8 2.5z" />
-                                                                                <circle cx="8" cy="8" r="3" />
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="16" height="16"
+                                                                                fill="none" stroke="#9C9C9C"
+                                                                                class="bi bi-eye" viewBox="0 0 16 16">
+                                                                                <path
+                                                                                    d="M8 2.5C4.5 2.5 1.73 5.11.64 8c1.09 2.89 3.86 5.5 7.36 5.5s6.27-2.61 7.36-5.5C14.27 5.11 11.5 2.5 8 2.5z" />
+                                                                                <circle cx="8" cy="8"
+                                                                                    r="3" />
                                                                             </svg>
                                                                         </a>
                                                                     @endif
@@ -1954,25 +1978,11 @@
                                                     @if ($quote->quoteByTransporter)
                                                         <div class="actionDiv">
                                                             <div class="rotated-banner">Bidding</div>
-                                                            {{-- <svg width="52" height="43" viewBox="0 0 52 43"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M0 2H19L49 27V43L24 22L0 2Z" fill="#ED1C24" />
-                                                                <path
-                                                                    d="M16.124 12.0284L16.7554 11.253L18.314 12.5222C18.588 12.7453 18.8694 12.8326 19.1583 12.7841C19.4471 12.7355 19.682 12.6001 19.863 12.3779C19.9851 12.2279 20.0652 12.061 20.1032 11.877C20.1412 11.6931 20.1272 11.5097 20.0611 11.3269C19.995 11.1441 19.8715 10.9791 19.6906 10.8317L18.132 9.56255L18.7634 8.78713L20.1902 9.94898C20.4228 10.1384 20.6574 10.2305 20.8937 10.2253C21.1301 10.22 21.3431 10.1011 21.5325 9.86848C21.7219 9.63585 21.7953 9.40326 21.7525 9.1707C21.7098 8.93814 21.5721 8.72715 21.3394 8.53771L19.9127 7.37586L20.5441 6.60044L21.9941 7.78124C22.3612 8.08012 22.6115 8.39569 22.745 8.72795C22.8785 9.06021 22.9184 9.38072 22.8647 9.68949C22.811 9.99826 22.6852 10.2741 22.4874 10.5171C22.2558 10.8014 21.9715 10.9869 21.6345 11.0735C21.3026 11.1643 20.9294 11.1528 20.515 11.0388L20.8121 10.8165C21.0396 11.2339 21.1459 11.6471 21.1309 12.0562C21.1159 12.4653 20.9695 12.8404 20.6916 13.1816C20.4643 13.4607 20.1861 13.6598 19.8571 13.7787C19.5333 13.9019 19.178 13.9264 18.7913 13.8523C18.414 13.7772 18.0315 13.5817 17.6438 13.266L16.124 12.0284ZM15.5114 11.5295L19.9315 6.1016L20.8233 6.82776L16.4032 12.2557L15.5114 11.5295ZM20.2265 15.3692L23.2575 11.6471L24.1104 12.3417L21.0795 16.0638L20.2265 15.3692ZM24.2396 11.3121C24.0949 11.1942 24.0134 11.0462 23.9951 10.868C23.9821 10.694 24.0345 10.5346 24.1523 10.3899C24.2702 10.2451 24.4157 10.1615 24.5887 10.1391C24.7669 10.1208 24.9284 10.1706 25.0731 10.2885C25.223 10.4106 25.3045 10.5586 25.3176 10.7326C25.3307 10.9066 25.2783 11.066 25.1604 11.2107C25.0425 11.3555 24.8971 11.4391 24.724 11.4615C24.551 11.484 24.3895 11.4341 24.2396 11.3121ZM23.5316 18.1895C23.1956 17.9159 22.9601 17.5823 22.825 17.1886C22.6951 16.7991 22.6679 16.3943 22.7434 15.9743C22.8282 15.5534 23.018 15.162 23.3127 14.8001C23.6116 14.4331 23.9564 14.168 24.3473 14.0048C24.7475 13.8406 25.1514 13.7827 25.5592 13.831C25.9763 13.8783 26.3528 14.0388 26.6888 14.3124C26.9732 14.544 27.1734 14.8102 27.2895 15.111C27.4149 15.411 27.456 15.7195 27.4126 16.0367C27.3693 16.3539 27.2381 16.6469 27.0192 16.9157L26.1478 17.9858C25.9289 18.2546 25.6686 18.4423 25.3667 18.5491C25.0701 18.66 24.7601 18.687 24.4368 18.63C24.1177 18.5679 23.8159 18.4211 23.5316 18.1895ZM24.3279 17.4968C24.5398 17.6694 24.7612 17.7723 24.9921 17.8055C25.2323 17.8378 25.4659 17.8044 25.6927 17.7054C25.9195 17.6064 26.1234 17.4457 26.3044 17.2234C26.4854 17.0011 26.6014 16.7689 26.6525 16.5267C26.7035 16.2846 26.6868 16.0517 26.6023 15.8282C26.5272 15.6037 26.3837 15.4051 26.1717 15.2325C25.9649 15.0642 25.7414 14.9638 25.5012 14.9315C25.2703 14.8983 25.0389 14.9291 24.807 15.0239C24.5802 15.1229 24.3762 15.2836 24.1952 15.5059C24.0142 15.7282 23.8982 15.9604 23.8472 16.2026C23.8013 16.4489 23.8159 16.6844 23.891 16.9089C23.9755 17.1324 24.1211 17.3284 24.3279 17.4968ZM25.5876 19.7348L24.7346 19.0402L25.5492 18.0399L26.4353 17.2527L27.0205 16.2332L29.281 13.4572L30.134 14.1518L25.5876 19.7348ZM28.0297 21.8524C27.6937 21.5788 27.4581 21.2451 27.323 20.8514C27.1932 20.4619 27.1659 20.0572 27.2414 19.6372C27.3263 19.2162 27.5161 18.8248 27.8107 18.463C28.1096 18.0959 28.4545 17.8308 28.8453 17.6676C29.2455 17.5035 29.6495 17.4455 30.0572 17.4938C30.4743 17.5412 30.8509 17.7017 31.1869 17.9753C31.4712 18.2068 31.6714 18.473 31.7875 18.7739C31.913 19.0738 31.954 19.3824 31.9107 19.6996C31.8673 20.0167 31.7362 20.3097 31.5173 20.5786L30.6459 21.6486C30.427 21.9175 30.1666 22.1052 29.8648 22.2119C29.5681 22.3228 29.2581 22.3498 28.9348 22.2929C28.6157 22.2308 28.314 22.0839 28.0297 21.8524ZM28.8259 21.1596C29.0379 21.3322 29.2593 21.4351 29.4902 21.4684C29.7304 21.5007 29.9639 21.4673 30.1907 21.3683C30.4175 21.2692 30.6214 21.1086 30.8024 20.8863C30.9834 20.664 31.0995 20.4318 31.1505 20.1896C31.2015 19.9475 31.1848 19.7146 31.1003 19.4911C31.0252 19.2665 30.8817 19.068 30.6698 18.8954C30.463 18.727 30.2395 18.6267 29.9992 18.5944C29.7684 18.5612 29.537 18.592 29.305 18.6868C29.0782 18.7858 28.8743 18.9465 28.6933 19.1688C28.5123 19.391 28.3962 19.6233 28.3452 19.8654C28.2993 20.1118 28.314 20.3472 28.3891 20.5717C28.4735 20.7953 28.6192 20.9912 28.8259 21.1596ZM30.0856 23.3977L29.2327 22.7031L30.0472 21.7028L30.9334 20.9155L31.5185 19.8961L33.7791 17.1201L34.632 17.8146L30.0856 23.3977ZM31.04 24.1749L34.071 20.4528L34.9239 21.1474L31.893 24.8694L31.04 24.1749ZM35.0531 20.1178C34.9084 19.9999 34.8269 19.8518 34.8086 19.6736C34.7956 19.4996 34.848 19.3403 34.9658 19.1955C35.0837 19.0508 35.2292 18.9672 35.4022 18.9447C35.5804 18.9265 35.7419 18.9763 35.8866 19.0942C36.0365 19.2163 36.118 19.3643 36.1311 19.5383C36.1442 19.7123 36.0918 19.8717 35.9739 20.0164C35.856 20.1612 35.7106 20.2448 35.5375 20.2672C35.3645 20.2896 35.203 20.2398 35.0531 20.1178ZM35.4008 27.7259L37.1499 25.578C37.352 25.3299 37.4381 25.0604 37.4084 24.7697C37.3838 24.4831 37.2474 24.2388 36.9993 24.0368C36.8339 23.9021 36.6571 23.8183 36.4689 23.7854C36.2807 23.7525 36.0978 23.7713 35.9202 23.8416C35.7426 23.9119 35.5864 24.0297 35.4517 24.1952L35.2698 23.7375C35.5014 23.4532 35.7676 23.253 36.0684 23.1369C36.3735 23.0157 36.6851 22.9814 37.0033 23.0341C37.3308 23.0859 37.6316 23.2234 37.9056 23.4465C38.1847 23.6738 38.3739 23.9482 38.4732 24.2698C38.5766 24.5862 38.5978 24.9086 38.5366 25.2371C38.4797 25.5604 38.3523 25.8435 38.1544 26.0865L36.2538 28.4205L35.4008 27.7259ZM32.8497 25.6485L35.8806 21.9265L36.7336 22.621L33.7026 26.3431L32.8497 25.6485ZM37.3454 32.0176C36.9525 31.6977 36.6676 31.3454 36.4908 30.9607C36.3098 30.5812 36.2341 30.1885 36.2637 29.7827L37.2766 29.679C37.275 29.9872 37.3319 30.2657 37.4474 30.5145C37.5629 30.7633 37.7551 30.9972 38.0239 31.2161C38.3599 31.4897 38.6977 31.6186 39.0373 31.6028C39.3726 31.5922 39.6624 31.437 39.9065 31.1371L40.6516 30.2221L41.4683 29.5202L41.9966 28.5705L42.8112 27.5702L43.6641 28.2648L40.7595 31.8317C40.469 32.1884 40.1337 32.4312 39.7536 32.5602C39.3693 32.6943 38.9688 32.7163 38.552 32.6263C38.1353 32.5362 37.7331 32.3334 37.3454 32.0176ZM38.6958 30.2801C38.3649 30.0107 38.1303 29.6864 37.992 29.3073C37.8631 28.9272 37.8368 28.5318 37.9133 28.1212C37.9949 27.7148 38.1788 27.3358 38.4651 26.9843C38.7513 26.6328 39.0831 26.3785 39.4603 26.2214C39.8427 26.0685 40.231 26.0193 40.6251 26.0738C41.0287 26.1272 41.3958 26.2887 41.7267 26.5581C42.0213 26.7981 42.2314 27.068 42.3569 27.3679C42.4823 27.6678 42.5208 27.9743 42.4723 28.2872C42.428 28.595 42.2921 28.8885 42.0648 29.1677L41.3197 30.0827C41.0966 30.3567 40.8341 30.547 40.5323 30.6537C40.2357 30.7646 39.9278 30.789 39.6087 30.7269C39.2895 30.6648 38.9852 30.5159 38.6958 30.2801ZM39.5231 29.6126C39.7298 29.781 39.9465 29.8844 40.1732 29.9228C40.3998 29.9612 40.6177 29.9365 40.8267 29.8488C41.045 29.7601 41.2405 29.6098 41.4131 29.3979C41.5857 29.1859 41.6912 28.9666 41.7296 28.74C41.7774 28.5124 41.7595 28.2915 41.676 28.0773C41.5925 27.8631 41.4474 27.6718 41.2406 27.5035C41.0338 27.3351 40.8145 27.2296 40.5827 27.187C40.356 27.1486 40.1335 27.1737 39.9151 27.2624C39.701 27.3459 39.5076 27.4936 39.335 27.7056C39.1666 27.9124 39.0611 28.1317 39.0185 28.3635C38.9759 28.5953 38.9963 28.8183 39.0798 29.0325C39.1685 29.2508 39.3163 29.4442 39.5231 29.6126Z"
-                                                                    fill="#F3F8FF" />
-                                                            </svg> --}}
                                                         </div>
                                                     @else
                                                         @if ($quote->created_at->timezone('Europe/London')->diffInHours(now('Europe/London')) < 1)
                                                             <div class="actionDiv">
                                                                 <div class="rotated-banner green">New</div>
-                                                                {{-- <svg width="49" height="41" viewBox="0 0 49 41"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M0 0H19L49 25V41L24 20L0 0Z" fill="#52D017" />
-                                                                    <path
-                                                                        d="M19.3422 12.9488L23.7623 7.52081L24.3826 8.02597L23.8205 9.27053L20.2339 13.6749L19.3422 12.9488ZM23.103 16.0113L23.308 9.12396L24.3826 8.02597L24.1776 14.9133L23.103 16.0113ZM23.103 16.0113L23.6083 14.8365L27.2517 10.3623L28.1434 11.0885L23.7233 16.5164L23.103 16.0113ZM26.4501 18.8659C26.0779 18.5628 25.8092 18.2065 25.6441 17.7969C25.4884 17.3863 25.4426 16.9622 25.5068 16.5244C25.5761 16.0908 25.7603 15.6905 26.0592 15.3235C26.358 14.9564 26.7106 14.6976 27.117 14.5471C27.5275 14.3913 27.947 14.346 28.3754 14.4112C28.809 14.4805 29.2041 14.6604 29.5608 14.9509C29.9072 15.2329 30.1469 15.5614 30.2801 15.9364C30.4184 16.3155 30.4488 16.7057 30.3714 17.1069C30.2992 17.5124 30.1178 17.8935 29.8274 18.2501C29.7769 18.3122 29.7191 18.3726 29.654 18.4314C29.5983 18.4892 29.5311 18.5506 29.4525 18.6155L26.3973 16.1276L26.9656 15.4297L29.5788 17.5577L29.0336 17.5779C29.2084 17.3421 29.3203 17.115 29.369 16.8968C29.4178 16.6786 29.4034 16.4691 29.326 16.2686C29.2538 16.0722 29.1143 15.8898 28.9075 15.7214C28.6904 15.5446 28.4638 15.4375 28.2278 15.4001C27.9918 15.3626 27.7604 15.3934 27.5336 15.4924C27.311 15.5863 27.105 15.7495 26.9156 15.9822C26.7261 16.2148 26.6064 16.4569 26.5563 16.7084C26.5062 16.9599 26.5265 17.2043 26.6171 17.4414C26.7119 17.6734 26.8705 17.8799 27.0927 18.0609C27.284 18.2166 27.4871 18.3262 27.7021 18.3895C27.9223 18.457 28.1418 18.4724 28.3608 18.4358L28.4553 19.4283C28.1017 19.4929 27.7515 19.4743 27.4047 19.3724C27.0578 19.2705 26.7396 19.1016 26.4501 18.8659ZM29.9664 21.6003L31.5007 16.6596L32.3847 17.3794L31.189 20.9065L30.9191 20.6996L34.1139 18.7875L34.6102 19.1917L33.3849 22.7076L33.1276 22.4851L36.3394 20.5998L37.2233 21.3196L32.6959 23.823L32.1996 23.4188L33.2879 20.0236L33.5671 20.2509L30.4626 22.0044L29.9664 21.6003Z"
-                                                                        fill="#F3F8FF" />
-                                                                </svg> --}}
                                                             </div>
                                                         @endif
                                                     @endif
@@ -1994,7 +2004,7 @@
     <div class="pagination before_search">
         {{ $quotes->links() }}
     </div>
-    
+
 
     <div class="modal get_quote fade" id="quote" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -2034,10 +2044,14 @@
                     <div class="modal-footer" style="margin-top: 10px;">
                         <input type="hidden" name="quote_id" id="quote_id" value="">
                         <p class="position-relative pl-4" style="line-height:16px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="20" height="20" style="left:0; top:0;" class="position-absolute" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-                            </svg>                              
-                            Do not share any contact details here. We will provide you with the users contact details after they have accepted your quote.
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="20" height="20"
+                                style="left:0; top:0;" class="position-absolute" viewBox="0 0 24 24" strokeWidth={1.5}
+                                stroke="currentColor" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                            </svg>
+                            Do not share any contact details here. We will provide you with the users contact details after
+                            they have accepted your quote.
                         </p>
                         <button type="submit" class="submit_btn">Place bid</button>
                     </div>
@@ -2251,7 +2265,7 @@
             }
         });
         // D4dDeveloper-R 04-10-2024
-        $(document).on('click','#saveSrch',function() {
+        $(document).on('click', '#saveSrch', function() {
             // alert("clicked");
             $("#srchName").val('');
             $('#emailNtf').prop('checked', false);
@@ -2391,6 +2405,7 @@
                 });
             }
         });
+
         function share_give_quote(id) {
             $('#quote_id').val(id);
             var quotes = @json($quotes);
@@ -2503,7 +2518,6 @@
             });
         }
 
-
         // Listen for the quote modal to be hidden
         $('#quote').on('hidden.bs.modal', function(e) {
             // Clear the z-index
@@ -2525,6 +2539,18 @@
             myFunction(x);
         });
 
+        var jobInfoUrl = "{{ route('transporter.job_information', ':id') }}";
+
+        $(document).on('click', '.car-row', function() {
+
+            var carId = $(this).data('car-id');
+            if (carId) {
+                var url = jobInfoUrl.replace(':id', carId); // Replace placeholder with actual ID
+                window.location.href = url; // Redirect to the URL
+            } else {
+                console.log('Job ID is missing');
+            }
+        });
 
         $(document).ready(function() {
             $("#jobsrch_form_blog").validate({
@@ -2554,156 +2580,159 @@
                     $(element).closest('.form-group').removeClass('error-margin');
                 }
             });
-            $(document).on('click', '.car-row', function() {
-               
-                var carId = $(this).data('car-id');
-                var carData = carDetails.data.find(function(car) {
-                    return car.id == carId;
-                });
-                if (carData) {
-                    let makeAndModel = `${carData.vehicle_make} ${carData.vehicle_model}`;
-                    if (carData.vehicle_make_1 && carData.vehicle_model_1) {
-                        makeAndModel += ` / ${carData.vehicle_make_1} ${carData.vehicle_model_1}`;
-                    }
-                    let startsDrives = carData.starts_drives == 0 ? 'No' : 'Yes';
-                    if (carData.starts_drives_1 !== null) {
-                        startsDrives += ` / ${carData.starts_drives_1 == 0 ? 'No' : 'Yes'}`;
-                    }
-                    var createdAt = new Date(carData.created_at);
+
+
+            // $(document).on('click', '.car-row', function() {
+
+            //     var carId = $(this).data('car-id');
+            //     var carData = carDetails.data.find(function(car) {
+            //         return car.id == carId;
+            //     });
+            //     if (carData) {
+            //         let makeAndModel = `${carData.vehicle_make} ${carData.vehicle_model}`;
+            //         if (carData.vehicle_make_1 && carData.vehicle_model_1) {
+            //             makeAndModel += ` / ${carData.vehicle_make_1} ${carData.vehicle_model_1}`;
+            //         }
+            //         let startsDrives = carData.starts_drives == 0 ? 'No' : 'Yes';
+            //         if (carData.starts_drives_1 !== null) {
+            //             startsDrives += ` / ${carData.starts_drives_1 == 0 ? 'No' : 'Yes'}`;
+            //         }
+            //         var createdAt = new Date(carData.created_at);
 
                     // Add 10 days to the created_at date
-                    createdAt.setDate(createdAt.getDate() + 10);
+                    //createdAt.setDate(createdAt.getDate() + 10);
 
                     // Extract the day, month, and last two digits of the year
-                    var dd = String(createdAt.getDate()).padStart(2, '0'); // Day with leading zero
-                    var mm = String(createdAt.getMonth() + 1).padStart(2, '0'); // Month with leading zero
-                    var yy = String(createdAt.getFullYear()).slice(-2); // Last two digits of the year
+                    //var dd = String(createdAt.getDate()).padStart(2, '0'); // Day with leading zero
+                    //var mm = String(createdAt.getMonth() + 1).padStart(2, '0'); // Month with leading zero
+                    //var yy = String(createdAt.getFullYear()).slice(-2); // Last two digits of the year
 
                     // Format the date as dd//mm/yy
-                    var formattedDate = `${dd}//${mm}//${yy}`;
+                   // var formattedDate = `${dd}//${mm}//${yy}`;
 
-                    var switch_custom = '';
-                    if (carData?.quote_by_transporter) {
-                        switch_custom = `<a href="javascript:;" onclick="share_edit_quote('${carData.id}');" class="make_offer_btn checkStatus">Edit bid</a>`
-                    } else {
-                        switch_custom = ` <a href="javascript:;" onclick="share_give_quote(${carData.id});" class="make_offer_btn checkStatus">Place bid</a>`
-                    }
+                   // var switch_custom = '';
+                  //  if (carData?.quote_by_transporter) {
+                  //      switch_custom = `<a href="javascript:;" onclick="share_edit_quote('${carData.id}');" class="make_offer_btn checkStatus">Edit bid</a>`
+                //    } else {
+                //        switch_custom = ` <a href="javascript:;" onclick="share_give_quote(${carData.id});" class="make_offer_btn checkStatus">Place bid</a>`
+                //    }
 
-                    // Dynamically update modal body content
-                    var modalBodyContent = `                    
-                    <div class="jobsrch_box">
-                        <div class="row">                           
-                            <div class="col-lg-6">
-                                <div class="jobsrch_top_box position-relative ddd">
-                                    ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
-                                        <div>
-                                            <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
-                                        </div>
-                                        ` : `
-                                            <div class="job_se_sec slider">
-                                                <div>
-                                                    <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
-                                                </div>
-                                                ${carData.image_1 ? `
-                                                    <div>
-                                                        <img src="/${carData.image_1}" class="vehicle_image" alt="Vehicle Image" />
-                                                    </div>
-                                                ` : `
-                                                    <div>
-                                                        <img src="/uploads/no_car_image.png" class="vehicle_image" alt="No Image Available" />
-                                                    </div>
-                                                `}
-                                            </div>
-                                            <div class="custom-navigation">
-                                                <span class="current-slide">1</span> of <span class="total-slides">2</span>
-                                            </div>
-                                    `}                                   
-                                </div>
-                                
-                                <div class="btnCustom">${switch_custom}</div>
-                                <div class="wishList-bidInfo">
-                                    <div class="wishListBtn">
-                                         <a href="javascript:;" class="btn"
-                                            onclick="addToWatchlist('${carData.id}');"
-                                            style="margin-left: auto;">
-                                                Add to watchlist
-                                        </a>
-                                    </div>
-                                    <div class="bidTnfo">
-                                        <p class="info">Current lowest bid: <span class="green">£${carData.lowest_bid  ?? 0}</span></p>
-                                        <p class="info">Transporters bidding: <span class="blue">${carData.transporter_quotes_count}</span></p>
-                                    </div>
-                                </div>
-                           
-                                <ul class="jobsrch_info_list">
-                                    <li>
-                                        <div class="jpbsrch_inner">
-                                            <small>Make & model:</small>
-                                        </div>
-                                        <span>${makeAndModel}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                           
-                                            <small>Pick-up area:</small>
-                                        </div>
-                                        <span>${carData.pickup_postcode ? formatAddress(carData.pickup_postcode) : '-'}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                            
-                                            <small>Drop-off area:</small>
-                                        </div>
-                                        <span>${carData.drop_postcode ? formatAddress(carData.drop_postcode) : '-'}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                           
-                                            <small>Delivery date:</small>
-                                        </div>
-                                        <span>${carData.delivery_timeframe_from ? formatCustomDate(carData.delivery_timeframe_from) : carData.delivery_timeframe}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                            
-                                            <small>Starts & drives:</small>
-                                        </div>
-                                        <span>${startsDrives}</span>
-                                    </li>
-                                    <li>
-                                        <div class="jpbsrch_inner">                                            
-                                            <small>Delivery type:</small>
-                                        </div>
-                                        <span>${carData.how_moved}</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="jobsrch_right_box">
-                                    <h4 class="distance_text">Journey Distance: <b>${carData.distance} miles</b> <strong>(${carData.duration})</strong></h4> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-                    $('#carDetailsModalBody').html(modalBodyContent);
-                }
-                $('#expiry_date').html(`<p>Expiry date: ${formattedDate}</p>`);
-                $('#carDetailsModal').modal('show');
-                
-                
-                setTimeout(function() {
-                var $slider = $('.slider');
-                $slider.slick({
-                    infinite: false,
-                    speed: 300, 
-                    slidesToShow: 1,
-                    adaptiveHeight: true,
-                    prevArrow: '<div class="slick-prev"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.0756 16.5115L1.85822 10.7965C1.31976 10.4441 1 9.87387 1 9.26607C1 8.65827 1.31976 8.08803 1.85822 7.73561L10.0756 1.48823C10.7708 0.976677 11.7151 0.857068 12.5347 1.17696C13.3543 1.49685 13.917 2.20438 14 3.01972V14.984L14 14.984C13.9156 15.7986 13.3523 16.5049 12.533 16.8238C11.7136 17.1427 10.7702 17.0228 10.0756 16.5115Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>',
-                    nextArrow: '<div class="slick-next"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.9244 1.48852L13.1418 7.20349C13.6802 7.5559 14 8.12613 14 8.73393C14 9.34173 13.6802 9.91197 13.1418 10.2644L4.9244 16.5118C4.22923 17.0233 3.28491 17.1429 2.46532 16.823C1.64573 16.5032 1.08303 15.7956 1 14.9803L1 3.01597C1.08445 2.20143 1.6477 1.49505 2.46703 1.17615C3.28636 0.857255 4.22984 0.977185 4.9244 1.48852Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
-                });
-                $slider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide) {
-                    var i = (currentSlide ? currentSlide : 0) + 1;
-                    $('.current-slide').text(i);
-                    $('.total-slides').text(slick.slideCount);
-                });
-            },250)
-            });
+            //         // Dynamically update modal body content
+            //         var modalBodyContent = `                    
+        //         <div class="jobsrch_box">
+        //             <div class="row">                           
+        //                 <div class="col-lg-6">
+        //                     <div class="jobsrch_top_box position-relative ddd">
+        //                         ${carData.vehicle_make_1 == null && carData.vehicle_model_1 == null ? `
+            //                             <div>
+            //                                 <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+            //                             </div>
+            //                             ` : `
+            //                                 <div class="job_se_sec slider">
+            //                                     <div>
+            //                                         <img src="${carData.image}" class="vehicle_image" alt="Vehicle Image" />
+            //                                     </div>
+            //                                     ${carData.image_1 ? `
+        //                                         <div>
+        //                                             <img src="/${carData.image_1}" class="vehicle_image" alt="Vehicle Image" />
+        //                                         </div>
+        //                                     ` : `
+        //                                         <div>
+        //                                             <img src="/uploads/no_car_image.png" class="vehicle_image" alt="No Image Available" />
+        //                                         </div>
+        //                                     `}
+            //                                 </div>
+            //                                 <div class="custom-navigation">
+            //                                     <span class="current-slide">1</span> of <span class="total-slides">2</span>
+            //                                 </div>
+            //                         `}                                   
+        //                     </div>
+
+        //                     <div class="btnCustom">${switch_custom}</div>
+        //                     <div class="wishList-bidInfo">
+        //                         <div class="wishListBtn">
+        //                              <a href="javascript:;" class="btn"
+        //                                 onclick="addToWatchlist('${carData.id}');"
+        //                                 style="margin-left: auto;">
+        //                                     Add to watchlist
+        //                             </a>
+        //                         </div>
+        //                         <div class="bidTnfo">
+        //                             <p class="info">Current lowest bid: <span class="green">£${carData.lowest_bid  ?? 0}</span></p>
+        //                             <p class="info">Transporters bidding: <span class="blue">${carData.transporter_quotes_count}</span></p>
+        //                         </div>
+        //                     </div>
+
+        //                     <ul class="jobsrch_info_list">
+        //                         <li>
+        //                             <div class="jpbsrch_inner">
+        //                                 <small>Make & model:</small>
+        //                             </div>
+        //                             <span>${makeAndModel}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                           
+        //                                 <small>Pick-up area:</small>
+        //                             </div>
+        //                             <span>${carData.pickup_postcode ? formatAddress(carData.pickup_postcode) : '-'}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                            
+        //                                 <small>Drop-off area:</small>
+        //                             </div>
+        //                             <span>${carData.drop_postcode ? formatAddress(carData.drop_postcode) : '-'}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                           
+        //                                 <small>Delivery date:</small>
+        //                             </div>
+        //                             <span>${carData.delivery_timeframe_from ? formatCustomDate(carData.delivery_timeframe_from) : carData.delivery_timeframe}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                            
+        //                                 <small>Starts & drives:</small>
+        //                             </div>
+        //                             <span>${startsDrives}</span>
+        //                         </li>
+        //                         <li>
+        //                             <div class="jpbsrch_inner">                                            
+        //                                 <small>Delivery type:</small>
+        //                             </div>
+        //                             <span>${carData.how_moved}</span>
+        //                         </li>
+        //                     </ul>
+        //                 </div>
+        //                 <div class="col-lg-6">
+        //                     <div class="jobsrch_right_box">
+        //                         <h4 class="distance_text">Journey Distance: <b>${carData.distance} miles</b> <strong>(${carData.duration})</strong></h4> 
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </div>`;
+            //         $('#carDetailsModalBody').html(modalBodyContent);
+            //     }
+            //     $('#expiry_date').html(`<p>Expiry date: ${formattedDate}</p>`);
+            //     $('#carDetailsModal').modal('show');
+
+
+            //     setTimeout(function() {
+            //     var $slider = $('.slider');
+            //     $slider.slick({
+            //         infinite: false,
+            //         speed: 300, 
+            //         slidesToShow: 1,
+            //         adaptiveHeight: true,
+            //         prevArrow: '<div class="slick-prev"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.0756 16.5115L1.85822 10.7965C1.31976 10.4441 1 9.87387 1 9.26607C1 8.65827 1.31976 8.08803 1.85822 7.73561L10.0756 1.48823C10.7708 0.976677 11.7151 0.857068 12.5347 1.17696C13.3543 1.49685 13.917 2.20438 14 3.01972V14.984L14 14.984C13.9156 15.7986 13.3523 16.5049 12.533 16.8238C11.7136 17.1427 10.7702 17.0228 10.0756 16.5115Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>',
+            //         nextArrow: '<div class="slick-next"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.9244 1.48852L13.1418 7.20349C13.6802 7.5559 14 8.12613 14 8.73393C14 9.34173 13.6802 9.91197 13.1418 10.2644L4.9244 16.5118C4.22923 17.0233 3.28491 17.1429 2.46532 16.823C1.64573 16.5032 1.08303 15.7956 1 14.9803L1 3.01597C1.08445 2.20143 1.6477 1.49505 2.46703 1.17615C3.28636 0.857255 4.22984 0.977185 4.9244 1.48852Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+            //     });
+            //     $slider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide) {
+            //         var i = (currentSlide ? currentSlide : 0) + 1;
+            //         $('.current-slide').text(i);
+            //         $('.total-slides').text(slick.slideCount);
+            //     });
+            // },250)
+            // });
+
             $('#backButton').on('click', function() {
                 $('#carDetailsModal').modal('hide');
             });
@@ -2713,6 +2742,7 @@
             });
             $('.where_box label').click(function() {
                 var location = $(this).text();
+                
                 $('#search_pick_up_area').val(location);
                 $('.where_box').hide();
                 var errorElement = $('#search_pick_up_area-error');
@@ -2882,7 +2912,7 @@
         }
 
         function fetch_data(page, str = '') {
-           
+
             if (str == '') {
                 $('#popup').addClass('show'); // Show the popup
             }
@@ -2891,7 +2921,7 @@
             $.ajax({
                 url: globalSiteUrl + "/transporter/find_job?page=" + page,
                 data: {
-                    
+
                     search_pick_up_area: search_pick_up_area,
                     search_drop_off_area: search_drop_off_area,
                 },

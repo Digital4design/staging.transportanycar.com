@@ -3184,7 +3184,7 @@ a.chat_cross {
   border-radius: 5px;
   background: #fff;
   /* height: calc(100vh - 172px); */
-  height: calc(100vh - 80px);
+  /* height: calc(100vh - 80px); */
 }
 
 .wd-deliver-lft {
@@ -4009,7 +4009,7 @@ a.wd-leave-btn {
 
 .wd-quote-data {
   border-radius: 10px;
-  /* border: 1px solid #BABABA; */
+  border: 1px solid #BABABA;
   background: #f9f9f9;
   margin: 24px 0 0;
 }
@@ -4042,7 +4042,7 @@ a.wd-leave-btn {
 .wd-quote-data .accordion .card {
   background: transparent;
   margin-bottom: 4px;
-  /* border: none; */
+  border: none;
 }
 
 .wd-quote-data .accordion .card-header {
@@ -4069,7 +4069,7 @@ a.wd-leave-btn {
 }
 
 .wd-quote-data .accordion .card-body {
-  padding: 20px 28px 30px 30px;
+  padding: 49px 28px 30px 30px;
 }
 
 .wd-quote-form .form-group {
@@ -4313,7 +4313,7 @@ a.wd-leave-btn {
 }
 
 .wd-accepted-btn svg {
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .wd-accepted-btn:hover {
@@ -4324,12 +4324,8 @@ a.wd-leave-btn {
   font-size: 16px;
   font-weight: 400;
   color: #0356D6;
-  padding: 15px 29px 16px 30px;
+  padding: 16px 29px 15px 16px;
   margin: 0;
-  line-height: 21px;
-  border-radius: 0 0 10px 10px;
-  background-color: #ffffff;
-  margin-bottom: 3px;
 }
 
 .wd-quote-photo {
@@ -6759,6 +6755,7 @@ div#spam-banner button.btn {
     padding-right: 0;
     left: 0; */
     padding: 0;
+    z-index:9;
     background: #f3f3f3;
     border: none;
     width: 100%;
@@ -6906,7 +6903,7 @@ div#spam-banner button.btn {
 
   .wd-quote-txt p {
     padding: 14px 28px;
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .wd-quote-data .card_lft {
@@ -7319,7 +7316,7 @@ button.swal2-confirm.swal2-styled:focus {
 
 
 @media(max-width: 580px) {
-  .chat_conversation_header {position:sticky; top:65px;}
+  .chat_conversation_header {position:sticky; top:0px;}
   /* .join_network_main .trans_login_blog {padding: 0px 20px; max-width: 100%;} */
   .chat_accept_btn {padding: 7px 10px;}
   .chat_box,
@@ -7969,7 +7966,7 @@ g.highcharts-input-group {
   .msg_active_container .chat_box .scrollbar {
     /* height: auto;
     max-height: calc(100vh - 280px); */
-    height: calc(100vh - 265px);
+    height: calc(100% - 222px);
     /* max-height: calc(100% - 213px);
     padding-bottom: 0; */
   }
@@ -8111,4 +8108,10 @@ g.highcharts-input-group {
     height: calc(100% - 85px);
   } */
   .wd-active-job.new_message_section .chat_box .chat_conversation {height:100%;}
+}
+@media (max-width: 767px) {
+  .foot_img {
+      text-align: left;
+      margin: 0 0 30px;
+  }
 }

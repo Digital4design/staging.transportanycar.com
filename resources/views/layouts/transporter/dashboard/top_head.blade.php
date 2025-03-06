@@ -45,9 +45,11 @@
                         @if($notification->type == 'won_job')
                             {{ route('transporter.current_jobs', ['id' => $notification->reference_id]) }}
                         @elseif($notification->type == 'message')
-                            {{ route('transporter.messages', ['thread_id' => $notification->reference_id]) }}
+                            {{-- {{ route('transporter.job_information', ['thread_id' => $notification->user_quote_id]) }} --}}
+                            {{ route('transporter.job_information', $notification->user_quote_id) }}
                         @elseif($notification->type == 'outbid')
-                            {{ route('transporter.current_jobs', ['source' => 'notification', 'quote-id' => $notification->user_quote_id]) }}
+                            {{-- {{ route('transporter.current_jobs', ['source' => 'notification', 'quote-id' => $notification->user_quote_id]) }} --}}
+                            {{ route('transporter.job_information', $notification->user_quote_id) }}
                         @endif
                         " onclick="handleNotificationClick(event, this);">
                             <div class="drop-item-lft notifaction_sec_list">

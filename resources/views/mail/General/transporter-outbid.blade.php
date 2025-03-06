@@ -24,7 +24,7 @@
         <p style="margin-top: 25px; margin-bottom: 25px; font-weight: 300;font-family: 'Outfit', sans-serif;font-size: 16px;line-height: 22px;">You have been outbid for the
             {{ $quote->vehicle_make }} {{ $quote->vehicle_model }}
             delivery, reduce your bid now for a better chance of winning.</p>
-        <a href="{{ route('transporter.current_jobs', ['source' => 'email', 'quote-id' => $quote->id]) }}"
+        <a href="{{ route('transporter.job_information', $quote->id) }}"
             class="verify-btn"
             style="border-radius: 50px; margin-bottom: 25px;  background: #52D017; color: #ffffff; text-decoration: none; font-size: 16px; line-height: 20px; font-weight: 400; border: none; display: inline-block; padding-top: 6px; padding-bottom: 6px; padding-left: 30px; padding-right: 30px; cursor: pointer;">
             Place bid

@@ -5,6 +5,7 @@
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no, address=no" />
     <title>{{ print_title(site_name) . ' | ' }}{{ isset($title) ? print_title($title) : '' }}</title>
     <!-- Favicon [ 16*16 SVG ]-->
     <link href="{{ asset('/assets/images/favicon.png') }}" rel="icon" class="favicon">
@@ -108,6 +109,8 @@
 </head>
 
 <body style="background: #FDFFFA;">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-572LPM3G"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     @yield('content')
 </body>
 <!-- Bootstrap JS & Jquery -->
