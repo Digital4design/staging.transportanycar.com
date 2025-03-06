@@ -440,9 +440,9 @@
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:25.5px;color:#666666;font-size:17px">
                                                                         You can compare your quotes and ask questions
                                                                         via message before accepting to make sure you
-                                                                        choose the right one for you, check out
-                                                                        <a href="{{ url('/dashboard') }}">
-                                                                            your quotes here.</a> </p>
+                                                                        choose the right one for you, check outyour quotes
+                                                                        <a href="{{ url('/dashboard') }}"> here.</a>
+                                                                    </p>
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:25.5px;color:#666666;font-size:17px">
                                                                         <br></p>
