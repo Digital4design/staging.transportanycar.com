@@ -531,7 +531,7 @@ class CarTransportersController extends WebController
             'recordsTotal' => 0,
             'recordsFiltered' => 0
         );
-        $main = User::with('user_QuoteByTransporter','userbid_QuoteByTransporter')->where('type', 'car_transporter')->where('is_status', 'approved');
+        $main = User::with('user_QuoteByTransporter', 'userbid_QuoteByTransporter')->where('type', 'car_transporter')->where('is_status', 'approved');
         $return_data['recordsTotal'] = $main->count();
         if (!empty($search)) {
             $main->where(function ($query) use ($search) {
@@ -550,8 +550,8 @@ class CarTransportersController extends WebController
                 $company_name = $value->name ?? ''; // Adjust based on actual field name in the database
                 $username = $value->username ?? ''; // Assuming 'username' field exists
                 $total_bids = count($value->userbid_QuoteByTransporter) ?? 0; // If it's calculated, adjust accordingly
-                $total_jobs_won = count($value->user_QuoteByTransporter )?? 0; // Adjust based on actual field
-                $member_since = $value->created_at->format('d-m-Y'); 
+                $total_jobs_won = count($value->user_QuoteByTransporter) ?? 0; // Adjust based on actual field
+                $member_since = $value->created_at->format('d-m-Y');
                 $param = [
                     'id' => $value->id,
                     'url' => [
@@ -566,7 +566,7 @@ class CarTransportersController extends WebController
                 $return_data['data'][] = array(
                     'id' => $offset + $key + 1,
                     'profile_image' => get_fancy_box_html($value['profile_image']),
-                    'name' => $value->first_name .' '.$value->last_name,
+                    'name' => $value->first_name . ' ' . $value->last_name,
                     'company_name' => $company_name,
                     'username' => $username,
                     'mobile_number' => $value->mobile,
@@ -605,59 +605,98 @@ class CarTransportersController extends WebController
     }
     public function review_data(Request $request)
     {
-        $datatable_filter = datatable_filters();
-        $offset = $datatable_filter['offset'];
-        $search = $datatable_filter['search'];
-        // dd('here');
-        $return_data = [
-            'data' => [],
-            'recordsTotal' => 0,
-            'recordsFiltered' => 0
-        ];
-        $data = User::leftJoin('quote_by_transpoters', function ($join) {
-            $join->on('users.id', '=', 'quote_by_transpoters.user_id')
-                ->where('quote_by_transpoters.status', '=', 'accept');
-        })
+        try {
+            $start = $request->input('start', 0); 
+            $length = $request->input('length', 10);
+            $draw = $request->input('draw', 1); // ✅ Include draw for DataTables
+    
+            $datatable_filter = datatable_filters();
+            $search = $datatable_filter['search'];
+    
+            // Initialize response structure
+            $return_data = [
+                'draw' => $draw,
+                'data' => [],
+                'recordsTotal' => 0,
+                'recordsFiltered' => 0
+            ];
+    
+            // ✅ Base Query with `fake_completed_job`
+            $query = User::leftJoin('quote_by_transpoters', function ($join) {
+                $join->on('users.id', '=', 'quote_by_transpoters.user_id')
+                    ->where('quote_by_transpoters.status', '=', 'accept');
+            })
             ->leftJoin('user_quotes', function ($join) {
                 $join->on('quote_by_transpoters.user_quote_id', '=', 'user_quotes.id')
                     ->where('user_quotes.status', 'completed');
             })
             ->where('users.type', 'car_transporter')
             ->where('users.is_status', 'approved')
-            ->select('users.*', DB::raw('COUNT(user_quotes.id) as actual_completed_job'))
-            ->groupBy('users.id'); // Group by user to properly count completed jobs
-
-        $return_data['recordsTotal'] = $data->count();
-        if (!empty($search)) {
-            $data->where(function ($query) use ($search) {
-                $query->AdminSearch($search);
-            });
-        }
-        $return_data['recordsFiltered'] = $data->count();
-        $all_data = $data->orderBy($datatable_filter['sort'], $datatable_filter['order'])
-            ->offset($offset)
-            ->limit($datatable_filter['limit'])
-            ->get();
-
-        if (!empty($all_data)) {
+            ->select(
+                'users.id', 
+                'users.first_name', 
+                'users.email', 
+                'users.profile_image', 
+                'users.country_code', 
+                'users.mobile',
+                DB::raw('COUNT(user_quotes.id) as actual_completed_job'),
+                DB::raw('COALESCE(users.completed_job, 0) as fake_completed_job') // ✅ Ensure fake_completed_job exists
+            )
+            ->groupBy(
+                'users.id', 
+                'users.first_name', 
+                'users.email', 
+                'users.profile_image', 
+                'users.country_code', 
+                'users.mobile', 
+                'users.completed_job' // ✅ Ensure fake_completed_job can be counted
+            );
+    
+            // ✅ Get total count before filtering
+            $return_data['recordsTotal'] = User::where('users.type', 'car_transporter')
+                ->where('users.is_status', 'approved')
+                ->count();
+    
+            // ✅ Apply search filter
+            if (!empty($search)) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('users.email', 'like', "%{$search}%")
+                      ->orWhere('users.first_name', 'like', "%{$search}%")
+                      ->orWhere('users.mobile', 'like', "%{$search}%");
+                });
+            }
+    
+            // ✅ Get filtered count
+            $return_data['recordsFiltered'] = $query->get()->count();
+    
+            // ✅ Apply pagination correctly
+            $all_data = $query->orderBy($datatable_filter['sort'], $datatable_filter['order'])
+                ->offset($start)
+                ->limit($length)
+                ->get();
+    
+            // ✅ Populate data
             foreach ($all_data as $key => $value) {
-                $return_data['data'][] = array(
-                    'id' => $offset + $key + 1,
-                    'profile_image' => get_fancy_box_html($value['profile_image']),
+                $return_data['data'][] = [
+                    'id' => $start + $key + 1,
+                    'profile_image' => get_fancy_box_html($value->profile_image),
                     'name' => $value->first_name,
                     'email' => $value->email,
                     'mobile_number' => $value->country_code . ' ' . $value->mobile,
-                    // 'review' =>count($value->user_feedback),
                     'actual_completed_job' => $value->actual_completed_job,
-                    'fake_completed_job' => $value->completed_job,
-                    'user_id' => $value->id,
-
-                    // 'action' => $this->generate_actions_buttons($param),
-                );
+                    'fake_completed_job' => $value->fake_completed_job, // ✅ Now it exists
+                    'user_id' => $value->id
+                ];
             }
+    
+            return response()->json($return_data);
+    
+        } catch (\Exception $ex) {
+            return response()->json(['error' => $ex->getMessage()], 500);
         }
-        return $return_data;
     }
+    
+
     public function review_data_save(Request $request)
     {
         $validated = $request->validate([
