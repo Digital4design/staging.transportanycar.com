@@ -25,29 +25,9 @@ use Carbon\Carbon;
 
 // URL Mapping to Home Page
 Route::get('/example', function () {
-    $quote = DB::table('user_quotes')
-    ->where('email_sent', 0)
-    ->orderBy('id', 'asc')
-    ->first();
-    $mailData = [
-        'id' => $quote->id,
-        'vehicle_make' => $quote->vehicle_make,
-        'vehicle_model' => $quote->vehicle_model,
-        'vehicle_make_1' => $quote->vehicle_make_1,
-        'vehicle_model_1' => $quote->vehicle_model_1,
-        'pickup_postcode' => formatAddress($quote->pickup_postcode),
-        'drop_postcode' => formatAddress($quote->drop_postcode),
-        'delivery_timeframe_from' => isset($quote->delivery_timeframe_from) ? $quote->delivery_timeframe_from : null,
-        'starts_drives' => $quote->starts_drives == 1 ? 'Yes' : 'No',
-        'starts_drives_1' => $quote->starts_drives_1,
-        'how_moved' => $quote->how_moved,
-        'distance' => $quote->distance,
-        'duration' => $quote->duration,
-        'map_image' => $quote->map_image,
-        'delivery_timeframe' => $quote->delivery_timeframe
-    ]; 
-    return view('mail.General.transporter-new-job-received', ['quote' => $mailData]); // This will call the 'example.blade.php' file in the resources/views folder
+    return view('mail.General.customerWelcome');
 });
+
 Route::get('/car-delivery', 'Front\GuestController@index')->name('car_delivery');
 Route::get('/car-transport', 'Front\GuestController@index')->name('car_transport');
 Route::get('/car-transport-quote', 'Front\GuestController@index')->name('car_transport_quote');
