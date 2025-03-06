@@ -717,7 +717,7 @@ class CarTransportersController extends WebController
                 'vehical_name' => $validated['vehical_name'],
                 'date' => $validated['date'],
             ]);
-            return response()->json(['success' => true]);
+            return response()->json(['success' => "true",'message'=>"fake review created successfully"]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }

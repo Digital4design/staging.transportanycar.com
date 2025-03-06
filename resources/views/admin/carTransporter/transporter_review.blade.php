@@ -22,6 +22,11 @@
             padding: 7px 60px;
         }
 
+        /* #listResults ~ .dataTables_paginate a.paginate_button.current {
+            background:linear-gradient(to bottom, #585858 0%, #111 100%);
+            color:#ffffff;
+            border: 1px solid #111111;
+        } */
         .wd_leave_bx {
             padding: 0 !important;
             box-shadow: none !important;
@@ -226,13 +231,17 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0 font-size-18"> Review</h4>
+                <h4 class="mb-sm-0 font-size-18"> Review</h4> 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-
+                        
                     </ol>
                 </div>
-
+                
+            </div>
+            <div class="alert alert-success alert-dismissible d-none" id="alert-dismissible" role="alert">
+                <div class="alert-text"></div>
+                <div class="alert-close"><i class="flaticon2-cross kt-icon-sm" data-dismiss="alert"></i></div>
             </div>
         </div>
     </div>
@@ -457,6 +466,7 @@
                     }
                 ]
             });
+            
             $(document).on('click', '.showModelOne, .showModelTwo', function() {
                 let userId = $(this).data('user-id'); // Get user_id from the button
                 let first_name = $(this).data('name');
@@ -511,6 +521,7 @@
                             $('#date').val('');
                             $('input[name="rating"]').prop('checked',
                                 false); // Deselect the rating
+                                $("#alert-dismissible").removeClass("d-none").find(".alert-text").text(response.message)
                         } else {
                             if (response.errors.rating) {
                                 $('#ratingError').text(response.errors.rating[0]);
