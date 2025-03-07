@@ -42,13 +42,11 @@ class Newquotenotify implements ShouldQueue
      * @return void
      */
     public $userId, $request, $dis_dur;
-    protected $emailService;
     public function __construct($userId,$request,$dis_dur)
     {
        $this->userId = $userId;
        $this->request = $request;
        $this->dis_dur = $dis_dur;
-       $this->emailService = app(EmailService::class);
     }
 
     /**
@@ -58,6 +56,7 @@ class Newquotenotify implements ShouldQueue
      */
     public function handle()
     {
+        $emailService = app(EmailService::class);
         $userId  = $this->userId;
         $request = $this->request;
         $dis_dur = $this->dis_dur;
@@ -132,7 +131,7 @@ class Newquotenotify implements ShouldQueue
                     if ($transporter->new_job_alert == "1") {
                         $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
                         $subject = 'You have received a transport notification';
-                        $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
+                        $emailService->sendEmail($transporter->email, $htmlContent, $subject);
                         // $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
 
                         Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
@@ -232,6 +231,7 @@ class Newquotenotify implements ShouldQueue
 
     public function SaveSearchQuoteEmailSend($quote)
     {
+        $emailService = app(EmailService::class);
         $pickupCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
             'address' => $quote['pickup_postcode'],
             'key' => config('constants.google_map_key'),
@@ -340,7 +340,7 @@ class Newquotenotify implements ShouldQueue
                     if ($transporter->job_email_preference){
                     $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
                     $subject = 'You have received a transport notification';
-                    $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
+                    $emailService->sendEmail($transporter->email, $htmlContent, $subject);
                     // $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
 
                     Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
