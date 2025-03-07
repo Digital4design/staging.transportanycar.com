@@ -43,12 +43,12 @@ class Newquotenotify implements ShouldQueue
      */
     public $userId, $request, $dis_dur;
     protected $emailService;
-    public function __construct($userId,$request,$dis_dur,EmailService $emailService)
+    public function __construct($userId,$request,$dis_dur)
     {
        $this->userId = $userId;
        $this->request = $request;
        $this->dis_dur = $dis_dur;
-       $this->emailService = $emailService;
+       $this->emailService = app(EmailService::class);
     }
 
     /**
