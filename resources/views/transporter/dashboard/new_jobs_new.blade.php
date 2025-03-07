@@ -1921,10 +1921,7 @@
                                                             <li class="row mx-0 w-100 align-items-end mb-0">
                                                                 <div class="btnCol">
                                                                     @if ($quote->quoteByTransporter)
-                                                                        {{-- <a href="javascript:;"
-                                                                            onclick="share_edit_quote('{{ $quote->id }}');"
-                                                                            class="w-100 mt-0 make_offer_btn checkStatus">Edit
-                                                                            bid</a> --}}
+                                                                        
                                                                             <a href="{{ route('transporter.job_information', $quote->id) }}"
                                                                                 class="w-100 mt-0 make_offer_btn checkStatus">
                                                                                 Edit bid

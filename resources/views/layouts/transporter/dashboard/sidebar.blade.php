@@ -375,11 +375,12 @@ $currentRoute = request()->route()->getName();
         });
 
         $(document).on('click', '.checkStatus', function(e) {
+            e.preventDefault(); // Prevent default action initially
+
             var isStatus = "{{ Auth::user()->is_status }}";
             var email_status = "{{ Auth::user()->email_verify_status }}";
             var driver_license = "{{ Auth::user()->driver_license }}";
             var goods_in_transit_insurance = "{{ Auth::user()->goods_in_transit_insurance }}";
-            console.log('yyyyyyyyy', driver_license);
 
             var companyDetails = @json(optional(Auth::user()->companyDetail)->id);
             var git_insurance_cover = @json(optional(Auth::user()->companyDetail)->git_insurance_cover ?? null);
@@ -387,185 +388,63 @@ $currentRoute = request()->route()->getName();
             var no_of_tow_trucks = @json(optional(Auth::user()->companyDetail)->no_of_tow_trucks ?? null);
             var no_of_drivers = @json(optional(Auth::user()->companyDetail)->no_of_drivers ?? null);
 
-            // if (driver_license == '' || goods_in_transit_insurance == '') {
-            //     e.preventDefault();
-            //     Swal.fire({
-            //         title: '<span class="swal-title" style="color:#ED1C24">Verify your account</span>',
-            //         html: '<span class="swal-text"> You must upload your drivers license,goods in transit insurance,verify your email and complete your company details within your profile before you are able to bid for jobs.</span>',
-            //         confirmButtonColor: '#52D017',
-            //         confirmButtonText: 'Verify',
-            //         customClass: {
-            //             title: 'swal-title',
-            //             htmlContainer: 'swal-text-container',
-            //             popup: 'swal-popup', // Add custom class for the popup
-            //             cancelButton: 'swal-button--cancel' // Add custom class for the cancel button
-            //         },
-            //         showCloseButton: true, // Add this line to show the close button
-            //         showConfirmButton: true, // Add this line to hide the confirm button
-            //         allowOutsideClick: false
-            //     }).then((result) => {
-            //         // Redirect to the dashboard if the confirm button or close button is clicked
-            //         if (result.isConfirmed || result.dismiss) {
-            //             window.location.href =
-            //             "{{ route('transporter.profile') }}"; // Change this to your actual dashboard URL
-            //         }
-            //     });
-            // } else if (driver_license == '' || goods_in_transit_insurance == '') {
-            //     e.preventDefault();
-            //     Swal.fire({
-            //         title: '<span class="swal-title" style="color:#ED1C24">Upload documents</span>',
-            //         html: '<span class="swal-text"> You must upload a valid driving license, goods in transist insurance within your profile before you are able to bids for jobs.</span>',
-            //         confirmButtonColor: '#52D017',
-            //         confirmButtonText: 'Verify',
-            //         customClass: {
-            //             title: 'swal-title',
-            //             htmlContainer: 'swal-text-container',
-            //             popup: 'swal-popup', // Add custom class for the popup
-            //             cancelButton: 'swal-button--cancel' // Add custom class for the cancel button
-            //         },
-            //         showCloseButton: true, // Add this line to show the close button
-            //         showConfirmButton: true, // Add this line to hide the confirm button
-            //         allowOutsideClick: false
-            //     }).then((result) => {
-            //         // Redirect to the dashboard if the confirm button or close button is clicked
-            //         if (result.isConfirmed || result.dismiss) {
-            //             window.location.href =
-            //             "{{ route('transporter.profile') }}"; // Change this to your actual dashboard URL
-            //         }
-            //     });
-            // } else if (email_status == '0') {
-            //     e.preventDefault();
-            //     Swal.fire({
-            //         title: '<span class="swal-title" style="color:#ED1C24">Verify your email</span>',
-            //         html: '<span class="swal-text"> You must verify your email address within your profile before you are able to bid for jobs.</span>',
-            //         confirmButtonColor: '#52D017',
-            //         confirmButtonText: 'Verify',
-            //         customClass: {
-            //             title: 'swal-title',
-            //             htmlContainer: 'swal-text-container',
-            //             popup: 'swal-popup', // Add custom class for the popup
-            //             cancelButton: 'swal-button--cancel' // Add custom class for the cancel button
-            //         },
-            //         showCloseButton: true, // Add this line to show the close button
-            //         showConfirmButton: true, // Add this line to hide the confirm button
-            //         allowOutsideClick: false
-            //     }).then((result) => {
-            //         // Redirect to the dashboard if the confirm button or close button is clicked
-            //         if (result.isConfirmed || result.dismiss) {
-            //             window.location.href =
-            //             "{{ route('transporter.profile') }}"; // Change this to your actual dashboard URL
-            //         }
-            //     });
+            // Condition to check if the profile is incomplete
+            if (!driver_license || !goods_in_transit_insurance || email_status === '0' ||
+                isStatus === 'pending' || isStatus === 'rejected' || !companyDetails ||
+                !git_insurance_cover || !years_established || !no_of_tow_trucks || !no_of_drivers) {
 
-            // }
-
-            // else if (isStatus == 'pending' || isStatus == 'rejected') {
-            //     e.preventDefault();
-            //     Swal.fire({
-            //         title: '<span class="swal-title" style="color:#ED1C24">Awaiting Approval</span>',
-            //         html: '<span class="swal-text">Sorry you can not bid on any jobs until your account has been approved.</span>',
-            //         confirmButtonColor: '#52D017',
-            //         confirmButtonText: 'Dismiss',
-            //         customClass: {
-            //             title: 'swal-title',
-            //             htmlContainer: 'swal-text-container',
-            //             popup: 'swal-popup', // Add custom class for the popup
-            //             cancelButton: 'swal-button--cancel' // Add custom class for the cancel button
-            //         },
-            //         showCloseButton: true, // Add this line to show the close button
-            //         showConfirmButton: true, // Add this line to hide the confirm button
-            //         allowOutsideClick: false
-            //     }).then((result) => {
-            //         // Redirect to the dashboard if the confirm button or close button is clicked
-            //         if (result.isConfirmed || result.dismiss) {
-            //             window.location.href =
-            //             "{{ route('transporter.dashboard') }}"; // Change this to your actual dashboard URL
-            //         }
-            //     });
-            // } 
-            if (driver_license == '' || goods_in_transit_insurance == '' || email_status == '0' ||
-                isStatus == 'pending' || isStatus == 'rejected' || companyDetails === null ||
-                git_insurance_cover === null || years_established === null || no_of_tow_trucks ===
-                null || no_of_drivers === null) {
                 Swal.fire({
-                    title: '<span class="swal-title" style="color:#ED1C24">Complete your profile</span>',
-                    html: '<span class="swal-text"> You must upload your drivers license, goods in transit insurance, verify your email and complete your company details within your profile before you are able to bid for jobs.</span>',
+                    title: '<span style="color:#ED1C24">Complete your profile</span>',
+                    html: '<span>You must upload your driver’s license, goods in transit insurance, verify your email, and complete your company details before bidding.</span>',
                     confirmButtonColor: '#52D017',
-                    confirmButtonText: 'Go to profile',
-                    customClass: {
-                        title: 'swal-title',
-                        htmlContainer: 'swal-text-container',
-                        popup: 'swal-popup', // Add custom class for the popup
-                        cancelButton: 'swal-button--cancel' // Add custom class for the cancel button
-                    },
-                    showCloseButton: true, // Add this line to show the close button
-                    showConfirmButton: true, // Add this line to hide the confirm button
+                    confirmButtonText: 'Go to Profile',
+                    showCloseButton: true,
                     allowOutsideClick: false
                 }).then((result) => {
-                    // Redirect to the dashboard if the confirm button or close button is clicked
                     if (result.isConfirmed || result.dismiss) {
-                        window.location.href =
-                            "{{ route('transporter.profile') }}"; // Change this to your actual dashboard URL
+                        window.location.href = "{{ route('transporter.profile') }}";
                     }
                 });
-            } else {
-                if (isStatus != 'approved') {
-                    e.preventDefault();
-                    Swal.fire({
-                        html: `
-                      <div style="text-align: center;">
-                          <h2>Upload Documents.</h2>
-                          <p>You must upload a valid driving license, goods in transist insurance within your profile before you are able to bids for jobs.</p>
-                          <button id="verifyActionBtn" style="background-color: #52D017; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                              Verify
-                          </button>
-                      </div>
-                  `,
-                        showConfirmButton: false, // Hide the default "OK" button
-                        width: '400px',
-                        padding: '20px',
-                        background: '#fff',
-                        customClass: {
-                            popup: 'swal2-popup-custom',
-                            htmlContainer: 'swal-desc-container',
-                        },
-                        allowOutsideClick: false, // Prevent modal from closing when clicking outside
-                        didOpen: () => {
-                            document.getElementById('verifyActionBtn').addEventListener(
-                                'click',
-                                function() {
-                                    window.location.href =
-                                        "{{ route('transporter.profile') }}"; // Change to your profile page URL
-                                });
-                        }
-                    });
-                } else {}
+
+                return; // Stop execution
             }
+
+            // Prevent access if the profile is NOT approved
+            if (isStatus !== 'approved') {
+                Swal.fire({
+                    html: `
+                <div style="text-align: center;">
+                    <h2>Upload Documents</h2>
+                    <p>You must upload a valid driving license and goods in transit insurance before bidding.</p>
+                    <button id="verifyActionBtn" style="background-color: #52D017; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Verify
+                    </button>
+                </div>
+            `,
+                    showConfirmButton: false,
+                    width: '400px',
+                    padding: '20px',
+                    background: '#fff',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        document.getElementById('verifyActionBtn').addEventListener('click',
+                            function() {
+                                window.location.href =
+                                    "{{ route('transporter.profile') }}";
+                            });
+                    }
+                });
+
+                return; // Stop execution
+            }
+            window.location.href = $(this).attr('href');
         });
 
-        // Check if the current URL contains 'dashboard' or 'profile'
-        //if (window.location.href.indexOf('dashboard') > -1 || window.location.href.indexOf('profile') > -1) {
+
+
         $('#importantNoticeModal').modal('show');
-        //}
+
     });
-    // $('.maintaince_mode').on('click',function(e) {
-    //   e.preventDefault();
-    //     Swal.fire({
-    //         title: '<span>Under maintenance</span>',
-    //         html: '<span class="swal-text">Apologies for any inconvenience, this is currently under maintenance and will be back up and running shortly.</span>',
-    //         confirmButtonColor: '#52D017',
-    //         confirmButtonText: 'Dismiss',
-    //         customClass: {
-    //               title: 'swal-title',
-    //               htmlContainer: 'swal-text-container',
-    //               popup: 'swal-popup', // Add custom class for the popup
-    //               cancelButton: 'swal-button--cancel' // Add custom class for the cancel button
-    //         },
-    //         showCloseButton: true, // Add this line to show the close button
-    //         showConfirmButton: true, // Add this line to hide the confirm button
-    //         allowOutsideClick: false
-    //       });
-    //   });
 </script>
 <script>
     function handleNotificationClick(event, element) {

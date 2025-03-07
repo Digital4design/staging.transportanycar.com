@@ -79,8 +79,8 @@
         }
 
         /* .view_message[data-target="#bidCollapse0"] {
-                        background-color: #0356D6;
-                    } */
+                            background-color: #0356D6;
+                        } */
         .view_message.login-user-button {
             background-color: #0356D6;
         }
@@ -401,11 +401,11 @@
 
         /* .modal-content, */
         /* #caption {
-                        -webkit-animation-name: zoom;
-                        -webkit-animation-duration: 0.6s;
-                     animation-name: zoom;
-                        animation-duration: 0.6s;
-                    } */
+                            -webkit-animation-name: zoom;
+                            -webkit-animation-duration: 0.6s;
+                         animation-name: zoom;
+                            animation-duration: 0.6s;
+                        } */
 
         @-webkit-keyframes zoom {
             from {
@@ -717,48 +717,58 @@
 
                         <div class="row align-items-center">
                             <div class="col-7 mb-3 pl-0 pl-md-3">
-                              
-                                    @php
+
+                                @php
                                     // Get the previous URL from the request query or fallback to Laravel's previous() helper
-                                    $previousUrl = request()->query('prev', url()->previous());
-                                    $currentUrl = url()->current();
-                                    $defaultRoute = route('transporter.new_jobs_new');
-                                
-                                    // Ensure previous URL is valid and not the same as current
-                                    if (!$previousUrl || $previousUrl == $currentUrl) {
-                                        $previousUrl = $defaultRoute;
-                                    }
-                                
-                                    // Extract only the path (without domain) for comparison
-                                    $previousPath = parse_url($previousUrl, PHP_URL_PATH);
-                                    $savedJobsPath = parse_url(route('transporter.savedFindJobResults', [], false), PHP_URL_PATH);
-                                    $watchlistPath = parse_url(route('transporter.watchlist.index', [], false), PHP_URL_PATH);
-                                    $findJobsPath = parse_url(route('transporter.new_jobs_new', [], false), PHP_URL_PATH);
-                                
+$previousUrl = request()->query('prev', url()->previous());
+$currentUrl = url()->current();
+$defaultRoute = route('transporter.new_jobs_new');
+
+// Ensure previous URL is valid and not the same as current
+if (!$previousUrl || $previousUrl == $currentUrl) {
+    $previousUrl = $defaultRoute;
+}
+
+// Extract only the path (without domain) for comparison
+$previousPath = parse_url($previousUrl, PHP_URL_PATH);
+$savedJobsPath = parse_url(
+    route('transporter.savedFindJobResults', [], false),
+    PHP_URL_PATH,
+);
+$watchlistPath = parse_url(
+    route('transporter.watchlist.index', [], false),
+    PHP_URL_PATH,
+);
+$findJobsPath = parse_url(
+    route('transporter.new_jobs_new', [], false),
+                                        PHP_URL_PATH,
+                                    );
+
                                     // If the previous URL is not recognized, default to "Find Jobs"
                                     if (!in_array($previousPath, [$savedJobsPath, $watchlistPath, $findJobsPath])) {
-                                        $previousUrl = $defaultRoute; 
+                                        $previousUrl = $defaultRoute;
                                         $previousPath = $findJobsPath;
                                     }
                                 @endphp
-<div class="back_btn row mx-0 align-items-center">
-    <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
-        <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-            <g opacity="0.5">
-                <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5"
-                      stroke-linecap="round" stroke-linejoin="round"></path>
-            </g>
-        </svg>
-        Back to 
-        @if ($previousPath === $savedJobsPath)
-            Saved Jobs
-        @elseif ($previousPath === $watchlistPath)
-            Watchlist
-        @else
-            Find Jobs
-        @endif
-    </a>
-</div>
+                                <div class="back_btn row mx-0 align-items-center">
+                                    <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
+                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                            <g opacity="0.5">
+                                                <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </g>
+                                        </svg>
+                                        Back to
+                                        @if ($previousPath === $savedJobsPath)
+                                            Saved Jobs
+                                        @elseif ($previousPath === $watchlistPath)
+                                            Watchlist
+                                        @else
+                                            Find Jobs
+                                        @endif
+                                    </a>
+                                </div>
                             </div>
                             <div class="col-5 date mb-3 pr-0 pr-md-3 text-right">
                                 Posted {{ getTimeAgo($quote->created_at->toDateTimeString()) }}
@@ -943,12 +953,12 @@
                                                 @if ($quote->quoteByTransporter)
                                                     <a href="javascript:;"
                                                         onclick="share_edit_quote('{{ $quote->id }}');"
-                                                        class="place_bid_btn">Edit
+                                                        class="place_bid_btn checkStatus">Edit
                                                         bid</a>
                                                 @else
                                                     <a href="javascript:;"
                                                         onclick="share_give_quote('{{ $quote->id }}');"
-                                                        class="place_bid_btn">Place
+                                                        class="place_bid_btn checkStatus">Place
                                                         bid</a>
                                                 @endif
 
@@ -1186,7 +1196,7 @@
                             Do not share any contact details here. We will provide you with the users contact details after
                             they have accepted your quote.
                         </p>
-                        <button type="submit" class="submit_btn">Place bid</button>
+                        <button type="submit" class="submit_btn checkStatus">Place bid</button>
                     </div>
                 </form>
             </div>
@@ -1243,18 +1253,18 @@
     </div>
 
     <!-- <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <span class="close">&times;</span>
-                                    <img id="img01" class="img-fluid" />
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <span class="close">&times;</span>
+                                        <img id="img01" class="img-fluid" />
 
-                                    <div id="caption"></div>
+                                        <div id="caption"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div> -->
+                        </div> -->
     {{-- EDIT  --}}
     <div class="modal get_quote fade custom-slide" id="quoteEdit" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
