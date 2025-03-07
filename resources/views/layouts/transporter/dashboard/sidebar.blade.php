@@ -375,11 +375,12 @@ $currentRoute = request()->route()->getName();
         });
 
         $(document).on('click', '.checkStatus', function(e) {
+            e.preventDefault(); // Prevent default action initially
+
             var isStatus = "{{ Auth::user()->is_status }}";
             var email_status = "{{ Auth::user()->email_verify_status }}";
             var driver_license = "{{ Auth::user()->driver_license }}";
             var goods_in_transit_insurance = "{{ Auth::user()->goods_in_transit_insurance }}";
-            console.log('yyyyyyyyy', driver_license);
 
             var companyDetails = @json(optional(Auth::user()->companyDetail)->id);
             var git_insurance_cover = @json(optional(Auth::user()->companyDetail)->git_insurance_cover ?? null);
@@ -387,24 +388,8 @@ $currentRoute = request()->route()->getName();
             var no_of_tow_trucks = @json(optional(Auth::user()->companyDetail)->no_of_tow_trucks ?? null);
             var no_of_drivers = @json(optional(Auth::user()->companyDetail)->no_of_drivers ?? null);
 
-
-            // Use globally set userData instead of Blade syntax
-            let {
-                isStatus,
-                email_status,
-                driver_license,
-                goods_in_transit_insurance,
-                companyDetails,
-                git_insurance_cover,
-                years_established,
-                no_of_tow_trucks,
-                no_of_drivers
-            } = window.userData;
-
-            console.log('Driver License:', driver_license); // Debugging check
-
-            // Check if profile is incomplete
-            if (!driver_license || !goods_in_transit_insurance || email_status == '0' ||
+            // Condition to check if the profile is incomplete
+            if (!driver_license || !goods_in_transit_insurance || email_status === '0' ||
                 isStatus === 'pending' || isStatus === 'rejected' || !companyDetails ||
                 !git_insurance_cover || !years_established || !no_of_tow_trucks || !no_of_drivers) {
 
@@ -421,7 +406,7 @@ $currentRoute = request()->route()->getName();
                     }
                 });
 
-                return; // Stop execution to prevent redirection
+                return; // Stop execution
             }
 
             // Prevent access if the profile is NOT approved
@@ -450,33 +435,16 @@ $currentRoute = request()->route()->getName();
                     }
                 });
 
-                return; // Stop execution to prevent redirection
+                return; // Stop execution
             }
-
-            // If everything is fine, allow the user to proceed
             window.location.href = $(this).attr('href');
         });
+
+
+
         $('#importantNoticeModal').modal('show');
 
     });
-    // $('.maintaince_mode').on('click',function(e) {
-    //   e.preventDefault();
-    //     Swal.fire({
-    //         title: '<span>Under maintenance</span>',
-    //         html: '<span class="swal-text">Apologies for any inconvenience, this is currently under maintenance and will be back up and running shortly.</span>',
-    //         confirmButtonColor: '#52D017',
-    //         confirmButtonText: 'Dismiss',
-    //         customClass: {
-    //               title: 'swal-title',
-    //               htmlContainer: 'swal-text-container',
-    //               popup: 'swal-popup', // Add custom class for the popup
-    //               cancelButton: 'swal-button--cancel' // Add custom class for the cancel button
-    //         },
-    //         showCloseButton: true, // Add this line to show the close button
-    //         showConfirmButton: true, // Add this line to hide the confirm button
-    //         allowOutsideClick: false
-    //       });
-    //   });
 </script>
 <script>
     function handleNotificationClick(event, element) {
