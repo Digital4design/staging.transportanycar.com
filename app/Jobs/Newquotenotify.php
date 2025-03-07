@@ -56,7 +56,7 @@ class Newquotenotify implements ShouldQueue
      */
     public function handle()
     {
-        $emailService = app(EmailService::class);
+        $emailService = new EmailService;
         $userId  = $this->userId;
         $request = $this->request;
         $dis_dur = $this->dis_dur;
@@ -231,7 +231,7 @@ class Newquotenotify implements ShouldQueue
 
     public function SaveSearchQuoteEmailSend($quote)
     {
-        $emailService = app(EmailService::class);
+        $emailService = new EmailService;
         $pickupCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
             'address' => $quote['pickup_postcode'],
             'key' => config('constants.google_map_key'),
