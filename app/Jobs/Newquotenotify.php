@@ -20,7 +20,7 @@ use App\Jobs\SendTransporterEmail;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Http\Request;
+use Illuminate\Http\requestData;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -41,11 +41,11 @@ class Newquotenotify implements ShouldQueue
      *
      * @return void
      */
-    public $userId, $request, $dis_dur;
-    public function __construct($userId,$request,$dis_dur)
+    public $userId, $requestData, $dis_dur;
+    public function __construct($userId,array $requestData,$dis_dur)
     {
        $this->userId = $userId;
-       $this->request = $request;
+       $this->requestData = $requestData;
        $this->dis_dur = $dis_dur;
     }
 
@@ -58,16 +58,16 @@ class Newquotenotify implements ShouldQueue
     {
         $emailService = new EmailService;
         $userId  = $this->userId;
-        $request = $this->request;
+        $requestData = $this->requestData;
         $dis_dur = $this->dis_dur;
         // Process vehicle information
-        $vehicle_make_1 = $request->vehicle_make_1 ?? null;
-        $vehicle_model_1 = $request->vehicle_model_1 ?? null;
-        $starts_drives_1 = !is_null($vehicle_make_1) && !is_null($vehicle_model_1) ? $request->starts_drives_1 ?? '0' : null;
+        $vehicle_make_1 = $requestData['vehicle_make_1'] ?? null;
+        $vehicle_model_1 = $requestData["vehicle_model_1"] ?? null;
+        $starts_drives_1 = !is_null($vehicle_make_1) && !is_null($vehicle_model_1) ? $requestData["starts_drives_1"] ?? '0' : null;
 
         // Handle file uploads
-        $up = $request->hasFile('file') ? upload_file('file', 'quote') : null;
-        $up1 = $request->hasFile('file_1') ? upload_file('file_1', 'quote') : null;
+        $up = $requestData->hasFile('file') ? upload_file('file', 'quote') : null;
+        $up1 = $requestData->hasFile('file_1') ? upload_file('file_1', 'quote') : null;
         // Set map image
         $result = $this->saveMapImage($dis_dur);
         // Prepare quote data
@@ -81,9 +81,9 @@ class Newquotenotify implements ShouldQueue
             'drop_lng' => $dis_dur['end_longitude'],
             'distance' => $result['distance'] ?? null,
             'duration' => $result['duration'] ?? null,
-            'vehicle_make' => $request->vehicle_make,
-            'vehicle_model' => $request->vehicle_model,
-            'starts_drives' => $request->starts_drives ?? '0',
+            'vehicle_make' => $requestData->vehicle_make,
+            'vehicle_model' => $requestData->vehicle_model,
+            'starts_drives' => $requestData->starts_drives ?? '0',
             'image' => $up,
             'vehicle_make_1' => $vehicle_make_1,
             'vehicle_model_1' => $vehicle_model_1,
@@ -92,10 +92,10 @@ class Newquotenotify implements ShouldQueue
             'map_image' => null,
             'created_at' => $now = Carbon::now('Europe/London'),
             'updated_at' => $now = Carbon::now('Europe/London'),
-            'how_moved' => $request->how_moved ? implode(',', $request->how_moved) : null,
-            'delivery_timeframe_from' => $request->delivery_timeframe_date ? (\DateTime::createFromFormat('d/m/Y', $request->delivery_timeframe_date) ? \DateTime::createFromFormat('d/m/Y', $request->delivery_timeframe_date)->format('Y-m-d') : null) : null,
-            'delivery_timeframe' => $request->delivery_timeframe ?? null,
-            'email' => $request->email ?? null,
+            'how_moved' => $requestData->how_moved ? implode(',', $requestData->how_moved) : null,
+            'delivery_timeframe_from' => $requestData->delivery_timeframe_date ? (\DateTime::createFromFormat('d/m/Y', $requestData->delivery_timeframe_date) ? \DateTime::createFromFormat('d/m/Y', $requestData->delivery_timeframe_date)->format('Y-m-d') : null) : null,
+            'delivery_timeframe' => $requestData->delivery_timeframe ?? null,
+            'email' => $requestData->email ?? null,
         ];
 
         // Create user quote
