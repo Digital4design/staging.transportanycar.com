@@ -632,8 +632,8 @@
 
         
 	};
-    console.log("in1:", in1); // Should log the first input element
-    console.log("ins:", ins); // 
+    // console.log("in1:", in1); // Should log the first input element
+    // console.log("ins:", ins); // 
 
 ins.forEach(function(input) {
 	/**
@@ -847,9 +847,7 @@ in1.addEventListener('input', splitNumber);
             },
             submitHandler: function (form) {
                 addOverlay();
-                $('#popup').addClass('show'); 
-                // Show the popup
-                // Trigger the gtag event with additional parameters
+                $('#popup').addClass('show');
                 gtag('event', 'conversion', {
                 'send_to': 'AW-16465579063/7cfLCJy7gb8ZELeYs6s9',
                 'event_category': 'Quote',
@@ -909,7 +907,7 @@ in1.addEventListener('input', splitNumber);
                     }
                 },
                 error: function(xhr, status, error) {
-                     console.error(xhr.responseText);
+                    //  console.error(xhr.responseText);
                      toastr.error("An error occurred. Please try again.");
                      //alert('An error occurred. Please try again.');
                 }
@@ -968,7 +966,7 @@ in1.addEventListener('input', splitNumber);
                     _token: "{{ csrf_token() }}" // CSRF token for security
                 },
                 success: function(response) {
-                    console.log(response);
+                    // console.log(response);
                     if (response.success) {
                         // toastr.success("OTP sended successfully");
                         //alert('OTP sended to successfully');
@@ -988,7 +986,7 @@ in1.addEventListener('input', splitNumber);
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
+                    // console.error(xhr.responseText);
                     toastr.error('An error occurred. Please try again.');
                     //alert('An error occurred. Please try again.');
                 }
@@ -1114,7 +1112,7 @@ in1.addEventListener('input', splitNumber);
                                 response(data.data);   
                             }
                             else {
-                                console.log('data not found')
+                                // console.log('data not found')
                             }
                         }
                     });
@@ -1145,7 +1143,7 @@ in1.addEventListener('input', splitNumber);
                                 response(data.data);   
                             }
                             else {
-                                console.log('data not found')
+                                // console.log('data not found')
                             }
                         }
                     });
@@ -1167,7 +1165,7 @@ in1.addEventListener('input', splitNumber);
                                 response(data.data);   
                             }
                             else {
-                                console.log('data not found')
+                                // console.log('data not found')
                             }
                         }
                     });
@@ -1198,7 +1196,7 @@ in1.addEventListener('input', splitNumber);
                                 response(data.data);   
                             }
                             else {
-                                console.log('data not found')
+                                // console.log('data not found')
                             }
                         }
                     });
@@ -1241,7 +1239,7 @@ in1.addEventListener('input', splitNumber);
                 },
                 error: function() {
                     // Handle error
-                    console.error('Error occurred while validating email.');
+                    // console.error('Error occurred while validating email.');
                 }
             });
         }

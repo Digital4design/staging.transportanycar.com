@@ -25,6 +25,7 @@ use App\Services\SmsService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
+use App\Jobs\Newquotenotify;
 
 
 class QuotesController extends WebController
@@ -114,7 +115,8 @@ class QuotesController extends WebController
 
             if ($user) {
                 // If the email exists in the database, log out current user and redirect to login page
-                $this->saveQuoteAndNotifyTransporters($user->id, $request, $dis_dur);
+                // $this->saveQuoteAndNotifyTransporters($user->id, $request, $dis_dur);
+                Newquotenotify::dispatch($user->id, $request, $dis_dur);
                 $user->mobile = $request->phone;
                 $user->save();
                 $user_info = false;
@@ -126,7 +128,8 @@ class QuotesController extends WebController
                 // If the email does not exist, create a new account and login with new account
                 $temp_password = genUniqueStr('', 6, 'users', 'password', true);
                 $user_data = $this->createNewUserAndNotify($request, $temp_password);
-                $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+                // $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+                Newquotenotify::dispatch($user_data->id, $request, $dis_dur);
 
                 // Set session variable to indicate user came from quote page
                 $request->session()->flash('came_from', 'quote_save');
@@ -154,14 +157,16 @@ class QuotesController extends WebController
                 $temp_password = genUniqueStr('', 6, 'users', 'password', true);
                 $user_data = $this->createNewUserAndNotify($request, $temp_password);
             }
-            $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+            Newquotenotify::dispatch($user_data->id, $request, $dis_dur);
+            // $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
 
         } else {
             // If user is logged in and the email is the same, use current user data
             $user_data = $current_user_data;
             $user->mobile = $request->phone;
             $user->save();
-            $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+            Newquotenotify::dispatch($user_data->id, $request, $dis_dur);
+            // $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
 
         }
 
