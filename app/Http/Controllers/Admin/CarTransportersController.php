@@ -742,7 +742,7 @@ class CarTransportersController extends WebController
                 'completed_job' => $validated['job_Completed'],
             ]);
 
-            return response()->json(['success' => true]);
+            return response()->json(['success' => true,'message'=>"change job successfully"]);
         } catch (\Exception $e) {
             // In case of an error during the update
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
