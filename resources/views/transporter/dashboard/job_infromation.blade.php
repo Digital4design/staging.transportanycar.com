@@ -953,12 +953,12 @@ $findJobsPath = parse_url(
                                                 @if ($quote->quoteByTransporter)
                                                     <a href="javascript:;"
                                                         onclick="share_edit_quote('{{ $quote->id }}');"
-                                                        class="place_bid_btn checkStatus">Edit
+                                                        class="place_bid_btn ">Edit
                                                         bid</a>
                                                 @else
                                                     <a href="javascript:;"
                                                         onclick="share_give_quote('{{ $quote->id }}');"
-                                                        class="place_bid_btn checkStatus">Place
+                                                        class="place_bid_btn ">Place
                                                         bid</a>
                                                 @endif
 
