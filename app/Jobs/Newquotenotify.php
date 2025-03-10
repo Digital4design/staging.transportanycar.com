@@ -43,7 +43,7 @@ class Newquotenotify implements ShouldQueue
      */
     public $userId, $requestData, $dis_dur;
     public function __construct($userId,array $requestData,$dis_dur)
-    {
+    {   
        $this->userId = $userId;
        $this->requestData = $requestData;
        $this->dis_dur = $dis_dur;
@@ -55,7 +55,7 @@ class Newquotenotify implements ShouldQueue
      * @return void
      */
     public function handle()
-    {
+    {    
         $emailService = new EmailService;
         $userId  = $this->userId;
         $requestData = $this->requestData;
@@ -64,10 +64,13 @@ class Newquotenotify implements ShouldQueue
         $vehicle_make_1 = $requestData['vehicle_make_1'] ?? null;
         $vehicle_model_1 = $requestData["vehicle_model_1"] ?? null;
         $starts_drives_1 = !is_null($vehicle_make_1) && !is_null($vehicle_model_1) ? $requestData["starts_drives_1"] ?? '0' : null;
-
+        //dd($requestData);
         // Handle file uploads
-        $up = $requestData->hasFile('file') ? upload_file('file', 'quote') : null;
-        $up1 = $requestData->hasFile('file_1') ? upload_file('file_1', 'quote') : null;
+        // $up = $requestData->hasFile('file') ? upload_file('file', 'quote') : null;
+        // $up1 = $requestData->hasFile('file_1') ? upload_file('file_1', 'quote') : null;
+        $up =  null;
+        $up1 =  null;
+
         // Set map image
         $result = $this->saveMapImage($dis_dur);
         // Prepare quote data
@@ -81,9 +84,9 @@ class Newquotenotify implements ShouldQueue
             'drop_lng' => $dis_dur['end_longitude'],
             'distance' => $result['distance'] ?? null,
             'duration' => $result['duration'] ?? null,
-            'vehicle_make' => $requestData->vehicle_make,
-            'vehicle_model' => $requestData->vehicle_model,
-            'starts_drives' => $requestData->starts_drives ?? '0',
+            'vehicle_make' => $requestData['vehicle_make'],
+            'vehicle_model' => $requestData['vehicle_model'],
+            'starts_drives' => $requestData['starts_drives'] ?? '0',
             'image' => $up,
             'vehicle_make_1' => $vehicle_make_1,
             'vehicle_model_1' => $vehicle_model_1,
@@ -92,10 +95,11 @@ class Newquotenotify implements ShouldQueue
             'map_image' => null,
             'created_at' => $now = Carbon::now('Europe/London'),
             'updated_at' => $now = Carbon::now('Europe/London'),
-            'how_moved' => $requestData->how_moved ? implode(',', $requestData->how_moved) : null,
-            'delivery_timeframe_from' => $requestData->delivery_timeframe_date ? (\DateTime::createFromFormat('d/m/Y', $requestData->delivery_timeframe_date) ? \DateTime::createFromFormat('d/m/Y', $requestData->delivery_timeframe_date)->format('Y-m-d') : null) : null,
-            'delivery_timeframe' => $requestData->delivery_timeframe ?? null,
-            'email' => $requestData->email ?? null,
+            // 'how_moved' => $requestData->how_moved ? implode(',', $requestData->how_moved) : null,
+            'how_moved' =>  $requestData['how_moved'][0] ?? null,
+            'delivery_timeframe_from' => $requestData['delivery_timeframe_date'] ? (\DateTime::createFromFormat('d/m/Y', $requestData['delivery_timeframe_date']) ? \DateTime::createFromFormat('d/m/Y', $requestData['delivery_timeframe_date'])->format('Y-m-d') : null) : null,
+            'delivery_timeframe' => $requestData['delivery_timeframe'] ?? null,
+            'email' => $requestData['email'] ?? null,
         ];
 
         // Create user quote
@@ -106,7 +110,7 @@ class Newquotenotify implements ShouldQueue
         Cache::forget('location_info');
         $this->SaveSearchQuoteEmailSend($quoteData);
 
-        $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->get();
+        $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->select('new_job_alert','email')->get();
 
         foreach ($all_transport as $transporter) {
             if ($transporter) {
@@ -143,19 +147,7 @@ class Newquotenotify implements ShouldQueue
             }
         }
 
-
-
-        // Send mail to transporters
-        //$this->sendMailToTransporters($quoteData);
-        // this is commented because of client requirement
-        // $command =  \Illuminate\Support\Facades\Artisan::call('send:quote_email_sent', [
-        //     'pickup_postcode' => $dis_dur['start_point'],
-        //     'drop_postcode' => $dis_dur['end_point'],
-        // ]);
-
-        // // $command = '/usr/local/bin/php /home/pfltvaho/public_html/artisan schedule:run';
-        // exec($command, $output, $returnVar);
-        // comment end
+//dd('in');
     
     }
 
