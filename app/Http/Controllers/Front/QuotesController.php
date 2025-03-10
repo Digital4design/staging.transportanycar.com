@@ -78,8 +78,8 @@ class QuotesController extends WebController
         //$location = Cache::get('location_'.$user_data->id);
     }
     public function quoteSave(Request $request)
-    {
-
+    {  
+        $requestData = $request->all();
         // Check if a user is authenticated with the 'web' guard
         $user_info = Auth::guard('web')->check();
         $current_user_data = $user_info ? Auth::guard('web')->user() : null;
@@ -115,8 +115,9 @@ class QuotesController extends WebController
             $request->session()->regenerateToken();
 
             if ($user) {
+               
                 // If the email exists in the database, log out current user and redirect to login page
-                $this->saveQuoteAndNotifyTransporters($user->id, $request, $dis_dur);
+                Newquotenotify::dispatch($user->id, $requestData, $dis_dur);
                 $user->mobile = $request->phone;
                 $user->save();
                 $user_info = false;
@@ -124,11 +125,11 @@ class QuotesController extends WebController
                 $request->session()->flash('login_email', $request->email);
                 $request->session()->flash('login_message', 'Your job created successfully. Please login.');
                 return redirect()->route('front.login');
-            } else {
+            } else { 
                 // If the email does not exist, create a new account and login with new account
                 $temp_password = genUniqueStr('', 6, 'users', 'password', true);
                 $user_data = $this->createNewUserAndNotify($request, $temp_password);
-                $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+                Newquotenotify::dispatch($user_data->id, $requestData, $dis_dur);
 
                 // Set session variable to indicate user came from quote page
                 $request->session()->flash('came_from', 'quote_save');
@@ -147,6 +148,7 @@ class QuotesController extends WebController
                 }
             }
         } elseif (!$user_info) {
+
             // If user is not logged in, use the found user or create a new user
             if ($user) {
                 $user_data = $user;
@@ -155,19 +157,20 @@ class QuotesController extends WebController
             } else {
                 $temp_password = genUniqueStr('', 6, 'users', 'password', true);
                 $user_data = $this->createNewUserAndNotify($request, $temp_password);
-            }
-            $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
-
-        } else {
+            }  
+            //$this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+            Newquotenotify::dispatch($user_data->id, $requestData, $dis_dur);
+        } else {  
             // If user is logged in and the email is the same, use current user data
             $user_data = $current_user_data;
             $user->mobile = $request->phone;
             $user->save();
-            $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+           // dd($requestData);
+          //  Newquotenotify::dispatch($user_data->id, $requestData, $dis_dur);
+            $job = new Newquotenotify($user_data->id, $requestData, $dis_dur);
+            $job->handle();  
 
         }
-
-
         // Set session variable to indicate user came from quote page
         $request->session()->flash('came_from', 'quote_save');
 
@@ -273,55 +276,6 @@ class QuotesController extends WebController
 
         $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->get();
         saveQuoteAndNotifyTransportersJob::dispatch($all_transport,$quoteData);
-
-        // foreach ($all_transport as $transporter) {
-        //     if ($transporter) {
-        //         $mailData = [
-        //             'id' => $quoteData['quotation_id'],
-        //             'vehicle_make' => $quoteData['vehicle_make'],
-        //             'vehicle_model' => $quoteData['vehicle_model'],
-        //             'vehicle_make_1' => $quoteData['vehicle_make_1'],
-        //             'vehicle_model_1' => $quoteData['vehicle_model_1'],
-        //             'pickup_postcode' => $quoteData['pickup_postcode'],
-        //             'drop_postcode' => $quoteData['drop_postcode'],
-        //             'delivery_timeframe_from' => $quoteData['delivery_timeframe_from'] ?? null,
-        //             'starts_drives' => $quoteData['starts_drives'],
-        //             'starts_drives_1' => $quoteData['starts_drives_1'],
-        //             'how_moved' => $quoteData['how_moved'],
-        //             'distance' => $quoteData['distance'],
-        //             'duration' => $quoteData['duration'],
-        //             'map_image' => $quoteData['map_image'],
-        //             'delivery_timeframe' => $quoteData['delivery_timeframe'],
-        //         ];
-        //         try {
-        //             if ($transporter->new_job_alert == "1") {
-        //                 $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
-        //                 $subject = 'You have received a transport notification';
-        //                 $this->emailService->sendEmail($transporter->email, $htmlContent, $subject);
-        //                 // $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
-
-        //                 \Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
-        //             }
-        //         } catch (\Exception $ex) {
-        //             \Log::error('Save Search functionality Error sending email to transporter for Quote ID: ' . $ex->getMessage());
-        //             // return $ex->getMessage();
-        //         }
-        //     }
-        // }
-
-
-
-        // Send mail to transporters
-        //$this->sendMailToTransporters($quoteData);
-        // this is commented because of client requirement
-        // $command =  \Illuminate\Support\Facades\Artisan::call('send:quote_email_sent', [
-        //     'pickup_postcode' => $dis_dur['start_point'],
-        //     'drop_postcode' => $dis_dur['end_point'],
-        // ]);
-
-        // // $command = '/usr/local/bin/php /home/pfltvaho/public_html/artisan schedule:run';
-        // exec($command, $output, $returnVar);
-        // comment end
     }
 
     private function saveMapImage($dis_dur)
@@ -341,45 +295,6 @@ class QuotesController extends WebController
         $directionsData = json_decode($directionsResponse->getBody()->getContents(), true);
 
         if ($directionsData['status'] == 'OK') {
-            // // Step 2: Extract the polyline encoding
-            // $route = $directionsData['routes'][0]['overview_polyline']['points'];
-
-            // // Map parameters
-            // $center = "52.3555,-1.1743"; // Center point for the map (central UK)
-            // $zoom = "7"; // Zoom level for a broad view
-            // $size = "600x400"; // Size of the map
-            // $mapType = "roadmap"; // Map type
-
-            // // No styles to hide features, showing all features
-            // $styles = [
-            //     'feature:road|element:geometry|visibility:on',
-            //     'feature:road|element:labels|visibility:on',
-            //     'feature:transit|element:geometry|visibility:on',
-            //     'feature:transit|element:labels|visibility:on',
-            //     'feature:poi|element:geometry|visibility:on',
-            //     'feature:poi|element:labels|visibility:on',
-            //     'feature:administrative|element:geometry|visibility:on',
-            //     'feature:administrative|element:labels|visibility:on',
-            //     'feature:landscape|element:geometry|visibility:on',
-            //     'feature:water|element:geometry|visibility:on',
-            // ];
-            // $styleString = implode('&style=', $styles);
-
-            // // Step 3: Generate the Static Map URL with the route
-            // $staticMapUrl = "https://maps.googleapis.com/maps/api/staticmap?";
-            // $staticMapUrl .= "center={$center}&zoom={$zoom}&size={$size}&maptype={$mapType}";
-            // $staticMapUrl .= "&markers=icon:$carImageURL%7Clabel:S%7C" . urlencode($startPoint); // Car image marker for starting point
-            // $staticMapUrl .= "&markers=color:red%7Clabel:E%7C" . urlencode($endPoint); // Default marker for ending point
-            // $staticMapUrl .= "&path=enc:{$route}";
-            // $staticMapUrl .= "&style={$styleString}";
-            // $staticMapUrl .= "&key={$apiKey}";
-
-            // // Step 4: Fetch the image
-            // $response = $client->get($staticMapUrl);
-            // $image = $response->getBody()->getContents();
-            // $path = 'uploads/maps/' . date('ymdHis') . '.png';
-            // Storage::put($path, $image);
-
             $distance = $directionsData['routes'][0]['legs'][0]['distance']['text'];
             $duration = $directionsData['routes'][0]['legs'][0]['duration']['text'];
             return [
@@ -393,27 +308,6 @@ class QuotesController extends WebController
             return redirect()->route('front.home')->withErrors(['general' => 'Failed to get directions. Please try with correct location']);
         }
     }
-
-    // private function sendMailToTransporters($quotation_data) {
-    //     $mailData = $this->getMailData($quotation_data);
-    //     //send mail to all transporters
-
-    //     //SendTransporterEmail::dispatch();
-
-    //     //$transporters = User::where(['type' => 'car_transporter', 'status' => 'active'])->get();
-    //     //$transporters = ['subham.k@ptiwebtech.com','info@transportanycar.com'];
-    //     $transporters = ['subham.k@ptiwebtech.com'];
-
-    //     foreach ($transporters as $transporter) {
-    //          // send to transporter new job mail
-    //         try {
-    //             $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
-    //             $this->emailService->sendEmail($transporter, $htmlContent, 'You have received a transport notification');
-    //         } catch (\Exception $ex) {
-    //             \Log::error('Error sending email to transporter: ' . $ex->getMessage());
-    //         }
-    //     }
-    // }
 
     private function getMailData($quotation_data)
     {
