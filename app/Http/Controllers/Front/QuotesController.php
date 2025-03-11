@@ -144,7 +144,7 @@ class QuotesController extends WebController
                 }
             }
         } elseif (!$user_info) {
-
+            // dd("yes1");
             if ($user) {
                 $user_data = $user;
                 $user->mobile = $request->phone;
@@ -229,7 +229,7 @@ class QuotesController extends WebController
 
         // Handle file uploads
       $up = isset($request['file']) ? upload_file($request['file'], 'quote') : null;
-$up1 = isset($request['file_1']) ? upload_file($request['file_1'], 'quote') : null;
+     $up1 = isset($request['file_1']) ? upload_file($request['file_1'], 'quote') : null;
 
         // Set map image
         $result = $this->saveMapImage($dis_dur);
@@ -270,7 +270,9 @@ $up1 = isset($request['file_1']) ? upload_file($request['file_1'], 'quote') : nu
         $this->SaveSearchQuoteEmailSend($quoteData);
 
         $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->get();
-        saveQuoteAndNotifyTransportersJob::dispatch($all_transport,$quoteData);
+        // saveQuoteAndNotifyTransportersJob::dispatch($all_transport,$quoteData);
+        $obj = new saveQuoteAndNotifyTransportersJob($all_transport,$quoteData);
+        $obj->handle();
     }
 
     private function saveMapImage($dis_dur)
@@ -440,6 +442,7 @@ $up1 = isset($request['file_1']) ? upload_file($request['file_1'], 'quote') : nu
 
     public function SaveSearchQuoteEmailSend($quote)
     {
+        // dd('yes3');
         $pickupCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
             'address' => $quote['pickup_postcode'],
             'key' => config('constants.google_map_key'),
@@ -517,8 +520,12 @@ $up1 = isset($request['file_1']) ? upload_file($request['file_1'], 'quote') : nu
             \Log::info('save search functionality No matching saved searches found for Quote ID: ' . $quote['quotation_id']);
             return;
         }
-        
-        SaveSearchQuoteEmailSendJob::dispatch($savedSearches,$quote);
+        // dd('yes4');
+
+        // SaveSearchQuoteEmailSendJob::dispatch($savedSearches,$quote);
+       $obj = new SaveSearchQuoteEmailSendJob($savedSearches,$quote);
+       $obj->handle();
+       
         // foreach ($savedSearches as $savedSearch) {
         //     $transporter = DB::table('users')
         //         ->where('id', $savedSearch->user_id)
