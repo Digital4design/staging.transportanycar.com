@@ -58,7 +58,7 @@ class saveQuoteAndNotifyTransportersJob implements ShouldQueue
         $emailService = new EmailService;
 
         $all_transport = $this->all_transport;
-        // dd($all_transport);
+        
         $quoteData = $this->quoteData;
         foreach ($all_transport as $transporter) {
             if ($transporter) { 
