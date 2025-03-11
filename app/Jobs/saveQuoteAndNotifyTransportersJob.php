@@ -56,10 +56,12 @@ class saveQuoteAndNotifyTransportersJob implements ShouldQueue
     public function handle()
     {
         $emailService = new EmailService;
+
         $all_transport = $this->all_transport;
+        // dd($all_transport);
         $quoteData = $this->quoteData;
         foreach ($all_transport as $transporter) {
-            if ($transporter) {
+            if ($transporter) { 
                 $mailData = [
                     'id' => $quoteData['quotation_id'],
                     'vehicle_make' => $quoteData['vehicle_make'],
