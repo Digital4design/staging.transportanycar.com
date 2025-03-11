@@ -31,6 +31,8 @@ use App\Services\SmsService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\View;
+
 
 class Newquotenotify implements ShouldQueue
 {
@@ -110,45 +112,45 @@ class Newquotenotify implements ShouldQueue
         Cache::forget('location_info');
         $this->SaveSearchQuoteEmailSend($quoteData);
 
-        $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->select('new_job_alert','email')->get();
+       $transporters = User::where('type', 'car_transporter')
+    ->where('is_status', 'approved')
+    ->where('new_job_alert', '1') // Only those who have job alerts enabled
+    ->select('email')
+    ->take(0) // Limit to only 10 transporters
+    ->get();
 
-        foreach ($all_transport as $transporter) {
-            if ($transporter) {
-                $mailData = [
-                    'id' => $quoteData['quotation_id'],
-                    'vehicle_make' => $quoteData['vehicle_make'],
-                    'vehicle_model' => $quoteData['vehicle_model'],
-                    'vehicle_make_1' => $quoteData['vehicle_make_1'],
-                    'vehicle_model_1' => $quoteData['vehicle_model_1'],
-                    'pickup_postcode' => $quoteData['pickup_postcode'],
-                    'drop_postcode' => $quoteData['drop_postcode'],
-                    'delivery_timeframe_from' => $quoteData['delivery_timeframe_from'] ?? null,
-                    'starts_drives' => $quoteData['starts_drives'],
-                    'starts_drives_1' => $quoteData['starts_drives_1'],
-                    'how_moved' => $quoteData['how_moved'],
-                    'distance' => $quoteData['distance'],
-                    'duration' => $quoteData['duration'],
-                    'map_image' => $quoteData['map_image'],
-                    'delivery_timeframe' => $quoteData['delivery_timeframe'],
-                ];
-                try {
-                    if ($transporter->new_job_alert == "1") {
-                        $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
-                        $subject = 'You have received a transport notification';
-                        $emailService->sendEmail($transporter->email, $htmlContent, $subject);
-                        // $this->emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
+if ($transporters->isNotEmpty()) {
+    $mailData = [
+        'id' => $quoteData['quotation_id'],
+        'vehicle_make' => $quoteData['vehicle_make'],
+        'vehicle_model' => $quoteData['vehicle_model'],
+        'vehicle_make_1' => $quoteData['vehicle_make_1'] ?? null,
+        'vehicle_model_1' => $quoteData['vehicle_model_1'] ?? null,
+        'pickup_postcode' => $quoteData['pickup_postcode'],
+        'drop_postcode' => $quoteData['drop_postcode'],
+        'delivery_timeframe_from' => $quoteData['delivery_timeframe_from'] ?? null,
+        'starts_drives' => $quoteData['starts_drives'],
+        'starts_drives_1' => $quoteData['starts_drives_1'] ?? null,
+        'how_moved' => $quoteData['how_moved'],
+        'distance' => $quoteData['distance'],
+        'duration' => $quoteData['duration'],
+        'map_image' => $quoteData['map_image'],
+        'delivery_timeframe' => $quoteData['delivery_timeframe'] ?? null,
+    ];
 
-                        Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
-                    }
-                } catch (\Exception $ex) {
-                    Log::error('Save Search functionality Error sending email to transporter for Quote ID: ' . $ex->getMessage());
-                    // return $ex->getMessage();
-                }
-            }
+    try {
+        $htmlContent = View::make('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
+        $subject = 'You have received a transport notification';
+
+        foreach ($transporters as $transporter) {
+            $emailService->sendEmail($transporter->email, $htmlContent, $subject);
+            Log::info("Email sent to transporter: {$transporter->email}");
         }
+    } catch (\Exception $ex) {
+        Log::error("Error sending email to transporters: " . $ex->getMessage());
+    }
+}
 
-//dd('in');
-    
     }
 
     private function saveMapImage($dis_dur)
