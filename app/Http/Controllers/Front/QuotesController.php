@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Front;
-
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\WebController;
 use App\QuoteByTransporter;
 use App\User;
@@ -270,6 +270,8 @@ class QuotesController extends WebController
 
         $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->get();
         saveQuoteAndNotifyTransportersJob::dispatch($all_transport,$quoteData);
+
+        Artisan::call('queue:work --tries=3 --timeout=180');
         // $obj = new saveQuoteAndNotifyTransportersJob($all_transport,$quoteData);
         // $obj->handle();
     }
