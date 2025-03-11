@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Front;
+
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\WebController;
 use App\QuoteByTransporter;
@@ -77,8 +78,8 @@ class QuotesController extends WebController
         //$location = Cache::get('location_'.$user_data->id);
     }
     public function quoteSave(Request $request)
-    {  
-       
+    {
+
         $user_info = Auth::guard('web')->check();
         $current_user_data = $user_info ? Auth::guard('web')->user() : null;
 
@@ -113,7 +114,7 @@ class QuotesController extends WebController
             $request->session()->regenerateToken();
 
             if ($user) {
-               
+
                 $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
                 $user->mobile = $request->phone;
                 $user->save();
@@ -122,8 +123,8 @@ class QuotesController extends WebController
                 $request->session()->flash('login_email', $request->email);
                 $request->session()->flash('login_message', 'Your job created successfully. Please login.');
                 return redirect()->route('front.login');
-            } else { 
-                
+            } else {
+
                 $temp_password = genUniqueStr('', 6, 'users', 'password', true);
                 $user_data = $this->createNewUserAndNotify($request, $temp_password);
                 $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
@@ -151,18 +152,15 @@ class QuotesController extends WebController
             } else {
                 $temp_password = genUniqueStr('', 6, 'users', 'password', true);
                 $user_data = $this->createNewUserAndNotify($request, $temp_password);
-            }  
-            
+            }
+
             $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
-             } 
-             else {  
+        } else {
             $user_data = $current_user_data;
             $user->mobile = $request->phone;
             $user->save();
-        
-            $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
-             
 
+            $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
         }
         // Set session variable to indicate user came from quote page
         $request->session()->flash('came_from', 'quote_save');
@@ -227,8 +225,8 @@ class QuotesController extends WebController
         $starts_drives_1 = !is_null($vehicle_make_1) && !is_null($vehicle_model_1) ? $request->starts_drives_1 ?? '0' : null;
 
         // Handle file uploads
-      $up = isset($request['file']) ? upload_file($request['file'], 'quote') : null;
-     $up1 = isset($request['file_1']) ? upload_file($request['file_1'], 'quote') : null;
+        $up = isset($request['file']) ? upload_file($request['file'], 'quote') : null;
+        $up1 = isset($request['file_1']) ? upload_file($request['file_1'], 'quote') : null;
 
         // Set map image
         $result = $this->saveMapImage($dis_dur);
@@ -269,16 +267,15 @@ class QuotesController extends WebController
         $this->SaveSearchQuoteEmailSend($quoteData);
 
         $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->get();
-        saveQuoteAndNotifyTransportersJob::dispatch($all_transport,$quoteData);
+        saveQuoteAndNotifyTransportersJob::dispatch($all_transport, $quoteData);
 
-        Artisan::call('queue:work --tries=3 --timeout=180');
+
         // $obj = new saveQuoteAndNotifyTransportersJob($all_transport,$quoteData);
         // $obj->handle();
     }
 
     private function saveMapImage($dis_dur)
     {
-
         $startPoint = $dis_dur['start_point']; // Replace with your start point
         $endPoint = $dis_dur['end_point']; // Replace with your end point
         $apiKey = get_constants('google_map_key'); // Replace with your API key
@@ -410,9 +407,9 @@ class QuotesController extends WebController
                 $quotationDetail['user_quote_id'] = $request['user_quote_id'];
                 $details = QuotationDetail::create($quotationDetail);
             }
-            
+
             UserQuote::where('id', $request['user_quote_id'])->update(['status' => 'completed']);
-           
+
             $username = Auth::user()->username;
             $user_quote = UserQuote::where('id', $request['user_quote_id'])->first();
             $mailData = $this->getMailData($user_quote);
@@ -523,10 +520,10 @@ class QuotesController extends WebController
         }
         // dd('yes4');
 
-        SaveSearchQuoteEmailSendJob::dispatch($savedSearches,$quote);
-    //    $obj = new SaveSearchQuoteEmailSendJob($savedSearches,$quote);
-    //    $obj->handle();
-       
+        SaveSearchQuoteEmailSendJob::dispatch($savedSearches, $quote);
+        //    $obj = new SaveSearchQuoteEmailSendJob($savedSearches,$quote);
+        //    $obj->handle();
+
         // foreach ($savedSearches as $savedSearch) {
         //     $transporter = DB::table('users')
         //         ->where('id', $savedSearch->user_id)
