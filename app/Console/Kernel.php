@@ -49,8 +49,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:test')->everyMinute();
         $schedule->command('send:feedback-reminder')->dailyAt('19:00');
         $schedule->command('queue:work --tries=3 --timeout=180')
-        ->withoutOverlapping()
-        ->runInBackground()
+        // ->withoutOverlapping()
+        // ->runInBackground()
         ->everyMinute();
 
     }
