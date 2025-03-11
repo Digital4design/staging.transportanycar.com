@@ -270,9 +270,9 @@ class QuotesController extends WebController
         $this->SaveSearchQuoteEmailSend($quoteData);
 
         $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->get();
-        // saveQuoteAndNotifyTransportersJob::dispatch($all_transport,$quoteData);
-        $obj = new saveQuoteAndNotifyTransportersJob($all_transport,$quoteData);
-        $obj->handle();
+        saveQuoteAndNotifyTransportersJob::dispatch($all_transport,$quoteData);
+        // $obj = new saveQuoteAndNotifyTransportersJob($all_transport,$quoteData);
+        // $obj->handle();
     }
 
     private function saveMapImage($dis_dur)
@@ -522,9 +522,9 @@ class QuotesController extends WebController
         }
         // dd('yes4');
 
-        // SaveSearchQuoteEmailSendJob::dispatch($savedSearches,$quote);
-       $obj = new SaveSearchQuoteEmailSendJob($savedSearches,$quote);
-       $obj->handle();
+        SaveSearchQuoteEmailSendJob::dispatch($savedSearches,$quote);
+    //    $obj = new SaveSearchQuoteEmailSendJob($savedSearches,$quote);
+    //    $obj->handle();
        
         // foreach ($savedSearches as $savedSearch) {
         //     $transporter = DB::table('users')
