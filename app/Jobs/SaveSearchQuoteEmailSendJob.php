@@ -54,6 +54,7 @@ class SaveSearchQuoteEmailSendJob implements ShouldQueue
      */
     public function handle()
     {
+        // dd('yessssss');
         $emailService = new EmailService;
         $savedSearches = $this->savedSearches;
         $quote = $this->quote;
