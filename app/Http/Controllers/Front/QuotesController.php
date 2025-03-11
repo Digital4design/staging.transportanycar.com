@@ -268,8 +268,7 @@ class QuotesController extends WebController
 
         $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->get();
         saveQuoteAndNotifyTransportersJob::dispatch($all_transport, $quoteData);
-        Artisan::call('schedule:run --name=run-queue-worker');
-
+      
         // $obj = new saveQuoteAndNotifyTransportersJob($all_transport,$quoteData);
         // $obj->handle();
     }
