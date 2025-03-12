@@ -225,9 +225,8 @@ class QuotesController extends WebController
         $starts_drives_1 = !is_null($vehicle_make_1) && !is_null($vehicle_model_1) ? $request->starts_drives_1 ?? '0' : null;
 
         // Handle file uploads
-        $up = $request->hasFile('file') ? $request->file('file')->store('quotes', 'public') : null;
-        $up1 = $request->hasFile('file_1') ? $request->file('file_1')->store('quotes', 'public') : null;
-        
+        $up = $request->hasFile('file') ? upload_file('file', 'quote') : null;
+        $up1 = $request->hasFile('file_1') ? upload_file('file_1', 'quote') : null;
 
         
         $result = $this->saveMapImage($dis_dur);
