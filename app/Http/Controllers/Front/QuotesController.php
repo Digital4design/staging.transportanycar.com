@@ -79,7 +79,7 @@ class QuotesController extends WebController
     }
     public function quoteSave(Request $request)
     {
-
+        // return $request->hasFile('file');
         $user_info = Auth::guard('web')->check();
         $current_user_data = $user_info ? Auth::guard('web')->user() : null;
 
@@ -115,7 +115,7 @@ class QuotesController extends WebController
 
             if ($user) {
 
-                $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+                $this->saveQuoteAndNotifyTransporters($user->id, $request, $dis_dur);
                 $user->mobile = $request->phone;
                 $user->save();
                 $user_info = false;
@@ -225,10 +225,11 @@ class QuotesController extends WebController
         $starts_drives_1 = !is_null($vehicle_make_1) && !is_null($vehicle_model_1) ? $request->starts_drives_1 ?? '0' : null;
 
         // Handle file uploads
-        $up = isset($request['file']) ? upload_file($request['file'], 'quote') : null;
-        $up1 = isset($request['file_1']) ? upload_file($request['file_1'], 'quote') : null;
+        $up = $request->hasFile('file') ? $request->file('file')->store('quotes', 'public') : null;
+        $up1 = $request->hasFile('file_1') ? $request->file('file_1')->store('quotes', 'public') : null;
+        
 
-        // Set map image
+        
         $result = $this->saveMapImage($dis_dur);
         // Prepare quote data
         $quoteData = [
