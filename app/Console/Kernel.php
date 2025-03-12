@@ -48,9 +48,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('send:save-search-mail')->dailyAt('13:00');
         $schedule->command('command:test')->everyMinute();
         $schedule->command('send:feedback-reminder')->dailyAt('19:00');
-        $schedule->command('queue:work --tries=3 --timeout=180')
-        ->everyMinute()
-        ->name('run-queue-worker');
+        // $schedule->command('queue:work --tries=3 --timeout=180')
+        // ->everyMinute()
+        // ->name('run-queue-worker');
 
     }
 
