@@ -7,7 +7,7 @@
             height: 48px;
             border: 5px solid #FFF;
 
-            border-left-color: #0356D6;
+            border-left-color: #008ad2;
             /* Change to second gradient color */
 
             border-radius: 50%;
