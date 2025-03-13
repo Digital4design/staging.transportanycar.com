@@ -106,7 +106,7 @@ class QuotesController extends WebController
             'email' => $request->email,
             'type' => 'user'
         ])->first();
-        $form_submission_successful = false;
+      
 
         if ($user_info && $current_user_data->email !== $request->email) {
             // If the email exists in the database, log out current user
@@ -188,16 +188,8 @@ class QuotesController extends WebController
                 return redirect()->route('front.home')->withErrors(['general' => 'Something is wrong! Try again.']);
             }
         } else {
-            // If user is already logged in, redirect to the dashboard
-            $form_submission_successful = true;
-            // return redirect()->route('front.dashboard');
-            if ($form_submission_successful) {
-                return view('front.success-page')->with([
-                    'redirect_url' => route('front.dashboard'),
-                    'delay' => 1500 // 1.5 seconds
-                ]);
-            }
-            
+          
+            return redirect()->route('front.dashboard');  
         }
     }
 
