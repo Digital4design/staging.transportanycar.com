@@ -79,8 +79,8 @@
         }
 
         /* .view_message[data-target="#bidCollapse0"] {
-                            background-color: #0356D6;
-                        } */
+                                background-color: #0356D6;
+                            } */
         .view_message.login-user-button {
             background-color: #0356D6;
         }
@@ -401,11 +401,11 @@
 
         /* .modal-content, */
         /* #caption {
-                            -webkit-animation-name: zoom;
-                            -webkit-animation-duration: 0.6s;
-                         animation-name: zoom;
-                            animation-duration: 0.6s;
-                        } */
+                                -webkit-animation-name: zoom;
+                                -webkit-animation-duration: 0.6s;
+                             animation-name: zoom;
+                                animation-duration: 0.6s;
+                            } */
 
         @-webkit-keyframes zoom {
             from {
@@ -888,19 +888,28 @@ $findJobsPath = parse_url(
                                     <div
                                         class="col-6 col-md-12 mb-3 mb-md-0 d-flex d-md-none flex-wrap align-items-end upper-right px-0 px-md-3">
                                         <div class="row w-100 mx-0">
-
                                             @if ($quote->watchlist)
-                                                <a href="javascript:;" class="add_to_wishlist"
-                                                    onclick="removeToWatchlist('{{ $quote->id }}');">
+                                            <a href="javascript:;" class="add_to_wishlist"
+                                                onclick="removeToWatchlist('{{ $quote->id }}');">
 
-                                                    Add to watchlist
-                                                </a>
+                                                Add to watchlist
+                                            </a>
+                                        @else
+                                            <a href="javascript:;" class="add_to_wishlist"
+                                                onclick="addToWatchlist('{{ $quote->id }}');">
+                                                Add to watchlist
+                                            </a>
+                                        @endif
+                                            {{-- @if ($quote->quoteByTransporter)
+                                                <a href="javascript:;" onclick="share_edit_quote('{{ $quote->id }}');"
+                                                    class="place_bid_btn  ">Edit
+                                                    bid</a>
                                             @else
-                                                <a href="javascript:;" class="add_to_wishlist"
-                                                    onclick="addToWatchlist('{{ $quote->id }}');">
-                                                    Add to watchlist
-                                                </a>
-                                            @endif
+                                                <a href="javascript:;" onclick="share_give_quote('{{ $quote->id }}');"
+                                                    class="place_bid_btn   ">Place
+                                                    bid</a>
+                                            @endif --}}
+
                                         </div>
                                     </div>
                                     <div
@@ -1253,18 +1262,18 @@ $findJobsPath = parse_url(
     </div>
 
     <!-- <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <span class="close">&times;</span>
-                                        <img id="img01" class="img-fluid" />
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <span class="close">&times;</span>
+                                            <img id="img01" class="img-fluid" />
 
-                                        <div id="caption"></div>
+                                            <div id="caption"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div> -->
+                            </div> -->
     {{-- EDIT  --}}
     <div class="modal get_quote fade custom-slide" id="quoteEdit" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
