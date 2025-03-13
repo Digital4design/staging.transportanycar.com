@@ -79,7 +79,7 @@ class QuotesController extends WebController
     }
     public function quoteSave(Request $request)
     {
-
+        // return $request->hasFile('file');
         $user_info = Auth::guard('web')->check();
         $current_user_data = $user_info ? Auth::guard('web')->user() : null;
 
@@ -106,6 +106,7 @@ class QuotesController extends WebController
             'email' => $request->email,
             'type' => 'user'
         ])->first();
+      
 
         if ($user_info && $current_user_data->email !== $request->email) {
             // If the email exists in the database, log out current user
@@ -115,7 +116,7 @@ class QuotesController extends WebController
 
             if ($user) {
 
-                $this->saveQuoteAndNotifyTransporters($user_data->id, $request, $dis_dur);
+                $this->saveQuoteAndNotifyTransporters($user->id, $request, $dis_dur);
                 $user->mobile = $request->phone;
                 $user->save();
                 $user_info = false;
@@ -187,8 +188,8 @@ class QuotesController extends WebController
                 return redirect()->route('front.home')->withErrors(['general' => 'Something is wrong! Try again.']);
             }
         } else {
-            // If user is already logged in, redirect to the dashboard
-            return redirect()->route('front.dashboard');
+          
+            return redirect()->route('front.dashboard');  
         }
     }
 
@@ -225,10 +226,10 @@ class QuotesController extends WebController
         $starts_drives_1 = !is_null($vehicle_make_1) && !is_null($vehicle_model_1) ? $request->starts_drives_1 ?? '0' : null;
 
         // Handle file uploads
-        $up = isset($request['file']) ? upload_file($request['file'], 'quote') : null;
-        $up1 = isset($request['file_1']) ? upload_file($request['file_1'], 'quote') : null;
+        $up = $request->hasFile('file') ? upload_file('file', 'quote') : null;
+        $up1 = $request->hasFile('file_1') ? upload_file('file_1', 'quote') : null;
 
-        // Set map image
+        
         $result = $this->saveMapImage($dis_dur);
         // Prepare quote data
         $quoteData = [
@@ -267,10 +268,10 @@ class QuotesController extends WebController
         $this->SaveSearchQuoteEmailSend($quoteData);
 
         $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->get();
-        saveQuoteAndNotifyTransportersJob::dispatch($all_transport, $quoteData);
+        // saveQuoteAndNotifyTransportersJob::dispatch($all_transport, $quoteData);
       
-        // $obj = new saveQuoteAndNotifyTransportersJob($all_transport,$quoteData);
-        // $obj->handle();
+        $obj = new saveQuoteAndNotifyTransportersJob($all_transport,$quoteData);
+        $obj->handle();
     }
 
     private function saveMapImage($dis_dur)
