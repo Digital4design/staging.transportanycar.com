@@ -125,7 +125,7 @@
                             <a href="{{ route('transporter.job_information', $quote->id) }}"
                                 data-amount="{{ roundBasedOnDecimal($quote->transporter_payment) }}"
                                 data-lowbid="{{ $lowestBid }}" data-bidcount="{{ $transporterQuotesCount }}"
-                                class="view_btn edit_quote_btn won_details">Edit bid</a>
+                                class="view_btn edit_quote_btn won_details checkstatus">Edit bid</a>
                         </div>
                         <div class="won_message">
                             <a href="{{ route('transporter.messages', ['thread_id' => $quote->thread_id]) }}"
@@ -157,7 +157,7 @@
                         <a href="{{ route('transporter.job_information', $quote->id) }}"
                             data-amount="{{ roundBasedOnDecimal($quote->transporter_payment) }}"
                             data-lowbid="{{ $lowestBid }}" data-bidcount="{{ $transporterQuotesCount }}"
-                            class="view_btn edit_quote_btn won_details">Edit bid</a>
+                            class="view_btn edit_quote_btn won_details checkstatus">Edit bid</a>
                     </div>
                     <div class="won_message">
                         <a href="{{ route('transporter.messages', ['thread_id' => $quote->thread_id]) }}"
@@ -179,7 +179,7 @@
                             <a style="width: 130px;text-align: center;justify-content: center;" href="{{ route('transporter.job_information', $quote->id) }}"
                                 data-amount="{{ roundBasedOnDecimal($quote->transporter_payment) }}"
                                 data-lowbid="{{ $lowestBid }}" data-bidcount="{{ $transporterQuotesCount }}"
-                                class="view_btn edit_quote_btn won_details">Edit bid</a>
+                                class="view_btn edit_quote_btn won_details checkstatus">Edit bid</a>
                         </div>
                 @endif
             </li>
