@@ -61,8 +61,8 @@
 
 
         /* .jobsrch_form_blog .form-control {
-                                color: #000000;
-                            } */
+                                    color: #000000;
+                                } */
         .jobsrch_form_blog .error-message {
             position: absolute;
             bottom: -34px;
@@ -137,9 +137,9 @@
         }
 
         /* .get_quote .modal-header .close {
-                        position: absolute;
-                        right: 15px;
-                    } */
+                            position: absolute;
+                            right: 15px;
+                        } */
 
         /* Add your CSS styling here */
         #popup {
@@ -234,10 +234,10 @@
         }
 
         /* #carDetailsModal .modal-header button.btn-close {
-                        position: absolute;
-                        top: 11px;
-                        right: 15px;
-                    } */
+                            position: absolute;
+                            top: 11px;
+                            right: 15px;
+                        } */
 
         #carDetailsModal .modal-header span {
             display: flex;
@@ -1422,9 +1422,9 @@
 
 
             /* .job_se_sec.slick-initialized .slick-slide {
-                    display: block;
-                    width: 380px !important;
-                } */
+                        display: block;
+                        width: 380px !important;
+                    } */
 
             .job_se_sec .slick-track {
                 width: 760px !important;
@@ -1435,10 +1435,10 @@
             }
 
             /* .modal-header button.btn-close {
-                            position: absolute;
-                            top: 11px;
-                            right: 15px;
-                        } */
+                                position: absolute;
+                                top: 11px;
+                                right: 15px;
+                            } */
 
             .jobserch_mob .jobsrch_box {
                 padding: 20px 20px 10px;
@@ -1835,7 +1835,8 @@
                                                                             fill="#52D017"></path>
                                                                     </svg>
                                                                 </i>
-                                                                <span class="text-decoration-none">{{ $quote->pickup_postcode ? hidePostcode(get_last_two_parts($quote->pickup_postcode)) : '-' }}</span>
+                                                                <span
+                                                                    class="text-decoration-none">{{ $quote->pickup_postcode ? hidePostcode(get_last_two_parts($quote->pickup_postcode)) : '-' }}</span>
                                                             </li>
 
                                                             <li>
@@ -1848,7 +1849,8 @@
                                                                             fill="#ED1C24"></path>
                                                                     </svg>
                                                                 </i>
-                                                                <span class="text-decoration-none">{{ $quote->drop_postcode ? hidePostcode(get_last_two_parts($quote->drop_postcode)) : '-' }}</span>
+                                                                <span
+                                                                    class="text-decoration-none">{{ $quote->drop_postcode ? hidePostcode(get_last_two_parts($quote->drop_postcode)) : '-' }}</span>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -1859,7 +1861,8 @@
                                                 </h2> --}}
                                                 <div class="contentBlockBtn">
                                                     <div class="leftList">
-                                                        <ul class="col-6 px-0 car-row" data-car-id="{{ $quote->id }}">
+                                                        <ul class="col-6 px-0 car-row "
+                                                            data-car-id="{{ $quote->id }}">
                                                             <li>
                                                                 <b>Expiry date:</b>
                                                                 <span class="font-weight-light">
@@ -1921,11 +1924,10 @@
                                                             <li class="row mx-0 w-100 align-items-end mb-0">
                                                                 <div class="btnCol">
                                                                     @if ($quote->quoteByTransporter)
-                                                                        
-                                                                            <a href="{{ route('transporter.job_information', $quote->id) }}"
-                                                                                class="w-100 mt-0 make_offer_btn checkStatus">
-                                                                                Edit bid
-                                                                             </a>
+                                                                        <a href="{{ route('transporter.job_information', $quote->id) }}"
+                                                                            class="w-100 mt-0 make_offer_btn checkStatus">
+                                                                            Edit bid
+                                                                        </a>
                                                                     @else
                                                                         <a href="{{ route('transporter.job_information', $quote->id) }}"
                                                                             {{-- onclick="share_give_quote('{{ $quote->id }}');" --}}
@@ -2538,16 +2540,27 @@
 
         var jobInfoUrl = "{{ route('transporter.job_information', ':id') }}";
 
-        $(document).on('click', '.car-row', function() {
+        $(document).on('click', '.car-row', function(e) {
+            e.preventDefault(); // Prevent default action initially
 
             var carId = $(this).data('car-id');
-            if (carId) {
-                var url = jobInfoUrl.replace(':id', carId); // Replace placeholder with actual ID
-                window.location.href = url; // Redirect to the URL
-            } else {
+            if (!carId) {
                 console.log('Job ID is missing');
+                return;
             }
+
+            $('.checkStatus').trigger('click'); // Trigger checkStatus
+
+            // Delay redirection to wait for Swal or other processes
+            setTimeout(function() {
+                if (!$('.swal2-container')
+                    .length) { // If no SweetAlert popup is open, proceed with redirect
+                    var url = jobInfoUrl.replace(':id', carId); // Replace placeholder with actual ID
+                    window.location.href = url; // Redirect to the URL
+                }
+            }, 1000); // Adjust delay time if needed
         });
+
 
         $(document).ready(function() {
             $("#jobsrch_form_blog").validate({
@@ -2596,23 +2609,23 @@
             //         }
             //         var createdAt = new Date(carData.created_at);
 
-                    // Add 10 days to the created_at date
-                    //createdAt.setDate(createdAt.getDate() + 10);
+            // Add 10 days to the created_at date
+            //createdAt.setDate(createdAt.getDate() + 10);
 
-                    // Extract the day, month, and last two digits of the year
-                    //var dd = String(createdAt.getDate()).padStart(2, '0'); // Day with leading zero
-                    //var mm = String(createdAt.getMonth() + 1).padStart(2, '0'); // Month with leading zero
-                    //var yy = String(createdAt.getFullYear()).slice(-2); // Last two digits of the year
+            // Extract the day, month, and last two digits of the year
+            //var dd = String(createdAt.getDate()).padStart(2, '0'); // Day with leading zero
+            //var mm = String(createdAt.getMonth() + 1).padStart(2, '0'); // Month with leading zero
+            //var yy = String(createdAt.getFullYear()).slice(-2); // Last two digits of the year
 
-                    // Format the date as dd//mm/yy
-                   // var formattedDate = `${dd}//${mm}//${yy}`;
+            // Format the date as dd//mm/yy
+            // var formattedDate = `${dd}//${mm}//${yy}`;
 
-                   // var switch_custom = '';
-                  //  if (carData?.quote_by_transporter) {
-                  //      switch_custom = `<a href="javascript:;" onclick="share_edit_quote('${carData.id}');" class="make_offer_btn checkStatus">Edit bid</a>`
-                //    } else {
-                //        switch_custom = ` <a href="javascript:;" onclick="share_give_quote(${carData.id});" class="make_offer_btn checkStatus">Place bid</a>`
-                //    }
+            // var switch_custom = '';
+            //  if (carData?.quote_by_transporter) {
+            //      switch_custom = `<a href="javascript:;" onclick="share_edit_quote('${carData.id}');" class="make_offer_btn checkStatus">Edit bid</a>`
+            //    } else {
+            //        switch_custom = ` <a href="javascript:;" onclick="share_give_quote(${carData.id});" class="make_offer_btn checkStatus">Place bid</a>`
+            //    }
 
             //         // Dynamically update modal body content
             //         var modalBodyContent = `                    
@@ -2739,7 +2752,7 @@
             });
             $('.where_box label').click(function() {
                 var location = $(this).text();
-                
+
                 $('#search_pick_up_area').val(location);
                 $('.where_box').hide();
                 var errorElement = $('#search_pick_up_area-error');
