@@ -2,6 +2,27 @@
 
 @section('head_css')
     <style>
+        .loader {
+        width: 48px;
+        height: 48px;
+        border: 5px solid #FFF;
+
+border-left-color: #0356D6;  /* Change to second gradient color */
+
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+        }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
         /* main {
             padding-top: 104px;
         } */    
@@ -325,7 +346,8 @@
             <div class="form-wizard">
                 <div id="popup">
                     <p>Searching our network of transport providers...</p>
-                    <img src="/uploads/loading-popup.gif" alt="Loading">
+                    <span class="loader"></span>
+                    <!--<img src="/uploads/infinite-spinner.svg" alt="Loading">-->
                 </div>
                 <form class="expert_steps" name="main_form" id="main_form" action="{{route('front.quote_save')}}" method="post" role="form" enctype="multipart/form-data">
                     @csrf
@@ -848,6 +870,7 @@ in1.addEventListener('input', splitNumber);
             submitHandler: function (form) {
                 addOverlay();
                 $('#popup').addClass('show');
+                  // Ensure GIF animation continues
                 gtag('event', 'conversion', {
                 'send_to': 'AW-16465579063/7cfLCJy7gb8ZELeYs6s9',
                 'event_category': 'Quote',
@@ -859,9 +882,9 @@ in1.addEventListener('input', splitNumber);
                 if (typeof uetq !== 'undefined') {
                     uet_report_conversion();
                 }
-                setTimeout(()=>{
-                    form.submit();
-                },1000)
+                 setTimeout(() => {
+                 form.submit();
+                 }, 3000);
                 //if (!otpVerified) {
                 //    setTimeout(() => {
                 //        $('#popup').removeClass('show');
