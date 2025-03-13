@@ -2558,7 +2558,7 @@
                     var url = jobInfoUrl.replace(':id', carId); // Replace placeholder with actual ID
                     window.location.href = url; // Redirect to the URL
                 }
-            }, 1000); // Adjust delay time if needed
+            }); // Adjust delay time if needed
         });
 
 
