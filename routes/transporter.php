@@ -22,7 +22,7 @@ Route::group(['as' => 'transporter.'], function () {
         Route::get('signup', 'GuestController@signup')->name('signup');
         Route::post('signup', 'GuestController@signupPost')->name('signup_post');
         Route::get('forgot-password', 'GuestController@forgotPassword')->name('forgot_password');
-        Route::post('forgot-password', 'GuestController@forgotPasswordPost')->name('forgot_password');
+        Route::post('forgot-password', 'GuestController@forgotPasswordPost')->name('forgot_password_post');
         Route::get('forgot-password/{token}', 'GuestController@transForgotPassword')->name('trans_password_upadte');
         Route::post('update-password', 'GuestController@updatePasswordPost')->name('trans_update_password');
     });

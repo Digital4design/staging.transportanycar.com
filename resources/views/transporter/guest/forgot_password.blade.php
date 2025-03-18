@@ -12,7 +12,7 @@
                     <h1 class="banner_newtext d-block text-center">Forgot password</h1>
                     <p>Please enter the email address associated with <br /> your account.</p>
                 </div>
-                <form class="other_forgot_account" action="{{ route('transporter.forgot_password') }}" name="form_forgot_password" id="form_forgot_password" method="post" autocomplete="off">
+                <form class="other_forgot_account" action="{{ route('transporter.forgot_password_post') }}" name="form_forgot_password" id="form_forgot_password" method="post" autocomplete="off">
                     @csrf
                     <a href="{{route('transporter.home')}}" class="backtologin">
                         <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
