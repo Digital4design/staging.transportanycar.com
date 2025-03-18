@@ -593,73 +593,33 @@ function number_to_dec($number = "", $show_number = 2, $separated = '.', $thousa
     return number_format($number, $show_number, $separated, $thousand_separator);
 }
 
-function genUniqueStr($prefix = '', $length = 10, $table, $field, $isAlphaNum = false)
+function genUniqueStr($table, $field, $prefix = '', $length = 10, $isAlphaNum = false)
 {
     $arr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
     if ($isAlphaNum) {
         $arr = array_merge($arr, array(
-            'a',
-            'b',
-            'c',
-            'd',
-            'e',
-            'f',
-            'g',
-            'h',
-            'i',
-            'j',
-            'k',
-            'l',
-            'm',
-            'n',
-            'o',
-            'p',
-            'r',
-            's',
-            't',
-            'u',
-            'v',
-            'x',
-            'y',
-            'z',
-            'A',
-            'B',
-            'C',
-            'D',
-            'E',
-            'F',
-            'G',
-            'H',
-            'I',
-            'J',
-            'K',
-            'L',
-            'M',
-            'N',
-            'O',
-            'P',
-            'R',
-            'S',
-            'T',
-            'U',
-            'V',
-            'X',
-            'Y',
-            'Z'
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+            'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u',
+            'v', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F',
+            'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+            'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'Z'
         ));
     }
+
     $token = $prefix;
     $maxLen = max(($length - strlen($prefix)), 0);
     for ($i = 0; $i < $maxLen; $i++) {
         $index = rand(0, count($arr) - 1);
         $token .= $arr[$index];
     }
+
     if (isTokenExist($token, $table, $field)) {
-        return genUniqueStr($prefix, $length, $table, $field, $isAlphaNum);
+        return genUniqueStr($table, $field, $prefix, $length, $isAlphaNum);
     } else {
         return $token;
     }
 }
+
 
 function isTokenExist($token, $table, $field)
 {
