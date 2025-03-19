@@ -69,11 +69,48 @@
             &noscript=1" />
     </noscript>
     @yield('head_css')
+    <style>
+        .maintaince ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin-bottom: 48px;
+        }
+
+        .maintaince ul li:not(:last-child) {
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-572LPM3G"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <a class="maintaince-modal hidden" data-toggle="modal" data-target="#maintainceModal">View</a>
+    <div class="modal fade maintaince" id="maintainceModal" tabindex="-1" role="dialog" aria-labelledby="maintainceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header align-items-center">
+                    <h2 class="modal-title" id="maintainceModalLabel">Important Notice</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>The website is currently undergoing maintenance as there have been some technical issues and bugs that need to be fixed. There will not be any new jobs posted on the find jobs section until the bugs have been resolved. Whilst we are fixing the technical issues we are also taking the opportunity to make improvements to the site that you may notice when pushed live. We will notify you by email and SMS as soon as the site is back up and running.</p>
+                    <h5 class="mt-5">New features:</h5>
+                    <ul>
+                        <li>Ability to view other transporter bids and messages to users.</li>
+                        <li>Lower commission as little as 3%</li>
+                        <li>Improved transporter feedback profile design</li>
+                    </ul>
+                    <p>Thank you for your patients.</p>
+                    <p>Kind regards,</p>
+                    <p>Transport Any Car Team</p>
+                    <p>If you have any questions or suggestions please email us <a href="mailto:support@transportanycar.com">support@transportanycar.com</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
     @yield('content')
 </body>
 <!-- Bootstrap JS & Jquery -->
@@ -139,13 +176,21 @@
     x.addListener(myFunction)
 </script>
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const modal = document.querySelector('.maintaince-modal');
+        if (modal) {
+            modal.click();
+        }
+    });
     $(function() {
-        @if (session('error'))
-            toastr.error('{{ session('error') }}', '', {
+        @if(session('error'))
+        toastr.error('{{ session('
+            error ') }}', '', {
                 timeOut: 2000
             });
-        @elseif (session('success'))
-            toastr.success('{{ session('success') }}', '', {
+        @elseif(session('success'))
+        toastr.success('{{ session('
+            success ') }}', '', {
                 timeOut: 2000
             });
         @endif
