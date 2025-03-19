@@ -2,9 +2,9 @@ name: Deploy
 
 on:
   push:
-    branches: ["staging"]
+    branches: ["main"]
   pull_request:
-    branches: ["staging"]
+    branches: ["main"]
 
 jobs:
   deploy:
@@ -19,7 +19,7 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           script: |
-            cd /var/www/html/stagingtransportanycar
-            git pull origin staging
+            cd /var/www/html/public_html
+            git pull origin main
             php artisan migrate --force
             php artisan config:clear
