@@ -267,8 +267,8 @@ class QuotesController extends WebController
         Cache::forget('location_info');
         $this->SaveSearchQuoteEmailSend($quoteData);
 
-        $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->get();
-        saveQuoteAndNotifyTransportersJob::dispatch($all_transport, $quoteData);
+        // $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->get();
+        saveQuoteAndNotifyTransportersJob::dispatch($quoteData);
       
         // $obj = new saveQuoteAndNotifyTransportersJob($all_transport,$quoteData);
         // $obj->handle();

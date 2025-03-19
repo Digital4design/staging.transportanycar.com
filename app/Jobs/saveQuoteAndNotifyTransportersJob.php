@@ -35,15 +35,15 @@ use Illuminate\Support\Facades\Http;
 class saveQuoteAndNotifyTransportersJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
+    public $timeout = 0; 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(public $all_transport,public $quoteData)
+    public function __construct(public $quoteData)
     {
-        $this->all_transport = $all_transport;
+        // $this->all_transport = $all_transport;
         $this->quoteData = $quoteData;
 
     }
@@ -56,12 +56,11 @@ class saveQuoteAndNotifyTransportersJob implements ShouldQueue
     public function handle()
     {
         $emailService = new EmailService;
+        $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->where('new_job_alert','1')->get();
 
-        $all_transport = $this->all_transport;
-        
         $quoteData = $this->quoteData;
-        foreach ($all_transport as $transporter) {
-            if ($transporter) { 
+        foreach ($all_transport as $index=> $transporter) {
+           
                 $mailData = [
                     'id' => $quoteData['quotation_id'],
                     'vehicle_make' => $quoteData['vehicle_make'],
@@ -80,19 +79,19 @@ class saveQuoteAndNotifyTransportersJob implements ShouldQueue
                     'delivery_timeframe' => $quoteData['delivery_timeframe'],
                 ];
                 try {
-                    if ($transporter->new_job_alert == "1") {
+                    
                         $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
                         $subject = 'You have received a transport notification';
                         $emailService->sendEmail($transporter->email, $htmlContent, $subject);
                         // $emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
 
-                        Log::info("Save Search functionality success sending email to transporter for Quote ID:  {$transporter->email}");
-                    }
+                        Log::info("quote functionality sending email to transporter: #{$index} {$transporter->first_name}  {$transporter->email} ");
+                   
                 } catch (\Exception $ex) {
-                    Log::error('Save Search functionality Error sending email to transporter for Quote ID: ' . $ex->getMessage());
+                    Log::error('error quote functionality sending email to transporter: ' . $ex->getMessage());
                     // return $ex->getMessage();
                 }
-            }
+           
         }
     }
 }
