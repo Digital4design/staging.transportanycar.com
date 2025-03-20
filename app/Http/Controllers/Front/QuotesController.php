@@ -297,9 +297,7 @@ class QuotesController extends WebController
                 //'path' => $path
             ];
         } else {
-            // Handle the error appropriately
-            //throw new Exception('Failed to get directions: ' . $directionsData['status']);
-            return redirect()->route('front.home')->withErrors(['general' => 'Failed to get directions. Please try with correct location']);
+              return redirect()->route('front.home')->withErrors(['general' => 'Failed to get directions. Please try with correct location']);
         }
     }
 
