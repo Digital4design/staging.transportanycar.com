@@ -5,7 +5,6 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 @endsection
 
 @section('content')
@@ -14,9 +13,10 @@
             position: relative;
             display: inline-block;
         }
+
         select.form-control {
-            padding: 9px 20px!important;
-            height:44px!important;
+            padding: 9px 20px !important;
+            height: 44px !important;
         }
 
         .wd-cstm-check .form-group span {
@@ -83,26 +83,26 @@
         }
 
         /* .document span {
-                                            font-size: 14px;
-                                            margin-bottom: 10px;
-                                        } */
+                                                font-size: 14px;
+                                                margin-bottom: 10px;
+                                            } */
 
         /* .upload-btn {
-                                            background-color: #f0f0f0;
-                                            border: 1px solid #ddd;
-                                            border-radius: 5px;
-                                            padding: 5px 10px;
-                                            font-size: 14px;
-                                            cursor: pointer;
-                                            display: flex;
-                                            align-items: center;
-                                        }
+                                                background-color: #f0f0f0;
+                                                border: 1px solid #ddd;
+                                                border-radius: 5px;
+                                                padding: 5px 10px;
+                                                font-size: 14px;
+                                                cursor: pointer;
+                                                display: flex;
+                                                align-items: center;
+                                            }
 
-                                        .upload-btn img {
-                                            margin-left: 5px;
-                                            width: 16px;
-                                            height: 16px;
-                                        } */
+                                            .upload-btn img {
+                                                margin-left: 5px;
+                                                width: 16px;
+                                                height: 16px;
+                                            } */
 
         .form-group {
             position: relative;
@@ -150,14 +150,14 @@
         }
 
         /* .requied_sec_row .document {
-                                            display: flex;
-                                            flex-direction: row;
-                                            align-items: center;
-                                            border: 1px solid #CFCFCF;
-                                            border-radius: 8px;
-                                            padding: 12px;
-                                            justify-content: space-around;
-                                        } */
+                                                display: flex;
+                                                flex-direction: row;
+                                                align-items: center;
+                                                border: 1px solid #CFCFCF;
+                                                border-radius: 8px;
+                                                padding: 12px;
+                                                justify-content: space-around;
+                                            } */
         .requied_sec_row .document a,
         .requied_sec_row .document span {
             color: #717171;
@@ -190,11 +190,11 @@
         }
 
         /* .requied_sec_row .upload-btn {
-                                            box-shadow: 0px 0px 13px 5px #cfcfcf9c;
-                                            font-size: 15px;
-                                            background: #fff;
-                                            padding: 6px 17px;
-                                        } */
+                                                box-shadow: 0px 0px 13px 5px #cfcfcf9c;
+                                                font-size: 15px;
+                                                background: #fff;
+                                                padding: 6px 17px;
+                                            } */
         .info_sec {
             margin-left: 10px;
             position: relative;
@@ -378,34 +378,34 @@
         @media screen and (min-width: 768px) and (max-width: 1100px) {
 
             /* .upload_docs .upload-section .requied_sec_row {
-                                    width:49%;
-                                } */
+                                        width:49%;
+                                    } */
             .admin-profile-box .col-lg-8 {
                 flex: auto;
                 max-width: 100%;
             }
 
             /* .wd-profile-form form#form_account {
-                                    padding-left: 33.33%;
-                                } */
+                                        padding-left: 33.33%;
+                                    } */
 
             /* .wd-admin-profile {
-                                    max-width: 33.333333%;
-                                    position: absolute;
-                                    left: 0;
-                                    bottom: 0;
-                                    margin-left: 15px;
-                                } */
+                                        max-width: 33.333333%;
+                                        position: absolute;
+                                        left: 0;
+                                        bottom: 0;
+                                        margin-left: 15px;
+                                    } */
 
 
         }
 
         /* end 16-09-2024 */
         /* @media(max-width: 1600px) {
-                                .requied_sec_row {
-                                    width: 100%;
-                                }
-                            } */
+                                    .requied_sec_row {
+                                        width: 100%;
+                                    }
+                                } */
 
         @media(max-width: 1199px) {
             .admin-profile-box a.logout_txt.mob_view {
@@ -439,12 +439,12 @@
             }
 
             /* .wd-profile-form .form-group span {
-                                                font-size: 14px;
-                                                width: 68%;
-                                            } */
+                                                    font-size: 14px;
+                                                    width: 68%;
+                                                } */
             /* .requied_sec_row .document {
-                                                padding: 10px 8px;
-                                            } */
+                                                    padding: 10px 8px;
+                                                } */
             .requied_sec_row .document label.addmore_btn {
                 flex-wrap: wrap;
                 font-size: 14px;
@@ -458,8 +458,9 @@
             .info_sec_details:before {
                 left: 77%;
             }
-            .uploaded-documents  {
-                font-size: 16px!important;
+
+            .uploaded-documents {
+                font-size: 16px !important;
                 line-height: 20px;
             }
         }
@@ -468,12 +469,13 @@
             .wd-cstm-check {
                 justify-content: space-between;
             }
+
             .wd-cstm-check li {
                 flex: 0 0 33.333%;
                 /* max-width: 33.333%;
-                flex: 0 0 33.333%; */
+                    flex: 0 0 33.333%; */
             }
-            
+
 
             .admin-profile-box .requied_sec {
                 padding: 0;
@@ -503,8 +505,8 @@
 
             /* start 16-09-2024 */
             /* .wd-profile-form .form-group span {
-                                                width: 100%;
-                                                } */
+                                                    width: 100%;
+                                                    } */
             /* end 16-09-2024 */
             .wd-profile-form .form-group label.addmore_btn span {
                 width: auto;
@@ -516,10 +518,14 @@
         }
 
         @media(max-width: 767px) {
-            .wd-cstm-check .form-group label {max-width: 100px;}
+            .wd-cstm-check .form-group label {
+                max-width: 100px;
+            }
+
             .wd-cstm-check li {
                 flex: 0 0 auto;
             }
+
             .upload-section .requied_sec_row:first-child .form-group {
                 margin-bottom: 0;
             }
@@ -540,9 +546,9 @@
             }
 
             /* .requied_sec {
-                                    margin-right: -15px;
-                                    margin-left: -15px;
-                                } */
+                                        margin-right: -15px;
+                                        margin-left: -15px;
+                                    } */
 
             .requied_sec_row .document {
                 justify-content: space-between;
@@ -569,9 +575,9 @@
                 width: 100%;
             }
 
-           /* #passwordIcon {
-                top: 16px;
-            }*/
+            /* #passwordIcon {
+                    top: 16px;
+                }*/
 
 
 
@@ -734,13 +740,20 @@
 
 
                                         @if ($user->is_status == '' || $user->is_status == 'pending' || $user->is_status == 'rejected')
-                                            @if ($user->is_status == 'pending' || $user->is_status == 'rejected' && ($user->driver_license != null && $user->goods_in_transit_insurance != null && $user->email_verify_status == '1'))
+                                            @if (
+                                                $user->is_status == 'pending' ||
+                                                    ($user->is_status == 'rejected' &&
+                                                        ($user->driver_license != null &&
+                                                            $user->goods_in_transit_insurance != null &&
+                                                            $user->email_verify_status == '1')))
                                                 <div class="requied_sec px-md-3 mx-xl-4" style="color:red">
                                                     <h2>Account approval pending</h2>
                                                 </div>
                                             @endif
                                             <div class="row mx-0 mx-xl-4">
-                                                @if (($user->is_status != 'approved' && $user->is_status != 'pending'  && $user->is_status != 'rejected') || ($user->driver_license == null || $user->goods_in_transit_insurance == null))
+                                                @if (
+                                                    ($user->is_status != 'approved' && $user->is_status != 'pending' && $user->is_status != 'rejected') ||
+                                                        ($user->driver_license == null || $user->goods_in_transit_insurance == null))
                                                     <div class="col-md-6 col-xl-6 requied_sec mb-0 upload_docs px-0 px-md-3 pl-lg-0 px-xl-3"
                                                         style="{{ $user->is_status == 'approved' ? 'display:block' : '' }}">
                                                         <h2 class="upload-heading">Upload Documents:
@@ -777,83 +790,85 @@
                                                                 </div>
                                                             </div>
                                                         </h2>
-                                                        
+
                                                         <p class="subtitle">You must upload your documents before you can
                                                             start
                                                             bidding.</p>
                                                         <p class="subtitle text-danger message">Upload your documents</p>
                                                         <div class="upload-section">
-                                                        @if ($user->driver_license == null)
-                                                            <div class="requied_sec_row">
-                                                                <div class="form-group">
-                                                                    <div class="document border-danger">
-                                                                        <!-- <span>Valid driving license</span> -->
-                                                                        <label for="driver_license"
-                                                                            class="addmore_btn font-weight-light"
-                                                                            id="add"
-                                                                            title="Click to upload the document">
-                                                                            Valid driving license
-                                                                            <span class="upload-btn">Upload
-                                                                                <svg width="15" height="15"
-                                                                                    viewBox="0 0 15 15" fill="none"
-                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                    <path
-                                                                                        d="M3.875 9.375C3.875 8.96079 3.53921 8.625 3.125 8.625C2.71079 8.625 2.375 8.96079 2.375 9.375H3.875ZM3.125 10H2.375H3.125ZM12.625 9.375C12.625 8.96079 12.2892 8.625 11.875 8.625C11.4608 8.625 11.125 8.96079 11.125 9.375H12.625ZM8.08565 3.59352C8.34441 3.27007 8.29197 2.79811 7.96852 2.53935C7.64507 2.28059 7.17311 2.33303 6.91435 2.65648L8.08565 3.59352ZM4.41435 5.78148C4.15559 6.10493 4.20803 6.57689 4.53148 6.83565C4.85493 7.09441 5.32689 7.04197 5.58565 6.71852L4.41435 5.78148ZM8.08565 2.65648C7.82689 2.33303 7.35493 2.28059 7.03148 2.53935C6.70803 2.79811 6.65559 3.27007 6.91435 3.59352L8.08565 2.65648ZM9.41435 6.71852C9.67311 7.04197 10.1451 7.09441 10.4685 6.83565C10.792 6.57689 10.8444 6.10493 10.5857 5.78148L9.41435 6.71852ZM8.25 3.125C8.25 2.71079 7.91421 2.375 7.5 2.375C7.08579 2.375 6.75 2.71079 6.75 3.125H8.25ZM6.75 10C6.75 10.4142 7.08579 10.75 7.5 10.75C7.91421 10.75 8.25 10.4142 8.25 10H6.75ZM2.375 9.375V10H3.875V9.375H2.375ZM2.375 10C2.375 11.4497 3.55025 12.625 5 12.625V11.125C4.37868 11.125 3.875 10.6213 3.875 10H2.375ZM5 12.625H10V11.125H5V12.625ZM10 12.625C11.4497 12.625 12.625 11.4497 12.625 10H11.125C11.125 10.6213 10.6213 11.125 10 11.125V12.625ZM12.625 10V9.375H11.125V10H12.625ZM6.91435 2.65648L4.41435 5.78148L5.58565 6.71852L8.08565 3.59352L6.91435 2.65648ZM6.91435 3.59352L9.41435 6.71852L10.5857 5.78148L8.08565 2.65648L6.91435 3.59352ZM6.75 3.125V10H8.25V3.125H6.75Z"
-                                                                                        fill="#52D017" />
-                                                                                </svg>
-                                                                            </span>
-                                                                            <input type="file"
-                                                                                accept=".pdf, .png, .jpg, .jpeg"
-                                                                                name="driver_license" id="driver_license"
-                                                                                style="display: none;">
-                                                                        </label>
+                                                            @if ($user->driver_license == null)
+                                                                <div class="requied_sec_row">
+                                                                    <div class="form-group">
+                                                                        <div class="document border-danger">
+                                                                            <!-- <span>Valid driving license</span> -->
+                                                                            <label for="driver_license"
+                                                                                class="addmore_btn font-weight-light"
+                                                                                id="add"
+                                                                                title="Click to upload the document">
+                                                                                Valid driving license
+                                                                                <span class="upload-btn">Upload
+                                                                                    <svg width="15" height="15"
+                                                                                        viewBox="0 0 15 15" fill="none"
+                                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                                        <path
+                                                                                            d="M3.875 9.375C3.875 8.96079 3.53921 8.625 3.125 8.625C2.71079 8.625 2.375 8.96079 2.375 9.375H3.875ZM3.125 10H2.375H3.125ZM12.625 9.375C12.625 8.96079 12.2892 8.625 11.875 8.625C11.4608 8.625 11.125 8.96079 11.125 9.375H12.625ZM8.08565 3.59352C8.34441 3.27007 8.29197 2.79811 7.96852 2.53935C7.64507 2.28059 7.17311 2.33303 6.91435 2.65648L8.08565 3.59352ZM4.41435 5.78148C4.15559 6.10493 4.20803 6.57689 4.53148 6.83565C4.85493 7.09441 5.32689 7.04197 5.58565 6.71852L4.41435 5.78148ZM8.08565 2.65648C7.82689 2.33303 7.35493 2.28059 7.03148 2.53935C6.70803 2.79811 6.65559 3.27007 6.91435 3.59352L8.08565 2.65648ZM9.41435 6.71852C9.67311 7.04197 10.1451 7.09441 10.4685 6.83565C10.792 6.57689 10.8444 6.10493 10.5857 5.78148L9.41435 6.71852ZM8.25 3.125C8.25 2.71079 7.91421 2.375 7.5 2.375C7.08579 2.375 6.75 2.71079 6.75 3.125H8.25ZM6.75 10C6.75 10.4142 7.08579 10.75 7.5 10.75C7.91421 10.75 8.25 10.4142 8.25 10H6.75ZM2.375 9.375V10H3.875V9.375H2.375ZM2.375 10C2.375 11.4497 3.55025 12.625 5 12.625V11.125C4.37868 11.125 3.875 10.6213 3.875 10H2.375ZM5 12.625H10V11.125H5V12.625ZM10 12.625C11.4497 12.625 12.625 11.4497 12.625 10H11.125C11.125 10.6213 10.6213 11.125 10 11.125V12.625ZM12.625 10V9.375H11.125V10H12.625ZM6.91435 2.65648L4.41435 5.78148L5.58565 6.71852L8.08565 3.59352L6.91435 2.65648ZM6.91435 3.59352L9.41435 6.71852L10.5857 5.78148L8.08565 2.65648L6.91435 3.59352ZM6.75 3.125V10H8.25V3.125H6.75Z"
+                                                                                            fill="#52D017" />
+                                                                                    </svg>
+                                                                                </span>
+                                                                                <input type="file"
+                                                                                    accept=".pdf, .png, .jpg, .jpeg"
+                                                                                    name="driver_license"
+                                                                                    id="driver_license"
+                                                                                    style="display: none;">
+                                                                            </label>
+                                                                        </div>
+                                                                        <span id="driver_license_success"
+                                                                            class="d-none success_msg subtitle message"
+                                                                            style="color: #52D017;">Uploaded
+                                                                            Successfully</span>
                                                                     </div>
-                                                                    <span id="driver_license_success"
-                                                                        class="d-none success_msg subtitle message"
-                                                                        style="color: #52D017;">Uploaded
-                                                                        Successfully</span>
                                                                 </div>
-                                                            </div>
-                                                        @endif
-                                                        @if ($user->goods_in_transit_insurance == null)
-                                                            <div class="requied_sec_row">
-                                                                <div class="form-group">
-                                                                    <div class="document border-danger">
-                                                                        <label for="goods_in_transit_insurance"
-                                                                            class="addmore_btn font-weight-light"
-                                                                            id="add"
-                                                                            title="Click to upload the document">
-                                                                            Goods in transit insurance
-                                                                            <!-- <span>Goods in transit insurance</span> -->
-                                                                            <span class="upload-btn">Upload
-                                                                                <svg width="15" height="15"
-                                                                                    viewBox="0 0 15 15" fill="none"
-                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                    <path
-                                                                                        d="M3.875 9.375C3.875 8.96079 3.53921 8.625 3.125 8.625C2.71079 8.625 2.375 8.96079 2.375 9.375H3.875ZM3.125 10H2.375H3.125ZM12.625 9.375C12.625 8.96079 12.2892 8.625 11.875 8.625C11.4608 8.625 11.125 8.96079 11.125 9.375H12.625ZM8.08565 3.59352C8.34441 3.27007 8.29197 2.79811 7.96852 2.53935C7.64507 2.28059 7.17311 2.33303 6.91435 2.65648L8.08565 3.59352ZM4.41435 5.78148C4.15559 6.10493 4.20803 6.57689 4.53148 6.83565C4.85493 7.09441 5.32689 7.04197 5.58565 6.71852L4.41435 5.78148ZM8.08565 2.65648C7.82689 2.33303 7.35493 2.28059 7.03148 2.53935C6.70803 2.79811 6.65559 3.27007 6.91435 3.59352L8.08565 2.65648ZM9.41435 6.71852C9.67311 7.04197 10.1451 7.09441 10.4685 6.83565C10.792 6.57689 10.8444 6.10493 10.5857 5.78148L9.41435 6.71852ZM8.25 3.125C8.25 2.71079 7.91421 2.375 7.5 2.375C7.08579 2.375 6.75 2.71079 6.75 3.125H8.25ZM6.75 10C6.75 10.4142 7.08579 10.75 7.5 10.75C7.91421 10.75 8.25 10.4142 8.25 10H6.75ZM2.375 9.375V10H3.875V9.375H2.375ZM2.375 10C2.375 11.4497 3.55025 12.625 5 12.625V11.125C4.37868 11.125 3.875 10.6213 3.875 10H2.375ZM5 12.625H10V11.125H5V12.625ZM10 12.625C11.4497 12.625 12.625 11.4497 12.625 10H11.125C11.125 10.6213 10.6213 11.125 10 11.125V12.625ZM12.625 10V9.375H11.125V10H12.625ZM6.91435 2.65648L4.41435 5.78148L5.58565 6.71852L8.08565 3.59352L6.91435 2.65648ZM6.91435 3.59352L9.41435 6.71852L10.5857 5.78148L8.08565 2.65648L6.91435 3.59352ZM6.75 3.125V10H8.25V3.125H6.75Z"
-                                                                                        fill="#52D017" />
-                                                                                </svg>
-                                                                            </span>
-                                                                            <input type="file"
-                                                                                accept=".pdf, .png, .jpg, .jpeg"
-                                                                                name="goods_in_transit_insurance"
-                                                                                id="goods_in_transit_insurance"
-                                                                                style="display: none;">
-                                                                        </label>
+                                                            @endif
+                                                            @if ($user->goods_in_transit_insurance == null)
+                                                                <div class="requied_sec_row">
+                                                                    <div class="form-group">
+                                                                        <div class="document border-danger">
+                                                                            <label for="goods_in_transit_insurance"
+                                                                                class="addmore_btn font-weight-light"
+                                                                                id="add"
+                                                                                title="Click to upload the document">
+                                                                                Goods in transit insurance
+                                                                                <!-- <span>Goods in transit insurance</span> -->
+                                                                                <span class="upload-btn">Upload
+                                                                                    <svg width="15" height="15"
+                                                                                        viewBox="0 0 15 15" fill="none"
+                                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                                        <path
+                                                                                            d="M3.875 9.375C3.875 8.96079 3.53921 8.625 3.125 8.625C2.71079 8.625 2.375 8.96079 2.375 9.375H3.875ZM3.125 10H2.375H3.125ZM12.625 9.375C12.625 8.96079 12.2892 8.625 11.875 8.625C11.4608 8.625 11.125 8.96079 11.125 9.375H12.625ZM8.08565 3.59352C8.34441 3.27007 8.29197 2.79811 7.96852 2.53935C7.64507 2.28059 7.17311 2.33303 6.91435 2.65648L8.08565 3.59352ZM4.41435 5.78148C4.15559 6.10493 4.20803 6.57689 4.53148 6.83565C4.85493 7.09441 5.32689 7.04197 5.58565 6.71852L4.41435 5.78148ZM8.08565 2.65648C7.82689 2.33303 7.35493 2.28059 7.03148 2.53935C6.70803 2.79811 6.65559 3.27007 6.91435 3.59352L8.08565 2.65648ZM9.41435 6.71852C9.67311 7.04197 10.1451 7.09441 10.4685 6.83565C10.792 6.57689 10.8444 6.10493 10.5857 5.78148L9.41435 6.71852ZM8.25 3.125C8.25 2.71079 7.91421 2.375 7.5 2.375C7.08579 2.375 6.75 2.71079 6.75 3.125H8.25ZM6.75 10C6.75 10.4142 7.08579 10.75 7.5 10.75C7.91421 10.75 8.25 10.4142 8.25 10H6.75ZM2.375 9.375V10H3.875V9.375H2.375ZM2.375 10C2.375 11.4497 3.55025 12.625 5 12.625V11.125C4.37868 11.125 3.875 10.6213 3.875 10H2.375ZM5 12.625H10V11.125H5V12.625ZM10 12.625C11.4497 12.625 12.625 11.4497 12.625 10H11.125C11.125 10.6213 10.6213 11.125 10 11.125V12.625ZM12.625 10V9.375H11.125V10H12.625ZM6.91435 2.65648L4.41435 5.78148L5.58565 6.71852L8.08565 3.59352L6.91435 2.65648ZM6.91435 3.59352L9.41435 6.71852L10.5857 5.78148L8.08565 2.65648L6.91435 3.59352ZM6.75 3.125V10H8.25V3.125H6.75Z"
+                                                                                            fill="#52D017" />
+                                                                                    </svg>
+                                                                                </span>
+                                                                                <input type="file"
+                                                                                    accept=".pdf, .png, .jpg, .jpeg"
+                                                                                    name="goods_in_transit_insurance"
+                                                                                    id="goods_in_transit_insurance"
+                                                                                    style="display: none;">
+                                                                            </label>
+                                                                        </div>
+                                                                        <span id="goods_in_transit_insurance_success"
+                                                                            class=" success_msg d-none subtitle message"
+                                                                            style="color: #52D017;">Uploaded
+                                                                            Successfully</span>
                                                                     </div>
-                                                                    <span id="goods_in_transit_insurance_success"
-                                                                        class=" success_msg d-none subtitle message"
-                                                                        style="color: #52D017;">Uploaded
-                                                                        Successfully</span>
                                                                 </div>
-                                                            </div>
-                                                        @endif
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 @endif
 
-                                                @if ($user->driver_license != null || $user->goods_in_transit_insurance != null )
-                                                    <div class="col-md-6 col-xl-6 mb-0 px-0 px-md-3 mt-3 pt-2 requied_sec ">
+                                                @if ($user->driver_license != null || $user->goods_in_transit_insurance != null)
+                                                    <div
+                                                        class="col-md-6 col-xl-6 mb-0 px-0 px-md-3 mt-3 pt-2 requied_sec ">
                                                         <h2 class="upload-heading p-0 m-0">Uploaded documents</h2>
                                                         <p class="subtitle text-success message">Documents uploaded</p>
 
@@ -919,7 +934,8 @@
 
                                                                         </label>
 
-                                                                        <span class="send-link" id="sendLinkBtn" onclick="handleSendLink()"
+                                                                        <span class="send-link" id="sendLinkBtn"
+                                                                            onclick="handleSendLink()"
                                                                             style="cursor: pointer;">Send Link</span>
 
                                                                         <div id="message" style="display: none;"></div>
@@ -1045,7 +1061,8 @@
                                                                 <div class="requied_sec_row">
                                                                     <div class="form-group">
                                                                         <div class="document">
-                                                                            <label for="" class="font-weight-light">
+                                                                            <label for=""
+                                                                                class="font-weight-light">
                                                                                 Valid driving license
                                                                                 <a class="view-pdf"
                                                                                     href="{{ url($user->driver_license) }}"
@@ -1063,7 +1080,8 @@
                                                                 <div class="requied_sec_row">
                                                                     <div class="form-group">
                                                                         <div class="document">
-                                                                            <label for="" class="font-weight-light">
+                                                                            <label for=""
+                                                                                class="font-weight-light">
                                                                                 Goods in transit insurance
                                                                                 <a class="view-pdf"
                                                                                     href="{{ url($user->goods_in_transit_insurance) }}"
@@ -1079,10 +1097,11 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 col-xl-6 requied_sec verify_email_sec mb-0 pl-md-3  mt-3 pt-2">
+                                                <div
+                                                    class="col-md-6 col-xl-6 requied_sec verify_email_sec mb-0 pl-md-3  mt-3 pt-2">
                                                     <h2 class="uploaded-documents p-0 m-0">Verify email:</h2>
-                                                    
-                                                     @if ($user->email_verify_status == '0')
+
+                                                    @if ($user->email_verify_status == '0')
                                                         <p class="subtitle">You must verify your email address before you
                                                             can start bidding.</p>
                                                         <p class="subtitle text-danger message">Please verify your email
@@ -1097,7 +1116,8 @@
 
                                                                         </label>
 
-                                                                        <span class="send-link" id="sendLinkBtn" onclick="handleSendLink()"
+                                                                        <span class="send-link" id="sendLinkBtn"
+                                                                            onclick="handleSendLink()"
                                                                             style="cursor: pointer;">Send Link</span>
 
                                                                         <div id="message" style="display: none;"></div>
@@ -1107,89 +1127,134 @@
                                                             </div>
                                                         </div>
                                                     @else
-                                                    <p class="subtitle text-success message">Email verified</p>
-                                                    <div class="upload-section ">
-                                                        <div class="requied_sec_row w-100">
-                                                            <div class="form-group">
-                                                                <div class="document flex-row">
-                                                                    <label for="email_verify"
-                                                                        class="w-auto font-weight-light">
-                                                                        Verify your email address
-                                                                    </label>
+                                                        <p class="subtitle text-success message">Email verified</p>
+                                                        <div class="upload-section ">
+                                                            <div class="requied_sec_row w-100">
+                                                                <div class="form-group">
+                                                                    <div class="document flex-row">
+                                                                        <label for="email_verify"
+                                                                            class="w-auto font-weight-light">
+                                                                            Verify your email address
+                                                                        </label>
 
-                                                                    <span id=""
-                                                                        style="cursor: pointer;">Verified</span>
+                                                                        <span id=""
+                                                                            style="cursor: pointer;">Verified</span>
 
-                                                                    <div id="message" style="display: none;"></div>
+                                                                        <div id="message" style="display: none;"></div>
 
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
                                                     @endif
                                                 </div>
                                             </div>
                                         @endif
 
-                                        <h3 class="adjust-space-mobile-padding"><p>Company details</p>
+                                        <h3 class="adjust-space-mobile-padding">
+                                            <p>Company details</p>
                                         </h3>
-                                        
+
                                         <div class="row align-items-end mx-4">
                                             <div class="col-lg-6 pr-lg-3">
                                                 <div class="form-group ">
-                                                    <label for="" class="mb-1 {{ empty($companyDetail) || empty($companyDetail->git_insurance_cover) ? 'text-danger' : '' }}">GIT insurance cover</label>
-                                                    <select class="form-control {{ empty($companyDetail) || empty($companyDetail->git_insurance_cover) ? 'border-danger' : '' }}" name="git_insurance_cover" id="git_insurance_cover"  onchange="updateBorderColor(this)">
-                                                        <option value="" disabled {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '' ? 'selected' : '' }}>Select git insurance cover</option>
+                                                    <label for=""
+                                                        class="mb-1 {{ empty($companyDetail) || empty($companyDetail->git_insurance_cover) ? 'text-danger' : '' }}">GIT
+                                                        insurance cover</label>
+                                                    <select
+                                                        class="form-control {{ empty($companyDetail) || empty($companyDetail->git_insurance_cover) ? 'border-danger' : '' }}"
+                                                        name="git_insurance_cover" id="git_insurance_cover"
+                                                        onchange="updateBorderColor(this)">
+                                                        <option value="" disabled
+                                                            {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '' ? 'selected' : '' }}>
+                                                            Select git insurance cover</option>
                                                         @foreach ([10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000] as $amount)
-                                                            <option value="{{ number_format($amount) }}" {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == number_format($amount) ? 'selected' : '' }}>
+                                                            <option value="{{ number_format($amount) }}"
+                                                                {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == number_format($amount) ? 'selected' : '' }}>
                                                                 £{{ number_format($amount) }}
                                                             </option>
                                                         @endforeach
-                                                        <option value="1,000,000+" {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '1,000,000+' ? 'selected' : '' }}>£1,000,000+</option>
+                                                        <option value="1,000,000+"
+                                                            {{ old('git_insurance_cover', optional($companyDetail)->git_insurance_cover) == '1,000,000+' ? 'selected' : '' }}>
+                                                            £1,000,000+</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="" class="mb-1 {{ empty($companyDetail) || empty($companyDetail->years_established) ? 'text-danger' : '' }}">Years established</label>
-                                                    <select class="form-control {{ empty($companyDetail) || empty($companyDetail->years_established) ? 'border-danger' : '' }}" name="years_established" id="years_established"  onchange="updateBorderColor(this)">
-                                                        <option value="" disabled {{ old('years_established', optional($companyDetail)->years_established) == '' ? 'selected' : '' }}>Years established</option>
+                                                    <label for=""
+                                                        class="mb-1 {{ empty($companyDetail) || empty($companyDetail->years_established) ? 'text-danger' : '' }}">Years
+                                                        established</label>
+                                                    <select
+                                                        class="form-control {{ empty($companyDetail) || empty($companyDetail->years_established) ? 'border-danger' : '' }}"
+                                                        name="years_established" id="years_established"
+                                                        onchange="updateBorderColor(this)">
+                                                        <option value="" disabled
+                                                            {{ old('years_established', optional($companyDetail)->years_established) == '' ? 'selected' : '' }}>
+                                                            Years established</option>
                                                         @foreach (range(1, 9) as $year)
-                                                            <option value="{{ $year }}" {{ old('years_established', optional($companyDetail)->years_established) == (string)$year ? 'selected' : '' }}>{{ $year }}</option>
+                                                            <option value="{{ $year }}"
+                                                                {{ old('years_established', optional($companyDetail)->years_established) == (string) $year ? 'selected' : '' }}>
+                                                                {{ $year }}</option>
                                                         @endforeach
-                                                        <option value="10+" {{ old('years_established', optional($companyDetail)->years_established) == '10+' ? 'selected' : '' }}>10+</option>
+                                                        <option value="10+"
+                                                            {{ old('years_established', optional($companyDetail)->years_established) == '10+' ? 'selected' : '' }}>
+                                                            10+</option>
                                                     </select>
                                                 </div>
                                             </div>
-                                        
+
                                             <div class="col-lg-6 pl-lg-3">
                                                 <div class="form-group">
-                                                    <label for="" class="mb-1 {{ empty($companyDetail) || empty($companyDetail->no_of_tow_trucks) ? 'text-danger' : '' }}">No of tow trucks</label>
-                                                    <select class="form-control {{ empty($companyDetail) || empty($companyDetail->no_of_tow_trucks) ? 'border-danger' : '' }}" name="no_of_tow_trucks" id="no_of_tow_trucks"  onchange="updateBorderColor(this)">
-                                                        <option value="" disabled {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == '' ? 'selected' : '' }}>Number of tow trucks</option>
+                                                    <label for=""
+                                                        class="mb-1 {{ empty($companyDetail) || empty($companyDetail->no_of_tow_trucks) ? 'text-danger' : '' }}">No
+                                                        of tow trucks</label>
+                                                    <select
+                                                        class="form-control {{ empty($companyDetail) || empty($companyDetail->no_of_tow_trucks) ? 'border-danger' : '' }}"
+                                                        name="no_of_tow_trucks" id="no_of_tow_trucks"
+                                                        onchange="updateBorderColor(this)">
+                                                        <option value="" disabled
+                                                            {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == '' ? 'selected' : '' }}>
+                                                            Number of tow trucks</option>
                                                         @foreach (range(1, 9) as $number)
-                                                            <option value="{{ $number }}" {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == (string)$number ? 'selected' : '' }}>{{ $number }}</option>
+                                                            <option value="{{ $number }}"
+                                                                {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == (string) $number ? 'selected' : '' }}>
+                                                                {{ $number }}</option>
                                                         @endforeach
-                                                        <option value="10+" {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == '10+' ? 'selected' : '' }}>10+</option>
+                                                        <option value="10+"
+                                                            {{ old('no_of_tow_trucks', optional($companyDetail)->no_of_tow_trucks) == '10+' ? 'selected' : '' }}>
+                                                            10+</option>
                                                     </select>
-                                                    
+
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="" class="mb-1 {{ empty($companyDetail) || empty($companyDetail->no_of_drivers) ? 'text-danger' : '' }}">No of drivers</label>
-                                                    <select class="form-control {{ empty($companyDetail) || empty($companyDetail->no_of_drivers) ? 'border-danger' : '' }}" name="no_of_drivers" id="no_of_drivers"  onchange="updateBorderColor(this)">
-                                                        <option value="" disabled {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == '' ? 'selected' : '' }}>Number of drivers</option>
+                                                    <label for=""
+                                                        class="mb-1 {{ empty($companyDetail) || empty($companyDetail->no_of_drivers) ? 'text-danger' : '' }}">No
+                                                        of drivers</label>
+                                                    <select
+                                                        class="form-control {{ empty($companyDetail) || empty($companyDetail->no_of_drivers) ? 'border-danger' : '' }}"
+                                                        name="no_of_drivers" id="no_of_drivers"
+                                                        onchange="updateBorderColor(this)">
+                                                        <option value="" disabled
+                                                            {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == '' ? 'selected' : '' }}>
+                                                            Number of drivers</option>
                                                         @foreach (range(1, 9) as $number)
-                                                            <option value="{{ $number }}" {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == (string)$number ? 'selected' : '' }}>{{ $number }}</option>
+                                                            <option value="{{ $number }}"
+                                                                {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == (string) $number ? 'selected' : '' }}>
+                                                                {{ $number }}</option>
                                                         @endforeach
-                                                        <option value="10+" {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == '10+' ? 'selected' : '' }}>10+</option>
+                                                        <option value="10+"
+                                                            {{ old('no_of_drivers', optional($companyDetail)->no_of_drivers) == '10+' ? 'selected' : '' }}>
+                                                            10+</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-                                        
-                                       
+
+
                                         <h3 class="adjust-space-mobile-padding d-none d-lg-block">Account details</h3>
                                         <div class="row mx-4">
                                             <div class="col-lg-6 pr-lg-3 order-2 order-lg-1">
-                                                <h3 class="adjust-space-mobile-padding d-lg-none px-3 mt-4">Account details</h3>
+                                                <h3 class="adjust-space-mobile-padding d-lg-none px-3 mt-4">Account details
+                                                </h3>
                                                 <div class="form-group">
                                                     <label for="" class="mb-1">Name</label>
                                                     <input type="text" class="form-control sticky-data"
@@ -1219,34 +1284,31 @@
                                                         value="{{ $user->username }}" readonly>
                                                 </div>
                                                 <div class="form-group">
-                                                   
-                                                        <label for="" class="mb-1">Mobile phone</label>
-                                                        {{-- <input type="tel" id="mobile" class="form-control"
+
+                                                    <label for="" class="mb-1">Mobile phone</label>
+                                                    {{-- <input type="tel" id="mobile" class="form-control"
                                                         placeholder="Mobile Phone" name="mobile"
                                                         value="{{ old('mobile', ($user->mobile ?? '')) ? '0' . ltrim(old('mobile', $user->mobile), '0') : '' }}" /> --}}
-                                                        <input 
-                                                        type="tel" 
-                                                        id="mobile" 
-                                                        class="form-control" 
-                                                        placeholder="Mobile Phone" 
-                                                        name="mobile" 
-                                                        value="{{ old('mobile', $user->mobile ?? '') }}" 
-                                                        pattern="^0[0-9]{9}$" 
+                                                    <input type="tel" id="mobile" class="form-control"
+                                                        placeholder="Mobile Phone" name="mobile"
+                                                        value="{{ old('mobile', $user->mobile ?? '') }}"
+                                                        pattern="^0[0-9]{9}$"
                                                         title="Mobile number must start with 0 and have exactly 10 digits."
-                                                        required 
-                                                    />
-                                                  
+                                                        required />
+
                                                 </div>
                                                 <div class="form-group" style="position: relative;">
                                                     <label for="npassword" class="mb-1">New password</label>
-                                                    <input type="password" class="form-control" placeholder="New password" name="npassword" id="npassword">
-                                                    
+                                                    <input type="password" class="form-control"
+                                                        placeholder="New password" name="npassword" id="npassword">
+
                                                     <!-- Toggle Password Icon -->
-                                                    <span id="togglePassword" style="position: absolute; right: 10px; top: 35px; cursor: pointer;">
+                                                    <span id="togglePassword"
+                                                        style="position: absolute; right: 10px; top: 35px; cursor: pointer;">
                                                         <i class="fas fa-eye" id="passwordIcon"></i>
                                                     </span>
                                                 </div>
-                                                
+
                                             </div>
                                             <div class="col-lg-6 pr-lg-3 order-4 order-lg-3 mt-3 mt-lg-0">
                                                 <h5>Email notifications preferences:</h5>
@@ -1292,7 +1354,7 @@
                                                         ? explode(',', $user->payment_methods)
                                                         : [];
                                                 @endphp
-                                                
+
                                                 <ul class="wd-cstm-check">
                                                     <li>
                                                         <div class="form-group">
@@ -1302,7 +1364,7 @@
                                                             <label for="payment1"></label>
                                                             <span>Cash</span>
                                                         </div>
-                                                        
+
                                                     </li>
 
 
@@ -1332,7 +1394,7 @@
                                             <button type="submit" class="wd-save-btn">Save Changes</button>
                                         </div>
                                     </div>
-                                </forphonem>
+                                    </forphonem>
                             </div>
                         </div>
                     </div>
@@ -1583,29 +1645,29 @@
         }
         let isLinkSent = false; // Track if the link is already sent
 
-function handleSendLink() {
-    const button = document.getElementById('sendLinkBtn');
-    const statusMessage = document.getElementById('statusMessage');
+        function handleSendLink() {
+            const button = document.getElementById('sendLinkBtn');
+            const statusMessage = document.getElementById('statusMessage');
 
-    // Update button text and status message
-    if (!isLinkSent) {
-        button.innerText = 'Resend';
-        statusMessage.innerText = 'Link sent successfully!';
-        statusMessage.classList.remove('text-muted', 'text-danger');
-        statusMessage.classList.add('text-success');
-        isLinkSent = true;
+            // Update button text and status message
+            if (!isLinkSent) {
+                button.innerText = 'Resend';
+                statusMessage.innerText = 'Link sent successfully!';
+                statusMessage.classList.remove('text-muted', 'text-danger');
+                statusMessage.classList.add('text-success');
+                isLinkSent = true;
 
-        // Call function to send the link
-       
-    } else {
-        statusMessage.innerText = 'Resend link...';
-        statusMessage.classList.remove('text-muted', 'text-success', 'text-danger');
-        statusMessage.classList.add('text-warning');
+                // Call function to send the link
 
-        // Call function to resend the link
-       
-    }
-}
+            } else {
+                statusMessage.innerText = 'Resend link...';
+                statusMessage.classList.remove('text-muted', 'text-success', 'text-danger');
+                statusMessage.classList.add('text-warning');
+
+                // Call function to resend the link
+
+            }
+        }
 
         function sendEmail() {
             const email = "{{ config('constants.default.admin_email') }}";
@@ -1657,25 +1719,25 @@ function handleSendLink() {
                 $(".file-upload").click();
             });
             // Show SweetAlert popup if session variable is set
-            @if (session('show_transporter_alert'))
-                Swal.fire({
-                    title: '<span class="swal-title">Important notice</span>',
-                    html: '<span class="swal-text">Do not use company names or share contact information, we will provide you with the customer contact details after they have accepted your bid. If you are found attempting to operate outside of this platform then you will be banned immediately.</span>',
-                    confirmButtonColor: '#52D017',
-                    confirmButtonText: 'OK, got it',
-                    customClass: {
-                        title: 'swal-title',
-                        htmlContainer: 'swal-text-container',
-                        popup: 'swal-popup', // Add custom class for the popup
-                    },
-                    showConfirmButton: true, // Show the confirm button
-                    allowOutsideClick: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        @php session()->forget('show_transporter_alert'); @endphp
-                    }
-                });
-            @endif
+            // @if (session('show_transporter_alert'))
+            //    Swal.fire({
+            //       title: '<span class="swal-title">Important notice</span>',
+            //    html: '<span class="swal-text">Do not use company names or share contact information, we will provide you with the customer contact details after they have accepted your bid. If you are found attempting to operate outside of this platform then you will be banned immediately.</span>',
+            //    confirmButtonColor: '#52D017',
+            //     confirmButtonText: 'OK, got it',
+            //    customClass: {
+            //        title: 'swal-title',
+            //        htmlContainer: 'swal-text-container',
+            //        popup: 'swal-popup', // Add custom class for the popup
+            //    },
+            //     showConfirmButton: true, // Show the confirm button
+            //      allowOutsideClick: false
+            // }).then((result) => {
+            //    if (result.isConfirmed) {
+            //       @php session()->forget('show_transporter_alert'); @endphp
+            //   }
+            //  });
+            //  @endif
 
             $('#check2, #check3, #check4, #check5,#check6').change(function() {
 
@@ -1705,7 +1767,7 @@ function handleSendLink() {
         });
 
         function updateEmailPrefrence() {
-        // alert('yeeeeeeeeeeeeeee');
+            // alert('yeeeeeeeeeeeeeee');
             var isChecked = $(this).is(':checked');
             var emailType = $(this).data('email-type');
             var value = isChecked ? 1 : 0; // Set value based on the checkbox state
@@ -1769,8 +1831,9 @@ function handleSendLink() {
                                     return $('#phone').val();
                                 }
                             },
-                             complete: function(response) {
-                              console.log("Remote validation response:", response.responseText); // Logs the server response
+                            complete: function(response) {
+                                console.log("Remote validation response:", response
+                                .responseText); // Logs the server response
                             }
                         },
                     },
@@ -1831,7 +1894,7 @@ function handleSendLink() {
                         required: 'Please enter mobile',
                         remote: "This number is already taken",
                         maxlength: "Please enter a valid mobile number",
-                        minlength:"Please enter a valid mobile number"
+                        minlength: "Please enter a valid mobile number"
                     },
                     // opassword: {
                     //     required: 'Old password is required',
@@ -1861,30 +1924,29 @@ function handleSendLink() {
             });
         });
         document.getElementById("togglePassword").addEventListener("click", function() {
-    const passwordInput = document.getElementById("npassword");
-    const passwordIcon = document.getElementById("passwordIcon");
+            const passwordInput = document.getElementById("npassword");
+            const passwordIcon = document.getElementById("passwordIcon");
 
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        passwordIcon.classList.remove("fa-eye");
-        passwordIcon.classList.add("fa-eye-slash");
-    } else {
-        passwordInput.type = "password";
-        passwordIcon.classList.remove("fa-eye-slash");
-        passwordIcon.classList.add("fa-eye");
-    }
-});
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                passwordIcon.classList.remove("fa-eye");
+                passwordIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                passwordIcon.classList.remove("fa-eye-slash");
+                passwordIcon.classList.add("fa-eye");
+            }
+        });
 
-function updateBorderColor(selectElement) {
-    // Check if a valid value is selected
-    if (selectElement.value) {
-        selectElement.classList.remove('border-danger');
-        selectElement.previousElementSibling.classList.remove('text-danger');
-    } else {
-        selectElement.classList.add('border-danger');
-        selectElement.previousElementSibling.classList.add('text-danger');
-    }
-}
-
+        function updateBorderColor(selectElement) {
+            // Check if a valid value is selected
+            if (selectElement.value) {
+                selectElement.classList.remove('border-danger');
+                selectElement.previousElementSibling.classList.remove('text-danger');
+            } else {
+                selectElement.classList.add('border-danger');
+                selectElement.previousElementSibling.classList.add('text-danger');
+            }
+        }
     </script>
 @endsection

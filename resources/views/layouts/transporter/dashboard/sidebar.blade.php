@@ -240,34 +240,7 @@ $currentRoute = request()->route()->getName();
         </div>
     </div>
 </div>
-<!-- Start Maintaince model comment by kartikd4d --->
-{{-- <div class="modal fade" id="importantNoticeModal" tabindex="-1" role="dialog" aria-labelledby="importantNoticeLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content maintaince_text">
-      <div class="modal-header">
-        <h5 class="modal-title" id="importantNoticeLabel">Important Notice</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body ">
-        <p>The website is currently undergoing maintenance as there have been some technical issues and bugs that need to be fixed. There will not be any new jobs posted on the find jobs section until the bugs have been resolved.</p>
-        <p>Whilst we are fixing the technical issues, we are also taking the opportunity to make improvements to the site that you may notice when pushed live. We will notify you by email and SMS as soon as the site is back up and running.</p>
-        <h5>New features:</h5>
-        <ul>
-          <li><strong>Outbid alerts:</strong> You can opt in to receive emails when you have been outbid.</li>
-          <li><strong>Saved searches:</strong> You can save your searches and opt in to receive email notifications each time a job gets posted that matches your saved search.</li>
-          <li><strong>Watchlist:</strong> You can choose to watch jobs and they will go into your watchlist.</li>
-          <li><strong>Notification panel:</strong> See all of your alerts in one place; outbids, messages, booking confirmations, saved search alerts.</li>
-        </ul>
-        <p>Thank you for your patience.</p>
-        <p>Kind regards,<br>Transport Any Car Team</p>
-        <p>If you have any questions, please email us at<b> <a href="mailto:support@transportanycar.com">support@transportanycar.com</a></b></p>
-        <p>You can download the <b>how it works</b> guide <a href="/uploads/transport_any_car_how_it _works.pdf" target="_blank">here.</a></p>
-      </div>
-    </div>
-  </div>
-</div> --}}
+
 <!--- End maintaince model --->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
