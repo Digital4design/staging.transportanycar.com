@@ -82,8 +82,8 @@ class saveQuoteAndNotifyTransportersJob implements ShouldQueue
                     
                         $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
                         $subject = 'You have received a transport notification';
-                        $emailService->sendEmail($transporter->email, $htmlContent, $subject);
-                        // $emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
+                        // $emailService->sendEmail($transporter->email, $htmlContent, $subject);
+                        $emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
 
                         Log::info("quote functionality sending email to transporter: #{$index} {$transporter->first_name}  {$transporter->email} ");
                    
