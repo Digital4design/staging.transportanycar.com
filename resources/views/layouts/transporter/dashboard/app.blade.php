@@ -83,22 +83,28 @@
 </head>
 
 <body>
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-572LPM3G"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-572LPM3G" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
     <a class="maintaince-modal hidden" data-toggle="modal" data-target="#maintainceModal">View</a>
-    <div class="modal fade maintaince" id="maintainceModal" tabindex="-1" role="dialog" aria-labelledby="maintainceModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade maintaince" id="maintainceModal" tabindex="-1" role="dialog"
+        aria-labelledby="maintainceModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header align-items-center">
                     <h2 class="modal-title" id="maintainceModalLabel">Important Notice</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <svg width="28" height="28" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <svg width="28" height="28" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>The website is currently undergoing maintenance as there have been some technical issues and bugs that need to be fixed. There will not be any new jobs posted on the find jobs section until the bugs have been resolved. Whilst we are fixing the technical issues we are also taking the opportunity to make improvements to the site that you may notice when pushed live. We will notify you by email and SMS as soon as the site is back up and running.</p>
+                    <p>The website is currently undergoing maintenance as there have been some technical issues and bugs
+                        that need to be fixed. There will not be any new jobs posted on the find jobs section until the
+                        bugs have been resolved. Whilst we are fixing the technical issues we are also taking the
+                        opportunity to make improvements to the site that you may notice when pushed live. We will
+                        notify you by email and SMS as soon as the site is back up and running.</p>
                     <h5 class="mt-5">New features:</h5>
                     <ul>
                         <li>Ability to view other transporter bids and messages to users.</li>
@@ -108,11 +114,12 @@
                     <p>Thank you for your patients.</p>
                     <p>Kind regards,</p>
                     <p>Transport Any Car Team</p>
-                    <p>If you have any questions or suggestions please email us <a href="mailto:support@transportanycar.com">support@transportanycar.com</a></p>
+                    <p>If you have any questions or suggestions please email us <a
+                            href="mailto:support@transportanycar.com">support@transportanycar.com</a></p>
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     @yield('content')
 </body>
 <!-- Bootstrap JS & Jquery -->
@@ -185,14 +192,14 @@
         }
     });
     $(function() {
-        @if(session('error'))
-        toastr.error('{{ session('
-            error ') }}', '', {
+        @if (session('error'))
+            toastr.error('{{ session('
+                        error ') }}', '', {
                 timeOut: 2000
             });
-        @elseif(session('success'))
-        toastr.success('{{ session('
-            success ') }}', '', {
+        @elseif (session('success'))
+            toastr.success('{{ session('
+                        success ') }}', '', {
                 timeOut: 2000
             });
         @endif
