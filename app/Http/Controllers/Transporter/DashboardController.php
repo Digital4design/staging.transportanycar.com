@@ -480,6 +480,7 @@ class DashboardController extends WebController
             $quote->update([
                 'price' => $quoteDetails['customer_quote'],
                 'deposit' => $quoteDetails['deposit'],
+                'status'=>'pending',
                 'transporter_payment' => $quoteDetails['transporter_payment'],
                 'message' => $request->message,
             ]);
