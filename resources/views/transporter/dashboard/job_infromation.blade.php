@@ -79,8 +79,8 @@
         }
 
         /* .view_message[data-target="#bidCollapse0"] {
-                                background-color: #0356D6;
-                            } */
+                                    background-color: #0356D6;
+                                } */
         .view_message.login-user-button {
             background-color: #0356D6;
         }
@@ -401,11 +401,11 @@
 
         /* .modal-content, */
         /* #caption {
-                                -webkit-animation-name: zoom;
-                                -webkit-animation-duration: 0.6s;
-                             animation-name: zoom;
-                                animation-duration: 0.6s;
-                            } */
+                                    -webkit-animation-name: zoom;
+                                    -webkit-animation-duration: 0.6s;
+                                 animation-name: zoom;
+                                    animation-duration: 0.6s;
+                                } */
 
         @-webkit-keyframes zoom {
             from {
@@ -751,7 +751,7 @@ $findJobsPath = parse_url(
                                     }
                                 @endphp
                                 <div class="back_btn row mx-0 align-items-center">
-                                    <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
+                                    {{-- <a href="{{ $previousUrl }}" class="d-flex flex-wrap align-items-center">
                                         <svg width="7" height="13" viewBox="0 0 7 13" fill="none"
                                             xmlns="http://www.w3.org/2000/svg" class="mr-2">
                                             <g opacity="0.5">
@@ -767,6 +767,15 @@ $findJobsPath = parse_url(
                                         @else
                                             Find Jobs
                                         @endif
+                                    </a> --}}
+                                    <a href="javascript:void(0);" onclick="goBack()" class="d-flex flex-wrap align-items-center">
+                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                            <g opacity="0.5">
+                                                <path d="M6 11.5L1 6.5L6 1.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </g>
+                                        </svg>
+                                        
+                                        <span id="previous-page"></span>
                                     </a>
                                 </div>
                             </div>
@@ -889,17 +898,17 @@ $findJobsPath = parse_url(
                                         class="col-6 col-md-12 mb-3 mb-md-0 d-flex d-md-none flex-wrap align-items-end upper-right px-0 px-md-3">
                                         <div class="row w-100 mx-0">
                                             @if ($quote->watchlist)
-                                            <a href="javascript:;" class="add_to_wishlist"
-                                                onclick="removeToWatchlist('{{ $quote->id }}');">
+                                                <a href="javascript:;" class="add_to_wishlist"
+                                                    onclick="removeToWatchlist('{{ $quote->id }}');">
 
-                                                Add to watchlist
-                                            </a>
-                                        @else
-                                            <a href="javascript:;" class="add_to_wishlist"
-                                                onclick="addToWatchlist('{{ $quote->id }}');">
-                                                Add to watchlist
-                                            </a>
-                                        @endif
+                                                    Add to watchlist
+                                                </a>
+                                            @else
+                                                <a href="javascript:;" class="add_to_wishlist"
+                                                    onclick="addToWatchlist('{{ $quote->id }}');">
+                                                    Add to watchlist
+                                                </a>
+                                            @endif
                                             {{-- @if ($quote->quoteByTransporter)
                                                 <a href="javascript:;" onclick="share_edit_quote('{{ $quote->id }}');"
                                                     class="place_bid_btn  ">Edit
@@ -1262,18 +1271,18 @@ $findJobsPath = parse_url(
     </div>
 
     <!-- <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <span class="close">&times;</span>
-                                            <img id="img01" class="img-fluid" />
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <span class="close">&times;</span>
+                                                <img id="img01" class="img-fluid" />
 
-                                            <div id="caption"></div>
+                                                <div id="caption"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div> -->
+                                </div> -->
     {{-- EDIT  --}}
     <div class="modal get_quote fade custom-slide" id="quoteEdit" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -1837,6 +1846,52 @@ $findJobsPath = parse_url(
                     }, 500);
                 }
             }
+        });
+
+        function goBack() {
+        if (document.referrer) {
+            history.back(); // Navigate back without refresh
+        } else {
+            window.location.href = "{{ $previousUrl }}"; // Fallback if no history
+        }
+    }
+
+    // Display the correct previous page name
+    document.addEventListener("DOMContentLoaded", function () {
+        let previousPath = "{{ $previousPath }}";
+        let pageName = "Find Jobs"; // Default
+
+        if (previousPath === "{{ $savedJobsPath }}") {
+            pageName = " Saved Jobs";
+        } else if (previousPath === "{{ $watchlistPath }}") {
+            pageName = " Watchlist";
+        }
+
+        document.getElementById("previous-page").innerText = pageName;
+    });
+
+    </script>
+    <script>
+        function goBack() {
+            if (document.referrer) {
+                history.back(); // Navigate back without refresh
+            } else {
+                window.location.href = "{{ $previousUrl }}"; // Fallback if no history
+            }
+        }
+    
+        // Display the correct previous page name
+        document.addEventListener("DOMContentLoaded", function () {
+            let previousPath = "{{ $previousPath }}";
+            let pageName = "Back to Find Jobs"; // Default
+    
+            if (previousPath === "{{ $savedJobsPath }}") {
+                pageName = "Back to Saved Jobs";
+            } else if (previousPath === "{{ $watchlistPath }}") {
+                pageName = "Back to Watchlist";
+            }
+    
+            document.getElementById("previous-page").innerText = pageName;
         });
     </script>
 @endsection
