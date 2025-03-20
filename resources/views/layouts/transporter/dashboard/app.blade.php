@@ -86,7 +86,7 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-572LPM3G" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
     <a class="maintaince-modal hidden" data-toggle="modal" data-target="#maintainceModal">View</a>
-    {{-- <div class="modal fade maintaince" id="maintainceModal" tabindex="-1" role="dialog"
+    <div class="modal fade maintaince" id="maintainceModal" tabindex="-1" role="dialog"
         aria-labelledby="maintainceModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -119,7 +119,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     @yield('content')
 </body>
 <!-- Bootstrap JS & Jquery -->

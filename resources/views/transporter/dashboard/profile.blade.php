@@ -1719,25 +1719,25 @@
                 $(".file-upload").click();
             });
             // Show SweetAlert popup if session variable is set
-            // @if (session('show_transporter_alert'))
-            //    Swal.fire({
-            //       title: '<span class="swal-title">Important notice</span>',
-            //    html: '<span class="swal-text">Do not use company names or share contact information, we will provide you with the customer contact details after they have accepted your bid. If you are found attempting to operate outside of this platform then you will be banned immediately.</span>',
-            //    confirmButtonColor: '#52D017',
-            //     confirmButtonText: 'OK, got it',
-            //    customClass: {
-            //        title: 'swal-title',
-            //        htmlContainer: 'swal-text-container',
-            //        popup: 'swal-popup', // Add custom class for the popup
-            //    },
-            //     showConfirmButton: true, // Show the confirm button
-            //      allowOutsideClick: false
-            // }).then((result) => {
-            //    if (result.isConfirmed) {
-            //       @php session()->forget('show_transporter_alert'); @endphp
-            //   }
-            //  });
-            //  @endif
+            @if (session('show_transporter_alert'))
+                Swal.fire({
+                    title: '<span class="swal-title">Important notice</span>',
+                    html: '<span class="swal-text">Do not use company names or share contact information, we will provide you with the customer contact details after they have accepted your bid. If you are found attempting to operate outside of this platform then you will be banned immediately.</span>',
+                    confirmButtonColor: '#52D017',
+                    confirmButtonText: 'OK, got it',
+                    customClass: {
+                        title: 'swal-title',
+                        htmlContainer: 'swal-text-container',
+                        popup: 'swal-popup', // Add custom class for the popup
+                    },
+                    showConfirmButton: true, // Show the confirm button
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @php session()->forget('show_transporter_alert'); @endphp
+                    }
+                });
+            @endif
 
             $('#check2, #check3, #check4, #check5,#check6').change(function() {
 
