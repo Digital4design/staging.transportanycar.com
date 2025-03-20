@@ -43,7 +43,7 @@ class QuotesController extends WebController
         if ($location) {
             return view('front.get_steps', ['title' => $title]);
         }
-        //error_session('Please enter valid postcode');
+        //kkkkkkkkkkkkkkkkkkkkkkkkkkkerror_session('Please enter valid postcode');
         return redirect()->route('front.home');
     }
 
