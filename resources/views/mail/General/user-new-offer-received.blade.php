@@ -21,7 +21,6 @@
         Accept quote
     </a>
     <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 25px; margin-bottom:25px;">You can message the transporter to make arrangements before accepting the quote.</p>
-    {{-- <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 22px; margin-top: 25px; margin-bottom:25px;">If you need any help or have any questions please contact our team on <a href="tel:08081557979">0808 155 7979</a> or email us <a href="mailto:support@transportanycar.com">support@transportanycar.com</a>.</p> --}}
     <div style="background-color: #f1f1f1; padding: 20px; text-align: left;">
         <p style="font-weight: 300;  font-family: 'Outfit', sans-serif; font-size: 20px; line-height: 24px; font-weight: 500; margin-bottom: 10px; text-align: left;">{{$user_name}} sent you a message</p>
         <p style="font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 20px; font-weight: 300; color: #000000; margin-bottom: 15px;">{{$data->message}}</p>

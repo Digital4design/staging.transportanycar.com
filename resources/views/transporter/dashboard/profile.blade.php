@@ -1563,7 +1563,11 @@
                         checkDocsUploaded();
                     }
                 },
-                error: function(data) {}
+                error: function(data) {
+                    console.error("AJAX Error:", status, error);
+                    console.error("Response:", xhr.responseText);
+    
+                }
             });
         }
         var user_id = {{ $user->id }};

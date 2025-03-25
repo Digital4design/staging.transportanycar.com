@@ -724,7 +724,6 @@ class DashboardController extends WebController
     {
         try {
             $maildata['email'] = 'support@transportanycar.com';
-            //$maildata['email'] = 'subham.k@ptiwebtech.com';
             $mailSubject = 'Help & Support Transporter';
             $htmlContent = view('mail.General.help_and_support', ['data' => $request])->render();
             $this->emailService->sendEmail($maildata['email'], $htmlContent, $mailSubject);
