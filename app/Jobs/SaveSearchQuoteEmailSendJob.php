@@ -64,6 +64,7 @@ class SaveSearchQuoteEmailSendJob implements ShouldQueue
                 ->where('status', 'active')
                 ->where('type', 'car_transporter')
                 ->where('is_status', 'approved')
+                ->whereNull('deleted_at')
                 ->first();
 
             if ($transporter) {
