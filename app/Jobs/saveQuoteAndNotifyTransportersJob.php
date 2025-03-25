@@ -78,6 +78,7 @@ class saveQuoteAndNotifyTransportersJob implements ShouldQueue
                     'map_image' => $quoteData['map_image'],
                     'delivery_timeframe' => $quoteData['delivery_timeframe'],
                 ];
+              
                 try {
                     
                         $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
@@ -85,7 +86,7 @@ class saveQuoteAndNotifyTransportersJob implements ShouldQueue
                         $emailService->sendEmail($transporter->email, $htmlContent, $subject);
                         // $emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
 
-                        Log::info("quote functionality sending email to transporter: #{$index} {$transporter->first_name}  {$transporter->email} ");
+                        Log::info("quote functionality sending email to transporter: #{$index} {$transporter}  {$transporter->email} ");
                    
                 } catch (\Exception $ex) {
                     Log::error('error quote functionality sending email to transporter: ' . $ex->getMessage());
