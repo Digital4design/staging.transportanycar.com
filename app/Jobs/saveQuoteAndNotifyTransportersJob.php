@@ -56,7 +56,7 @@ class saveQuoteAndNotifyTransportersJob implements ShouldQueue
     public function handle()
     {
         $emailService = new EmailService;
-        $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->where('new_job_alert','1')->get();
+        $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->where('new_job_alert','1')->whereNull('deleted_at')->get();
 
         $quoteData = $this->quoteData;
         foreach ($all_transport as $index=> $transporter) {
