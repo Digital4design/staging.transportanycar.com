@@ -21,5 +21,4 @@ jobs:
           script: |
             cd /var/www/html/public_html
             git pull origin main
-            php artisan migrate --force
             php artisan config:clear
