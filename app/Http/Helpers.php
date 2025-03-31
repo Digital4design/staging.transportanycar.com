@@ -992,8 +992,22 @@ if (!function_exists('create_notification')) {
         $notification->seen = true;
         $notification->created_at = Carbon::now('Europe/London');
         $notification->updated_at = Carbon::now('Europe/London');
+        // Save the notification
         $notification->save();
         return $notification;
+    }
+}
+if (!function_exists('get_last_two_parts')) {
+    function get_last_two_parts($location)
+    {
+        // Split the location by commas
+        $parts = explode(',', $location);
+
+        // Get the last two parts and trim any extra whitespace
+        $lastTwoParts = array_slice($parts, -2);
+
+        // Join them back with a comma
+        return implode(', ', array_map('trim', $lastTwoParts));
     }
 }
 if (!function_exists('hidePostcode')) {
@@ -1010,17 +1024,17 @@ if (!function_exists('hidePostcode')) {
 
         // Check if the postcode exists in the address
         if (preg_match($postcodePattern, $address, $matches)) {
-        // Extract the full postcode
-        $fullPostcode = $matches[1];
-        
-        // Hide the last three characters of the postcode
-        $hiddenPostcode = substr($fullPostcode, 0, -3);
-        
-        // Replace the original postcode in the address with the hidden version
-        $address = str_replace($fullPostcode, $hiddenPostcode, $address);
-    }
+            // Extract the full postcode
+            $fullPostcode = $matches[1];
 
-    // Return the updated address
-    return $address;
+            // Hide the last three characters of the postcode
+            $hiddenPostcode = substr($fullPostcode, 0, -3);
+
+            // Replace the original postcode in the address with the hidden version
+            $address = str_replace($fullPostcode, $hiddenPostcode, $address);
+        }
+
+        // Return the updated address
+        return $address;
     }
 }
