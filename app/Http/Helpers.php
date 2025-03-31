@@ -649,7 +649,9 @@ function genUniqueStr($prefix = '', $length = 10, $table, $field, $isAlphaNum = 
         ));
     }
     $token = $prefix;
-    $maxLen = max(($length - strlen($prefix)), 0);
+    // $maxLen = max(($length - strlen($prefix)), 0);
+    $maxLen = max(((int) $length - strlen($prefix)), 0);
+
     for ($i = 0; $i < $maxLen; $i++) {
         $index = rand(0, count($arr) - 1);
         $token .= $arr[$index];
