@@ -1015,6 +1015,7 @@ if (!function_exists('create_notification')) {
         $notification->seen = true;
         $notification->created_at = Carbon::now('Europe/London');
         $notification->updated_at = Carbon::now('Europe/London');
+        // Save the notification
         $notification->save();
         return $notification;
     }
