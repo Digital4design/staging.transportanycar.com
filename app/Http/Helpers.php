@@ -997,3 +997,31 @@ if (!function_exists('create_notification')) {
         return $notification;
     }
 }
+if (!function_exists('hidePostcode')) {
+    /**
+     * Truncate the address at the postcode, if present.
+     *
+     * @param string $address The full address string.
+     * @return string The truncated address.
+     */
+    function hidePostcode(string $address): string
+    {
+        // Regular expression to match UK postcode patterns
+        $postcodePattern = '/\b([A-Z]{1,2}[0-9][A-Z0-9]?\s?[0-9][A-Z]{2})(,?\s?UK)?\b/i';
+
+        // Check if the postcode exists in the address
+        if (preg_match($postcodePattern, $address, $matches)) {
+        // Extract the full postcode
+        $fullPostcode = $matches[1];
+        
+        // Hide the last three characters of the postcode
+        $hiddenPostcode = substr($fullPostcode, 0, -3);
+        
+        // Replace the original postcode in the address with the hidden version
+        $address = str_replace($fullPostcode, $hiddenPostcode, $address);
+    }
+
+    // Return the updated address
+    return $address;
+    }
+}
