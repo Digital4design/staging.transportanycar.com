@@ -101,48 +101,7 @@ if (!function_exists('un_link_file')) {
         return $pass;
     }
 }
-if (!function_exists('get_last_two_parts')) {
-    function get_last_two_parts($location)
-    {
-        // Split the location by commas
-        $parts = explode(',', $location);
 
-        // Get the last two parts and trim any extra whitespace
-        $lastTwoParts = array_slice($parts, -2);
-
-        // Join them back with a comma
-        return implode(', ', array_map('trim', $lastTwoParts));
-    }
-}
-
-if (!function_exists('hidePostcode')) {
-    /**
-     * Truncate the address at the postcode, if present.
-     *
-     * @param string $address The full address string.
-     * @return string The truncated address.
-     */
-    function hidePostcode(string $address): string
-    {
-        // Regular expression to match UK postcode patterns
-        $postcodePattern = '/\b([A-Z]{1,2}[0-9][A-Z0-9]?\s?[0-9][A-Z]{2})(,?\s?UK)?\b/i';
-
-        // Check if the postcode exists in the address
-        if (preg_match($postcodePattern, $address, $matches)) {
-        // Extract the full postcode
-        $fullPostcode = $matches[1];
-        
-        // Hide the last three characters of the postcode
-        $hiddenPostcode = substr($fullPostcode, 0, -3);
-        
-        // Replace the original postcode in the address with the hidden version
-        $address = str_replace($fullPostcode, $hiddenPostcode, $address);
-    }
-
-    // Return the updated address
-    return $address;
-    }
-}
 
 
 function get_asset($val = "", $file_exits_check = true, $no_image_available = null)
@@ -262,13 +221,6 @@ function admin_modules()
                 [
                     'route' => route('admin.carTransporter.approvedview'),
                     'name' => 'Approved Transporters',
-                    'icon' => 'badge badge-custom',
-                    'approved_counter' => true,
-                    'all_routes' => [],
-                ],
-                [
-                    'route' => route('admin.carTransporter.review'),
-                    'name' => 'Edit Review',
                     'icon' => 'badge badge-custom',
                     'approved_counter' => true,
                     'all_routes' => [],
@@ -661,7 +613,6 @@ function genUniqueStr($prefix = '', $length = 10, $table, $field, $isAlphaNum = 
     }
 }
 
-
 function isTokenExist($token, $table, $field)
 {
     if ($token != '') {
@@ -891,7 +842,7 @@ function readMoreHelper($story_desc, $chars)
     if (strlen($story_desc) > $chars) {
         $short_desc = substr($story_desc, 0, $chars);
         $long_desc = substr($story_desc, $chars);
-        $story_desc = $short_desc . '<a href="javascript:;" class="read_more_show"> Read more</a>';
+        $story_desc = $short_desc . '<a href="javascript:;" class="read_more_show"> Read More</a>';
         $story_desc .= '<span class="read_more_content d-none">' . $long_desc . '<a href="javascript:;" class="read_more_less d-none"> Read Less</a></span>';
     }
 
@@ -965,35 +916,20 @@ if (!function_exists('calculateCustomerQuote')) {
         // } else {
         //     $markup = $offer * 0.25;
         // }
-        // if ($offer <= 100) {
-        //     $markup = max($offer * 0.30, 15);
-        // } elseif ($offer <= 200) {
-        //     $markup = $offer * 0.25;
-        // } elseif ($offer <= 250) {
-        //     $markup = $offer * 0.20;
-        // } elseif ($offer <= 300) {
-        //     $markup = $offer * 0.18;
-        // } elseif ($offer <= 400) {
-        //     $markup = $offer * 0.15;
-        // } elseif ($offer <= 500) {
-        //     $markup = $offer * 0.12;
-        // } else {
-        //     $markup = $offer * 0.10;
-        // }
         if ($offer <= 100) {
-            $markup = max($offer * 0.15, 15); // Minimum £15 applies
+            $markup = max($offer * 0.30, 15);
         } elseif ($offer <= 200) {
-            $markup = max($offer * 0.08, 15); // Minimum £15 applies
+            $markup = $offer * 0.25;
         } elseif ($offer <= 250) {
-            $markup = max($offer * 0.07, 15); // Minimum £15 applies
+            $markup = $offer * 0.20;
         } elseif ($offer <= 300) {
-            $markup = max($offer * 0.06, 15); // Minimum £15 applies
+            $markup = $offer * 0.18;
         } elseif ($offer <= 400) {
-            $markup = max($offer * 0.05, 15); // Minimum £15 applies
+            $markup = $offer * 0.15;
         } elseif ($offer <= 500) {
-            $markup = max($offer * 0.04, 15); // Minimum £15 applies
+            $markup = $offer * 0.12;
         } else {
-            $markup = max($offer * 0.03, 15); // Minimum £15 applies
+            $markup = $offer * 0.10;
         }
 
         $customerQuote = $offer + $markup;
@@ -1059,5 +995,46 @@ if (!function_exists('create_notification')) {
         // Save the notification
         $notification->save();
         return $notification;
+    }
+}
+if (!function_exists('get_last_two_parts')) {
+    function get_last_two_parts($location)
+    {
+        // Split the location by commas
+        $parts = explode(',', $location);
+
+        // Get the last two parts and trim any extra whitespace
+        $lastTwoParts = array_slice($parts, -2);
+
+        // Join them back with a comma
+        return implode(', ', array_map('trim', $lastTwoParts));
+    }
+}
+if (!function_exists('hidePostcode')) {
+    /**
+     * Truncate the address at the postcode, if present.
+     *
+     * @param string $address The full address string.
+     * @return string The truncated address.
+     */
+    function hidePostcode(string $address): string
+    {
+        // Regular expression to match UK postcode patterns
+        $postcodePattern = '/\b([A-Z]{1,2}[0-9][A-Z0-9]?\s?[0-9][A-Z]{2})(,?\s?UK)?\b/i';
+
+        // Check if the postcode exists in the address
+        if (preg_match($postcodePattern, $address, $matches)) {
+            // Extract the full postcode
+            $fullPostcode = $matches[1];
+
+            // Hide the last three characters of the postcode
+            $hiddenPostcode = substr($fullPostcode, 0, -3);
+
+            // Replace the original postcode in the address with the hidden version
+            $address = str_replace($fullPostcode, $hiddenPostcode, $address);
+        }
+
+        // Return the updated address
+        return $address;
     }
 }
