@@ -59,3 +59,6 @@ modules.xml
 transportanycar_code_29_08.zip
 old_bkp/
 .github/workflows/deploy.yml
+/app/Http/Helpers.php
+/storage/framework/cache/*
+robots.txt
