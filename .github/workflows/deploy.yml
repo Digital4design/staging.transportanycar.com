@@ -2,9 +2,9 @@ name: Deploy
 
 on:
   push:
-    branches: ["main"]
+    branches: ["staging"]
   pull_request:
-    branches: ["main"]
+    branches: ["staging"]
 
 jobs:
   deploy:
@@ -20,5 +20,5 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           script: |
             cd /var/www/html/public_html
-            git pull origin main
+            git pull origin staging
             php artisan config:clear
