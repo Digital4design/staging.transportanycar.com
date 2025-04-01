@@ -61,4 +61,5 @@ old_bkp/
 .github/workflows/deploy.yml
 /app/Http/Helpers.php
 /storage/framework/cache/*
+/storage/framework/views/*
 robots.txt
