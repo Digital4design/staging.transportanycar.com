@@ -20,5 +20,5 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           script: |
             cd /var/www/html/public_html
-            git pull origin staing
+            git pull origin staging
             php artisan config:clear
