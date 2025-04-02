@@ -24,15 +24,12 @@ class Kernel extends ConsoleKernel
 
     ];
 
-
     /**
      * Define the application's command schedule.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-
-
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('send:quote_email_sent')->everyMinute();
@@ -48,9 +45,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('send:save-search-mail')->dailyAt('13:00');
         $schedule->command('command:test')->everyMinute();
         $schedule->command('send:feedback-reminder')->dailyAt('19:00');
-        // $schedule->command('queue:work')
-        // ->everyMinute()
-        // ->name('run-queue-worker');
+        
 
     }
 
