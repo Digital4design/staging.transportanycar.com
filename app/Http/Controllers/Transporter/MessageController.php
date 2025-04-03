@@ -215,13 +215,7 @@ class MessageController extends WebController
 
         $chats = $c_insatnce->get();
 
-        // $chats = $this->chat_obj->select('messages.*','f.name','f.id as user_id','f.profile_image')
-        //     //->select(DB::raw("select count(cm.from_user) from chat_messages as cm where cm.from_user_id = chat_messages.from_user_id group by  as unread_message"))
-        //     ->leftJoin('users as f','f.id','=','chat_messages.from_user_id')
-        //     ->where('to_user_id', '=', $user_id)
-        //     ->OrderBy('total_unread','DESC')
-        //     ->groupBy('from_user_id')
-        //     ->get();
+       
         $latest_chat = $chats->first();
         return view('transporter.dashboard.partial.chat_listing')->with(compact('chats', 'user', 'latest_chat', 'quotes', 'selected_chat_id', 'front_user'));
     }
