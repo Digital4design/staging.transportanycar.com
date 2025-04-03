@@ -2374,27 +2374,27 @@
             myFunction(x);
         });
 
-        var jobInfoUrl = "{{ route('transporter.job_information', ':id') }}";
-        $(document).on('click', '.car-row', function(e) {
-            e.preventDefault(); // Prevent default action initially
+        // var jobInfoUrl = "{{ route('transporter.job_information', ':id') }}";
+        // $(document).on('click', '.car-row', function(e) {
+        //     e.preventDefault(); // Prevent default action initially
 
-            var carId = $(this).data('car-id');
-            if (!carId) {
-                console.log('Job ID is missing');
-                return;
-            }
+        //     var carId = $(this).data('car-id');
+        //     if (!carId) {
+        //         console.log('Job ID is missing');
+        //         return;
+        //     }
 
-            $('.checkStatus').trigger('click'); // Trigger checkStatus
+        //     $('.checkStatus').trigger('click'); // Trigger checkStatus
 
-            // Delay redirection to wait for Swal or other processes
-            setTimeout(function() {
-                if (!$('.swal2-container')
-                    .length) { // If no SweetAlert popup is open, proceed with redirect
-                    var url = jobInfoUrl.replace(':id', carId); // Replace placeholder with actual ID
-                    window.location.href = url; // Redirect to the URL
-                }
-            }); // Adjust delay time if needed
-        });
+        //     // Delay redirection to wait for Swal or other processes
+        //     setTimeout(function() {
+        //         if (!$('.swal2-container')
+        //             .length) { // If no SweetAlert popup is open, proceed with redirect
+        //             var url = jobInfoUrl.replace(':id', carId); // Replace placeholder with actual ID
+        //             window.location.href = url; // Redirect to the URL
+        //         }
+        //     }); // Adjust delay time if needed
+        // });
         $(document).ready(function() {
             $("#jobsrch_form_blog").validate({
                 rules: {
