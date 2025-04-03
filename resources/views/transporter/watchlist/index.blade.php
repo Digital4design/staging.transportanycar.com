@@ -2753,47 +2753,7 @@
             element.reset();
         }
 
-        // function initialize_search_pick_up_area() {
-        //     var input = document.getElementById('search_pick_up_area');
-        //     var options = {
-        //         //types: [''],
-        //         componentRestrictions: {country: "in"}
-        //     };
-        //     var autocomplete = new google.maps.places.Autocomplete(input);
-        //     autocomplete.addListener('place_changed', function() {
-        //         var place = autocomplete.getPlace();
-        //         if (!place.geometry) {
-        //             return;
-        //         }
-        //         var pick_latitude = place.geometry.location.lat();
-        //         var pick_longitude = place.geometry.location.lng();
-        //
-        //         $('#pick_up_latitude').val(pick_latitude);
-        //         $('#pick_up_longitude').val(pick_longitude);
-        //     });
-        // }
-        // google.maps.event.addDomListener(window, 'load', initialize_search_pick_up_area);
-
-        // function initialize_search_drop_off_area() {
-        //     var input = document.getElementById('search_drop_off_area');
-        //     var options = {
-        //         //types: [''],
-        //         componentRestrictions: {country: "in"}
-        //     };
-        //     var autocomplete = new google.maps.places.Autocomplete(input);
-        //     autocomplete.addListener('place_changed', function() {
-        //         var place = autocomplete.getPlace();
-        //         if (!place.geometry) {
-        //             return;
-        //         }
-        //         var drop_latitude = place.geometry.location.lat();
-        //         var drop_longitude = place.geometry.location.lng();
-        //
-        //         $('#drop_off_latitude').val(drop_latitude);
-        //         $('#drop_off_longitude').val(drop_longitude);
-        //     });
-        // }
-        // google.maps.event.addDomListener(window, 'load', initialize_search_drop_off_area);
+        
 
         function fetch_data(page, str = '') {
             // alert('yesss');
