@@ -1776,11 +1776,7 @@
                                     </div>
                                 </form>
                             </div>
-                            {{-- <div class="form-group">
-                                <button type="button"  id="saveSrch" class="btn btn-success">Save
-                                    Search</button>
-                            </div> --}}
-
+                            
                             <div class="mainContentDiv">
                                 <div class="job-data">
                                     @if ($quotes->total() == 0)
@@ -1809,7 +1805,6 @@
                                                         {{ getTimeAgo($quote->created_at->toDateTimeString()) }}</span>
                                                 </h2>
                                                 <div class="boxImg-text car-row" data-car-id="{{ $quote->id }}">
-
                                                     <div class="imgCol">
                                                         <img src="{{ $quote->image }}" class="" alt="image" />
                                                     </div>
@@ -1855,10 +1850,7 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                {{-- <h2 class="imgHeading">
-                                                    <span>Posted
-                                                        {{ getTimeAgo($quote->created_at->toDateTimeString()) }}</span>
-                                                </h2> --}}
+                                               
                                                 <div class="contentBlockBtn">
                                                     <div class="leftList">
                                                         <ul class="col-6 px-0 car-row "
@@ -2539,26 +2531,26 @@
 
         var jobInfoUrl = "{{ route('transporter.job_information', ':id') }}";
 
-        $(document).on('click', '.car-row', function(e) {
-            e.preventDefault(); // Prevent default action initially
+        // $(document).on('click', '.car-row', function(e) {
+        //     e.preventDefault(); // Prevent default action initially
 
-            var carId = $(this).data('car-id');
-            if (!carId) {
-                console.log('Job ID is missing');
-                return;
-            }
+        //     var carId = $(this).data('car-id');
+        //     if (!carId) {
+        //         console.log('Job ID is missing');
+        //         return;
+        //     }
 
-            $('.checkStatus').trigger('click'); // Trigger checkStatus
+        //     $('.checkStatus').trigger('click'); // Trigger checkStatus
 
-            // Delay redirection to wait for Swal or other processes
-            setTimeout(function() {
-                if (!$('.swal2-container')
-                    .length) { // If no SweetAlert popup is open, proceed with redirect
-                    var url = jobInfoUrl.replace(':id', carId); // Replace placeholder with actual ID
-                    window.location.href = url; // Redirect to the URL
-                }
-            }); // Adjust delay time if needed
-        });
+        //     // Delay redirection to wait for Swal or other processes
+        //     setTimeout(function() {
+        //         if (!$('.swal2-container')
+        //             .length) { // If no SweetAlert popup is open, proceed with redirect
+        //             var url = jobInfoUrl.replace(':id', carId); // Replace placeholder with actual ID
+        //             window.location.href = url; // Redirect to the URL
+        //         }
+        //     }); // Adjust delay time if needed
+        // });
 
         $(document).ready(function() {
             $("#jobsrch_form_blog").validate({

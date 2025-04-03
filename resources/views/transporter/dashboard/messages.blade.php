@@ -65,15 +65,7 @@ $auth_user = Auth::user();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.6.2/tinymce.min.js"></script>
 
     <script type="text/javascript">
-    // function setDynamicHeight() {
-    //     let height = window.innerHeight; // Visible height without hidden browser UI
-    //     document.documentElement.style.setProperty('--vh', `${height * 0.01}px`);
-    // }
-
-    // // Update on load and resize
-    // window.addEventListener('resize', setDynamicHeight);
-    // window.addEventListener('orientationchange', setDynamicHeight);
-    // document.addEventListener('DOMContentLoaded', setDynamicHeight);
+   
         const textarea = document.querySelector('textarea');
 
         textarea.addEventListener('focus', () => {
@@ -126,12 +118,6 @@ $auth_user = Auth::user();
             }
         }
         $(document).ready(function () {
-            // $(document).on('focus', 'input, textarea', function () {
-            //     $('body').addClass('keyboard-open');
-            // }).on('blur', 'input, textarea', function () {
-            //     $('body').removeClass('keyboard-open');
-            // });
-            //open particular chat
             const urlParams = new URLSearchParams(window.location.search);
             const threadId = urlParams.get('thread_id');
             if (threadId) {
