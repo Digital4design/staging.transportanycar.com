@@ -1,0 +1,401 @@
+/*  Desktop */
+@media all and (min-width: 1601px) and (max-width: 1920px)
+{
+
+}
+
+/* Laptop */
+@media (max-width: 1366px)
+{
+	.wd_banner_form h2{font-size: 40px;}
+}
+
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1200px)
+{
+	.wd_banner_form h2{font-size: 33px;}
+	header .navbar .menu-item a{font-size: 16px;margin-right: 16px;}
+}
+
+@media (max-width: 1024px)
+{
+	.bgright_img{display: none;}
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991px)
+{
+	br{display: none;}
+	.banner-row-reverse{flex-flow: column-reverse;}
+	.wd_banner{padding: 0;}
+	.wd_title h3{font-size: 25px;}	
+	.owl-review .owl-stage-outer{overflow: hidden;}
+	.other_info_blog img {width: 40.5%;}
+	.other_info_main{padding: 30px 0;}
+	.btngrp_table{grid-gap: 10px;}
+	.review_quote_blog, .user_blog{padding: 30px 0;}
+	.profile_blogside{padding: 15px 15px;margin-bottom: 15px;}
+	.white_bgblog{padding: 15px 15px;}
+	.wd-report-headr{margin-bottom: 0.5rem;}
+	.bg_wallet{margin-bottom: 15px;}
+	.wallet_blog{margin-bottom: 0;}
+	.wd_banner_form h2{font-size: 24px;}
+	.custom-container{padding: 0 15px;}
+	.network_steps{grid-gap: 10px;overflow-x: auto;}
+	.join_network_main .banner_newtext{font-size: 40px;}
+	.join_network_main .pera_netext{font-size: 20px;background: transparent;margin: 1rem 0 2rem;padding: 0;color: rgb(0 0 0 / 50%);}
+	.network_step_content h1{font-size: 35px;margin-bottom: 15px;}
+	.join_network_main{padding: 0;}
+	ul.network_list li:last-child{margin-bottom: 30px;}
+	.network_steps::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: unset;
+		border-radius: 0px;
+		background-color: transparent;
+	}
+
+	.network_steps::-webkit-scrollbar
+	{
+		width: 1px;
+		background-color: transparent;
+	}
+
+	.network_steps::-webkit-scrollbar-thumb
+	{
+		border-radius: 0px;
+		-webkit-box-shadow: unset;
+		background-color: transparent;
+	}
+	.network_step_content.dflex_right{padding: 0;}
+	main{padding: 0;}
+	#jobsrch{padding: 50px 0 30px;}
+	.network_step_content p{font-size: 16px;}
+	#wizard{padding: 0 0 70px;}
+	.custom-checkbox > [type="checkbox"]:not(:checked) + label:after, .custom-checkbox > [type="checkbox"]:checked + label:after{margin: 3px 7px;}
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767px)
+{
+	br{display: none;}
+	.wd_banner_txt{margin-bottom: 20px;}
+	.form_flex{display: block;}
+	.wd_banner_form form .form-group{margin-bottom: 16px;}
+	.wd_abt{padding: 110px 0 0px;}
+	.row-reverse{flex-flow: column-reverse;}
+	#chooseus{padding: 48px 0 46px;}
+	#review{padding: 46px 0;}	
+	.wd_banner::before, .wd_banner{border-radius: 0;}
+	.wd_abt .wd_title{margin-bottom: 30px;}
+	.wd_work{margin: 0 auto 20px;}
+	.reviewblog{margin-bottom: 20px;}	
+	#review .wd_title {margin-bottom: 20px;}
+	.owl-nav.disabled, .owl-nav{position: relative;align-items: center;justify-content: center;left: unset;top: unset;grid-gap: 15px;}
+	.other_info_blog img {width: 50.5%;}
+	/* getsteps */
+	.fieldgroup{padding: 15px 15px;}
+	#wizard h5{font-size: 20px;margin-bottom: 1rem;}
+	.wd_nextbtn, .wd_backbtn{font-size: 16px;}
+	.wizard_btngrp{grid-gap: 10px;}
+	.wd_user_head{display: block;}
+	.wd_user_lft{margin-bottom: 15px;}
+	/*.order_box .col{flex-basis:unset;margin-bottom: 10px;}
+	.order_box .col:last-child{margin-bottom: 0;}*/
+	.footer_logo{position: unset;margin: 0;}
+	.foot_img{text-align: left;margin: 0 0 30px;}
+	.btm_footer {flex-flow: column-reverse;display: flex;}
+	.wizard_laststep .form-group{width: 100%;}
+	.banner_newtext{font-size: 38px;line-height: normal;margin-bottom: 1rem;}
+	.pera_netext{font-size: 16px;
+		color: #fff;
+		background: #008DD4;
+		padding: 10px 30px;
+		font-weight: 300;
+		line-height: 1.4;}
+	.getqt_btnincld{font-size: 24px !important;
+    max-width: 316px !important;
+    padding: 15px 20px 16px !important;margin:0 auto !important;}
+	main{padding: 0;}
+	.form_flex_includes {flex-flow: column;padding: 0 15px;grid-gap: 11px;margin: 1.5rem 0 2rem;}
+	.form_flex_includes svg {width: 15px;height: 10px;transform: rotate(88deg);}
+	.network_main{background: url("../images/mob_wave_new.svg") no-repeat;padding: 90px 0 0px;background-size: cover;background-position: top right;margin-top: 68px;position:relative;}
+	/*#network:before{*/
+	/*    content:"";*/
+	/*    width:150px;*/
+	/*    height: 150px;*/
+	/*    display:inline-block;*/
+	/*    position:relative;*/
+	/*    background: url("../images/car_wave.svg") no-repeat;*/
+	/*}*/
+	.wd_banner .container {padding: 0;}
+	#network h2{font-size: 35px;margin-top:0;}
+	.network_steps span{font-size: 13px;}
+	.network_card h6{font-size: 17px;}
+	.svgicon_inclds svg{display: none;}
+	.network_steps{margin: 30px 0 30px;
+		grid-gap: 6px;
+		overflow-x: auto;}
+	.custom-container{background: linear-gradient(267.78deg, #018ED5 2.7%, #0356D6 98.26%);padding: 0 15px 45px;}
+	.star_rating {width: 176px;}
+	.review_topblog .star_rating{width: 112px;margin-bottom: 16px;}
+	header .navbar .menu-item a:after{display: none;}
+	.join_network_main{padding: 0 0 33px;margin: 0 15px;}
+	.trans_signup_main{margin: 0 10px !important;}
+	.joinnetwork_steps img{width: 100%;}
+	.joinnetwork_steps{padding: 50px 0;}
+	.joinnetwork_steps .row > div{margin-bottom: 50px;}	
+	.network_top_includes a{position: unset;}
+	.network_top_includes{margin-bottom: 12px;display: flex;flex-flow: column-reverse;gap: 26px;}
+	.image_network{display: none;}
+	.pera_netext strong{color: #A7E1FF;}
+	.newform_getqt .form-control{border: 0.86px solid;height: 100px;padding-left: 55px;}
+	.form_flex_includes .bglayer{width: 53px;height: 100px;border: 1px solid #000000}
+	.network_main .row {padding-bottom: 47px;}
+	.network_card{width: 160px;
+		height: 160px;
+		padding: 10px 10px;}
+	#network .getqt_btnincld{max-width: 316px !important;font-size: 24px !important;padding: 15px 20px 16px;}
+	.image_banner_netwk{max-width: 253px;margin: 100px auto 0;display: block;}
+	.joinnetwork_steps .row-reverse{flex-flow: column-reverse;}
+	.document_listing{padding-left: 1.3rem;}
+	.custom_check{margin: 0;padding: 0;}
+	.form-check-label{color: #000;}
+	.signnetwork .form-control{font-size: 20px;
+		margin-bottom: 19px;
+		border-radius: 5.536px;
+		border: 2.214px solid var(--Quiet-Stroke, #CFCFCF);}	
+	.signnetwork .input_group svg {	    
+	    margin: 15px 12px;
+	    width: 18px;
+	    height: 18px;
+	}
+	.address_block h6 a, .manual_link{margin-left: 0;
+		margin-top: 0px;
+		font-size: 16px;
+		font-weight: 400;}
+	.labelup{font-size: 14px;color: rgb(0 0 0 / 50%);}
+	.signnetwork h6{display: block;font-size: 25px;}
+	.network_top_includes a svg path {opacity: 0.5;}
+	.address_block h6 a {margin-top: 11px;}
+	.document_listing li{font-size: 20px;}
+	.hover_blog{max-width: 338px;}
+	.hover_blog:before{top: -5%;right: 31%;left: unset;}
+	.product_imgicludes{display: block;}
+	.product_imgicludes img{width: 100%;}
+	.flex_status{flex-flow: column;grid-gap: 10px;}	
+	.order_status_blog .nav-pills .nav-link{padding: 10px 20px 12px;}
+	
+	/* new flow css */
+	#chooseus h3 {font-size: 35px;}
+	#review .wd_title h3{text-align:center;font-size: 35px;}
+	#aboutus .wd_title h3{font-size:35px;max-width:275px;width:100%;}
+	#chooseus .wd_title {margin-bottom: 48px;}
+	.choose_card h5{font-size:32px;}
+	.chcard_pera{font-size:15px;opacity:0.5;}
+	.card_blogchoose > div{margin-bottom:50px;}
+	.card_blogchoose > div:last-child, .card_blogchoose > div:last-child p{margin-bottom:0px;}
+	.deskimg_right{display:none;}
+	.phimg_right{display:block;width:100%;}
+	.review_topblog{padding: 16px 20px 19px 27px;}
+	.review_topblog p{font-size:13px;}
+	.review_topblog h6{font-size:13px;margin-bottom:0;}
+	.review_topblog h4{font-size:22px;margin-bottom: 15px;}
+	#review .wd_title p, .owl-review .owl-nav{display:none;}
+	body{background:transparent !important;}
+	#review .container {
+        padding-right: 0;
+        padding-left: 0;
+        text-align: left;
+    }
+    #review .container .owl-review{padding-left: 38px;}
+    #aboutus p{font-size: 15px;
+    margin: -30px auto 22px;
+    text-align: center;}
+    #aboutus p br {display: block;}
+    #aboutus .wd_title{padding: 37px 0 0;}
+	#aboutus{background: url("../images/home/bgvector.png") no-repeat;background-position: top right;background-size: contain;}
+	.iti{margin-bottom: 16px;}
+	.upload_blogs{display: none;}
+	.title_srch{font-size: 45px;}
+	.jobsrch_box{padding: 24px 24px;margin-bottom: 24px;}
+	.jobsrch_info_list{margin: 19px 0 0;}
+	.jobsrch_info_list h6{max-width: fit-content;}
+	.jobsrch_info_list span {max-width: 125px;width: 100%;}
+	.jobsrch_info_list li{justify-content: space-between;margin-bottom: 26px;}
+	.jobsrch_right_box {margin-top: 32px;}
+	.distance_text{font-size: 16px;}
+	.mapimg_jobsrch{margin: 22px 0;}
+	.make_offer_btn{font-size: 24px;}
+	.teleph_text {
+    color: #000 !important;
+    background: var(--Blue-linear, linear-gradient(273deg, #018ED5 1.21%, #0356D6 98.03%)) !important;
+    -webkit-background-clip: text !important;    
+    display: flex !important;
+    margin:0 !important;}
+	.last_menuitem {		
+		gap: 30px;
+		flex-flow: column-reverse;		
+	}
+	.peratag{margin: 17px 0 28px;font-size: 14px;}
+	.payment_confirm_blog .form-group.text-right {text-align: left !important;}
+	.payment_confirm_blog .manual_link{margin-bottom: 27px;}
+
+	/* temporary */	
+	.jobsrch_form_blog {
+		margin: 30px 0 20px;
+		flex-flow: column;
+		border-radius: 0;
+		border: none;
+		box-shadow: unset;
+		background: transparent;
+	}
+	.jobsrch_form_blog .form-group{
+		background: #FDFFFA;
+		border: 1px solid #CFCFCF;
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+		border-radius: 100px;
+		max-width: 100% !important;
+		margin-bottom: 15px;		
+		padding: 10px 30px;
+	}
+	.jobsrch_form_blog label{
+		font-size: 20px;
+		margin-bottom: 0;
+	}
+	.jobsrch_form_blog .form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: #9C9C9C;
+      font-weight: 400;
+    }
+    .jobsrch_form_blog .form-control::-moz-placeholder { /* Firefox 19+ */
+      color: #9C9C9C;
+      font-weight: 400;
+    }
+    .jobsrch_form_blog .form-control:-ms-input-placeholder { /* IE 10+ */
+      color: #9C9C9C;
+      font-weight: 400;
+    }
+    .jobsrch_form_blog .form-control:-moz-placeholder { /* Firefox 18- */
+      color: #9C9C9C;
+      font-weight: 400;
+    }
+	.drop_off_box:after{display: none;}
+	.where_custom.field_filled label, .where_custom.field_active label, .drop_off_box.field_filled label, .drop_off_box.field_active label {
+        display: none;
+    }
+    .where_custom.field_filled input, .where_custom.field_active input, .drop_off_box.field_filled input, .drop_off_box.field_active input {
+        font-size: 20px;
+        font-weight: 400;
+        color: #000;
+        padding: 8px 0;
+    }
+	.jobsrch_form_blog .field_filled, .jobsrch_form_blog .field_active{
+		border: 1px solid #000;
+		background: #FDFFFA;
+	}
+	.jobsrch_form_blog .form-group:last-child{
+		padding: 0;
+		border: none;
+		margin-top: 15px;
+	}
+	.suggest_filter label {
+	    border: 0.44px solid #CFCFCF;
+	    border-radius: 44px;
+	    font-size: 16px;
+	    font-weight: 400;
+	    color: #000000;
+	    10px: 1;
+	    line-height: normal;
+	    padding: 8px 20px;
+	    background: #fff;
+	    text-align: center;
+	}
+	.suggest_filter {
+	    display: flex;
+	    flex-wrap: nowrap;
+	    align-items: center;
+	    justify-content: flex-start;
+	    padding: 0;
+	    overflow-x: auto;
+	    margin: 8px 0 20px 15px;
+	    width: 100%;
+	    gap: 5px;
+	}
+	.svgvector_mob {
+	    position: absolute;
+	    right: 0;
+	    top: 0;
+	    bottom: 0;
+	    height: 100%;
+	    margin: 0 20px;
+	}
+	.srchjob_byn{
+		font-size: 18px;
+    	justify-content: center;
+    	padding: 12px 10px;
+	}
+	.srchjob_byn svg{
+		width: 22px;
+		height: 22px;
+	}
+	.local_srch_fillterbx{
+		position: unset;
+    	margin-bottom: 15px;
+		right: unset;
+	}
+	.box_width_custom{
+		border: none;
+		padding: 0;
+		margin: 0;
+	}
+	.payment_confirm_blog{
+		padding: 20px 25px 46px;
+		border: 1.65px solid #CFCFCF;
+		border-radius: 8px;
+		margin-bottom: 20px;
+	}
+	#pay_address1 {
+		margin-bottom: 0;
+	}
+	header .navbar .brand img{
+		max-width: 190px;
+		width: 100%;
+		object-fit: contain;
+	}
+	.other_forgot_account .signnetwork, .trans_login_blog .signnetwork {
+		padding: 30px 10px;
+	}
+	.other_forgot_account .form-control{margin-bottom: 7px !important;}
+	.trans_forgotpass p {
+		font-size: 15px;		
+		margin: 8px 0 20px;		
+	}
+	.trans_login_main p {
+		font-size: 15px;		
+		margin: 15px 0;
+	}
+	.res_input{visibility: visible;}	
+	.desk_input{display: none;}
+	.title_srch br{display: block;}
+	.payment_confirm_main .peratag_br br{display: block;}
+	#jobsrch{padding: 0;}
+	#jobsrch .title_srch {
+		margin-bottom: 10px;
+	}	
+	#jobsrch .pera_srch {
+		line-height: normal;
+	}
+	.no_margin{margin-bottom:7px !important;}
+	.join_network_main .getqt_btnincld{margin: 1.5rem auto 0 !important;}
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575px)
+{
+	.wd_banner_txt h1{font-size: 26px;}
+	.wd_banner_txt p{font-size: 14px;}		
+	#network .container{padding-right: 0;}
+	#network .row .col-lg-5.col-md-6{padding-right: 15px;}
+	#network .col-lg-7{text-align: center;}
+	#network .getqt_btnincld{margin: 0 15px 0 auto !important;display: inline-flex !important;}
+	.get_quote .modal-footer p{font-size: 13px;}
+}
