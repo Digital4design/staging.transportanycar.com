@@ -58,7 +58,7 @@
     <main>
         <section id="home" class="wd_banner">
             <div class="container">
-                <h1 class="banner_newtext">Get an <b>instant</b> car transport quote </h1>
+                <h1 class="banner_newtext">Test an <b>instant</b> car transport quote </h1>
                 <p class="pera_netext">
                     <strong>Save over 70%</strong> by getting quotes from car transport companies <br /> that are already travelling your route.
                 </p>
