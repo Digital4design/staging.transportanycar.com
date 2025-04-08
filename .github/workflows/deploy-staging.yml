@@ -23,4 +23,4 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/www/html/staging.transportanycar.com
-            
+            git pull origin staging
