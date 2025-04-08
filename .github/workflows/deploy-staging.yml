@@ -26,5 +26,4 @@ jobs:
           script: |
             cd /var/www/html/staging.transportanycar.com
             git pull origin staging
-            php artisan migrate --force
             
