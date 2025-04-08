@@ -124,6 +124,6 @@ Route::get("/new/template/check", function () {
 });
 Route::get('/cehck/save/search/mail',[App\Http\Controllers\Front\QuotesController::class,'checkSaveSearchFunctionality']);
 Route::get('/just/check/hiden',function(){
-    return "Hello World!";
+    return "Hello World! World!";
 });
 
