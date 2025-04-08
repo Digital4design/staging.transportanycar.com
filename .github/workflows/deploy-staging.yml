@@ -9,7 +9,7 @@ jobs:
     name: Deploy to Staging Server
     runs-on: ubuntu-latest
     environment:
-      name: staging
+      name: Staging
 
     steps:
       - uses: actions/checkout@v3
