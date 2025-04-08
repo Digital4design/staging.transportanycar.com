@@ -12,13 +12,14 @@ jobs:
       name: Staging
 
     steps:
-      run: |
-        echo "${{ secrets.SSH_KEY }}" > key.pem
-        chmod 600 key.pem
+      - name: Manual SSH Deploy
+        run: |
+          echo "${{ secrets.SSH_KEY }}" > key.pem
+          chmod 600 key.pem
 
-        ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.USER }}@${{ secrets.HOST }} -p ${{ secrets.PORT }} << 'EOF'
-        cd /var/www/html/staging.transportanycar.com
-        git pull origin staging
-        php artisan migrate --force
-        php artisan config:cache
-        EOF
+          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.USER }}@${{ secrets.HOST }} -p ${{ secrets.PORT }} << 'EOF'
+          cd /var/www/html/staging.transportanycar.com
+          git pull origin staging
+          php artisan migrate --force
+          php artisan config:cache
+          EOF
