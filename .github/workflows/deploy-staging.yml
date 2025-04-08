@@ -8,18 +8,19 @@ jobs:
   deploy:
     name: Deploy to Staging Server
     runs-on: ubuntu-latest
-    environment:
-      name: Staging
+    # environment:
+    #   name: Staging
 
     steps:
-      - name: Manual SSH Deploy
-        run: |
-          echo "${{ secrets.SSH_KEY }}" > key.pem
-          chmod 600 key.pem
+      - uses: actions/checkout@v3
 
-          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.USER }}@${{ secrets.HOST }} -p ${{ secrets.PORT }} << 'EOF'
-          cd /var/www/html/staging.transportanycar.com
-          git pull origin staging
-          php artisan migrate --force
-          php artisan config:cache
-          EOF
+      - name: Deploy to Staging Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.STAGING_HOST}}
+          username: ${{secrets.STAGING_USER}}
+          port: ${{secrets.STAGING_PORT}}
+          key: ${{secrets.STAGING_SSH_KEY}}
+          script: |
+            cd /var/www/html/staging.transportanycar.com
+            git pull origin staging
