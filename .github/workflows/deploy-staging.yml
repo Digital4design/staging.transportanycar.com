@@ -9,8 +9,8 @@ jobs:
     name: Deploy to Staging Server
     runs-on: ubuntu-latest
     # Add this only if using Environment Secrets:
-    # environment:
-    #   name: Staging
+    environment:
+      name: Staging
 
     steps:
       - name: Checkout Code
@@ -19,10 +19,10 @@ jobs:
       - name: Deploy to Staging Server
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.STAGING_HOST }}
-          username: ${{ secrets.STAGING_USER }}
-          port: ${{ secrets.STAGING_PORT }}
-          key: ${{ secrets.STAGING_SSH_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/www/html/staging.transportanycar.com
             git pull origin staging
