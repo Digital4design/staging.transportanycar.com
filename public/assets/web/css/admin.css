@@ -5483,7 +5483,16 @@ div#spam-banner button.btn {
 }
 
 /*--------Responsive ----------*/
+@media (max-width: 1640px) {
+  .admin-header .navbar .menu-item a {
+    padding: 6px 12px;
+  }
+}
 @media (max-width: 1430px) {
+  .admin-header .navbar .menu-item a {
+    margin-right: 10px;
+  }
+  .admin-header .navbar .menu-item a svg {display:none;}
   .white_box .nav .nav-link {
     padding: 10px 5px;
     flex-flow: nowrap;
@@ -5673,55 +5682,13 @@ div#spam-banner button.btn {
     margin: 0 auto;
     text-align: center;
   }
-}
-
-@media (max-width: 1024px) {
-  .wd-quote-area {
-    padding: 20px;
-    margin: 20px;
+  .admin-header .navbar .nav-toggle {
+    display: block;
+    cursor: pointer;
+    z-index: 999;
+    margin-bottom: 0;
+    position: relative;
   }
-
-  .view-quote a {
-    padding: 6px 10px 6px 10px;
-    font-size: 14px;
-  }
-
-  .tabs_bx .nav-pills li .nav-link {
-    padding: 12px 30px;
-  }
-}
-
-@media (max-width: 991px) {
-  .dropdown-toggle svg,
-  .admin-menu svg {
-    width: 25px;
-    height: 25px;
-  }
-
-  .admin-header {
-    box-shadow: 0px 4px 4px 0px #0000001A
-  }
-
-  .admin-menu {
-    justify-content: flex-end;
-  }
-
-  .admin-header .navbar {
-    padding: 15px 0;
-    margin: 0 auto;
-  }
-
-  .admin-header .navbar #nav:checked~.wrapper {
-    width: 100%;
-    background: #fff;
-    opacity: 1;
-    display: flex;
-    flex-direction: column;
-    z-index: 99;
-    height: 100%;
-    transition: all 0.3s ease;
-  }
-
   .admin-header .navbar .wrapper {
     position: fixed;
     top: 0;
@@ -5734,7 +5701,6 @@ div#spam-banner button.btn {
     background: #d1dee7;
     transition: all 0.3s ease;
   }
-
   .admin-header .navbar .wrapper .menu {
     display: none;
     position: absolute;
@@ -5779,13 +5745,7 @@ div#spam-banner button.btn {
     transition: all 0.3s ease-in-out;
   }
 
-  .admin-header .navbar .nav-toggle {
-    display: block;
-    cursor: pointer;
-    z-index: 999;
-    margin-bottom: 0;
-    position: relative;
-  }
+
 
   .admin-header .navbar .nav-toggle span {
     display: block;
@@ -5857,6 +5817,55 @@ div#spam-banner button.btn {
 
   .admin-header .navbar .menu-item.active a svg path {
     fill: #fff;
+  }
+  .admin-header .navbar #nav:checked~.wrapper {
+    width: 100%;
+    background: #fff;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    z-index: 99;
+    height: 100%;
+    transition: all 0.3s ease;
+  }
+
+
+}
+
+@media (max-width: 1024px) {
+  .wd-quote-area {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .view-quote a {
+    padding: 6px 10px 6px 10px;
+    font-size: 14px;
+  }
+
+  .tabs_bx .nav-pills li .nav-link {
+    padding: 12px 30px;
+  }
+}
+
+@media (max-width: 991px) {
+  .dropdown-toggle svg,
+  .admin-menu svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .admin-header {
+    box-shadow: 0px 4px 4px 0px #0000001A
+  }
+
+  .admin-menu {
+    justify-content: flex-end;
+  }
+
+  .admin-header .navbar {
+    padding: 15px 0;
+    margin: 0 auto;
   }
 
   .send-msg {
