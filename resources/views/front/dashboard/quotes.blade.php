@@ -615,10 +615,10 @@
                 <div class="accordion" id="accordionExample">
                     @foreach ($quotes as $key => $quote)
                         @if ($quote->status != 'rejected')
-                            <div class="card">
+                            <div class="card scroll{{$quote->getTransporters->id}}">
                                 <div class="card-header @if ($key == 0) active @endif"
                                     id="heading{{ $key }}">
-                                    <div class="card_lft scroll{{$quote->getTransporters->id}}" style="width:calc(100% - 350px);">
+                                    <div class="card_lft" style="width:calc(100% - 350px);">
                                         <div class="d-flex flex-wrap align-items-center mobile-wrap first-mobile-wrap"
                                             style="max-width:20%; flex: 0 0 20%;">
                                             <span class="mobile-label">
