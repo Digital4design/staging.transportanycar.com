@@ -618,7 +618,7 @@
                             <div class="card">
                                 <div class="card-header @if ($key == 0) active @endif"
                                     id="heading{{ $key }}">
-                                    <div class="card_lft{{$quote->getTransporters->id}} " style="width:calc(100% - 350px);">
+                                    <div class="card_lft scroll{{$quote->getTransporters->id}}" style="width:calc(100% - 350px);">
                                         <div class="d-flex flex-wrap align-items-center mobile-wrap first-mobile-wrap"
                                             style="max-width:20%; flex: 0 0 20%;">
                                             <span class="mobile-label">
@@ -1199,7 +1199,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const userId = "{{ $user_id ?? '' }}"; // Injected from Blade
             if (userId) {
-                const target = document.querySelector(".card_lft " + userId);
+                const target = document.querySelector(".scroll" + userId);
                 if (target) {
                     setTimeout(() => {
                         target.scrollIntoView({
