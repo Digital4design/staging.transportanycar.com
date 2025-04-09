@@ -529,7 +529,7 @@ class DashboardController extends WebController
         return view('front.dashboard.messages')->with(compact('title', 'chats', 'latest_chat'));
     }
 
-    public function quotes(Request $request ,$id,$user_id)
+    public function quotes(Request $request ,$id,$user_id = null)
     {
         // return $id;
         $user_data = Auth::guard('web')->user();
