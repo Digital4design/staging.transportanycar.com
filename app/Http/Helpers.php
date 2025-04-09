@@ -3,6 +3,7 @@
 use App\DeviceToken;
 use App\PushLog;
 use App\User;
+use App\GeneralSettings;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -958,7 +959,8 @@ function getTimeAgo($timestamp, $timezone = 'Europe/London')
 if (!function_exists('calculateCustomerQuote')) {
     function calculateCustomerQuote(float $offer): array
     {
-        // if ($offer <= 100) {
+        $serviceFee = GeneralSettings::where('unique_name', 'site_commission')->first()?->value;
+
         //     $markup = max($offer * 0.35, 15);
         // } elseif ($offer <= 200) {
         //     $markup = $offer * 0.30;
@@ -981,19 +983,19 @@ if (!function_exists('calculateCustomerQuote')) {
         //     $markup = $offer * 0.10;
         // }
         if ($offer <= 100) {
-            $markup = max($offer * 0.15, 15); // Minimum £15 applies
+            $markup = max($offer * 0.15, $serviceFee); // Minimum £15 applies
         } elseif ($offer <= 200) {
-            $markup = max($offer * 0.08, 15); // Minimum £15 applies
+            $markup = max($offer * 0.08, $serviceFee); // Minimum £15 applies
         } elseif ($offer <= 250) {
-            $markup = max($offer * 0.07, 15); // Minimum £15 applies
+            $markup = max($offer * 0.07, $serviceFee); // Minimum £15 applies
         } elseif ($offer <= 300) {
-            $markup = max($offer * 0.06, 15); // Minimum £15 applies
+            $markup = max($offer * 0.06, $serviceFee); // Minimum £15 applies
         } elseif ($offer <= 400) {
-            $markup = max($offer * 0.05, 15); // Minimum £15 applies
+            $markup = max($offer * 0.05, $serviceFee); // Minimum £15 applies
         } elseif ($offer <= 500) {
-            $markup = max($offer * 0.04, 15); // Minimum £15 applies
+            $markup = max($offer * 0.04, $serviceFee); // Minimum £15 applies
         } else {
-            $markup = max($offer * 0.03, 15); // Minimum £15 applies
+            $markup = max($offer * 0.03, $serviceFee); // Minimum £15 applies
         }
 
         $customerQuote = $offer + $markup;
