@@ -612,7 +612,7 @@
                     </p>
                 </div>
 
-                <div class="accordion" id="accordionExample">
+                <div class="accordion overflow-hidden" id="accordionExample" style="border-radius: 15px;">
                     @foreach ($quotes as $key => $quote)
                         @if ($quote->status != 'rejected')
                             <div class="card scroll{{$quote->getTransporters->id}}">
