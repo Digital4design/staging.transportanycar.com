@@ -150,7 +150,7 @@
 }
 
 .boxContentList .contentBlockBtn {
-    width: 60%;
+    width: 55%;
     display: flex;
     flex-wrap: wrap;
 }
@@ -501,11 +501,13 @@ span.grey {
 .review-count-bar span {margin-right: 10px;}
 /* User Feedback Page */
 
+
 @media (min-width:992px) {
     .jobsrch_form_blog .form-group.where_custom {
-        padding: 15px 30px;
+        padding: 10px 40px;
     }
 
+    .jobsrch_form_blog .form-group.drop_off_box label,
     .jobsrch_form_blog .form-group.where_custom label {
         font-size: 20px;
         font-weight: 500;
