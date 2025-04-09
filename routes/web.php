@@ -123,4 +123,7 @@ Route::get("/new/template/check", function () {
     return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
 });
 Route::get('/cehck/save/search/mail',[App\Http\Controllers\Front\QuotesController::class,'checkSaveSearchFunctionality']);
+Route::get('/check/server',function(){
+    return "Hello World!";
+});
 

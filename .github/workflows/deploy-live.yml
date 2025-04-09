@@ -1,0 +1,29 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    name: Deploy to Staging Server
+    runs-on: ubuntu-latest
+    # Add this only if using Environment Secrets:
+    environment:
+      name: Live
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Staging Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /var/www/html/public_html
+            git pull origin main
+            
