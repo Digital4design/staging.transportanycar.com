@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to Staging Server
+    name: Deploy to Live Server
     runs-on: ubuntu-latest
     # Add this only if using Environment Secrets:
     environment:
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Deploy to Staging Server
+      - name: Deploy to Live Server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
