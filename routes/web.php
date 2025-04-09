@@ -70,7 +70,7 @@ Route::group(['as' => 'front.'], function () {
         Route::get('feedback-view/{id}', 'DashboardController@feedbackView')->name('feedback_view');
         Route::get('feedback_listing/{id}', 'DashboardController@feedback_listing')->name('feedback_listing');
         Route::get('user-deposit/{id}', 'DashboardController@userDeposit')->name('user_deposit');
-        Route::get('quotes/{id}', 'DashboardController@quotes')->name('quotes');
+        Route::get('quotes/{id}/{user_id?}', 'DashboardController@quotes')->name('quotes');
         Route::get('quotes/delete/{id}', 'DashboardController@quotesDelete')->name('quote_delete');
         Route::get('booking-confirm/{id?}', 'DashboardController@bookingConfirm')->name('booking_confirm_page');
         Route::get('messages', 'DashboardController@messages')->name('messages');

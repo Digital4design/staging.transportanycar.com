@@ -737,12 +737,11 @@
                                                                 ? round($quote->percentage)
                                                                 : number_format($quote->percentage, 1) }}%)
                                                         </span>
-                                                        {{-- <span class="ml-1">({{ fmod($quote->percentage, 1) == 0 ? round($quote->percentage) : number_format($quote->percentage, 1) }}%)</span> --}}
-                                                    </li>
+                                                     </li>
                                                 </ul>
                                             @endif
                                         </div>
-                                        {{-- </div> --}}
+                                       
                                         <div class="mobile-wrap" style="max-width:20%; flex: 0 0 20%; text-align:center;">
                                             <span class="mobile-label">Verified</span>
                                             <span class="verified-icon">
@@ -771,8 +770,7 @@
                                                     </div>
                                                 </div>
                                             </span>
-                                            {{-- <img src="{{ asset('assets/web/images/right-mark.png') }}" class="right_mark"
-                            alt="right mark"> --}}
+                                           
                                         </div>
                                         <div class="mobile-wrap" style="max-width:20%; flex: 0 0 20%;">
                                             <span class="mobile-label">Availability</span>
@@ -794,7 +792,7 @@
                                     <div class="wd-quote-btn" style="width: 350px;">
                                         <a href="javascript:;" class="wd-view-btn messageShow justify-content-center"
                                             data-msgkey="{{ $key }}" type="button" data-toggle="collapse"
-                                            data-target="#collapse{{ $key }}" aria-expanded="true"
+                                            data-target="#collapse{{ $quote->getTransporters->id }}" aria-expanded="true"
                                             aria-controls="collapseOne">View messages
                                             <span class="msg_{{ $quote->thread_id ?? 0 }}">0</span>
                                         </a>
@@ -865,8 +863,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="collapse{{ $key }}"
-                                    class="collapse @if ($key == 0) show @endif"
+                               
+                               
+                                <div id="collapse{{ $quote->getTransporters->id  }}"
+                                    class="collapse @if ($quote->getTransporters->id  == $user_id) show @endif"
                                     aria-labelledby="heading{{ $key }}" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <form id="chat__form_{{ $key }}"
@@ -886,7 +886,7 @@
                                             <input type="hidden" name="user_current_chat_id"
                                                 id="user_current_chat_id_{{ $key }}"
                                                 value="{{ $thread ? $thread->id : 0 }}">
-                                            <div class="wd-quote-form bid_wrapper">
+                                            <div class="wd-quote-form bid_wrapper{{$quote->getTransporters->id}}">
                                                 <div class="form-group">
                                                     <p class="font-weight-light d-flex flex-wrap align-items-center text-left position-relative"
                                                         style="font-size:14px; padding-left:20px; margin-bottom: 5px; color:#444444;">
@@ -1195,15 +1195,14 @@
             }
         })
     </script>
-     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let scrollToElement = "{{ $scroll ?? '' }}"; // Get scroll parameter
-
-            if (scrollToElement) {
-                let targetElement = document.querySelector("." + scrollToElement);
-                if (targetElement) {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const userId = "{{ $user_id ?? '' }}"; // Injected from Blade
+            if (userId) {
+                const target = document.querySelector(".bid_wrapper" + userId);
+                if (target) {
                     setTimeout(() => {
-                        targetElement.scrollIntoView({
+                        target.scrollIntoView({
                             behavior: "smooth",
                             block: "start"
                         });
@@ -1212,4 +1211,5 @@
             }
         });
     </script>
+    
 @endsection
