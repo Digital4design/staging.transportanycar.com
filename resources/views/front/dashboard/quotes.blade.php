@@ -618,7 +618,7 @@
                             <div class="card">
                                 <div class="card-header @if ($key == 0) active @endif"
                                     id="heading{{ $key }}">
-                                    <div class="card_lft" style="width:calc(100% - 350px);">
+                                    <div class="card_lft{{$quote->getTransporters->id}} " style="width:calc(100% - 350px);">
                                         <div class="d-flex flex-wrap align-items-center mobile-wrap first-mobile-wrap"
                                             style="max-width:20%; flex: 0 0 20%;">
                                             <span class="mobile-label">
@@ -886,7 +886,7 @@
                                             <input type="hidden" name="user_current_chat_id"
                                                 id="user_current_chat_id_{{ $key }}"
                                                 value="{{ $thread ? $thread->id : 0 }}">
-                                            <div class="wd-quote-form bid_wrapper{{$quote->getTransporters->id}}">
+                                            <div class="wd-quote-form bid_wrapper">
                                                 <div class="form-group">
                                                     <p class="font-weight-light d-flex flex-wrap align-items-center text-left position-relative"
                                                         style="font-size:14px; padding-left:20px; margin-bottom: 5px; color:#444444;">
@@ -1199,7 +1199,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const userId = "{{ $user_id ?? '' }}"; // Injected from Blade
             if (userId) {
-                const target = document.querySelector(".bid_wrapper" + userId);
+                const target = document.querySelector(".card_lft " + userId);
                 if (target) {
                     setTimeout(() => {
                         target.scrollIntoView({
