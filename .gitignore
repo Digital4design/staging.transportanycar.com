@@ -58,7 +58,7 @@ modules.xml
 .idea/sonarlint
 transportanycar_code_29_08.zip
 old_bkp/
-.github/workflows/deploy-live.yml
+.github/workflows/deploy-staging.yml
 /app/Http/Helpers.php
 /storage
 /storage/framework/cache/*
