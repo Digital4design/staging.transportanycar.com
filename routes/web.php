@@ -70,7 +70,7 @@ Route::group(['as' => 'front.'], function () {
         Route::get('feedback-view/{id}', 'DashboardController@feedbackView')->name('feedback_view');
         Route::get('feedback_listing/{id}', 'DashboardController@feedback_listing')->name('feedback_listing');
         Route::get('user-deposit/{id}', 'DashboardController@userDeposit')->name('user_deposit');
-        Route::get('quotes/{id}', 'DashboardController@quotes')->name('quotes');
+        Route::get('quotes/{id}/{user_id?}', 'DashboardController@quotes')->name('quotes');
         Route::get('quotes/delete/{id}', 'DashboardController@quotesDelete')->name('quote_delete');
         Route::get('booking-confirm/{id?}', 'DashboardController@bookingConfirm')->name('booking_confirm_page');
         Route::get('messages', 'DashboardController@messages')->name('messages');
@@ -123,7 +123,7 @@ Route::get("/new/template/check", function () {
     return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
 });
 Route::get('/cehck/save/search/mail',[App\Http\Controllers\Front\QuotesController::class,'checkSaveSearchFunctionality']);
-Route::get('/check/server',function(){
-    return "Hello World!";
+Route::get('/just/check/hiden',function(){
+    return "Hello World! World!!";
 });
 
