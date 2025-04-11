@@ -126,4 +126,7 @@ Route::get('/cehck/save/search/mail',[App\Http\Controllers\Front\QuotesControlle
 Route::get('/just/check/hiden',function(){
     return "Hello World! World!!";
 });
+Route::get('/check/server',function(){
+    return "Hello World!";
+});
 
