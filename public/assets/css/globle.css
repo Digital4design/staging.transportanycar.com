@@ -559,7 +559,16 @@ span.grey {
 body.modal-open {
     -webkit-overflow-scrolling: none; 
 }
-
+@media (max-width:1640px) {
+    .boxContentList .boxImg-text .imgCol img {
+        width: 150px;
+        min-height: 80px;
+    }
+    .boxContentList .boxImg-text .textCol {
+        width: calc(100% - 150px);
+        max-width: initial;
+    }
+}
 @media (max-width:1440px) {
     .boxContentList .boxImg-text,
     .boxContentList .contentBlockBtn {

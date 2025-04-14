@@ -325,9 +325,9 @@
             overflow: hidden !important;
         }
 
-        .wd-quote-data .accordion .card:last-child {
+        /* .wd-quote-data .accordion .card:last-child {
             margin-bottom: 0 !important;
-        }
+        } */
 
         .wd-quote-data .accordion .card:first-child {
             border-radius: 0px 0 10px 10px !important;
@@ -612,7 +612,7 @@
                     </p>
                 </div>
 
-                <div class="accordion overflow-hidden" id="accordionExample" style="border-radius: 15px;">
+                <div class="accordion overflow-hidden" id="accordionExample" style="border-radius: 0 0 15px 15px;">
                     @foreach ($quotes as $key => $quote)
                         @if ($quote->status != 'rejected')
                             <div class="card scroll{{$quote->getTransporters->id}}">

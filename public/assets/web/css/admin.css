@@ -4008,7 +4008,7 @@ a.wd-leave-btn {
 }
 
 .wd-quote-data {
-  border-radius: 10px;
+  border-radius: 15px;
   border: 1px solid #BABABA;
   background: #f9f9f9;
   margin: 24px 0 0;
@@ -4044,6 +4044,7 @@ a.wd-leave-btn {
   margin-bottom: 4px;
   border: none;
 }
+.wd-quote-data .accordion .card:last-child {margin-bottom: 0;}
 
 .wd-quote-data .accordion .card-header {
   background: #fff;
@@ -5482,7 +5483,16 @@ div#spam-banner button.btn {
 }
 
 /*--------Responsive ----------*/
+@media (max-width: 1640px) {
+  .admin-header .navbar .menu-item a {
+    padding: 6px 12px;
+  }
+}  
 @media (max-width: 1430px) {
+  .admin-header .navbar .menu-item a {
+    margin-right: 10px;
+  }
+  .admin-header .navbar .menu-item a svg {display:none;}
   .white_box .nav .nav-link {
     padding: 10px 5px;
     flex-flow: nowrap;
@@ -5672,44 +5682,6 @@ div#spam-banner button.btn {
     margin: 0 auto;
     text-align: center;
   }
-}
-
-@media (max-width: 1024px) {
-  .wd-quote-area {
-    padding: 20px;
-    margin: 20px;
-  }
-
-  .view-quote a {
-    padding: 6px 10px 6px 10px;
-    font-size: 14px;
-  }
-
-  .tabs_bx .nav-pills li .nav-link {
-    padding: 12px 30px;
-  }
-}
-
-@media (max-width: 991px) {
-  .dropdown-toggle svg,
-  .admin-menu svg {
-    width: 25px;
-    height: 25px;
-  }
-
-  .admin-header {
-    box-shadow: 0px 4px 4px 0px #0000001A
-  }
-
-  .admin-menu {
-    justify-content: flex-end;
-  }
-
-  .admin-header .navbar {
-    padding: 15px 0;
-    margin: 0 auto;
-  }
-
   .admin-header .navbar #nav:checked~.wrapper {
     width: 100%;
     background: #fff;
@@ -5842,11 +5814,6 @@ div#spam-banner button.btn {
     transform: translateX(0);
   }
 
-  /* .admin-header:hover .navbar .nav-toggle span {background: #4285F4;} */
-  .wd-profile {
-    display: none;
-  }
-
   .admin-header .navbar .menu-item.active a {
     background: #0356D6;
     display: flex;
@@ -5856,6 +5823,50 @@ div#spam-banner button.btn {
 
   .admin-header .navbar .menu-item.active a svg path {
     fill: #fff;
+  }
+  .admin-header {
+    box-shadow: 0px 4px 4px 0px #0000001A
+  }
+
+  .admin-menu {
+    justify-content: flex-end;
+  }
+
+  .admin-header .navbar {
+    padding: 15px 0;
+    margin: 0 auto;
+  }
+
+}
+
+@media (max-width: 1024px) {
+  .wd-quote-area {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .view-quote a {
+    padding: 6px 10px 6px 10px;
+    font-size: 14px;
+  }
+
+  .tabs_bx .nav-pills li .nav-link {
+    padding: 12px 30px;
+  }
+}
+
+@media (max-width: 991px) {
+  .dropdown-toggle svg,
+  .admin-menu svg {
+    width: 25px;
+    height: 25px;
+  }
+
+ 
+ 
+  /* .admin-header:hover .navbar .nav-toggle span {background: #4285F4;} */
+  .wd-profile {
+    display: none;
   }
 
   .send-msg {
@@ -7052,16 +7063,7 @@ div#spam-banner button.btn {
     padding-right: 0;
   }
 }
-
-
-
-
-
-
-
 /* new 21-05-2024 */
-
-
 .admin-profile-box .col-lg-8 {
   padding-left: 0;
   padding-right: 0;
@@ -8097,7 +8099,11 @@ g.highcharts-input-group {
   }
 
 }
-
+@media(min-width: 1200px) {
+  .deshbord-job-listing li > div:not(:first-child) {
+    padding: 0 10px;
+  }
+}
 @media(min-width: 1200px) {
   .container-job .chat_box,
   .message_container .chat_box {
@@ -8110,6 +8116,9 @@ g.highcharts-input-group {
   .wd-active-job.new_message_section .chat_box .chat_conversation {height:100%;}
 }
 @media (max-width: 767px) {
+  .deshbord-job-listing li > div:not(:first-child) p {
+    white-space:wrap;
+  }
   .foot_img {
       text-align: left;
       margin: 0 0 30px;
