@@ -5488,11 +5488,13 @@ div#spam-banner button.btn {
     padding: 6px 12px;
   }
 }  
+@media screen and (min-width:1200px) and (max-width: 1430px) {
+  .admin-header .navbar .menu-item a svg {display:none;}
+}
 @media (max-width: 1430px) {
   .admin-header .navbar .menu-item a {
     margin-right: 10px;
   }
-  .admin-header .navbar .menu-item a svg {display:none;}
   .white_box .nav .nav-link {
     padding: 10px 5px;
     flex-flow: nowrap;
@@ -5836,7 +5838,9 @@ div#spam-banner button.btn {
     padding: 15px 0;
     margin: 0 auto;
   }
-
+  .wd-profile {
+    display: none;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -5865,9 +5869,7 @@ div#spam-banner button.btn {
  
  
   /* .admin-header:hover .navbar .nav-toggle span {background: #4285F4;} */
-  .wd-profile {
-    display: none;
-  }
+  
 
   .send-msg {
     padding: 7px;
