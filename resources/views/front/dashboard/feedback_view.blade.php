@@ -362,7 +362,7 @@
                                                         </svg>
                                                     </li>
                                                     <li class="user-feedback-rating-count">
-                                                        <span>({{ $user->completed_job }})</span>
+                                                        <span>({{ count($feedback) }})</span>
                                                         {{-- <span class="ml-1">{{ number_format( $rating_percentage,0) }}%</span> --}}
                                                     </li>
 
