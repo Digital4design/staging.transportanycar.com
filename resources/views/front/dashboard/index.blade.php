@@ -695,6 +695,7 @@
                 url: "{{ route('front.quote_delete', ['id' => ':id']) }}".replace(':id', quoteId),
                 type: "GET",
                 success: function(res) {
+                    console.log(res);
                     if (res.success == true) {
                         Swal.fire({
                             title: '<span class="swal-title">Quote deleted</span>',
