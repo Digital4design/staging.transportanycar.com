@@ -268,8 +268,10 @@ class DashboardController extends WebController
     {
         $user_data = Auth::guard('transporter')->user();
 
-        $quoteBytransporter = QuoteByTransporter::where('user_id', $user_data->id)->get();
+        $quoteBytransporter = QuoteByTransporter::where('user_id', $user_data->id)->where('status', 'accept')->get();
         $userQuote = UserQuote::whereIn('id', $quoteBytransporter->pluck('user_quote_id'))->get();
+        // dd($userQuote);
+        // return;
 
         $total_distance = UserQuote::whereIn('id', $quoteBytransporter->where('status', 'accept')->pluck('user_quote_id')->toArray())
             ->sum('distance');
