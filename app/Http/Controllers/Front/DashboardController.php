@@ -586,6 +586,8 @@ class DashboardController extends WebController
 
     public function quotesDelete($id)
     {
+        dd('yessssssssssssssssssssss');
+        return ;
         $user_data = Auth::guard('web')->user();
         $deleted = UserQuote::where(['user_id' => $user_data->id, 'id' => $id])->delete();
         if ($deleted) {
