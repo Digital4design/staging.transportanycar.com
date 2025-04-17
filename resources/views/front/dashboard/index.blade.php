@@ -691,7 +691,7 @@
         }
 
         function deleteQuote(quoteId) {
-            let quoteId = 123; // or however you’re getting it
+          
 let url = "{{ route('front.quote_delete', ['id' => ':id']) }}".replace(':id', quoteId);
 
 console.log(url); 
