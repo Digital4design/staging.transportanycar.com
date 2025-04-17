@@ -691,6 +691,7 @@
         }
 
         function deleteQuote(quoteId) {
+            alert(quoteId);
             $.ajax({
                 url: "{{ route('front.quote_delete', ['id' => ':id']) }}".replace(':id', quoteId),
                 type: "GET",
