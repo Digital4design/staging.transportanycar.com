@@ -586,15 +586,24 @@ class DashboardController extends WebController
 
     public function quotesDelete($id)
     {
-        return "yesssssssssssssssssssssss";
         $user_data = Auth::guard('web')->user();
-        $deleted = UserQuote::where(['user_id' => $user_data->id, 'id' => $id])->delete();
+    
+        if (!$user_data) {
+            return response()->json(['success' => false, 'message' => 'Unauthenticated user.'], 401);
+        }
+    
+        $deleted = UserQuote::where([
+            'user_id' => $user_data->id,
+            'id' => $id
+        ])->delete();
+    
         if ($deleted) {
             return response()->json(['success' => true, 'message' => 'Your quote deleted successfully']);
         } else {
             return response()->json(['success' => false, 'message' => 'Failed to delete quote']);
         }
     }
+    
 
     public function leaveFeedback($id)
     {
