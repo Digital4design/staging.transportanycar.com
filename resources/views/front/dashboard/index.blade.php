@@ -1,4 +1,5 @@
 @extends('layouts.web.dashboard.app')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 @section('head_css')
 @endsection
@@ -588,6 +589,11 @@
     <script src="{{ asset('assets/web/js/admin.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
         function uploadImageQuote(item_id) {
             const fileImage = document.querySelector('#uploadImage' + item_id);
 
@@ -691,67 +697,50 @@
         }
 
         function deleteQuote(quoteId) {
-            $.ajax({
-                url: "{{ route('front.quote_delete', ['id' => ':id']) }}".replace(':id', quoteId),
-                type: "GET",
-                success: function(res) {
-                    if (res.success == true) {
-                        Swal.fire({
-                            title: '<span class="swal-title">Quote deleted</span>',
-                            html: '<span class="swal-text">Your quote has been deleted successfully.</span>',
-                            confirmButtonColor: '#52D017',
-                            confirmButtonText: 'Dismiss',
-                            customClass: {
-                                title: 'swal-title',
-                                htmlContainer: 'swal-text-container',
-                                popup: 'swal-popup', // Add custom class for the popup
-                                cancelButton: 'swal-button--cancel' // Add custom class for the cancel button
-                            },
-                            showCloseButton: true, // Add this line to show the close button
-                            showConfirmButton: true, // Add this line to hide the confirm button
-                            allowOutsideClick: false
-                        }).then((result) => {
-                            if (result.isConfirmed || result.isDismissed) {
-                                window.location.reload();
-                            }
-                        });
-                    } else {
-                        Swal.fire({
-                            title: 'Error',
-                            html: '<span class="swal-text">Failed to delete quote.</span>',
-                            confirmButtonColor: '#52D017',
-                            confirmButtonText: 'Dismiss',
-                            customClass: {
-                                title: 'swal-title',
-                                htmlContainer: 'swal-text-container',
-                                popup: 'swal-popup',
-                                cancelButton: 'swal-button--cancel'
-                            },
-                            showCloseButton: true,
-                            showConfirmButton: true,
-                            allowOutsideClick: false
-                        });
+    $.ajax({
+        url: "{{ route('front.quote_delete', ['id' => ':id']) }}".replace(':id', quoteId),
+        type: "Delete", // change to DELETE if your route uses it
+        success: function(res) {
+            if (res.success == true) {
+                Swal.fire({
+                    title: '<span class="swal-title">Quote deleted</span>',
+                    html: '<span class="swal-text">Your quote has been deleted successfully.</span>',
+                    confirmButtonColor: '#52D017',
+                    confirmButtonText: 'Dismiss',
+                    customClass: {
+                        title: 'swal-title',
+                        htmlContainer: 'swal-text-container',
+                        popup: 'swal-popup',
+                        cancelButton: 'swal-button--cancel'
+                    },
+                    showCloseButton: true,
+                    showConfirmButton: true,
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed || result.isDismissed) {
+                        window.location.reload();
                     }
-                },
-                error: function(data) {
-                    Swal.fire({
-                        title: 'Error',
-                        html: '<span class="swal-text">Something went wrong!</span>',
-                        confirmButtonColor: '#52D017',
-                        confirmButtonText: 'Dismiss',
-                        customClass: {
-                            title: 'swal-title',
-                            htmlContainer: 'swal-text-container',
-                            popup: 'swal-popup',
-                            cancelButton: 'swal-button--cancel'
-                        },
-                        showCloseButton: true,
-                        showConfirmButton: true,
-                        allowOutsideClick: false
-                    });
-                }
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    html: '<span class="swal-text">Failed to delete quote.</span>',
+                    confirmButtonColor: '#52D017',
+                    confirmButtonText: 'Dismiss'
+                });
+            }
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+            Swal.fire({
+                title: 'Error',
+                html: '<span class="swal-text">Something went wrong!</span>',
+                confirmButtonColor: '#52D017',
+                confirmButtonText: 'Dismiss'
             });
         }
+    });
+}
 
 
 
