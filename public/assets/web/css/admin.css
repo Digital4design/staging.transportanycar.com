@@ -5483,7 +5483,7 @@ div#spam-banner button.btn {
 }
 
 /*--------Responsive ----------*/
-@media (max-width: 1640px) {
+@media screen and (min-width: 1200px) and (max-width: 1640px) {
   .admin-header .navbar .menu-item a {
     padding: 6px 12px;
   }
