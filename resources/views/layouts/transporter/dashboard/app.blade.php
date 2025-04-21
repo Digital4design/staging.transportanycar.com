@@ -191,20 +191,16 @@
             modal.click();
         }
     });
-    $(function() {
+
+    $(function () {
         @if (session('error'))
-            toastr.error('{{ session('
-                        error ') }}', '', {
-                timeOut: 2000
-            });
+            toastr.error("{{ session('error') }}", '', { timeOut: 2000 });
         @elseif (session('success'))
-            toastr.success('{{ session('
-                        success ') }}', '', {
-                timeOut: 2000
-            });
+            toastr.success("{{ session('success') }}", '', { timeOut: 2000 });
         @endif
     });
 </script>
+
 <script src="{{ asset('/assets/admin/vendors/general/validate/jquery.validate.min.js') }}"></script>
 @yield('script')
 
