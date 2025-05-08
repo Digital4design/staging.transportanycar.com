@@ -1184,16 +1184,34 @@
                 }
             });
         });
-        $('.messageShow').on('click', function() {
-            // alart('yesssssssssss');
-            var id = $(this).attr('data-msgkey');
-            var selected_chat_id = $("#user_current_chat_id_" + id).val();
-            if (selected_chat_id) {
-                var url = "{{ route('front.message.quote_history', ':chat_id') }}";
-                url = url.replace(':chat_id', selected_chat_id);
-                getChatHistory(url, id);
-            }
-        })
+
+
+        $(document).ready(function () {
+    // Function to handle message click and automatic page load behavior
+    function handleMessageShowClick(id) {
+        var selected_chat_id = $("#user_current_chat_id_" + id).val();
+        if (selected_chat_id) {
+            var url = "{{ route('front.message.quote_history', ':chat_id') }}";
+            url = url.replace(':chat_id', selected_chat_id);
+            getChatHistory(url, id);
+        }
+    }
+
+    // Delegate click event to handle dynamically loaded .messageShow elements
+    $(document).on('click', '.messageShow', function () {
+        var id = $(this).attr('data-msgkey');  // Get id from data-msgkey attribute
+        handleMessageShowClick(id);
+    });
+
+    // ✅ Automatically trigger the first .messageShow on page load (like clicking it)
+    var firstMsg = $('.messageShow').first();
+    if (firstMsg.length) {
+        var firstId = firstMsg.attr('data-msgkey'); // Get the data-msgkey of the first element
+        //alert(firstId); // For debugging, remove this line in production
+        handleMessageShowClick(1); // Manually invoke the same function as the click event
+    }
+});
+
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
