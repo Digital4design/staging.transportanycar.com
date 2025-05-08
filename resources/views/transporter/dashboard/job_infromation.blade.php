@@ -115,7 +115,7 @@
             margin-bottom: 10px;
         }
 
-        .bidder_bid span {
+         .bidder_bid span {
             color: #52D017;
         }
 
@@ -723,6 +723,7 @@
 $previousUrl = request()->query('prev', url()->previous());
 $currentUrl = url()->current();
 $defaultRoute = route('transporter.new_jobs_new');
+$jobId = $quote->id ?? null; 
 
 // Ensure previous URL is valid and not the same as current
 if (!$previousUrl || $previousUrl == $currentUrl) {
@@ -748,6 +749,10 @@ $findJobsPath = parse_url(
                                     if (!in_array($previousPath, [$savedJobsPath, $watchlistPath, $findJobsPath])) {
                                         $previousUrl = $defaultRoute;
                                         $previousPath = $findJobsPath;
+                                    }
+
+                                    if ($previousPath === $findJobsPath && $jobId) {
+                                        $previousUrl .= '#job-' . $jobId;
                                     }
                                 @endphp
                                 <div class="back_btn row mx-0 align-items-center">
