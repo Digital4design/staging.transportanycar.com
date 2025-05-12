@@ -14,7 +14,7 @@ body {
   background: #E8F1FF;
   overflow-x: hidden;
 }
-
+ 
 a:hover {
   color: #009eff;
 }
@@ -1229,6 +1229,9 @@ text.highcharts-credits {
 /*------Admin Jobs [ START ]----*/
 .job_container {
   padding: 38px 78px 0 69px;
+}
+.job_container.highlight {
+  margin-top:130px;
 }
 
 .admin_job_bx {
