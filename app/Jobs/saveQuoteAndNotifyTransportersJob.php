@@ -3,96 +3,79 @@
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-use App\QuoteByTransporter;
 use App\User;
-use App\UserQuote;
-use Carbon\Carbon;
-use App\QuotationDetail;
-use App\MobileVerification;
 use App\Services\EmailService;
-use App\Jobs\SendTransporterEmail;
-use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Http\requestData;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
-use Exception;
-use App\Services\SmsService;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Http;
 
 class saveQuoteAndNotifyTransportersJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    public $timeout = 0; 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
+
+    public $timeout = 0;
+
     public function __construct(public $quoteData)
     {
-        // $this->all_transport = $all_transport;
         $this->quoteData = $quoteData;
-
+        Log::info("Job instantiated with quoteData:", $this->quoteData);
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
+        Log::info("saveQuoteAndNotifyTransportersJob started.");
+
         $emailService = new EmailService;
-        $all_transport = user::where('type', 'car_transporter')->where('is_status', 'approved')->where('new_job_alert','1')->whereNull('deleted_at')->get();
+
+        Log::info("Fetching transporters...");
+        $all_transport = User::where('type', 'car_transporter')
+            ->where('is_status', 'approved')
+            ->where('new_job_alert', '1')
+            ->whereNull('deleted_at')
+            ->get();
+
+        Log::info("Total transporters found: " . $all_transport->count());
 
         $quoteData = $this->quoteData;
-        foreach ($all_transport as $index=> $transporter) {
-           
-                $mailData = [
-                    'id' => $quoteData['quotation_id'],
-                    'vehicle_make' => $quoteData['vehicle_make'],
-                    'vehicle_model' => $quoteData['vehicle_model'],
-                    'vehicle_make_1' => $quoteData['vehicle_make_1'],
-                    'vehicle_model_1' => $quoteData['vehicle_model_1'],
-                    'pickup_postcode' => $quoteData['pickup_postcode'],
-                    'drop_postcode' => $quoteData['drop_postcode'],
-                    'delivery_timeframe_from' => $quoteData['delivery_timeframe_from'] ?? null,
-                    'starts_drives' => $quoteData['starts_drives'],
-                    'starts_drives_1' => $quoteData['starts_drives_1'],
-                    'how_moved' => $quoteData['how_moved'],
-                    'distance' => $quoteData['distance'],
-                    'duration' => $quoteData['duration'],
-                    'map_image' => $quoteData['map_image'],
-                    'delivery_timeframe' => $quoteData['delivery_timeframe'],
-                ];
-              
-                try {
-                    
-                        $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
-                        $subject = 'You have received a transport notification';
-                        $emailService->sendEmail($transporter->email, $htmlContent, $subject);
-                        // $emailService->sendEmail("kartik.d4d@gmail.com", $htmlContent, $subject);
 
-                        Log::info("quote functionality sending email to transporter: #{$index} {$transporter}  {$transporter->email} ");
-                   
-                } catch (\Exception $ex) {
-                    Log::error('error quote functionality sending email to transporter: ' . $ex->getMessage());
-                    // return $ex->getMessage();
-                }
-           
+        foreach ($all_transport as $index => $transporter) {
+            Log::info("Preparing email for transporter #{$index}: {$transporter->email}");
+
+            $mailData = [
+                'id' => $quoteData['quotation_id'] ?? null,
+                'vehicle_make' => $quoteData['vehicle_make'] ?? null,
+                'vehicle_model' => $quoteData['vehicle_model'] ?? null,
+                'vehicle_make_1' => $quoteData['vehicle_make_1'] ?? null,
+                'vehicle_model_1' => $quoteData['vehicle_model_1'] ?? null,
+                'pickup_postcode' => $quoteData['pickup_postcode'] ?? null,
+                'drop_postcode' => $quoteData['drop_postcode'] ?? null,
+                'delivery_timeframe_from' => $quoteData['delivery_timeframe_from'] ?? null,
+                'starts_drives' => $quoteData['starts_drives'] ?? null,
+                'starts_drives_1' => $quoteData['starts_drives_1'] ?? null,
+                'how_moved' => $quoteData['how_moved'] ?? null,
+                'distance' => $quoteData['distance'] ?? null,
+                'duration' => $quoteData['duration'] ?? null,
+                'map_image' => $quoteData['map_image'] ?? null,
+                'delivery_timeframe' => $quoteData['delivery_timeframe'] ?? null,
+            ];
+
+            try {
+                Log::debug("Generating HTML for email with mailData:", $mailData);
+                $htmlContent = view('mail.General.transporter-new-job-received', ['quote' => $mailData])->render();
+
+                $subject = 'You have received a transport notification';
+
+                $emailService->sendEmail($transporter->email, $htmlContent, $subject);
+
+                Log::info("Email sent successfully to: {$transporter->email}");
+            } catch (\Exception $ex) {
+                Log::error("Failed to send email to {$transporter->email}: " . $ex->getMessage());
+            }
         }
+
+        Log::info("saveQuoteAndNotifyTransportersJob completed.");
     }
 }
