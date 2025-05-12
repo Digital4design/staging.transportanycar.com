@@ -22,7 +22,7 @@ class SendTransporterEmail implements ShouldQueue
     public function handle()
     {
         //$transporters = User::where(['type' => 'car_transporter', 'status' => 'active'])->get();
-        $transporters = ['subham.k@ptiwebtech.com','info@transportanycar.com'];
+        $transporters = ['subham.k@ptiwebtech.com','info@transportanycar.com','harmeetsingh.d4d@gmail.com'];
 
         foreach ($transporters as $transporter) {
              // send to transporter new job mail
