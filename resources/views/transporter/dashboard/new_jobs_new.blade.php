@@ -2877,7 +2877,7 @@ $(document).ready(function() {
     var hash = window.location.hash; // Get the URL hash
     if (hash.startsWith('#job-')) {
         var jobId = hash.substring(5); // Extract the job ID
-        $('.mainContentDiv').addClass('highlight'); // Add 'highlight' class to the div
+        $('.job_container').addClass('highlight'); // Add 'highlight' class to the div
     }
 });
 
