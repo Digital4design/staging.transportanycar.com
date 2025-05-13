@@ -12,7 +12,8 @@ use App\User;
 use App\Services\EmailService;
 use Illuminate\Support\Facades\Log;
 
-class saveQuoteAndNotifyTransportersJob implements ShouldQueue
+class SaveQuoteAndNotifyTransportersJob implements ShouldQueue
+
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

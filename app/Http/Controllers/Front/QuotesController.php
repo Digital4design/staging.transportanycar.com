@@ -26,7 +26,7 @@ use App\Services\SmsService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
-use App\Jobs\saveQuoteAndNotifyTransportersJob;
+use App\Jobs\SaveQuoteAndNotifyTransportersJob;
 use App\Jobs\SaveSearchQuoteEmailSendJob;
 
 class QuotesController extends WebController
@@ -267,10 +267,7 @@ class QuotesController extends WebController
         Cache::forget('location_info');
         $this->SaveSearchQuoteEmailSend($quoteData);
 
-        // saveQuoteAndNotifyTransportersJob::dispatch($quoteData);
-        Log::info("About to dispatch saveQuoteAndNotifyTransportersJob");
         saveQuoteAndNotifyTransportersJob::dispatch($quoteData);
-
 
         // $obj = new saveQuoteAndNotifyTransportersJob($all_transport,$quoteData);
         // $obj->handle();

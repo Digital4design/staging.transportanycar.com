@@ -7,11 +7,18 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\General\NotificationController;
 use Illuminate\Support\Facades\Mail;
 use App\Services\EmailService;
-use App\{User, Thread, UserQuote,SaveSearch,Feedback};
+use App\{User, Thread, UserQuote, SaveSearch, Feedback};
 use App\QuoteByTransporter;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Jobs\SaveQuoteAndNotifyTransportersJob;
+use Illuminate\Support\Facades\Log;
 
+Route::get('/test-job', function () {
+    Log::info("Dispatching the job...");
+    SaveQuoteAndNotifyTransportersJob::dispatch(['quotation_id' => 123]);
+    return 'Job dispatched';
+});
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -124,8 +131,7 @@ Route::get("/new/template/check", function () {
     return $data;
     return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
 });
-Route::get('/cehck/save/search/mail',[App\Http\Controllers\Front\QuotesController::class,'checkSaveSearchFunctionality']);
-Route::get('/just/check/hiden',function(){
+Route::get('/cehck/save/search/mail', [App\Http\Controllers\Front\QuotesController::class, 'checkSaveSearchFunctionality']);
+Route::get('/just/check/hiden', function () {
     return "Hello World! World!!";
 });
-
