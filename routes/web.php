@@ -11,7 +11,7 @@ use App\{User, Thread, UserQuote, SaveSearch, Feedback};
 use App\QuoteByTransporter;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use App\Jobs\SaveQuoteAndNotifyTransportersJob;
+use App\Jobs\saveQuoteAndNotifyTransportersJob;
 use Illuminate\Support\Facades\Log;
 
 Route::get('/test-job', function () {
