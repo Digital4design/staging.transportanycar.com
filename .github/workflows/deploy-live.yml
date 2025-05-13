@@ -26,5 +26,6 @@ jobs:
           script: |
             cd /var/www/html/public_html
             git checkout main
+             git add .
+            git commit -m "Auto commit from GitHub Actions deployment" || echo "Nothing to commit"
             git pull origin main
-            
