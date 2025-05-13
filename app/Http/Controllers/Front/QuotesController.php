@@ -26,7 +26,7 @@ use App\Services\SmsService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
-use App\Jobs\SaveQuoteAndNotifyTransportersJob;
+use App\Jobs\saveQuoteAndNotifyTransportersJob;
 use App\Jobs\SaveSearchQuoteEmailSendJob;
 
 class QuotesController extends WebController
