@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Log;
 
 Route::get('/test-job', function () {
     Log::info("Dispatching the job...");
-    SaveQuoteAndNotifyTransportersJob::dispatch(['quotation_id' => 123]);
+    saveQuoteAndNotifyTransportersJob::dispatch(['quotation_id' => 123]);
     return 'Job dispatched';
 });
 /*
