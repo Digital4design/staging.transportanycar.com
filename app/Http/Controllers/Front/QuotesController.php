@@ -106,7 +106,7 @@ class QuotesController extends WebController
             'email' => $request->email,
             'type' => 'user'
         ])->first();
-      
+
 
         if ($user_info && $current_user_data->email !== $request->email) {
             // If the email exists in the database, log out current user
@@ -188,8 +188,8 @@ class QuotesController extends WebController
                 return redirect()->route('front.home')->withErrors(['general' => 'Something is wrong! Try again.']);
             }
         } else {
-          
-            return redirect()->route('front.dashboard');  
+
+            return redirect()->route('front.dashboard');
         }
     }
 
@@ -229,7 +229,7 @@ class QuotesController extends WebController
         $up = $request->hasFile('file') ? upload_file('file', 'quote') : null;
         $up1 = $request->hasFile('file_1') ? upload_file('file_1', 'quote') : null;
 
-        
+
         $result = $this->saveMapImage($dis_dur);
         // Prepare quote data
         $quoteData = [
@@ -267,8 +267,11 @@ class QuotesController extends WebController
         Cache::forget('location_info');
         $this->SaveSearchQuoteEmailSend($quoteData);
 
+        // saveQuoteAndNotifyTransportersJob::dispatch($quoteData);
+        Log::info("About to dispatch saveQuoteAndNotifyTransportersJob");
         saveQuoteAndNotifyTransportersJob::dispatch($quoteData);
-      
+
+
         // $obj = new saveQuoteAndNotifyTransportersJob($all_transport,$quoteData);
         // $obj->handle();
     }
@@ -297,7 +300,7 @@ class QuotesController extends WebController
                 //'path' => $path
             ];
         } else {
-              return redirect()->route('front.home')->withErrors(['general' => 'Failed to get directions. Please try with correct location']);
+            return redirect()->route('front.home')->withErrors(['general' => 'Failed to get directions. Please try with correct location']);
         }
     }
 
