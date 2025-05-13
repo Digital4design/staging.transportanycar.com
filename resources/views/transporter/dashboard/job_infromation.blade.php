@@ -752,7 +752,7 @@ $findJobsPath = parse_url(
                                     }
 
                                     if ($previousPath === $findJobsPath && $jobId) {
-                                        $previousUrl .= '#job-' . $jobId;
+                                        $previousUrl .= '#job' . $jobId;
                                     }
                                 @endphp
                                 <div class="back_btn row mx-0 align-items-center">

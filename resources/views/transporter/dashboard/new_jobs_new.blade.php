@@ -2873,13 +2873,47 @@
     });
 </script>
 <script>
-$(document).ready(function() {
-    var hash = window.location.hash; // Get the URL hash
-    if (hash.startsWith('#job-')) {
-        var jobId = hash.substring(5); // Extract the job ID
-        $('.job_container').addClass('highlight'); // Add 'highlight' class to the div
-       // window.location.reload();
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash;
+ 
+  if (hash) {
+    const jobId = hash.slice(4); // Remove "job-" from "#job-1101"
+    const newHash = `#job-${jobId}`;
+    const element = document.querySelector(newHash);
+ 
+    if (element) {
+      const isMobile = window.innerWidth < 992;
+ 
+      if (isMobile) {
+        // Scroll the whole body (mobile)
+        const elementRect = element.getBoundingClientRect();
+        const offset = elementRect.top + window.pageYOffset; // Position relative to document
+ 
+        setTimeout(() => {
+          window.scrollTo({
+            top: offset - 75,
+            behavior: 'smooth'
+          });
+        }, 500);
+      } else {
+        console.log('else')
+        // Scroll the .admin_job_bx container (desktop)
+        const scrollElement = document.querySelector('.admin_job_bx');
+ 
+        if (scrollElement) {
+          const elementRect = element.getBoundingClientRect();
+          const containerRect = scrollElement.getBoundingClientRect();
+          const offset = elementRect.top - containerRect.top;
+          setTimeout(() => {
+            scrollElement.scrollTo({
+              top: scrollElement.scrollTop + offset,
+              behavior: 'smooth'
+            });
+          }, 500);
+        }
+      }
     }
+  }
 });
 
 
