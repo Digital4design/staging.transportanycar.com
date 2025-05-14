@@ -293,49 +293,54 @@ class DashboardController extends WebController
 
     public function feedback_listing($transporter_id)
     {
-        // $my_quotes = QuoteByTransporter::where('user_id', $transporter_id)->pluck('id');
-        // $all_feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->get();
-        // $feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->paginate(10);
-        // return"yesssssssssssss";
+        // Get all feedbacks for this transporter (excluding quote_by_transporter_id)
         $all_feedbacks = Feedback::where('transporter_id', $transporter_id)
-            ->where('quote_by_transporter_id', null)
+            ->whereNull('quote_by_transporter_id')
             ->get();
 
+        // Paginated feedbacks for listing
         $feedbacks = Feedback::where('transporter_id', $transporter_id)
-            ->where('quote_by_transporter_id', null)
+            ->whereNull('quote_by_transporter_id')
             ->paginate(10);
 
-        $total_feedbacks = $all_feedbacks->count(); // Correct total count
+        // Total feedback count
+        $total_feedbacks = $all_feedbacks->count();
 
-        // Calculate rating percentages
+        // Calculate rating percentages for each star level
         $ratings = collect([5, 4, 3, 2, 1])->mapWithKeys(function ($rating) use ($all_feedbacks, $total_feedbacks) {
             $count = $all_feedbacks->where('rating', $rating)->count();
             $percentage = $total_feedbacks > 0 ? round(($count / $total_feedbacks) * 100, 1) : 0;
-            return ['star_' . $rating  =>  $percentage];
+            return ['star_' . $rating => $percentage];
         });
 
-        // Ensure total percentage sums exactly to 100%
-        $totalPercentage = array_sum($ratings->toArray());
+        // ✅ Only adjust percentages if there's actual feedback
+        if ($total_feedbacks > 0) {
+            $totalPercentage = array_sum($ratings->toArray());
 
-        if ($totalPercentage !== 100) {
-            $difference = 100 - $totalPercentage; // Calculate how much to adjust
+            if ($totalPercentage !== 100) {
+                $difference = 100 - $totalPercentage;
 
-            // Find the largest rating percentage to adjust it
-            $highestKey = collect($ratings)->sortDesc()->keys()->first();
+                // Find the star rating with the highest percentage to adjust it
+                $highestKey = collect($ratings)->sortDesc()->keys()->first();
 
-            // Apply adjustment while preventing negative values
-            if (isset($ratings[$highestKey])) {
-                $ratings[$highestKey] = max(0, $ratings[$highestKey] + $difference);
+                if (isset($ratings[$highestKey])) {
+                    $ratings[$highestKey] = max(0, $ratings[$highestKey] + $difference);
+                }
             }
         }
 
-        // Calculate the average rating
+        // Calculate average rating
         $average_rating = $total_feedbacks > 0 ? round($all_feedbacks->avg('rating'), 1) : 0;
 
-        // Render the feedback listing view
+        // Render Blade view for feedback listing
         $params['html'] = view('front.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings', 'average_rating'))->render();
 
-        return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $params]);
+        // Return the JSON response
+        return response()->json([
+            'success' => true,
+            'message' => 'Job found successfully',
+            'data' => $params
+        ]);
     }
 
     private function get_transporter_feedback($transporter_id)
