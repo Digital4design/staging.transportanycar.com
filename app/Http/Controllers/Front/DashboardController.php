@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use PDF;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends WebController
 {
@@ -38,6 +39,7 @@ class DashboardController extends WebController
 
     public function dashboard()
     {
+
         $title = 'Dashboard';
         $user_data = Auth::guard('web')->user();
         // save last visit time of transporter
@@ -45,20 +47,22 @@ class DashboardController extends WebController
         $user_data->save();
 
         // Subquery to get quotes count and lowest bid
-        $subQuery = \DB::table('quote_by_transpoters')
-            ->select('user_quote_id', \DB::raw('COUNT(*) as quotes_count'), \DB::raw('MIN(price) as lowest_bid'))
-            ->where('status', 'pending')  // Add this line to filter by status
+        $subQuery = DB::table('quote_by_transpoters')
+            ->select('user_quote_id', DB::raw('COUNT(*) as quotes_count'), DB::raw('MIN(price) as lowest_bid'))
+            ->where('status', 'pending')
             ->groupBy('user_quote_id');
 
-
-        $quotes = UserQuote::with('notification_thread')->where(['user_id' => $user_data->id])
+        $quotes = UserQuote::with('notification_thread')
+            ->where('user_id', $user_data->id)
             ->whereNotIn('status', ['completed', 'cancelled'])
+            ->whereRaw('DATE_ADD(user_quotes.created_at, INTERVAL 10 DAY) >= ?', [Carbon::today()->toDateString()])
             ->leftJoinSub($subQuery, 'sub', function ($join) {
                 $join->on('user_quotes.id', '=', 'sub.user_quote_id');
             })
             ->select('user_quotes.*', 'sub.quotes_count', 'sub.lowest_bid')
             ->latest()
             ->get();
+        //  dd($quotes);
 
         $subQuery1 = \DB::table('quote_by_transpoters')
             ->select('user_quote_id', \DB::raw('COUNT(*) as quotes_count'), \DB::raw('MIN(price) as lowest_bid'))
@@ -294,43 +298,43 @@ class DashboardController extends WebController
         // $feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->paginate(10);
         // return"yesssssssssssss";
         $all_feedbacks = Feedback::where('transporter_id', $transporter_id)
-        ->where('quote_by_transporter_id', null)
-        ->get();
-    
-    $feedbacks = Feedback::where('transporter_id', $transporter_id)
-        ->where('quote_by_transporter_id', null)
-        ->paginate(10);
-    
-    $total_feedbacks = $all_feedbacks->count(); // Correct total count
-    
-    // Calculate rating percentages
-    $ratings = collect([5, 4, 3, 2, 1])->mapWithKeys(function ($rating) use ($all_feedbacks, $total_feedbacks) {
-        $count = $all_feedbacks->where('rating', $rating)->count();
-        $percentage = $total_feedbacks > 0 ? round(($count / $total_feedbacks) * 100, 1) : 0;
-        return ['star_' . $rating  =>  $percentage];
-    });
-    
-    // Ensure total percentage sums exactly to 100%
-    $totalPercentage = array_sum($ratings->toArray());
-    
-    if ($totalPercentage !== 100) {
-        $difference = 100 - $totalPercentage; // Calculate how much to adjust
-    
-        // Find the largest rating percentage to adjust it
-        $highestKey = collect($ratings)->sortDesc()->keys()->first();
-    
-        // Apply adjustment while preventing negative values
-        if (isset($ratings[$highestKey])) {
-            $ratings[$highestKey] = max(0, $ratings[$highestKey] + $difference);
+            ->where('quote_by_transporter_id', null)
+            ->get();
+
+        $feedbacks = Feedback::where('transporter_id', $transporter_id)
+            ->where('quote_by_transporter_id', null)
+            ->paginate(10);
+
+        $total_feedbacks = $all_feedbacks->count(); // Correct total count
+
+        // Calculate rating percentages
+        $ratings = collect([5, 4, 3, 2, 1])->mapWithKeys(function ($rating) use ($all_feedbacks, $total_feedbacks) {
+            $count = $all_feedbacks->where('rating', $rating)->count();
+            $percentage = $total_feedbacks > 0 ? round(($count / $total_feedbacks) * 100, 1) : 0;
+            return ['star_' . $rating  =>  $percentage];
+        });
+
+        // Ensure total percentage sums exactly to 100%
+        $totalPercentage = array_sum($ratings->toArray());
+
+        if ($totalPercentage !== 100) {
+            $difference = 100 - $totalPercentage; // Calculate how much to adjust
+
+            // Find the largest rating percentage to adjust it
+            $highestKey = collect($ratings)->sortDesc()->keys()->first();
+
+            // Apply adjustment while preventing negative values
+            if (isset($ratings[$highestKey])) {
+                $ratings[$highestKey] = max(0, $ratings[$highestKey] + $difference);
+            }
         }
-    }
-    
-    // Calculate the average rating
-    $average_rating = $total_feedbacks > 0 ? round($all_feedbacks->avg('rating'), 1) : 0;
-    
-    // Render the feedback listing view
-    $params['html'] = view('front.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings', 'average_rating'))->render();
-    
+
+        // Calculate the average rating
+        $average_rating = $total_feedbacks > 0 ? round($all_feedbacks->avg('rating'), 1) : 0;
+
+        // Render the feedback listing view
+        $params['html'] = view('front.dashboard.partial.feedback_listing', compact('feedbacks', 'ratings', 'average_rating'))->render();
+
         return response()->json(['success' => true, 'message' => 'Job find successfully', 'data' => $params]);
     }
 
@@ -529,7 +533,7 @@ class DashboardController extends WebController
         return view('front.dashboard.messages')->with(compact('title', 'chats', 'latest_chat'));
     }
 
-    public function quotes(Request $request ,$id,$user_id = null)
+    public function quotes(Request $request, $id, $user_id = null)
     {
         // return $id;
         $user_data = Auth::guard('web')->user();
@@ -553,7 +557,7 @@ class DashboardController extends WebController
             return $quote;
         });
 
-        
+
         $threads = Thread::where(['user_id' => $user_data->id, 'user_quote_id' => $id])->get();
         $threadMap = $threads->pluck('id', 'friend_id');
         $quotes->map(function ($quote) use ($threadMap) {
@@ -579,7 +583,7 @@ class DashboardController extends WebController
         $params['job_status'] = $job_status;
         $params['scroll'] = $scroll;
         $params['user_id'] = $user_id;
-        
+
         // $params['rating_average'] = $rating_average;
         return view('front.dashboard.quotes', $params);
     }
@@ -587,19 +591,19 @@ class DashboardController extends WebController
     public function quotesDelete($id)
     {
         $user = Auth::guard('web')->user();
-    
+
         if (!$user) {
             return response()->json(['success' => false, 'message' => 'Unauthenticated'], 401);
         }
-    
+
         $quote = UserQuote::where('id', $id)->where('user_id', $user->id)->first();
-    
+
         if (!$quote) {
             return response()->json(['success' => false, 'message' => 'Quote not found'], 404);
         }
-    
+
         $quote->delete();
-    
+
         return response()->json(['success' => true, 'message' => 'Your quote deleted successfully']);
     }
 
