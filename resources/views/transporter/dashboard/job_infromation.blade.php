@@ -735,6 +735,7 @@ $previousPath = parse_url($previousUrl, PHP_URL_PATH);
 $savedJobsPath = parse_url(
     route('transporter.savedFindJobResults', [], false),
     PHP_URL_PATH,
+    
 );
 $watchlistPath = parse_url(
     route('transporter.watchlist.index', [], false),
@@ -752,6 +753,9 @@ $findJobsPath = parse_url(
                                     }
 
                                     if ($previousPath === $findJobsPath && $jobId) {
+                                        $previousUrl .= '#job' . $jobId;
+                                    }
+                                    if ($previousPath === $savedJobsPath && $jobId) {
                                         $previousUrl .= '#job' . $jobId;
                                     }
                                 @endphp

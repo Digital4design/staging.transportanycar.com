@@ -10,7 +10,7 @@
         }
 
         .vehicle_image {
-            width: 500px !important;
+            width: 500px !important; 
         }
 
         a.make_offer_btn {
@@ -1932,8 +1932,8 @@
                             @endif
                             @foreach ($quotes as $quote)
                                 <div class="boxContent">
-                                    <div class="boxContentList" id="search-results">
-
+                                    {{-- <div class="boxContentList" id="search-results"> --}}
+                                     <div class="boxContentList" id="job-{{ $quote->id }}">
                                         <h2 class="imgHeading">
                                             <span>Posted {{ getTimeAgo(\Carbon\Carbon::parse($quote->created_at)) }}</span>
                                         </h2>
@@ -3158,4 +3158,48 @@
             });
         }
     </script>
+    <script>
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash;
+ 
+  if (hash) {
+    const jobId = hash.slice(4); // Remove "job-" from "#job-1101"
+    const newHash = `#job-${jobId}`;
+    const element = document.querySelector(newHash);
+ 
+    if (element) {
+      const isMobile = window.innerWidth < 992;
+ 
+      if (isMobile) {
+        // Scroll the whole body (mobile)
+        const elementRect = element.getBoundingClientRect();
+        const offset = elementRect.top + window.pageYOffset; // Position relative to document
+ 
+        setTimeout(() => {
+          window.scrollTo({
+            top: offset - 75,
+            behavior: 'smooth'
+          });
+        }, 500);
+      } else {
+        console.log('else')
+        // Scroll the .admin_job_bx container (desktop)
+        const scrollElement = document.querySelector('.admin_job_bx');
+ 
+        if (scrollElement) {
+          const elementRect = element.getBoundingClientRect();
+          const containerRect = scrollElement.getBoundingClientRect();
+          const offset = elementRect.top - containerRect.top;
+          setTimeout(() => {
+            scrollElement.scrollTo({
+              top: scrollElement.scrollTop + offset,
+              behavior: 'smooth'
+            });
+          }, 500);
+        }
+      }
+    }
+  }
+});
+</script>
 @endsection

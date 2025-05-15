@@ -2915,8 +2915,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
-
-
 </script>
     
 @endsection
