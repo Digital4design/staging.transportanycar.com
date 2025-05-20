@@ -990,7 +990,7 @@ function getTimeAgo($timestamp, $timezone = 'Europe/London')
 if (!function_exists('calculateCustomerQuote')) {
     function calculateCustomerQuote(float $offer): array
     {
-        $fixedCommission = GeneralSettings::where('unique_name', 'fixed')
+        $minimumCommission = GeneralSettings::where('unique_name', 'minimum')
             ->where('status', 'active')
             ->value('value');
 
@@ -1024,7 +1024,7 @@ if (!function_exists('calculateCustomerQuote')) {
         $percentageMarkup = $offer * ($percentage / 100);
 
         // Use the higher of percentage-based markup or fixed commission
-        $markup = max($fixedCommission, $percentageMarkup);
+        $markup = max($minimumCommission, $percentageMarkup);
 
         $customerQuote = $offer + $markup;
         $adjustedCustomerQuote = roundBasedOnDecimal($customerQuote);
