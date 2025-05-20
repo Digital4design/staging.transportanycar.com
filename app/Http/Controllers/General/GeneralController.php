@@ -134,7 +134,7 @@ class GeneralController extends WebController
             'title' => $title,
             'fields' => GeneralSettings::where('status', 'active')
                 ->where('page', 'site_settings')
-                ->orderBy('created_on', 'DESC')->get(),
+                ->orderBy('created_at', 'ASC')->get(),
             'breadcrumb' => breadcrumb([
                 $title => route('admin.get_site_settings'),
             ]),
