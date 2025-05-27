@@ -290,7 +290,7 @@
                             <img src="{{asset('assets/web/images/footer_logo.png')}}" alt="brand_logo" class="footer_logos" width="200" />
                             <ul class="list-inline social-icons ml-3">
                                 <li>
-                                    <a href="https://www.facebook.com/share/16A3vJKiYH/?mibextid=wwXIfr" target="_blank" class="text-center">
+                                    <a href="https://www.facebook.com/share/16A3vJKiYH/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="25px" height="25px" fill="#ffffff" class="mx-auto d-block">    
                                         <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M37,19h-2c-2.14,0-3,0.5-3,2 v3h5l-1,5h-4v15h-5V29h-4v-5h4v-3c0-4,2-7,6-7c2.9,0,4,1,4,1V19z" />
                                     </svg>
