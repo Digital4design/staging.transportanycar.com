@@ -208,13 +208,13 @@
                 <h6 class="ftlink_title">Quick links</h6>
                 <ul class="ftmenu_list">
                     <li>
-                        <a href="#home">Home</a>
+                        <a href="/#home">Home</a>
                     </li>
                     <!-- <li>
                         <a href="#review">Reviews</a>
                     </li> -->
                     <li>
-                        <a href="#chooseus">Why choose us</a>
+                        <a href="/#chooseus">Why choose us</a>
                     </li>
                     <li>
                         <a href="{{route('transporter.home')}}">Transporters</a>
