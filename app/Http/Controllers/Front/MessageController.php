@@ -146,12 +146,12 @@ class MessageController extends WebController
             }
             $maildata['url'] =  route('transporter.manage_notification');
             $maildata['quotes'] = $userQuote;
-            //  $data = $maildata;
 
-            //issue is here
-            // $htmlContent = view('mail.General.new-message-received', ['data' => $data, 'thread_id' => $thread_id])->render();
+
+            // return response()->json(['data' => $maildata]);
+            $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
             // return response()->json(['data' => $htmlContent]);
-            // $this->emailService->sendEmail($email_to, $htmlContent, 'You Have a Message from ' . $auth_user->username . ' Regarding ' . $userQuote->vehicle_make . ' ' . $userQuote->vehicle_model . 'Delivery.');
+            $this->emailService->sendEmail($email_to, $htmlContent, 'You Have a Message from ' . $auth_user->username . ' Regarding ' . $userQuote->vehicle_make . ' ' . $userQuote->vehicle_model . 'Delivery.');
 
 
             create_notification(
