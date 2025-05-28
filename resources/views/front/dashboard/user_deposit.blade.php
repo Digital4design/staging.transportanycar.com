@@ -421,6 +421,7 @@
                         <span></span>
                     </div>
                     <div class="wd-dlvr-contact">
+                         <h3>{{ $transporter_detail->username }}</h3>
                         {{-- <a href="{{ route('front.feedback_view', $quote_by_transporter->id) }}">
                             <h3>{{ $transporter_detail->username }}</h3>
                         </a> --}}
