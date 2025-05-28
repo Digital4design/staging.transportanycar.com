@@ -28,8 +28,8 @@
         <p
             style="margin-top: 25px; font-family: 'Outfit', sans-serif;margin-bottom: 25px; font-weight: 300; font-size: 16px; line-height: 22px;">
             You have received a new message from
-            {{ $data['user']->username }} for
-            {{ $data['quotes']->vehicle_make }} {{ $data['quotes']->vehicle_model }}
+            {{ $data['user']->username ?? '' }} for
+            {{ $data['quotes']->vehicle_make ?? '' }} {{ $data['quotes']->vehicle_model ?? '' }}
             @if (!is_null($data['quotes']->vehicle_make_1) && !is_null($data['quotes']->vehicle_model_1))
                 / {{ $data['quotes']->vehicle_make_1 }} {{ $data['quotes']->vehicle_model_1 }}
             @endif
@@ -39,7 +39,7 @@
             style="font-family: 'Outfit', sans-serif; background-color: #f1f1f1; padding-top: 40px; padding-bottom: 40px; padding-left: 40px; padding-right: 40px; text-align: center;">
             <p class="message-title"
                 style="font-family: 'Outfit', sans-serif;font-size: 20px; line-height: 24px; font-weight: 500; margin-bottom: 10px; text-align: left;">
-                {{ $data['user']->username }}
+                {{ $data['user']->username ?? ''}}
                 sent you a message</p>
             <p class="message"
                 style="font-family: 'Outfit', sans-serif;font-size: 16px; line-height: 20px; font-weight: 300; color: #000000; margin-bottom: 15px; text-align:left;">
@@ -116,12 +116,17 @@
                         </span>
                     </a>
                 @else
-                    <a @if ($data['main_url'] == route('transporter.job_information')) href="{{ $data['main_url'] . '/' . $data['quotes']->id . '?scroll=bid_wrapper' }}"
-@else
- {{-- href="{{ url('quotes/' . $data['quotes']->id) . '?scroll=bid_wrapper'  }}" --}}
- href="{{ url('quotes/' . $data['quotes']->id . ($data['user']->id ? '/' . $data['user']->id : '')) }}"
+                @php
+                    $href = '#'; // Default fallback
 
-  @endif
+    if (isset($data['main_url']) && $data['main_url'] === route('transporter.job_information')) {
+        $href = $data['main_url'] . '/' . $data['quotes']->id . '?scroll=bid_wrapper';
+    } elseif (isset($data['quotes']->id)) {
+        $userIdPart = isset($data['user']->id) ? '/' . $data['user']->id : '';
+        $href = url('quotes/' . $data['quotes']->id . $userIdPart);
+    }
+                @endphp
+                    <a href="{{ $href }}"
                         target="_blank"
                         style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#52d017;border-radius:2px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:5px;padding-bottom:5px;font-family:'Montserrat', sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;">
                         <span
