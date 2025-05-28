@@ -677,7 +677,7 @@ $auth_user = Auth::user();
         let digitCount = (currentValue.match(/\d/g) || []).length;
         if (digitCount == 0) {
             event.preventDefault();
-            toastr.error("Do not share contact information or you will be banned.");
+            // toastr.error("Do not share contact information or you will be banned.");
             $this.prop('disabled', true);
             setTimeout(() => {
                 $this.prop('disabled', false);
@@ -691,7 +691,7 @@ $auth_user = Auth::user();
         let digitCount = (pastedData.match(/\d/g) || []).length + (currentValue.match(/\d/g) || []).length;
         if (digitCount > 1) {
             event.preventDefault();
-            toastr.error("Do not share contact information or you will be banned.");
+            // toastr.error("Do not share contact information or you will be banned.");
             $this.prop('disabled', true);
             setTimeout(() => {
                 $this.prop('disabled', false);
@@ -704,7 +704,7 @@ $auth_user = Auth::user();
         let newValue = $this.val();
         let digits = newValue.match(/\d/g);
         if (digits && digits.length > 1) {
-            toastr.error("Do not share contact information or you will be banned.");
+            // toastr.error("Do not share contact information or you will be banned.");
             $this.prop('disabled', true);
             setTimeout(() => {
                 $this.prop('disabled', false);
