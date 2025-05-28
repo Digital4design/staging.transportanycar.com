@@ -421,11 +421,9 @@
                         <span></span>
                     </div>
                     <div class="wd-dlvr-contact">
-                        <a href="{{ route('front.feedback_view', $quote_by_transporter->id) }}">
-                            <h3>{{ $transporter_detail->username }}
-                                {{-- <span>({{count($trans_feedback['feedback'])}})</span>  --}}
-                            </h3>
-                        </a>
+                        {{-- <a href="{{ route('front.feedback_view', $quote_by_transporter->id) }}">
+                            <h3>{{ $transporter_detail->username }}</h3>
+                        </a> --}}
                         @if ($percentage == 0)
                             <ul class="rating-star choose_quote_rating mb-3 d-none">
                                 <li>
