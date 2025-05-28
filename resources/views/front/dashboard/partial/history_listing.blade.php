@@ -291,7 +291,7 @@ $auth_user = Auth::user();
             enctype='multipart/form-data'>
             @csrf
             <div class="form-group">
-                <div class="msg-send_flex">
+                <div class="msg-send_flex">  
                     <!-- <a href="javascript:;" class="option_btn">
                         <svg width="4" height="22" viewBox="0 0 4 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="2" cy="2" r="2" fill="#9A9A9A"/>
@@ -515,18 +515,18 @@ $auth_user = Auth::user();
             var user_current_chat_id = $('#user_current_chat_id').val();
             var file_name = $("#image-upload1").val();
             var message = $('.textarea').val();
-            var contains_email = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i.test(message);
-            // var contains_digit = /\d/.test(message);
-            var digitMatches = message.match(/\d/g);
-            var digitCount = digitMatches ? digitMatches.length : 0;
+            // var contains_email = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i.test(message);
+            // // var contains_digit = /\d/.test(message);
+            // var digitMatches = message.match(/\d/g);
+            // var digitCount = digitMatches ? digitMatches.length : 0;
             if (!message.trim()) {
                 toastr.error("Message cannot be empty.");
                 return;
             }
-            if (contains_email || digitCount > 3) {
-                toastr.error("Do not share contact information or you will be banned.")
-                return;
-            }
+            // if (contains_email || digitCount > 3) {
+            //     toastr.error("Do not share contact information or you will be banned.")
+            //     return;
+            // }
             var send_message = false;
             if (file_name != "") {
                 send_message = true;
@@ -618,16 +618,17 @@ $auth_user = Auth::user();
                     scrollToBottom();
                     $(".kt-avatar__cancel").click();
                 }).fail(function(xhr) {
+                    alert("error");
                     //alert("error");
-                    if (xhr.status === 422) {
-                        var errors = xhr.responseJSON.errors;
-                        if (errors.message) {
-                            toastr.error(
-                                "Do not share contact information or you will be banned..");
-                        }
-                    }
-                    $("#send_message").prop("disabled",
-                    false); // Re-enable the button in case of error
+                    // if (xhr.status === 422) {
+                    //     var errors = xhr.responseJSON.errors;
+                    //     if (errors.message) {
+                    //         // toastr.error(
+                    //         //     "Do not share contact information or you will be banned..");
+                    //     }
+                    // }
+                    // $("#send_message").prop("disabled",
+                    // false); // Re-enable the button in case of error
                 });
             }
 
@@ -668,52 +669,52 @@ $auth_user = Auth::user();
     //     }
     // });
 
-    $('#message').on('keydown paste input', function(event) {
-    let $this = $(this);
-    let currentValue = $this.val();
+//     $('#message').on('keydown paste input', function(event) {
+//     let $this = $(this);
+//     let currentValue = $this.val();
 
-    // Handle keydown
-    if (event.type === 'keydown' && event.key >= '0' && event.key <= '9') {
-        let digitCount = (currentValue.match(/\d/g) || []).length;
-        if (digitCount >= 1) {
-            event.preventDefault();
-            toastr.error("Do not share contact information or you will be banned.");
-            $this.prop('disabled', true);
-            setTimeout(() => {
-                $this.prop('disabled', false);
-            }, 3000); // Re-enable after 3 seconds
-        }
-    }
+//     // Handle keydown
+//     if (event.type === 'keydown' && event.key >= '0' && event.key <= '9') {
+//         let digitCount = (currentValue.match(/\d/g) || []).length;
+//         if (digitCount >= 1) {
+//             event.preventDefault();
+//             toastr.error("Do not share contact information or you will be banned.");
+//             $this.prop('disabled', true);
+//             setTimeout(() => {
+//                 $this.prop('disabled', false);
+//             }, 3000); // Re-enable after 3 seconds
+//         }
+//     }
 
-    // Handle paste
-    if (event.type === 'paste') {
-        let pastedData = event.originalEvent.clipboardData.getData('text');
-        let digitCount = (pastedData.match(/\d/g) || []).length + (currentValue.match(/\d/g) || []).length;
-        if (digitCount > 1) {
-            event.preventDefault();
-            toastr.error("Do not share contact information or you will be banned.");
-            $this.prop('disabled', true);
-            setTimeout(() => {
-                $this.prop('disabled', false);
-            }, 3000);
-        }
-    }
+//     // Handle paste
+//     if (event.type === 'paste') {
+//         let pastedData = event.originalEvent.clipboardData.getData('text');
+//         let digitCount = (pastedData.match(/\d/g) || []).length + (currentValue.match(/\d/g) || []).length;
+//         if (digitCount > 1) {
+//             event.preventDefault();
+//             toastr.error("Do not share contact information or you will be banned.");
+//             $this.prop('disabled', true);
+//             setTimeout(() => {
+//                 $this.prop('disabled', false);
+//             }, 3000);
+//         }
+//     }
 
-    // Clean input to remove extra digits beyond 3
-    if (event.type === 'input') {
-        let newValue = $this.val();
-        let digits = newValue.match(/\d/g);
-        if (digits && digits.length > 1) {
-            toastr.error("Do not share contact information or you will be banned.");
-            $this.prop('disabled', true);
-            setTimeout(() => {
-                $this.prop('disabled', false);
-            }, 3000);
-            // Remove all digits
-            $this.val(newValue.replace(/\d/g, ''));
-        }
-    }
-});
+//     // Clean input to remove extra digits beyond 3
+//     if (event.type === 'input') {
+//         let newValue = $this.val();
+//         let digits = newValue.match(/\d/g);
+//         if (digits && digits.length > 1) {
+//             toastr.error("Do not share contact information or you will be banned.");
+//             $this.prop('disabled', true);
+//             setTimeout(() => {
+//                 $this.prop('disabled', false);
+//             }, 3000);
+//             // Remove all digits
+//             $this.val(newValue.replace(/\d/g, ''));
+//         }
+//     }
+// });
 
 
     $(document).ready(function() {
