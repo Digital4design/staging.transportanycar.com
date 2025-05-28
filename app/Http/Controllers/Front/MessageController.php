@@ -84,8 +84,8 @@ class MessageController extends WebController
         $request->validate([
             'message' => [
                 'required',
-                // $request->check !== "true" ? 'regex:/^[^\d]*$/' : 'nullable',
-                //'regex:/^[^\d]*$/', // Ensure no digits are present
+                $request->check !== "true" ? 'regex:/^[^\d]*$/' : 'nullable',
+                'regex:/^[^\d]*$/', // Ensure no digits are present
             ],
         ]);
 
