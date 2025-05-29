@@ -1690,7 +1690,7 @@
                             <div class="mainContentDiv">
 
                                 @if ($quotes[0] > '')
-                                    <div id="watchlisting" class="px-3 px-md-0">
+                                    <div id="watchlisting">
                                         @foreach ($quotes as $quote)  
                                             <div class="boxContent">
                                                 <div class="boxContentList">
