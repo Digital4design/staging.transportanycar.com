@@ -6770,7 +6770,7 @@ div#spam-banner button.btn {
     padding-left: 0;
     padding-right: 0;
     left: 0; */
-    padding: 5px 0;
+    padding: 15px 0;
     border-radius: 0;
     z-index:9;
     background: #f3f3f3;
@@ -7974,7 +7974,7 @@ g.highcharts-input-group {
   .msg_active_container .chat_box .scrollbar {
     /* height: auto;
     max-height: calc(100vh - 280px); */
-    height: calc(100% - 222px);
+    height: calc(100% - 290px);
     /* max-height: calc(100% - 213px);
     padding-bottom: 0; */
   }

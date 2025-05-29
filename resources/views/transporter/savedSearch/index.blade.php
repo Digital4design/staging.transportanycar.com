@@ -1325,9 +1325,9 @@
             }
 
             .jobserch_mob {
-                width: calc(100% + 60px);
-                margin-left: -30px;
-                margin-right: -30px;
+                width: calc(100% + 30px);
+                margin-left: -15px;
+                margin-right: -15px;
                 /* width: 100%; */
                 padding-top: 10px;
             }
