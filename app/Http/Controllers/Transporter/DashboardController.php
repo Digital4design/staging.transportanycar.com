@@ -1460,6 +1460,7 @@ class DashboardController extends WebController
             // return $id;+
             // return url()->previous();
             $user_data = \Auth::guard('transporter')->user();
+            //  dd($user_data->id);
             $quote = UserQuote::with([
                 'watchlist',
                 'quoteByTransporter' => function ($query) use ($user_data) {
@@ -1477,7 +1478,7 @@ class DashboardController extends WebController
                         ->whereColumn('user_quote_id', 'user_quotes.id')
                 ])
                 ->find($id);
-            //  dd($quote);
+            // dd($quote);
 
             $quotes = QuoteByTransporter::where('user_quote_id', $id)
                 ->orderByRaw('(user_id = ?) DESC', [auth()->id()]) // Place matching user_id records at the top
