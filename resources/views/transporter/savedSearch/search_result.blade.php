@@ -1931,7 +1931,7 @@
                                 </div>
                             @endif
                             @foreach ($quotes as $quote)
-                                <div class="boxContent">
+                                <div class="boxContent" style="margin-left: -15px; margin-right:-15px;">
                                     {{-- <div class="boxContentList" id="search-results"> --}}
                                      <div class="boxContentList" id="job-{{ $quote->id }}">
                                         <h2 class="imgHeading">
