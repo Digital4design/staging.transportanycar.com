@@ -1795,7 +1795,7 @@
                                         @endif
                                     @endif
                                 </div>
-                                <div id="orderlisting" class="px-3 px-md-0">
+                                <div id="orderlisting">
                                     @foreach ($quotes as $quote) 
                                         <div class="boxContent addEventListener">
                                             <div class="boxContentList" id="job-{{ $quote->id }}">
