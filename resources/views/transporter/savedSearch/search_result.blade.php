@@ -10,7 +10,7 @@
         }
 
         .vehicle_image {
-            width: 500px !important; 
+            width: 500px !important;    
         }
 
         a.make_offer_btn {
@@ -2129,9 +2129,12 @@
                             <div class="search_sec_footer">
                                 <div class="conatiner srch-data">
                                     <span>That’s all for now. Why not try<br>
-                                        <a href="http://localhost:8000/transporter/new-jobs-new">editing your
+                                       
+                                          <a href="{{ route('transporter.new_jobs_new') }}">editing your
                                             search</a> for more
-                                        jobs.
+                                        {{-- <a href="http://localhost:8000/transporter/new-jobs-new">editing your
+                                            search</a> for more
+                                        jobs. --}}
                                     </span>
                                 </div>
                             </div>
