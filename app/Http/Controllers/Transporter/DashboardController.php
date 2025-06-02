@@ -1478,7 +1478,10 @@ class DashboardController extends WebController
                         ->whereColumn('user_quote_id', 'user_quotes.id')
                 ])
                 ->find($id);
-            // dd($quote);
+
+            if (!$quote) {
+                return redirect()->back()->with('error', 'The Job has been Expired');
+            }
 
             $quotes = QuoteByTransporter::where('user_quote_id', $id)
                 ->orderByRaw('(user_id = ?) DESC', [auth()->id()]) // Place matching user_id records at the top
