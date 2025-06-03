@@ -1468,8 +1468,8 @@ class DashboardController extends WebController
                 }
             ])->where(function ($query) {
                 $query->where('status', 'pending')
-                    ->orWhere('status', 'approved')
-                    ->orWhere('status', 'completed');
+                    ->orWhere('status', 'approved');
+                // ->orWhere('status', 'completed');
             })
                 ->whereDate('created_at', '>=', now()->subDays(10))
                 ->addSelect([
@@ -1483,7 +1483,7 @@ class DashboardController extends WebController
             // dd($quote);
 
             if (!$quote) {
-                return redirect()->back()->with('error', 'The Job has been Expired');
+                return redirect()->back()->with('error', 'You’ve already won this job - Please go to the message section to view or reply');
             }
 
             $quotes = QuoteByTransporter::where('user_quote_id', $id)
