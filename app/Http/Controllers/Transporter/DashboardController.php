@@ -1468,7 +1468,8 @@ class DashboardController extends WebController
                 }
             ])->where(function ($query) {
                 $query->where('status', 'pending')
-                    ->orWhere('status', 'approved');
+                    ->orWhere('status', 'approved')
+                    ->orWhere('status', 'completed');
             })
                 ->whereDate('created_at', '>=', now()->subDays(10))
                 ->addSelect([
@@ -1478,6 +1479,8 @@ class DashboardController extends WebController
                         ->whereColumn('user_quote_id', 'user_quotes.id')
                 ])
                 ->find($id);
+
+            // dd($quote);
 
             if (!$quote) {
                 return redirect()->back()->with('error', 'The Job has been Expired');
