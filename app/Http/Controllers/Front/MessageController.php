@@ -141,6 +141,9 @@ class MessageController extends WebController
             if ($userQuote->status == 'completed') {
                 $maildata['from_page'] = 'delivery';
                 $maildata['quote_by_transporter_id'] = $quoteByTransporter->id;
+            } elseif ($userQuote->status == 'pending') {
+                $maildata['from_page'] = '';
+                $maildata['main_url'] =  route('transporter.job_information');
             } else {
                 $maildata['from_page'] = '';
             }
@@ -148,9 +151,14 @@ class MessageController extends WebController
             $maildata['quotes'] = $userQuote;
 
 
-            // return response()->json(['data' => $maildata]);
             $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
-            // return response()->json(['data' => $htmlContent]);
+            // try {
+            //     $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => $thread_id])->render();
+            //     return response()->json(['data' => $htmlContent]);
+            // } catch (\Throwable $e) {
+            //     return response()->json(['error' => $e->getMessage()]);
+            // }
+
             $this->emailService->sendEmail($email_to, $htmlContent, 'You Have a Message from ' . $auth_user->username . ' Regarding ' . $userQuote->vehicle_make . ' ' . $userQuote->vehicle_model . 'Delivery.');
 
 
