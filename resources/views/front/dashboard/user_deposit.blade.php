@@ -422,7 +422,7 @@
                     </div>
                     <div class="wd-dlvr-contact">
                          <h3>{{ $transporter_detail->username }}</h3>
-                        {{-- <a href="{{ route('front.feedback_view', $quote_by_transporter->id) }}">
+                        {{-- <a href="{{ route('front.feedback_view', $quote_by_transporter->id) }}">  
                             <h3>{{ $transporter_detail->username }}</h3>
                         </a> --}}
                         @if ($percentage == 0)
@@ -1036,4 +1036,20 @@
             $('#download-form').submit();
         });
     </script>
+    <script>
+    window.addEventListener('load', function () {
+        const params = new URLSearchParams(window.location.search);
+        const shouldScroll = params.get('scroll');
+ 
+        if (shouldScroll === 'true') {
+            // Delay scroll to ensure all content is loaded/rendered
+            setTimeout(() => {
+                window.scrollTo({
+                    top: document.documentElement.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 300); // Adjust delay if needed (e.g., 300ms to 1000ms)
+        }
+    });
+</script>
 @endsection
