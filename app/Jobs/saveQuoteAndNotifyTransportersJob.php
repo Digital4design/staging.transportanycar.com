@@ -7,12 +7,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use App\User;
 use App\Services\EmailService;
 use Illuminate\Support\Facades\Log;
 
-class saveQuoteAndNotifyTransportersJob implements ShouldQueue
+class saveQuoteAndNotifyTransportersJob implements ShouldQueue, ShouldBeUnique
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
