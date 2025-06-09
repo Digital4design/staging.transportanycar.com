@@ -25,7 +25,20 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/www/html/public_html
+
+            echo "✅ Cleaning up possible unfinished Git operations..."
+            if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+              git rebase --abort || true
+              rm -rf .git/rebase-merge .git/rebase-apply
+            fi
+
+            echo "🔄 Resetting working directory..."
+            git reset --hard HEAD
+
+            echo "📦 Switching to main branch..."
             git checkout main
-             git add .
-            git commit -m "Auto commit from GitHub Actions deployment" || echo "Nothing to commit"
-            git pull origin main
+
+            echo "⬇️ Pulling latest changes from origin/main..."
+            git pull origin main --rebase
+
+            echo "✅ Deployment complete."
