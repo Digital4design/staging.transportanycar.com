@@ -8,7 +8,6 @@ use App\Http\Controllers\General\NotificationController;
 use Illuminate\Support\Facades\Mail;
 use App\Services\EmailService;
 use App\{User, Thread, UserQuote, SaveSearch, Feedback};
-use App\{User, Thread, UserQuote, SaveSearch, Feedback};
 use App\QuoteByTransporter;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
