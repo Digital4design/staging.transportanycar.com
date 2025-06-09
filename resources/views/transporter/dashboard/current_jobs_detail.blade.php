@@ -740,4 +740,35 @@ $(document).ready(function() {
     });
 
 </script>
+<script>
+
+    window.addEventListener('load', function () {
+
+        const params = new URLSearchParams(window.location.search);
+
+        const shouldScroll = params.get('scroll');
+ 
+        if (shouldScroll === 'true') {
+
+            // Delay scroll to ensure all content is loaded/rendered
+
+            setTimeout(() => {
+
+                window.scrollTo({
+
+                    top: document.documentElement.scrollHeight,
+
+                    behavior: 'smooth'
+
+                });
+
+            }, 300); // Adjust delay if needed (e.g., 300ms to 1000ms)
+
+        }
+
+    });
+</script>
+
+ 
+
 @endsection

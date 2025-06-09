@@ -3,7 +3,9 @@
 use App\DeviceToken;
 use App\PushLog;
 use App\User;
+use App\GeneralSettings;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
@@ -129,18 +131,18 @@ if (!function_exists('hidePostcode')) {
 
         // Check if the postcode exists in the address
         if (preg_match($postcodePattern, $address, $matches)) {
-        // Extract the full postcode
-        $fullPostcode = $matches[1];
-        
-        // Hide the last three characters of the postcode
-        $hiddenPostcode = substr($fullPostcode, 0, -3);
-        
-        // Replace the original postcode in the address with the hidden version
-        $address = str_replace($fullPostcode, $hiddenPostcode, $address);
-    }
+            // Extract the full postcode
+            $fullPostcode = $matches[1];
 
-    // Return the updated address
-    return $address;
+            // Hide the last three characters of the postcode
+            $hiddenPostcode = substr($fullPostcode, 0, -3);
+
+            // Replace the original postcode in the address with the hidden version
+            $address = str_replace($fullPostcode, $hiddenPostcode, $address);
+        }
+
+        // Return the updated address
+        return $address;
     }
 }
 
@@ -955,50 +957,79 @@ function getTimeAgo($timestamp, $timezone = 'Europe/London')
 
 
 
+// if (!function_exists('calculateCustomerQuote')) {
+//     function calculateCustomerQuote(float $offer): array
+//     {
+//         if ($offer <= 100) {
+//             $markup = max($offer * 0.15, 15); // Minimum £15 applies
+//         } elseif ($offer <= 200) {
+//             $markup = max($offer * 0.08, 15); // Minimum £15 applies
+//         } elseif ($offer <= 250) {
+//             $markup = max($offer * 0.07, 15); // Minimum £15 applies
+//         } elseif ($offer <= 300) {
+//             $markup = max($offer * 0.06, 15); // Minimum £15 applies
+//         } elseif ($offer <= 400) {
+//             $markup = max($offer * 0.05, 15); // Minimum £15 applies
+//         } elseif ($offer <= 500) {
+//             $markup = max($offer * 0.04, 15); // Minimum £15 applies
+//         } else {
+//             $markup = max($offer * 0.03, 15); // Minimum £15 applies
+//         }
+
+//         $customerQuote = $offer + $markup;
+//         $adjustedCustomerQuote = roundBasedOnDecimal($customerQuote);
+//         $deposit = $adjustedCustomerQuote - $offer;
+//         return [
+//             'customer_quote' => $adjustedCustomerQuote,
+//             'deposit' => $deposit,
+//             'transporter_payment' => $offer
+//         ];
+//     }
+// }
+
 if (!function_exists('calculateCustomerQuote')) {
     function calculateCustomerQuote(float $offer): array
     {
-        // if ($offer <= 100) {
-        //     $markup = max($offer * 0.35, 15);
-        // } elseif ($offer <= 200) {
-        //     $markup = $offer * 0.30;
-        // } else {
-        //     $markup = $offer * 0.25;
-        // }
-        // if ($offer <= 100) {
-        //     $markup = max($offer * 0.30, 15);
-        // } elseif ($offer <= 200) {
-        //     $markup = $offer * 0.25;
-        // } elseif ($offer <= 250) {
-        //     $markup = $offer * 0.20;
-        // } elseif ($offer <= 300) {
-        //     $markup = $offer * 0.18;
-        // } elseif ($offer <= 400) {
-        //     $markup = $offer * 0.15;
-        // } elseif ($offer <= 500) {
-        //     $markup = $offer * 0.12;
-        // } else {
-        //     $markup = $offer * 0.10;
-        // }
-        if ($offer <= 100) {
-            $markup = max($offer * 0.15, 15); // Minimum £15 applies
-        } elseif ($offer <= 200) {
-            $markup = max($offer * 0.08, 15); // Minimum £15 applies
-        } elseif ($offer <= 250) {
-            $markup = max($offer * 0.07, 15); // Minimum £15 applies
-        } elseif ($offer <= 300) {
-            $markup = max($offer * 0.06, 15); // Minimum £15 applies
-        } elseif ($offer <= 400) {
-            $markup = max($offer * 0.05, 15); // Minimum £15 applies
-        } elseif ($offer <= 500) {
-            $markup = max($offer * 0.04, 15); // Minimum £15 applies
-        } else {
-            $markup = max($offer * 0.03, 15); // Minimum £15 applies
+        $minimumCommission = GeneralSettings::where('unique_name', 'minimum')
+            ->where('status', 'active')
+            ->value('value');
+
+        $slabs = GeneralSettings::where('unique_name', 'site_commission')
+            ->where('status', 'active')
+            ->get(['label', 'value']);
+
+        $percentage = 0;
+
+        foreach ($slabs as $slab) {
+            $label = $slab->label;
+            $slabValue = (float) $slab->value;
+
+            if (Str::contains($label, '+')) {
+                // Example: "£501+"
+                if ($offer > 500) {
+                    $percentage = $slabValue;
+                    break;
+                }
+            } elseif (preg_match('/£(\d+)-£(\d+)/', $label, $matches)) {
+                $min = (float) $matches[1];
+                $max = (float) $matches[2];
+                if ($offer >= $min && $offer <= $max) {
+                    $percentage = $slabValue;
+                    break;
+                }
+            }
         }
+
+        // Calculate percentage-based markup
+        $percentageMarkup = $offer * ($percentage / 100);
+
+        // Use the higher of percentage-based markup or fixed commission
+        $markup = max($minimumCommission, $percentageMarkup);
 
         $customerQuote = $offer + $markup;
         $adjustedCustomerQuote = roundBasedOnDecimal($customerQuote);
         $deposit = $adjustedCustomerQuote - $offer;
+
         return [
             'customer_quote' => $adjustedCustomerQuote,
             'deposit' => $deposit,

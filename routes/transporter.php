@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// KARTK
 Route::group(['as' => 'transporter.'], function () {
     Route::group(['middleware' => 'guest:transporter', 'namespace' => 'Transporter'], function () {
         Route::get('login', 'GuestController@login')->name('login');

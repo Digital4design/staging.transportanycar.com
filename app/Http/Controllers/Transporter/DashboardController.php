@@ -268,8 +268,10 @@ class DashboardController extends WebController
     {
         $user_data = Auth::guard('transporter')->user();
 
-        $quoteBytransporter = QuoteByTransporter::where('user_id', $user_data->id)->get();
+        $quoteBytransporter = QuoteByTransporter::where('user_id', $user_data->id)->where('status', 'accept')->get();
         $userQuote = UserQuote::whereIn('id', $quoteBytransporter->pluck('user_quote_id'))->get();
+        // dd($userQuote);
+        // return;
 
         $total_distance = UserQuote::whereIn('id', $quoteBytransporter->where('status', 'accept')->pluck('user_quote_id')->toArray())
             ->sum('distance');
@@ -327,7 +329,7 @@ class DashboardController extends WebController
     {
         $user_data = Auth::guard('transporter')->user();
         $my_quotes = QuoteByTransporter::where('user_id', $user_data->id)->pluck('id');
-        $all_feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->where('transporter_id',$user_data->id)->get();
+        $all_feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->where('transporter_id', $user_data->id)->get();
         $feedbacks = Feedback::whereIn('quote_by_transporter_id', $my_quotes)->paginate(10);
         $total_feedbacks = $all_feedbacks->count();
 
@@ -482,7 +484,7 @@ class DashboardController extends WebController
             $quote->update([
                 'price' => $quoteDetails['customer_quote'],
                 'deposit' => $quoteDetails['deposit'],
-                'status'=>'pending',
+                'status' => 'pending',
                 'transporter_payment' => $quoteDetails['transporter_payment'],
                 'message' => $request->message,
             ]);
@@ -1066,22 +1068,42 @@ class DashboardController extends WebController
     public function saveSearch(Request $request)
     {
         try {
+            // $validator = Validator::make($request->all(), [
+            //     'pick_area' => [
+            //         'required',
+            //         Rule::unique('save_searches')->where(function ($query) use ($request) {
+            //             $query->where('drop_area', $request->drop_area)
+            //                 ->where('user_id', Auth::id());
+            //         }),
+            //     ],
+            //     'drop_area' => 'required',
+            // ], [
+            //     'pick_area.unique' => 'The combination of pick area and drop area already exists for your account.',
+            // ]);
+
+            // if ($validator->fails()) {
+            //     return response(["success" => false, "message" => "The combination of pick area and drop area already exists for your account.", "data" => $validator->errors()]);
+            // }
+
             $validator = Validator::make($request->all(), [
                 'pick_area' => [
-                    'required',
-                    Rule::unique('save_searches')->where(function ($query) use ($request) {
-                        $query->where('drop_area', $request->drop_area)
-                            ->where('user_id', Auth::id());
-                    }),
+                    'nullable', // allow it to be empty
+                    function ($attribute, $value, $fail) use ($request) {
+                        if (!empty($value)) {
+                            $exists = DB::table('save_searches')
+                                ->where('pick_area', $value)
+                                ->where('drop_area', $request->drop_area)
+                                ->where('user_id', Auth::id())
+                                ->exists();
+
+                            if ($exists) {
+                                $fail('The combination of pick area and drop area already exists for your account.');
+                            }
+                        }
+                    },
                 ],
                 'drop_area' => 'required',
-            ], [
-                'pick_area.unique' => 'The combination of pick area and drop area already exists for your account.',
             ]);
-
-            if ($validator->fails()) {
-                return response(["success" => false, "message" => "The combination of pick area and drop area already exists for your account.", "data" => $validator->errors()]);
-            }
             $pickupCoordinates = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
                 'address' => $request->pick_area,
                 'key' => config('constants.google_map_key'),
@@ -1438,6 +1460,7 @@ class DashboardController extends WebController
             // return $id;+
             // return url()->previous();
             $user_data = \Auth::guard('transporter')->user();
+            //  dd($user_data->id);
             $quote = UserQuote::with([
                 'watchlist',
                 'quoteByTransporter' => function ($query) use ($user_data) {
@@ -1446,6 +1469,7 @@ class DashboardController extends WebController
             ])->where(function ($query) {
                 $query->where('status', 'pending')
                     ->orWhere('status', 'approved');
+                // ->orWhere('status', 'completed');
             })
                 ->whereDate('created_at', '>=', now()->subDays(10))
                 ->addSelect([
@@ -1455,13 +1479,19 @@ class DashboardController extends WebController
                         ->whereColumn('user_quote_id', 'user_quotes.id')
                 ])
                 ->find($id);
-           
+
+            // dd($quote);
+
+            if (!$quote) {
+                return redirect()->back()->with('error', 'You’ve already won this job - Please go to the message section to view or reply');
+            }
+
             $quotes = QuoteByTransporter::where('user_quote_id', $id)
                 ->orderByRaw('(user_id = ?) DESC', [auth()->id()]) // Place matching user_id records at the top
                 ->orderByRaw('CAST(price AS UNSIGNED) ASC') // Then sort the rest by price
                 ->get();
             // return $quotes;
-            
+
 
             $quotes = $quotes->map(function ($quote) {
                 $my_quotes = QuoteByTransporter::where('user_id', $quote->user_id)->pluck('id');
@@ -1477,12 +1507,12 @@ class DashboardController extends WebController
 
 
             // Update quotes with thread_id if the thread exists
-            $threads = Thread:: with(['messages' => function ($query) {
+            $threads = Thread::with(['messages' => function ($query) {
                 $query->orderBy('created_at', 'asc');  // Order messages by 'created_at' in descending order
             }])
-            ->where(['user_id' => $quote->user_id, 'user_quote_id' => $id])
-            ->get();
-           
+                ->where(['user_id' => $quote->user_id, 'user_quote_id' => $id])
+                ->get();
+
             $quotes->map(function ($quote) use ($threads) {
                 $matchingThread = $threads->firstWhere('friend_id', $quote->user_id);
                 if ($matchingThread) {
@@ -1496,13 +1526,12 @@ class DashboardController extends WebController
             });
             $scroll = $request->has('scroll') ? $request->query('scroll') : null;
 
-        return view('transporter.dashboard.job_infromation', [
-            'quote' => $quote,
-            'quotebytransporters' => $quotes,
-            'scroll' => $scroll // Pass scroll parameter to view
-            
-        ]);
-           
+            return view('transporter.dashboard.job_infromation', [
+                'quote' => $quote,
+                'quotebytransporters' => $quotes,
+                'scroll' => $scroll // Pass scroll parameter to view
+
+            ]);
         } catch (\Exception $ex) {
             return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
         }

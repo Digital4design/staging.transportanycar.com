@@ -77,7 +77,7 @@ class MessageController extends WebController
             $isThreadExist->user_status = 'y'; // Update the thread's status
             $isThreadExist->save(); // Save the changes
         }
-      
+
         $message_type = "message";
         if ($request->hasFile('file')) {
             $message_type = "file";
@@ -107,21 +107,29 @@ class MessageController extends WebController
                     $maildata['user'] = $auth_user;
                     $maildata['thread'] = $isThread;
                     $maildata['message'] = $request->message;
+                    $maildata['quote_id'] = $from_quote_id;
                     if ($userQuote->status == 'pending') {
                         $maildata['from_page'] = 'quotes_admin';
-
                     } else if ($userQuote->status == 'completed') {
                         $maildata['from_page'] = 'delivery_admin';
+                        $from_quote_id = QuoteByTransporter::where('user_quote_id', $from_quote_id)->pluck('id')->first();
+                        $maildata['quote_id'] = $from_quote_id;
                     } else {
                         $maildata['from_page'] = 'message_admin';
                     }
 
                     $maildata['quotes'] = $userQuote;
-                    $maildata['quote_id'] = $from_quote_id;
+
                     $maildata['type'] = 'user';
                     $maildata['url'] = route('front.manage_notification');
-                    // $maildata['main_url'] = route('front.quotes');
+                    // return response()->json(['status' => "success", "data" => $maildata]);
                     $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'quotes_id' => $from_quote_id, 'thread_id' => $thread_id])->render();
+                    // try {
+                    //     $htmlContent = view('mail.General.new-message-received', ['data' => $maildata, 'quotes_id' => $from_quote_id, 'thread_id' => $thread_id])->render();
+                    //     return response()->json(['data' => $htmlContent]);
+                    // } catch (\Throwable $e) {
+                    //     return response()->json(['error' => $e->getMessage()]);
+                    // }
                     $this->emailService->sendEmail($email_to, $htmlContent, $subject);
 
                     // Call create_notification to notify the user
@@ -215,7 +223,7 @@ class MessageController extends WebController
 
         $chats = $c_insatnce->get();
 
-       
+
         $latest_chat = $chats->first();
         return view('transporter.dashboard.partial.chat_listing')->with(compact('chats', 'user', 'latest_chat', 'quotes', 'selected_chat_id', 'front_user'));
     }
@@ -321,7 +329,7 @@ class MessageController extends WebController
     }
     public function jobInfoMessage(Request $request)
     {
-        if(isset($request->form_page) && $request->form_page == 'quote') {
+        if (isset($request->form_page) && $request->form_page == 'quote') {
             $request->validate([
                 'message' => [
                     'required',
@@ -332,7 +340,7 @@ class MessageController extends WebController
 
         $user = Auth::user();
         $friend_id = $request->user_id ?? 0;
-        $quoteId = $request->user_quote_id;        
+        $quoteId = $request->user_quote_id;
         $thread = Thread::where(function ($q) use ($friend_id) {
             $q->where('user_id', '=', $friend_id)
                 ->orWhere('friend_id', '=', $friend_id);

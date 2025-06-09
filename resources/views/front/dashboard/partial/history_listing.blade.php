@@ -291,7 +291,7 @@ $auth_user = Auth::user();
             enctype='multipart/form-data'>
             @csrf
             <div class="form-group">
-                <div class="msg-send_flex">
+                <div class="msg-send_flex">  
                     <!-- <a href="javascript:;" class="option_btn">
                         <svg width="4" height="22" viewBox="0 0 4 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="2" cy="2" r="2" fill="#9A9A9A"/>
@@ -311,7 +311,7 @@ $auth_user = Auth::user();
                 </div>
             </div>
         </form>
-        <p class="chat-note text-left font-weight-normal position-relative" style="font-size:12px; padding-left:40px;">
+        <p class="chat-note text-left font-weight-normal position-relative" style="font-size:12px; padding-left:40px; margin-bottom:0;">
             <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="position-absolute" style="left:20px; top:12px;">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5631 12.2653L10.9587 4.78559C10.655 4.27279 10.1032 3.95831 9.50721 3.95831C8.91121 3.95831 8.35943 4.27279 8.05569 4.78559L3.45057 12.2653C3.10235 12.8105 3.07241 13.5003 3.37208 14.0737C3.67176 14.647 4.25525 15.0163 4.90169 15.0416H14.1119C14.7584 15.0163 15.3419 14.647 15.6416 14.0737C15.9412 13.5003 15.9113 12.8105 15.5631 12.2653Z" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M9.50682 10.2916V6.33329" stroke="#5B5B5B" stroke-width="1.5" stroke-linecap="round"/>
@@ -515,16 +515,18 @@ $auth_user = Auth::user();
             var user_current_chat_id = $('#user_current_chat_id').val();
             var file_name = $("#image-upload1").val();
             var message = $('.textarea').val();
-            var contains_email = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i.test(message);
-            var contains_digit = /\d/.test(message);
+            // var contains_email = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i.test(message);
+            // // var contains_digit = /\d/.test(message);
+            // var digitMatches = message.match(/\d/g);
+            // var digitCount = digitMatches ? digitMatches.length : 0;
             if (!message.trim()) {
                 toastr.error("Message cannot be empty.");
                 return;
             }
-            if (contains_email || contains_digit) {
-                toastr.error("Do not share contact information or you will be banned.")
-                return;
-            }
+            // if (contains_email || digitCount > 3) {
+            //     toastr.error("Do not share contact information or you will be banned.")
+            //     return;
+            // }
             var send_message = false;
             if (file_name != "") {
                 send_message = true;
@@ -562,7 +564,8 @@ $auth_user = Auth::user();
                     contentType: false,
                     cache: false,
                     processData: false,
-                }).done(function(response) {
+                }).done(function(response) { 
+                    console.log(response);
                     $("#image-upload1").val("");
                     $("#image_previe_main").addClass("d-none");
                     $("#audio_preview").addClass("d-none");
@@ -615,6 +618,7 @@ $auth_user = Auth::user();
                     scrollToBottom();
                     $(".kt-avatar__cancel").click();
                 }).fail(function(xhr) {
+                   
                     if (xhr.status === 422) {
                         var errors = xhr.responseJSON.errors;
                         if (errors.message) {
@@ -648,21 +652,69 @@ $auth_user = Auth::user();
         $("#image_previe_main").addClass("d-none");
     }
 
+    // $('#message').on('keydown paste input', function(event) {
+    //     if (event.type === 'keydown' && event.key >= '0' && event.key <= '9') {
+    //         event.preventDefault();
+    //     }
+    //     if (event.type === 'paste') {
+    //         let pastedData = event.originalEvent.clipboardData.getData('text');
+    //         if (/\d/.test(pastedData)) {
+    //             event.preventDefault();
+    //         }
+    //     }
+    //     if (event.type === 'input') {
+    //         let newValue = $(this).val().replace(/[0-9]/g, '');
+    //         $(this).val(newValue);
+    //     }
+    // });
+
     $('#message').on('keydown paste input', function(event) {
-        if (event.type === 'keydown' && event.key >= '0' && event.key <= '9') {
+    let $this = $(this);
+    let currentValue = $this.val();
+
+    // Handle keydown
+    if (event.type === 'keydown' && event.key >= '0' && event.key <= '9') {
+        let digitCount = (currentValue.match(/\d/g) || []).length;
+        if (digitCount == 0) {
             event.preventDefault();
+            // toastr.error("Do not share contact information or you will be banned.");
+            $this.prop('disabled', true);
+            setTimeout(() => {
+                $this.prop('disabled', false);
+            }, 3000); // Re-enable after 3 seconds
         }
-        if (event.type === 'paste') {
-            let pastedData = event.originalEvent.clipboardData.getData('text');
-            if (/\d/.test(pastedData)) {
-                event.preventDefault();
-            }
+    }
+
+    // Handle paste
+    if (event.type === 'paste') {
+        let pastedData = event.originalEvent.clipboardData.getData('text');
+        let digitCount = (pastedData.match(/\d/g) || []).length + (currentValue.match(/\d/g) || []).length;
+        if (digitCount > 1) {
+            event.preventDefault();
+            // toastr.error("Do not share contact information or you will be banned.");
+            $this.prop('disabled', true);
+            setTimeout(() => {
+                $this.prop('disabled', false);
+            }, 3000);
         }
-        if (event.type === 'input') {
-            let newValue = $(this).val().replace(/[0-9]/g, '');
-            $(this).val(newValue);
+    }
+
+    // Clean input to remove extra digits beyond 3
+    if (event.type === 'input') {
+        let newValue = $this.val();
+        let digits = newValue.match(/\d/g);
+        if (digits && digits.length > 1) {
+            // toastr.error("Do not share contact information or you will be banned.");
+            $this.prop('disabled', true);
+            setTimeout(() => {
+                $this.prop('disabled', false);
+            }, 3000);
+            // Remove all digits
+            $this.val(newValue.replace(/\d/g, ''));
         }
-    });
+    }
+});
+
 
     $(document).ready(function() {
         $('body').addClass('message-color');

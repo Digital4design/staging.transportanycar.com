@@ -651,6 +651,7 @@ class CarTransportersController extends WebController
                 'users.mobile', 
                 'users.completed_job' // ✅ Ensure fake_completed_job can be counted
             );
+            
     
             // ✅ Get total count before filtering
             $return_data['recordsTotal'] = User::where('users.type', 'car_transporter')

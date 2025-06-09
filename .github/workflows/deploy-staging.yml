@@ -2,7 +2,7 @@ name: Deploy to Staging
 
 on:
   push:
-    branches: ["staging"]
+    branches: ["staging_server"]
 
 jobs:
   deploy:
@@ -20,9 +20,10 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           port: ${{ secrets.PORT }}
-          key: ${{ secrets.SH_KEY }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/www/html/staging.transportanycar.com
-            git pull origin staging
-            php artisan migrate --force
+            git pull origin staging_server
             php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache

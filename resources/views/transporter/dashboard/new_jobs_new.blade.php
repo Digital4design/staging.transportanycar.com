@@ -8,7 +8,7 @@
 
         .jobsrch_info_list h6 {
             width: 10% !important;
-        }
+        }  
 
         .vehicle_image {
             width: 500px !important;
@@ -1796,9 +1796,9 @@
                                     @endif
                                 </div>
                                 <div id="orderlisting">
-                                    @foreach ($quotes as $quote)
+                                    @foreach ($quotes as $quote) 
                                         <div class="boxContent addEventListener">
-                                            <div class="boxContentList">
+                                            <div class="boxContentList" id="job-{{ $quote->id }}">
 
                                                 <h2 class="imgHeading">
                                                     <span>Posted
@@ -2851,4 +2851,70 @@
     localStorage.setItem("scrollPosition", window.scrollY);
 });
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const hash = window.location.hash;
+
+        if (!hash) return;
+
+        function scrollToTarget(retries = 10) {
+            const target = document.querySelector(hash);
+
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else if (retries > 0) {
+                // Try again after 200ms
+                setTimeout(() => scrollToTarget(retries - 1), 200);
+            }
+        }
+
+        // Start the retry scroll
+        scrollToTarget();
+    });
+</script>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash;
+ 
+  if (hash) {
+    const jobId = hash.slice(4); // Remove "job-" from "#job-1101"
+    const newHash = `#job-${jobId}`;
+    const element = document.querySelector(newHash);
+ 
+    if (element) {
+      const isMobile = window.innerWidth < 992;
+ 
+      if (isMobile) {
+        // Scroll the whole body (mobile)
+        const elementRect = element.getBoundingClientRect();
+        const offset = elementRect.top + window.pageYOffset; // Position relative to document
+ 
+        setTimeout(() => {
+          window.scrollTo({
+            top: offset - 75,
+            behavior: 'smooth'
+          });
+        }, 500);
+      } else {
+        console.log('else')
+        // Scroll the .admin_job_bx container (desktop)
+        const scrollElement = document.querySelector('.admin_job_bx');
+ 
+        if (scrollElement) {
+          const elementRect = element.getBoundingClientRect();
+          const containerRect = scrollElement.getBoundingClientRect();
+          const offset = elementRect.top - containerRect.top;
+          setTimeout(() => {
+            scrollElement.scrollTo({
+              top: scrollElement.scrollTop + offset,
+              behavior: 'smooth'
+            });
+          }, 500);
+        }
+      }
+    }
+  }
+});
+</script>
+    
 @endsection

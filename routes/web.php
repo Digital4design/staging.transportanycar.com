@@ -8,6 +8,7 @@ use App\Http\Controllers\General\NotificationController;
 use Illuminate\Support\Facades\Mail;
 use App\Services\EmailService;
 use App\{User, Thread, UserQuote, SaveSearch, Feedback};
+use App\{User, Thread, UserQuote, SaveSearch, Feedback};
 use App\QuoteByTransporter;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -20,6 +21,11 @@ Route::get('/test-job', function () {
     return 'Job dispatched';
 });
 
+Route::get('/test-job', function () {
+    Log::info("Dispatching the job...");
+    saveQuoteAndNotifyTransportersJob::dispatch(['quotation_id' => 123]);
+    return 'Job dispatched';
+});
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,8 +84,10 @@ Route::group(['as' => 'front.'], function () {
         Route::get('feedback-view/{id}', 'DashboardController@feedbackView')->name('feedback_view');
         Route::get('feedback_listing/{id}', 'DashboardController@feedback_listing')->name('feedback_listing');
         Route::get('user-deposit/{id}', 'DashboardController@userDeposit')->name('user_deposit');
-        Route::get('quotes/{id}', 'DashboardController@quotes')->name('quotes');
-        Route::get('quotes/delete/{id}', 'DashboardController@quotesDelete')->name('quote_delete');
+        Route::get('quotes/{id}/{user_id?}', 'DashboardController@quotes')->name('quotes');
+        // Route::get('quotes/delete/{id}', 'DashboardController@quotesDelete')->name('quote_delete');
+        Route::delete('/quote/delete/{id}', 'DashboardController@quotesDelete')->name('quote_delete');
+
         Route::get('booking-confirm/{id?}', 'DashboardController@bookingConfirm')->name('booking_confirm_page');
         Route::get('messages', 'DashboardController@messages')->name('messages');
         Route::get('leave-feedback/{id?}', 'DashboardController@leaveFeedback')->name('leave_feedback');

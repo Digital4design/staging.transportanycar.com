@@ -325,9 +325,9 @@
             overflow: hidden !important;
         }
 
-        .wd-quote-data .accordion .card:last-child {
+        /* .wd-quote-data .accordion .card:last-child {
             margin-bottom: 0 !important;
-        }
+        } */
 
         .wd-quote-data .accordion .card:first-child {
             border-radius: 0px 0 10px 10px !important;
@@ -612,10 +612,10 @@
                     </p>
                 </div>
 
-                <div class="accordion" id="accordionExample">
+                <div class="accordion overflow-hidden" id="accordionExample" style="border-radius: 0 0 15px 15px;">
                     @foreach ($quotes as $key => $quote)
                         @if ($quote->status != 'rejected')
-                            <div class="card">
+                            <div class="card scroll{{$quote->getTransporters->id}}">
                                 <div class="card-header @if ($key == 0) active @endif"
                                     id="heading{{ $key }}">
                                     <div class="card_lft" style="width:calc(100% - 350px);">
@@ -737,12 +737,11 @@
                                                                 ? round($quote->percentage)
                                                                 : number_format($quote->percentage, 1) }}%)
                                                         </span>
-                                                        {{-- <span class="ml-1">({{ fmod($quote->percentage, 1) == 0 ? round($quote->percentage) : number_format($quote->percentage, 1) }}%)</span> --}}
-                                                    </li>
+                                                     </li>
                                                 </ul>
                                             @endif
                                         </div>
-                                        {{-- </div> --}}
+                                       
                                         <div class="mobile-wrap" style="max-width:20%; flex: 0 0 20%; text-align:center;">
                                             <span class="mobile-label">Verified</span>
                                             <span class="verified-icon">
@@ -771,8 +770,7 @@
                                                     </div>
                                                 </div>
                                             </span>
-                                            {{-- <img src="{{ asset('assets/web/images/right-mark.png') }}" class="right_mark"
-                            alt="right mark"> --}}
+                                           
                                         </div>
                                         <div class="mobile-wrap" style="max-width:20%; flex: 0 0 20%;">
                                             <span class="mobile-label">Availability</span>
@@ -794,7 +792,7 @@
                                     <div class="wd-quote-btn" style="width: 350px;">
                                         <a href="javascript:;" class="wd-view-btn messageShow justify-content-center"
                                             data-msgkey="{{ $key }}" type="button" data-toggle="collapse"
-                                            data-target="#collapse{{ $key }}" aria-expanded="true"
+                                            data-target="#collapse{{ $quote->getTransporters->id }}" aria-expanded="true"
                                             aria-controls="collapseOne">View messages
                                             <span class="msg_{{ $quote->thread_id ?? 0 }}">0</span>
                                         </a>
@@ -865,8 +863,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="collapse{{ $key }}"
-                                    class="collapse @if ($key == 0) show @endif"
+                               
+                               
+                                <div id="collapse{{ $quote->getTransporters->id  }}"
+                                    class="collapse @if ($quote->getTransporters->id  == $user_id) show @endif"
                                     aria-labelledby="heading{{ $key }}" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <form id="chat__form_{{ $key }}"
@@ -1184,26 +1184,43 @@
                 }
             });
         });
-        $('.messageShow').on('click', function() {
-            // alart('yesssssssssss');
-            var id = $(this).attr('data-msgkey');
-            var selected_chat_id = $("#user_current_chat_id_" + id).val();
-            if (selected_chat_id) {
-                var url = "{{ route('front.message.quote_history', ':chat_id') }}";
-                url = url.replace(':chat_id', selected_chat_id);
-                getChatHistory(url, id);
-            }
-        })
-    </script>
-     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let scrollToElement = "{{ $scroll ?? '' }}"; // Get scroll parameter
 
-            if (scrollToElement) {
-                let targetElement = document.querySelector("." + scrollToElement);
-                if (targetElement) {
+
+        $(document).ready(function () {
+    // Function to handle message click and automatic page load behavior
+    function handleMessageShowClick(id) {
+        var selected_chat_id = $("#user_current_chat_id_" + id).val();
+        if (selected_chat_id) {
+            var url = "{{ route('front.message.quote_history', ':chat_id') }}";
+            url = url.replace(':chat_id', selected_chat_id);
+            getChatHistory(url, id);
+        }
+    }
+
+    // Delegate click event to handle dynamically loaded .messageShow elements
+    $(document).on('click', '.messageShow', function () {
+        var id = $(this).attr('data-msgkey');  // Get id from data-msgkey attribute
+        handleMessageShowClick(id);
+    });
+
+    // ✅ Automatically trigger the first .messageShow on page load (like clicking it)
+    var firstMsg = $('.messageShow').first();
+    if (firstMsg.length) {
+        var firstId = firstMsg.attr('data-msgkey'); // Get the data-msgkey of the first element
+        //alert(firstId); // For debugging, remove this line in production
+        handleMessageShowClick(1); // Manually invoke the same function as the click event
+    }
+});
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const userId = "{{ $user_id ?? '' }}"; // Injected from Blade
+            if (userId) {
+                const target = document.querySelector(".scroll" + userId);
+                if (target) {
                     setTimeout(() => {
-                        targetElement.scrollIntoView({
+                        target.scrollIntoView({
                             behavior: "smooth",
                             block: "start"
                         });
@@ -1212,4 +1229,5 @@
             }
         });
     </script>
+    
 @endsection

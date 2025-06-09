@@ -176,42 +176,49 @@
 </div>
 <div class="review-outer-wrap">
     @foreach ($feedbacks as $feedback)
-        <div class="review-wrap">
-            <div class="feedback-user-name">
-                @if ($feedback->quote_by_transporter->quote->user)
-                    @if ($feedback->quote_by_transporter->quote->user->name)
-                        {{ $feedback->quote_by_transporter->quote->user->name }}
-                    @else
-                        {{ $feedback->quote_by_transporter->quote->user->username }}
-                    @endif
+    <div class="review-wrap">
+        <div class="feedback-user-name">
+            @if ($feedback->quote_by_transporter && $feedback->quote_by_transporter->quote && $feedback->quote_by_transporter->quote->user)
+                @if ($feedback->quote_by_transporter->quote->user->name)
+                    {{ $feedback->quote_by_transporter->quote->user->name }}
                 @else
-                    -
+                    {{ $feedback->quote_by_transporter->quote->user->username }}
                 @endif
-            </div>
-            <ul class="wd-star-lst user-feedback-stars other-reviews">
-                @for ($i = 1; $i <= $total_stars; $i++)
-                    <li>
-                        <svg width="20" height="20" viewBox="0 0 12 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                fill="{{ $i <= $feedback->rating ? '#FFA800' : '#ccc' }}" />
-                        </svg>
-                    </li>
-                @endfor
-                <div class="feedback-user-verified">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9" viewBox="0 0 11 9" fill="none">
-                        <path d="M3.73608 8.04173L0.161084 4.46672C-0.0536948 4.25195 -0.0536948 3.90371 0.161084 3.6889L0.938883 2.91108C1.15366 2.69628 1.50192 2.69628 1.7167 2.91108L4.125 5.31935L9.28329 0.161084C9.49807 -0.0536948 9.84633 -0.0536948 10.0611 0.161084L10.8389 0.938905C11.0537 1.15368 11.0537 1.50192 10.8389 1.71672L4.51391 8.04175C4.2991 8.25653 3.95086 8.25653 3.73608 8.04173Z" fill="#52D017"/>
-                    </svg>
-                    <span>Verified</span>
-                </div>
-            </ul>
-            <div class="font-weight-light">{{ general_date($feedback->created_at) }}</div>
-            <div class="feedback-item">{{ $feedback->quote_by_transporter->quote->vehicle_make }}
-                {{ $feedback->quote_by_transporter->quote->vehicle_model }}</div>
-            <div class="font-weight-light">{!! $feedback->comment ? readMoreHelper($feedback->comment, 50) : '-' !!}</div>
+            @else
+                -
+            @endif
         </div>
-    @endforeach
+        <ul class="wd-star-lst user-feedback-stars other-reviews">
+            @for ($i = 1; $i <= $total_stars; $i++)
+                <li>
+                    <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                            fill="{{ $i <= $feedback->rating ? '#FFA800' : '#ccc' }}" />
+                    </svg>
+                </li>
+            @endfor
+            <div class="feedback-user-verified">
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9" viewBox="0 0 11 9" fill="none">
+                    <path d="M3.73608 8.04173L0.161084 4.46672C-0.0536948 4.25195 -0.0536948 3.90371 0.161084 3.6889L0.938883 2.91108C1.15366 2.69628 1.50192 2.69628 1.7167 2.91108L4.125 5.31935L9.28329 0.161084C9.49807 -0.0536948 9.84633 -0.0536948 10.0611 0.161084L10.8389 0.938905C11.0537 1.15368 11.0537 1.50192 10.8389 1.71672L4.51391 8.04175C4.2991 8.25653 3.95086 8.25653 3.73608 8.04173Z" fill="#52D017"/>
+                </svg>
+                <span>Verified</span>
+            </div>
+        </ul>
+        <div class="font-weight-light">{{ general_date($feedback->created_at) }}</div>
+        <div class="feedback-item">
+            @if ($feedback->quote_by_transporter && $feedback->quote_by_transporter->quote)
+                {{ $feedback->quote_by_transporter->quote->vehicle_make }} {{ $feedback->quote_by_transporter->quote->vehicle_model }}
+            @else
+                -
+            @endif
+        </div>
+        <div class="font-weight-light">
+            {!! $feedback->comment ? readMoreHelper($feedback->comment, 50) : '-' !!}
+        </div>
+    </div>
+@endforeach
+
 </div>
 {{-- <div class="table-responsive">
     <table>

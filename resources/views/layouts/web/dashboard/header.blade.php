@@ -179,7 +179,7 @@
                     </li>
                     <li class="menu-item {{ is_active_module_dashboard(['front.messages']) }}">
                         <a href="{{ route('front.messages') }}">
-                            <div class="noti_info_icon message_icon">
+                            <div class="noti_info_icon message_icon mr-0">
                                 <svg width="17" height="15" viewBox="0 0 17 15" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"

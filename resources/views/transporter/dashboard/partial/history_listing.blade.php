@@ -223,7 +223,7 @@ $auth_user = Auth::user();
             enctype='multipart/form-data'>
             @csrf
             <div class="form-group">
-                <div class="msg-send_flex">
+                <div class="msg-send_flex">  
                     <!-- <a href="javascript:;" class="option_btn">
                         <svg width="4" height="22" viewBox="0 0 4 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="2" cy="2" r="2" fill="#9A9A9A"/>
@@ -619,6 +619,71 @@ $auth_user = Auth::user();
             }
         }
     });
+     $('#message').on('keydown paste input', function(event) {
+        if (event.type === 'keydown' && event.key >= '0' && event.key <= '9') {
+            event.preventDefault();
+        }
+        if (event.type === 'paste') {
+            let pastedData = event.originalEvent.clipboardData.getData('text');
+            if (/\d/.test(pastedData)) {
+                event.preventDefault();
+            }
+        }
+        if (event.type === 'input') {
+            let newValue = $(this).val().replace(/[0-9]/g, '');
+            $(this).val(newValue);
+        }
+    });
+
+    $('#message').on('keydown paste input', function(event) {
+       
+    let $this = $(this);
+    let currentValue = $this.val();
+
+    // Handle keydown
+    if (event.type === 'keydown' && event.key >= '0' && event.key <= '9') {
+        let digitCount = (currentValue.match(/\d/g) || []).length;
+         //alert(digitCount);
+        if (digitCount == 0) {
+           // alert(digitCount);
+            event.preventDefault();
+            toastr.error("Do not share contact information or you will be banned.");
+            $this.prop('disabled', true);
+            setTimeout(() => {
+                $this.prop('disabled', false);
+            }, 3000); // Re-enable after 3 seconds
+        }
+    }
+
+    // Handle paste
+    if (event.type === 'paste') {
+        let pastedData = event.originalEvent.clipboardData.getData('text');
+        let digitCount = (pastedData.match(/\d/g) || []).length + (currentValue.match(/\d/g) || []).length;
+        if (digitCount > 1) {
+            event.preventDefault();
+            toastr.error("Do not share contact information or you will be banned.");
+            $this.prop('disabled', true);
+            setTimeout(() => {
+                $this.prop('disabled', false);
+            }, 3000);
+        }
+    }
+
+    // Clean input to remove extra digits beyond 3
+    if (event.type === 'input') {
+        let newValue = $this.val();
+        let digits = newValue.match(/\d/g);
+        if (digits && digits.length > 1) {
+            toastr.error("Do not share contact information or you will be banned.");
+            $this.prop('disabled', true);
+            setTimeout(() => {
+                $this.prop('disabled', false);
+            }, 3000);
+            // Remove all digits
+            $this.val(newValue.replace(/\d/g, ''));
+        }
+    }
+});
     $(document).ready(function() {
         $('body').addClass('message-color');
     })

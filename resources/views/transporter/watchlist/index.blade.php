@@ -9,7 +9,7 @@
         .vehicle_image {
             width: 500px !important;
         }
-
+   
         a.make_offer_btn {
             margin-top: 30px;
         }
@@ -1691,7 +1691,7 @@
 
                                 @if ($quotes[0] > '')
                                     <div id="watchlisting">
-                                        @foreach ($quotes as $quote)
+                                        @foreach ($quotes as $quote)  
                                             <div class="boxContent">
                                                 <div class="boxContentList">
                                                     <h2 class="imgHeading">
@@ -1699,7 +1699,7 @@
                                                             {{ getTimeAgo($quote->created_at->toDateTimeString()) }}</span>
                                                     </h2>
 
-                                                    <div class="boxImg-text car-row" data-car-id="{{ $quote->id }}">
+                                                    <div class="boxImg-text car-row" data-car-id="{{ $quote->id }}" id="job-{{ $quote->id }}">
                                                         <div class="imgCol">
                                                             <img src="{{ $quote->image }}" class="" alt="image" />
                                                         </div>
@@ -2816,7 +2816,7 @@
 
         $(document).on('click', '.before_search a', function(event) {
             event.preventDefault();
-            var baseUrl = window.location.origin; // e.g., http://127.0.0.1:8000
+            var baseUrl = window.location.origin; // e.g., http://127.0.0.1:8000 
             var path = '/transporter/new-jobs-new';
             var page = $(this).attr('href').split('page=')[1];
             var newUrl = baseUrl + path + '?page=' + page;
@@ -2862,4 +2862,48 @@
             });
         }
     </script>
+    <script>
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash;
+ 
+  if (hash) {
+    const jobId = hash.slice(4); // Remove "job-" from "#job-1101"
+    const newHash = `#job-${jobId}`;
+    const element = document.querySelector(newHash);
+ 
+    if (element) {
+      const isMobile = window.innerWidth < 992;
+ 
+      if (isMobile) {
+        // Scroll the whole body (mobile)
+        const elementRect = element.getBoundingClientRect();
+        const offset = elementRect.top + window.pageYOffset; // Position relative to document
+ 
+        setTimeout(() => {
+          window.scrollTo({
+            top: offset - 75,
+            behavior: 'smooth'
+          });
+        }, 500);
+      } else {
+        console.log('else')
+        // Scroll the .admin_job_bx container (desktop)
+        const scrollElement = document.querySelector('.admin_job_bx');
+ 
+        if (scrollElement) {
+          const elementRect = element.getBoundingClientRect();
+          const containerRect = scrollElement.getBoundingClientRect();
+          const offset = elementRect.top - containerRect.top;
+          setTimeout(() => {
+            scrollElement.scrollTo({
+              top: scrollElement.scrollTop + offset,
+              behavior: 'smooth'
+            });
+          }, 500);
+        }
+      }
+    }
+  }
+});
+</script>
 @endsection
