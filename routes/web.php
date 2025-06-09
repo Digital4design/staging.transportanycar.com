@@ -31,7 +31,7 @@ Route::get('/test-job', function () {
 |
 */
 
-// URL Mapping to Home Page
+/// URL Mapping to Home Page
 Route::get('/example', function () {
     return view('mail.General.customerWelcome');
 });
