@@ -21,11 +21,6 @@ Route::get('/test-job', function () {
     return 'Job dispatched';
 });
 
-Route::get('/test-job', function () {
-    Log::info("Dispatching the job...");
-    saveQuoteAndNotifyTransportersJob::dispatch(['quotation_id' => 123]);
-    return 'Job dispatched';
-});
 /*
 |--------------------------------------------------------------------------
 | Web Routes
