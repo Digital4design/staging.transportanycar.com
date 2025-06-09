@@ -14,11 +14,11 @@ use Carbon\Carbon;
 use App\Jobs\saveQuoteAndNotifyTransportersJob;
 use Illuminate\Support\Facades\Log;
 
-Route::get('/test-job', function () {
-    Log::info("Dispatching the job...");
-    saveQuoteAndNotifyTransportersJob::dispatch(['quotation_id' => 123]);
-    return 'Job dispatched';
-});
+// Route::get('/test-job', function () {
+//     Log::info("Dispatching the job...");
+//     saveQuoteAndNotifyTransportersJob::dispatch(['quotation_id' => 123]);
+//     return 'Job dispatched';
+// });
 
 /*
 |--------------------------------------------------------------------------
