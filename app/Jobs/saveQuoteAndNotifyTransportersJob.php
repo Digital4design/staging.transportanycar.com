@@ -7,12 +7,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use App\User;
 use App\Services\EmailService;
 use Illuminate\Support\Facades\Log;
 
-class saveQuoteAndNotifyTransportersJob implements ShouldQueue
+class saveQuoteAndNotifyTransportersJob implements ShouldQueue, ShouldBeUnique
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -22,6 +22,16 @@ class saveQuoteAndNotifyTransportersJob implements ShouldQueue
     {
         $this->quoteData = $quoteData;
         Log::info("Job instantiated with quoteData:", $this->quoteData);
+    }
+
+     public function uniqueId()
+    {
+        return $this->quoteData['quotation_id'] ?? uniqid();
+    }
+
+    public function uniqueFor()
+    {
+        return 600; // keep it unique for 10 minutes
     }
 
     public function handle()
