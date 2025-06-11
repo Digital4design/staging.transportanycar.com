@@ -14,11 +14,12 @@ use Carbon\Carbon;
 use App\Jobs\saveQuoteAndNotifyTransportersJob;
 use Illuminate\Support\Facades\Log;
 
-Route::get('/test-job', function () {
-    Log::info("Dispatching the job...");
-    saveQuoteAndNotifyTransportersJob::dispatch(['quotation_id' => 123]);
-    return 'Job dispatched';
-});
+// Route::get('/test-job', function () {
+//     Log::info("Dispatching the job...");
+//     saveQuoteAndNotifyTransportersJob::dispatch(['quotation_id' => 123]);
+//     return 'Job dispatched';
+// });
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +31,7 @@ Route::get('/test-job', function () {
 |
 */
 
-// URL Mapping to Home Page
+/// URL Mapping to Home Page
 Route::get('/example', function () {
     return view('mail.General.customerWelcome');
 });
@@ -132,6 +133,6 @@ Route::get("/new/template/check", function () {
     return view('mail.General.new-message-received', ['data' => $maildata, 'thread_id' => 1707]);
 });
 Route::get('/cehck/save/search/mail', [App\Http\Controllers\Front\QuotesController::class, 'checkSaveSearchFunctionality']);
-Route::get('/just/check/hiden', function () {
-    return "Hello World! World!!";
+Route::get('/check/server', function () {
+    return "Hello World!";
 });

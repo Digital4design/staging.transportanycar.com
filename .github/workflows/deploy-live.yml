@@ -1,0 +1,44 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    name: Deploy to Live Server
+    runs-on: ubuntu-latest
+    # Add this only if using Environment Secrets:
+    environment:
+      name: Live
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Live Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /var/www/html/public_html
+
+            echo "✅ Cleaning up possible unfinished Git operations..."
+            if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+              git rebase --abort || true
+              rm -rf .git/rebase-merge .git/rebase-apply
+            fi
+
+            echo "🔄 Resetting working directory..."
+            git reset --hard HEAD
+
+            echo "📦 Switching to main branch..."
+            git checkout main
+
+            echo "⬇️ Pulling latest changes from origin/main..."
+            git pull origin main --rebase
+
+            echo "✅ Deployment complete."
