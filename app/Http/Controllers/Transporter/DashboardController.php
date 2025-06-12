@@ -444,6 +444,10 @@ class DashboardController extends WebController
     public function submitOffer(Request $request)
     {
         $user_data = \Auth::guard('transporter')->user();
+        if ($user_data->is_status !== 'approved') {
+            return response()->json(['success' => false, 'message' => 'Unauthorized'], 200);
+        }
+        $user_data = \Auth::guard('transporter')->user();
         //dump($user_data);
         // Validate the request
         $validator = \Validator::make($request->all(), [
