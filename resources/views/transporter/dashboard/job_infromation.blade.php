@@ -1507,7 +1507,65 @@ $findJobsPath = parse_url(
         }
 
         function share_edit_quote(id) {
-            // console.log('aaaaaaaaaaaaaaa');
+             var isStatus = "{{ Auth::user()->is_status }}";
+            var email_status = "{{ Auth::user()->email_verify_status }}";
+            var driver_license = "{{ Auth::user()->driver_license }}";
+            var goods_in_transit_insurance = "{{ Auth::user()->goods_in_transit_insurance }}";
+
+            var companyDetails = @json(optional(Auth::user()->companyDetail)->id);
+            var git_insurance_cover = @json(optional(Auth::user()->companyDetail)->git_insurance_cover ?? null);
+            var years_established = @json(optional(Auth::user()->companyDetail)->years_established ?? null);
+            var no_of_tow_trucks = @json(optional(Auth::user()->companyDetail)->no_of_tow_trucks ?? null);
+            var no_of_drivers = @json(optional(Auth::user()->companyDetail)->no_of_drivers ?? null);
+
+            // Condition to check if the profile is incomplete
+            if (!driver_license || !goods_in_transit_insurance || email_status === '0' ||
+                isStatus === 'pending' || isStatus === 'rejected' || !companyDetails ||
+                !git_insurance_cover || !years_established || !no_of_tow_trucks || !no_of_drivers) {
+
+                Swal.fire({
+                    title: '<span style="color:#ED1C24">Complete your profile</span>',
+                    html: '<span>You must upload your driver’s license, goods in transit insurance, verify your email, and complete your company details before bidding.</span>',
+                    confirmButtonColor: '#52D017',
+                    confirmButtonText: 'Go to Profile',
+                    showCloseButton: true,
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed || result.dismiss) {
+                        window.location.href = "{{ route('transporter.profile') }}";
+                    }
+                });
+
+                return; // Stop execution
+            }
+              // Prevent access if the profile is NOT approved
+            if (isStatus !== 'approved') {
+                Swal.fire({
+                    html: `
+                <div style="text-align: center;">
+                    <h2>Upload Documents</h2>
+                    <p>You must upload a valid driving license and goods in transit insurance before bidding.</p>
+                    <button id="verifyActionBtn" style="background-color: #52D017; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Verify
+                    </button>
+                </div>
+            `,
+                    showConfirmButton: false,
+                    width: '400px',
+                    padding: '20px',
+                    background: '#fff',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        document.getElementById('verifyActionBtn').addEventListener('click',
+                            function() {
+                                window.location.href =
+                                    "{{ route('transporter.profile') }}";
+                            });
+                    }
+                });
+
+                return; // Stop execution
+            }
             $('#quote_edit_id').val(id);
             var quotes = @json($quote);
             var selectedQuote = quotes;
@@ -1532,7 +1590,7 @@ $findJobsPath = parse_url(
         }
 
         function share_give_quote(id) {
-               var isStatus = "{{ Auth::user()->is_status }}";
+            var isStatus = "{{ Auth::user()->is_status }}";
             var email_status = "{{ Auth::user()->email_verify_status }}";
             var driver_license = "{{ Auth::user()->driver_license }}";
             var goods_in_transit_insurance = "{{ Auth::user()->goods_in_transit_insurance }}";
