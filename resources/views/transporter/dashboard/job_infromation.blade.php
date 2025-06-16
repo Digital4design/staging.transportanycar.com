@@ -1553,7 +1553,7 @@ $findJobsPath = parse_url(
                     showConfirmButton: false,
                     width: '400px',
                     padding: '20px',
-                    background: '#fff',
+                    background: '#fff',  
                     allowOutsideClick: false,
                     didOpen: () => {
                         document.getElementById('verifyActionBtn').addEventListener('click',

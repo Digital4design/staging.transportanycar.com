@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Jenssegers\Agent\Agent;
+use Illuminate\Support\Facades\Log;
 
 if (!function_exists('send_response')) {
 
@@ -990,7 +991,7 @@ function getTimeAgo($timestamp, $timezone = 'Europe/London')
 if (!function_exists('calculateCustomerQuote')) {
     function calculateCustomerQuote(float $offer): array
     {
-        $minimumCommission = GeneralSettings::where('unique_name', 'minimum')
+        $minimumCommission = (float) GeneralSettings::where('unique_name', 'minimum')
             ->where('status', 'active')
             ->value('value');
 
@@ -1029,6 +1030,15 @@ if (!function_exists('calculateCustomerQuote')) {
         $customerQuote = $offer + $markup;
         $adjustedCustomerQuote = roundBasedOnDecimal($customerQuote);
         $deposit = $adjustedCustomerQuote - $offer;
+
+        Log::info('Commission calculation', [
+            'minimum_commission' => $minimumCommission,
+            'slabs' => $slabs,
+            'calculated_percentage' => $percentage,
+            'percentage_markup' => $percentageMarkup ?? null,
+            'final_markup' => $markup ?? null
+        ]);
+
 
         return [
             'customer_quote' => $adjustedCustomerQuote,
