@@ -6,23 +6,25 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to Staging Server
     runs-on: ubuntu-latest
     environment:
       name: staging
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Deploy to Staging Server
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /var/www/html/staging.transportanycar.com
+            cd /var/www/html/staging.transportanycar.com || exit 1
+            git reset --hard
+            git clean -fd
             git pull origin staging_server
             php artisan config:cache
             php artisan route:cache
