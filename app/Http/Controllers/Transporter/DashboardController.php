@@ -27,7 +27,7 @@ use App\Services\SmsService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Artisan;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class DashboardController extends WebController
 {
@@ -1538,8 +1538,14 @@ class DashboardController extends WebController
                 'scroll' => $scroll // Pass scroll parameter to view
 
             ]);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('dashboard')->with('error', 'The job was deleted by the user.');
         } catch (\Exception $ex) {
-            return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
+            return response([
+                "success" => false,
+                "message" => $ex->getMessage(),
+                "data" => []
+            ]);
         }
     }
 }
