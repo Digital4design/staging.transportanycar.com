@@ -1465,7 +1465,7 @@ class DashboardController extends WebController
 
             $userquoteData = UserQuote::findOrFail($id);
             if (!$userquoteData) {
-                return redirect()->back()->with('error', 'The job was deleted by the user.');
+                return redirect()->route('dashboard')->with('error', 'The job was deleted by the user.');
             }
 
             $quote = UserQuote::with([
