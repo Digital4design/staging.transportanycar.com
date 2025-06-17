@@ -1458,10 +1458,16 @@ class DashboardController extends WebController
     public function jobInformation(Request $request, $id)
     {
         try {
-            // return $id;+
-            // return url()->previous();
+
             $user_data = \Auth::guard('transporter')->user();
-            //  dd($user_data->id);
+
+            // Check if the job is not deleted
+
+            $userquoteData = UserQuote::where('id', $id)->firstOrFail();
+            if (!$userquoteData) {
+                return redirect()->back()->with('error', 'The job was deleted by the user.');
+            }
+
             $quote = UserQuote::with([
                 'watchlist',
                 'quoteByTransporter' => function ($query) use ($user_data) {
@@ -1470,7 +1476,6 @@ class DashboardController extends WebController
             ])->where(function ($query) {
                 $query->where('status', 'pending')
                     ->orWhere('status', 'approved');
-                // ->orWhere('status', 'completed');
             })
                 ->whereDate('created_at', '>=', now()->subDays(10))
                 ->addSelect([
