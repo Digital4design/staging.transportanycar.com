@@ -1465,7 +1465,7 @@ class DashboardController extends WebController
 
             $userquoteData = UserQuote::findOrFail($id);
             if (!$userquoteData) {
-                return redirect()->route('dashboard')->with('error', 'The job was deleted by the user.');
+                return redirect()->route('transporter.dashboard')->with('error', 'The job was deleted by the user.');
             }
 
             $quote = UserQuote::with([
@@ -1489,7 +1489,7 @@ class DashboardController extends WebController
             // dd($quote);
 
             if (!$quote) {
-                return redirect()->back()->with('error', 'You’ve already won this job - Please go to the message section to view or reply');
+                return redirect()->route('transporter.dashboard')->with('error', 'You’ve already won this job - Please go to the message section to view or reply');
             }
 
             $quotes = QuoteByTransporter::where('user_quote_id', $id)
