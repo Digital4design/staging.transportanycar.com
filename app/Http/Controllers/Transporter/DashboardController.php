@@ -1539,7 +1539,7 @@ class DashboardController extends WebController
 
             ]);
         } catch (ModelNotFoundException $e) {
-            return redirect()->route('dashboard')->with('error', 'The job was deleted by the user.');
+            return redirect()->route('transporter.dashboard')->with('error', 'The job was deleted by the user.');
         } catch (\Exception $ex) {
             return response([
                 "success" => false,
