@@ -1466,9 +1466,7 @@ class DashboardController extends WebController
             // Check if the job is not deleted
 
             $userquoteData = UserQuote::findOrFail($id);
-            if (!$userquoteData) {
-                return redirect()->route('dashboard')->with('error', 'The job was deleted by the user.');
-            }
+
 
             $quote = UserQuote::with([
                 'watchlist',
