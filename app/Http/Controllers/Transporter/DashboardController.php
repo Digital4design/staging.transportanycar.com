@@ -1455,6 +1455,8 @@ class DashboardController extends WebController
             return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
         }
     }
+
+
     public function jobInformation(Request $request, $id)
     {
         try {
@@ -1538,8 +1540,14 @@ class DashboardController extends WebController
                 'scroll' => $scroll // Pass scroll parameter to view
 
             ]);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('dashboard')->with('error', 'The job was deleted by the user.');
         } catch (\Exception $ex) {
-            return response(["success" => false, "message" => $ex->getMessage(), "data" => []]);
+            return response([
+                "success" => false,
+                "message" => $ex->getMessage(),
+                "data" => []
+            ]);
         }
     }
 }
