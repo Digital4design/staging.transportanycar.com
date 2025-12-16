@@ -24,7 +24,7 @@
 
     @yield('head_css')
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16465579063"></script>
+    {{-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16465579063"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -33,8 +33,8 @@
         }
         gtag('js', new Date());
         gtag('config', 'AW-16465579063');
-    </script>
-    <script>
+    </script> --}}
+    {{-- <script>
         (function(w, d, t, r, u) {
             var f, n, i;
             w[u] = w[u] || [], f = function() {
@@ -51,7 +51,7 @@
                 i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i)
         })
         (window, document, "script", "//bat.bing.com/bat.js", "uetq");
-    </script>
+    </script> --}}
     <script>
         window.uetq = window.uetq || [];
         window.uetq.push("event", "submit_lead_form", {});
@@ -109,8 +109,8 @@
 </head>
 
 <body style="background: #FDFFFA;">
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-572LPM3G"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {{-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-572LPM3G"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> --}}
     @yield('content')
 </body>
 <!-- Bootstrap JS & Jquery -->
