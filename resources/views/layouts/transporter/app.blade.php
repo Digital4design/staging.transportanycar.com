@@ -24,20 +24,20 @@
     <link href="{{ asset('assets/admin/vendors/general/toastr/build/toastr.css') }}" rel="stylesheet" type="text/css" />
     @yield('head_css')
     <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-572LPM3G');
+        // (function(w, d, s, l, i) {
+        //     w[l] = w[l] || [];
+        //     w[l].push({
+        //         'gtm.start': new Date().getTime(),
+        //         event: 'gtm.js'
+        //     });
+        //     var f = d.getElementsByTagName(s)[0],
+        //         j = d.createElement(s),
+        //         dl = l != 'dataLayer' ? '&l=' + l : '';
+        //     j.async = true;
+        //     j.src =
+        //         'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        //     f.parentNode.insertBefore(j, f);
+        // })(window, document, 'script', 'dataLayer', 'GTM-572LPM3G');
     </script>
     <script>
         ! function(f, b, e, v, n, t, s) {
@@ -69,8 +69,8 @@
 </head>
 
 <body>
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-572LPM3G"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {{-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-572LPM3G"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> --}}
     @yield('content')
 </body>
 <!-- Bootstrap JS & Jquery -->

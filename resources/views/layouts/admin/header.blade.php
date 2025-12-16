@@ -21,20 +21,20 @@
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.min.js"></script> -->
     <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-572LPM3G');
+        // (function(w, d, s, l, i) {
+        //     w[l] = w[l] || [];
+        //     w[l].push({
+        //         'gtm.start': new Date().getTime(),
+        //         event: 'gtm.js'
+        //     });
+        //     var f = d.getElementsByTagName(s)[0],
+        //         j = d.createElement(s),
+        //         dl = l != 'dataLayer' ? '&l=' + l : '';
+        //     j.async = true;
+        //     j.src =
+        //         'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        //     f.parentNode.insertBefore(j, f);
+        // })(window, document, 'script', 'dataLayer', 'GTM-572LPM3G');
     </script>
     <script>
         ! function(f, b, e, v, n, t, s) {
@@ -90,5 +90,5 @@
 
 <body
     class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--fixed kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading">
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-572LPM3G"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {{-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-572LPM3G"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> --}}
