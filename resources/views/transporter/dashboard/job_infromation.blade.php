@@ -1343,7 +1343,7 @@ $findJobsPath = parse_url(
     <script src="{{ asset('assets/web/js/main.js') }}"></script>
     <script src="{{ asset('assets/web/js/rangeslider.js') }}"></script>
     <script type="text/javascript"
-        src="https://maps.google.com/maps/api/js?key={{ config('constants.google_map_key') }}&libraries=places"></script>
+        {{-- src="https://maps.google.com/maps/api/js?key={{ config('constants.google_map_key') }}&libraries=places"></script> --}}
     {{-- <script src="https://maps.googleapis.com/maps/api/js?key={{ config('constants.google_map_key') }}&loading=async&libraries=places&callback=initMap" async defer></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>

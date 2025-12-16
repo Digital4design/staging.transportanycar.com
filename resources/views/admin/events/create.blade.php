@@ -232,7 +232,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/css/intlTelInput.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/utils.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1MjB-QzoalneW1cJiPRIe7eKXxmjt318&libraries=places"></script>
+    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1MjB-QzoalneW1cJiPRIe7eKXxmjt318&libraries=places"></script> --}}
     <script src="{{asset('assets/js/pages/jquery.repeater/jquery.repeater.min.js')}}"></script>
     <script src="{{asset('assets/js/pages/form-repeater.int.js')}}"></script>
 

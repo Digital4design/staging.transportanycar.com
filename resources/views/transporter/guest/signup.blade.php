@@ -383,7 +383,7 @@ fa-eye:before {
     <script src="{{asset('assets/web/js/main.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/intlTelInput-jquery.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXiRBNeXSlj2AjrGBL8yIqMGSekCtCBuk&libraries=places"></script>
+    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXiRBNeXSlj2AjrGBL8yIqMGSekCtCBuk&libraries=places"></script> --}}
     <script>
         var isMobile = "{{ isMobile() }}";
         if(isMobile) {
